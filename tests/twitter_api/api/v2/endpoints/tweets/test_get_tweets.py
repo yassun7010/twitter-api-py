@@ -1,8 +1,12 @@
+import pytest
+
+from tests.conftest import synthetic_monitoring_is_disable
 from twitter_api.api.v2.endpoints.tweets.get_tweets import V2GetTweetsResponseBody
 from twitter_api.api.v2.types.tweet.tweet import Tweet
 from twitter_api.client.twitter_api_mock_client import TwitterApiMockClient
 
 
+@pytest.mark.skipif(**synthetic_monitoring_is_disable())
 class TestV2GetTweets:
     def test_mock_get_tweets(self, mock_client: TwitterApiMockClient):
         tweet = Tweet(

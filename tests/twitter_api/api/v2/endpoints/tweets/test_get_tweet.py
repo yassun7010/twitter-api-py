@@ -2,6 +2,7 @@ from textwrap import dedent
 
 import pytest
 
+from tests.conftest import synthetic_monitoring_is_disable
 from twitter_api.api.v2.endpoints.tweets.get_tweet import V2GetTweetResponseBody
 from twitter_api.api.v2.types.tweet.tweet import Tweet
 from twitter_api.client.twitter_api_mock_client import TwitterApiMockClient
@@ -26,6 +27,7 @@ def tweet() -> Tweet:
     )
 
 
+@pytest.mark.skipif(**synthetic_monitoring_is_disable())
 class TestV2GetTweet:
     def test_get_tweets(self, real_client: TwitterApiRealClient, tweet):
         expected_response = V2GetTweetResponseBody(data=tweet)

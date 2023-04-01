@@ -2,6 +2,7 @@ import os
 
 import pytest
 
+from tests.conftest import synthetic_monitoring_is_disable
 from twitter_api.api.authentication.endpoints.oauth2.post_invalidate_token import (
     Oauth2PostInvalidateTokenResponseBody,
 )
@@ -9,6 +10,7 @@ from twitter_api.client.twitter_api_mock_client import TwitterApiMockClient
 from twitter_api.client.twitter_api_real_client import TwitterApiRealClient
 
 
+@pytest.mark.skipif(**synthetic_monitoring_is_disable())
 class TestOauth2PostInvalidateToken:
     @pytest.mark.skipif(True, reason="上手く invalidation できない理由を要調査。")
     def test_post_oauth2_invalidate_token(self, real_client: TwitterApiRealClient):
