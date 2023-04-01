@@ -47,7 +47,6 @@ class TestV2GetTweets:
         assert real_response == expected_response
 
 
-@pytest.mark.skipif(**synthetic_monitoring_is_disable())
 class TestMockV2GetTweets:
     def test_mock_get_tweets(self, mock_app_auth_v2_client: TwitterApiMockClient):
         tweet = Tweet(

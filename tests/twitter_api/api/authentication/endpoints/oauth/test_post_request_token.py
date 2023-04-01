@@ -2,12 +2,13 @@ import os
 
 import pytest
 
+from tests.conftest import synthetic_monitoring_is_disable
 from twitter_api.client.twitter_api_mock_client import TwitterApiMockClient
 from twitter_api.client.twitter_api_real_client import TwitterApiRealClient
 from twitter_api.error import TwitterApiOAuthVersionWrong
 
 
-# @pytest.mark.skipif(**synthetic_monitoring_is_disable())
+@pytest.mark.skipif(**synthetic_monitoring_is_disable())
 class TestOauthPostRequestToken:
     def test_post_oauth_request_token(
         self, real_app_auth_v2_client: TwitterApiRealClient
