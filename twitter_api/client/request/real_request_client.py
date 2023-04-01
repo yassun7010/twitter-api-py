@@ -1,6 +1,12 @@
 from typing import Optional, Type
 
 import requests
+from authlib.integrations.requests_client.oauth1_session import (
+    OAuth1Auth,  # pyright: reportMissingImports=false
+)
+from authlib.integrations.requests_client.oauth2_session import (
+    OAuth2Auth,  # pyright: reportMissingImports=false
+)
 
 from twitter_api.error import (
     TwitterApiOAuthTokenV1NotFound,
@@ -13,12 +19,13 @@ from twitter_api.utils.ratelimit import RateLimitTarget
 
 from .request_client import (
     Headers,
-    OAuth,
     QuryParameters,
     RequestClient,
     RequestJsonBody,
     ResponseModelBody,
 )
+
+OAuth = OAuth2Auth | OAuth1Auth
 
 TWITTER_API_DOMAIN = "https://api.twitter.com"
 

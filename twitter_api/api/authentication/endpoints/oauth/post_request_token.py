@@ -9,8 +9,8 @@ Uri = Literal["/oauth/request_token"]
 
 ENDPOINT: Endpoint = Endpoint("POST", "/oauth/request_token")
 
-PostOauthRequestTokenQueryParameters = TypedDict(
-    "PostOauthRequestTokenQueryParameters",
+OauthPostRequestTokenQueryParameters = TypedDict(
+    "OauthPostRequestTokenQueryParameters",
     {
         "oauth_callback": str,
         "x_auth_access_type": NotRequired[Optional[str]],
@@ -18,20 +18,20 @@ PostOauthRequestTokenQueryParameters = TypedDict(
 )
 
 
-class PostOauthRequestTokenResponseBody(ExtraPermissiveModel):
+class OauthPostRequestTokenResponseBody(ExtraPermissiveModel):
     oauth_token: OAuthToken
     oauth_token_secret: OAuthTokenSecret
     oauth_callback_confirmed: bool
 
 
-class PostOauthRequestToken:
+class OauthPostRequestToken:
     def __init__(self, client: RequestClient) -> None:
         self._client = client
 
     def post(
         self,
-        headers: PostOauthRequestTokenQueryParameters,
-    ) -> PostOauthRequestTokenResponseBody:
+        headers: OauthPostRequestTokenQueryParameters,
+    ) -> OauthPostRequestTokenResponseBody:
         # flake8: noqa E501
         """
         OAuth 1.0a の最初のステップ。
@@ -41,6 +41,6 @@ class PostOauthRequestToken:
         """
         return self._client.post(
             endpoint=ENDPOINT,
-            response_type=PostOauthRequestTokenResponseBody,
+            response_type=OauthPostRequestTokenResponseBody,
             headers=headers,  # type: ignore
         )

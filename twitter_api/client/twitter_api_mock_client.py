@@ -1,5 +1,6 @@
 from typing import Optional, Self, Type, overload
 
+from twitter_api.api.authentication.endpoints.oauth import post_request_token
 from twitter_api.api.authentication.endpoints.oauth2 import (
     post_invalidate_token,
     post_token,
@@ -43,6 +44,14 @@ class TwitterApiMockClient(TwitterApiClient):
         self._client.inject_response_body(Endpoint("GET", uri), response)
 
         return self
+
+    @overload
+    def inject_post_response(
+        self,
+        uri: post_request_token.Uri,
+        response: post_request_token.OauthPostRequestTokenResponseBody,
+    ) -> Self:
+        ...
 
     @overload
     def inject_post_response(

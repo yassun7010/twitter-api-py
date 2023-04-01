@@ -1,12 +1,5 @@
 from abc import abstractmethod
-from typing import Generic, Optional, Type, TypeAlias
-
-from authlib.integrations.requests_client.oauth1_session import (
-    OAuth1Auth,  # pyright: reportMissingImports=false
-)
-from authlib.integrations.requests_client.oauth2_session import (
-    OAuth2Auth,  # pyright: reportMissingImports=false
-)
+from typing import Generic, Optional, Type
 
 from twitter_api.types.endpoint import Endpoint
 from twitter_api.types.http import (
@@ -15,8 +8,6 @@ from twitter_api.types.http import (
     RequestJsonBody,
     ResponseModelBody,
 )
-
-OAuth: TypeAlias = OAuth1Auth | OAuth2Auth
 
 
 class RequestClient(Generic[QuryParameters, ResponseModelBody]):

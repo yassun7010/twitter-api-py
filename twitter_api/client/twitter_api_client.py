@@ -30,7 +30,7 @@ class TwitterApiClient(metaclass=ABCMeta):
     def request(
         self: Self,
         uri: post_request_token.Uri,
-    ) -> post_request_token.PostOauthRequestToken:
+    ) -> post_request_token.OauthPostRequestToken:
         ...
 
     @overload
@@ -72,7 +72,7 @@ class TwitterApiClient(metaclass=ABCMeta):
         ],
     ):
         if uri == "/oauth/request_token":
-            return post_request_token.PostOauthRequestToken(
+            return post_request_token.OauthPostRequestToken(
                 self._request_client,
             )
         elif uri == "/oauth2/token":
