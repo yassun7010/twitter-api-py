@@ -37,14 +37,14 @@ class TwitterApiClient(metaclass=ABCMeta):
     def request(
         self: Self,
         uri: post_token.Uri,
-    ) -> post_token.PostOauth2Token:
+    ) -> post_token.Oauth2PostToken:
         ...
 
     @overload
     def request(
         self: Self,
         uri: post_invalidate_token.Uri,
-    ) -> post_invalidate_token.PostOauth2InvalidateToken:
+    ) -> post_invalidate_token.Oauth2PostInvalidateToken:
         ...
 
     @overload
@@ -76,11 +76,11 @@ class TwitterApiClient(metaclass=ABCMeta):
                 self._request_client,
             )
         elif uri == "/oauth2/token":
-            return post_token.PostOauth2Token(
+            return post_token.Oauth2PostToken(
                 self._request_client,
             )
         elif uri == "/oauth2/invalidate_token":
-            return post_invalidate_token.PostOauth2InvalidateToken(
+            return post_invalidate_token.Oauth2PostInvalidateToken(
                 self._request_client,
             )
         elif uri == "/2/tweets":

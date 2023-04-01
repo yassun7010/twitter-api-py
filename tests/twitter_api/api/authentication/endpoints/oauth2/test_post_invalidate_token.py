@@ -3,16 +3,16 @@ import os
 import pytest
 
 from twitter_api.api.authentication.endpoints.oauth2.post_invalidate_token import (
-    PostOauth2InvalidateTokenResponseBody,
+    Oauth2PostInvalidateTokenResponseBody,
 )
 from twitter_api.client.twitter_api_mock_client import TwitterApiMockClient
 from twitter_api.client.twitter_api_real_client import TwitterApiRealClient
 
 
 class TestOauth2PostInvalidateToken:
-    @pytest.mark.skipif(True)
+    @pytest.mark.skipif(True, reason="上手く invalidation できない理由を要調査。")
     def test_post_oauth2_invalidate_token(self, real_client: TwitterApiRealClient):
-        expected_response = PostOauth2InvalidateTokenResponseBody(
+        expected_response = Oauth2PostInvalidateTokenResponseBody(
             access_token=(
                 real_client._client._auth.token["access_token"]
                 # pyright: reportOptionalSubscript=false
@@ -38,7 +38,7 @@ class TestOauth2PostInvalidateToken:
 
 class TestMockOauth2PostInvalidateToken:
     def test_mock_post_oauth2_invalidate_token(self, mock_client: TwitterApiMockClient):
-        expected_response = PostOauth2InvalidateTokenResponseBody(access_token="")
+        expected_response = Oauth2PostInvalidateTokenResponseBody(access_token="")
 
         assert (
             mock_client.chain()

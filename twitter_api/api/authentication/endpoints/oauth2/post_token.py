@@ -10,20 +10,20 @@ Uri = Literal["/oauth2/token"]
 
 ENDPOINT: Endpoint = Endpoint("POST", "/oauth2/token")
 
-PostOauth2TokenRequestBody = TypedDict(
-    "PostOauth2TokenRequestBody",
+Oauth2PostTokenRequestBody = TypedDict(
+    "Oauth2PostTokenRequestBody",
     {
         "grant_type": Literal["client_credentials"],
     },
 )
 
 
-class PostOauth2TokenResponseBody(ExtraPermissiveModel):
+class Oauth2PostTokenResponseBody(ExtraPermissiveModel):
     token_type: Literal["bearer"]
     access_token: AccessToken
 
 
-class PostOauth2Token:
+class Oauth2PostToken:
     def __init__(self, client: RequestClient) -> None:
         self._client = client
 
@@ -31,8 +31,8 @@ class PostOauth2Token:
         self,
         api_key: ApiKey,
         api_secret: ApiSecret,
-        request_body: PostOauth2TokenRequestBody,
-    ) -> PostOauth2TokenResponseBody:
+        request_body: Oauth2PostTokenRequestBody,
+    ) -> Oauth2PostTokenResponseBody:
         # flake8: noqa E501
         """
         OAuth 2.0 のアプリ用のアクセストークンのセットを生成するために使用する。
@@ -46,7 +46,7 @@ class PostOauth2Token:
 
         return self._client.post(
             endpoint=ENDPOINT,
-            response_type=PostOauth2TokenResponseBody,
+            response_type=Oauth2PostTokenResponseBody,
             auth=False,
             headers={
                 "Authorization": f"Basic {bearer_token.decode()}",

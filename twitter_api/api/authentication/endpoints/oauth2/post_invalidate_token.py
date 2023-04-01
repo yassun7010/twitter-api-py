@@ -10,19 +10,19 @@ Uri = Literal["/oauth2/invalidate_token"]
 
 ENDPOINT: Endpoint = Endpoint("POST", "/oauth2/invalidate_token")
 
-PostOauth2InvalidateTokenQueryParameters = TypedDict(
-    "PostOauth2InvalidateTokenQueryParameters",
+Oauth2PostInvalidateTokenQueryParameters = TypedDict(
+    "Oauth2PostInvalidateTokenQueryParameters",
     {
         "access_token": AccessToken,
     },
 )
 
 
-class PostOauth2InvalidateTokenResponseBody(ExtraPermissiveModel):
+class Oauth2PostInvalidateTokenResponseBody(ExtraPermissiveModel):
     access_token: AccessToken
 
 
-class PostOauth2InvalidateToken:
+class Oauth2PostInvalidateToken:
     def __init__(self, client: RequestClient) -> None:
         self._client = client
 
@@ -30,8 +30,8 @@ class PostOauth2InvalidateToken:
         self,
         api_key: ApiKey,
         api_secret: ApiSecret,
-        query_parameters: PostOauth2InvalidateTokenQueryParameters,
-    ) -> PostOauth2InvalidateTokenResponseBody:
+        query_parameters: Oauth2PostInvalidateTokenQueryParameters,
+    ) -> Oauth2PostInvalidateTokenResponseBody:
         # flake8: noqa E501
         """
         OAuth 2.0 のアプリ用のアクセストークンを削除するために使用する。
@@ -45,7 +45,7 @@ class PostOauth2InvalidateToken:
 
         return self._client.post(
             endpoint=ENDPOINT,
-            response_type=PostOauth2InvalidateTokenResponseBody,
+            response_type=Oauth2PostInvalidateTokenResponseBody,
             auth=False,
             headers={
                 "Authorization": f"Basic {bearer_token.decode()}",

@@ -48,7 +48,7 @@ class TwitterApiMockClient(TwitterApiClient):
     def inject_post_response(
         self,
         uri: post_invalidate_token.Uri,
-        response: post_invalidate_token.PostOauth2InvalidateTokenResponseBody,
+        response: post_invalidate_token.Oauth2PostInvalidateTokenResponseBody,
     ) -> Self:
         ...
 
@@ -56,7 +56,7 @@ class TwitterApiMockClient(TwitterApiClient):
     def inject_post_response(
         self,
         uri: post_token.Uri,
-        response: post_token.PostOauth2TokenResponseBody,
+        response: post_token.Oauth2PostTokenResponseBody,
     ) -> Self:
         ...
 

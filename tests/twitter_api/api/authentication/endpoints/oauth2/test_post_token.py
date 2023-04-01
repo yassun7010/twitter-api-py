@@ -1,7 +1,7 @@
 import os
 
 from twitter_api.api.authentication.endpoints.oauth2.post_token import (
-    PostOauth2TokenResponseBody,
+    Oauth2PostTokenResponseBody,
 )
 from twitter_api.client.twitter_api_mock_client import TwitterApiMockClient
 from twitter_api.client.twitter_api_real_client import TwitterApiRealClient
@@ -9,7 +9,7 @@ from twitter_api.client.twitter_api_real_client import TwitterApiRealClient
 
 class TestOauth2PostToken:
     def test_post_oauth2_token(self, real_client: TwitterApiRealClient):
-        expected_response = PostOauth2TokenResponseBody(
+        expected_response = Oauth2PostTokenResponseBody(
             token_type="bearer",
             access_token=(
                 real_client._client._auth.token["access_token"]
@@ -36,7 +36,7 @@ class TestOauth2PostToken:
 
 class TestMockOauth2PostToken:
     def test_mock_post_oauth2_token(self, mock_client: TwitterApiMockClient):
-        expected_response = PostOauth2TokenResponseBody(
+        expected_response = Oauth2PostTokenResponseBody(
             token_type="bearer",
             access_token="AAAAAAAAAAAAAAAAAAAAAOeOmQEAAAAAu",
         )
