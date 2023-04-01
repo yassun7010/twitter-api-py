@@ -1,13 +1,6 @@
-import base64
-from typing import Literal, Optional, Type, Union
+from typing import Optional, Type
 
 import requests
-from authlib.integrations.requests_client.oauth1_session import (
-    OAuth1Auth,  # pyright: reportMissingImports=false
-)
-from authlib.integrations.requests_client.oauth2_session import (
-    OAuth2Auth,  # pyright: reportMissingImports=false
-)
 
 from twitter_api.error import (
     TwitterApiOAuthTokenV1NotFound,
@@ -16,12 +9,11 @@ from twitter_api.error import (
     TwitterApiResponseModelBodyDecodeError,
 )
 from twitter_api.types.endpoint import Endpoint
-from twitter_api.types.extra_permissive_model import ExtraPermissiveModel
-from twitter_api.types.oauth import AccessToken, ConsumerKey, ConsumerSecret
 from twitter_api.utils.ratelimit import RateLimitTarget
 
 from .request_client import (
     Headers,
+    OAuth,
     QuryParameters,
     RequestClient,
     RequestJsonBody,
@@ -36,7 +28,7 @@ class RealRequestClient(RequestClient):
         self,
         *,
         rate_limit: RateLimitTarget,
-        auth: Optional[Union[OAuth1Auth, OAuth2Auth]],
+        auth: Optional[OAuth],
         session: Optional[requests.Session] = None,
         timeout_sec: Optional[float] = None,
     ) -> None:
@@ -54,6 +46,7 @@ class RealRequestClient(RequestClient):
         endpoint: Endpoint,
         response_type: Type[ResponseModelBody],
         uri: Optional[str] = None,
+        auth: bool = True,
         headers: Optional[Headers] = None,
         query: Optional[QuryParameters] = None,
         body: Optional[RequestJsonBody] = None,
@@ -62,7 +55,7 @@ class RealRequestClient(RequestClient):
 
         response = self._session.request(
             url=url,
-            auth=self._auth,
+            auth=self._auth if auth else None,
             method=endpoint.method,
             params=query,
             timeout=self.timeout_sec,
@@ -85,6 +78,7 @@ class RealRequestClient(RequestClient):
         endpoint: Endpoint,
         response_type: Type[ResponseModelBody],
         uri: Optional[str] = None,
+        auth: bool = True,
         headers: Optional[Headers] = None,
         query: Optional[QuryParameters] = None,
         body: Optional[RequestJsonBody] = None,
@@ -93,7 +87,7 @@ class RealRequestClient(RequestClient):
 
         response = self._session.request(
             url=url,
-            auth=self._auth,
+            auth=self._auth if auth else None,
             method=endpoint.method,
             headers=headers,
             params=query,
@@ -116,9 +110,7 @@ class RealRequestClient(RequestClient):
         )
 
 
-def _make_twitter_api_url(
-    endpoint: Endpoint, uri: Optional[str] = None
-) -> str:
+def _make_twitter_api_url(endpoint: Endpoint, uri: Optional[str] = None) -> str:
     if uri is None:
         return f"{TWITTER_API_DOMAIN}{endpoint.uri}"
     else:
@@ -133,21 +125,24 @@ def _parse_response(
     query: Optional[QuryParameters] = None,
     body: Optional[RequestJsonBody] = None,
 ) -> dict:
-    try:
-        data: dict = response.json()
-    except ValueError:
-        raise TwitterApiResponseModelBodyDecodeError(
-            endpoint,
-            response.content,
-        )
+    if response.content == b"":
+        data: dict = {}
+    else:
+        try:
+            data = response.json()
+        except ValueError:
+            raise TwitterApiResponseModelBodyDecodeError(
+                endpoint,
+                response.content,
+            )
 
     if not response.ok:
         raise TwitterApiResponseFailed(
             endpoint,
             url=url,
             request_headers=headers,
-            request_query=query,
-            request_body=body.dict() if body is not None else None,
+            query=query,
+            request_body=body if body is not None else None,
             response_status_code=response.status_code,
             response_body=data,
         )
@@ -167,29 +162,3 @@ def _parse_response(
         )
 
     return data
-
-
-class BearerTokenResponseBody(ExtraPermissiveModel):
-    token_type: Literal["bearer"]
-    access_token: AccessToken
-
-
-def generate_bearer_token(
-    consumer_key: ConsumerKey,
-    consumer_secret: ConsumerSecret,
-) -> BearerTokenResponseBody:
-    bearer_token = base64.b64encode(
-        f"{consumer_key}:{consumer_secret}".encode()
-    )
-    endpoint = Endpoint("POST", "/oauth2/token")
-    url = f"{TWITTER_API_DOMAIN}{endpoint.uri}"
-    resp = requests.post(
-        url=url,
-        headers={
-            "Authorization": f"Basic {bearer_token.decode()}",
-            "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
-        },
-        data={"grant_type": "client_credentials"},
-    )
-
-    return BearerTokenResponseBody(**_parse_response(endpoint, resp, url))

@@ -42,5 +42,5 @@ class PostOauthRequestToken:
         return self._client.post(
             endpoint=ENDPOINT,
             response_type=PostOauthRequestTokenResponseBody,
-            headers=headers,
+            headers=headers,  # type: ignore
         )

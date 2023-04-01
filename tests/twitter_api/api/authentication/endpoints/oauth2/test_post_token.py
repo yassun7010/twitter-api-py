@@ -1,18 +1,16 @@
 import os
 
-import pytest
-
-from twitter_api.api.authentication.endpoints.oauth2.post_invalidate_token import (
-    PostOauth2InvalidateTokenResponseBody,
+from twitter_api.api.authentication.endpoints.oauth2.post_token import (
+    PostOauth2TokenResponseBody,
 )
 from twitter_api.client.twitter_api_mock_client import TwitterApiMockClient
 from twitter_api.client.twitter_api_real_client import TwitterApiRealClient
 
 
-class TestOauth2PostInvalidateToken:
-    @pytest.mark.skipif(True, reason="上手く invalidation できない理由を要調査。")
-    def test_post_oauth2_invalidate_token(self, real_client: TwitterApiRealClient):
-        expected_response = PostOauth2InvalidateTokenResponseBody(
+class TestOauth2PostToken:
+    def test_post_oauth2_token(self, real_client: TwitterApiRealClient):
+        expected_response = PostOauth2TokenResponseBody(
+            token_type="bearer",
             access_token=(
                 real_client._client._auth.token["access_token"]
                 # pyright: reportOptionalSubscript=false
@@ -22,11 +20,11 @@ class TestOauth2PostInvalidateToken:
 
         real_response = (
             real_client.chain()
-            .request("/oauth2/invalidate_token")
+            .request("/oauth2/token")
             .post(
                 consumer_key=os.environ["CONSUMER_KEY"],
                 consumer_secret=os.environ["CONSUMER_SECRET"],
-                query_parameters={"access_token": expected_response.access_token},
+                request_body={"grant_type": "client_credentials"},
             )
         )
 
@@ -36,21 +34,24 @@ class TestOauth2PostInvalidateToken:
         assert real_response == expected_response
 
 
-class TestMockOauth2PostInvalidateToken:
-    def test_mock_post_oauth2_invalidate_token(self, mock_client: TwitterApiMockClient):
-        expected_response = PostOauth2InvalidateTokenResponseBody(access_token="")
+class TestMockOauth2PostToken:
+    def test_mock_post_oauth2_token(self, mock_client: TwitterApiMockClient):
+        expected_response = PostOauth2TokenResponseBody(
+            token_type="bearer",
+            access_token="AAAAAAAAAAAAAAAAAAAAAOeOmQEAAAAAu",
+        )
 
         assert (
             mock_client.chain()
             .inject_post_response(
-                "/oauth2/invalidate_token",
+                "/oauth2/token",
                 expected_response,
             )
-            .request("/oauth2/invalidate_token")
+            .request("/oauth2/token")
             .post(
                 consumer_key="DUMMY_CONSUMER_KEY",
                 consumer_secret="DUMMY_CONSUMER_SECRET",
-                query_parameters={"access_token": "DUMMY_ACCESS_TOKEN"},
+                request_body={"grant_type": "client_credentials"},
             )
             == expected_response
         )

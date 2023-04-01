@@ -2,7 +2,10 @@ from abc import ABCMeta, abstractmethod
 from typing import Self, Union, overload
 
 from twitter_api.api.authentication.endpoints.oauth import post_request_token
-from twitter_api.api.authentication.endpoints.oauth2 import post_token
+from twitter_api.api.authentication.endpoints.oauth2 import (
+    post_invalidate_token,
+    post_token,
+)
 from twitter_api.api.v2.endpoints.tweets import get_tweet, get_tweets
 from twitter_api.error import NeverError
 from twitter_api.types.oauth import (
@@ -24,6 +27,11 @@ class TwitterApiClient(metaclass=ABCMeta):
     def _request_client(self) -> RequestClient:
         ...
 
+    def chain(self) -> Self:
+        """メソッドチェーンをキレイに表示させるための関数。"""
+
+        return self
+
     @overload
     def request(
         self: Self,
@@ -36,6 +44,13 @@ class TwitterApiClient(metaclass=ABCMeta):
         self: Self,
         uri: post_token.Uri,
     ) -> post_token.PostOauth2Token:
+        ...
+
+    @overload
+    def request(
+        self: Self,
+        uri: post_invalidate_token.Uri,
+    ) -> post_invalidate_token.PostOauth2InvalidateToken:
         ...
 
     @overload
@@ -54,7 +69,13 @@ class TwitterApiClient(metaclass=ABCMeta):
 
     def request(
         self: Self,
-        uri: Union[get_tweet.Uri, get_tweets.Uri, post_request_token.Uri],
+        uri: Union[
+            get_tweet.Uri,
+            get_tweets.Uri,
+            post_request_token.Uri,
+            post_invalidate_token.Uri,
+            post_token.Uri,
+        ],
     ):
         if uri == "/oauth/request_token":
             return post_request_token.PostOauthRequestToken(
@@ -62,6 +83,10 @@ class TwitterApiClient(metaclass=ABCMeta):
             )
         elif uri == "/oauth2/token":
             return post_token.PostOauth2Token(
+                self._request_client,
+            )
+        elif uri == "/oauth2/invalidate_token":
+            return post_invalidate_token.PostOauth2InvalidateToken(
                 self._request_client,
             )
         elif uri == "/2/tweets":

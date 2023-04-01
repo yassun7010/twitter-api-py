@@ -5,12 +5,7 @@ from typing import Any, Never, Optional
 from twitter_api.types.extra_permissive_model import ExtraPermissiveModel
 
 from .types.endpoint import Endpoint
-from .types.http import (
-    Headers,
-    QuryParameters,
-    RequestJsonBody,
-    ResponseJsonBody,
-)
+from .types.http import Headers, QuryParameters, RequestJsonBody, ResponseJsonBody
 from .utils.json import exclude_none
 
 
@@ -20,9 +15,7 @@ class ErrorMessage(ExtraPermissiveModel):
     erros: Optional[list[str]] = None
 
     def to_message(self) -> str:
-        return self.json(
-            exclude_unset=True, exclude_none=True, ensure_ascii=False
-        )
+        return self.json(ensure_ascii=False)
 
 
 class TwitterApiException(Exception):
@@ -95,7 +88,7 @@ class TwitterApiResponseFailed(TwitterApiError):
         endpoint: Endpoint,
         url: str,
         request_headers: Optional[Headers],
-        request_query: Optional[QuryParameters],
+        query: Optional[QuryParameters],
         request_body: Optional[RequestJsonBody],
         response_status_code: int,
         response_body: Optional[ResponseJsonBody],
@@ -103,7 +96,7 @@ class TwitterApiResponseFailed(TwitterApiError):
         self.endpoint = endpoint
         self.url = url
         self.request_headers = request_headers
-        self.request_query = request_query
+        self.query = query
         self.request_body = request_body
         self.response_status_code = response_status_code
         self.response_body = response_body
@@ -116,7 +109,7 @@ class TwitterApiResponseFailed(TwitterApiError):
                 endpoint=self.endpoint,
                 url=self.url,
                 reqeust_headers=exclude_none(self.request_headers),
-                request_query=exclude_none(self.request_query),
+                query=exclude_none(self.query),
                 request_body=exclude_none(self.request_body),
                 response_status_code=self.response_status_code,
                 response_body=exclude_none(self.response_body),

@@ -1,19 +1,21 @@
+import base64
 from typing import Literal, TypedDict
 
-
 from twitter_api.client.request.request_client import RequestClient
-import base64
 from twitter_api.types.endpoint import Endpoint
 from twitter_api.types.extra_permissive_model import ExtraPermissiveModel
-from twitter_api.types.oauth import (
-    AccessToken,
-    ConsumerKey,
-    ConsumerSecret,
-)
+from twitter_api.types.oauth import AccessToken, ConsumerKey, ConsumerSecret
 
 Uri = Literal["/oauth2/invalidate_token"]
 
 ENDPOINT: Endpoint = Endpoint("POST", "/oauth2/invalidate_token")
+
+PostOauth2InvalidateTokenQueryParameters = TypedDict(
+    "PostOauth2InvalidateTokenQueryParameters",
+    {
+        "access_token": AccessToken,
+    },
+)
 
 
 class PostOauth2InvalidateTokenResponseBody(ExtraPermissiveModel):
@@ -28,6 +30,7 @@ class PostOauth2InvalidateToken:
         self,
         consumer_key: ConsumerKey,
         consumer_secret: ConsumerSecret,
+        query_parameters: PostOauth2InvalidateTokenQueryParameters,
     ) -> PostOauth2InvalidateTokenResponseBody:
         # flake8: noqa E501
         """
@@ -37,14 +40,16 @@ class PostOauth2InvalidateToken:
         """
 
         bearer_token = base64.b64encode(
-            f"{consumer_key}:{consumer_secret}".encode()
+            f"{consumer_key}:{consumer_secret}".encode(),
         )
 
         return self._client.post(
             endpoint=ENDPOINT,
             response_type=PostOauth2InvalidateTokenResponseBody,
+            auth=False,
             headers={
                 "Authorization": f"Basic {bearer_token.decode()}",
-                "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
+                "Content-Type": "application/x-www-form-urlencoded",
             },
+            query=query_parameters,
         )

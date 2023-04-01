@@ -16,9 +16,7 @@ class MockRequestClient(RequestClient, Generic[ResponseModelBody]):
     def __init__(self):
         self._store: list[tuple[Endpoint, ResponseModelBody]] = []
 
-    def inject_response_body(
-        self, endpoint: Endpoint, response: ResponseModelBody
-    ):
+    def inject_response_body(self, endpoint: Endpoint, response: ResponseModelBody):
         self._store.append((endpoint, response))
 
     def extract_response_body(self, endpoint: Endpoint) -> ResponseModelBody:
@@ -38,6 +36,7 @@ class MockRequestClient(RequestClient, Generic[ResponseModelBody]):
         endpoint: Endpoint,
         response_type: Type[ResponseModelBody],
         uri: Optional[str] = None,
+        auth: bool = True,
         query: Optional[QuryParameters] = None,
     ) -> ResponseModelBody:
         return self.extract_response_body(endpoint)
@@ -48,6 +47,7 @@ class MockRequestClient(RequestClient, Generic[ResponseModelBody]):
         endpoint: Endpoint,
         response_type: Type[ResponseModelBody],
         uri: Optional[str] = None,
+        auth: bool = True,
         headers: Optional[Headers] = None,
         query: Optional[QuryParameters] = None,
         body: Optional[RequestJsonBody] = None,

@@ -15,9 +15,7 @@ from twitter_api.types.oauth import (
     Env,
 )
 
-from .request.real_request_client import (
-    RealRequestClient,
-)
+from .request.real_request_client import RealRequestClient
 from .request.request_client import RequestClient
 from .twitter_api_client import TwitterApiClient
 
@@ -69,10 +67,8 @@ class TwitterApiRealClient(TwitterApiClient):
         consumer_secret: ConsumerSecret,
     ):
         """アプリ認証を用いてクライアントを作成する。"""
-        return cls.from_bearer_token(
-            TwitterApiRealClient(
-                RealRequestClient(rate_limit="app", auth=None)
-            )
+        access_token = (
+            TwitterApiRealClient(RealRequestClient(rate_limit="app", auth=None))
             .request("/oauth2/token")
             .post(
                 consumer_key=consumer_key,
@@ -81,6 +77,8 @@ class TwitterApiRealClient(TwitterApiClient):
             )
             .access_token
         )
+
+        return cls.from_bearer_token(access_token)
 
     @classmethod
     def from_app_auth_env(
