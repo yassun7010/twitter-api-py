@@ -76,6 +76,10 @@ class TwitterApiClient(metaclass=ABCMeta):
             post_token.Uri,
         ],
     ):
+        """
+        操作したい URI を指定し、実行可能な操作方法を返却します。
+        """
+
         if uri == "/oauth/request_token":
             return post_request_token.OauthPostRequestToken(
                 self._request_client,
