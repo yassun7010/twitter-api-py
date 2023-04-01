@@ -6,6 +6,7 @@ from twitter_api.types.extra_permissive_model import ExtraPermissiveModel
 
 from .types.endpoint import Endpoint
 from .types.http import Headers, QuryParameters, RequestJsonBody, ResponseJsonBody
+from .types.oauth import OAuthVersion
 from .utils.json import exclude_none
 
 
@@ -15,7 +16,7 @@ class ErrorMessage(ExtraPermissiveModel):
     erros: Optional[list[str]] = None
 
     def to_message(self) -> str:
-        return self.json(ensure_ascii=False)
+        return self.json()
 
 
 class TwitterApiException(Exception):
@@ -91,7 +92,7 @@ class TwitterApiResponseFailed(TwitterApiError):
         query: Optional[QuryParameters],
         request_body: Optional[RequestJsonBody],
         response_status_code: int,
-        response_body: Optional[ResponseJsonBody],
+        response_body: Optional[ResponseJsonBody | bytes],
     ):
         self.endpoint = endpoint
         self.url = url
@@ -112,7 +113,11 @@ class TwitterApiResponseFailed(TwitterApiError):
                 query=exclude_none(self.query),
                 request_body=exclude_none(self.request_body),
                 response_status_code=self.response_status_code,
-                response_body=exclude_none(self.response_body),
+                response_body=(
+                    exclude_none(self.response_body)
+                    if not isinstance(self.response_body, bytes)
+                    else self.response_body
+                ),
             ),
         ).to_message()
 
@@ -150,4 +155,19 @@ class TwitterApiOAuthTokenV1NotFound(TwitterApiError):
                 data=exclude_none(self.data),
             ),
             **exclude_none(self.extra),
+        ).to_message()
+
+
+class TwitterApiOAuthVersionWrong(TwitterApiError):
+    def __init__(self, *, version: OAuthVersion, expected_version: OAuthVersion):
+        self.version = version
+        self.expected_version = expected_version
+
+    def __str__(self) -> str:
+        return ErrorMessage(
+            type=self.__class__.__name__,
+            message=(
+                f'OAuth のバージョンは "{self.version}" ではなく'
+                f' "{self.expected_version}" である必要があります。'
+            ),
         ).to_message()

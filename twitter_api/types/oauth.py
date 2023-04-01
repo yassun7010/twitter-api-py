@@ -8,9 +8,11 @@ Twitter の OAuth 認証に必要な情報をまとめた型。
 refer: https://developer.twitter.com/en/docs/authentication/oauth-1-0a/obtaining-user-access-tokens
 """
 
-from typing import Annotated, TypeAlias, TypeVar
+from typing import Annotated, Literal, TypeAlias, TypeVar
 
 T = TypeVar("T", bound=str)
+
+OAuthVersion = Literal["1.0a", "2.0"]
 
 Env = Annotated[T, ...]
 """

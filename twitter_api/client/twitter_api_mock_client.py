@@ -7,7 +7,14 @@ from twitter_api.api.authentication.endpoints.oauth2 import (
 )
 from twitter_api.api.v2.endpoints.tweets import get_tweet, get_tweets
 from twitter_api.types.endpoint import Endpoint
-from twitter_api.types.oauth import AccessSecret, AccessToken, ApiKey, ApiSecret, Env
+from twitter_api.types.oauth import (
+    AccessSecret,
+    AccessToken,
+    ApiKey,
+    ApiSecret,
+    Env,
+    OAuthVersion,
+)
 
 from .request.mock_request_client import MockRequestClient
 from .request.request_client import QuryParameters, RequestClient, ResponseModelBody
@@ -17,8 +24,8 @@ from .twitter_api_client import TwitterApiClient
 class TwitterApiMockClient(TwitterApiClient):
     """Twitter API V2 をモックするためのクライアント"""
 
-    def __init__(self) -> None:
-        self._client = MockRequestClient()
+    def __init__(self, *, oauth_version: OAuthVersion = "2.0") -> None:
+        self._client = MockRequestClient(oauth_version=oauth_version)
 
     @property
     def _request_client(self) -> RequestClient:
@@ -78,28 +85,28 @@ class TwitterApiMockClient(TwitterApiClient):
     def from_bearer_token_env(cls, bearer_token="BEARER_TOEKN"):
         """環境変数から、 Bearer 認証を用いてクライアントを作成する。"""
 
-        return TwitterApiMockClient()
+        return TwitterApiMockClient(oauth_version="2.0")
 
     @classmethod
-    def from_app_auth(
+    def from_app_auth_v2(
         cls,
         *,
         api_key: ApiKey,
         api_secret: ApiSecret,
     ) -> Self:
-        return TwitterApiMockClient()
+        return TwitterApiMockClient(oauth_version="2.0")
 
     @classmethod
-    def from_app_auth_env(
+    def from_app_auth_v2_env(
         cls,
         *,
         api_key: Env[ApiKey] = "API_KEY",
         api_secret: Env[ApiSecret] = "API_SECRET",
     ):
-        return TwitterApiMockClient()
+        return TwitterApiMockClient(oauth_version="2.0")
 
     @classmethod
-    def from_user_auth(
+    def from_user_auth_v1(
         cls,
         *,
         api_key: ApiKey,
@@ -107,10 +114,10 @@ class TwitterApiMockClient(TwitterApiClient):
         access_token: AccessToken,
         access_secret: AccessSecret,
     ):
-        return TwitterApiMockClient()
+        return TwitterApiMockClient(oauth_version="1.0a")
 
     @classmethod
-    def from_user_auth_env(
+    def from_user_auth_v1_env(
         cls,
         *,
         api_key: Env[ApiKey] = "API_KEY",
@@ -118,7 +125,7 @@ class TwitterApiMockClient(TwitterApiClient):
         access_token: Env[AccessToken] = "ACCESS_TOKEN",
         access_secret: Env[AccessSecret] = "ACCESS_SECRET",
     ):
-        return TwitterApiMockClient()
+        return TwitterApiMockClient(oauth_version="1.0a")
 
     def _get(
         self,

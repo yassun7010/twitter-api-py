@@ -15,6 +15,7 @@ from twitter_api.error import (
     TwitterApiResponseModelBodyDecodeError,
 )
 from twitter_api.types.endpoint import Endpoint
+from twitter_api.types.oauth import OAuthVersion
 from twitter_api.utils.ratelimit import RateLimitTarget
 
 from .request_client import (
@@ -34,6 +35,7 @@ class RealRequestClient(RequestClient):
     def __init__(
         self,
         *,
+        oauth_version: OAuthVersion,
         rate_limit: RateLimitTarget,
         auth: Optional[OAuth],
         session: Optional[requests.Session] = None,
@@ -42,10 +44,15 @@ class RealRequestClient(RequestClient):
         if session is None:
             session = requests.Session()
 
+        self._oauth_version: OAuthVersion = oauth_version
         self._rate_limit: RateLimitTarget = rate_limit
         self._auth = auth
         self._session = session
         self.timeout_sec = timeout_sec
+
+    @property
+    def oauth_version(self) -> OAuthVersion:
+        return self._oauth_version
 
     def get(
         self,
@@ -138,10 +145,21 @@ def _parse_response(
         try:
             data = response.json()
         except ValueError:
-            raise TwitterApiResponseModelBodyDecodeError(
-                endpoint,
-                response.content,
-            )
+            if not response.ok:
+                raise TwitterApiResponseFailed(
+                    endpoint,
+                    url=url,
+                    request_headers=headers,
+                    query=query,
+                    request_body=body if body is not None else None,
+                    response_status_code=response.status_code,
+                    response_body=response.content,
+                )
+            else:
+                raise TwitterApiResponseModelBodyDecodeError(
+                    endpoint,
+                    response.content,
+                )
 
     if not response.ok:
         raise TwitterApiResponseFailed(

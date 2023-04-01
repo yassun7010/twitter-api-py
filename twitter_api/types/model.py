@@ -64,4 +64,8 @@ class Model(BaseModel):
             exclude_unset=exclude_unset,
             exclude_defaults=exclude_defaults,
             exclude_none=exclude_none,
+            encoder=encoder,
+            models_as_dict=models_as_dict,
+            ensure_ascii=ensure_ascii,
+            **dumps_kwargs,
         )

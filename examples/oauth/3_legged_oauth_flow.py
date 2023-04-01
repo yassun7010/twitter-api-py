@@ -3,7 +3,7 @@ import sys
 from twitter_api.client import TwitterApiClient
 from twitter_api.error import TwitterApiError
 
-client = TwitterApiClient.from_app_auth_env()
+client = TwitterApiClient.from_app_auth_v2_env()
 
 try:
     token = client.request("/oauth/request_token").post(

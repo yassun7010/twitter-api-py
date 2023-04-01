@@ -14,7 +14,9 @@ from .request.request_client import RequestClient
 
 
 class TwitterApiClient(metaclass=ABCMeta):
-    """Twitter API V2 を操作するためのクライアント"""
+    """
+    Twitter API を操作するためのクライアント
+    """
 
     @property
     @abstractmethod
@@ -22,7 +24,9 @@ class TwitterApiClient(metaclass=ABCMeta):
         ...
 
     def chain(self) -> Self:
-        """メソッドチェーンをキレイに表示させるための関数。"""
+        """
+        メソッドチェーンをキレイに表示させるための関数。
+        """
 
         return self
 
@@ -111,7 +115,7 @@ class TwitterApiClient(metaclass=ABCMeta):
         return TwitterApiRealClient.from_bearer_token_env(bearer_token)
 
     @classmethod
-    def from_app_auth(
+    def from_app_auth_v2(
         cls,
         *,
         api_key: ApiKey,
@@ -121,13 +125,13 @@ class TwitterApiClient(metaclass=ABCMeta):
 
         from .twitter_api_real_client import TwitterApiRealClient
 
-        return TwitterApiRealClient.from_app_auth(
+        return TwitterApiRealClient.from_app_auth_v2(
             api_key=api_key,
             api_secret=api_secret,
         )
 
     @classmethod
-    def from_app_auth_env(
+    def from_app_auth_v2_env(
         cls,
         *,
         api_key: Env[ApiKey] = "API_KEY",
@@ -137,13 +141,13 @@ class TwitterApiClient(metaclass=ABCMeta):
 
         from .twitter_api_real_client import TwitterApiRealClient
 
-        return TwitterApiRealClient.from_app_auth_env(
+        return TwitterApiRealClient.from_app_auth_v2_env(
             api_key=api_key,
             api_secret=api_secret,
         )
 
     @classmethod
-    def from_user_auth(
+    def from_user_auth_v1(
         cls,
         *,
         api_key: ApiKey,
@@ -155,7 +159,7 @@ class TwitterApiClient(metaclass=ABCMeta):
 
         from .twitter_api_real_client import TwitterApiRealClient
 
-        return TwitterApiRealClient.from_user_auth(
+        return TwitterApiRealClient.from_user_auth_v1(
             api_key=api_key,
             api_secret=api_secret,
             access_token=access_token,
@@ -163,7 +167,7 @@ class TwitterApiClient(metaclass=ABCMeta):
         )
 
     @classmethod
-    def from_user_auth_env(
+    def from_user_auth_v1_env(
         cls,
         *,
         api_key: Env[ApiKey] = "API_KEY",
@@ -175,7 +179,7 @@ class TwitterApiClient(metaclass=ABCMeta):
 
         from .twitter_api_real_client import TwitterApiRealClient
 
-        return TwitterApiRealClient.from_user_auth_env(
+        return TwitterApiRealClient.from_user_auth_v1_env(
             api_key=api_key,
             api_secret=api_secret,
             access_token=access_token,

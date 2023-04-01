@@ -4,18 +4,16 @@ from typing import Literal, TypedDict
 from twitter_api.client.request.request_client import RequestClient
 from twitter_api.types.endpoint import Endpoint
 from twitter_api.types.extra_permissive_model import ExtraPermissiveModel
+from twitter_api.types.http import downcast_dict
 from twitter_api.types.oauth import AccessToken, ApiKey, ApiSecret
 
 Uri = Literal["/oauth2/token"]
 
 ENDPOINT: Endpoint = Endpoint("POST", "/oauth2/token")
 
-Oauth2PostTokenRequestBody = TypedDict(
-    "Oauth2PostTokenRequestBody",
-    {
-        "grant_type": Literal["client_credentials"],
-    },
-)
+
+class Oauth2PostTokenQueryParameters(TypedDict):
+    grant_type: Literal["client_credentials"]
 
 
 class Oauth2PostTokenResponseBody(ExtraPermissiveModel):
@@ -31,7 +29,7 @@ class Oauth2PostToken:
         self,
         api_key: ApiKey,
         api_secret: ApiSecret,
-        request_body: Oauth2PostTokenRequestBody,
+        query_parameters: Oauth2PostTokenQueryParameters,
     ) -> Oauth2PostTokenResponseBody:
         # flake8: noqa E501
         """
@@ -52,5 +50,5 @@ class Oauth2PostToken:
                 "Authorization": f"Basic {bearer_token.decode()}",
                 "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
             },
-            query=request_body,
+            query=downcast_dict(query_parameters),
         )

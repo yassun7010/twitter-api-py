@@ -1,5 +1,5 @@
-from abc import abstractmethod
-from typing import Generic, Optional, Type
+from abc import ABCMeta, abstractmethod
+from typing import Optional, Type
 
 from twitter_api.types.endpoint import Endpoint
 from twitter_api.types.http import (
@@ -8,9 +8,15 @@ from twitter_api.types.http import (
     RequestJsonBody,
     ResponseModelBody,
 )
+from twitter_api.types.oauth import OAuthVersion
 
 
-class RequestClient(Generic[QuryParameters, ResponseModelBody]):
+class RequestClient(metaclass=ABCMeta):
+    @property
+    @abstractmethod
+    def oauth_version(self) -> OAuthVersion:
+        ...
+
     @abstractmethod
     def get(
         self,

@@ -2,6 +2,7 @@ from typing import Generic, Optional, Type
 
 from twitter_api.error import MockInjectionResponseWrong, MockResponseNotFound
 from twitter_api.types.endpoint import Endpoint
+from twitter_api.types.oauth import OAuthVersion
 
 from .request_client import (
     Headers,
@@ -13,8 +14,13 @@ from .request_client import (
 
 
 class MockRequestClient(RequestClient, Generic[ResponseModelBody]):
-    def __init__(self):
+    def __init__(self, *, oauth_version: OAuthVersion):
         self._store: list[tuple[Endpoint, ResponseModelBody]] = []
+        self._oauth_version: OAuthVersion = oauth_version
+
+    @property
+    def oauth_version(self) -> OAuthVersion:
+        return self._oauth_version
 
     def inject_response_body(self, endpoint: Endpoint, response: ResponseModelBody):
         self._store.append((endpoint, response))

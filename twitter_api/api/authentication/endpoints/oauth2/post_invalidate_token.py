@@ -4,6 +4,7 @@ from typing import Literal, TypedDict
 from twitter_api.client.request.request_client import RequestClient
 from twitter_api.types.endpoint import Endpoint
 from twitter_api.types.extra_permissive_model import ExtraPermissiveModel
+from twitter_api.types.http import downcast_dict
 from twitter_api.types.oauth import AccessToken, ApiKey, ApiSecret
 
 Uri = Literal["/oauth2/invalidate_token"]
@@ -51,5 +52,5 @@ class Oauth2PostInvalidateToken:
                 "Authorization": f"Basic {bearer_token.decode()}",
                 "Content-Type": "application/x-www-form-urlencoded",
             },
-            query=query_parameters,
+            query=downcast_dict(query_parameters),
         )

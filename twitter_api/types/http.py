@@ -1,4 +1,4 @@
-from typing import TypeVar
+from typing import TypedDict, TypeVar
 
 from pydantic import BaseModel
 
@@ -7,3 +7,7 @@ QuryParameters = TypeVar("QuryParameters", bound=dict)
 RequestJsonBody = TypeVar("RequestJsonBody", bound=dict)
 ResponseJsonBody = TypeVar("ResponseJsonBody", bound=dict)
 ResponseModelBody = TypeVar("ResponseModelBody", bound=BaseModel)
+
+
+def downcast_dict(typed_dict: TypedDict) -> dict:
+    return typed_dict  # type: ignore

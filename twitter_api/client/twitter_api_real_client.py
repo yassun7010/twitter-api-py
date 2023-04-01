@@ -44,7 +44,8 @@ class TwitterApiRealClient(TwitterApiClient):
                         "token_type": "Bearer",
                     }
                 ),
-            )
+                oauth_version="2.0",
+            ),
         )
 
     @classmethod
@@ -54,7 +55,7 @@ class TwitterApiRealClient(TwitterApiClient):
         return cls.from_bearer_token(os.environ[bearer_token])
 
     @classmethod
-    def from_app_auth(
+    def from_app_auth_v2(
         cls,
         *,
         api_key: ApiKey,
@@ -62,12 +63,18 @@ class TwitterApiRealClient(TwitterApiClient):
     ):
         """アプリ認証を用いてクライアントを作成する。"""
         access_token = (
-            TwitterApiRealClient(RealRequestClient(rate_limit="app", auth=None))
+            TwitterApiRealClient(
+                RealRequestClient(
+                    rate_limit="app",
+                    auth=None,
+                    oauth_version="2.0",
+                ),
+            )
             .request("/oauth2/token")
             .post(
                 api_key=api_key,
                 api_secret=api_secret,
-                request_body={"grant_type": "client_credentials"},
+                query_parameters={"grant_type": "client_credentials"},
             )
             .access_token
         )
@@ -75,7 +82,7 @@ class TwitterApiRealClient(TwitterApiClient):
         return cls.from_bearer_token(access_token)
 
     @classmethod
-    def from_app_auth_env(
+    def from_app_auth_v2_env(
         cls,
         *,
         api_key: Env[ApiKey] = "API_KEY",
@@ -83,13 +90,13 @@ class TwitterApiRealClient(TwitterApiClient):
     ):
         """環境変数から、アプリ認証を用いてクライアントを作成する。"""
 
-        return cls.from_app_auth(
+        return cls.from_app_auth_v2(
             api_key=os.environ[api_key],
             api_secret=os.environ[api_secret],
         )
 
     @classmethod
-    def from_user_auth(
+    def from_user_auth_v1(
         cls,
         *,
         api_key: ApiKey,
@@ -106,11 +113,12 @@ class TwitterApiRealClient(TwitterApiClient):
                     token=access_token,
                     token_secret=access_secret,
                 ),
-            )
+                oauth_version="1.0a",
+            ),
         )
 
     @classmethod
-    def from_user_auth_env(
+    def from_user_auth_v1_env(
         cls,
         *,
         api_key: Env[ApiKey] = "API_KEY",
@@ -118,7 +126,7 @@ class TwitterApiRealClient(TwitterApiClient):
         access_token: Env[AccessToken] = "ACCESS_TOKEN",
         access_secret: Env[AccessSecret] = "ACCESS_SECRET",
     ):
-        return cls.from_user_auth(
+        return cls.from_user_auth_v1(
             api_key=os.environ[api_key],
             api_secret=os.environ[api_secret],
             access_token=os.environ[access_token],
