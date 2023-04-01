@@ -5,46 +5,46 @@ from twitter_api.client.twitter_api_mock_client import TwitterApiMockClient
 from twitter_api.client.twitter_api_real_client import (
     TwitterApiRealClient,
 )
+import pytest
+
+
+@pytest.fixture
+def tweet() -> Tweet:
+    return Tweet(
+        id="1460323737035677698",
+        text=dedent(
+            # flake8: noqa E501
+            """
+            Introducing a new era for the Twitter Developer Platform! \n
+            📣The Twitter API v2 is now the primary API and full of new features
+            ⏱Immediate access for most use cases, or apply to get more access for free
+            📖Removed certain restrictions in the Policy
+            https://t.co/Hrm15bkBWJ https://t.co/YFfCDErHsg
+            """
+        ).strip(),
+        edit_history_tweet_ids=["1460323737035677698"],
+    )
 
 
 class TestTwitterApiClient:
-    def test_get_tweets(self, real_client: TwitterApiRealClient):
-        tweet = Tweet(
-            id="1460323737035677698",
-            text=dedent(
-                # flake8: noqa E501
-                """
-                Introducing a new era for the Twitter Developer Platform! \n
-                📣The Twitter API v2 is now the primary API and full of new features
-                ⏱Immediate access for most use cases, or apply to get more access for free
-                📖Removed certain restrictions in the Policy
-                https://t.co/Hrm15bkBWJ https://t.co/YFfCDErHsg
-                """
-            ).strip(),
-            edit_history_tweet_ids=["1460323737035677698"],
-        )
-        response = GetTweetResponseBody(data=tweet)
+    def test_get_tweets(self, real_client: TwitterApiRealClient, tweet):
+        expected_response = GetTweetResponseBody(data=tweet)
         real_response = real_client.request("/2/tweets/:id").get(tweet.id)
 
         print(real_response.dict())
-        print(response.dict())
+        print(expected_response.dict())
 
-        assert real_response == response
+        assert real_response == expected_response
 
 
 class TestTwitterApiMockClient:
-    def test_mock_get_tweets(self, mock_client: TwitterApiMockClient):
-        tweet = Tweet(
-            id="1460323737035677698",
-            text="tweet",
-            edit_history_tweet_ids=["56789"],
-        )
-        response = GetTweetResponseBody(data=tweet)
+    def test_mock_get_tweets(self, mock_client: TwitterApiMockClient, tweet):
+        expected_response = GetTweetResponseBody(data=tweet)
 
         assert (
             mock_client.chain()
-            .inject_get_response("/2/tweets/:id", response)
+            .inject_get_response("/2/tweets/:id", expected_response)
             .request("/2/tweets/:id")
             .get(tweet.id)
-            == response
+            == expected_response
         )
