@@ -46,5 +46,6 @@ class RequestClient(metaclass=ABCMeta):
         headers: Optional[Headers] = None,
         query: Optional[QuryParameters] = None,
         body: Optional[RequestJsonBody] = None,
+        json: Optional[RequestJsonBody] = None,
     ) -> ResponseModelBody:
         ...

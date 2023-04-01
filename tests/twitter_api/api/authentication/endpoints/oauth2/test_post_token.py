@@ -16,7 +16,7 @@ class TestOauth2PostToken:
         expected_response = Oauth2PostTokenResponseBody(
             token_type="bearer",
             access_token=(
-                real_client._client._auth.token["access_token"]
+                real_app_auth_v2_client._client._auth.token["access_token"]
                 # pyright: reportOptionalSubscript=false
                 # pyright: reportOptionalMemberAccess=false
             ),

@@ -100,6 +100,7 @@ class RealRequestClient(RequestClient):
         headers: Optional[Headers] = None,
         query: Optional[QuryParameters] = None,
         body: Optional[RequestJsonBody] = None,
+        json: Optional[RequestJsonBody] = None,
     ) -> ResponseModelBody:
         url = _make_twitter_api_url(endpoint, uri)
 
@@ -110,6 +111,7 @@ class RealRequestClient(RequestClient):
             headers=headers,
             params=query,
             data=body,
+            json=json,
             timeout=self.timeout_sec,
         )
 

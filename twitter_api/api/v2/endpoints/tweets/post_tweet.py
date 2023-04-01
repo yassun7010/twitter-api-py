@@ -66,5 +66,5 @@ class V2PostTweet:
         return self._client.post(
             endpoint=ENDPOINT,
             response_type=V2PostTweetResponseBody,
-            body=downcast_dict(request_body),
+            json=downcast_dict(request_body),
         )

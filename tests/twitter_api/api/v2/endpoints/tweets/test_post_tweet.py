@@ -3,7 +3,6 @@ from datetime import datetime
 import pytest
 
 from tests.conftest import synthetic_monitoring_is_disable
-from twitter_api.api.v2.endpoints.tweets.get_tweet import V2GetTweetResponseBody
 from twitter_api.api.v2.endpoints.tweets.post_tweet import V2PostTweetResponseBody
 from twitter_api.api.v2.types.tweet.tweet import Tweet
 from twitter_api.client.twitter_api_mock_client import TwitterApiMockClient
@@ -21,20 +20,22 @@ def tweet() -> Tweet:
 
 @pytest.mark.skipif(**synthetic_monitoring_is_disable())
 class TestV2GetTweet:
-    def test_get_tweet(
-        self, real_app_auth_v2_client: TwitterApiRealClient, tweet: Tweet
-    ):
-        expected_response = V2GetTweetResponseBody(data=tweet)
+    def test_get_tweet(self, real_user_auth_v1_client: TwitterApiRealClient):
+        tweet_text = f"テストツイート。{datetime.now().isoformat()}"
         real_response = (
-            real_app_auth_v2_client.chain()
+            real_user_auth_v1_client.chain()
             .request("/2/tweets")
-            .post({"text": f"テストツイート。{datetime.now().isoformat()}"})
+            .post(
+                {
+                    "text": tweet_text,
+                }
+            )
         )
 
         print(real_response.dict())
-        print(expected_response.dict())
+        print(tweet_text)
 
-        assert real_response == expected_response
+        assert real_response.data.text == tweet_text
 
 
 class TestMockV2GetTweet:
