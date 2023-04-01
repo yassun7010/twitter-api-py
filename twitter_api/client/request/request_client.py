@@ -49,3 +49,16 @@ class RequestClient(metaclass=ABCMeta):
         json: Optional[RequestJsonBody] = None,
     ) -> ResponseModelBody:
         ...
+
+    @abstractmethod
+    def delete(
+        self,
+        *,
+        endpoint: Endpoint,
+        response_type: Type[ResponseModelBody],
+        uri: Optional[str] = None,
+        auth: bool = True,
+        headers: Optional[Headers] = None,
+        query: Optional[QuryParameters] = None,
+    ) -> ResponseModelBody:
+        ...

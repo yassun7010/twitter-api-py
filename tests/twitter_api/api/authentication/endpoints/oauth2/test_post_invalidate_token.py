@@ -18,7 +18,7 @@ class TestOauth2PostInvalidateToken:
     ):
         expected_response = Oauth2PostInvalidateTokenResponseBody(
             access_token=(
-                real_client._client._auth.token["access_token"]
+                real_app_auth_v2_client._client._auth.token["access_token"]
                 # pyright: reportOptionalSubscript=false
                 # pyright: reportOptionalMemberAccess=false
             ),

@@ -94,6 +94,15 @@ class TwitterApiMockClient(TwitterApiClient):
 
         return self
 
+    def inject_delete_response(
+        self,
+        uri: tweets.TweetUri,
+        response: tweets.delete_tweet.V2DeleteTweetResponseBody,
+    ) -> Self:
+        self._client.inject_response_body(Endpoint("DELETE", uri), response)
+
+        return self
+
     @classmethod
     def from_bearer_token(cls, bearer_token: str):
         return TwitterApiMockClient(

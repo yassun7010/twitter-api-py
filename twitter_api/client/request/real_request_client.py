@@ -129,6 +129,40 @@ class RealRequestClient(RequestClient):
             )
         )
 
+    def delete(
+        self,
+        *,
+        endpoint: Endpoint,
+        response_type: Type[ResponseModelBody],
+        uri: Optional[str] = None,
+        auth: bool = True,
+        headers: Optional[Headers] = None,
+        query: Optional[QuryParameters] = None,
+    ) -> ResponseModelBody:
+        url = _make_twitter_api_url(endpoint, uri)
+
+        response = self._session.request(
+            url=url,
+            auth=self._auth if auth else None,
+            method=endpoint.method,
+            headers=headers,
+            params=query,
+            timeout=self.timeout_sec,
+        )
+
+        if response_type is str:
+            return response.content.decode("utf-8")  # type: ignore
+
+        return response_type(
+            **_parse_response(
+                endpoint,
+                response,
+                url,
+                headers,
+                query,
+            )
+        )
+
 
 def _make_twitter_api_url(endpoint: Endpoint, uri: Optional[str] = None) -> str:
     if uri is None:
