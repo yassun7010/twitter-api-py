@@ -4,7 +4,7 @@ from typing import Literal, TypedDict
 from twitter_api.client.request.request_client import RequestClient
 from twitter_api.types.endpoint import Endpoint
 from twitter_api.types.extra_permissive_model import ExtraPermissiveModel
-from twitter_api.types.oauth import AccessToken, ConsumerKey, ConsumerSecret
+from twitter_api.types.oauth import AccessToken, ApiKey, ApiSecret
 
 Uri = Literal["/oauth2/invalidate_token"]
 
@@ -28,8 +28,8 @@ class PostOauth2InvalidateToken:
 
     def post(
         self,
-        consumer_key: ConsumerKey,
-        consumer_secret: ConsumerSecret,
+        api_key: ApiKey,
+        api_secret: ApiSecret,
         query_parameters: PostOauth2InvalidateTokenQueryParameters,
     ) -> PostOauth2InvalidateTokenResponseBody:
         # flake8: noqa E501
@@ -40,7 +40,7 @@ class PostOauth2InvalidateToken:
         """
 
         bearer_token = base64.b64encode(
-            f"{consumer_key}:{consumer_secret}".encode(),
+            f"{api_key}:{api_secret}".encode(),
         )
 
         return self._client.post(

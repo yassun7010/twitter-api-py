@@ -8,13 +8,7 @@ from twitter_api.api.authentication.endpoints.oauth2 import (
 )
 from twitter_api.api.v2.endpoints.tweets import get_tweet, get_tweets
 from twitter_api.error import NeverError
-from twitter_api.types.oauth import (
-    AccessSecret,
-    AccessToken,
-    ConsumerKey,
-    ConsumerSecret,
-    Env,
-)
+from twitter_api.types.oauth import AccessSecret, AccessToken, ApiKey, ApiSecret, Env
 
 from .request.request_client import RequestClient
 
@@ -120,40 +114,40 @@ class TwitterApiClient(metaclass=ABCMeta):
     def from_app_auth(
         cls,
         *,
-        consumer_key: ConsumerKey,
-        consumer_secret: ConsumerSecret,
+        api_key: ApiKey,
+        api_secret: ApiSecret,
     ) -> Self:
         """アプリ認証を用いてクライアントを作成する。"""
 
         from .twitter_api_real_client import TwitterApiRealClient
 
         return TwitterApiRealClient.from_app_auth(
-            consumer_key=consumer_key,
-            consumer_secret=consumer_secret,
+            api_key=api_key,
+            api_secret=api_secret,
         )
 
     @classmethod
     def from_app_auth_env(
         cls,
         *,
-        consumer_key: Env[ConsumerKey] = "CONSUMER_KEY",
-        consumer_secret: Env[ConsumerSecret] = "CONSUMER_SECRET",
+        api_key: Env[ApiKey] = "API_KEY",
+        api_secret: Env[ApiSecret] = "API_SECRET",
     ):
         """環境変数から、アプリ認証を用いてクライアントを作成する。"""
 
         from .twitter_api_real_client import TwitterApiRealClient
 
         return TwitterApiRealClient.from_app_auth_env(
-            consumer_key=consumer_key,
-            consumer_secret=consumer_secret,
+            api_key=api_key,
+            api_secret=api_secret,
         )
 
     @classmethod
     def from_user_auth(
         cls,
         *,
-        consumer_key: ConsumerKey,
-        consumer_secret: ConsumerSecret,
+        api_key: ApiKey,
+        api_secret: ApiSecret,
         access_token: AccessToken,
         access_secret: AccessSecret,
     ):
@@ -162,8 +156,8 @@ class TwitterApiClient(metaclass=ABCMeta):
         from .twitter_api_real_client import TwitterApiRealClient
 
         return TwitterApiRealClient.from_user_auth(
-            consumer_key=consumer_key,
-            consumer_secret=consumer_secret,
+            api_key=api_key,
+            api_secret=api_secret,
             access_token=access_token,
             access_secret=access_secret,
         )
@@ -172,8 +166,8 @@ class TwitterApiClient(metaclass=ABCMeta):
     def from_user_auth_env(
         cls,
         *,
-        consumer_key: Env[ConsumerKey] = "CONSUMER_KEY",
-        consumer_secret: Env[ConsumerSecret] = "CONSUMER_SECRET",
+        api_key: Env[ApiKey] = "API_KEY",
+        api_secret: Env[ApiSecret] = "API_SECRET",
         access_token: Env[AccessToken] = "ACCESS_TOKEN",
         access_secret: Env[AccessSecret] = "ACCESS_SECRET",
     ):
@@ -182,8 +176,8 @@ class TwitterApiClient(metaclass=ABCMeta):
         from .twitter_api_real_client import TwitterApiRealClient
 
         return TwitterApiRealClient.from_user_auth_env(
-            consumer_key=consumer_key,
-            consumer_secret=consumer_secret,
+            api_key=api_key,
+            api_secret=api_secret,
             access_token=access_token,
             access_secret=access_secret,
         )

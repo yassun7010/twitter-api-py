@@ -18,7 +18,7 @@ Env = Annotated[T, ...]
 """
 
 
-ConsumerKey: TypeAlias = str
+ApiKey: TypeAlias = str
 """
 アプリの認証に必要なキー。
 
@@ -32,7 +32,7 @@ ConsumerKey: TypeAlias = str
 - oauth_consumer_key
 """
 
-ConsumerSecret: TypeAlias = str
+ApiSecret: TypeAlias = str
 """
 アプリの認証に必要な秘密キー。
 

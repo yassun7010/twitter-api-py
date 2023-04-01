@@ -22,8 +22,8 @@ class TestOauth2PostToken:
             real_client.chain()
             .request("/oauth2/token")
             .post(
-                consumer_key=os.environ["CONSUMER_KEY"],
-                consumer_secret=os.environ["CONSUMER_SECRET"],
+                api_key=os.environ["API_KEY"],
+                api_secret=os.environ["API_SECRET"],
                 request_body={"grant_type": "client_credentials"},
             )
         )
@@ -49,8 +49,8 @@ class TestMockOauth2PostToken:
             )
             .request("/oauth2/token")
             .post(
-                consumer_key="DUMMY_CONSUMER_KEY",
-                consumer_secret="DUMMY_CONSUMER_SECRET",
+                api_key="DUMMY_API_KEY",
+                api_secret="DUMMY_API_SECRET",
                 request_body={"grant_type": "client_credentials"},
             )
             == expected_response

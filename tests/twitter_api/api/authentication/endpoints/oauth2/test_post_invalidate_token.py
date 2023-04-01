@@ -24,8 +24,8 @@ class TestOauth2PostInvalidateToken:
             real_client.chain()
             .request("/oauth2/invalidate_token")
             .post(
-                consumer_key=os.environ["CONSUMER_KEY"],
-                consumer_secret=os.environ["CONSUMER_SECRET"],
+                api_key=os.environ["API_KEY"],
+                api_secret=os.environ["API_SECRET"],
                 query_parameters={"access_token": expected_response.access_token},
             )
         )
@@ -48,8 +48,8 @@ class TestMockOauth2PostInvalidateToken:
             )
             .request("/oauth2/invalidate_token")
             .post(
-                consumer_key="DUMMY_CONSUMER_KEY",
-                consumer_secret="DUMMY_CONSUMER_SECRET",
+                api_key="DUMMY_API_KEY",
+                api_secret="DUMMY_API_SECRET",
                 query_parameters={"access_token": "DUMMY_ACCESS_TOKEN"},
             )
             == expected_response
