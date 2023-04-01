@@ -1,3 +1,4 @@
+import os
 from abc import ABCMeta, abstractmethod
 from typing import Self, Union, overload
 
@@ -110,9 +111,7 @@ class TwitterApiClient(metaclass=ABCMeta):
     def from_bearer_token_env(cls, bearer_token="BEARER_TOEKN"):
         """環境変数から、 Bearer 認証を用いてクライアントを作成する。"""
 
-        from .twitter_api_real_client import TwitterApiRealClient
-
-        return TwitterApiRealClient.from_bearer_token_env(bearer_token)
+        return cls.from_bearer_token(os.environ[bearer_token])
 
     @classmethod
     def from_app_auth_v2(
@@ -139,11 +138,9 @@ class TwitterApiClient(metaclass=ABCMeta):
     ):
         """環境変数から、アプリ認証を用いてクライアントを作成する。"""
 
-        from .twitter_api_real_client import TwitterApiRealClient
-
-        return TwitterApiRealClient.from_app_auth_v2_env(
-            api_key=api_key,
-            api_secret=api_secret,
+        return cls.from_app_auth_v2(
+            api_key=os.environ[api_key],
+            api_secret=os.environ[api_secret],
         )
 
     @classmethod
@@ -177,11 +174,9 @@ class TwitterApiClient(metaclass=ABCMeta):
     ):
         """環境変数から、アプリ認証を用いてクライアントを作成する。"""
 
-        from .twitter_api_real_client import TwitterApiRealClient
-
-        return TwitterApiRealClient.from_user_auth_v1_env(
-            api_key=api_key,
-            api_secret=api_secret,
-            access_token=access_token,
-            access_secret=access_secret,
+        return cls.from_user_auth_v1(
+            api_key=os.environ[api_key],
+            api_secret=os.environ[api_secret],
+            access_token=os.environ[access_token],
+            access_secret=os.environ[access_secret],
         )

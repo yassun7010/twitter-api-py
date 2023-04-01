@@ -1,4 +1,4 @@
-from typing import Optional, Self, Type, overload
+from typing import Self, overload
 
 from twitter_api.api.authentication.endpoints.oauth import post_request_token
 from twitter_api.api.authentication.endpoints.oauth2 import (
@@ -12,12 +12,11 @@ from twitter_api.types.oauth import (
     AccessToken,
     ApiKey,
     ApiSecret,
-    Env,
     OAuthVersion,
 )
 
 from .request.mock_request_client import MockRequestClient
-from .request.request_client import QuryParameters, RequestClient, ResponseModelBody
+from .request.request_client import RequestClient
 from .twitter_api_client import TwitterApiClient
 
 
@@ -82,9 +81,7 @@ class TwitterApiMockClient(TwitterApiClient):
         return self
 
     @classmethod
-    def from_bearer_token_env(cls, bearer_token="BEARER_TOEKN"):
-        """環境変数から、 Bearer 認証を用いてクライアントを作成する。"""
-
+    def from_bearer_token(cls, bearer_token: str):
         return TwitterApiMockClient(oauth_version="2.0")
 
     @classmethod
@@ -97,15 +94,6 @@ class TwitterApiMockClient(TwitterApiClient):
         return TwitterApiMockClient(oauth_version="2.0")
 
     @classmethod
-    def from_app_auth_v2_env(
-        cls,
-        *,
-        api_key: Env[ApiKey] = "API_KEY",
-        api_secret: Env[ApiSecret] = "API_SECRET",
-    ):
-        return TwitterApiMockClient(oauth_version="2.0")
-
-    @classmethod
     def from_user_auth_v1(
         cls,
         *,
@@ -115,24 +103,3 @@ class TwitterApiMockClient(TwitterApiClient):
         access_secret: AccessSecret,
     ):
         return TwitterApiMockClient(oauth_version="1.0a")
-
-    @classmethod
-    def from_user_auth_v1_env(
-        cls,
-        *,
-        api_key: Env[ApiKey] = "API_KEY",
-        api_secret: Env[ApiSecret] = "API_SECRET",
-        access_token: Env[AccessToken] = "ACCESS_TOKEN",
-        access_secret: Env[AccessSecret] = "ACCESS_SECRET",
-    ):
-        return TwitterApiMockClient(oauth_version="1.0a")
-
-    def _get(
-        self,
-        *,
-        endpoint: Endpoint,
-        response_type: Type[ResponseModelBody],
-        uri: Optional[str] = None,
-        query: Optional[QuryParameters] = None,
-    ) -> ResponseModelBody:
-        return self._client.extract_response_body(endpoint)

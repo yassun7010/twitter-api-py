@@ -1,5 +1,3 @@
-import os
-
 from authlib.integrations.requests_client.oauth1_session import (
     OAuth1Auth,  # pyright: reportMissingImports=false
 )
@@ -7,7 +5,7 @@ from authlib.integrations.requests_client.oauth2_session import (
     OAuth2Auth,  # pyright: reportMissingImports=false
 )
 
-from twitter_api.types.oauth import AccessSecret, AccessToken, ApiKey, ApiSecret, Env
+from twitter_api.types.oauth import AccessSecret, AccessToken, ApiKey, ApiSecret
 
 from .request.real_request_client import RealRequestClient
 from .request.request_client import RequestClient
@@ -33,8 +31,6 @@ class TwitterApiRealClient(TwitterApiClient):
 
     @classmethod
     def from_bearer_token(cls, bearer_token: str):
-        """Bearer 認証を用いてクライアントを作成する。"""
-
         return TwitterApiRealClient(
             RealRequestClient(
                 rate_limit="app",
@@ -49,19 +45,12 @@ class TwitterApiRealClient(TwitterApiClient):
         )
 
     @classmethod
-    def from_bearer_token_env(cls, bearer_token="BEARER_TOEKN"):
-        """環境変数から、 Bearer 認証を用いてクライアントを作成する。"""
-
-        return cls.from_bearer_token(os.environ[bearer_token])
-
-    @classmethod
     def from_app_auth_v2(
         cls,
         *,
         api_key: ApiKey,
         api_secret: ApiSecret,
     ):
-        """アプリ認証を用いてクライアントを作成する。"""
         access_token = (
             TwitterApiRealClient(
                 RealRequestClient(
@@ -80,20 +69,6 @@ class TwitterApiRealClient(TwitterApiClient):
         )
 
         return cls.from_bearer_token(access_token)
-
-    @classmethod
-    def from_app_auth_v2_env(
-        cls,
-        *,
-        api_key: Env[ApiKey] = "API_KEY",
-        api_secret: Env[ApiSecret] = "API_SECRET",
-    ):
-        """環境変数から、アプリ認証を用いてクライアントを作成する。"""
-
-        return cls.from_app_auth_v2(
-            api_key=os.environ[api_key],
-            api_secret=os.environ[api_secret],
-        )
 
     @classmethod
     def from_user_auth_v1(
@@ -115,20 +90,4 @@ class TwitterApiRealClient(TwitterApiClient):
                 ),
                 oauth_version="1.0a",
             ),
-        )
-
-    @classmethod
-    def from_user_auth_v1_env(
-        cls,
-        *,
-        api_key: Env[ApiKey] = "API_KEY",
-        api_secret: Env[ApiSecret] = "API_SECRET",
-        access_token: Env[AccessToken] = "ACCESS_TOKEN",
-        access_secret: Env[AccessSecret] = "ACCESS_SECRET",
-    ):
-        return cls.from_user_auth_v1(
-            api_key=os.environ[api_key],
-            api_secret=os.environ[api_secret],
-            access_token=os.environ[access_token],
-            access_secret=os.environ[access_secret],
         )
