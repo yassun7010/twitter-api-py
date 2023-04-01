@@ -7,7 +7,7 @@ from .request_client import (
     Headers,
     QuryParameters,
     RequestClient,
-    RequestModelBody,
+    RequestJsonBody,
     ResponseModelBody,
 )
 
@@ -50,6 +50,6 @@ class MockRequestClient(RequestClient, Generic[ResponseModelBody]):
         uri: Optional[str] = None,
         headers: Optional[Headers] = None,
         query: Optional[QuryParameters] = None,
-        body: Optional[RequestModelBody] = None,
+        body: Optional[RequestJsonBody] = None,
     ) -> ResponseModelBody:
         return self.extract_response_body(endpoint)

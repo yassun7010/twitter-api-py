@@ -24,7 +24,7 @@ from .request_client import (
     Headers,
     QuryParameters,
     RequestClient,
-    RequestModelBody,
+    RequestJsonBody,
     ResponseModelBody,
 )
 
@@ -36,7 +36,7 @@ class RealRequestClient(RequestClient):
         self,
         *,
         rate_limit: RateLimitTarget,
-        auth: Union[OAuth1Auth, OAuth2Auth],
+        auth: Optional[Union[OAuth1Auth, OAuth2Auth]],
         session: Optional[requests.Session] = None,
         timeout_sec: Optional[float] = None,
     ) -> None:
@@ -56,7 +56,7 @@ class RealRequestClient(RequestClient):
         uri: Optional[str] = None,
         headers: Optional[Headers] = None,
         query: Optional[QuryParameters] = None,
-        body: Optional[RequestModelBody] = None,
+        body: Optional[RequestJsonBody] = None,
     ) -> ResponseModelBody:
         url = _make_twitter_api_url(endpoint, uri)
 
@@ -87,7 +87,7 @@ class RealRequestClient(RequestClient):
         uri: Optional[str] = None,
         headers: Optional[Headers] = None,
         query: Optional[QuryParameters] = None,
-        body: Optional[RequestModelBody] = None,
+        body: Optional[RequestJsonBody] = None,
     ) -> ResponseModelBody:
         url = _make_twitter_api_url(endpoint, uri)
 
@@ -97,7 +97,7 @@ class RealRequestClient(RequestClient):
             method=endpoint.method,
             headers=headers,
             params=query,
-            data=body.dict() if body is not None else None,
+            data=body,
             timeout=self.timeout_sec,
         )
 
@@ -131,7 +131,7 @@ def _parse_response(
     url: str,
     headers: Optional[Headers] = None,
     query: Optional[QuryParameters] = None,
-    body: Optional[RequestModelBody] = None,
+    body: Optional[RequestJsonBody] = None,
 ) -> dict:
     try:
         data: dict = response.json()

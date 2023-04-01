@@ -5,7 +5,7 @@ from twitter_api.types.endpoint import Endpoint
 from twitter_api.types.http import (
     Headers,
     QuryParameters,
-    RequestModelBody,
+    RequestJsonBody,
     ResponseModelBody,
 )
 
@@ -31,6 +31,6 @@ class RequestClient(Generic[QuryParameters, ResponseModelBody]):
         uri: Optional[str] = None,
         headers: Optional[Headers] = None,
         query: Optional[QuryParameters] = None,
-        body: Optional[RequestModelBody] = None,
+        body: Optional[RequestJsonBody] = None,
     ) -> ResponseModelBody:
         ...

@@ -2,6 +2,7 @@ from abc import ABCMeta, abstractmethod
 from typing import Self, Union, overload
 
 from twitter_api.api.authentication.endpoints.oauth import post_request_token
+from twitter_api.api.authentication.endpoints.oauth2 import post_token
 from twitter_api.api.v2.endpoints.tweets import get_tweet, get_tweets
 from twitter_api.error import NeverError
 from twitter_api.types.oauth import (
@@ -33,6 +34,13 @@ class TwitterApiClient(metaclass=ABCMeta):
     @overload
     def request(
         self: Self,
+        uri: post_token.Uri,
+    ) -> post_token.PostOauth2Token:
+        ...
+
+    @overload
+    def request(
+        self: Self,
         uri: get_tweets.Uri,
     ) -> get_tweets.GetTweets:
         ...
@@ -50,12 +58,20 @@ class TwitterApiClient(metaclass=ABCMeta):
     ):
         if uri == "/oauth/request_token":
             return post_request_token.PostOauthRequestToken(
-                self._request_client
+                self._request_client,
+            )
+        elif uri == "/oauth2/token":
+            return post_token.PostOauth2Token(
+                self._request_client,
             )
         elif uri == "/2/tweets":
-            return get_tweets.GetTweets(self._request_client)
+            return get_tweets.GetTweets(
+                self._request_client,
+            )
         elif uri == "/2/tweets/:id":
-            return get_tweet.GetTweet(self._request_client)
+            return get_tweet.GetTweet(
+                self._request_client,
+            )
         else:
             raise NeverError(uri)
 
