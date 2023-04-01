@@ -58,10 +58,7 @@ class RealRequestClient(RequestClient):
         query: Optional[QuryParameters] = None,
         body: Optional[RequestModelBody] = None,
     ) -> ResponseModelBody:
-        if uri is None:
-            url = f"{TWITTER_API_DOMAIN}{endpoint.uri}"
-        else:
-            url = f"{TWITTER_API_DOMAIN}{uri}"
+        url = _make_twitter_api_url(endpoint, uri)
 
         response = self._session.request(
             url=url,
@@ -92,10 +89,7 @@ class RealRequestClient(RequestClient):
         query: Optional[QuryParameters] = None,
         body: Optional[RequestModelBody] = None,
     ) -> ResponseModelBody:
-        if uri is None:
-            url = f"{TWITTER_API_DOMAIN}{endpoint.uri}"
-        else:
-            url = f"{TWITTER_API_DOMAIN}{uri}"
+        url = _make_twitter_api_url(endpoint, uri)
 
         response = self._session.request(
             url=url,
@@ -120,6 +114,15 @@ class RealRequestClient(RequestClient):
                 body,
             )
         )
+
+
+def _make_twitter_api_url(
+    endpoint: Endpoint, uri: Optional[str] = None
+) -> str:
+    if uri is None:
+        return f"{TWITTER_API_DOMAIN}{endpoint.uri}"
+    else:
+        return f"{TWITTER_API_DOMAIN}{uri}"
 
 
 def _parse_response(
