@@ -10,7 +10,7 @@ from twitter_api.client.twitter_api_real_client import TwitterApiRealClient
 
 
 class TestOauth2PostInvalidateToken:
-    @pytest.mark.skipif(True, reason="上手く invalidation できない理由を要調査。")
+    @pytest.mark.skipif(True)
     def test_post_oauth2_invalidate_token(self, real_client: TwitterApiRealClient):
         expected_response = PostOauth2InvalidateTokenResponseBody(
             access_token=(
