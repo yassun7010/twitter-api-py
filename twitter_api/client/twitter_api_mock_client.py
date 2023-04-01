@@ -15,6 +15,7 @@ from twitter_api.types.oauth import (
     OAuthVersion,
 )
 
+from ..utils.ratelimit import RateLimitTarget
 from .request.mock_request_client import MockRequestClient
 from .request.request_client import RequestClient
 from .twitter_api_client import TwitterApiClient
@@ -23,8 +24,13 @@ from .twitter_api_client import TwitterApiClient
 class TwitterApiMockClient(TwitterApiClient):
     """Twitter API V2 をモックするためのクライアント"""
 
-    def __init__(self, *, oauth_version: OAuthVersion = "2.0") -> None:
-        self._client = MockRequestClient(oauth_version=oauth_version)
+    def __init__(
+        self, *, rate_limit: RateLimitTarget, oauth_version: OAuthVersion
+    ) -> None:
+        self._client = MockRequestClient(
+            rate_limit=rate_limit,
+            oauth_version=oauth_version,
+        )
 
     @property
     def _request_client(self) -> RequestClient:
@@ -90,7 +96,10 @@ class TwitterApiMockClient(TwitterApiClient):
 
     @classmethod
     def from_bearer_token(cls, bearer_token: str):
-        return TwitterApiMockClient(oauth_version="2.0")
+        return TwitterApiMockClient(
+            rate_limit="app",
+            oauth_version="2.0",
+        )
 
     @classmethod
     def from_app_auth_v2(
@@ -99,7 +108,10 @@ class TwitterApiMockClient(TwitterApiClient):
         api_key: ApiKey,
         api_secret: ApiSecret,
     ) -> Self:
-        return TwitterApiMockClient(oauth_version="2.0")
+        return TwitterApiMockClient(
+            rate_limit="app",
+            oauth_version="2.0",
+        )
 
     @classmethod
     def from_user_auth_v1(
@@ -110,4 +122,7 @@ class TwitterApiMockClient(TwitterApiClient):
         access_token: AccessToken,
         access_secret: AccessSecret,
     ):
-        return TwitterApiMockClient(oauth_version="1.0a")
+        return TwitterApiMockClient(
+            rate_limit="app",
+            oauth_version="1.0a",
+        )

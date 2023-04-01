@@ -45,4 +45,9 @@ def real_app_auth_v2_client() -> TwitterApiRealClient:
 
 @pytest.fixture
 def mock_app_auth_v2_client() -> TwitterApiMockClient:
-    return TwitterApiMockClient()
+    return TwitterApiMockClient(rate_limit="app", oauth_version="2.0")
+
+
+@pytest.fixture
+def mock_app_auth_v1_client() -> TwitterApiMockClient:
+    return TwitterApiMockClient(rate_limit="app", oauth_version="1.0a")

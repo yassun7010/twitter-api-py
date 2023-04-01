@@ -54,6 +54,10 @@ class RealRequestClient(RequestClient):
     def oauth_version(self) -> OAuthVersion:
         return self._oauth_version
 
+    @property
+    def rate_limit(self) -> RateLimitTarget:
+        return self._rate_limit
+
     def get(
         self,
         *,

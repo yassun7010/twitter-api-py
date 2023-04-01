@@ -9,12 +9,18 @@ from twitter_api.types.http import (
     ResponseModelBody,
 )
 from twitter_api.types.oauth import OAuthVersion
+from twitter_api.utils.ratelimit import RateLimitTarget
 
 
 class RequestClient(metaclass=ABCMeta):
     @property
     @abstractmethod
     def oauth_version(self) -> OAuthVersion:
+        ...
+
+    @property
+    @abstractmethod
+    def rate_limit(self) -> RateLimitTarget:
         ...
 
     @abstractmethod
