@@ -29,9 +29,11 @@ def tweet() -> Tweet:
 
 @pytest.mark.skipif(**synthetic_monitoring_is_disable())
 class TestV2GetTweet:
-    def test_get_tweet(self, real_client: TwitterApiRealClient, tweet: Tweet):
+    def test_get_tweet(
+        self, real_app_auth_v2_client: TwitterApiRealClient, tweet: Tweet
+    ):
         expected_response = V2GetTweetResponseBody(data=tweet)
-        real_response = real_client.request("/2/tweets/:id").get(tweet.id)
+        real_response = real_app_auth_v2_client.request("/2/tweets/:id").get(tweet.id)
 
         print(real_response.dict())
         print(expected_response.dict())
@@ -40,11 +42,13 @@ class TestV2GetTweet:
 
 
 class TestMockV2GetTweet:
-    def test_mock_get_tweet(self, mock_client: TwitterApiMockClient, tweet: Tweet):
+    def test_mock_get_tweet(
+        self, mock_app_auth_v2_client: TwitterApiMockClient, tweet: Tweet
+    ):
         expected_response = V2GetTweetResponseBody(data=tweet)
 
         assert (
-            mock_client.chain()
+            mock_app_auth_v2_client.chain()
             .inject_get_response("/2/tweets/:id", expected_response)
             .request("/2/tweets/:id")
             .get(tweet.id)

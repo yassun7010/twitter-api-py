@@ -34,15 +34,15 @@ def synthetic_monitoring_is_disable() -> dict:
 
 
 @pytest.fixture
-def client() -> TwitterApiClient:
+def app_auth_v2_client() -> TwitterApiClient:
     return TwitterApiClient.from_app_auth_v2_env()
 
 
 @pytest.fixture
-def real_client() -> TwitterApiRealClient:
+def real_app_auth_v2_client() -> TwitterApiRealClient:
     return TwitterApiRealClient.from_app_auth_v2_env()
 
 
 @pytest.fixture
-def mock_client() -> TwitterApiMockClient:
+def mock_app_auth_v2_client() -> TwitterApiMockClient:
     return TwitterApiMockClient()

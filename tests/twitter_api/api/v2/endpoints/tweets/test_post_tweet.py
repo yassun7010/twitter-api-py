@@ -21,10 +21,14 @@ def tweet() -> Tweet:
 
 @pytest.mark.skipif(**synthetic_monitoring_is_disable())
 class TestV2GetTweet:
-    def test_get_tweet(self, real_client: TwitterApiRealClient, tweet: Tweet):
+    def test_get_tweet(
+        self, real_app_auth_v2_client: TwitterApiRealClient, tweet: Tweet
+    ):
         expected_response = V2GetTweetResponseBody(data=tweet)
-        real_response = real_client.request("/2/tweets").post(
-            {"text": f"テストツイート。{datetime.now().isoformat()}"}
+        real_response = (
+            real_app_auth_v2_client.chain()
+            .request("/2/tweets")
+            .post({"text": f"テストツイート。{datetime.now().isoformat()}"})
         )
 
         print(real_response.dict())
@@ -34,11 +38,13 @@ class TestV2GetTweet:
 
 
 class TestMockV2GetTweet:
-    def test_mock_get_tweet(self, mock_client: TwitterApiMockClient, tweet: Tweet):
+    def test_mock_get_tweet(
+        self, mock_app_auth_v2_client: TwitterApiMockClient, tweet: Tweet
+    ):
         expected_response = V2PostTweetResponseBody(data=tweet)
 
         assert (
-            mock_client.chain()
+            mock_app_auth_v2_client.chain()
             .inject_post_response("/2/tweets", expected_response)
             .request("/2/tweets")
             .post({"text": tweet.text})

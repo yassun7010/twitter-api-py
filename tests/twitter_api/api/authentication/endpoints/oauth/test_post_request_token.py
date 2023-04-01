@@ -9,10 +9,12 @@ from twitter_api.error import TwitterApiOAuthVersionWrong
 
 # @pytest.mark.skipif(**synthetic_monitoring_is_disable())
 class TestOauthPostRequestToken:
-    def test_post_oauth_request_token(self, real_client: TwitterApiRealClient):
+    def test_post_oauth_request_token(
+        self, real_app_auth_v2_client: TwitterApiRealClient
+    ):
         with pytest.raises(TwitterApiOAuthVersionWrong):
             (
-                real_client.chain()
+                real_app_auth_v2_client.chain()
                 .request("/oauth/request_token")
                 .post(
                     api_key=os.environ["API_KEY"],
@@ -23,10 +25,12 @@ class TestOauthPostRequestToken:
 
 
 class TestMockOauthPostRequestToken:
-    def test_mock_post_oauth_request_token(self, mock_client: TwitterApiMockClient):
+    def test_mock_post_oauth_request_token(
+        self, mock_app_auth_v2_client: TwitterApiMockClient
+    ):
         with pytest.raises(TwitterApiOAuthVersionWrong):
             (
-                mock_client.chain()
+                mock_app_auth_v2_client.chain()
                 .request("/oauth/request_token")
                 .post(
                     api_key=os.environ["API_KEY"],

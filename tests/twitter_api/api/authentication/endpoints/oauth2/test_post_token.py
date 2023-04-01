@@ -12,7 +12,7 @@ from twitter_api.client.twitter_api_real_client import TwitterApiRealClient
 
 @pytest.mark.skipif(**synthetic_monitoring_is_disable())
 class TestOauth2PostToken:
-    def test_post_oauth2_token(self, real_client: TwitterApiRealClient):
+    def test_post_oauth2_token(self, real_app_auth_v2_client: TwitterApiRealClient):
         expected_response = Oauth2PostTokenResponseBody(
             token_type="bearer",
             access_token=(
@@ -23,7 +23,7 @@ class TestOauth2PostToken:
         )
 
         real_response = (
-            real_client.chain()
+            real_app_auth_v2_client.chain()
             .request("/oauth2/token")
             .post(
                 api_key=os.environ["API_KEY"],
@@ -39,14 +39,16 @@ class TestOauth2PostToken:
 
 
 class TestMockOauth2PostToken:
-    def test_mock_post_oauth2_token(self, mock_client: TwitterApiMockClient):
+    def test_mock_post_oauth2_token(
+        self, mock_app_auth_v2_client: TwitterApiMockClient
+    ):
         expected_response = Oauth2PostTokenResponseBody(
             token_type="bearer",
             access_token="AAAAAAAAAAAAAAAAAAAAAOeOmQEAAAAAu",
         )
 
         assert (
-            mock_client.chain()
+            mock_app_auth_v2_client.chain()
             .inject_post_response(
                 "/oauth2/token",
                 expected_response,

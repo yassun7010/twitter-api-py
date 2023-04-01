@@ -31,10 +31,14 @@ def tweets() -> list[Tweet]:
 
 @pytest.mark.skipif(**synthetic_monitoring_is_disable())
 class TestV2GetTweets:
-    def test_get_tweets(self, real_client: TwitterApiRealClient, tweets: list[Tweet]):
+    def test_get_tweets(
+        self, real_app_auth_v2_client: TwitterApiRealClient, tweets: list[Tweet]
+    ):
         expected_response = V2GetTweetsResponseBody(data=tweets)
-        real_response = real_client.request("/2/tweets").get(
-            {"ids": list(map(lambda tweet: tweet.id, tweets))}
+        real_response = (
+            real_app_auth_v2_client.chain()
+            .request("/2/tweets")
+            .get({"ids": list(map(lambda tweet: tweet.id, tweets))})
         )
 
         print(real_response.dict())
@@ -45,7 +49,7 @@ class TestV2GetTweets:
 
 @pytest.mark.skipif(**synthetic_monitoring_is_disable())
 class TestMockV2GetTweets:
-    def test_mock_get_tweets(self, mock_client: TwitterApiMockClient):
+    def test_mock_get_tweets(self, mock_app_auth_v2_client: TwitterApiMockClient):
         tweet = Tweet(
             id="12345",
             text="tweet",
@@ -55,7 +59,7 @@ class TestMockV2GetTweets:
         response = V2GetTweetsResponseBody(data=[tweet for _ in range(10)])
 
         assert (
-            mock_client.chain()
+            mock_app_auth_v2_client.chain()
             .inject_get_response("/2/tweets", response)
             .request("/2/tweets")
             .get({"ids": list(map(lambda tweet: tweet.id, response.data))})
