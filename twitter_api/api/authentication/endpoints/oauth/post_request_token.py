@@ -53,6 +53,7 @@ class OauthPostRequestToken:
             raise TwitterApiOAuthVersionWrong(
                 version=self._client.oauth_version, expected_version="1.0a"
             )
+
         # NOTE: このコードは成功するが、さらなる調査が必要。
         #
         # return OauthPostRequestTokenResponseBody(
