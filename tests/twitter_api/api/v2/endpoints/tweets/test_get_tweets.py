@@ -1,11 +1,9 @@
-from twitter_api.api.v2.endpoints.tweets.get_tweets import (
-    GetTweetsResponseBody,
-)
+from twitter_api.api.v2.endpoints.tweets.get_tweets import GetTweetsResponseBody
 from twitter_api.api.v2.types.tweet.tweet import Tweet
 from twitter_api.client.twitter_api_mock_client import TwitterApiMockClient
 
 
-class TestTwitterApiMockClient:
+class TestV2GetTweets:
     def test_mock_get_tweets(self, mock_client: TwitterApiMockClient):
         tweet = Tweet(
             id="12345",

@@ -39,6 +39,9 @@ line_length = 88
 multi_line_output = 3
 profile = "black"
 
+[tool.flake8]
+max-line-length = 88
+
 [tool.pyright]
 exclude = ["**/__pycache__"]
 reportPrivateImportUsage = "none"
