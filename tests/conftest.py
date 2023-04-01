@@ -3,7 +3,6 @@ from textwrap import dedent
 
 import pytest
 
-from twitter_api.client.twitter_api_client import TwitterApiClient
 from twitter_api.client.twitter_api_mock_client import TwitterApiMockClient
 from twitter_api.client.twitter_api_real_client import TwitterApiRealClient
 
@@ -31,11 +30,6 @@ def synthetic_monitoring_is_disable() -> dict:
             """
         ).replace("\n", ""),
     )
-
-
-@pytest.fixture
-def app_auth_v2_client() -> TwitterApiClient:
-    return TwitterApiClient.from_app_auth_v2_env()
 
 
 @pytest.fixture
