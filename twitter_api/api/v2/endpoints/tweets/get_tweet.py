@@ -1,4 +1,4 @@
-from typing import Literal, NotRequired, Optional, TypedDict
+from typing import NotRequired, Optional, TypedDict
 
 from twitter_api.api.v2.types.expansion import Expansion
 from twitter_api.api.v2.types.media.media_field import MediaField
@@ -14,8 +14,6 @@ from twitter_api.types.comma_separatable import CommaSeparatable, comma_separate
 from twitter_api.types.endpoint import Endpoint
 from twitter_api.types.extra_permissive_model import ExtraPermissiveModel
 from twitter_api.utils.ratelimit import rate_limit
-
-Uri = Literal["/2/tweets/:id"]
 
 ENDPOINT = Endpoint("GET", "/2/tweets/:id")
 

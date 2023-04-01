@@ -1,7 +1,8 @@
-from typing import TypedDict, TypeVar
+from typing import TypeAlias, TypedDict, TypeVar
 
 from pydantic import BaseModel
 
+Url: TypeAlias = str
 Headers = TypeVar("Headers", bound=dict)
 QuryParameters = TypeVar("QuryParameters", bound=dict)
 RequestJsonBody = TypeVar("RequestJsonBody", bound=dict)

@@ -1,8 +1,8 @@
 from dataclasses import dataclass
-from typing import Literal
+from typing import Literal, TypeAlias
 
 EndpointMethod = Literal["GET", "POST"]
-EndpointURI = str
+EndpointURI: TypeAlias = str
 
 
 @dataclass

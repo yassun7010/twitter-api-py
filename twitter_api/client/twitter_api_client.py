@@ -7,7 +7,7 @@ from twitter_api.api.authentication.endpoints.oauth2 import (
     post_invalidate_token,
     post_token,
 )
-from twitter_api.api.v2.endpoints.tweets import get_tweet, get_tweets
+from twitter_api.api.v2.endpoints import tweets
 from twitter_api.error import NeverError
 from twitter_api.types.oauth import AccessSecret, AccessToken, ApiKey, ApiSecret, Env
 
@@ -55,22 +55,22 @@ class TwitterApiClient(metaclass=ABCMeta):
     @overload
     def request(
         self: Self,
-        uri: get_tweets.Uri,
-    ) -> get_tweets.V2GetTweets:
+        uri: tweets.TweetUri,
+    ) -> tweets.V2Tweet:
         ...
 
     @overload
     def request(
         self: Self,
-        uri: get_tweet.Uri,
-    ) -> get_tweet.V2GetTweet:
+        uri: tweets.TweetsUri,
+    ) -> tweets.V2Tweets:
         ...
 
     def request(
         self: Self,
         uri: Union[
-            get_tweet.Uri,
-            get_tweets.Uri,
+            tweets.TweetUri,
+            tweets.TweetsUri,
             post_request_token.Uri,
             post_invalidate_token.Uri,
             post_token.Uri,
@@ -89,11 +89,11 @@ class TwitterApiClient(metaclass=ABCMeta):
                 self._request_client,
             )
         elif uri == "/2/tweets":
-            return get_tweets.V2GetTweets(
+            return tweets.V2Tweets(
                 self._request_client,
             )
         elif uri == "/2/tweets/:id":
-            return get_tweet.V2GetTweet(
+            return tweets.V2Tweet(
                 self._request_client,
             )
         else:

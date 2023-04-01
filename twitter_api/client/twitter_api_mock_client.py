@@ -5,7 +5,7 @@ from twitter_api.api.authentication.endpoints.oauth2 import (
     post_invalidate_token,
     post_token,
 )
-from twitter_api.api.v2.endpoints.tweets import get_tweet, get_tweets
+from twitter_api.api.v2.endpoints import tweets
 from twitter_api.types.endpoint import Endpoint
 from twitter_api.types.oauth import (
     AccessSecret,
@@ -33,16 +33,16 @@ class TwitterApiMockClient(TwitterApiClient):
     @overload
     def inject_get_response(
         self,
-        uri: get_tweets.Uri,
-        response: get_tweets.V2GetTweetsResponseBody,
+        uri: tweets.TweetsUri,
+        response: tweets.get_tweets.V2GetTweetsResponseBody,
     ) -> Self:
         ...
 
     @overload
     def inject_get_response(
         self,
-        uri: get_tweet.Uri,
-        response: get_tweet.V2GetTweetResponseBody,
+        uri: tweets.TweetUri,
+        response: tweets.get_tweet.V2GetTweetResponseBody,
     ) -> Self:
         ...
 
@@ -72,6 +72,14 @@ class TwitterApiMockClient(TwitterApiClient):
         self,
         uri: post_token.Uri,
         response: post_token.Oauth2PostTokenResponseBody,
+    ) -> Self:
+        ...
+
+    @overload
+    def inject_post_response(
+        self,
+        uri: tweets.TweetsUri,
+        response: tweets.post_tweet.V2PostTweetResponseBody,
     ) -> Self:
         ...
 
