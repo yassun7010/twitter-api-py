@@ -3,7 +3,6 @@ from typing import Literal, NotRequired, Optional, TypedDict
 from twitter_api.client.request.request_client import RequestClient
 from twitter_api.types.endpoint import Endpoint
 from twitter_api.types.screen_name import ScreenName
-from twitter_api.utils.ratelimit import rate_limit
 
 Uri = Literal["/oauth/authenticate"]
 

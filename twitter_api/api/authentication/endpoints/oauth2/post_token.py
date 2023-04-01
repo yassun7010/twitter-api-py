@@ -9,8 +9,6 @@ from twitter_api.types.oauth import (
     AccessToken,
     ConsumerKey,
     ConsumerSecret,
-    OAuthToken,
-    OAuthTokenSecret,
 )
 
 Uri = Literal["/oauth2/token"]
