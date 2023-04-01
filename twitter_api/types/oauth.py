@@ -94,7 +94,7 @@ OAuth 認証をするときに、一時的に発行されるトークンを検�
 """
 
 
-ClientID: TypeAlias = str
+ClientId: TypeAlias = str
 """
 OAuth2.0 で認証をするときに必要なID。
 """
