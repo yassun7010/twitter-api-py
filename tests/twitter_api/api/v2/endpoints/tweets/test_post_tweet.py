@@ -9,15 +9,6 @@ from twitter_api.client.twitter_api_mock_client import TwitterApiMockClient
 from twitter_api.client.twitter_api_real_client import TwitterApiRealClient
 
 
-@pytest.fixture
-def tweet() -> Tweet:
-    return Tweet(
-        id="1234567890123456789",
-        text="ツイートしました。",
-        edit_history_tweet_ids=["1234567890123456789"],
-    )
-
-
 @pytest.mark.skipif(**synthetic_monitoring_is_disable())
 class TestV2GetTweet:
     def test_get_tweet(self, real_user_auth_v1_client: TwitterApiRealClient):
@@ -39,9 +30,13 @@ class TestV2GetTweet:
 
 
 class TestMockV2GetTweet:
-    def test_mock_get_tweet(
-        self, mock_app_auth_v2_client: TwitterApiMockClient, tweet: Tweet
-    ):
+    def test_mock_get_tweet(self, mock_app_auth_v2_client: TwitterApiMockClient):
+        tweet = Tweet(
+            id="1234567890123456789",
+            text="ツイートしました。",
+            edit_history_tweet_ids=["1234567890123456789"],
+        )
+
         expected_response = V2PostTweetResponseBody(data=tweet)
 
         assert (
