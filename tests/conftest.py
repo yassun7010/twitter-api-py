@@ -6,15 +6,15 @@ from twitter_api.client.twitter_api_real_client import TwitterApiRealClient
 
 
 @pytest.fixture
-def client():
-    return TwitterApiClient.from_bearer_token("aaaaa")
+def client() -> TwitterApiClient:
+    return TwitterApiClient.from_app_auth_env()
 
 
 @pytest.fixture
-def real_client():
-    return TwitterApiRealClient.from_bearer_token("aaaaa")
+def real_client() -> TwitterApiRealClient:
+    return TwitterApiRealClient.from_app_auth_env()
 
 
 @pytest.fixture
-def mock_client():
+def mock_client() -> TwitterApiMockClient:
     return TwitterApiMockClient()
