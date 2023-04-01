@@ -2,6 +2,7 @@ import base64
 from typing import Literal, TypedDict
 
 from twitter_api.client.request.request_client import RequestClient
+from twitter_api.error import TwitterApiOAuthVersionWrong
 from twitter_api.types.endpoint import Endpoint
 from twitter_api.types.extra_permissive_model import ExtraPermissiveModel
 from twitter_api.types.http import downcast_dict
@@ -39,6 +40,11 @@ class Oauth2PostInvalidateToken:
 
         refer: https://developer.twitter.com/en/docs/authentication/api-reference/invalidate_bearer_token
         """
+
+        if self._client.oauth_version != "2.0":
+            raise TwitterApiOAuthVersionWrong(
+                version=self._client.oauth_version, expected_version="2.0"
+            )
 
         bearer_token = base64.b64encode(
             f"{api_key}:{api_secret}".encode(),
