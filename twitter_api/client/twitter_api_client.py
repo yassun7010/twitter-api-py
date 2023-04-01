@@ -51,14 +51,14 @@ class TwitterApiClient(metaclass=ABCMeta):
     def request(
         self: Self,
         uri: get_tweets.Uri,
-    ) -> get_tweets.GetTweets:
+    ) -> get_tweets.V2GetTweets:
         ...
 
     @overload
     def request(
         self: Self,
         uri: get_tweet.Uri,
-    ) -> get_tweet.GetTweet:
+    ) -> get_tweet.V2GetTweet:
         ...
 
     def request(
@@ -84,11 +84,11 @@ class TwitterApiClient(metaclass=ABCMeta):
                 self._request_client,
             )
         elif uri == "/2/tweets":
-            return get_tweets.GetTweets(
+            return get_tweets.V2GetTweets(
                 self._request_client,
             )
         elif uri == "/2/tweets/:id":
-            return get_tweet.GetTweet(
+            return get_tweet.V2GetTweet(
                 self._request_client,
             )
         else:

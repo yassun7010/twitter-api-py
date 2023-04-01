@@ -1,4 +1,4 @@
-from twitter_api.api.v2.endpoints.tweets.get_tweets import GetTweetsResponseBody
+from twitter_api.api.v2.endpoints.tweets.get_tweets import V2GetTweetsResponseBody
 from twitter_api.api.v2.types.tweet.tweet import Tweet
 from twitter_api.client.twitter_api_mock_client import TwitterApiMockClient
 
@@ -11,7 +11,7 @@ class TestV2GetTweets:
             edit_history_tweet_ids=["56789"],
         )
 
-        response = GetTweetsResponseBody(data=[tweet for _ in range(10)])
+        response = V2GetTweetsResponseBody(data=[tweet for _ in range(10)])
 
         assert (
             mock_client.chain()

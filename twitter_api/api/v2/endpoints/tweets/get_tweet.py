@@ -10,10 +10,7 @@ from twitter_api.api.v2.types.tweet.tweet_id import TweetId
 from twitter_api.api.v2.types.user.user import User
 from twitter_api.api.v2.types.user.user_field import UserField
 from twitter_api.client.request.request_client import RequestClient
-from twitter_api.types.comma_separatable import (
-    CommaSeparatable,
-    comma_separated_str,
-)
+from twitter_api.types.comma_separatable import CommaSeparatable, comma_separated_str
 from twitter_api.types.endpoint import Endpoint
 from twitter_api.types.extra_permissive_model import ExtraPermissiveModel
 from twitter_api.utils.ratelimit import rate_limit
@@ -22,8 +19,8 @@ Uri = Literal["/2/tweets/:id"]
 
 ENDPOINT = Endpoint("GET", "/2/tweets/:id")
 
-GetTweetQueryParameters = TypedDict(
-    "GetTweetQueryParameters",
+V2GetTweetQueryParameters = TypedDict(
+    "V2GetTweetQueryParameters",
     {
         "expansions": NotRequired[Optional[CommaSeparatable[Expansion]]],
         "media.fields": NotRequired[Optional[CommaSeparatable[MediaField]]],
@@ -36,41 +33,31 @@ GetTweetQueryParameters = TypedDict(
 
 
 def _make_query(
-    query_parameters: Optional[GetTweetQueryParameters],
+    query_parameters: Optional[V2GetTweetQueryParameters],
 ) -> Optional[dict]:
     if query_parameters is None:
         return None
 
     return {
         "expansions": comma_separated_str(query_parameters.get("expansions")),
-        "media.fields": comma_separated_str(
-            query_parameters.get("media.fields")
-        ),
-        "place.fields": comma_separated_str(
-            query_parameters.get("place.fields")
-        ),
-        "poll.fields": comma_separated_str(
-            query_parameters.get("poll.fields")
-        ),
-        "tweet.fields": comma_separated_str(
-            query_parameters.get("tweet.fields")
-        ),
-        "user.fields": comma_separated_str(
-            query_parameters.get("user.fields")
-        ),
+        "media.fields": comma_separated_str(query_parameters.get("media.fields")),
+        "place.fields": comma_separated_str(query_parameters.get("place.fields")),
+        "poll.fields": comma_separated_str(query_parameters.get("poll.fields")),
+        "tweet.fields": comma_separated_str(query_parameters.get("tweet.fields")),
+        "user.fields": comma_separated_str(query_parameters.get("user.fields")),
     }
 
 
-class GetTweetResponseBodyIncludes(ExtraPermissiveModel):
+class V2GetTweetResponseBodyIncludes(ExtraPermissiveModel):
     users: list[User]
 
 
-class GetTweetResponseBody(ExtraPermissiveModel):
+class V2GetTweetResponseBody(ExtraPermissiveModel):
     data: Tweet
-    includes: Optional[GetTweetResponseBodyIncludes] = None
+    includes: Optional[V2GetTweetResponseBodyIncludes] = None
 
 
-class GetTweet:
+class V2GetTweet:
     def __init__(self, client: RequestClient) -> None:
         self._client = client
 
@@ -79,8 +66,8 @@ class GetTweet:
     def get(
         self,
         id: TweetId,
-        query: Optional[GetTweetQueryParameters] = None,
-    ) -> GetTweetResponseBody:
+        query: Optional[V2GetTweetQueryParameters] = None,
+    ) -> V2GetTweetResponseBody:
         # flake8: noqa E501
         """
         ツイートの一覧を取得する。
@@ -89,7 +76,7 @@ class GetTweet:
         """
         return self._client.get(
             endpoint=ENDPOINT,
-            response_type=GetTweetResponseBody,
+            response_type=V2GetTweetResponseBody,
             uri=ENDPOINT.uri.replace(":id", id),
             query=_make_query(query),
         )

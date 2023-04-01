@@ -27,7 +27,7 @@ class TwitterApiMockClient(TwitterApiClient):
     def inject_get_response(
         self,
         uri: get_tweets.Uri,
-        response: get_tweets.GetTweetsResponseBody,
+        response: get_tweets.V2GetTweetsResponseBody,
     ) -> Self:
         ...
 
@@ -35,7 +35,7 @@ class TwitterApiMockClient(TwitterApiClient):
     def inject_get_response(
         self,
         uri: get_tweet.Uri,
-        response: get_tweet.GetTweetResponseBody,
+        response: get_tweet.V2GetTweetResponseBody,
     ) -> Self:
         ...
 

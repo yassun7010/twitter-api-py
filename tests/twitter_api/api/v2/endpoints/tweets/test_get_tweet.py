@@ -2,7 +2,7 @@ from textwrap import dedent
 
 import pytest
 
-from twitter_api.api.v2.endpoints.tweets.get_tweet import GetTweetResponseBody
+from twitter_api.api.v2.endpoints.tweets.get_tweet import V2GetTweetResponseBody
 from twitter_api.api.v2.types.tweet.tweet import Tweet
 from twitter_api.client.twitter_api_mock_client import TwitterApiMockClient
 from twitter_api.client.twitter_api_real_client import TwitterApiRealClient
@@ -28,7 +28,7 @@ def tweet() -> Tweet:
 
 class TestV2GetTweet:
     def test_get_tweets(self, real_client: TwitterApiRealClient, tweet):
-        expected_response = GetTweetResponseBody(data=tweet)
+        expected_response = V2GetTweetResponseBody(data=tweet)
         real_response = real_client.request("/2/tweets/:id").get(tweet.id)
 
         print(real_response.dict())
@@ -39,7 +39,7 @@ class TestV2GetTweet:
 
 class TestMockV2GetTweet:
     def test_mock_get_tweets(self, mock_client: TwitterApiMockClient, tweet):
-        expected_response = GetTweetResponseBody(data=tweet)
+        expected_response = V2GetTweetResponseBody(data=tweet)
 
         assert (
             mock_client.chain()
