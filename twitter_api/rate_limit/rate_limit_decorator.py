@@ -50,21 +50,23 @@ def rate_limit(
 
     def _rate_limit(func):
         def _wrapper(self: HasReqeustClient, *args, **kwargs):
-            total_seconds = 0
-            if seconds is not None:
-                total_seconds += seconds
-            if mins is not None:
-                total_seconds += 60 * mins
+            # RateLimitTarget が一致する場合、 LimitOver を確認する。
+            if self.request_client.rate_limit_target == target:
+                total_seconds = 0
+                if seconds is not None:
+                    total_seconds += seconds
+                if mins is not None:
+                    total_seconds += 60 * mins
 
-            data = RateLimitInfo(
-                target=target,
-                endpoint=endpoint,
-                requests=requests,
-                total_seconds=total_seconds,
-            )
+                data = RateLimitInfo(
+                    target=target,
+                    endpoint=endpoint,
+                    requests=requests,
+                    total_seconds=total_seconds,
+                )
 
-            if self.request_client.rate_limit_manager.check_limit_over(data):
-                raise RateLimitOverError(data)
+                if self.request_client.rate_limit_manager.check_limit_over(data):
+                    raise RateLimitOverError(data)
 
             return func(self, *args, **kwargs)
 
