@@ -1,6 +1,6 @@
 # ✨✨ Twitter API Client by Typed Python ✨✨
 
-# Why do we needs new twitter Api client?
+# Why do we needs new Twitter Client Client?
 
 今までの API クライアントに対し、常に不満を持っていました。
 
