@@ -3,6 +3,12 @@ from typing import Any, Optional, overload
 null = None
 """Json のデータをそのままコードにコピーして利用できるように、 null を定義しておく。"""
 
+true = True
+"""Json のデータをそのままコードにコピーして利用できるように、 true を定義しておく。"""
+
+false = True
+"""Json のデータをそのままコードにコピーして利用できるように、 false を定義しておく。"""
+
 
 @overload
 def exclude_none(data: dict) -> dict:
@@ -28,4 +34,4 @@ def _exclude_none_recursive(data: Any):
         return data
 
 
-__all__ = ["null"]
+__all__ = ["null", "true", "false"]
