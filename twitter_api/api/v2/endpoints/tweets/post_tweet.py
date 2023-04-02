@@ -2,7 +2,7 @@ from typing import Literal, NotRequired, Optional, TypedDict
 
 from twitter_api.api.v2.types.media.media_id import MediaId
 from twitter_api.api.v2.types.place.place_id import PlaceId
-from twitter_api.api.v2.types.tweet.tweet import Tweet
+from twitter_api.api.v2.types.tweet.tweet_detail import TweetDetail
 from twitter_api.api.v2.types.tweet.tweet_id import TweetId
 from twitter_api.api.v2.types.user.user_id import UserId
 from twitter_api.client.request.has_request_client import HasReqeustClient
@@ -47,7 +47,7 @@ class V2PostTweetRequestBody(TypedDict):
 
 
 class V2PostTweetResponseBody(ExtraPermissiveModel):
-    data: Tweet
+    data: TweetDetail
 
 
 class V2PostTweet(HasReqeustClient):

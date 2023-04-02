@@ -19,7 +19,7 @@ from twitter_api.types.endpoint import Endpoint
 from twitter_api.types.extra_permissive_model import ExtraPermissiveModel
 from twitter_api.utils.functional import map_optional
 
-Uri: TypeAlias = Literal["https://api.twitter.com/2/tweets/search/all"]
+Url: TypeAlias = Literal["https://api.twitter.com/2/tweets/search/all"]
 
 ENDPOINT = Endpoint("GET", "https://api.twitter.com/2/tweets/search/all")
 

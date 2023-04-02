@@ -14,7 +14,7 @@ from twitter_api.types.comma_separatable import CommaSeparatable, comma_separate
 from twitter_api.types.endpoint import Endpoint
 from twitter_api.types.extra_permissive_model import ExtraPermissiveModel
 
-Uri: TypeAlias = Literal["https://api.twitter.com/2/tweets/:id/retweeted_by"]
+Url: TypeAlias = Literal["https://api.twitter.com/2/tweets/:id/retweeted_by"]
 
 ENDPOINT = Endpoint("GET", "https://api.twitter.com/2/tweets/:id/retweeted_by")
 

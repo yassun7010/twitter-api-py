@@ -6,7 +6,7 @@ from twitter_api.api.v2.types.media.media_field import MediaField
 from twitter_api.api.v2.types.place.place_field import PlaceField
 from twitter_api.api.v2.types.poll.poll_field import PollField
 from twitter_api.api.v2.types.search_query import SearchQuery
-from twitter_api.api.v2.types.tweet.tweet import Tweet
+from twitter_api.api.v2.types.tweet.tweet_detail import TweetDetail
 from twitter_api.api.v2.types.tweet.tweet_field import TweetField
 from twitter_api.api.v2.types.tweet.tweet_id import TweetId
 from twitter_api.api.v2.types.user.user_field import UserField
@@ -18,7 +18,7 @@ from twitter_api.types.endpoint import Endpoint
 from twitter_api.types.extra_permissive_model import ExtraPermissiveModel
 from twitter_api.utils.functional import map_optional
 
-Uri: TypeAlias = Literal["https://api.twitter.com/2/tweets/search/recent"]
+Url: TypeAlias = Literal["https://api.twitter.com/2/tweets/search/recent"]
 
 ENDPOINT = Endpoint("GET", "https://api.twitter.com/2/tweets/search/recent")
 
@@ -68,7 +68,7 @@ class V2GetTweetsSearchRecentResponseBodyMeta(ExtraPermissiveModel):
 
 
 class V2GetTweetsSearchRecentResponseBody(ExtraPermissiveModel):
-    data: Optional[list[Tweet]] = None  # データが 1 つも見つからないとき、 None となる。
+    data: Optional[list[TweetDetail]] = None
     meta: V2GetTweetsSearchRecentResponseBodyMeta
 
 

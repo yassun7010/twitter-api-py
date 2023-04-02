@@ -4,7 +4,7 @@ from twitter_api.client.request.request_client import RequestClient
 from twitter_api.types.endpoint import Endpoint
 from twitter_api.types.screen_name import ScreenName
 
-Uri = Literal["https://api.twitter.com/oauth/authorize"]
+Url = Literal["https://api.twitter.com/oauth/authorize"]
 
 ENDPOINT = Endpoint("GET", "https://api.twitter.com/oauth/authorize")
 

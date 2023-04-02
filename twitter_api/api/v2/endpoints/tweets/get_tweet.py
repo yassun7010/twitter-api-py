@@ -5,6 +5,7 @@ from twitter_api.api.v2.types.media.media_field import MediaField
 from twitter_api.api.v2.types.place.place_field import PlaceField
 from twitter_api.api.v2.types.poll.poll_field import PollField
 from twitter_api.api.v2.types.tweet.tweet import Tweet
+from twitter_api.api.v2.types.tweet.tweet_detail import TweetDetail
 from twitter_api.api.v2.types.tweet.tweet_field import TweetField
 from twitter_api.api.v2.types.tweet.tweet_id import TweetId
 from twitter_api.api.v2.types.user.user import User
@@ -51,7 +52,7 @@ class V2GetTweetResponseBodyIncludes(ExtraPermissiveModel):
 
 
 class V2GetTweetResponseBody(ExtraPermissiveModel):
-    data: Tweet
+    data: TweetDetail
     includes: Optional[V2GetTweetResponseBodyIncludes] = None
 
 

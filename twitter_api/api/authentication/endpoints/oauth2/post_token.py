@@ -8,7 +8,7 @@ from twitter_api.types.extra_permissive_model import ExtraPermissiveModel
 from twitter_api.types.http import downcast_dict
 from twitter_api.types.oauth import AccessToken, ApiKey, ApiSecret
 
-Uri = Literal["https://api.twitter.com/oauth2/token"]
+Url = Literal["https://api.twitter.com/oauth2/token"]
 
 ENDPOINT: Endpoint = Endpoint("POST", "https://api.twitter.com/oauth2/token")
 

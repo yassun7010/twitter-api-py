@@ -7,7 +7,7 @@ from twitter_api.api.authentication.endpoints.oauth2 import (
     post_invalidate_token,
     post_token,
 )
-from twitter_api.api.v2.endpoints import tweets
+from twitter_api.api.v2.endpoints import tweets, users
 from twitter_api.api.v2.endpoints.tweets.retweeted_by import get_retweeted_by
 from twitter_api.api.v2.endpoints.tweets.search.all import get_tweets_search_all
 from twitter_api.api.v2.endpoints.tweets.search.recent import get_tweets_search_recent
@@ -42,78 +42,86 @@ class TwitterApiClient(metaclass=ABCMeta):
     @overload
     def request(
         self: Self,
-        url: post_request_token.Uri,
+        url: post_request_token.Url,
     ) -> post_request_token.OauthPostRequestToken:
         ...
 
     @overload
     def request(
         self: Self,
-        url: post_token.Uri,
+        url: post_token.Url,
     ) -> post_token.Oauth2PostToken:
         ...
 
     @overload
     def request(
         self: Self,
-        url: post_invalidate_token.Uri,
+        url: post_invalidate_token.Url,
     ) -> post_invalidate_token.Oauth2PostInvalidateToken:
         ...
 
     @overload
     def request(
         self: Self,
-        url: tweets.TweetUri,
+        url: tweets.TweetUrl,
     ) -> tweets.V2Tweet:
         ...
 
     @overload
     def request(
         self: Self,
-        url: tweets.TweetsUri,
+        url: tweets.TweetsUrl,
     ) -> tweets.V2Tweets:
         ...
 
     @overload
     def request(
         self: Self,
-        url: get_retweeted_by.Uri,
+        url: get_retweeted_by.Url,
     ) -> get_retweeted_by.V2GetRetweetedBy:
         ...
 
     @overload
     def request(
         self: Self,
-        url: get_tweets_search_all.Uri,
+        url: get_tweets_search_all.Url,
     ) -> get_tweets_search_all.V2GetTweetsSearchAll:
         ...
 
     @overload
     def request(
         self: Self,
-        url: get_tweets_search_recent.Uri,
+        url: get_tweets_search_recent.Url,
     ) -> get_tweets_search_recent.V2GetTweetsSearchRecent:
         ...
 
     @overload
     def request(
         self: Self,
-        url: get_tweets_search_stream.Uri,
+        url: get_tweets_search_stream.Url,
     ) -> get_tweets_search_stream.V2GetTweetsSearchStream:
+        ...
+
+    @overload
+    def request(
+        self: Self,
+        url: users.UsersUrl,
+    ) -> users.V2Users:
         ...
 
     def request(
         self: Self,
         url: Union[
-            tweets.TweetUri,
-            tweets.TweetsUri,
-            post_request_token.Uri,
-            post_invalidate_token.Uri,
-            post_token.Uri,
-            get_retweeted_by.Uri,
-            get_tweets_search_all.Uri,
-            get_tweets_search_recent.Uri,
-            get_tweets_search_stream.Uri,
+            tweets.TweetUrl,
+            tweets.TweetsUrl,
+            post_request_token.Url,
+            post_invalidate_token.Url,
+            post_token.Url,
+            get_retweeted_by.Url,
+            get_tweets_search_all.Url,
+            get_tweets_search_recent.Url,
+            get_tweets_search_stream.Url,
+            users.UsersUrl,
         ],
     ):
         """
@@ -154,6 +162,10 @@ class TwitterApiClient(metaclass=ABCMeta):
             )
         elif url == "https://api.twitter.com/2/tweets/search/stream":
             return get_tweets_search_stream.V2GetTweetsSearchStream(
+                self._request_client,
+            )
+        elif url == "https://api.twitter.com/2/users":
+            return users.V2Users(
                 self._request_client,
             )
         else:

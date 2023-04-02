@@ -10,7 +10,7 @@ from twitter_api.types.endpoint import Endpoint
 from twitter_api.types.extra_permissive_model import ExtraPermissiveModel
 from twitter_api.types.oauth import ApiKey, ApiSecret, OAuthToken, OAuthTokenSecret
 
-Uri = Literal["https://api.twitter.com/oauth/request_token"]
+Url = Literal["https://api.twitter.com/oauth/request_token"]
 
 ENDPOINT: Endpoint = Endpoint("POST", "https://api.twitter.com/oauth/request_token")
 

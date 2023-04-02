@@ -13,7 +13,7 @@ class User(ExtraPermissiveModel):
     id: UserId
     name: str
     username: Username
-    created_at: datetime
+    created_at: Optional[datetime] = None
     description: Optional[str] = None
     entities: Optional[dict[str, Any]] = None
     location: Optional[str] = None
