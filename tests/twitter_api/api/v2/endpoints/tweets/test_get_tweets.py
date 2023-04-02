@@ -61,6 +61,8 @@ class TestMockV2GetTweets:
             mock_app_auth_v2_client.chain()
             .inject_get_response_body("https://api.twitter.com/2/tweets", response)
             .request("https://api.twitter.com/2/tweets")
-            .get({"ids": list(map(lambda tweet: tweet.id, response.data))})
+            .get(
+                {"ids": "1460323737035677698", "expansions": ["attachments.media_keys"]}
+            )
             == response
         )
