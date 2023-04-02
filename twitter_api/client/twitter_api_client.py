@@ -1,6 +1,6 @@
 import os
 from abc import ABCMeta, abstractmethod
-from typing import Self, Union, overload
+from typing import Optional, Self, Union, overload
 
 from twitter_api.api.authentication.endpoints.oauth import post_request_token
 from twitter_api.api.authentication.endpoints.oauth2 import (
@@ -11,13 +11,13 @@ from twitter_api.api.v2.endpoints import tweets
 from twitter_api.api.v2.endpoints.tweets.retweeted_by import get_retweeted_by
 from twitter_api.api.v2.endpoints.tweets.search.all import get_search_all
 from twitter_api.error import NeverError
-from twitter_api.ratelimit.ratelimit_interface import RatelimitInterface
+from twitter_api.rate_limit.manager.rate_limit_manager import RateLimitManager
 from twitter_api.types.oauth import AccessSecret, AccessToken, ApiKey, ApiSecret, Env
 
 from .request.request_client import RequestClient
 
 
-class TwitterApiClient(RatelimitInterface, metaclass=ABCMeta):
+class TwitterApiClient(metaclass=ABCMeta):
     """
     Twitter API を操作するためのクライアント
     """
@@ -114,39 +114,50 @@ class TwitterApiClient(RatelimitInterface, metaclass=ABCMeta):
         elif url == "https://api.twitter.com/2/tweets":
             return tweets.V2Tweets(
                 self._request_client,
-                self.ratelimit,
             )
         elif url == "https://api.twitter.com/2/tweets/:id":
             return tweets.V2Tweet(
                 self._request_client,
-                self.ratelimit,
             )
         elif url == "https://api.twitter.com/2/tweets/:id/retweeted_by":
             return get_retweeted_by.V2GetRetweetedBy(
                 self._request_client,
-                self.ratelimit,
             )
         elif url == "https://api.twitter.com/2/tweets/search/all":
             return get_search_all.V2GetTweetsSearchAll(
                 self._request_client,
-                self.ratelimit,
             )
         else:
             raise NeverError(url)
 
     @classmethod
-    def from_bearer_token(cls, bearer_token: str) -> Self:
+    def from_bearer_token(
+        cls,
+        bearer_token: str,
+        *,
+        rate_limit_manager: Optional[RateLimitManager] = None,
+    ) -> Self:
         """Bearer 認証を用いてクライアントを作成する。"""
 
         from .twitter_api_real_client import TwitterApiRealClient
 
-        return TwitterApiRealClient.from_bearer_token(bearer_token)
+        return TwitterApiRealClient.from_bearer_token(
+            bearer_token,
+            rate_limit_manager=rate_limit_manager,
+        )
 
     @classmethod
-    def from_bearer_token_env(cls, bearer_token="BEARER_TOEKN"):
+    def from_bearer_token_env(
+        cls,
+        bearer_token="BEARER_TOEKN",
+        rate_limit_manager: Optional[RateLimitManager] = None,
+    ):
         """環境変数から、 Bearer 認証を用いてクライアントを作成する。"""
 
-        return cls.from_bearer_token(os.environ[bearer_token])
+        return cls.from_bearer_token(
+            os.environ[bearer_token],
+            rate_limit_manager=rate_limit_manager,
+        )
 
     @classmethod
     def from_app_auth_v2(
@@ -154,6 +165,7 @@ class TwitterApiClient(RatelimitInterface, metaclass=ABCMeta):
         *,
         api_key: ApiKey,
         api_secret: ApiSecret,
+        rate_limit_manager: Optional[RateLimitManager] = None,
     ) -> Self:
         """アプリ認証を用いてクライアントを作成する。"""
 
@@ -162,6 +174,7 @@ class TwitterApiClient(RatelimitInterface, metaclass=ABCMeta):
         return TwitterApiRealClient.from_app_auth_v2(
             api_key=api_key,
             api_secret=api_secret,
+            rate_limit_manager=rate_limit_manager,
         )
 
     @classmethod
@@ -170,12 +183,14 @@ class TwitterApiClient(RatelimitInterface, metaclass=ABCMeta):
         *,
         api_key: Env[ApiKey] = "API_KEY",
         api_secret: Env[ApiSecret] = "API_SECRET",
+        rate_limit_manager: Optional[RateLimitManager] = None,
     ):
         """環境変数から、アプリ認証を用いてクライアントを作成する。"""
 
         return cls.from_app_auth_v2(
             api_key=os.environ[api_key],
             api_secret=os.environ[api_secret],
+            rate_limit_manager=rate_limit_manager,
         )
 
     @classmethod
@@ -186,6 +201,7 @@ class TwitterApiClient(RatelimitInterface, metaclass=ABCMeta):
         api_secret: ApiSecret,
         access_token: AccessToken,
         access_secret: AccessSecret,
+        rate_limit_manager: Optional[RateLimitManager] = None,
     ):
         """ユーザ認証を用いてクライアントを作成する。"""
 
@@ -196,6 +212,7 @@ class TwitterApiClient(RatelimitInterface, metaclass=ABCMeta):
             api_secret=api_secret,
             access_token=access_token,
             access_secret=access_secret,
+            rate_limit_manager=rate_limit_manager,
         )
 
     @classmethod
@@ -206,6 +223,7 @@ class TwitterApiClient(RatelimitInterface, metaclass=ABCMeta):
         api_secret: Env[ApiSecret] = "API_SECRET",
         access_token: Env[AccessToken] = "ACCESS_TOKEN",
         access_secret: Env[AccessSecret] = "ACCESS_SECRET",
+        rate_limit_manager: Optional[RateLimitManager] = None,
     ):
         """環境変数から、アプリ認証を用いてクライアントを作成する。"""
 
@@ -214,4 +232,5 @@ class TwitterApiClient(RatelimitInterface, metaclass=ABCMeta):
             api_secret=os.environ[api_secret],
             access_token=os.environ[access_token],
             access_secret=os.environ[access_secret],
+            rate_limit_manager=rate_limit_manager,
         )

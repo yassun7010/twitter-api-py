@@ -2,14 +2,14 @@ from abc import ABCMeta, abstractmethod
 from datetime import datetime
 from typing import Optional
 
-from twitter_api.ratelimit.ratelimit_data import RatelimitData
+from twitter_api.rate_limit.rate_limit_data import RateLimitData
 
 
-class RatelimitManager(metaclass=ABCMeta):
+class RateLimitManager(metaclass=ABCMeta):
     @abstractmethod
     def check_limit_over(
         self,
-        ratelimit: RatelimitData,
+        rate_limit: RateLimitData,
         now: Optional[datetime] = None,
     ) -> bool:
         ...

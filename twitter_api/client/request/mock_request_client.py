@@ -1,7 +1,11 @@
 from typing import Generic, Optional, Type
 
 from twitter_api.error import MockInjectionResponseWrong, MockResponseNotFound
-from twitter_api.ratelimit.ratelimit_target import RatelimitTarget
+from twitter_api.rate_limit.manager.ignored_rate_limit_manager import (
+    IgnoredRateLimitManager,
+)
+from twitter_api.rate_limit.manager.rate_limit_manager import RateLimitManager
+from twitter_api.rate_limit.rate_limit_target import RateLimitTarget
 from twitter_api.types.endpoint import Endpoint
 from twitter_api.types.http import Url
 from twitter_api.types.oauth import OAuthVersion
@@ -19,20 +23,30 @@ class MockRequestClient(RequestClient, Generic[ResponseModelBody]):
     def __init__(
         self,
         *,
-        rate_limit: RatelimitTarget,
         oauth_version: OAuthVersion,
+        rate_limit_target: RateLimitTarget,
+        rate_limit_manager: Optional[RateLimitManager] = None,
     ):
         self._store: list[tuple[Endpoint, ResponseModelBody]] = []
-        self._rate_limit: RatelimitTarget = rate_limit
         self._oauth_version: OAuthVersion = oauth_version
+        self._rate_limit_target: RateLimitTarget = rate_limit_target
+
+        if rate_limit_manager is None:
+            rate_limit_manager = IgnoredRateLimitManager()
+
+        self._rate_limit_manager = rate_limit_manager
 
     @property
     def oauth_version(self) -> OAuthVersion:
         return self._oauth_version
 
     @property
-    def rate_limit(self) -> RatelimitTarget:
-        return self._rate_limit
+    def rate_limit_target(self) -> RateLimitTarget:
+        return self._rate_limit_target
+
+    @property
+    def rate_limit_manager(self) -> RateLimitManager:
+        return self._rate_limit_manager
 
     def inject_response_body(self, endpoint: Endpoint, response: ResponseModelBody):
         self._store.append((endpoint, response))

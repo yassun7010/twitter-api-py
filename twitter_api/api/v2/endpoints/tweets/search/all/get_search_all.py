@@ -11,10 +11,9 @@ from twitter_api.api.v2.types.tweet.tweet import Tweet
 from twitter_api.api.v2.types.tweet.tweet_field import TweetField
 from twitter_api.api.v2.types.tweet.tweet_id import TweetId
 from twitter_api.api.v2.types.user.user_field import UserField
+from twitter_api.client.request.has_request_client import HasReqeustClient
 from twitter_api.client.request.request_client import RequestClient
-from twitter_api.ratelimit.manager.ratelimit_manager import RatelimitManager
-from twitter_api.ratelimit.ratelimit_decorator import rate_limit
-from twitter_api.ratelimit.ratelimit_interface import RatelimitInterface
+from twitter_api.rate_limit.rate_limit_decorator import rate_limit
 from twitter_api.types.comma_separatable import CommaSeparatable, comma_separated_str
 from twitter_api.types.endpoint import Endpoint
 from twitter_api.types.extra_permissive_model import ExtraPermissiveModel
@@ -74,14 +73,13 @@ class V2GetTweetsSearchAllResponseBody(ExtraPermissiveModel):
     meta: V2GetTweetsSearchAllResponseBodyMeta
 
 
-class V2GetTweetsSearchAll(RatelimitInterface):
-    def __init__(self, client: RequestClient, ratelimit: RatelimitManager) -> None:
+class V2GetTweetsSearchAll(HasReqeustClient):
+    def __init__(self, client: RequestClient) -> None:
         self._client = client
-        self._ratelimit = ratelimit
 
     @property
-    def ratelimit(self) -> RatelimitManager:
-        return self._ratelimit
+    def request_client(self) -> RequestClient:
+        return self._client
 
     @rate_limit(ENDPOINT, "app", requests=300, mins=15)
     @rate_limit(ENDPOINT, "app", requests=1, seconds=1)

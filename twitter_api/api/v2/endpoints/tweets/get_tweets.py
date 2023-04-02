@@ -9,10 +9,8 @@ from twitter_api.api.v2.types.tweet.tweet_field import TweetField
 from twitter_api.api.v2.types.tweet.tweet_id import TweetId
 from twitter_api.api.v2.types.user.user import User
 from twitter_api.api.v2.types.user.user_field import UserField
-from twitter_api.client.request.request_client import RequestClient
-from twitter_api.ratelimit.manager.ratelimit_manager import RatelimitManager
-from twitter_api.ratelimit.ratelimit_decorator import rate_limit
-from twitter_api.ratelimit.ratelimit_interface import RatelimitInterface
+from twitter_api.client.request.has_request_client import HasReqeustClient
+from twitter_api.rate_limit.rate_limit_decorator import rate_limit
 from twitter_api.types.comma_separatable import CommaSeparatable, comma_separated_str
 from twitter_api.types.endpoint import Endpoint
 from twitter_api.types.extra_permissive_model import ExtraPermissiveModel
@@ -54,15 +52,7 @@ class V2GetTweetsResponseBody(ExtraPermissiveModel):
     includes: Optional[V2GetTweetsResponseBodyIncludes] = None
 
 
-class V2GetTweets(RatelimitInterface):
-    def __init__(self, client: RequestClient, ratelimit: RatelimitManager) -> None:
-        self._client = client
-        self._ratelimit = ratelimit
-
-    @property
-    def ratelimit(self) -> RatelimitManager:
-        return self._ratelimit
-
+class V2GetTweets(HasReqeustClient):
     @rate_limit(ENDPOINT, "app", requests=300, mins=15)
     @rate_limit(ENDPOINT, "user", requests=900, mins=15)
     def get(self, query: V2GetTweetsQueryParameters) -> V2GetTweetsResponseBody:
@@ -72,7 +62,7 @@ class V2GetTweets(RatelimitInterface):
 
         refer: https://developer.twitter.com/en/docs/twitter-api/tweets/lookup/api-reference/get-tweets
         """
-        return self._client.get(
+        return self.request_client.get(
             endpoint=ENDPOINT,
             query=_make_query(query),
             response_type=V2GetTweetsResponseBody,

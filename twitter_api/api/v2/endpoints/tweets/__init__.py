@@ -1,5 +1,7 @@
 from typing_extensions import Literal
 
+from twitter_api.client.request.request_client import RequestClient
+
 from .delete_tweet import V2DeleteTweet
 from .get_tweet import V2GetTweet
 from .get_tweets import V2GetTweets
@@ -10,8 +12,18 @@ TweetUri = Literal["https://api.twitter.com/2/tweets/:id"]
 
 
 class V2Tweets(V2GetTweets, V2PostTweet):
-    pass
+    def __init__(self, client: RequestClient) -> None:
+        self._client = client
+
+    @property
+    def request_client(self) -> RequestClient:
+        return self._client
 
 
 class V2Tweet(V2GetTweet, V2DeleteTweet):
-    pass
+    def __init__(self, client: RequestClient) -> None:
+        self._client = client
+
+    @property
+    def request_client(self) -> RequestClient:
+        return self._client

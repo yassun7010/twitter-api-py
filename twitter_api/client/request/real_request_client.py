@@ -14,7 +14,11 @@ from twitter_api.error import (
     TwitterApiResponseFailed,
     TwitterApiResponseModelBodyDecodeError,
 )
-from twitter_api.ratelimit.ratelimit_target import RatelimitTarget
+from twitter_api.rate_limit.manager.ignored_rate_limit_manager import (
+    IgnoredRateLimitManager,
+)
+from twitter_api.rate_limit.manager.rate_limit_manager import RateLimitManager
+from twitter_api.rate_limit.rate_limit_target import RateLimitTarget
 from twitter_api.types.endpoint import Endpoint
 from twitter_api.types.http import Url
 from twitter_api.types.oauth import OAuthVersion
@@ -34,9 +38,10 @@ class RealRequestClient(RequestClient):
     def __init__(
         self,
         *,
-        oauth_version: OAuthVersion,
-        rate_limit: RatelimitTarget,
         auth: Optional[OAuth],
+        oauth_version: OAuthVersion,
+        rate_limit_target: RateLimitTarget,
+        rate_limit_manager: Optional[RateLimitManager] = None,
         session: Optional[requests.Session] = None,
         timeout_sec: Optional[float] = None,
     ) -> None:
@@ -44,18 +49,27 @@ class RealRequestClient(RequestClient):
             session = requests.Session()
 
         self._oauth_version: OAuthVersion = oauth_version
-        self._rate_limit: RatelimitTarget = rate_limit
+        self._rate_limit_target: RateLimitTarget = rate_limit_target
         self._auth = auth
         self._session = session
         self.timeout_sec = timeout_sec
+
+        if rate_limit_manager is None:
+            rate_limit_manager = IgnoredRateLimitManager()
+
+        self._rate_limit_manager = rate_limit_manager
 
     @property
     def oauth_version(self) -> OAuthVersion:
         return self._oauth_version
 
     @property
-    def rate_limit(self) -> RatelimitTarget:
-        return self._rate_limit
+    def rate_limit_target(self) -> RateLimitTarget:
+        return self._rate_limit_target
+
+    @property
+    def rate_limit_manager(self) -> RateLimitManager:
+        return self._rate_limit_manager
 
     def get(
         self,

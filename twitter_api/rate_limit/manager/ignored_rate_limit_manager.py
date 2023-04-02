@@ -1,11 +1,11 @@
 from datetime import datetime
 from typing import Optional
 
-from twitter_api.ratelimit.manager.ratelimit_manager import RatelimitManager
-from twitter_api.ratelimit.ratelimit_data import RatelimitData
+from twitter_api.rate_limit.manager.rate_limit_manager import RateLimitManager
+from twitter_api.rate_limit.rate_limit_data import RateLimitData
 
 
-class IgnoredRatelimitManager(RatelimitManager):
+class IgnoredRateLimitManager(RateLimitManager):
     """
     レートリミットに関して、クライアント側で何も制御しないマネージャ。
 
@@ -14,7 +14,7 @@ class IgnoredRatelimitManager(RatelimitManager):
 
     def check_limit_over(
         self,
-        ratelimit: RatelimitData,
+        rate_limit: RateLimitData,
         now: Optional[datetime] = None,
     ) -> bool:
         return False

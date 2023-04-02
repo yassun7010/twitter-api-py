@@ -1,12 +1,12 @@
 from attr import dataclass
 
-from twitter_api.ratelimit.ratelimit_target import RatelimitTarget
+from twitter_api.rate_limit.rate_limit_target import RateLimitTarget
 from twitter_api.types.endpoint import Endpoint
 
 
 @dataclass(frozen=True)
-class RatelimitData:
-    target: RatelimitTarget
+class RateLimitData:
+    target: RateLimitTarget
     endpoint: Endpoint
     requests: int
     total_seconds: int

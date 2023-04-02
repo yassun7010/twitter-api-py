@@ -1,16 +1,16 @@
 from typing import Callable, Literal, Optional, overload
 
-from twitter_api.error import RatelimitOverError
-from twitter_api.ratelimit.ratelimit_data import RatelimitData
-from twitter_api.ratelimit.ratelimit_interface import RatelimitInterface
-from twitter_api.ratelimit.ratelimit_target import RatelimitTarget
+from twitter_api.client.request.has_request_client import HasReqeustClient
+from twitter_api.error import RateLimitOverError
+from twitter_api.rate_limit.rate_limit_data import RateLimitData
+from twitter_api.rate_limit.rate_limit_target import RateLimitTarget
 from twitter_api.types.endpoint import Endpoint
 
 
 @overload
 def rate_limit(
     endpoint: Endpoint,
-    target: RatelimitTarget,
+    target: RateLimitTarget,
     *,
     requests: int,
     seconds: int,
@@ -22,7 +22,7 @@ def rate_limit(
 @overload
 def rate_limit(
     endpoint: Endpoint,
-    target: RatelimitTarget,
+    target: RateLimitTarget,
     *,
     requests: int,
     mins: int,
@@ -33,7 +33,7 @@ def rate_limit(
 
 def rate_limit(
     endpoint: Endpoint,
-    target: RatelimitTarget,
+    target: RateLimitTarget,
     *,
     requests: int,
     mins: Optional[int] = None,
@@ -49,22 +49,22 @@ def rate_limit(
     """
 
     def _rate_limit(func):
-        def _wrapper(self: RatelimitInterface, *args, **kwargs):
+        def _wrapper(self: HasReqeustClient, *args, **kwargs):
             total_seconds = 0
             if seconds is not None:
                 total_seconds += seconds
             if mins is not None:
                 total_seconds += 60 * mins
 
-            data = RatelimitData(
+            data = RateLimitData(
                 target=target,
                 endpoint=endpoint,
                 requests=requests,
                 total_seconds=total_seconds,
             )
 
-            if self.ratelimit.check_limit_over(data):
-                raise RatelimitOverError(data)
+            if self.request_client.rate_limit_manager.check_limit_over(data):
+                raise RateLimitOverError(data)
 
             return func(self, *args, **kwargs)
 

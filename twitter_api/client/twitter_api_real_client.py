@@ -7,10 +7,7 @@ from authlib.integrations.requests_client.oauth2_session import (
     OAuth2Auth,  # pyright: reportMissingImports=false
 )
 
-from twitter_api.ratelimit.manager.ignored_ratelimit_manager import (
-    IgnoredRatelimitManager,
-)
-from twitter_api.ratelimit.manager.ratelimit_manager import RatelimitManager
+from twitter_api.rate_limit.manager.rate_limit_manager import RateLimitManager
 from twitter_api.types.oauth import AccessSecret, AccessToken, ApiKey, ApiSecret
 
 from .request.real_request_client import RealRequestClient
@@ -28,29 +25,21 @@ class TwitterApiRealClient(TwitterApiClient):
     def __init__(
         self,
         request_client: RealRequestClient,
-        *,
-        ratelimit: Optional[RatelimitManager] = None,
     ) -> None:
         self._client = request_client
-
-        if ratelimit is None:
-            ratelimit = IgnoredRatelimitManager()
-
-        self._ratelimit = ratelimit
 
     @property
     def _request_client(self) -> RequestClient:
         return self._client
 
-    @property
-    def ratelimit(self) -> RatelimitManager:
-        return self._ratelimit
-
     @classmethod
-    def from_bearer_token(cls, bearer_token: str):
+    def from_bearer_token(
+        cls,
+        bearer_token: str,
+        rate_limit_manager: Optional[RateLimitManager] = None,
+    ):
         return TwitterApiRealClient(
             RealRequestClient(
-                rate_limit="app",
                 auth=OAuth2Auth(
                     token={
                         "access_token": bearer_token,
@@ -58,6 +47,8 @@ class TwitterApiRealClient(TwitterApiClient):
                     }
                 ),
                 oauth_version="2.0",
+                rate_limit_target="app",
+                rate_limit_manager=rate_limit_manager,
             ),
         )
 
@@ -67,13 +58,15 @@ class TwitterApiRealClient(TwitterApiClient):
         *,
         api_key: ApiKey,
         api_secret: ApiSecret,
+        rate_limit_manager: Optional[RateLimitManager] = None,
     ):
         access_token = (
             TwitterApiRealClient(
                 RealRequestClient(
-                    rate_limit="app",
                     auth=None,
                     oauth_version="2.0",
+                    rate_limit_target="app",
+                    rate_limit_manager=rate_limit_manager,
                 ),
             )
             .request("https://api.twitter.com/oauth2/token")
@@ -95,10 +88,10 @@ class TwitterApiRealClient(TwitterApiClient):
         api_secret: ApiSecret,
         access_token: AccessToken,
         access_secret: AccessSecret,
+        rate_limit_manager: Optional[RateLimitManager] = None,
     ):
         return TwitterApiRealClient(
             RealRequestClient(
-                rate_limit="user",
                 auth=OAuth1Auth(
                     client_id=api_key,
                     client_secret=api_secret,
@@ -106,5 +99,7 @@ class TwitterApiRealClient(TwitterApiClient):
                     token_secret=access_secret,
                 ),
                 oauth_version="1.0a",
+                rate_limit_target="user",
+                rate_limit_manager=rate_limit_manager,
             ),
         )

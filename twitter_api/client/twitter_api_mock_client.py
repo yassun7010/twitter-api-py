@@ -8,11 +8,8 @@ from twitter_api.api.authentication.endpoints.oauth2 import (
 from twitter_api.api.v2.endpoints import tweets
 from twitter_api.api.v2.endpoints.tweets.retweeted_by import get_retweeted_by
 from twitter_api.api.v2.endpoints.tweets.search.all import get_search_all
-from twitter_api.ratelimit.manager.ignored_ratelimit_manager import (
-    IgnoredRatelimitManager,
-)
-from twitter_api.ratelimit.manager.ratelimit_manager import RatelimitManager
-from twitter_api.ratelimit.ratelimit_target import RatelimitTarget
+from twitter_api.rate_limit.manager.rate_limit_manager import RateLimitManager
+from twitter_api.rate_limit.rate_limit_target import RateLimitTarget
 from twitter_api.types.endpoint import Endpoint
 from twitter_api.types.oauth import (
     AccessSecret,
@@ -33,23 +30,15 @@ class TwitterApiMockClient(TwitterApiClient):
     def __init__(
         self,
         *,
-        rate_limit: RatelimitTarget,
         oauth_version: OAuthVersion,
-        ratelimit: Optional[RatelimitManager] = None,
+        rate_limit_target: RateLimitTarget,
+        rate_limit_manager: Optional[RateLimitManager] = None,
     ) -> None:
         self._client = MockRequestClient(
-            rate_limit=rate_limit,
             oauth_version=oauth_version,
+            rate_limit_target=rate_limit_target,
+            rate_limit_manager=rate_limit_manager,
         )
-
-        if ratelimit is None:
-            ratelimit = IgnoredRatelimitManager()
-
-        self._ratelimit = ratelimit
-
-    @property
-    def ratelimit(self) -> RatelimitManager:
-        return self._ratelimit
 
     @property
     def _request_client(self) -> RequestClient:
@@ -139,10 +128,16 @@ class TwitterApiMockClient(TwitterApiClient):
         return self
 
     @classmethod
-    def from_bearer_token(cls, bearer_token: str):
+    def from_bearer_token(
+        cls,
+        bearer_token: str,
+        *,
+        rate_limit_manager: Optional[RateLimitManager] = None,
+    ):
         return TwitterApiMockClient(
-            rate_limit="app",
             oauth_version="2.0",
+            rate_limit_target="app",
+            rate_limit_manager=rate_limit_manager,
         )
 
     @classmethod
@@ -151,10 +146,12 @@ class TwitterApiMockClient(TwitterApiClient):
         *,
         api_key: ApiKey,
         api_secret: ApiSecret,
+        rate_limit_manager: Optional[RateLimitManager] = None,
     ) -> Self:
         return TwitterApiMockClient(
-            rate_limit="app",
             oauth_version="2.0",
+            rate_limit_target="app",
+            rate_limit_manager=rate_limit_manager,
         )
 
     @classmethod
@@ -165,8 +162,10 @@ class TwitterApiMockClient(TwitterApiClient):
         api_secret: ApiSecret,
         access_token: AccessToken,
         access_secret: AccessSecret,
+        rate_limit_manager: Optional[RateLimitManager] = None,
     ):
         return TwitterApiMockClient(
-            rate_limit="app",
             oauth_version="1.0a",
+            rate_limit_target="app",
+            rate_limit_manager=rate_limit_manager,
         )
