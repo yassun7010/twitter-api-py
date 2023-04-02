@@ -2,6 +2,7 @@ import os
 
 import pytest
 
+from tests.data import JsonDataLoader
 from twitter_api.client.twitter_api_mock_client import TwitterApiMockClient
 from twitter_api.client.twitter_api_real_client import TwitterApiRealClient
 
@@ -24,6 +25,11 @@ def synthetic_monitoring_is_disable() -> dict:
         ),
         reason="外形監視が有効時（環境変数 SYNTHETIC_MONITORING が true ）に実行されます。",
     )
+
+
+@pytest.fixture
+def json_data_loader() -> JsonDataLoader:
+    return JsonDataLoader()
 
 
 @pytest.fixture
