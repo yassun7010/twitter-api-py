@@ -30,7 +30,8 @@ class Tweet(ExtraPermissiveModel):
     # Required
     id: TweetId
     text: str
-    edit_history_tweet_ids: list[TweetId]
+    # 必須なはずだが、他の API では必須ではない。
+    edit_history_tweet_ids: Optional[list[TweetId]] = None
 
     # Optional
     attachments: Optional[TweetAttachments] = None
