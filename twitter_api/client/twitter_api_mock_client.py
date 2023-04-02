@@ -38,7 +38,7 @@ class TwitterApiMockClient(TwitterApiClient):
         return self._client
 
     @overload
-    def inject_get_response(
+    def inject_get_response_body(
         self,
         url: tweets.TweetsUri,
         response: tweets.get_tweets.V2GetTweetsResponseBody,
@@ -46,7 +46,7 @@ class TwitterApiMockClient(TwitterApiClient):
         ...
 
     @overload
-    def inject_get_response(
+    def inject_get_response_body(
         self,
         url: tweets.TweetUri,
         response: tweets.get_tweet.V2GetTweetResponseBody,
@@ -54,20 +54,20 @@ class TwitterApiMockClient(TwitterApiClient):
         ...
 
     @overload
-    def inject_get_response(
+    def inject_get_response_body(
         self,
         url: get_retweeted_by.Uri,
         response: get_retweeted_by.V2GetRetweetedByResponseBody,
     ) -> Self:
         ...
 
-    def inject_get_response(self, url, response) -> Self:
+    def inject_get_response_body(self, url, response) -> Self:
         self._client.inject_response_body(Endpoint("GET", url), response)
 
         return self
 
     @overload
-    def inject_post_response(
+    def inject_post_response_body(
         self,
         url: post_request_token.Uri,
         response: post_request_token.OauthPostRequestTokenResponseBody,
@@ -75,7 +75,7 @@ class TwitterApiMockClient(TwitterApiClient):
         ...
 
     @overload
-    def inject_post_response(
+    def inject_post_response_body(
         self,
         url: post_invalidate_token.Uri,
         response: post_invalidate_token.Oauth2PostInvalidateTokenResponseBody,
@@ -83,7 +83,7 @@ class TwitterApiMockClient(TwitterApiClient):
         ...
 
     @overload
-    def inject_post_response(
+    def inject_post_response_body(
         self,
         url: post_token.Uri,
         response: post_token.Oauth2PostTokenResponseBody,
@@ -91,19 +91,19 @@ class TwitterApiMockClient(TwitterApiClient):
         ...
 
     @overload
-    def inject_post_response(
+    def inject_post_response_body(
         self,
         url: tweets.TweetsUri,
         response: tweets.post_tweet.V2PostTweetResponseBody,
     ) -> Self:
         ...
 
-    def inject_post_response(self, url, response) -> Self:
+    def inject_post_response_body(self, url, response) -> Self:
         self._client.inject_response_body(Endpoint("POST", url), response)
 
         return self
 
-    def inject_delete_response(
+    def inject_delete_response_body(
         self,
         url: tweets.TweetUri,
         response: tweets.delete_tweet.V2DeleteTweetResponseBody,

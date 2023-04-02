@@ -33,7 +33,7 @@ class TestMockV2GetRetweetedBy:
 
         assert (
             mock_app_auth_v2_client.chain()
-            .inject_get_response(
+            .inject_get_response_body(
                 "https://api.twitter.com/2/tweets/:id/retweeted_by", expected_response
             )
             .request("https://api.twitter.com/2/tweets/:id/retweeted_by")

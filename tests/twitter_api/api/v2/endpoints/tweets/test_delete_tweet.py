@@ -42,7 +42,7 @@ class TestMockV2DeleteTweet:
 
         assert (
             mock_app_auth_v2_client.chain()
-            .inject_delete_response(
+            .inject_delete_response_body(
                 "https://api.twitter.com/2/tweets/:id", expected_response
             )
             .request("https://api.twitter.com/2/tweets/:id")

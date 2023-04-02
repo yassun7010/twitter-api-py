@@ -48,7 +48,7 @@ class TestMockOauth2PostInvalidateToken:
 
         assert (
             mock_app_auth_v2_client.chain()
-            .inject_post_response(
+            .inject_post_response_body(
                 "https://api.twitter.com/oauth2/invalidate_token",
                 expected_response,
             )
