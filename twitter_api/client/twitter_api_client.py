@@ -12,7 +12,7 @@ from twitter_api.api.v2.endpoints.tweets.retweeted_by import get_retweeted_by
 from twitter_api.api.v2.endpoints.tweets.search.all import get_tweets_search_all
 from twitter_api.api.v2.endpoints.tweets.search.recent import get_tweets_search_recent
 from twitter_api.api.v2.endpoints.tweets.search.stream import get_tweets_search_stream
-from twitter_api.api.v2.endpoints.users import followers, liked_tweets
+from twitter_api.api.v2.endpoints.users import followers, following, liked_tweets
 from twitter_api.error import NeverError
 from twitter_api.rate_limit.manager.rate_limit_manager import RateLimitManager
 from twitter_api.types.oauth import AccessSecret, AccessToken, ApiKey, ApiSecret, Env
@@ -131,6 +131,13 @@ class TwitterApiClient(metaclass=ABCMeta):
     ) -> followers.V2UserFollowers:
         ...
 
+    @overload
+    def request(
+        self: Self,
+        url: following.UserFollowingUrl,
+    ) -> following.V2UserFollowing:
+        ...
+
     def request(
         self: Self,
         url: Union[
@@ -147,6 +154,7 @@ class TwitterApiClient(metaclass=ABCMeta):
             users.UserUrl,
             liked_tweets.UserLikedTweetsUrl,
             followers.UserFollowersUrl,
+            following.UserFollowingUrl,
         ],
     ):
         """
@@ -203,6 +211,10 @@ class TwitterApiClient(metaclass=ABCMeta):
             )
         elif url == "https://api.twitter.com/2/users/:id/followers":
             return followers.V2UserFollowers(
+                self._request_client,
+            )
+        elif url == "https://api.twitter.com/2/users/:id/following":
+            return following.V2UserFollowing(
                 self._request_client,
             )
         else:
