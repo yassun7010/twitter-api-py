@@ -4,15 +4,15 @@ import pytest
 
 from tests.conftest import synthetic_monitoring_is_disable
 from twitter_api.api.v2.endpoints.tweets.get_tweets import V2GetTweetsResponseBody
-from twitter_api.api.v2.types.tweet.tweet import Tweet
+from twitter_api.api.v2.types.tweet.tweet_detail import TweetDetail
 from twitter_api.client.twitter_api_mock_client import TwitterApiMockClient
 from twitter_api.client.twitter_api_real_client import TwitterApiRealClient
 
 
 @pytest.fixture
-def tweets() -> list[Tweet]:
+def tweets() -> list[TweetDetail]:
     return [
-        Tweet(
+        TweetDetail(
             id="1460323737035677698",
             text=dedent(
                 # flake8: noqa E501
@@ -32,7 +32,7 @@ def tweets() -> list[Tweet]:
 @pytest.mark.skipif(**synthetic_monitoring_is_disable())
 class TestV2GetTweets:
     def test_get_tweets(
-        self, real_app_auth_v2_client: TwitterApiRealClient, tweets: list[Tweet]
+        self, real_app_auth_v2_client: TwitterApiRealClient, tweets: list[TweetDetail]
     ):
         expected_response = V2GetTweetsResponseBody(data=tweets)
         real_response = (
@@ -49,7 +49,7 @@ class TestV2GetTweets:
 
 class TestMockV2GetTweets:
     def test_mock_get_tweets(self, mock_app_auth_v2_client: TwitterApiMockClient):
-        tweet = Tweet(
+        tweet = TweetDetail(
             id="12345",
             text="tweet",
             edit_history_tweet_ids=["56789"],

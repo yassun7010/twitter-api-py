@@ -4,7 +4,7 @@ import pytest
 
 from tests.conftest import synthetic_monitoring_is_disable
 from twitter_api.api.v2.endpoints.tweets.post_tweet import V2PostTweetResponseBody
-from twitter_api.api.v2.types.tweet.tweet import Tweet
+from twitter_api.api.v2.types.tweet.tweet_detail import TweetDetail
 from twitter_api.client.twitter_api_mock_client import TwitterApiMockClient
 from twitter_api.client.twitter_api_real_client import TwitterApiRealClient
 
@@ -31,7 +31,7 @@ class TestV2GetTweet:
 
 class TestMockV2GetTweet:
     def test_mock_get_tweet(self, mock_app_auth_v2_client: TwitterApiMockClient):
-        tweet = Tweet(
+        tweet = TweetDetail(
             id="1234567890123456789",
             text="ツイートしました。",
             edit_history_tweet_ids=["1234567890123456789"],
