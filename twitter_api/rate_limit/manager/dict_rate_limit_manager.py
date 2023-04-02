@@ -14,6 +14,13 @@ class RateLimitStatus:
 
 
 class DictRateLimitManager(RateLimitManager):
+    """
+    単純なハッシュマップによるレートリミットの管理を行うマネージャ。
+
+    Redis, RDS などで管理したい場合は、
+    このクラスを参考に RateLimitManager を実装すればよい。
+    """
+
     def __init__(self) -> None:
         self._store: dict[RateLimitData, RateLimitStatus] = {}
 
