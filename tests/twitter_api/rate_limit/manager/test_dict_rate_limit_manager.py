@@ -6,15 +6,15 @@ from twitter_api.rate_limit.manager.dict_rate_limit_manager import (
     DictRateLimitManager,
     RateLimitStatus,
 )
-from twitter_api.rate_limit.rate_limit_data import RateLimitData
+from twitter_api.rate_limit.rate_limit_info import RateLimitInfo
 from twitter_api.types.endpoint import Endpoint
 
 TOTAL_REQUESTS = 10
 
 
 @pytest.fixture
-def rate_limit_data() -> RateLimitData:
-    return RateLimitData(
+def rate_limit_info() -> RateLimitInfo:
+    return RateLimitInfo(
         target="app",
         endpoint=Endpoint("GET", "https://api.twitter.com/2/tweets"),
         requests=TOTAL_REQUESTS,
@@ -29,7 +29,7 @@ class TestDictRateLimitManager:
     )
     def test_check_limit_over(
         self,
-        rate_limit_data: RateLimitData,
+        rate_limit_info: RateLimitInfo,
         requests,
         result,
     ):
@@ -41,7 +41,7 @@ class TestDictRateLimitManager:
         ]
 
         manager = DictRateLimitManager()
-        manager._store[rate_limit_data] = RateLimitStatus(
+        manager._store[rate_limit_info] = RateLimitStatus(
             start_datetime=start_datetime,
             request_datetimes=request_datetimes,
         )
@@ -50,7 +50,7 @@ class TestDictRateLimitManager:
         # 単純に窓の上限を超えるデータを入れるとレートリミットになる。
         assert (
             manager.check_limit_over(
-                rate_limit_data=rate_limit_data,
+                rate_limit_info=rate_limit_info,
                 now=start_datetime + timedelta(seconds=len(request_datetimes)),
             )
             is result

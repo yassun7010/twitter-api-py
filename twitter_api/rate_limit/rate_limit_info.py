@@ -5,7 +5,7 @@ from twitter_api.types.endpoint import Endpoint
 
 
 @dataclass(frozen=True)
-class RateLimitData:
+class RateLimitInfo:
     target: RateLimitTarget
     endpoint: Endpoint
     requests: int

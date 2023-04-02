@@ -2,7 +2,7 @@ from typing import Callable, Literal, Optional, overload
 
 from twitter_api.client.request.has_request_client import HasReqeustClient
 from twitter_api.error import RateLimitOverError
-from twitter_api.rate_limit.rate_limit_data import RateLimitData
+from twitter_api.rate_limit.rate_limit_info import RateLimitInfo
 from twitter_api.rate_limit.rate_limit_target import RateLimitTarget
 from twitter_api.types.endpoint import Endpoint
 
@@ -56,7 +56,7 @@ def rate_limit(
             if mins is not None:
                 total_seconds += 60 * mins
 
-            data = RateLimitData(
+            data = RateLimitInfo(
                 target=target,
                 endpoint=endpoint,
                 requests=requests,

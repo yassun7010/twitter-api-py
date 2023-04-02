@@ -4,7 +4,7 @@ from typing import Any, Never, Optional
 
 import pydantic
 
-from twitter_api.rate_limit.rate_limit_data import RateLimitData
+from twitter_api.rate_limit.rate_limit_info import RateLimitInfo
 from twitter_api.types.extra_permissive_model import ExtraPermissiveModel
 
 from .types.endpoint import Endpoint
@@ -197,7 +197,7 @@ class TwitterApiOAuthVersionWrong(TwitterApiError):
 
 
 class RateLimitOverError(TwitterApiError):
-    def __init__(self, rate_limit: RateLimitData) -> None:
+    def __init__(self, rate_limit: RateLimitInfo) -> None:
         self._rate_limit = rate_limit
 
     def __str__(self) -> str:
