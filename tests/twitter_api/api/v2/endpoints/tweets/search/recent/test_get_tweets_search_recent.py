@@ -24,13 +24,21 @@ class TestV2GetTweetsSearchRecent:
 
 
 class TestMockV2GetTweetsSearchRecent:
+    @pytest.mark.parametrize(
+        "json_filename",
+        [
+            "get_tweets_search_recent_response.json",
+            "get_tweets_search_recent_response_empty_result.json",
+        ],
+    )
     def test_mock_get_search_recent(
         self,
         mock_app_auth_v2_client: TwitterApiMockClient,
         json_data_loader: JsonDataLoader,
+        json_filename: str,
     ):
         expected_response = V2GetTweetsSearchRecentResponseBody(
-            **json_data_loader.load("get_tweets_search_recent_response.json")
+            **json_data_loader.load(json_filename)
         )
 
         assert (
@@ -39,27 +47,6 @@ class TestMockV2GetTweetsSearchRecent:
                 "https://api.twitter.com/2/tweets/search/recent", expected_response
             )
             .request("https://api.twitter.com/2/tweets/search/recent")
-            .get({"query": "ツイート"})
-            == expected_response
-        )
-
-    def test_mock_get_search_recent_when_empty_result(
-        self,
-        mock_app_auth_v2_client: TwitterApiMockClient,
-        json_data_loader: JsonDataLoader,
-    ):
-        expected_response = V2GetTweetsSearchRecentResponseBody(
-            **json_data_loader.load(
-                "get_tweets_search_recent_response_empty_result.json"
-            )
-        )
-
-        assert (
-            mock_app_auth_v2_client.chain()
-            .inject_get_response_body(
-                "https://api.twitter.com/2/tweets/search/recent", expected_response
-            )
-            .request("https://api.twitter.com/2/tweets/search/recent")
-            .get({"query": "検索結果が0件となるような検索条件"})
+            .get({"query": "モックされているので、この検索条件に意味はない"})
             == expected_response
         )
