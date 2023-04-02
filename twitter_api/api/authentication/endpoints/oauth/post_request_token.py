@@ -40,7 +40,7 @@ class OauthPostRequestToken:
         self,
         api_key: ApiKey,
         api_secret: ApiSecret,
-        query_parameters: OauthPostRequestTokenQueryParameters,
+        query: OauthPostRequestTokenQueryParameters,
     ) -> OauthPostRequestTokenResponseBody:
         # flake8: noqa E501
         """
@@ -60,12 +60,12 @@ class OauthPostRequestToken:
         #     **OAuth1Session(
         #         client_id=api_key,
         #         client_secret=api_secret,
-        #         callback_uri=query_parameters["oauth_callback"],
+        #         callback_uri=query["oauth_callback"],
         #     ).fetch_request_token("https://api.twitter.com/oauth/request_token")
         # )
 
         return self._client.post(
             endpoint=ENDPOINT,
             response_type=OauthPostRequestTokenResponseBody,
-            query=query_parameters,  # type: ignore
+            query=query,  # type: ignore
         )

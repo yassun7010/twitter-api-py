@@ -20,7 +20,7 @@ class TestOauthPostRequestToken:
                 .post(
                     api_key=os.environ["API_KEY"],
                     api_secret=os.environ["API_SECRET"],
-                    query_parameters={"oauth_callback": "https://120.0.0.1:8080"},
+                    query={"oauth_callback": "https://120.0.0.1:8080"},
                 )
             )
 
@@ -36,6 +36,6 @@ class TestMockOauthPostRequestToken:
                 .post(
                     api_key=os.environ["API_KEY"],
                     api_secret=os.environ["API_SECRET"],
-                    query_parameters={"oauth_callback": "https://120.0.0.1:8080"},
+                    query={"oauth_callback": "https://120.0.0.1:8080"},
                 )
             )

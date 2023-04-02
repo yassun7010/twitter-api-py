@@ -30,7 +30,7 @@ class TestOauth2PostInvalidateToken:
             .post(
                 api_key=os.environ["API_KEY"],
                 api_secret=os.environ["API_SECRET"],
-                query_parameters={"access_token": expected_response.access_token},
+                query={"access_token": expected_response.access_token},
             )
         )
 
@@ -56,7 +56,7 @@ class TestMockOauth2PostInvalidateToken:
             .post(
                 api_key="DUMMY_API_KEY",
                 api_secret="DUMMY_API_SECRET",
-                query_parameters={"access_token": "DUMMY_ACCESS_TOKEN"},
+                query={"access_token": "DUMMY_ACCESS_TOKEN"},
             )
             == expected_response
         )

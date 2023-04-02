@@ -30,7 +30,7 @@ class Oauth2PostToken:
         self,
         api_key: ApiKey,
         api_secret: ApiSecret,
-        query_parameters: Oauth2PostTokenQueryParameters,
+        query: Oauth2PostTokenQueryParameters,
     ) -> Oauth2PostTokenResponseBody:
         # flake8: noqa E501
         """
@@ -56,5 +56,5 @@ class Oauth2PostToken:
                 "Authorization": f"Basic {bearer_token.decode()}",
                 "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
             },
-            query=downcast_dict(query_parameters),
+            query=downcast_dict(query),
         )

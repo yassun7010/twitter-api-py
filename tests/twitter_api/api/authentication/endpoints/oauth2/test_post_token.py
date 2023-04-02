@@ -28,7 +28,7 @@ class TestOauth2PostToken:
             .post(
                 api_key=os.environ["API_KEY"],
                 api_secret=os.environ["API_SECRET"],
-                query_parameters={"grant_type": "client_credentials"},
+                query={"grant_type": "client_credentials"},
             )
         )
 
@@ -57,7 +57,7 @@ class TestMockOauth2PostToken:
             .post(
                 api_key="DUMMY_API_KEY",
                 api_secret="DUMMY_API_SECRET",
-                query_parameters={"grant_type": "client_credentials"},
+                query={"grant_type": "client_credentials"},
             )
             == expected_response
         )

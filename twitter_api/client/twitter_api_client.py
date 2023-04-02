@@ -12,6 +12,7 @@ from twitter_api.api.v2.endpoints.tweets.retweeted_by import get_retweeted_by
 from twitter_api.api.v2.endpoints.tweets.search.all import get_tweets_search_all
 from twitter_api.api.v2.endpoints.tweets.search.recent import get_tweets_search_recent
 from twitter_api.api.v2.endpoints.tweets.search.stream import get_tweets_search_stream
+from twitter_api.api.v2.endpoints.users import liked_tweets
 from twitter_api.error import NeverError
 from twitter_api.rate_limit.manager.rate_limit_manager import RateLimitManager
 from twitter_api.types.oauth import AccessSecret, AccessToken, ApiKey, ApiSecret, Env
@@ -109,6 +110,13 @@ class TwitterApiClient(metaclass=ABCMeta):
     ) -> users.V2Users:
         ...
 
+    @overload
+    def request(
+        self: Self,
+        url: liked_tweets.UserLikedTweetsUrl,
+    ) -> liked_tweets.V2UserLikedTweets:
+        ...
+
     def request(
         self: Self,
         url: Union[
@@ -122,6 +130,7 @@ class TwitterApiClient(metaclass=ABCMeta):
             get_tweets_search_recent.Url,
             get_tweets_search_stream.Url,
             users.UsersUrl,
+            liked_tweets.UserLikedTweetsUrl,
         ],
     ):
         """
@@ -166,6 +175,10 @@ class TwitterApiClient(metaclass=ABCMeta):
             )
         elif url == "https://api.twitter.com/2/users":
             return users.V2Users(
+                self._request_client,
+            )
+        elif url == "https://api.twitter.com/2/users/:id/liked_tweets":
+            return liked_tweets.V2UserLikedTweets(
                 self._request_client,
             )
         else:

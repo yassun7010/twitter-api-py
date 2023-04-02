@@ -32,7 +32,7 @@ class Oauth2PostInvalidateToken:
         self,
         api_key: ApiKey,
         api_secret: ApiSecret,
-        query_parameters: Oauth2PostInvalidateTokenQueryParameters,
+        query: Oauth2PostInvalidateTokenQueryParameters,
     ) -> Oauth2PostInvalidateTokenResponseBody:
         # flake8: noqa E501
         """
@@ -58,5 +58,5 @@ class Oauth2PostInvalidateToken:
                 "Authorization": f"Basic {bearer_token.decode()}",
                 "Content-Type": "application/x-www-form-urlencoded",
             },
-            query=downcast_dict(query_parameters),
+            query=downcast_dict(query),
         )

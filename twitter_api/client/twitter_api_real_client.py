@@ -73,7 +73,7 @@ class TwitterApiRealClient(TwitterApiClient):
             .post(
                 api_key=api_key,
                 api_secret=api_secret,
-                query_parameters={"grant_type": "client_credentials"},
+                query={"grant_type": "client_credentials"},
             )
             .access_token
         )
