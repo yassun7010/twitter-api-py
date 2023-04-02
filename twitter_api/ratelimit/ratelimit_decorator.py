@@ -1,6 +1,6 @@
-from typing import Callable, Literal, Optional, TypeAlias, overload
+from typing import Callable, Literal, Optional, overload
 
-RateLimitTarget: TypeAlias = Literal["app", "user"]
+from twitter_api.ratelimit.ratelimit_target import RateLimitTarget
 
 
 @overload

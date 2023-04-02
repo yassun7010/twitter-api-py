@@ -14,10 +14,10 @@ from twitter_api.error import (
     TwitterApiResponseFailed,
     TwitterApiResponseModelBodyDecodeError,
 )
+from twitter_api.ratelimit.ratelimit_target import RateLimitTarget
 from twitter_api.types.endpoint import Endpoint
 from twitter_api.types.http import Url
 from twitter_api.types.oauth import OAuthVersion
-from twitter_api.utils.ratelimit import RateLimitTarget
 
 from .request_client import (
     Headers,

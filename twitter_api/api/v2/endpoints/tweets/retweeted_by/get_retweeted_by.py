@@ -7,10 +7,10 @@ from twitter_api.api.v2.types.tweet.tweet_id import TweetId
 from twitter_api.api.v2.types.user.user import User
 from twitter_api.api.v2.types.user.user_field import UserField
 from twitter_api.client.request.request_client import RequestClient
+from twitter_api.ratelimit.ratelimit_decorator import rate_limit
 from twitter_api.types.comma_separatable import CommaSeparatable, comma_separated_str
 from twitter_api.types.endpoint import Endpoint
 from twitter_api.types.extra_permissive_model import ExtraPermissiveModel
-from twitter_api.utils.ratelimit import rate_limit
 
 Uri: TypeAlias = Literal["https://api.twitter.com/2/tweets/:id/retweeted_by"]
 
