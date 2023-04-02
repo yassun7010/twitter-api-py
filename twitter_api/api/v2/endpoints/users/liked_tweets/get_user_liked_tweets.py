@@ -7,8 +7,6 @@ from twitter_api.api.v2.types.poll.poll_field import PollField
 from twitter_api.api.v2.types.tweet.tweet import Tweet
 from twitter_api.api.v2.types.tweet.tweet_detail import TweetDetail
 from twitter_api.api.v2.types.tweet.tweet_field import TweetField
-from twitter_api.api.v2.types.tweet.tweet_id import TweetId
-from twitter_api.api.v2.types.user.user import User
 from twitter_api.api.v2.types.user.user_field import UserField
 from twitter_api.api.v2.types.user.user_id import UserId
 from twitter_api.client.request.has_request_client import HasReqeustClient
