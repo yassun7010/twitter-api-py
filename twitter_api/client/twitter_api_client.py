@@ -113,6 +113,13 @@ class TwitterApiClient(metaclass=ABCMeta):
     @overload
     def request(
         self: Self,
+        url: users.UserUrl,
+    ) -> users.V2User:
+        ...
+
+    @overload
+    def request(
+        self: Self,
         url: liked_tweets.UserLikedTweetsUrl,
     ) -> liked_tweets.V2UserLikedTweets:
         ...
@@ -130,6 +137,7 @@ class TwitterApiClient(metaclass=ABCMeta):
             get_tweets_search_recent.Url,
             get_tweets_search_stream.Url,
             users.UsersUrl,
+            users.UserUrl,
             liked_tweets.UserLikedTweetsUrl,
         ],
     ):
@@ -175,6 +183,10 @@ class TwitterApiClient(metaclass=ABCMeta):
             )
         elif url == "https://api.twitter.com/2/users":
             return users.V2Users(
+                self._request_client,
+            )
+        elif url == "https://api.twitter.com/2/users/:id":
+            return users.V2User(
                 self._request_client,
             )
         elif url == "https://api.twitter.com/2/users/:id/liked_tweets":

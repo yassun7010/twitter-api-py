@@ -12,12 +12,11 @@ from twitter_api.types.comma_separatable import CommaSeparatable, comma_separate
 from twitter_api.types.endpoint import Endpoint
 from twitter_api.types.extra_permissive_model import ExtraPermissiveModel
 
-ENDPOINT = Endpoint("GET", "https://api.twitter.com/2/users")
+ENDPOINT = Endpoint("GET", "https://api.twitter.com/2/users/:id")
 
-V2GetUsersQueryParameters = TypedDict(
-    "V2GetUsersQueryParameters",
+V2GetUserQueryParameters = TypedDict(
+    "V2GetUserQueryParameters",
     {
-        "ids": CommaSeparatable[UserId],
         "expansions": NotRequired[Optional[CommaSeparatable[Expansion]]],
         "tweet.fields": NotRequired[Optional[CommaSeparatable[TweetField]]],
         "user.fields": NotRequired[Optional[CommaSeparatable[UserField]]],
@@ -25,36 +24,40 @@ V2GetUsersQueryParameters = TypedDict(
 )
 
 
-def _make_query(query: V2GetUsersQueryParameters) -> dict:
+def _make_query(query: V2GetUserQueryParameters) -> dict:
     return {
-        "ids": comma_separated_str(query["ids"]),
         "expansions": comma_separated_str(query.get("expansions")),
         "tweet.fields": comma_separated_str(query.get("tweet.fields")),
         "user.fields": comma_separated_str(query.get("user.fields")),
     }
 
 
-class V2GetUsersResponseBodyIncludes(ExtraPermissiveModel):
+class V2GetUserResponseBodyIncludes(ExtraPermissiveModel):
     tweets: list[Tweet]
 
 
-class V2GetUsersResponseBody(ExtraPermissiveModel):
-    data: list[User]
-    includes: Optional[V2GetUsersResponseBodyIncludes] = None
+class V2GetUserResponseBody(ExtraPermissiveModel):
+    data: User
+    includes: Optional[V2GetUserResponseBodyIncludes] = None
 
 
-class V2GetUsers(HasReqeustClient):
+class V2GetUser(HasReqeustClient):
     @rate_limit(ENDPOINT, "app", requests=300, mins=15)
     @rate_limit(ENDPOINT, "user", requests=900, mins=15)
-    def get(self, query: V2GetUsersQueryParameters) -> V2GetUsersResponseBody:
+    def get(
+        self,
+        id: UserId,
+        query: Optional[V2GetUserQueryParameters] = None,
+    ) -> V2GetUserResponseBody:
         # flake8: noqa E501
         """
-        ユーザの一覧を取得する。
+        ユーザの情報を取得する。
 
-        refer: https://developer.twitter.com/en/docs/twitter-api/users/lookup/api-reference/get-users
+        refer: https://developer.twitter.com/en/docs/twitter-api/users/lookup/api-reference/get-users-id
         """
         return self.request_client.get(
             endpoint=ENDPOINT,
-            query=_make_query(query),
-            response_type=V2GetUsersResponseBody,
+            url=ENDPOINT.url.replace(":id", id),
+            query=_make_query(query) if query is not None else None,
+            response_type=V2GetUserResponseBody,
         )
