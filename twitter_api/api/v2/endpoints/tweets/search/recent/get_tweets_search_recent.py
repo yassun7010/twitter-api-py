@@ -83,7 +83,7 @@ class V2GetTweetsSearchRecent(HasReqeustClient):
     @rate_limit(ENDPOINT, "app", requests=450, mins=15)
     @rate_limit(ENDPOINT, "user", requests=180, mins=15)
     def get(
-        self, query: Optional[V2GetTweetsSearchRecentQueryParameters] = None
+        self, query: V2GetTweetsSearchRecentQueryParameters
     ) -> V2GetTweetsSearchRecentResponseBody:
         # flake8: noqa E501
         """

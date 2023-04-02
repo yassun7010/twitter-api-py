@@ -1,6 +1,5 @@
 from datetime import datetime
 from typing import Literal, NotRequired, Optional, TypeAlias, TypedDict
-from urllib import parse
 
 from twitter_api.api.v2.types.expansion import Expansion
 from twitter_api.api.v2.types.media.media_field import MediaField
@@ -19,21 +18,16 @@ from twitter_api.types.endpoint import Endpoint
 from twitter_api.types.extra_permissive_model import ExtraPermissiveModel
 from twitter_api.utils.functional import map_optional
 
-Uri: TypeAlias = Literal["https://api.twitter.com/2/tweets/search/all"]
+Uri: TypeAlias = Literal["https://api.twitter.com/2/tweets/search/stream"]
 
-ENDPOINT = Endpoint("GET", "https://api.twitter.com/2/tweets/search/all")
+ENDPOINT = Endpoint("GET", "https://api.twitter.com/2/tweets/search/stream")
 
-V2GetTweetsSearchAllQueryParameters = TypedDict(
-    "V2GetTweetsSearchAllQueryParameters",
+V2GetTweetsSearchStreamQueryParameters = TypedDict(
+    "V2GetTweetsSearchStreamQueryParameters",
     {
-        "query": str | SearchQuery,
+        "backfill_minutes": NotRequired[Optional[int]],
         "start_time": NotRequired[Optional[datetime]],
         "end_time": NotRequired[Optional[datetime]],
-        "since_id": NotRequired[Optional[TweetId]],
-        "until_id": NotRequired[Optional[TweetId]],
-        "sort_order": NotRequired[Optional[Literal["recency", "relevancy"]]],
-        "next_token": NotRequired[Optional[str]],
-        "max_results": NotRequired[Optional[int]],
         "expansions": NotRequired[Optional[CommaSeparatable[Expansion]]],
         "place.fields": NotRequired[Optional[CommaSeparatable[PlaceField]]],
         "media.fields": NotRequired[Optional[CommaSeparatable[MediaField]]],
@@ -44,16 +38,11 @@ V2GetTweetsSearchAllQueryParameters = TypedDict(
 )
 
 
-def _make_query(query: V2GetTweetsSearchAllQueryParameters) -> dict:
+def _make_query(query: V2GetTweetsSearchStreamQueryParameters) -> dict:
     return {
-        "query": parse.quote(str(query["query"])),
+        "backfill_minutes": query.get("backfill_minutes"),
         "start_time": map_optional(lambda x: x.isoformat(), query.get("start_time")),
         "end_time": map_optional(lambda x: x.isoformat(), query.get("end_time")),
-        "since_id": query.get("since_id"),
-        "until_id": query.get("until_id"),
-        "sort_order": query.get("sort_order"),
-        "next_token": query.get("next_token"),
-        "max_results": query.get("expansions"),
         "expansions": comma_separated_str(query.get("expansions")),
         "place.fields": query.get("place.fields"),
         "media.fields": query.get("media.fields"),
@@ -63,17 +52,11 @@ def _make_query(query: V2GetTweetsSearchAllQueryParameters) -> dict:
     }
 
 
-class V2GetTweetsSearchAllResponseBodyMeta(ExtraPermissiveModel):
-    result_count: int
-    next_token: Optional[str] = None
+class V2GetTweetsSearchStreamResponseBody(ExtraPermissiveModel):
+    data: Optional[list[Tweet]] = None  # データが 1 つも見つからないとき、 None となる。
 
 
-class V2GetTweetsSearchAllResponseBody(ExtraPermissiveModel):
-    data: list[Tweet]
-    meta: V2GetTweetsSearchAllResponseBodyMeta
-
-
-class V2GetTweetsSearchAll(HasReqeustClient):
+class V2GetTweetsSearchStream(HasReqeustClient):
     def __init__(self, client: RequestClient) -> None:
         self._client = client
 
@@ -81,19 +64,18 @@ class V2GetTweetsSearchAll(HasReqeustClient):
     def request_client(self) -> RequestClient:
         return self._client
 
-    @rate_limit(ENDPOINT, "app", requests=300, mins=15)
-    @rate_limit(ENDPOINT, "app", requests=1, seconds=1)
+    @rate_limit(ENDPOINT, "app", requests=50, mins=15)
     def get(
-        self, query: V2GetTweetsSearchAllQueryParameters
-    ) -> V2GetTweetsSearchAllResponseBody:
+        self, query: Optional[V2GetTweetsSearchStreamQueryParameters] = None
+    ) -> V2GetTweetsSearchStreamResponseBody:
         # flake8: noqa E501
         """
         ツイートの一覧を検索する。
 
-        refer: https://developer.twitter.com/en/docs/twitter-api/tweets/search/api-reference/get-tweets-search-all
+        refer: https://developer.twitter.com/en/docs/twitter-api/tweets/filtered-stream/api-reference/get-tweets-search-stream
         """
         return self._client.get(
             endpoint=ENDPOINT,
-            response_type=V2GetTweetsSearchAllResponseBody,
+            response_type=V2GetTweetsSearchStreamResponseBody,
             query=_make_query(query) if query is not None else None,
         )

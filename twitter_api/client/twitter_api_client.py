@@ -11,6 +11,7 @@ from twitter_api.api.v2.endpoints import tweets
 from twitter_api.api.v2.endpoints.tweets.retweeted_by import get_retweeted_by
 from twitter_api.api.v2.endpoints.tweets.search.all import get_tweets_search_all
 from twitter_api.api.v2.endpoints.tweets.search.recent import get_tweets_search_recent
+from twitter_api.api.v2.endpoints.tweets.search.stream import get_tweets_search_stream
 from twitter_api.error import NeverError
 from twitter_api.rate_limit.manager.rate_limit_manager import RateLimitManager
 from twitter_api.types.oauth import AccessSecret, AccessToken, ApiKey, ApiSecret, Env
@@ -94,6 +95,13 @@ class TwitterApiClient(metaclass=ABCMeta):
     ) -> get_tweets_search_recent.V2GetTweetsSearchRecent:
         ...
 
+    @overload
+    def request(
+        self: Self,
+        url: get_tweets_search_stream.Uri,
+    ) -> get_tweets_search_stream.V2GetTweetsSearchStream:
+        ...
+
     def request(
         self: Self,
         url: Union[
@@ -105,6 +113,7 @@ class TwitterApiClient(metaclass=ABCMeta):
             get_retweeted_by.Uri,
             get_tweets_search_all.Uri,
             get_tweets_search_recent.Uri,
+            get_tweets_search_stream.Uri,
         ],
     ):
         """
@@ -141,6 +150,10 @@ class TwitterApiClient(metaclass=ABCMeta):
             )
         elif url == "https://api.twitter.com/2/tweets/search/recent":
             return get_tweets_search_recent.V2GetTweetsSearchRecent(
+                self._request_client,
+            )
+        elif url == "https://api.twitter.com/2/tweets/search/stream":
+            return get_tweets_search_stream.V2GetTweetsSearchStream(
                 self._request_client,
             )
         else:
