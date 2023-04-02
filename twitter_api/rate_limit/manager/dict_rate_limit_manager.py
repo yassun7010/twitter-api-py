@@ -30,11 +30,11 @@ class DictRateLimitManager(RateLimitManager):
                 start_datetime=now, request_datetimes=[now]
             )
 
-        # レートリミットの窓に今回のデータを入れる。
+        # 今回のデータを履歴に追加する。
         status = self._store[rate_limit_data]
         status.request_datetimes.append(now)
 
-        # 窓に入っている過去のデータのうち、考慮する必要のないデータを消す。
+        # レートリミットの計算対象より過去のデータを履歴から消す。
         min_datetime = now - timedelta(seconds=rate_limit_data.total_seconds)
         index = bisect_left(status.request_datetimes, min_datetime)
         del status.request_datetimes[:index]
