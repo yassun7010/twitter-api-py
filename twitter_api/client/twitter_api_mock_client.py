@@ -10,7 +10,13 @@ from twitter_api.api.v2.endpoints.tweets.retweeted_by import get_retweeted_by
 from twitter_api.api.v2.endpoints.tweets.search.all import get_tweets_search_all
 from twitter_api.api.v2.endpoints.tweets.search.recent import get_tweets_search_recent
 from twitter_api.api.v2.endpoints.tweets.search.stream import get_tweets_search_stream
-from twitter_api.api.v2.endpoints.users import get_user, get_users, liked_tweets
+from twitter_api.api.v2.endpoints.users import (
+    followers,
+    get_user,
+    get_users,
+    liked_tweets,
+)
+from twitter_api.api.v2.endpoints.users.followers import get_user_followers
 from twitter_api.api.v2.endpoints.users.liked_tweets import get_user_liked_tweets
 from twitter_api.error import TwitterApiError
 from twitter_api.rate_limit.manager.rate_limit_manager import RateLimitManager
@@ -143,6 +149,17 @@ class TwitterApiMockClient(TwitterApiClient):
         url: liked_tweets.UserLikedTweetsUrl,
         response_body: Union[
             get_user_liked_tweets.V2GetUserLikedTweetsResponseBody,
+            TwitterApiError,
+        ],
+    ) -> Self:
+        ...
+
+    @overload
+    def inject_get_response_body(
+        self,
+        url: followers.UserFollowersUrl,
+        response_body: Union[
+            get_user_followers.V2GetUserFollowersResponseBody,
             TwitterApiError,
         ],
     ) -> Self:
