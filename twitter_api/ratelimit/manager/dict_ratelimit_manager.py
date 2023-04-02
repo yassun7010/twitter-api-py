@@ -16,7 +16,7 @@ class DictRatelimitManager(RatelimitManager):
     def __init__(self) -> None:
         self._store: dict[Ratelimit, RatelimitStatus] = {}
 
-    def check_ratelimit(self, ratelimit: Ratelimit) -> bool:
+    def check_limit_over(self, ratelimit: Ratelimit) -> bool:
         now = datetime.now()
         if ratelimit not in self._store:
             self._store[ratelimit] = RatelimitStatus(start_at=now, requests=[now])
