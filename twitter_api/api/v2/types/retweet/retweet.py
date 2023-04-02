@@ -21,7 +21,7 @@ class Retweet(ExtraPermissiveModel):
     protected: Optional[bool] = None
     withheld: Optional[RetweetWithheld] = None
     location: Optional[str] = None
-    url: Optional[str] = None
+    url: Optional[Url] = None
     description: Optional[str] = None
     verified: Optional[bool] = None
     entities: Optional[RetweetEntities] = None

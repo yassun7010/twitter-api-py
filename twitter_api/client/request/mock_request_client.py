@@ -2,6 +2,7 @@ from typing import Generic, Optional, Type
 
 from twitter_api.error import MockInjectionResponseWrong, MockResponseNotFound
 from twitter_api.types.endpoint import Endpoint
+from twitter_api.types.http import Url
 from twitter_api.types.oauth import OAuthVersion
 from twitter_api.utils.ratelimit import RateLimitTarget
 
@@ -52,7 +53,7 @@ class MockRequestClient(RequestClient, Generic[ResponseModelBody]):
         *,
         endpoint: Endpoint,
         response_type: Type[ResponseModelBody],
-        uri: Optional[str] = None,
+        url: Optional[Url] = None,
         auth: bool = True,
         query: Optional[QuryParameters] = None,
     ) -> ResponseModelBody:
@@ -63,7 +64,7 @@ class MockRequestClient(RequestClient, Generic[ResponseModelBody]):
         *,
         endpoint: Endpoint,
         response_type: Type[ResponseModelBody],
-        uri: Optional[str] = None,
+        url: Optional[Url] = None,
         auth: bool = True,
         headers: Optional[Headers] = None,
         query: Optional[QuryParameters] = None,
@@ -77,7 +78,7 @@ class MockRequestClient(RequestClient, Generic[ResponseModelBody]):
         *,
         endpoint: Endpoint,
         response_type: Type[ResponseModelBody],
-        uri: Optional[str] = None,
+        url: Optional[Url] = None,
         auth: bool = True,
         headers: Optional[Headers] = None,
         query: Optional[QuryParameters] = None,

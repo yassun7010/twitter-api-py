@@ -1,11 +1,12 @@
 from dataclasses import dataclass
-from typing import Literal, TypeAlias
+from typing import Literal
+
+from twitter_api.types.http import Url
 
 EndpointMethod = Literal["GET", "POST", "DELETE"]
-EndpointURI: TypeAlias = str
 
 
 @dataclass
 class Endpoint:
     method: EndpointMethod
-    uri: EndpointURI
+    url: Url

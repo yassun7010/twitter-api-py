@@ -35,48 +35,48 @@ class TwitterApiClient(metaclass=ABCMeta):
     @overload
     def request(
         self: Self,
-        uri: post_request_token.Uri,
+        url: post_request_token.Uri,
     ) -> post_request_token.OauthPostRequestToken:
         ...
 
     @overload
     def request(
         self: Self,
-        uri: post_token.Uri,
+        url: post_token.Uri,
     ) -> post_token.Oauth2PostToken:
         ...
 
     @overload
     def request(
         self: Self,
-        uri: post_invalidate_token.Uri,
+        url: post_invalidate_token.Uri,
     ) -> post_invalidate_token.Oauth2PostInvalidateToken:
         ...
 
     @overload
     def request(
         self: Self,
-        uri: tweets.TweetUri,
+        url: tweets.TweetUri,
     ) -> tweets.V2Tweet:
         ...
 
     @overload
     def request(
         self: Self,
-        uri: tweets.TweetsUri,
+        url: tweets.TweetsUri,
     ) -> tweets.V2Tweets:
         ...
 
     @overload
     def request(
         self: Self,
-        uri: get_retweeted_by.Uri,
+        url: get_retweeted_by.Uri,
     ) -> get_retweeted_by.V2GetRetweetedBy:
         ...
 
     def request(
         self: Self,
-        uri: Union[
+        url: Union[
             tweets.TweetUri,
             tweets.TweetsUri,
             post_request_token.Uri,
@@ -89,32 +89,32 @@ class TwitterApiClient(metaclass=ABCMeta):
         操作したい URI を指定し、実行可能な操作方法を返却します。
         """
 
-        if uri == "/oauth/request_token":
+        if url == "https://api.twitter.com/oauth/request_token":
             return post_request_token.OauthPostRequestToken(
                 self._request_client,
             )
-        elif uri == "/oauth2/token":
+        elif url == "https://api.twitter.com/oauth2/token":
             return post_token.Oauth2PostToken(
                 self._request_client,
             )
-        elif uri == "/oauth2/invalidate_token":
+        elif url == "https://api.twitter.com/oauth2/invalidate_token":
             return post_invalidate_token.Oauth2PostInvalidateToken(
                 self._request_client,
             )
-        elif uri == "/2/tweets":
+        elif url == "https://api.twitter.com/2/tweets":
             return tweets.V2Tweets(
                 self._request_client,
             )
-        elif uri == "/2/tweets/:id":
+        elif url == "https://api.twitter.com/2/tweets/:id":
             return tweets.V2Tweet(
                 self._request_client,
             )
-        elif uri == "/2/tweets/:id/retweeted_by":
+        elif url == "https://api.twitter.com/2/tweets/:id/retweeted_by":
             return get_retweeted_by.V2GetRetweetedBy(
                 self._request_client,
             )
         else:
-            raise NeverError(uri)
+            raise NeverError(url)
 
     @classmethod
     def from_bearer_token(cls, bearer_token: str) -> Self:

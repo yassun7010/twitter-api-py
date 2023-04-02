@@ -59,7 +59,7 @@ class TwitterApiRealClient(TwitterApiClient):
                     oauth_version="2.0",
                 ),
             )
-            .request("/oauth2/token")
+            .request("https://api.twitter.com/oauth2/token")
             .post(
                 api_key=api_key,
                 api_secret=api_secret,

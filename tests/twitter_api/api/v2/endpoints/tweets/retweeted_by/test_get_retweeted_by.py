@@ -13,7 +13,7 @@ from twitter_api.client.twitter_api_real_client import TwitterApiRealClient
 class TestV2GetRetweetedBy:
     def test_get_retweeted_by(self, real_app_auth_v2_client: TwitterApiRealClient):
         real_response = real_app_auth_v2_client.request(
-            "/2/tweets/:id/retweeted_by"
+            "https://api.twitter.com/2/tweets/:id/retweeted_by"
         ).get("1460323737035677698")
 
         print(real_response.json())
@@ -33,8 +33,10 @@ class TestMockV2GetRetweetedBy:
 
         assert (
             mock_app_auth_v2_client.chain()
-            .inject_get_response("/2/tweets/:id/retweeted_by", expected_response)
-            .request("/2/tweets/:id/retweeted_by")
+            .inject_get_response(
+                "https://api.twitter.com/2/tweets/:id/retweeted_by", expected_response
+            )
+            .request("https://api.twitter.com/2/tweets/:id/retweeted_by")
             .get("1234567890123456789")
             == expected_response
         )

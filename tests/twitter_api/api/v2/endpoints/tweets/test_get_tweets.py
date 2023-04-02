@@ -37,7 +37,7 @@ class TestV2GetTweets:
         expected_response = V2GetTweetsResponseBody(data=tweets)
         real_response = (
             real_app_auth_v2_client.chain()
-            .request("/2/tweets")
+            .request("https://api.twitter.com/2/tweets")
             .get({"ids": list(map(lambda tweet: tweet.id, tweets))})
         )
 
@@ -59,8 +59,8 @@ class TestMockV2GetTweets:
 
         assert (
             mock_app_auth_v2_client.chain()
-            .inject_get_response("/2/tweets", response)
-            .request("/2/tweets")
+            .inject_get_response("https://api.twitter.com/2/tweets", response)
+            .request("https://api.twitter.com/2/tweets")
             .get({"ids": list(map(lambda tweet: tweet.id, response.data))})
             == response
         )

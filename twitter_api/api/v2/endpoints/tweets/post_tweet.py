@@ -12,7 +12,7 @@ from twitter_api.types.extra_permissive_model import ExtraPermissiveModel
 from twitter_api.types.http import Url, downcast_dict
 from twitter_api.utils.ratelimit import rate_limit
 
-ENDPOINT = Endpoint("POST", "/2/tweets")
+ENDPOINT = Endpoint("POST", "https://api.twitter.com/2/tweets")
 
 
 class V2PostTweetGeospatialInformation(TypedDict):

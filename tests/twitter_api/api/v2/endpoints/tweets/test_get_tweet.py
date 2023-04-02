@@ -33,7 +33,9 @@ class TestV2GetTweet:
         self, real_app_auth_v2_client: TwitterApiRealClient, tweet: Tweet
     ):
         expected_response = V2GetTweetResponseBody(data=tweet)
-        real_response = real_app_auth_v2_client.request("/2/tweets/:id").get(tweet.id)
+        real_response = real_app_auth_v2_client.request(
+            "https://api.twitter.com/2/tweets/:id"
+        ).get(tweet.id)
 
         print(real_response.dict())
         print(expected_response.dict())
@@ -49,8 +51,10 @@ class TestMockV2GetTweet:
 
         assert (
             mock_app_auth_v2_client.chain()
-            .inject_get_response("/2/tweets/:id", expected_response)
-            .request("/2/tweets/:id")
+            .inject_get_response(
+                "https://api.twitter.com/2/tweets/:id", expected_response
+            )
+            .request("https://api.twitter.com/2/tweets/:id")
             .get(tweet.id)
             == expected_response
         )

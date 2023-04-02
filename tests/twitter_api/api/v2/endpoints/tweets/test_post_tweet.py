@@ -15,7 +15,7 @@ class TestV2GetTweet:
         tweet_text = f"テストツイート。{datetime.now().isoformat()}"
         real_response = (
             real_user_auth_v1_client.chain()
-            .request("/2/tweets")
+            .request("https://api.twitter.com/2/tweets")
             .post(
                 {
                     "text": tweet_text,
@@ -41,8 +41,8 @@ class TestMockV2GetTweet:
 
         assert (
             mock_app_auth_v2_client.chain()
-            .inject_post_response("/2/tweets", expected_response)
-            .request("/2/tweets")
+            .inject_post_response("https://api.twitter.com/2/tweets", expected_response)
+            .request("https://api.twitter.com/2/tweets")
             .post({"text": tweet.text})
             == expected_response
         )

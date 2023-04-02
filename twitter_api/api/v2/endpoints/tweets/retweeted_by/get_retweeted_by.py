@@ -12,9 +12,9 @@ from twitter_api.types.endpoint import Endpoint
 from twitter_api.types.extra_permissive_model import ExtraPermissiveModel
 from twitter_api.utils.ratelimit import rate_limit
 
-Uri: TypeAlias = Literal["/2/tweets/:id/retweeted_by"]
+Uri: TypeAlias = Literal["https://api.twitter.com/2/tweets/:id/retweeted_by"]
 
-ENDPOINT = Endpoint("GET", "/2/tweets/:id/retweeted_by")
+ENDPOINT = Endpoint("GET", "https://api.twitter.com/2/tweets/:id/retweeted_by")
 
 V2GetRetweetedByQueryParameters = TypedDict(
     "V2GetRetweetedByQueryParameters",
@@ -66,6 +66,6 @@ class V2GetRetweetedBy:
         return self._client.get(
             endpoint=ENDPOINT,
             response_type=V2GetRetweetedByResponseBody,
-            uri=ENDPOINT.uri.replace(":id", id),
+            url=ENDPOINT.url.replace(":id", id),
             query=_make_query(query) if query is not None else None,
         )

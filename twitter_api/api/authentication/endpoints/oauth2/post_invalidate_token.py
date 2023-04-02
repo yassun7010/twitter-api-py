@@ -8,9 +8,9 @@ from twitter_api.types.extra_permissive_model import ExtraPermissiveModel
 from twitter_api.types.http import downcast_dict
 from twitter_api.types.oauth import AccessToken, ApiKey, ApiSecret
 
-Uri = Literal["/oauth2/invalidate_token"]
+Uri = Literal["https://api.twitter.com/oauth2/invalidate_token"]
 
-ENDPOINT: Endpoint = Endpoint("POST", "/oauth2/invalidate_token")
+ENDPOINT: Endpoint = Endpoint("POST", "https://api.twitter.com/oauth2/invalidate_token")
 
 Oauth2PostInvalidateTokenQueryParameters = TypedDict(
     "Oauth2PostInvalidateTokenQueryParameters",

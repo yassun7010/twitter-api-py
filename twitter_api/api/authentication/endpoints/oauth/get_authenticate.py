@@ -4,9 +4,9 @@ from twitter_api.client.request.request_client import RequestClient
 from twitter_api.types.endpoint import Endpoint
 from twitter_api.types.screen_name import ScreenName
 
-Uri = Literal["/oauth/authenticate"]
+Uri = Literal["https://api.twitter.com/oauth/authenticate"]
 
-ENDPOINT = Endpoint("GET", "/oauth/authenticate")
+ENDPOINT = Endpoint("GET", "https://api.twitter.com/oauth/authenticate")
 
 GetOauthAuthenticateQueryParameters = TypedDict(
     "GetOauthAuthenticateQueryParameters",

@@ -15,7 +15,7 @@ from twitter_api.types.endpoint import Endpoint
 from twitter_api.types.extra_permissive_model import ExtraPermissiveModel
 from twitter_api.utils.ratelimit import rate_limit
 
-ENDPOINT = Endpoint("GET", "/2/tweets/:id")
+ENDPOINT = Endpoint("GET", "https://api.twitter.com/2/tweets/:id")
 
 V2GetTweetQueryParameters = TypedDict(
     "V2GetTweetQueryParameters",
@@ -75,6 +75,6 @@ class V2GetTweet:
         return self._client.get(
             endpoint=ENDPOINT,
             response_type=V2GetTweetResponseBody,
-            uri=ENDPOINT.uri.replace(":id", id),
+            url=ENDPOINT.url.replace(":id", id),
             query=_make_query(query),
         )

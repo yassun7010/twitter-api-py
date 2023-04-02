@@ -18,13 +18,15 @@ class TestV2DeleteTweet:
 
         tweet = (
             real_user_auth_v1_client.chain()
-            .request("/2/tweets")
+            .request("https://api.twitter.com/2/tweets")
             .post({"text": tweet_text})
             .data
         )
 
         real_response = (
-            real_user_auth_v1_client.chain().request("/2/tweets/:id").delete(tweet.id)
+            real_user_auth_v1_client.chain()
+            .request("https://api.twitter.com/2/tweets/:id")
+            .delete(tweet.id)
         )
 
         print(real_response.dict())
@@ -40,8 +42,10 @@ class TestMockV2DeleteTweet:
 
         assert (
             mock_app_auth_v2_client.chain()
-            .inject_delete_response("/2/tweets/:id", expected_response)
-            .request("/2/tweets/:id")
+            .inject_delete_response(
+                "https://api.twitter.com/2/tweets/:id", expected_response
+            )
+            .request("https://api.twitter.com/2/tweets/:id")
             .delete("1234567890123456789")
             == expected_response
         )

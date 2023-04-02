@@ -15,6 +15,7 @@ from twitter_api.error import (
     TwitterApiResponseModelBodyDecodeError,
 )
 from twitter_api.types.endpoint import Endpoint
+from twitter_api.types.http import Url
 from twitter_api.types.oauth import OAuthVersion
 from twitter_api.utils.ratelimit import RateLimitTarget
 
@@ -27,8 +28,6 @@ from .request_client import (
 )
 
 OAuth = OAuth2Auth | OAuth1Auth
-
-TWITTER_API_DOMAIN = "https://api.twitter.com"
 
 
 class RealRequestClient(RequestClient):
@@ -63,13 +62,13 @@ class RealRequestClient(RequestClient):
         *,
         endpoint: Endpoint,
         response_type: Type[ResponseModelBody],
-        uri: Optional[str] = None,
+        url: Optional[Url] = None,
         auth: bool = True,
         headers: Optional[Headers] = None,
         query: Optional[QuryParameters] = None,
         body: Optional[RequestJsonBody] = None,
     ) -> ResponseModelBody:
-        url = _make_twitter_api_url(endpoint, uri)
+        url = endpoint.url if url is None else url
 
         response = self._session.request(
             url=url,
@@ -95,14 +94,14 @@ class RealRequestClient(RequestClient):
         *,
         endpoint: Endpoint,
         response_type: Type[ResponseModelBody],
-        uri: Optional[str] = None,
+        url: Optional[Url] = None,
         auth: bool = True,
         headers: Optional[Headers] = None,
         query: Optional[QuryParameters] = None,
         body: Optional[RequestJsonBody] = None,
         json: Optional[RequestJsonBody] = None,
     ) -> ResponseModelBody:
-        url = _make_twitter_api_url(endpoint, uri)
+        url = endpoint.url if url is None else url
 
         response = self._session.request(
             url=url,
@@ -134,12 +133,12 @@ class RealRequestClient(RequestClient):
         *,
         endpoint: Endpoint,
         response_type: Type[ResponseModelBody],
-        uri: Optional[str] = None,
+        url: Optional[Url] = None,
         auth: bool = True,
         headers: Optional[Headers] = None,
         query: Optional[QuryParameters] = None,
     ) -> ResponseModelBody:
-        url = _make_twitter_api_url(endpoint, uri)
+        url = endpoint.url if url is None else url
 
         response = self._session.request(
             url=url,
@@ -164,17 +163,10 @@ class RealRequestClient(RequestClient):
         )
 
 
-def _make_twitter_api_url(endpoint: Endpoint, uri: Optional[str] = None) -> str:
-    if uri is None:
-        return f"{TWITTER_API_DOMAIN}{endpoint.uri}"
-    else:
-        return f"{TWITTER_API_DOMAIN}{uri}"
-
-
 def _parse_response(
     endpoint: Endpoint,
     response: requests.Response,
-    url: str,
+    url: Url,
     headers: Optional[Headers] = None,
     query: Optional[QuryParameters] = None,
     body: Optional[RequestJsonBody] = None,

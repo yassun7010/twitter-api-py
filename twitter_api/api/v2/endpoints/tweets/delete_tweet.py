@@ -15,7 +15,7 @@ from twitter_api.types.endpoint import Endpoint
 from twitter_api.types.extra_permissive_model import ExtraPermissiveModel
 from twitter_api.utils.ratelimit import rate_limit
 
-ENDPOINT = Endpoint("DELETE", "/2/tweets/:id")
+ENDPOINT = Endpoint("DELETE", "https://api.twitter.com/2/tweets/:id")
 
 
 class V2DeleteTweetResponseBodyData(ExtraPermissiveModel):
@@ -44,5 +44,5 @@ class V2DeleteTweet:
         return self._client.delete(
             endpoint=ENDPOINT,
             response_type=V2DeleteTweetResponseBody,
-            uri=ENDPOINT.uri.replace(":id", id),
+            url=ENDPOINT.url.replace(":id", id),
         )

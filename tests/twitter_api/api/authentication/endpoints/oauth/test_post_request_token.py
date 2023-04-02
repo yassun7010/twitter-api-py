@@ -16,7 +16,7 @@ class TestOauthPostRequestToken:
         with pytest.raises(TwitterApiOAuthVersionWrong):
             (
                 real_app_auth_v2_client.chain()
-                .request("/oauth/request_token")
+                .request("https://api.twitter.com/oauth/request_token")
                 .post(
                     api_key=os.environ["API_KEY"],
                     api_secret=os.environ["API_SECRET"],
@@ -32,7 +32,7 @@ class TestMockOauthPostRequestToken:
         with pytest.raises(TwitterApiOAuthVersionWrong):
             (
                 mock_app_auth_v2_client.chain()
-                .request("/oauth/request_token")
+                .request("https://api.twitter.com/oauth/request_token")
                 .post(
                     api_key=os.environ["API_KEY"],
                     api_secret=os.environ["API_SECRET"],
