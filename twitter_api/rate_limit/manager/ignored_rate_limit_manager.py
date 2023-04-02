@@ -14,7 +14,7 @@ class IgnoredRateLimitManager(RateLimitManager):
 
     def check_limit_over(
         self,
-        rate_limit: RateLimitData,
+        rate_limit_data: RateLimitData,
         now: Optional[datetime] = None,
     ) -> bool:
         return False
