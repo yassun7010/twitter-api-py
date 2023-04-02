@@ -4,6 +4,7 @@ from typing import Optional
 from twitter_api.api.v2.types.retweet.retweet_entities import RetweetEntities
 from twitter_api.api.v2.types.retweet.retweet_includes import RetweetIncludes
 from twitter_api.api.v2.types.retweet.retweet_public_metrics import RetweetPublicMetrics
+from twitter_api.api.v2.types.username import Username
 from twitter_api.types.extra_permissive_model import ExtraPermissiveModel
 from twitter_api.types.http import Url
 
@@ -16,7 +17,7 @@ DomainId = str
 class Retweet(ExtraPermissiveModel):
     id: TweetId
     name: str
-    username: str
+    username: Username
     created_at: Optional[datetime] = None
     protected: Optional[bool] = None
     withheld: Optional[RetweetWithheld] = None

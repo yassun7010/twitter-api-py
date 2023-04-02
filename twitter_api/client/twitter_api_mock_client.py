@@ -7,6 +7,7 @@ from twitter_api.api.authentication.endpoints.oauth2 import (
 )
 from twitter_api.api.v2.endpoints import tweets
 from twitter_api.api.v2.endpoints.tweets.retweeted_by import get_retweeted_by
+from twitter_api.api.v2.endpoints.tweets.search.all import get_search_all
 from twitter_api.types.endpoint import Endpoint
 from twitter_api.types.oauth import (
     AccessSecret,
@@ -58,6 +59,14 @@ class TwitterApiMockClient(TwitterApiClient):
         self,
         url: get_retweeted_by.Uri,
         response: get_retweeted_by.V2GetRetweetedByResponseBody,
+    ) -> Self:
+        ...
+
+    @overload
+    def inject_get_response_body(
+        self,
+        url: get_search_all.Uri,
+        response: get_search_all.V2GetTweetsSearchAllResponseBody,
     ) -> Self:
         ...
 

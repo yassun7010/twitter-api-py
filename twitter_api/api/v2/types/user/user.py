@@ -1,6 +1,7 @@
 from datetime import datetime
 from typing import Any, Optional
 
+from twitter_api.api.v2.types.username import Username
 from twitter_api.types.extra_permissive_model import ExtraPermissiveModel
 from twitter_api.types.http import Url
 
@@ -11,7 +12,7 @@ from .user_id import UserId
 class User(ExtraPermissiveModel):
     id: UserId
     name: str
-    username: str
+    username: Username
     created_at: datetime
     description: Optional[str] = None
     entities: Optional[dict[str, Any]] = None

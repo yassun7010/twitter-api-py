@@ -9,6 +9,7 @@ from twitter_api.api.authentication.endpoints.oauth2 import (
 )
 from twitter_api.api.v2.endpoints import tweets
 from twitter_api.api.v2.endpoints.tweets.retweeted_by import get_retweeted_by
+from twitter_api.api.v2.endpoints.tweets.search.all import get_search_all
 from twitter_api.error import NeverError
 from twitter_api.types.oauth import AccessSecret, AccessToken, ApiKey, ApiSecret, Env
 
@@ -74,6 +75,13 @@ class TwitterApiClient(metaclass=ABCMeta):
     ) -> get_retweeted_by.V2GetRetweetedBy:
         ...
 
+    @overload
+    def request(
+        self: Self,
+        url: get_search_all.Uri,
+    ) -> get_search_all.V2GetTweetsSearchAll:
+        ...
+
     def request(
         self: Self,
         url: Union[
@@ -83,6 +91,7 @@ class TwitterApiClient(metaclass=ABCMeta):
             post_invalidate_token.Uri,
             post_token.Uri,
             get_retweeted_by.Uri,
+            get_search_all.Uri,
         ],
     ):
         """
@@ -111,6 +120,10 @@ class TwitterApiClient(metaclass=ABCMeta):
             )
         elif url == "https://api.twitter.com/2/tweets/:id/retweeted_by":
             return get_retweeted_by.V2GetRetweetedBy(
+                self._request_client,
+            )
+        elif url == "https://api.twitter.com/2/tweets/search/all":
+            return get_search_all.V2GetTweetsSearchAll(
                 self._request_client,
             )
         else:
