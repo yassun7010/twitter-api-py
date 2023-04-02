@@ -80,8 +80,8 @@ class V2GetTweetsSearchRecent(HasReqeustClient):
     def request_client(self) -> RequestClient:
         return self._client
 
-    @rate_limit(ENDPOINT, "app", requests=300, mins=15)
-    @rate_limit(ENDPOINT, "app", requests=1, seconds=1)
+    @rate_limit(ENDPOINT, "app", requests=450, mins=15)
+    @rate_limit(ENDPOINT, "user", requests=180, mins=15)
     def get(
         self, query: Optional[V2GetTweetsSearchRecentQueryParameters] = None
     ) -> V2GetTweetsSearchRecentResponseBody:
