@@ -7,7 +7,8 @@ from twitter_api.api.authentication.endpoints.oauth2 import (
 )
 from twitter_api.api.v2.endpoints import tweets
 from twitter_api.api.v2.endpoints.tweets.retweeted_by import get_retweeted_by
-from twitter_api.api.v2.endpoints.tweets.search.all import get_search_all
+from twitter_api.api.v2.endpoints.tweets.search.all import get_tweets_search_all
+from twitter_api.api.v2.endpoints.tweets.search.recent import get_tweets_search_recent
 from twitter_api.rate_limit.manager.rate_limit_manager import RateLimitManager
 from twitter_api.rate_limit.rate_limit_target import RateLimitTarget
 from twitter_api.types.endpoint import Endpoint
@@ -71,8 +72,16 @@ class TwitterApiMockClient(TwitterApiClient):
     @overload
     def inject_get_response_body(
         self,
-        url: get_search_all.Uri,
-        response: get_search_all.V2GetTweetsSearchAllResponseBody,
+        url: get_tweets_search_all.Uri,
+        response: get_tweets_search_all.V2GetTweetsSearchAllResponseBody,
+    ) -> Self:
+        ...
+
+    @overload
+    def inject_get_response_body(
+        self,
+        url: get_tweets_search_recent.Uri,
+        response: get_tweets_search_recent.V2GetTweetsSearchRecentResponseBody,
     ) -> Self:
         ...
 

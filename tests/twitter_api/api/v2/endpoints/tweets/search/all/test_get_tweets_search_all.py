@@ -2,7 +2,7 @@ import pytest
 
 from tests.conftest import synthetic_monitoring_is_disable
 from tests.data import JsonDataLoader
-from twitter_api.api.v2.endpoints.tweets.search.all.get_search_all import (
+from twitter_api.api.v2.endpoints.tweets.search.all.get_tweets_search_all import (
     V2GetTweetsSearchAllResponseBody,
 )
 from twitter_api.client.twitter_api_mock_client import TwitterApiMockClient
@@ -20,7 +20,7 @@ class TestV2GetTweetsSearchAll:
                 .get({"query": "conversation_id:1273733248749690880", "max_results": 1})
             )
 
-    @pytest.mark.skipif(True, reason="OAuth2.0 で入らないといけないらしい。")
+    @pytest.mark.skipif(True, reason="プレミアムなアカウントでないとテストできない。")
     def test_get_search_all(self, real_app_auth_v2_client: TwitterApiRealClient):
         real_response = (
             real_app_auth_v2_client.chain()

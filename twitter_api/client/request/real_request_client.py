@@ -1,5 +1,6 @@
 from typing import Optional, Type
 
+import pydantic
 import requests
 from authlib.integrations.requests_client.oauth1_session import (
     OAuth1Auth,  # pyright: reportMissingImports=false
@@ -13,6 +14,7 @@ from twitter_api.error import (
     TwitterApiResponseError,
     TwitterApiResponseFailed,
     TwitterApiResponseModelBodyDecodeError,
+    TwitterApiResponseValidationError,
 )
 from twitter_api.rate_limit.manager.no_operation_rate_limit_manager import (
     NoOperationRateLimitManager,
@@ -92,15 +94,14 @@ class RealRequestClient(RequestClient):
             timeout=self.timeout_sec,
         )
 
-        return response_type(
-            **_parse_response(
-                endpoint,
-                response,
-                url,
-                headers,
-                query,
-                body,
-            )
+        return _parse_response(
+            endpoint,
+            response,
+            response_type,
+            url,
+            headers,
+            query,
+            body,
         )
 
     def post(
@@ -131,15 +132,14 @@ class RealRequestClient(RequestClient):
         if response_type is str:
             return response.content.decode("utf-8")  # type: ignore
 
-        return response_type(
-            **_parse_response(
-                endpoint,
-                response,
-                url,
-                headers,
-                query,
-                body,
-            )
+        return _parse_response(
+            endpoint,
+            response,
+            response_type,
+            url,
+            headers,
+            query,
+            body,
         )
 
     def delete(
@@ -166,25 +166,25 @@ class RealRequestClient(RequestClient):
         if response_type is str:
             return response.content.decode("utf-8")  # type: ignore
 
-        return response_type(
-            **_parse_response(
-                endpoint,
-                response,
-                url,
-                headers,
-                query,
-            )
+        return _parse_response(
+            endpoint,
+            response,
+            response_type,
+            url,
+            headers,
+            query,
         )
 
 
 def _parse_response(
     endpoint: Endpoint,
     response: requests.Response,
+    response_type: Type[ResponseModelBody],
     url: Url,
     headers: Optional[Headers] = None,
     query: Optional[QuryParameters] = None,
     body: Optional[RequestJsonBody] = None,
-) -> dict:
+) -> ResponseModelBody:
     if response.content == b"":
         data: dict = {}
     else:
@@ -232,4 +232,7 @@ def _parse_response(
             data,
         )
 
-    return data
+    try:
+        return response_type(**data)
+    except pydantic.ValidationError as error:
+        raise TwitterApiResponseValidationError(endpoint, data, error)
