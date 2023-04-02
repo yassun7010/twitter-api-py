@@ -1,7 +1,7 @@
 from abc import ABCMeta, abstractmethod
 from typing import Optional, Type
 
-from twitter_api.ratelimit.ratelimit_target import RateLimitTarget
+from twitter_api.ratelimit.ratelimit_target import RatelimitTarget
 from twitter_api.types.endpoint import Endpoint
 from twitter_api.types.http import (
     Headers,
@@ -21,7 +21,7 @@ class RequestClient(metaclass=ABCMeta):
 
     @property
     @abstractmethod
-    def rate_limit(self) -> RateLimitTarget:
+    def rate_limit(self) -> RatelimitTarget:
         ...
 
     @abstractmethod

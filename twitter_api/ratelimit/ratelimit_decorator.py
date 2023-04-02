@@ -1,14 +1,14 @@
 from typing import Callable, Literal, Optional, overload
 
-from twitter_api.ratelimit.ratelimit_target import RateLimitTarget
+from twitter_api.ratelimit.ratelimit_target import RatelimitTarget
 
 
 @overload
 def rate_limit(
-    target: RateLimitTarget,
+    target: RatelimitTarget,
     *,
     requests: int,
-    secs: int,
+    seconds: int,
     mins: Literal[None] = None,
 ) -> Callable:
     ...
@@ -16,21 +16,21 @@ def rate_limit(
 
 @overload
 def rate_limit(
-    target: RateLimitTarget,
+    target: RatelimitTarget,
     *,
     requests: int,
     mins: int,
-    secs: Literal[None] = None,
+    seconds: Literal[None] = None,
 ) -> Callable:
     ...
 
 
 def rate_limit(
-    target: RateLimitTarget,
+    target: RatelimitTarget,
     *,
     requests: int,
     mins: Optional[int] = None,
-    secs: Optional[int] = None,
+    seconds: Optional[int] = None,
 ) -> Callable:
     """
     レートリミットに関する情報を付与します。

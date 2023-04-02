@@ -1,7 +1,7 @@
 from typing import Generic, Optional, Type
 
 from twitter_api.error import MockInjectionResponseWrong, MockResponseNotFound
-from twitter_api.ratelimit.ratelimit_target import RateLimitTarget
+from twitter_api.ratelimit.ratelimit_target import RatelimitTarget
 from twitter_api.types.endpoint import Endpoint
 from twitter_api.types.http import Url
 from twitter_api.types.oauth import OAuthVersion
@@ -19,11 +19,11 @@ class MockRequestClient(RequestClient, Generic[ResponseModelBody]):
     def __init__(
         self,
         *,
-        rate_limit: RateLimitTarget,
+        rate_limit: RatelimitTarget,
         oauth_version: OAuthVersion,
     ):
         self._store: list[tuple[Endpoint, ResponseModelBody]] = []
-        self._rate_limit: RateLimitTarget = rate_limit
+        self._rate_limit: RatelimitTarget = rate_limit
         self._oauth_version: OAuthVersion = oauth_version
 
     @property
@@ -31,7 +31,7 @@ class MockRequestClient(RequestClient, Generic[ResponseModelBody]):
         return self._oauth_version
 
     @property
-    def rate_limit(self) -> RateLimitTarget:
+    def rate_limit(self) -> RatelimitTarget:
         return self._rate_limit
 
     def inject_response_body(self, endpoint: Endpoint, response: ResponseModelBody):

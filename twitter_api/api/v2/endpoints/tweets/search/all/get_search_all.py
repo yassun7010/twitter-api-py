@@ -77,7 +77,7 @@ class V2GetTweetsSearchAll:
         self._client = client
 
     @rate_limit("app", requests=300, mins=15)
-    @rate_limit("app", requests=1, secs=1)
+    @rate_limit("app", requests=1, seconds=1)
     def get(
         self, query: Optional[V2GetTweetsSearchAllQueryParameters] = None
     ) -> V2GetTweetsSearchAllResponseBody:

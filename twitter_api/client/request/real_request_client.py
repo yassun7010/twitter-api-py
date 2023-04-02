@@ -14,7 +14,7 @@ from twitter_api.error import (
     TwitterApiResponseFailed,
     TwitterApiResponseModelBodyDecodeError,
 )
-from twitter_api.ratelimit.ratelimit_target import RateLimitTarget
+from twitter_api.ratelimit.ratelimit_target import RatelimitTarget
 from twitter_api.types.endpoint import Endpoint
 from twitter_api.types.http import Url
 from twitter_api.types.oauth import OAuthVersion
@@ -35,7 +35,7 @@ class RealRequestClient(RequestClient):
         self,
         *,
         oauth_version: OAuthVersion,
-        rate_limit: RateLimitTarget,
+        rate_limit: RatelimitTarget,
         auth: Optional[OAuth],
         session: Optional[requests.Session] = None,
         timeout_sec: Optional[float] = None,
@@ -44,7 +44,7 @@ class RealRequestClient(RequestClient):
             session = requests.Session()
 
         self._oauth_version: OAuthVersion = oauth_version
-        self._rate_limit: RateLimitTarget = rate_limit
+        self._rate_limit: RatelimitTarget = rate_limit
         self._auth = auth
         self._session = session
         self.timeout_sec = timeout_sec
@@ -54,7 +54,7 @@ class RealRequestClient(RequestClient):
         return self._oauth_version
 
     @property
-    def rate_limit(self) -> RateLimitTarget:
+    def rate_limit(self) -> RatelimitTarget:
         return self._rate_limit
 
     def get(

@@ -8,7 +8,7 @@ from twitter_api.api.authentication.endpoints.oauth2 import (
 from twitter_api.api.v2.endpoints import tweets
 from twitter_api.api.v2.endpoints.tweets.retweeted_by import get_retweeted_by
 from twitter_api.api.v2.endpoints.tweets.search.all import get_search_all
-from twitter_api.ratelimit.ratelimit_target import RateLimitTarget
+from twitter_api.ratelimit.ratelimit_target import RatelimitTarget
 from twitter_api.types.endpoint import Endpoint
 from twitter_api.types.oauth import (
     AccessSecret,
@@ -27,7 +27,7 @@ class TwitterApiMockClient(TwitterApiClient):
     """Twitter API V2 をモックするためのクライアント"""
 
     def __init__(
-        self, *, rate_limit: RateLimitTarget, oauth_version: OAuthVersion
+        self, *, rate_limit: RatelimitTarget, oauth_version: OAuthVersion
     ) -> None:
         self._client = MockRequestClient(
             rate_limit=rate_limit,
