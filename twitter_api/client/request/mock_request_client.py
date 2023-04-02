@@ -1,6 +1,10 @@
 from typing import Generic, Optional, Type
 
-from twitter_api.error import MockInjectionResponseWrong, MockResponseNotFound
+from twitter_api.error import (
+    MockInjectionResponseWrong,
+    MockResponseNotFound,
+    TwitterApiError,
+)
 from twitter_api.rate_limit.manager.no_operation_rate_limit_manager import (
     NoOperationRateLimitManager,
 )
@@ -27,7 +31,7 @@ class MockRequestClient(RequestClient, Generic[ResponseModelBody]):
         rate_limit_target: RateLimitTarget,
         rate_limit_manager: Optional[RateLimitManager] = None,
     ):
-        self._store: list[tuple[Endpoint, ResponseModelBody]] = []
+        self._store: list[tuple[Endpoint, ResponseModelBody | TwitterApiError]] = []
         self._oauth_version: OAuthVersion = oauth_version
         self._rate_limit_target: RateLimitTarget = rate_limit_target
 
@@ -48,19 +52,24 @@ class MockRequestClient(RequestClient, Generic[ResponseModelBody]):
     def rate_limit_manager(self) -> RateLimitManager:
         return self._rate_limit_manager
 
-    def inject_response_body(self, endpoint: Endpoint, response: ResponseModelBody):
-        self._store.append((endpoint, response))
+    def inject_response_body(
+        self, endpoint: Endpoint, response_body: ResponseModelBody | TwitterApiError
+    ):
+        self._store.append((endpoint, response_body))
 
     def extract_response_body(self, endpoint: Endpoint) -> ResponseModelBody:
         if len(self._store) == 0:
             raise MockResponseNotFound()
 
-        expected_endpoint, response = self._store.pop(0)
+        expected_endpoint, response_body = self._store.pop(0)
 
         if endpoint != expected_endpoint:
             raise MockInjectionResponseWrong(endpoint, expected_endpoint)
 
-        return response
+        if isinstance(response_body, TwitterApiError):
+            raise response_body
+
+        return response_body
 
     def get(
         self,

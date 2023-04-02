@@ -1,4 +1,4 @@
-from typing import Optional, Self, overload
+from typing import Optional, Self, Union, overload
 
 from twitter_api.api.authentication.endpoints.oauth import post_request_token
 from twitter_api.api.authentication.endpoints.oauth2 import (
@@ -9,6 +9,7 @@ from twitter_api.api.v2.endpoints import tweets
 from twitter_api.api.v2.endpoints.tweets.retweeted_by import get_retweeted_by
 from twitter_api.api.v2.endpoints.tweets.search.all import get_tweets_search_all
 from twitter_api.api.v2.endpoints.tweets.search.recent import get_tweets_search_recent
+from twitter_api.error import TwitterApiError
 from twitter_api.rate_limit.manager.rate_limit_manager import RateLimitManager
 from twitter_api.rate_limit.rate_limit_target import RateLimitTarget
 from twitter_api.types.endpoint import Endpoint
@@ -49,7 +50,10 @@ class TwitterApiMockClient(TwitterApiClient):
     def inject_get_response_body(
         self,
         url: tweets.TweetsUri,
-        response: tweets.get_tweets.V2GetTweetsResponseBody,
+        response_body: Union[
+            tweets.get_tweets.V2GetTweetsResponseBody,
+            TwitterApiError,
+        ],
     ) -> Self:
         ...
 
@@ -57,7 +61,10 @@ class TwitterApiMockClient(TwitterApiClient):
     def inject_get_response_body(
         self,
         url: tweets.TweetUri,
-        response: tweets.get_tweet.V2GetTweetResponseBody,
+        response_body: Union[
+            tweets.get_tweet.V2GetTweetResponseBody,
+            TwitterApiError,
+        ],
     ) -> Self:
         ...
 
@@ -65,7 +72,10 @@ class TwitterApiMockClient(TwitterApiClient):
     def inject_get_response_body(
         self,
         url: get_retweeted_by.Uri,
-        response: get_retweeted_by.V2GetRetweetedByResponseBody,
+        response_body: Union[
+            get_retweeted_by.V2GetRetweetedByResponseBody,
+            TwitterApiError,
+        ],
     ) -> Self:
         ...
 
@@ -73,7 +83,10 @@ class TwitterApiMockClient(TwitterApiClient):
     def inject_get_response_body(
         self,
         url: get_tweets_search_all.Uri,
-        response: get_tweets_search_all.V2GetTweetsSearchAllResponseBody,
+        response_body: Union[
+            get_tweets_search_all.V2GetTweetsSearchAllResponseBody,
+            TwitterApiError,
+        ],
     ) -> Self:
         ...
 
@@ -81,12 +94,15 @@ class TwitterApiMockClient(TwitterApiClient):
     def inject_get_response_body(
         self,
         url: get_tweets_search_recent.Uri,
-        response: get_tweets_search_recent.V2GetTweetsSearchRecentResponseBody,
+        response_body: Union[
+            get_tweets_search_recent.V2GetTweetsSearchRecentResponseBody,
+            TwitterApiError,
+        ],
     ) -> Self:
         ...
 
-    def inject_get_response_body(self, url, response) -> Self:
-        self._client.inject_response_body(Endpoint("GET", url), response)
+    def inject_get_response_body(self, url, response_body) -> Self:
+        self._client.inject_response_body(Endpoint("GET", url), response_body)
 
         return self
 
@@ -94,7 +110,10 @@ class TwitterApiMockClient(TwitterApiClient):
     def inject_post_response_body(
         self,
         url: post_request_token.Uri,
-        response: post_request_token.OauthPostRequestTokenResponseBody,
+        response_body: Union[
+            post_request_token.OauthPostRequestTokenResponseBody,
+            TwitterApiError,
+        ],
     ) -> Self:
         ...
 
@@ -102,7 +121,10 @@ class TwitterApiMockClient(TwitterApiClient):
     def inject_post_response_body(
         self,
         url: post_invalidate_token.Uri,
-        response: post_invalidate_token.Oauth2PostInvalidateTokenResponseBody,
+        response_body: Union[
+            post_invalidate_token.Oauth2PostInvalidateTokenResponseBody,
+            TwitterApiError,
+        ],
     ) -> Self:
         ...
 
@@ -110,7 +132,10 @@ class TwitterApiMockClient(TwitterApiClient):
     def inject_post_response_body(
         self,
         url: post_token.Uri,
-        response: post_token.Oauth2PostTokenResponseBody,
+        response_body: Union[
+            post_token.Oauth2PostTokenResponseBody,
+            TwitterApiError,
+        ],
     ) -> Self:
         ...
 
@@ -118,21 +143,27 @@ class TwitterApiMockClient(TwitterApiClient):
     def inject_post_response_body(
         self,
         url: tweets.TweetsUri,
-        response: tweets.post_tweet.V2PostTweetResponseBody,
+        response_body: Union[
+            tweets.post_tweet.V2PostTweetResponseBody,
+            TwitterApiError,
+        ],
     ) -> Self:
         ...
 
-    def inject_post_response_body(self, url, response) -> Self:
-        self._client.inject_response_body(Endpoint("POST", url), response)
+    def inject_post_response_body(self, url, response_body) -> Self:
+        self._client.inject_response_body(Endpoint("POST", url), response_body)
 
         return self
 
     def inject_delete_response_body(
         self,
         url: tweets.TweetUri,
-        response: tweets.delete_tweet.V2DeleteTweetResponseBody,
+        response_body: Union[
+            tweets.delete_tweet.V2DeleteTweetResponseBody,
+            TwitterApiError,
+        ],
     ) -> Self:
-        self._client.inject_response_body(Endpoint("DELETE", url), response)
+        self._client.inject_response_body(Endpoint("DELETE", url), response_body)
 
         return self
 
