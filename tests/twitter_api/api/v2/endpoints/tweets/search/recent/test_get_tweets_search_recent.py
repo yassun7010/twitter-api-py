@@ -47,6 +47,12 @@ class TestMockV2GetTweetsSearchRecent:
                 "https://api.twitter.com/2/tweets/search/recent", expected_response
             )
             .request("https://api.twitter.com/2/tweets/search/recent")
-            .get({"query": "モックされているので、この検索条件に意味はない"})
+            .get(
+                {
+                    "query": "モックされているので、この検索条件に意味はない",
+                    "expansions": ["attachments.poll_ids"],
+                    "media.fields": ["preview_image_url"],
+                }
+            )
             == expected_response
         )

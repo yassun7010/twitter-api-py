@@ -14,16 +14,16 @@ def synthetic_monitoring_is_disable() -> dict:
     下記の環境変数を設定すると、実際に API を叩いてテストが行われる。
 
     ```env
-    SYNTHETIC_MONITORING=true
+    SYNTHETIC_MONITORING_TEST=true
     ```
     """
 
     return dict(
         condition=(
-            "SYNTHETIC_MONITORING" not in os.environ
-            or os.environ["SYNTHETIC_MONITORING"].lower() != "true"
+            "SYNTHETIC_MONITORING_TEST" not in os.environ
+            or os.environ["SYNTHETIC_MONITORING_TEST"].lower() != "true"
         ),
-        reason="外形監視が有効時（環境変数 SYNTHETIC_MONITORING が true ）に実行されます。",
+        reason="外形監視が有効時（環境変数 SYNTHETIC_MONITORING_TEST が true ）に実行されます。",
     )
 
 
