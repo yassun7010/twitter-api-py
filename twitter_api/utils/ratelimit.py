@@ -1,9 +1,37 @@
-from typing import Literal, TypeAlias
+from typing import Callable, Literal, Optional, TypeAlias, overload
 
 RateLimitTarget: TypeAlias = Literal["app", "user"]
 
 
-def rate_limit(per: RateLimitTarget, requests: int, mins: int):
+@overload
+def rate_limit(
+    target: RateLimitTarget,
+    *,
+    requests: int,
+    secs: int,
+    mins: Literal[None] = None,
+) -> Callable:
+    ...
+
+
+@overload
+def rate_limit(
+    target: RateLimitTarget,
+    *,
+    requests: int,
+    mins: int,
+    secs: Literal[None] = None,
+) -> Callable:
+    ...
+
+
+def rate_limit(
+    target: RateLimitTarget,
+    *,
+    requests: int,
+    mins: Optional[int] = None,
+    secs: Optional[int] = None,
+) -> Callable:
     """
     レートリミットに関する情報を付与します。
 

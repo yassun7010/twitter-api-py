@@ -30,7 +30,7 @@ class V2DeleteTweet:
     def __init__(self, client: RequestClient) -> None:
         self._client = client
 
-    @rate_limit(per="user", requests=50, mins=15)
+    @rate_limit("user", requests=50, mins=15)
     def delete(
         self,
         id: TweetId,

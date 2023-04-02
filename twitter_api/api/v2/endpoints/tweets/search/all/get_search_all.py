@@ -12,12 +12,12 @@ from twitter_api.types.endpoint import Endpoint
 from twitter_api.types.extra_permissive_model import ExtraPermissiveModel
 from twitter_api.utils.ratelimit import rate_limit
 
-Uri: TypeAlias = Literal["https://api.twitter.com/2/tweets/:id/retweeted_by"]
+Uri: TypeAlias = Literal["https://api.twitter.com/2/tweets/search/all"]
 
-ENDPOINT = Endpoint("GET", "https://api.twitter.com/2/tweets/:id/retweeted_by")
+ENDPOINT = Endpoint("GET", "https://api.twitter.com/2/tweets/search/all")
 
-V2GetRetweetedByQueryParameters = TypedDict(
-    "V2GetRetweetedByQueryParameters",
+V2GetTweetsSearchAllQueryParameters = TypedDict(
+    "V2GetTweetsSearchAllQueryParameters",
     {
         "expansions": NotRequired[Optional[CommaSeparatable[Expansion]]],
         "max_results": NotRequired[Optional[int]],
@@ -28,7 +28,7 @@ V2GetRetweetedByQueryParameters = TypedDict(
 )
 
 
-def _make_query(query: V2GetRetweetedByQueryParameters) -> dict:
+def _make_query(query: V2GetTweetsSearchAllQueryParameters) -> dict:
     return {
         "expansions": comma_separated_str(query.get("expansions")),
         "max_results": query.get("expansions"),
@@ -38,25 +38,25 @@ def _make_query(query: V2GetRetweetedByQueryParameters) -> dict:
     }
 
 
-class V2GetRetweetedByResponseBodyMeta(ExtraPermissiveModel):
+class V2GetTweetsSearchAllResponseBodyMeta(ExtraPermissiveModel):
     result_count: int
     next_token: Optional[str] = None
 
 
-class V2GetRetweetedByResponseBody(ExtraPermissiveModel):
+class V2GetTweetsSearchAllResponseBody(ExtraPermissiveModel):
     data: list[Retweet]
-    meta: V2GetRetweetedByResponseBodyMeta
+    meta: V2GetTweetsSearchAllResponseBodyMeta
 
 
-class V2GetRetweetedBy:
+class V2GetTweetsSearchAll:
     def __init__(self, client: RequestClient) -> None:
         self._client = client
 
-    @rate_limit("app", requests=75, mins=15)
-    @rate_limit("user", requests=75, mins=15)
+    @rate_limit("app", requests=300, mins=15)
+    @rate_limit("user", requests=1, secs=1)
     def get(
-        self, id: TweetId, query: Optional[V2GetRetweetedByQueryParameters] = None
-    ) -> V2GetRetweetedByResponseBody:
+        self, id: TweetId, query: Optional[V2GetTweetsSearchAllQueryParameters] = None
+    ) -> V2GetTweetsSearchAllResponseBody:
         # flake8: noqa E501
         """
         リツイートされたツイートの一覧を取得する。
@@ -65,7 +65,7 @@ class V2GetRetweetedBy:
         """
         return self._client.get(
             endpoint=ENDPOINT,
-            response_type=V2GetRetweetedByResponseBody,
+            response_type=V2GetTweetsSearchAllResponseBody,
             url=ENDPOINT.url.replace(":id", id),
             query=_make_query(query) if query is not None else None,
         )

@@ -59,8 +59,8 @@ class V2GetTweet:
     def __init__(self, client: RequestClient) -> None:
         self._client = client
 
-    @rate_limit(per="app", requests=300, mins=15)
-    @rate_limit(per="user", requests=900, mins=15)
+    @rate_limit("app", requests=300, mins=15)
+    @rate_limit("user", requests=900, mins=15)
     def get(
         self,
         id: TweetId,

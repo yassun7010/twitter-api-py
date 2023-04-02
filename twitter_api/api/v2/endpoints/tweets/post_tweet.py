@@ -55,7 +55,7 @@ class V2PostTweet:
     def __init__(self, client: RequestClient) -> None:
         self._client = client
 
-    @rate_limit(per="user", requests=200, mins=15)
+    @rate_limit("user", requests=200, mins=15)
     def post(self, request_body: V2PostTweetRequestBody) -> V2PostTweetResponseBody:
         # flake8: noqa E501
         """
