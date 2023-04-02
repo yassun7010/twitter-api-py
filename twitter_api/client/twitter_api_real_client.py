@@ -1,3 +1,5 @@
+from typing import Optional
+
 from authlib.integrations.requests_client.oauth1_session import (
     OAuth1Auth,  # pyright: reportMissingImports=false
 )
@@ -5,6 +7,10 @@ from authlib.integrations.requests_client.oauth2_session import (
     OAuth2Auth,  # pyright: reportMissingImports=false
 )
 
+from twitter_api.ratelimit.manager.ignored_ratelimit_manager import (
+    IgnoredRatelimitManager,
+)
+from twitter_api.ratelimit.manager.ratelimit_manager import RatelimitManager
 from twitter_api.types.oauth import AccessSecret, AccessToken, ApiKey, ApiSecret
 
 from .request.real_request_client import RealRequestClient
@@ -22,12 +28,23 @@ class TwitterApiRealClient(TwitterApiClient):
     def __init__(
         self,
         request_client: RealRequestClient,
+        *,
+        ratelimit: Optional[RatelimitManager] = None,
     ) -> None:
         self._client = request_client
+
+        if ratelimit is None:
+            ratelimit = IgnoredRatelimitManager()
+
+        self._ratelimit = ratelimit
 
     @property
     def _request_client(self) -> RequestClient:
         return self._client
+
+    @property
+    def ratelimit(self) -> RatelimitManager:
+        return self._ratelimit
 
     @classmethod
     def from_bearer_token(cls, bearer_token: str):

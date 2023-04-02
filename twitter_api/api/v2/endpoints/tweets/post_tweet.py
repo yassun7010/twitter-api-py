@@ -7,7 +7,9 @@ from twitter_api.api.v2.types.tweet.tweet_id import TweetId
 from twitter_api.api.v2.types.user.user import User
 from twitter_api.api.v2.types.user.user_id import UserId
 from twitter_api.client.request.request_client import RequestClient
+from twitter_api.ratelimit.manager.ratelimit_manager import RatelimitManager
 from twitter_api.ratelimit.ratelimit_decorator import rate_limit
+from twitter_api.ratelimit.ratelimit_interface import RatelimitInterface
 from twitter_api.types.endpoint import Endpoint
 from twitter_api.types.extra_permissive_model import ExtraPermissiveModel
 from twitter_api.types.http import Url, downcast_dict
@@ -51,11 +53,16 @@ class V2PostTweetResponseBody(ExtraPermissiveModel):
     data: Tweet
 
 
-class V2PostTweet:
-    def __init__(self, client: RequestClient) -> None:
+class V2PostTweet(RatelimitInterface):
+    def __init__(self, client: RequestClient, ratelimit: RatelimitManager) -> None:
         self._client = client
+        self._ratelimit = ratelimit
 
-    @rate_limit("user", requests=200, mins=15)
+    @property
+    def ratelimit(self) -> RatelimitManager:
+        return self._ratelimit
+
+    @rate_limit(ENDPOINT, "user", requests=200, mins=15)
     def post(self, request_body: V2PostTweetRequestBody) -> V2PostTweetResponseBody:
         # flake8: noqa E501
         """

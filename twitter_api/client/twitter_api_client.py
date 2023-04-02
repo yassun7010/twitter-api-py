@@ -11,12 +11,13 @@ from twitter_api.api.v2.endpoints import tweets
 from twitter_api.api.v2.endpoints.tweets.retweeted_by import get_retweeted_by
 from twitter_api.api.v2.endpoints.tweets.search.all import get_search_all
 from twitter_api.error import NeverError
+from twitter_api.ratelimit.ratelimit_interface import RatelimitInterface
 from twitter_api.types.oauth import AccessSecret, AccessToken, ApiKey, ApiSecret, Env
 
 from .request.request_client import RequestClient
 
 
-class TwitterApiClient(metaclass=ABCMeta):
+class TwitterApiClient(RatelimitInterface, metaclass=ABCMeta):
     """
     Twitter API を操作するためのクライアント
     """
@@ -113,18 +114,22 @@ class TwitterApiClient(metaclass=ABCMeta):
         elif url == "https://api.twitter.com/2/tweets":
             return tweets.V2Tweets(
                 self._request_client,
+                self.ratelimit,
             )
         elif url == "https://api.twitter.com/2/tweets/:id":
             return tweets.V2Tweet(
                 self._request_client,
+                self.ratelimit,
             )
         elif url == "https://api.twitter.com/2/tweets/:id/retweeted_by":
             return get_retweeted_by.V2GetRetweetedBy(
                 self._request_client,
+                self.ratelimit,
             )
         elif url == "https://api.twitter.com/2/tweets/search/all":
             return get_search_all.V2GetTweetsSearchAll(
                 self._request_client,
+                self.ratelimit,
             )
         else:
             raise NeverError(url)

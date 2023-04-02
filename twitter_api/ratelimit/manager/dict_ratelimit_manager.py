@@ -4,7 +4,7 @@ from datetime import datetime, timedelta
 from typing import Optional
 
 from twitter_api.ratelimit.manager.ratelimit_manager import RatelimitManager
-from twitter_api.ratelimit.ratelimit import Ratelimit
+from twitter_api.ratelimit.ratelimit_data import RatelimitData
 
 
 @dataclass
@@ -15,11 +15,11 @@ class RatelimitStatus:
 
 class DictRatelimitManager(RatelimitManager):
     def __init__(self) -> None:
-        self._store: dict[Ratelimit, RatelimitStatus] = {}
+        self._store: dict[RatelimitData, RatelimitStatus] = {}
 
     def check_limit_over(
         self,
-        ratelimit: Ratelimit,
+        ratelimit: RatelimitData,
         now: Optional[datetime] = None,
     ) -> bool:
         if now is None:
@@ -33,7 +33,7 @@ class DictRatelimitManager(RatelimitManager):
         status.requests.append(now)
 
         # 窓に入っている過去のデータのうち、考慮する必要のないデータを消す。
-        min_datetime = now - timedelta(seconds=ratelimit.seconds)
+        min_datetime = now - timedelta(seconds=ratelimit.total_seconds)
         index = bisect_left(status.requests, min_datetime)
         del status.requests[:index]
 

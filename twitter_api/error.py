@@ -2,6 +2,7 @@ from collections import OrderedDict
 from textwrap import dedent
 from typing import Any, Never, Optional
 
+from twitter_api.ratelimit.ratelimit_data import RatelimitData
 from twitter_api.types.extra_permissive_model import ExtraPermissiveModel
 
 from .types.endpoint import Endpoint
@@ -171,3 +172,11 @@ class TwitterApiOAuthVersionWrong(TwitterApiError):
                 f' "{self.expected_version}" である必要があります。'
             ),
         ).to_message()
+
+
+class RatelimitOverError(TwitterApiError):
+    def __init__(self, ratelimit: RatelimitData) -> None:
+        self._ratelimit = ratelimit
+
+    def __str__(self) -> str:
+        return f"レートリミットを超えています。{self._ratelimit}"

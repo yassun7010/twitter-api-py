@@ -1,4 +1,4 @@
-from typing import Self, overload
+from typing import Optional, Self, overload
 
 from twitter_api.api.authentication.endpoints.oauth import post_request_token
 from twitter_api.api.authentication.endpoints.oauth2 import (
@@ -8,6 +8,10 @@ from twitter_api.api.authentication.endpoints.oauth2 import (
 from twitter_api.api.v2.endpoints import tweets
 from twitter_api.api.v2.endpoints.tweets.retweeted_by import get_retweeted_by
 from twitter_api.api.v2.endpoints.tweets.search.all import get_search_all
+from twitter_api.ratelimit.manager.ignored_ratelimit_manager import (
+    IgnoredRatelimitManager,
+)
+from twitter_api.ratelimit.manager.ratelimit_manager import RatelimitManager
 from twitter_api.ratelimit.ratelimit_target import RatelimitTarget
 from twitter_api.types.endpoint import Endpoint
 from twitter_api.types.oauth import (
@@ -27,12 +31,25 @@ class TwitterApiMockClient(TwitterApiClient):
     """Twitter API V2 をモックするためのクライアント"""
 
     def __init__(
-        self, *, rate_limit: RatelimitTarget, oauth_version: OAuthVersion
+        self,
+        *,
+        rate_limit: RatelimitTarget,
+        oauth_version: OAuthVersion,
+        ratelimit: Optional[RatelimitManager] = None,
     ) -> None:
         self._client = MockRequestClient(
             rate_limit=rate_limit,
             oauth_version=oauth_version,
         )
+
+        if ratelimit is None:
+            ratelimit = IgnoredRatelimitManager()
+
+        self._ratelimit = ratelimit
+
+    @property
+    def ratelimit(self) -> RatelimitManager:
+        return self._ratelimit
 
     @property
     def _request_client(self) -> RequestClient:

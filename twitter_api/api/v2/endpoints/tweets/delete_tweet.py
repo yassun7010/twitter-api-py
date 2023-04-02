@@ -10,7 +10,9 @@ from twitter_api.api.v2.types.tweet.tweet_id import TweetId
 from twitter_api.api.v2.types.user.user import User
 from twitter_api.api.v2.types.user.user_field import UserField
 from twitter_api.client.request.request_client import RequestClient
+from twitter_api.ratelimit.manager.ratelimit_manager import RatelimitManager
 from twitter_api.ratelimit.ratelimit_decorator import rate_limit
+from twitter_api.ratelimit.ratelimit_interface import RatelimitInterface
 from twitter_api.types.comma_separatable import CommaSeparatable, comma_separated_str
 from twitter_api.types.endpoint import Endpoint
 from twitter_api.types.extra_permissive_model import ExtraPermissiveModel
@@ -26,11 +28,16 @@ class V2DeleteTweetResponseBody(ExtraPermissiveModel):
     data: V2DeleteTweetResponseBodyData
 
 
-class V2DeleteTweet:
-    def __init__(self, client: RequestClient) -> None:
+class V2DeleteTweet(RatelimitInterface):
+    def __init__(self, client: RequestClient, ratelimit: RatelimitManager) -> None:
         self._client = client
+        self._ratelimit = ratelimit
 
-    @rate_limit("user", requests=50, mins=15)
+    @property
+    def ratelimit(self) -> RatelimitManager:
+        return self._ratelimit
+
+    @rate_limit(ENDPOINT, "user", requests=50, mins=15)
     def delete(
         self,
         id: TweetId,
