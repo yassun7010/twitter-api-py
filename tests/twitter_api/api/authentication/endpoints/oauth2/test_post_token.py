@@ -32,8 +32,8 @@ class TestOauth2PostToken:
             )
         )
 
-        print(real_response.dict())
-        print(expected_response.dict())
+        print(real_response.json())
+        print(expected_response.json())
 
         assert real_response == expected_response
 

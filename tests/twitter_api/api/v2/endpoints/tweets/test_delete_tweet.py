@@ -29,7 +29,7 @@ class TestV2DeleteTweet:
             .delete(tweet.id)
         )
 
-        print(real_response.dict())
+        print(real_response.json())
 
         assert real_response.data.deleted is True
 

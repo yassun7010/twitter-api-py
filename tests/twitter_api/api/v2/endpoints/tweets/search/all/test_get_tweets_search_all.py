@@ -28,7 +28,7 @@ class TestV2GetTweetsSearchAll:
             .get({"query": "conversation_id:1273733248749690880", "max_results": 1})
         )
 
-        print(real_response.dict())
+        print(real_response.json())
 
         assert False
 

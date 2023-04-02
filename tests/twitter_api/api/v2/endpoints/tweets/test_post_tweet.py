@@ -23,7 +23,7 @@ class TestV2GetTweet:
             )
         )
 
-        print(real_response.dict())
+        print(real_response.json())
         print(tweet_text)
 
         assert real_response.data.text == tweet_text
