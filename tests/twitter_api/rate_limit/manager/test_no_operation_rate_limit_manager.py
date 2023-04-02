@@ -1,7 +1,7 @@
 import pytest
 
-from twitter_api.rate_limit.manager.ignored_rate_limit_manager import (
-    IgnoredRateLimitManager,
+from twitter_api.rate_limit.manager.no_operation_rate_limit_manager import (
+    NoOperationRateLimitManager,
 )
 from twitter_api.rate_limit.rate_limit_data import RateLimitData
 from twitter_api.types.endpoint import Endpoint
@@ -17,13 +17,13 @@ def rate_limit_data() -> RateLimitData:
     )
 
 
-class TestIgnoredRateLimitManager:
+class TestNoOperationRateLimitManager:
     def test_check_limit_over(
         self,
         rate_limit_data: RateLimitData,
     ):
         assert (
-            IgnoredRateLimitManager().check_limit_over(
+            NoOperationRateLimitManager().check_limit_over(
                 rate_limit_data=rate_limit_data,
             )
             is False

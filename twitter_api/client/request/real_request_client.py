@@ -14,8 +14,8 @@ from twitter_api.error import (
     TwitterApiResponseFailed,
     TwitterApiResponseModelBodyDecodeError,
 )
-from twitter_api.rate_limit.manager.ignored_rate_limit_manager import (
-    IgnoredRateLimitManager,
+from twitter_api.rate_limit.manager.no_operation_rate_limit_manager import (
+    NoOperationRateLimitManager,
 )
 from twitter_api.rate_limit.manager.rate_limit_manager import RateLimitManager
 from twitter_api.rate_limit.rate_limit_target import RateLimitTarget
@@ -55,7 +55,7 @@ class RealRequestClient(RequestClient):
         self.timeout_sec = timeout_sec
 
         if rate_limit_manager is None:
-            rate_limit_manager = IgnoredRateLimitManager()
+            rate_limit_manager = NoOperationRateLimitManager()
 
         self._rate_limit_manager = rate_limit_manager
 
