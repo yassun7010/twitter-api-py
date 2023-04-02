@@ -2,6 +2,7 @@
   "python.analysis.addImport.exactMatchOnly": true,
   "python.analysis.autoImportCompletions": true,
   "python.analysis.completeFunctionParens": false,
+  "python.analysis.importFormat": "absolute",
   "python.analysis.indexing": true,
   "python.analysis.typeCheckingMode": "basic",
   "python.formatting.provider": "black",

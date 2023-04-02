@@ -6,6 +6,7 @@ from twitter_api.api.authentication.endpoints.oauth2 import (
     post_token,
 )
 from twitter_api.api.v2.endpoints import tweets
+from twitter_api.api.v2.endpoints.tweets.retweeted_by import get_retweeted_by
 from twitter_api.types.endpoint import Endpoint
 from twitter_api.types.oauth import (
     AccessSecret,
@@ -49,6 +50,14 @@ class TwitterApiMockClient(TwitterApiClient):
         self,
         uri: tweets.TweetUri,
         response: tweets.get_tweet.V2GetTweetResponseBody,
+    ) -> Self:
+        ...
+
+    @overload
+    def inject_get_response(
+        self,
+        uri: get_retweeted_by.Uri,
+        response: get_retweeted_by.V2GetRetweetedByResponseBody,
     ) -> Self:
         ...
 

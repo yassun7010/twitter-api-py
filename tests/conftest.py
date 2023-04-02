@@ -1,5 +1,4 @@
 import os
-from textwrap import dedent
 
 import pytest
 
@@ -23,12 +22,7 @@ def synthetic_monitoring_is_disable() -> dict:
             "SYNTHETIC_MONITORING" not in os.environ
             or os.environ["SYNTHETIC_MONITORING"].lower() != "true"
         ),
-        reason=dedent(
-            """
-            環境変数 SYNTHETIC_MONITORING が true ではないため。
-            実際に API を叩いて応答を確認したい場合のみ有効にする。
-            """
-        ).replace("\n", ""),
+        reason="外形監視が有効時（環境変数 SYNTHETIC_MONITORING が true ）に実行されます。",
     )
 
 

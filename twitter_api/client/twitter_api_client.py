@@ -8,6 +8,7 @@ from twitter_api.api.authentication.endpoints.oauth2 import (
     post_token,
 )
 from twitter_api.api.v2.endpoints import tweets
+from twitter_api.api.v2.endpoints.tweets.retweeted_by import get_retweeted_by
 from twitter_api.error import NeverError
 from twitter_api.types.oauth import AccessSecret, AccessToken, ApiKey, ApiSecret, Env
 
@@ -66,6 +67,13 @@ class TwitterApiClient(metaclass=ABCMeta):
     ) -> tweets.V2Tweets:
         ...
 
+    @overload
+    def request(
+        self: Self,
+        uri: get_retweeted_by.Uri,
+    ) -> get_retweeted_by.V2GetRetweetedBy:
+        ...
+
     def request(
         self: Self,
         uri: Union[
@@ -74,6 +82,7 @@ class TwitterApiClient(metaclass=ABCMeta):
             post_request_token.Uri,
             post_invalidate_token.Uri,
             post_token.Uri,
+            get_retweeted_by.Uri,
         ],
     ):
         """
@@ -98,6 +107,10 @@ class TwitterApiClient(metaclass=ABCMeta):
             )
         elif uri == "/2/tweets/:id":
             return tweets.V2Tweet(
+                self._request_client,
+            )
+        elif uri == "/2/tweets/:id/retweeted_by":
+            return get_retweeted_by.V2GetRetweetedBy(
                 self._request_client,
             )
         else:
