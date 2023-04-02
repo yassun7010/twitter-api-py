@@ -37,4 +37,5 @@ class DictRatelimitManager(RatelimitManager):
         index = bisect_left(status.requests, min_datetime)
         del status.requests[:index]
 
+        # 窓に入っているデータの数が、制限を超えていたらリミットオーバ
         return len(status.requests) > ratelimit.requests
