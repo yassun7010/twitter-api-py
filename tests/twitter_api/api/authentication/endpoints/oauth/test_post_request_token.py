@@ -34,8 +34,8 @@ class TestMockOauthPostRequestToken:
                 mock_app_auth_v2_client.chain()
                 .request("https://api.twitter.com/oauth/request_token")
                 .post(
-                    api_key=os.environ["API_KEY"],
-                    api_secret=os.environ["API_SECRET"],
+                    api_key="DUMMY_API_KEY",
+                    api_secret="DUMMY_API_SECRET",
                     query={"oauth_callback": "https://120.0.0.1:8080"},
                 )
             )

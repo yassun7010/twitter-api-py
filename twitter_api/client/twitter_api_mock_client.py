@@ -29,6 +29,7 @@ from twitter_api.types.oauth import (
     AccessToken,
     ApiKey,
     ApiSecret,
+    Env,
     OAuthVersion,
 )
 
@@ -286,3 +287,13 @@ class TwitterApiMockClient(TwitterApiClient):
             rate_limit_target="app",
             rate_limit_manager=rate_limit_manager,
         )
+
+    @classmethod
+    def _get_env(cls, key: Env[str]) -> str:
+        """
+        環境変数を取り出す。
+
+        Mock であるためとりあえず値を返す。
+        """
+
+        return ""

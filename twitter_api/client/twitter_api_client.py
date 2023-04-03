@@ -245,7 +245,7 @@ class TwitterApiClient(metaclass=ABCMeta):
         """環境変数から、 Bearer 認証を用いてクライアントを作成する。"""
 
         return cls.from_bearer_token(
-            os.environ[bearer_token],
+            cls._get_env(bearer_token),
             rate_limit_manager=rate_limit_manager,
         )
 
@@ -278,8 +278,8 @@ class TwitterApiClient(metaclass=ABCMeta):
         """環境変数から、アプリ認証を用いてクライアントを作成する。"""
 
         return cls.from_app_auth_v2(
-            api_key=os.environ[api_key],
-            api_secret=os.environ[api_secret],
+            api_key=cls._get_env(api_key),
+            api_secret=cls._get_env(api_secret),
             rate_limit_manager=rate_limit_manager,
         )
 
@@ -318,9 +318,14 @@ class TwitterApiClient(metaclass=ABCMeta):
         """環境変数から、アプリ認証を用いてクライアントを作成する。"""
 
         return cls.from_user_auth_v1(
-            api_key=os.environ[api_key],
-            api_secret=os.environ[api_secret],
-            access_token=os.environ[access_token],
-            access_secret=os.environ[access_secret],
+            api_key=cls._get_env(api_key),
+            api_secret=cls._get_env(api_secret),
+            access_token=cls._get_env(access_token),
+            access_secret=cls._get_env(access_secret),
             rate_limit_manager=rate_limit_manager,
         )
+
+    @classmethod
+    def _get_env(cls, key: Env[str]) -> str:
+        """環境変数を取り出す。"""
+        return os.environ[key]
