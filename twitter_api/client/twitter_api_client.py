@@ -68,14 +68,14 @@ class TwitterApiClient(metaclass=ABCMeta):
     def request(
         self: Self,
         url: tweets.TweetUrl,
-    ) -> tweets.V2Tweet:
+    ) -> tweets.V2TweetResources:
         ...
 
     @overload
     def request(
         self: Self,
         url: tweets.TweetsUrl,
-    ) -> tweets.V2Tweets:
+    ) -> tweets.V2TweetsResources:
         ...
 
     @overload
@@ -185,11 +185,11 @@ class TwitterApiClient(metaclass=ABCMeta):
                 self._request_client,
             )
         elif url == "https://api.twitter.com/2/tweets":
-            return tweets.V2Tweets(
+            return tweets.V2TweetsResources(
                 self._request_client,
             )
         elif url == "https://api.twitter.com/2/tweets/:id":
-            return tweets.V2Tweet(
+            return tweets.V2TweetResources(
                 self._request_client,
             )
         elif url == "https://api.twitter.com/2/tweets/:id/retweeted_by":

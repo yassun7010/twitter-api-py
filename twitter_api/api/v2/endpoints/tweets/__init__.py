@@ -9,9 +9,9 @@ TweetsUrl = Literal["https://api.twitter.com/2/tweets"]
 TweetUrl = Literal["https://api.twitter.com/2/tweets/:id"]
 
 
-class V2Tweets(V2GetTweetsResources, V2PostTweetResources):
+class V2TweetsResources(V2GetTweetsResources, V2PostTweetResources):
     pass
 
 
-class V2Tweet(V2GetTweetResources, V2DeleteTweetResources):
+class V2TweetResources(V2GetTweetResources, V2DeleteTweetResources):
     pass
