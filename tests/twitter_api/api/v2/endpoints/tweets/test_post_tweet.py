@@ -26,6 +26,13 @@ class TestV2GetTweet:
         print(real_response.json())
         print(tweet_text)
 
+        # テストが終わったらデータを消しておく。
+        (
+            real_user_auth_v1_client.chain()
+            .request("https://api.twitter.com/2/tweets/:id")
+            .delete(real_response.data.id)
+        )
+
         assert real_response.data.text == tweet_text
 
 
