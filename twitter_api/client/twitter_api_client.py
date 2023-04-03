@@ -6,13 +6,16 @@ import twitter_api.api.v2.endpoints.tweets.retweeted_by as tweet_retweeted_by
 import twitter_api.api.v2.endpoints.tweets.search.all as tweets_search_all
 import twitter_api.api.v2.endpoints.tweets.search.recent as tweets_search_recent
 import twitter_api.api.v2.endpoints.tweets.search.stream as tweets_search_stream
+import twitter_api.api.v2.endpoints.users.followers as user_followers
+import twitter_api.api.v2.endpoints.users.following as user_following
+import twitter_api.api.v2.endpoints.users.liked_tweets as user_liked_tweets
+import twitter_api.api.v2.endpoints.users.tweets as user_tweets
 from twitter_api.api.authentication.endpoints.oauth import post_request_token
 from twitter_api.api.authentication.endpoints.oauth2 import (
     post_invalidate_token,
     post_token,
 )
 from twitter_api.api.v2.endpoints import tweets, users
-from twitter_api.api.v2.endpoints.users import followers, following, liked_tweets
 from twitter_api.error import NeverError
 from twitter_api.rate_limit.manager.rate_limit_manager import RateLimitManager
 from twitter_api.types.oauth import AccessSecret, AccessToken, ApiKey, ApiSecret, Env
@@ -120,22 +123,29 @@ class TwitterApiClient(metaclass=ABCMeta):
     @overload
     def request(
         self: Self,
-        url: liked_tweets.UserLikedTweetsUrl,
-    ) -> liked_tweets.V2UserLikedTweetsResources:
+        url: user_liked_tweets.UserLikedTweetsUrl,
+    ) -> user_liked_tweets.V2UserLikedTweetsResources:
         ...
 
     @overload
     def request(
         self: Self,
-        url: followers.UserFollowersUrl,
-    ) -> followers.V2UserFollowersResources:
+        url: user_followers.UserFollowersUrl,
+    ) -> user_followers.V2UserFollowersResources:
         ...
 
     @overload
     def request(
         self: Self,
-        url: following.UserFollowingUrl,
-    ) -> following.V2UserFollowingResources:
+        url: user_following.UserFollowingUrl,
+    ) -> user_following.V2UserFollowingResources:
+        ...
+
+    @overload
+    def request(
+        self: Self,
+        url: user_tweets.UserTweetsUrl,
+    ) -> user_tweets.V2UserTweetsResources:
         ...
 
     def request(
@@ -152,9 +162,10 @@ class TwitterApiClient(metaclass=ABCMeta):
             tweets_search_stream.TweetsSearchStreamUrl,
             users.UsersUrl,
             users.UserUrl,
-            liked_tweets.UserLikedTweetsUrl,
-            followers.UserFollowersUrl,
-            following.UserFollowingUrl,
+            user_liked_tweets.UserLikedTweetsUrl,
+            user_followers.UserFollowersUrl,
+            user_following.UserFollowingUrl,
+            user_tweets.UserTweetsUrl,
         ],
     ):
         """
@@ -206,15 +217,19 @@ class TwitterApiClient(metaclass=ABCMeta):
                 self._request_client,
             )
         elif url == "https://api.twitter.com/2/users/:id/liked_tweets":
-            return liked_tweets.V2UserLikedTweetsResources(
+            return user_liked_tweets.V2UserLikedTweetsResources(
                 self._request_client,
             )
         elif url == "https://api.twitter.com/2/users/:id/followers":
-            return followers.V2UserFollowersResources(
+            return user_followers.V2UserFollowersResources(
                 self._request_client,
             )
         elif url == "https://api.twitter.com/2/users/:id/following":
-            return following.V2UserFollowingResources(
+            return user_following.V2UserFollowingResources(
+                self._request_client,
+            )
+        elif url == "https://api.twitter.com/2/users/:id/tweets":
+            return user_tweets.V2UserTweetsResources(
                 self._request_client,
             )
         else:

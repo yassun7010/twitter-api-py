@@ -4,6 +4,7 @@ import twitter_api.api.v2.endpoints.tweets.retweeted_by as tweet_retweeted_by
 import twitter_api.api.v2.endpoints.tweets.search.all as tweets_search_all
 import twitter_api.api.v2.endpoints.tweets.search.recent as tweets_search_recent
 import twitter_api.api.v2.endpoints.tweets.search.stream as tweets_search_stream
+import twitter_api.api.v2.endpoints.users.tweets as user_tweets
 from twitter_api.api.authentication.endpoints.oauth import post_request_token
 from twitter_api.api.authentication.endpoints.oauth2 import (
     post_invalidate_token,
@@ -24,6 +25,7 @@ from twitter_api.api.v2.endpoints.users import (
 from twitter_api.api.v2.endpoints.users.followers import get_user_followers
 from twitter_api.api.v2.endpoints.users.following import post_user_following
 from twitter_api.api.v2.endpoints.users.liked_tweets import get_user_liked_tweets
+from twitter_api.api.v2.endpoints.users.tweets import get_user_tweets
 from twitter_api.error import TwitterApiError
 from twitter_api.rate_limit.manager.rate_limit_manager import RateLimitManager
 from twitter_api.rate_limit.rate_limit_target import RateLimitTarget
@@ -167,6 +169,17 @@ class TwitterApiMockClient(TwitterApiClient):
         url: followers.UserFollowersUrl,
         response_body: Union[
             get_user_followers.V2GetUserFollowersResponseBody,
+            TwitterApiError,
+        ],
+    ) -> Self:
+        ...
+
+    @overload
+    def inject_get_response_body(
+        self,
+        url: user_tweets.UserTweetsUrl,
+        response_body: Union[
+            get_user_tweets.V2GetUserTweetsResponseBody,
             TwitterApiError,
         ],
     ) -> Self:

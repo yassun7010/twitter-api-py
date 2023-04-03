@@ -1,0 +1,829 @@
+{
+  "data": [
+    {
+      "public_metrics": {
+        "retweet_count": 5,
+        "reply_count": 2,
+        "like_count": 22,
+        "quote_count": 0
+      },
+      "source": "Twitter Web App",
+      "entities": {
+        "urls": [
+          {
+            "start": 10,
+            "end": 33,
+            "url": "https://t.co/9BbWekeWq2",
+            "expanded_url": "https://twitter.com/TwitterDev/status/1374104599456534531",
+            "display_url": "twitter.com/TwitterDev/sta…"
+          }
+        ]
+      },
+      "id": "1374405406261268481",
+      "edit_history_tweet_ids": [
+        "1374405406261268481"
+      ],
+      "referenced_tweets": [
+        {
+          "type": "quoted",
+          "id": "1374104599456534531"
+        }
+      ],
+      "conversation_id": "1374405406261268481",
+      "text": "Live now! https://t.co/9BbWekeWq2",
+      "author_id": "2244994945",
+      "created_at": "2021-03-23T16:59:18.000Z",
+      "reply_settings": "everyone",
+      "lang": "en",
+      "context_annotations": [
+        {
+          "domain": {
+            "id": "46",
+            "name": "Brand Category",
+            "description": "Categories within Brand Verticals that narrow down the scope of Brands"
+          },
+          "entity": {
+            "id": "781974596752842752",
+            "name": "Services"
+          }
+        },
+        {
+          "domain": {
+            "id": "47",
+            "name": "Brand",
+            "description": "Brands and Companies"
+          },
+          "entity": {
+            "id": "10045225402",
+            "name": "Twitter"
+          }
+        }
+      ],
+      "possibly_sensitive": false
+    },
+    {
+      "public_metrics": {
+        "retweet_count": 7,
+        "reply_count": 1,
+        "like_count": 21,
+        "quote_count": 2
+      },
+      "source": "Twitter Web App",
+      "entities": {
+        "annotations": [
+          {
+            "start": 41,
+            "end": 48,
+            "probability": 0.411,
+            "type": "Product",
+            "normalized_text": "APIs 101"
+          }
+        ],
+        "urls": [
+          {
+            "start": 52,
+            "end": 75,
+            "url": "https://t.co/GrtBOXyHmB",
+            "expanded_url": "http://twitch.tv/twitterdev",
+            "display_url": "twitch.tv/twitterdev"
+          },
+          {
+            "start": 76,
+            "end": 99,
+            "url": "https://t.co/YyQfmgiLlL",
+            "expanded_url": "https://twitter.com/TwitterDev/status/1373001119480344583",
+            "display_url": "twitter.com/TwitterDev/sta…"
+          }
+        ]
+      },
+      "id": "1374104599456534531",
+      "edit_history_tweet_ids": [
+        "1374104599456534531"
+      ],
+      "referenced_tweets": [
+        {
+          "type": "quoted",
+          "id": "1373001119480344583"
+        }
+      ],
+      "conversation_id": "1374104599456534531",
+      "text": "Hope to see you tomorrow at 1 pm EST for APIs 101! nhttps://t.co/GrtBOXyHmB https://t.co/YyQfmgiLlL",
+      "author_id": "2244994945",
+      "created_at": "2021-03-22T21:04:00.000Z",
+      "reply_settings": "everyone",
+      "lang": "en",
+      "context_annotations": [
+        {
+          "domain": {
+            "id": "46",
+            "name": "Brand Category",
+            "description": "Categories within Brand Verticals that narrow down the scope of Brands"
+          },
+          "entity": {
+            "id": "781974596752842752",
+            "name": "Services"
+          }
+        },
+        {
+          "domain": {
+            "id": "47",
+            "name": "Brand",
+            "description": "Brands and Companies"
+          },
+          "entity": {
+            "id": "10045225402",
+            "name": "Twitter"
+          }
+        }
+      ],
+      "possibly_sensitive": false
+    },
+    {
+      "public_metrics": {
+        "retweet_count": 18,
+        "reply_count": 3,
+        "like_count": 92,
+        "quote_count": 6
+      },
+      "source": "Twitter Web App",
+      "entities": {
+        "annotations": [
+          {
+            "start": 32,
+            "end": 42,
+            "probability": 0.5425,
+            "type": "Product",
+            "normalized_text": "Twitter API"
+          },
+          {
+            "start": 140,
+            "end": 147,
+            "probability": 0.521,
+            "type": "Product",
+            "normalized_text": "APIs 101"
+          }
+        ],
+        "urls": [
+          {
+            "start": 254,
+            "end": 277,
+            "url": "https://t.co/GrtBOXyHmB",
+            "expanded_url": "http://twitch.tv/twitterdev",
+            "display_url": "twitch.tv/twitterdev"
+          }
+        ],
+        "mentions": [
+          {
+            "start": 72,
+            "end": 86,
+            "username": "jessicagarson"
+          }
+        ]
+      },
+      "id": "1373001119480344583",
+      "edit_history_tweet_ids": [
+        "1373001119480344583"
+      ],
+      "conversation_id": "1373001119480344583",
+      "text": "Looking to get started with the Twitter API but new to APIs in general? @jessicagarson will walk you through everything you need to know in APIs 101 session. She’ll use examples using our v2 endpoints, Tuesday, March 23rd at 1 pm EST.nnJoin us on Twitchnhttps://t.co/GrtBOXyHmB",
+      "author_id": "2244994945",
+      "created_at": "2021-03-19T19:59:10.000Z",
+      "reply_settings": "everyone",
+      "lang": "en",
+      "context_annotations": [
+        {
+          "domain": {
+            "id": "46",
+            "name": "Brand Category",
+            "description": "Categories within Brand Verticals that narrow down the scope of Brands"
+          },
+          "entity": {
+            "id": "781974596752842752",
+            "name": "Services"
+          }
+        },
+        {
+          "domain": {
+            "id": "47",
+            "name": "Brand",
+            "description": "Brands and Companies"
+          },
+          "entity": {
+            "id": "10045225402",
+            "name": "Twitter"
+          }
+        }
+      ],
+      "possibly_sensitive": false
+    },
+    {
+      "public_metrics": {
+        "retweet_count": 4,
+        "reply_count": 0,
+        "like_count": 21,
+        "quote_count": 1
+      },
+      "source": "Twitter Web App",
+      "entities": {
+        "urls": [
+          {
+            "start": 240,
+            "end": 263,
+            "url": "https://t.co/duIkd27lPx",
+            "expanded_url": "https://twittercommunity.com/t/announcing-monthly-office-hours-for-the-academic-research-product-track/151028",
+            "display_url": "twittercommunity.com/t/announcing-m…",
+            "images": [
+              {
+                "url": "https://pbs.twimg.com/news_img/1372625618605469698/6E0uKJr7?format=jpg&name=orig",
+                "width": 1200,
+                "height": 630
+              },
+              {
+                "url": "https://pbs.twimg.com/news_img/1372625618605469698/6E0uKJr7?format=jpg&name=150x150",
+                "width": 150,
+                "height": 150
+              }
+            ],
+            "status": 200,
+            "title": "Announcing monthly office hours for the academic research product track",
+            "description": "We are excited to offer office hours for academic researchers that are using the Academic Research product track on the new Twitter API. This is an opportunity for users of this new product track to get their technical questions answered, and helping you get research data with the v2 API. Most office hours will be held on the last Thursday of every month, from 10:00 am PST to 11:30 am PST. We will also try and accommodate other timezones for some of these sessions. How does it work? First, re...",
+            "unwound_url": "https://twittercommunity.com/t/announcing-monthly-office-hours-for-the-academic-research-product-track/151028"
+          },
+          {
+            "start": 264,
+            "end": 287,
+            "url": "https://t.co/AP9YY4F8FG",
+            "expanded_url": "https://twitter.com/TwitterDev/status/1371363033352638467",
+            "display_url": "twitter.com/TwitterDev/sta…"
+          }
+        ]
+      },
+      "id": "1372627771717869568",
+      "edit_history_tweet_ids": [
+        "1372627771717869568"
+      ],
+      "referenced_tweets": [
+        {
+          "type": "quoted",
+          "id": "1371363033352638467"
+        }
+      ],
+      "conversation_id": "1372627771717869568",
+      "text": "Thanks to everyone who joined and made today a great session! 🙌 nnIf weren't able to attend, we've got you covered. Academic researchers can now sign up for office hours for help using the new product track. See how you can sign up, here 👇nhttps://t.co/duIkd27lPx https://t.co/AP9YY4F8FG",
+      "author_id": "2244994945",
+      "created_at": "2021-03-18T19:15:37.000Z",
+      "reply_settings": "everyone",
+      "lang": "en",
+      "context_annotations": [
+        {
+          "domain": {
+            "id": "46",
+            "name": "Brand Category",
+            "description": "Categories within Brand Verticals that narrow down the scope of Brands"
+          },
+          "entity": {
+            "id": "781974596752842752",
+            "name": "Services"
+          }
+        },
+        {
+          "domain": {
+            "id": "47",
+            "name": "Brand",
+            "description": "Brands and Companies"
+          },
+          "entity": {
+            "id": "10045225402",
+            "name": "Twitter"
+          }
+        }
+      ],
+      "possibly_sensitive": false
+    },
+    {
+      "public_metrics": {
+        "retweet_count": 0,
+        "reply_count": 0,
+        "like_count": 1,
+        "quote_count": 0
+      },
+      "source": "Twitter Web App",
+      "entities": {
+        "urls": [
+          {
+            "start": 175,
+            "end": 198,
+            "url": "https://t.co/duIkd27lPx",
+            "expanded_url": "https://twittercommunity.com/t/announcing-monthly-office-hours-for-the-academic-research-product-track/151028",
+            "display_url": "twittercommunity.com/t/announcing-m…",
+            "images": [
+              {
+                "url": "https://pbs.twimg.com/news_img/1372625618605469698/6E0uKJr7?format=jpg&name=orig",
+                "width": 1200,
+                "height": 630
+              },
+              {
+                "url": "https://pbs.twimg.com/news_img/1372625618605469698/6E0uKJr7?format=jpg&name=150x150",
+                "width": 150,
+                "height": 150
+              }
+            ],
+            "status": 200,
+            "title": "Announcing monthly office hours for the academic research product track",
+            "description": "We are excited to offer office hours for academic researchers that are using the Academic Research product track on the new Twitter API. This is an opportunity for users of this new product track to get their technical questions answered, and helping you get research data with the v2 API. Most office hours will be held on the last Thursday of every month, from 10:00 am PST to 11:30 am PST. We will also try and accommodate other timezones for some of these sessions. How does it work? First, re...",
+            "unwound_url": "https://twittercommunity.com/t/announcing-monthly-office-hours-for-the-academic-research-product-track/151028"
+          },
+          {
+            "start": 277,
+            "end": 300,
+            "url": "https://t.co/0SfXa84EDO",
+            "expanded_url": "https://developer.twitter.com/en/solutions/academic-research/resources",
+            "display_url": "developer.twitter.com/en/solutions/a…"
+          }
+        ],
+        "mentions": [
+          {
+            "start": 0,
+            "end": 9,
+            "username": "geet_qcp"
+          },
+          {
+            "start": 10,
+            "end": 22,
+            "username": "suhemparack"
+          }
+        ]
+      },
+      "id": "1372625612460810242",
+      "edit_history_tweet_ids": [
+        "1372625612460810242"
+      ],
+      "referenced_tweets": [
+        {
+          "type": "replied_to",
+          "id": "1371363774729363460"
+        }
+      ],
+      "conversation_id": "1371363033352638467",
+      "text": "@geet_qcp @suhemparack Hey! We have good news, we just introduced Academic Research office hours. Hopefully, this lets you sign up for a day/time where you have flexibility:  https://t.co/duIkd27lPxnnWe do also have a resources page, which includes n code samples shared today https://t.co/0SfXa84EDO",
+      "author_id": "2244994945",
+      "created_at": "2021-03-18T19:07:02.000Z",
+      "reply_settings": "everyone",
+      "lang": "en",
+      "in_reply_to_user_id": "3117973774",
+      "context_annotations": [
+        {
+          "domain": {
+            "id": "46",
+            "name": "Brand Category",
+            "description": "Categories within Brand Verticals that narrow down the scope of Brands"
+          },
+          "entity": {
+            "id": "781974596752842752",
+            "name": "Services"
+          }
+        },
+        {
+          "domain": {
+            "id": "47",
+            "name": "Brand",
+            "description": "Brands and Companies"
+          },
+          "entity": {
+            "id": "10045225402",
+            "name": "Twitter"
+          }
+        }
+      ],
+      "possibly_sensitive": false
+    }
+  ],
+  "includes": {
+    "users": [
+      {
+        "profile_image_url": "https://pbs.twimg.com/profile_images/1354494203451961345/d8HkZl6p_normal.jpg",
+        "id": "2244994945",
+        "url": "https://t.co/3ZX3TNiZCY",
+        "public_metrics": {
+          "followers_count": 517602,
+          "following_count": 2033,
+          "tweet_count": 3689,
+          "listed_count": 1732
+        },
+        "name": "Twitter Dev",
+        "entities": {
+          "url": {
+            "urls": [
+              {
+                "start": 0,
+                "end": 23,
+                "url": "https://t.co/3ZX3TNiZCY",
+                "expanded_url": "https://developer.twitter.com/en/community",
+                "display_url": "developer.twitter.com/en/community"
+              }
+            ]
+          },
+          "description": {
+            "hashtags": [
+              {
+                "start": 17,
+                "end": 28,
+                "tag": "TwitterDev"
+              },
+              {
+                "start": 105,
+                "end": 116,
+                "tag": "TwitterAPI"
+              }
+            ]
+          }
+        },
+        "username": "TwitterDev",
+        "location": "127.0.0.1",
+        "verified": true,
+        "protected": false,
+        "description": "The voice of the #TwitterDev team and your official source for updates, news, and events, related to the #TwitterAPI.",
+        "pinned_tweet_id": "1354143047324299264",
+        "created_at": "2013-12-14T04:35:55.000Z"
+      },
+      {
+        "profile_image_url": "https://pbs.twimg.com/profile_images/1357142766933917699/uvTbiTAs_normal.jpg",
+        "id": "15772978",
+        "url": "https://t.co/7o2d6oAKln",
+        "public_metrics": {
+          "followers_count": 3517,
+          "following_count": 2723,
+          "tweet_count": 6969,
+          "listed_count": 129
+        },
+        "name": "Jessica Garson",
+        "entities": {
+          "url": {
+            "urls": [
+              {
+                "start": 0,
+                "end": 23,
+                "url": "https://t.co/7o2d6oAKln",
+                "expanded_url": "http://github.com/JessicaGarson",
+                "display_url": "github.com/JessicaGarson"
+              }
+            ]
+          },
+          "description": {
+            "mentions": [
+              {
+                "start": 19,
+                "end": 27,
+                "username": "Twitter"
+              }
+            ]
+          }
+        },
+        "username": "jessicagarson",
+        "location": "Brooklyn, NY",
+        "verified": false,
+        "protected": false,
+        "description": "Developer Advocate @Twitter. Python programmer.  Noted thought leader on vegan snacks. Makes music as Messica Arson.",
+        "created_at": "2008-08-08T02:16:23.000Z"
+      },
+      {
+        "profile_image_url": "https://pbs.twimg.com/profile_images/1230703695051935747/TbQKe91L_normal.jpg",
+        "id": "857699969263964161",
+        "url": "https://t.co/8IkCzCDr19",
+        "public_metrics": {
+          "followers_count": 917,
+          "following_count": 540,
+          "tweet_count": 470,
+          "listed_count": 16
+        },
+        "name": "Suhem Parack",
+        "entities": {
+          "url": {
+            "urls": [
+              {
+                "start": 0,
+                "end": 23,
+                "url": "https://t.co/8IkCzCDr19",
+                "expanded_url": "https://developer.twitter.com",
+                "display_url": "developer.twitter.com"
+              }
+            ]
+          },
+          "description": {
+            "mentions": [
+              {
+                "start": 42,
+                "end": 50,
+                "username": "Twitter"
+              }
+            ]
+          }
+        },
+        "username": "suhemparack",
+        "location": "Seattle, WA",
+        "verified": false,
+        "protected": false,
+        "description": "Developer Relations for Academic Research @Twitter. Talk to me about research with Twitter data. Views are my own",
+        "pinned_tweet_id": "1296498078233571329",
+        "created_at": "2017-04-27T20:56:22.000Z"
+      }
+    ],
+    "tweets": [
+      {
+        "public_metrics": {
+          "retweet_count": 7,
+          "reply_count": 1,
+          "like_count": 21,
+          "quote_count": 2
+        },
+        "source": "Twitter Web App",
+        "entities": {
+          "annotations": [
+            {
+              "start": 41,
+              "end": 48,
+              "probability": 0.411,
+              "type": "Product",
+              "normalized_text": "APIs 101"
+            }
+          ],
+          "urls": [
+            {
+              "start": 52,
+              "end": 75,
+              "url": "https://t.co/GrtBOXyHmB",
+              "expanded_url": "http://twitch.tv/twitterdev",
+              "display_url": "twitch.tv/twitterdev"
+            },
+            {
+              "start": 76,
+              "end": 99,
+              "url": "https://t.co/YyQfmgiLlL",
+              "expanded_url": "https://twitter.com/TwitterDev/status/1373001119480344583",
+              "display_url": "twitter.com/TwitterDev/sta…"
+            }
+          ]
+        },
+        "id": "1374104599456534531",
+        "edit_history_tweet_ids": [
+          "1374104599456534531"
+        ],
+        "referenced_tweets": [
+          {
+            "type": "quoted",
+            "id": "1373001119480344583"
+          }
+        ],
+        "conversation_id": "1374104599456534531",
+        "text": "Hope to see you tomorrow at 1 pm EST for APIs 101! nhttps://t.co/GrtBOXyHmB https://t.co/YyQfmgiLlL",
+        "author_id": "2244994945",
+        "created_at": "2021-03-22T21:04:00.000Z",
+        "reply_settings": "everyone",
+        "lang": "en",
+        "context_annotations": [
+          {
+            "domain": {
+              "id": "46",
+              "name": "Brand Category",
+              "description": "Categories within Brand Verticals that narrow down the scope of Brands"
+            },
+            "entity": {
+              "id": "781974596752842752",
+              "name": "Services"
+            }
+          },
+          {
+            "domain": {
+              "id": "47",
+              "name": "Brand",
+              "description": "Brands and Companies"
+            },
+            "entity": {
+              "id": "10045225402",
+              "name": "Twitter"
+            }
+          }
+        ],
+        "possibly_sensitive": false
+      },
+      {
+        "public_metrics": {
+          "retweet_count": 18,
+          "reply_count": 3,
+          "like_count": 92,
+          "quote_count": 6
+        },
+        "source": "Twitter Web App",
+        "entities": {
+          "annotations": [
+            {
+              "start": 32,
+              "end": 42,
+              "probability": 0.5425,
+              "type": "Product",
+              "normalized_text": "Twitter API"
+            },
+            {
+              "start": 140,
+              "end": 147,
+              "probability": 0.521,
+              "type": "Product",
+              "normalized_text": "APIs 101"
+            }
+          ],
+          "urls": [
+            {
+              "start": 254,
+              "end": 277,
+              "url": "https://t.co/GrtBOXyHmB",
+              "expanded_url": "http://twitch.tv/twitterdev",
+              "display_url": "twitch.tv/twitterdev"
+            }
+          ],
+          "mentions": [
+            {
+              "start": 72,
+              "end": 86,
+              "username": "jessicagarson"
+            }
+          ]
+        },
+        "id": "1373001119480344583",
+        "edit_history_tweet_ids": [
+          "1373001119480344583"
+        ],
+        "conversation_id": "1373001119480344583",
+        "text": "Looking to get started with the Twitter API but new to APIs in general? @jessicagarson will walk you through everything you need to know in APIs 101 session. She’ll use examples using our v2 endpoints, Tuesday, March 23rd at 1 pm EST.nnJoin us on Twitchnhttps://t.co/GrtBOXyHmB",
+        "author_id": "2244994945",
+        "created_at": "2021-03-19T19:59:10.000Z",
+        "reply_settings": "everyone",
+        "lang": "en",
+        "context_annotations": [
+          {
+            "domain": {
+              "id": "46",
+              "name": "Brand Category",
+              "description": "Categories within Brand Verticals that narrow down the scope of Brands"
+            },
+            "entity": {
+              "id": "781974596752842752",
+              "name": "Services"
+            }
+          },
+          {
+            "domain": {
+              "id": "47",
+              "name": "Brand",
+              "description": "Brands and Companies"
+            },
+            "entity": {
+              "id": "10045225402",
+              "name": "Twitter"
+            }
+          }
+        ],
+        "possibly_sensitive": false
+      },
+      {
+        "public_metrics": {
+          "retweet_count": 8,
+          "reply_count": 1,
+          "like_count": 36,
+          "quote_count": 2
+        },
+        "source": "Twitter Web App",
+        "entities": {
+          "urls": [
+            {
+              "start": 188,
+              "end": 211,
+              "url": "https://t.co/GrtBOXyHmB",
+              "expanded_url": "http://twitch.tv/twitterdev",
+              "display_url": "twitch.tv/twitterdev",
+              "images": [
+                {
+                  "url": "https://pbs.twimg.com/news_img/1373001120851841025/8EmQiIf3?format=png&name=orig",
+                  "width": 300,
+                  "height": 300
+                },
+                {
+                  "url": "https://pbs.twimg.com/news_img/1373001120851841025/8EmQiIf3?format=png&name=150x150",
+                  "width": 150,
+                  "height": 150
+                }
+              ],
+              "status": 200,
+              "title": "TwitterDev - Twitch",
+              "description": "Brought to you by Twitter's Developer Relations team",
+              "unwound_url": "https://www.twitch.tv/twitterdev"
+            },
+            {
+              "start": 250,
+              "end": 273,
+              "url": "https://t.co/SpuOoD7Dm8",
+              "expanded_url": "https://twitter.com/suhemparack/status/1367897834758934530",
+              "display_url": "twitter.com/suhemparack/st…"
+            }
+          ],
+          "mentions": [
+            {
+              "start": 139,
+              "end": 151,
+              "username": "suhemparack"
+            }
+          ]
+        },
+        "id": "1371363033352638467",
+        "edit_history_tweet_ids": [
+          "1371363033352638467"
+        ],
+        "referenced_tweets": [
+          {
+            "type": "quoted",
+            "id": "1367897834758934530"
+          }
+        ],
+        "conversation_id": "1371363033352638467",
+        "text": "🔎 If you're using v2 full-archive search for Academic Research, you won't want to miss this livestream hosted by our research dev advocate @suhemparack.nnMark your calendars to join us on https://t.co/GrtBOXyHmB Thursday March 18th, 10AM PT/ 1PM ET. https://t.co/SpuOoD7Dm8",
+        "author_id": "2244994945",
+        "created_at": "2021-03-15T07:30:00.000Z",
+        "reply_settings": "everyone",
+        "lang": "en",
+        "context_annotations": [
+          {
+            "domain": {
+              "id": "46",
+              "name": "Brand Category",
+              "description": "Categories within Brand Verticals that narrow down the scope of Brands"
+            },
+            "entity": {
+              "id": "781974596752842752",
+              "name": "Services"
+            }
+          },
+          {
+            "domain": {
+              "id": "47",
+              "name": "Brand",
+              "description": "Brands and Companies"
+            },
+            "entity": {
+              "id": "10045225402",
+              "name": "Twitter"
+            }
+          },
+          {
+            "domain": {
+              "id": "47",
+              "name": "Brand",
+              "description": "Brands and Companies"
+            },
+            "entity": {
+              "id": "1054826545758396416",
+              "name": "Twitch",
+              "description": "Twitch"
+            }
+          }
+        ],
+        "possibly_sensitive": false
+      }
+    ]
+  },
+  "errors": [
+    {
+      "resource_id": "geet_qcp",
+      "parameter": "entities.mentions.username",
+      "resource_type": "user",
+      "section": "includes",
+      "title": "Authorization Error",
+      "value": "geet_qcp",
+      "detail": "Sorry, you are not authorized to see the user with entities.mentions.username: [geet_qcp].",
+      "type": "https://api.twitter.com/2/problems/not-authorized-for-resource"
+    },
+    {
+      "resource_id": "3117973774",
+      "parameter": "in_reply_to_user_id",
+      "resource_type": "user",
+      "section": "includes",
+      "title": "Authorization Error",
+      "value": "3117973774",
+      "detail": "Sorry, you are not authorized to see the user with in_reply_to_user_id: [3117973774].",
+      "type": "https://api.twitter.com/2/problems/not-authorized-for-resource"
+    },
+    {
+      "value": "1371363774729363460",
+      "detail": "Could not find tweet with referenced_tweets.id: [1371363774729363460].",
+      "title": "Not Found Error",
+      "resource_type": "tweet",
+      "parameter": "referenced_tweets.id",
+      "resource_id": "1371363774729363460",
+      "type": "https://api.twitter.com/2/problems/resource-not-found"
+    }
+  ],
+  "meta": {
+    "oldest_id": "1372625612460810242",
+    "newest_id": "1374405406261268481",
+    "result_count": 5,
+    "next_token": "7140dibdnow9c7btw3w3xyyhxcirw2ov9mjp7gczc93xu"
+  }
+}

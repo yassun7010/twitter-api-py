@@ -1,3 +1,5 @@
+from typing import Optional
+
 from twitter_api.types.extra_permissive_model import ExtraPermissiveModel
 
 from .entity import Entity
@@ -9,4 +11,4 @@ class Domain(ExtraPermissiveModel):
     id: DomainId
     name: str
     description: str
-    entity: Entity
+    entity: Optional[Entity] = None

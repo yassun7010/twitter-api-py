@@ -67,7 +67,7 @@ class V2GetUserTweetsResponseBodyMeta(ExtraPermissiveModel):
 
 
 class V2GetUserTweetsResponseBodyIncludes(ExtraPermissiveModel):
-    tweets: list[Tweet]
+    tweets: Optional[list[Tweet]] = None
 
 
 class V2GetUserTweetsResponseBody(ExtraPermissiveModel):
