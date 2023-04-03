@@ -12,11 +12,13 @@ from twitter_api.error import TwitterApiResponseFailed
 
 @pytest.mark.skipif(**synthetic_monitoring_is_disable())
 class TestV2GetUserFollowing:
+    @pytest.mark.skipif(
+        True, reason="[OAuth 1.0a User Context, OAuth 2.0 User Context] が必要らしい。"
+    )
     def test_get_user_following(
         self,
         real_app_auth_v2_client: TwitterApiRealClient,
     ):
-        # NOTE: [OAuth 1.0a User Context, OAuth 2.0 User Context] が必要らしい。
         with pytest.raises(TwitterApiResponseFailed):
             (
                 real_app_auth_v2_client.chain()

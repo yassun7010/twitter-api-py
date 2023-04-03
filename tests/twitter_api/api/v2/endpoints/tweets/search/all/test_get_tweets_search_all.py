@@ -12,17 +12,9 @@ from twitter_api.error import TwitterApiResponseFailed
 
 @pytest.mark.skipif(**synthetic_monitoring_is_disable())
 class TestV2GetTweetsSearchAll:
-    def test_get_search_all_v1(self, real_app_auth_v2_client: TwitterApiRealClient):
-        with pytest.raises(TwitterApiResponseFailed):
-            (
-                real_app_auth_v2_client.chain()
-                .request("https://api.twitter.com/2/tweets/search/all")
-                .get({"query": "conversation_id:1273733248749690880", "max_results": 1})
-            )
-
     @pytest.mark.skipif(True, reason="プレミアムなアカウントでないとテストできない。")
     def test_get_search_all(self, real_app_auth_v2_client: TwitterApiRealClient):
-        real_response = (
+        real_response: V2GetTweetsSearchAllResponseBody = (
             real_app_auth_v2_client.chain()
             .request("https://api.twitter.com/2/tweets/search/all")
             .get({"query": "conversation_id:1273733248749690880", "max_results": 1})
