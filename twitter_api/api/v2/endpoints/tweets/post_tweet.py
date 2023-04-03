@@ -5,7 +5,7 @@ from twitter_api.api.v2.types.place.place_id import PlaceId
 from twitter_api.api.v2.types.tweet.tweet_detail import TweetDetail
 from twitter_api.api.v2.types.tweet.tweet_id import TweetId
 from twitter_api.api.v2.types.user.user_id import UserId
-from twitter_api.client.request.has_request_client import HasReqeustClient
+from twitter_api.client.types.api_resources import ApiResources
 from twitter_api.rate_limit.rate_limit_decorator import rate_limit
 from twitter_api.types.endpoint import Endpoint
 from twitter_api.types.extra_permissive_model import ExtraPermissiveModel
@@ -50,7 +50,7 @@ class V2PostTweetResponseBody(ExtraPermissiveModel):
     data: TweetDetail
 
 
-class V2PostTweet(HasReqeustClient):
+class V2PostTweetResources(ApiResources):
     @rate_limit(ENDPOINT, "user", requests=200, mins=15)
     def post(self, request_body: V2PostTweetRequestBody) -> V2PostTweetResponseBody:
         # flake8: noqa E501

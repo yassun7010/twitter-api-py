@@ -1,5 +1,5 @@
 from twitter_api.api.v2.types.tweet.tweet_id import TweetId
-from twitter_api.client.request.has_request_client import HasReqeustClient
+from twitter_api.client.types.api_resources import ApiResources
 from twitter_api.rate_limit.rate_limit_decorator import rate_limit
 from twitter_api.types.endpoint import Endpoint
 from twitter_api.types.extra_permissive_model import ExtraPermissiveModel
@@ -15,7 +15,7 @@ class V2DeleteTweetResponseBody(ExtraPermissiveModel):
     data: V2DeleteTweetResponseBodyData
 
 
-class V2DeleteTweet(HasReqeustClient):
+class V2DeleteTweetResources(ApiResources):
     @rate_limit(ENDPOINT, "user", requests=50, mins=15)
     def delete(
         self,

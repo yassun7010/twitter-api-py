@@ -11,15 +11,13 @@ from twitter_api.api.v2.types.tweet.tweet import Tweet
 from twitter_api.api.v2.types.tweet.tweet_field import TweetField
 from twitter_api.api.v2.types.tweet.tweet_id import TweetId
 from twitter_api.api.v2.types.user.user_field import UserField
-from twitter_api.client.request.has_request_client import HasReqeustClient
 from twitter_api.client.request.request_client import RequestClient
+from twitter_api.client.types.api_resources import ApiResources
 from twitter_api.rate_limit.rate_limit_decorator import rate_limit
 from twitter_api.types.comma_separatable import CommaSeparatable, comma_separated_str
 from twitter_api.types.endpoint import Endpoint
 from twitter_api.types.extra_permissive_model import ExtraPermissiveModel
 from twitter_api.utils.functional import map_optional
-
-Url: TypeAlias = Literal["https://api.twitter.com/2/tweets/search/all"]
 
 ENDPOINT = Endpoint("GET", "https://api.twitter.com/2/tweets/search/all")
 
@@ -66,6 +64,7 @@ def _make_query(query: V2GetTweetsSearchAllQueryParameters) -> dict:
 class V2GetTweetsSearchAllResponseBodyMeta(ExtraPermissiveModel):
     result_count: int
     next_token: Optional[str] = None
+    previous_token: Optional[str] = None
 
 
 class V2GetTweetsSearchAllResponseBody(ExtraPermissiveModel):
@@ -73,7 +72,7 @@ class V2GetTweetsSearchAllResponseBody(ExtraPermissiveModel):
     meta: V2GetTweetsSearchAllResponseBodyMeta
 
 
-class V2GetTweetsSearchAll(HasReqeustClient):
+class V2GetTweetsSearchAllResources(ApiResources):
     def __init__(self, client: RequestClient) -> None:
         self._client = client
 

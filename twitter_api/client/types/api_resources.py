@@ -1,13 +1,7 @@
-from typing import Literal
-
 from twitter_api.client.request.request_client import RequestClient
 
-from .get_user_followers import V2GetUserFollowersResources
 
-UserFollowersUrl = Literal["https://api.twitter.com/2/users/:id/followers"]
-
-
-class V2UserFollowersResources(V2GetUserFollowersResources):
+class ApiResources:
     def __init__(self, client: RequestClient) -> None:
         self._client = client
 

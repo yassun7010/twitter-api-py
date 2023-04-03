@@ -1,6 +1,6 @@
 from typing import Callable, Literal, Optional, overload
 
-from twitter_api.client.request.has_request_client import HasReqeustClient
+from twitter_api.client.types.api_resources import ApiResources
 from twitter_api.error import RateLimitOverError
 from twitter_api.rate_limit.rate_limit_info import RateLimitInfo
 from twitter_api.rate_limit.rate_limit_target import RateLimitTarget
@@ -49,7 +49,7 @@ def rate_limit(
     """
 
     def _rate_limit(func):
-        def _wrapper(self: HasReqeustClient, *args, **kwargs):
+        def _wrapper(self: ApiResources, *args, **kwargs):
             # RateLimitTarget が一致する場合、 LimitOver を確認する。
             if self.request_client.rate_limit_target == target:
                 total_seconds = 0

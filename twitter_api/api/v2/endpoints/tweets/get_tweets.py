@@ -9,7 +9,7 @@ from twitter_api.api.v2.types.tweet.tweet_field import TweetField
 from twitter_api.api.v2.types.tweet.tweet_id import TweetId
 from twitter_api.api.v2.types.user.user import User
 from twitter_api.api.v2.types.user.user_field import UserField
-from twitter_api.client.request.has_request_client import HasReqeustClient
+from twitter_api.client.types.api_resources import ApiResources
 from twitter_api.rate_limit.rate_limit_decorator import rate_limit
 from twitter_api.types.comma_separatable import CommaSeparatable, comma_separated_str
 from twitter_api.types.endpoint import Endpoint
@@ -52,7 +52,7 @@ class V2GetTweetsResponseBody(ExtraPermissiveModel):
     includes: Optional[V2GetTweetsResponseBodyIncludes] = None
 
 
-class V2GetTweets(HasReqeustClient):
+class V2GetTweetsResources(ApiResources):
     @rate_limit(ENDPOINT, "app", requests=300, mins=15)
     @rate_limit(ENDPOINT, "user", requests=900, mins=15)
     def get(self, query: V2GetTweetsQueryParameters) -> V2GetTweetsResponseBody:

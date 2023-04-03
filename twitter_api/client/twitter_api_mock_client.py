@@ -1,12 +1,16 @@
 from typing import Optional, Self, Union, overload
 
+import twitter_api.api.v2.endpoints.tweets.retweeted_by as tweet_retweeted_by
+import twitter_api.api.v2.endpoints.tweets.search.all as tweets_search_all
+import twitter_api.api.v2.endpoints.tweets.search.recent as tweets_search_recent
+import twitter_api.api.v2.endpoints.tweets.search.stream as tweets_search_stream
 from twitter_api.api.authentication.endpoints.oauth import post_request_token
 from twitter_api.api.authentication.endpoints.oauth2 import (
     post_invalidate_token,
     post_token,
 )
 from twitter_api.api.v2.endpoints import tweets, users
-from twitter_api.api.v2.endpoints.tweets.retweeted_by import get_retweeted_by
+from twitter_api.api.v2.endpoints.tweets.retweeted_by import get_tweet_retweeted_by
 from twitter_api.api.v2.endpoints.tweets.search.all import get_tweets_search_all
 from twitter_api.api.v2.endpoints.tweets.search.recent import get_tweets_search_recent
 from twitter_api.api.v2.endpoints.tweets.search.stream import get_tweets_search_stream
@@ -83,9 +87,9 @@ class TwitterApiMockClient(TwitterApiClient):
     @overload
     def inject_get_response_body(
         self,
-        url: get_retweeted_by.Url,
+        url: tweet_retweeted_by.TweetRetweetedByUrl,
         response_body: Union[
-            get_retweeted_by.V2GetRetweetedByResponseBody,
+            get_tweet_retweeted_by.V2GetTweetRetweetedByResponseBody,
             TwitterApiError,
         ],
     ) -> Self:
@@ -94,7 +98,7 @@ class TwitterApiMockClient(TwitterApiClient):
     @overload
     def inject_get_response_body(
         self,
-        url: get_tweets_search_all.Url,
+        url: tweets_search_all.TweetsSearchAllUrl,
         response_body: Union[
             get_tweets_search_all.V2GetTweetsSearchAllResponseBody,
             TwitterApiError,
@@ -105,7 +109,7 @@ class TwitterApiMockClient(TwitterApiClient):
     @overload
     def inject_get_response_body(
         self,
-        url: get_tweets_search_recent.Url,
+        url: tweets_search_recent.TweetsSearchRecentUrl,
         response_body: Union[
             get_tweets_search_recent.V2GetTweetsSearchRecentResponseBody,
             TwitterApiError,
@@ -116,7 +120,7 @@ class TwitterApiMockClient(TwitterApiClient):
     @overload
     def inject_get_response_body(
         self,
-        url: get_tweets_search_stream.Url,
+        url: tweets_search_stream.TweetsSearchStreamUrl,
         response_body: Union[
             get_tweets_search_stream.V2GetTweetsSearchStreamResponseBody,
             TwitterApiError,

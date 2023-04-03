@@ -1,7 +1,7 @@
 from typing import TypedDict
 
 from twitter_api.api.v2.types.user.user_id import UserId
-from twitter_api.client.request.has_request_client import HasReqeustClient
+from twitter_api.client.types.api_resources import ApiResources
 from twitter_api.rate_limit.rate_limit_decorator import rate_limit
 from twitter_api.types.endpoint import Endpoint
 from twitter_api.types.extra_permissive_model import ExtraPermissiveModel
@@ -26,7 +26,7 @@ class V2PostUserFollowingResponseBody(ExtraPermissiveModel):
     data: V2PostUserFollowingResponseBodyData
 
 
-class V2PostUserFollowing(HasReqeustClient):
+class V2PostUserFollowingResources(ApiResources):
     @rate_limit(ENDPOINT, "user", requests=50, mins=15)
     def post(
         self,

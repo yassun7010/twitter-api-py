@@ -1,5 +1,5 @@
 from datetime import datetime
-from typing import Literal, NotRequired, Optional, TypeAlias, TypedDict
+from typing import NotRequired, Optional, TypedDict
 
 from twitter_api.api.v2.types.expansion import Expansion
 from twitter_api.api.v2.types.media.media_field import MediaField
@@ -8,15 +8,12 @@ from twitter_api.api.v2.types.poll.poll_field import PollField
 from twitter_api.api.v2.types.tweet.tweet_detail import TweetDetail
 from twitter_api.api.v2.types.tweet.tweet_field import TweetField
 from twitter_api.api.v2.types.user.user_field import UserField
-from twitter_api.client.request.has_request_client import HasReqeustClient
-from twitter_api.client.request.request_client import RequestClient
+from twitter_api.client.types.api_resources import ApiResources
 from twitter_api.rate_limit.rate_limit_decorator import rate_limit
 from twitter_api.types.comma_separatable import CommaSeparatable, comma_separated_str
 from twitter_api.types.endpoint import Endpoint
 from twitter_api.types.extra_permissive_model import ExtraPermissiveModel
 from twitter_api.utils.functional import map_optional
-
-Url: TypeAlias = Literal["https://api.twitter.com/2/tweets/search/stream"]
 
 ENDPOINT = Endpoint("GET", "https://api.twitter.com/2/tweets/search/stream")
 
@@ -54,14 +51,7 @@ class V2GetTweetsSearchStreamResponseBody(ExtraPermissiveModel):
     data: Optional[list[TweetDetail]] = None  # データが 1 つも見つからないとき、 None となる。
 
 
-class V2GetTweetsSearchStream(HasReqeustClient):
-    def __init__(self, client: RequestClient) -> None:
-        self._client = client
-
-    @property
-    def request_client(self) -> RequestClient:
-        return self._client
-
+class V2GetTweetsSearchStreamResources(ApiResources):
     @rate_limit(ENDPOINT, "app", requests=50, mins=15)
     def get(
         self, query: Optional[V2GetTweetsSearchStreamQueryParameters] = None

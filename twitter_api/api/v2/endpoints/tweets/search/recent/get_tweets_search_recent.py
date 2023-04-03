@@ -10,15 +10,13 @@ from twitter_api.api.v2.types.tweet.tweet_detail import TweetDetail
 from twitter_api.api.v2.types.tweet.tweet_field import TweetField
 from twitter_api.api.v2.types.tweet.tweet_id import TweetId
 from twitter_api.api.v2.types.user.user_field import UserField
-from twitter_api.client.request.has_request_client import HasReqeustClient
 from twitter_api.client.request.request_client import RequestClient
+from twitter_api.client.types.api_resources import ApiResources
 from twitter_api.rate_limit.rate_limit_decorator import rate_limit
 from twitter_api.types.comma_separatable import CommaSeparatable, comma_separated_str
 from twitter_api.types.endpoint import Endpoint
 from twitter_api.types.extra_permissive_model import ExtraPermissiveModel
 from twitter_api.utils.functional import map_optional
-
-Url: TypeAlias = Literal["https://api.twitter.com/2/tweets/search/recent"]
 
 ENDPOINT = Endpoint("GET", "https://api.twitter.com/2/tweets/search/recent")
 
@@ -72,14 +70,7 @@ class V2GetTweetsSearchRecentResponseBody(ExtraPermissiveModel):
     meta: V2GetTweetsSearchRecentResponseBodyMeta
 
 
-class V2GetTweetsSearchRecent(HasReqeustClient):
-    def __init__(self, client: RequestClient) -> None:
-        self._client = client
-
-    @property
-    def request_client(self) -> RequestClient:
-        return self._client
-
+class V2GetTweetsSearchRecentResources(ApiResources):
     @rate_limit(ENDPOINT, "app", requests=450, mins=15)
     @rate_limit(ENDPOINT, "user", requests=180, mins=15)
     def get(

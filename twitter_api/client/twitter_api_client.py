@@ -2,16 +2,16 @@ import os
 from abc import ABCMeta, abstractmethod
 from typing import Optional, Self, Union, overload
 
+import twitter_api.api.v2.endpoints.tweets.retweeted_by as tweet_retweeted_by
+import twitter_api.api.v2.endpoints.tweets.search.all as tweets_search_all
+import twitter_api.api.v2.endpoints.tweets.search.recent as tweets_search_recent
+import twitter_api.api.v2.endpoints.tweets.search.stream as tweets_search_stream
 from twitter_api.api.authentication.endpoints.oauth import post_request_token
 from twitter_api.api.authentication.endpoints.oauth2 import (
     post_invalidate_token,
     post_token,
 )
 from twitter_api.api.v2.endpoints import tweets, users
-from twitter_api.api.v2.endpoints.tweets.retweeted_by import get_retweeted_by
-from twitter_api.api.v2.endpoints.tweets.search.all import get_tweets_search_all
-from twitter_api.api.v2.endpoints.tweets.search.recent import get_tweets_search_recent
-from twitter_api.api.v2.endpoints.tweets.search.stream import get_tweets_search_stream
 from twitter_api.api.v2.endpoints.users import followers, following, liked_tweets
 from twitter_api.error import NeverError
 from twitter_api.rate_limit.manager.rate_limit_manager import RateLimitManager
@@ -78,64 +78,64 @@ class TwitterApiClient(metaclass=ABCMeta):
     @overload
     def request(
         self: Self,
-        url: get_retweeted_by.Url,
-    ) -> get_retweeted_by.V2GetRetweetedBy:
+        url: tweet_retweeted_by.TweetRetweetedByUrl,
+    ) -> tweet_retweeted_by.V2TweetRetweetedByRerources:
         ...
 
     @overload
     def request(
         self: Self,
-        url: get_tweets_search_all.Url,
-    ) -> get_tweets_search_all.V2GetTweetsSearchAll:
+        url: tweets_search_all.TweetsSearchAllUrl,
+    ) -> tweets_search_all.V2TweetsSearchAllResources:
         ...
 
     @overload
     def request(
         self: Self,
-        url: get_tweets_search_recent.Url,
-    ) -> get_tweets_search_recent.V2GetTweetsSearchRecent:
+        url: tweets_search_recent.TweetsSearchRecentUrl,
+    ) -> tweets_search_recent.V2GetTweetsSearchRecentResources:
         ...
 
     @overload
     def request(
         self: Self,
-        url: get_tweets_search_stream.Url,
-    ) -> get_tweets_search_stream.V2GetTweetsSearchStream:
+        url: tweets_search_stream.TweetsSearchStreamUrl,
+    ) -> tweets_search_stream.V2GetTweetsSearchStreamResources:
         ...
 
     @overload
     def request(
         self: Self,
         url: users.UsersUrl,
-    ) -> users.V2Users:
+    ) -> users.V2UsersResources:
         ...
 
     @overload
     def request(
         self: Self,
         url: users.UserUrl,
-    ) -> users.V2User:
+    ) -> users.V2UserResources:
         ...
 
     @overload
     def request(
         self: Self,
         url: liked_tweets.UserLikedTweetsUrl,
-    ) -> liked_tweets.V2UserLikedTweets:
+    ) -> liked_tweets.V2UserLikedTweetsResources:
         ...
 
     @overload
     def request(
         self: Self,
         url: followers.UserFollowersUrl,
-    ) -> followers.V2UserFollowers:
+    ) -> followers.V2UserFollowersResources:
         ...
 
     @overload
     def request(
         self: Self,
         url: following.UserFollowingUrl,
-    ) -> following.V2UserFollowing:
+    ) -> following.V2UserFollowingResources:
         ...
 
     def request(
@@ -146,10 +146,10 @@ class TwitterApiClient(metaclass=ABCMeta):
             post_request_token.Url,
             post_invalidate_token.Url,
             post_token.Url,
-            get_retweeted_by.Url,
-            get_tweets_search_all.Url,
-            get_tweets_search_recent.Url,
-            get_tweets_search_stream.Url,
+            tweet_retweeted_by.TweetRetweetedByUrl,
+            tweets_search_all.TweetsSearchAllUrl,
+            tweets_search_recent.TweetsSearchRecentUrl,
+            tweets_search_stream.TweetsSearchStreamUrl,
             users.UsersUrl,
             users.UserUrl,
             liked_tweets.UserLikedTweetsUrl,
@@ -182,39 +182,39 @@ class TwitterApiClient(metaclass=ABCMeta):
                 self._request_client,
             )
         elif url == "https://api.twitter.com/2/tweets/:id/retweeted_by":
-            return get_retweeted_by.V2GetRetweetedBy(
+            return tweet_retweeted_by.V2TweetRetweetedByRerources(
                 self._request_client,
             )
         elif url == "https://api.twitter.com/2/tweets/search/all":
-            return get_tweets_search_all.V2GetTweetsSearchAll(
+            return tweets_search_all.V2TweetsSearchAllResources(
                 self._request_client,
             )
         elif url == "https://api.twitter.com/2/tweets/search/recent":
-            return get_tweets_search_recent.V2GetTweetsSearchRecent(
+            return tweets_search_recent.V2GetTweetsSearchRecentResources(
                 self._request_client,
             )
         elif url == "https://api.twitter.com/2/tweets/search/stream":
-            return get_tweets_search_stream.V2GetTweetsSearchStream(
+            return tweets_search_stream.V2GetTweetsSearchStreamResources(
                 self._request_client,
             )
         elif url == "https://api.twitter.com/2/users":
-            return users.V2Users(
+            return users.V2UsersResources(
                 self._request_client,
             )
         elif url == "https://api.twitter.com/2/users/:id":
-            return users.V2User(
+            return users.V2UserResources(
                 self._request_client,
             )
         elif url == "https://api.twitter.com/2/users/:id/liked_tweets":
-            return liked_tweets.V2UserLikedTweets(
+            return liked_tweets.V2UserLikedTweetsResources(
                 self._request_client,
             )
         elif url == "https://api.twitter.com/2/users/:id/followers":
-            return followers.V2UserFollowers(
+            return followers.V2UserFollowersResources(
                 self._request_client,
             )
         elif url == "https://api.twitter.com/2/users/:id/following":
-            return following.V2UserFollowing(
+            return following.V2UserFollowingResources(
                 self._request_client,
             )
         else:
