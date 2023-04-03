@@ -1,11 +1,11 @@
 from typing import Literal, NotRequired, Optional, TypedDict
 
+from twitter_api.api.api_resources import ApiResources
 from twitter_api.api.v2.types.media.media_id import MediaId
 from twitter_api.api.v2.types.place.place_id import PlaceId
 from twitter_api.api.v2.types.tweet.tweet_detail import TweetDetail
 from twitter_api.api.v2.types.tweet.tweet_id import TweetId
 from twitter_api.api.v2.types.user.user_id import UserId
-from twitter_api.client.types.api_resources import ApiResources
 from twitter_api.rate_limit.rate_limit_decorator import rate_limit
 from twitter_api.types.endpoint import Endpoint
 from twitter_api.types.extra_permissive_model import ExtraPermissiveModel
