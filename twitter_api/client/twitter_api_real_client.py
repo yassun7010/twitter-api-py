@@ -60,25 +60,31 @@ class TwitterApiRealClient(TwitterApiClient):
         api_secret: ApiSecret,
         rate_limit_manager: Optional[RateLimitManager] = None,
     ):
-        access_token = (
-            TwitterApiRealClient(
-                RealRequestClient(
-                    auth=None,
-                    oauth_version="2.0",
-                    rate_limit_target="app",
-                    rate_limit_manager=rate_limit_manager,
-                ),
-            )
-            .request("https://api.twitter.com/oauth2/token")
-            .post(
-                api_key=api_key,
-                api_secret=api_secret,
-                query={"grant_type": "client_credentials"},
-            )
-            .access_token
+        client = TwitterApiRealClient(
+            RealRequestClient(
+                auth=None,
+                oauth_version="2.0",
+                rate_limit_target="app",
+                rate_limit_manager=rate_limit_manager,
+            ),
         )
 
-        return cls.from_bearer_token(access_token)
+        client._client._auth = OAuth2Auth(
+            token={
+                "access_token": (
+                    client.request("https://api.twitter.com/oauth2/token")
+                    .post(
+                        api_key=api_key,
+                        api_secret=api_secret,
+                        query={"grant_type": "client_credentials"},
+                    )
+                    .access_token
+                ),
+                "token_type": "Bearer",
+            }
+        )
+
+        return client
 
     @classmethod
     def from_user_auth_v1(
