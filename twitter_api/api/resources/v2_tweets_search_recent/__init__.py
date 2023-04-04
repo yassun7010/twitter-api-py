@@ -4,7 +4,7 @@ from typing_extensions import Literal
 
 from .get_tweets_search_recent import V2GetTweetsSearchRecentResources
 
-TweetsSearchRecentUrl: TypeAlias = Literal[
+V2TweetsSearchRecentUrl: TypeAlias = Literal[
     "https://api.twitter.com/2/tweets/search/recent"
 ]
 

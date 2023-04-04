@@ -12,57 +12,57 @@ from twitter_api.api.resources.oauth_request_token import (
     OauthRequestTokenUrl,
 )
 from twitter_api.api.resources.v2_dm_conversation_messages import (
-    DmConversationsMessagesUrl,
     V2DmConversationMessagesResources,
+    V2DmConversationsMessagesUrl,
 )
 from twitter_api.api.resources.v2_dm_conversations import (
-    DmConversationsUrl,
     V2DmConversationsResources,
+    V2DmConversationsUrl,
 )
 from twitter_api.api.resources.v2_dm_conversations_with_messages import (
-    DmConversationsWithParticipantMessagesUrl,
     V2DmConversationsWithParticipantMessagesResources,
+    V2DmConversationsWithParticipantMessagesUrl,
 )
-from twitter_api.api.resources.v2_tweet import TweetUrl, V2TweetResources
+from twitter_api.api.resources.v2_tweet import V2TweetResources, V2TweetUrl
 from twitter_api.api.resources.v2_tweet_retweeted_by import (
-    TweetRetweetedByUrl,
     V2TweetRetweetedByRerources,
+    V2TweetRetweetedByUrl,
 )
-from twitter_api.api.resources.v2_tweets import TweetsUrl, V2TweetsResources
+from twitter_api.api.resources.v2_tweets import V2TweetsResources, V2TweetsUrl
 from twitter_api.api.resources.v2_tweets_search_all import (
-    TweetsSearchAllUrl,
     V2TweetsSearchAllResources,
+    V2TweetsSearchAllUrl,
 )
-from twitter_api.api.resources.v2_tweets_search_recent import TweetsSearchRecentUrl
+from twitter_api.api.resources.v2_tweets_search_recent import V2TweetsSearchRecentUrl
 from twitter_api.api.resources.v2_tweets_search_recent.get_tweets_search_recent import (
     V2GetTweetsSearchRecentResources,
 )
-from twitter_api.api.resources.v2_tweets_search_stream import TweetsSearchStreamUrl
+from twitter_api.api.resources.v2_tweets_search_stream import V2TweetsSearchStreamUrl
 from twitter_api.api.resources.v2_tweets_search_stream.get_tweets_search_stream import (
     V2GetTweetsSearchStreamResources,
 )
-from twitter_api.api.resources.v2_user import UserUrl, V2UserResources
+from twitter_api.api.resources.v2_user import V2UserResources, V2UserUrl
 from twitter_api.api.resources.v2_user_followers import (
-    UserFollowersUrl,
     V2UserFollowersResources,
+    V2UserFollowersUrl,
 )
 from twitter_api.api.resources.v2_user_following import (
-    UserFollowingUrl,
     V2UserFollowingResources,
+    V2UserFollowingUrl,
 )
 from twitter_api.api.resources.v2_user_liked_tweets import (
-    UserLikedTweetsUrl,
     V2UserLikedTweetsResources,
+    V2UserLikedTweetsUrl,
 )
 from twitter_api.api.resources.v2_user_retweets import (
-    UserRetweetsUrl,
     V2UserRetweetsResources,
+    V2UserRetweetsUrl,
 )
 from twitter_api.api.resources.v2_user_tweets import (
-    UserTweetsUrl,
     V2UserTweetsResources,
+    V2UserTweetsUrl,
 )
-from twitter_api.api.resources.v2_users import UsersUrl, V2UsersResources
+from twitter_api.api.resources.v2_users import V2UsersResources, V2UsersUrl
 from twitter_api.error import NeverError
 from twitter_api.rate_limit.manager.rate_limit_manager import RateLimitManager
 from twitter_api.types.oauth import AccessSecret, AccessToken, ApiKey, ApiSecret, Env
@@ -114,112 +114,112 @@ class TwitterApiClient(metaclass=ABCMeta):
     @overload
     def request(
         self: Self,
-        url: TweetUrl,
+        url: V2TweetUrl,
     ) -> V2TweetResources:
         ...
 
     @overload
     def request(
         self: Self,
-        url: TweetsUrl,
+        url: V2TweetsUrl,
     ) -> V2TweetsResources:
         ...
 
     @overload
     def request(
         self: Self,
-        url: TweetRetweetedByUrl,
+        url: V2TweetRetweetedByUrl,
     ) -> V2TweetRetweetedByRerources:
         ...
 
     @overload
     def request(
         self: Self,
-        url: TweetsSearchAllUrl,
+        url: V2TweetsSearchAllUrl,
     ) -> V2TweetsSearchAllResources:
         ...
 
     @overload
     def request(
         self: Self,
-        url: TweetsSearchRecentUrl,
+        url: V2TweetsSearchRecentUrl,
     ) -> V2GetTweetsSearchRecentResources:
         ...
 
     @overload
     def request(
         self: Self,
-        url: TweetsSearchStreamUrl,
+        url: V2TweetsSearchStreamUrl,
     ) -> V2GetTweetsSearchStreamResources:
         ...
 
     @overload
     def request(
         self: Self,
-        url: UsersUrl,
+        url: V2UsersUrl,
     ) -> V2UsersResources:
         ...
 
     @overload
     def request(
         self: Self,
-        url: UserUrl,
+        url: V2UserUrl,
     ) -> V2UserResources:
         ...
 
     @overload
     def request(
         self: Self,
-        url: UserLikedTweetsUrl,
+        url: V2UserLikedTweetsUrl,
     ) -> V2UserLikedTweetsResources:
         ...
 
     @overload
     def request(
         self: Self,
-        url: UserFollowersUrl,
+        url: V2UserFollowersUrl,
     ) -> V2UserFollowersResources:
         ...
 
     @overload
     def request(
         self: Self,
-        url: UserFollowingUrl,
+        url: V2UserFollowingUrl,
     ) -> V2UserFollowingResources:
         ...
 
     @overload
     def request(
         self: Self,
-        url: UserRetweetsUrl,
+        url: V2UserRetweetsUrl,
     ) -> V2UserRetweetsResources:
         ...
 
     @overload
     def request(
         self: Self,
-        url: UserTweetsUrl,
+        url: V2UserTweetsUrl,
     ) -> V2UserTweetsResources:
         ...
 
     @overload
     def request(
         self: Self,
-        url: DmConversationsWithParticipantMessagesUrl,
+        url: V2DmConversationsWithParticipantMessagesUrl,
     ) -> V2DmConversationsWithParticipantMessagesResources:
         ...
 
     @overload
     def request(
         self: Self,
-        url: DmConversationsUrl,
+        url: V2DmConversationsUrl,
     ) -> V2DmConversationsResources:
         ...
 
     @overload
     def request(
         self: Self,
-        url: DmConversationsMessagesUrl,
+        url: V2DmConversationsMessagesUrl,
     ) -> V2DmConversationMessagesResources:
         ...
 
@@ -229,22 +229,22 @@ class TwitterApiClient(metaclass=ABCMeta):
             OauthRequestTokenUrl,
             Oauth2InvalidateTokenUrl,
             Oauth2TokenUrl,
-            TweetRetweetedByUrl,
-            TweetsSearchAllUrl,
-            TweetsSearchRecentUrl,
-            TweetsSearchStreamUrl,
-            TweetsUrl,
-            TweetUrl,
-            UserFollowersUrl,
-            UserFollowingUrl,
-            UserRetweetsUrl,
-            UserLikedTweetsUrl,
-            UserTweetsUrl,
-            UsersUrl,
-            UserUrl,
-            DmConversationsWithParticipantMessagesUrl,
-            DmConversationsUrl,
-            DmConversationsMessagesUrl,
+            V2TweetRetweetedByUrl,
+            V2TweetsSearchAllUrl,
+            V2TweetsSearchRecentUrl,
+            V2TweetsSearchStreamUrl,
+            V2TweetsUrl,
+            V2TweetUrl,
+            V2UserFollowersUrl,
+            V2UserFollowingUrl,
+            V2UserRetweetsUrl,
+            V2UserLikedTweetsUrl,
+            V2UserTweetsUrl,
+            V2UsersUrl,
+            V2UserUrl,
+            V2DmConversationsWithParticipantMessagesUrl,
+            V2DmConversationsUrl,
+            V2DmConversationsMessagesUrl,
         ],
     ):
         """

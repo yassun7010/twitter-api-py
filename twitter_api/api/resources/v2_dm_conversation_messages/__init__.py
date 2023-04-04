@@ -7,7 +7,7 @@ from .post_dm_conversations_messages import (
     V2PostDmConversationMessagesResponseBody,
 )
 
-DmConversationsMessagesUrl: TypeAlias = Literal[
+V2DmConversationsMessagesUrl: TypeAlias = Literal[
     "https://api.twitter.com/2/dm_conversations/:dm_conversation_id/messages"
 ]
 

@@ -4,7 +4,7 @@ from typing_extensions import Literal
 
 from .get_tweets_search_all import V2GetTweetsSearchAllResources
 
-TweetsSearchAllUrl: TypeAlias = Literal["https://api.twitter.com/2/tweets/search/all"]
+V2TweetsSearchAllUrl: TypeAlias = Literal["https://api.twitter.com/2/tweets/search/all"]
 
 
 class V2TweetsSearchAllResources(V2GetTweetsSearchAllResources):
