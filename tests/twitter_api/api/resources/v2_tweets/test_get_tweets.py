@@ -62,6 +62,9 @@ class TestMockV2GetTweets:
             .inject_get_response_body("https://api.twitter.com/2/tweets", response)
             .request("https://api.twitter.com/2/tweets")
             .get(
-                {"ids": "1460323737035677698", "expansions": ["attachments.media_keys"]}
+                {
+                    "ids": "1460323737035677698",
+                    "expansions": ["attachments.media_keys"],
+                }
             )
         ) == response
