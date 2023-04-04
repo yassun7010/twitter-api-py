@@ -33,7 +33,7 @@ from twitter_api.api.resources.v2_tweet_retweeted_by.get_tweet_retweeted_by impo
 )
 from twitter_api.api.resources.v2_tweets import V2TweetsUrl
 from twitter_api.api.resources.v2_tweets.get_tweets import V2GetTweetsResponseBody
-from twitter_api.api.resources.v2_tweets.post_tweet import V2PostTweetResponseBody
+from twitter_api.api.resources.v2_tweets.post_tweets import V2PostTweetsResponseBody
 from twitter_api.api.resources.v2_tweets_search_all import V2TweetsSearchAllUrl
 from twitter_api.api.resources.v2_tweets_search_all.get_tweets_search_all import (
     V2GetTweetsSearchAllResponseBody,
@@ -269,7 +269,7 @@ class TwitterApiMockClient(TwitterApiClient):
         self,
         url: V2TweetsUrl,
         response_body: Union[
-            V2PostTweetResponseBody,
+            V2PostTweetsResponseBody,
             TwitterApiError,
         ],
     ) -> Self:
