@@ -58,5 +58,4 @@ class TestMockOauth2PostInvalidateToken:
                 api_secret="DUMMY_API_SECRET",
                 query={"access_token": "DUMMY_ACCESS_TOKEN"},
             )
-            == expected_response
-        )
+        ) == expected_response

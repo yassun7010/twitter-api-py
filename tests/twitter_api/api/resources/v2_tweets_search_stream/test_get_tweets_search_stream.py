@@ -60,5 +60,4 @@ class TestMockV2GetTweetsSearchStream:
                     "media.fields": ["preview_image_url"],
                 }
             )
-            == expected_response
-        )
+        ) == expected_response

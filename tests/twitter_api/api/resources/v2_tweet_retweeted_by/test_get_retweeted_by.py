@@ -38,5 +38,4 @@ class TestMockV2GetRetweetedBy:
             )
             .request("https://api.twitter.com/2/tweets/:id/retweeted_by")
             .get("1234567890123456789")
-            == expected_response
-        )
+        ) == expected_response

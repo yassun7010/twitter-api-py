@@ -48,5 +48,4 @@ class TestMockV2GetUsers:
             )
             .request("https://api.twitter.com/2/users")
             .get({"ids": ["2244994945"]})
-            == expected_response
-        )
+        ) == expected_response

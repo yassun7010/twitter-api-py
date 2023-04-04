@@ -41,5 +41,4 @@ class TestMockV2GetTweetsSearchAll:
             )
             .request("https://api.twitter.com/2/tweets/search/all")
             .get({"query": "ツイート"})
-            == expected_response
-        )
+        ) == expected_response

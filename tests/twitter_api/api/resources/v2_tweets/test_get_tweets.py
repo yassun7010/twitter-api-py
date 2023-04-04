@@ -64,5 +64,4 @@ class TestMockV2GetTweets:
             .get(
                 {"ids": "1460323737035677698", "expansions": ["attachments.media_keys"]}
             )
-            == response
-        )
+        ) == response

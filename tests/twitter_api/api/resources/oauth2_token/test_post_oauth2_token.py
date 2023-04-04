@@ -59,5 +59,4 @@ class TestMockOauth2PostToken:
                 api_secret="DUMMY_API_SECRET",
                 query={"grant_type": "client_credentials"},
             )
-            == expected_response
-        )
+        ) == expected_response

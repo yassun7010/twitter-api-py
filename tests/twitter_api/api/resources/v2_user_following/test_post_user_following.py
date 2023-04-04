@@ -53,5 +53,4 @@ class TestMockV2GetUserFollowing:
             )
             .request("https://api.twitter.com/2/users/:id/following")
             .post("2244994945", {"target_user_id": "2244994945"})
-            == expected_response
-        )
+        ) == expected_response

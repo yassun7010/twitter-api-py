@@ -53,5 +53,4 @@ class TestMockV2GetUserRetweets:
             )
             .request("https://api.twitter.com/2/users/:id/retweets")
             .post("2244994945", {"tweet_id": "1228393702244134912"})
-            == expected_response
-        )
+        ) == expected_response

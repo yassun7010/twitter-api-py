@@ -50,5 +50,4 @@ class TestMockV2GetUserFollowers:
             )
             .request("https://api.twitter.com/2/users/:id/followers")
             .get("2244994945")
-            == expected_response
-        )
+        ) == expected_response

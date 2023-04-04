@@ -53,5 +53,4 @@ class TestMockV2GetTweet:
             )
             .request("https://api.twitter.com/2/tweets")
             .post({"text": tweet.text})
-            == expected_response
-        )
+        ) == expected_response

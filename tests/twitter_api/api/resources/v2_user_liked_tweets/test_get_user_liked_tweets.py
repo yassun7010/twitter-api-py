@@ -50,5 +50,4 @@ class TestMockV2GetUserLikedTweets:
             )
             .request("https://api.twitter.com/2/users/:id/liked_tweets")
             .get("2244994945")
-            == expected_response
-        )
+        ) == expected_response

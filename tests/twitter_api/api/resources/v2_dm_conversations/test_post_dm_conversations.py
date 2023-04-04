@@ -70,5 +70,4 @@ class TestMockV2GetUserFollowing:
                     },
                 },
             )
-            == expected_response
-        )
+        ) == expected_response

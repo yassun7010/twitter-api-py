@@ -59,5 +59,4 @@ class TestMockV2GetUserFollowing:
                 "with/:participant_id/messages"
             )
             .post("2244994945", {"text": "DM のテスト。"})
-            == expected_response
-        )
+        ) == expected_response
