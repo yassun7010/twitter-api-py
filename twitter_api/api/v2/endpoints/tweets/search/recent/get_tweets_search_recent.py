@@ -82,7 +82,7 @@ class V2GetTweetsSearchRecentResources(ApiResources):
 
         refer: https://developer.twitter.com/en/docs/twitter-api/tweets/search/api-reference/get-tweets-search-recent
         """
-        return self._client.get(
+        return self.request_client.get(
             endpoint=ENDPOINT,
             response_type=V2GetTweetsSearchRecentResponseBody,
             query=_make_query(query) if query is not None else None,

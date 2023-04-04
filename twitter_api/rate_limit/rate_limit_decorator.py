@@ -13,7 +13,21 @@ def rate_limit(
     target: RateLimitTarget,
     *,
     requests: int,
+    hours: int,
+    mins: Literal[None] = None,
+    seconds: Literal[None] = None,
+) -> Callable:
+    ...
+
+
+@overload
+def rate_limit(
+    endpoint: Endpoint,
+    target: RateLimitTarget,
+    *,
+    requests: int,
     seconds: int,
+    hours: Literal[None] = None,
     mins: Literal[None] = None,
 ) -> Callable:
     ...
@@ -26,6 +40,7 @@ def rate_limit(
     *,
     requests: int,
     mins: int,
+    hours: Literal[None] = None,
     seconds: Literal[None] = None,
 ) -> Callable:
     ...
@@ -36,6 +51,7 @@ def rate_limit(
     target: RateLimitTarget,
     *,
     requests: int,
+    hours: Optional[int] = None,
     mins: Optional[int] = None,
     seconds: Optional[int] = None,
 ) -> Callable:
@@ -53,10 +69,12 @@ def rate_limit(
             # RateLimitTarget が一致する場合、 LimitOver を確認する。
             if self.request_client.rate_limit_target == target:
                 total_seconds = 0
-                if seconds is not None:
-                    total_seconds += seconds
+                if hours is not None:
+                    total_seconds += 3600 * hours
                 if mins is not None:
                     total_seconds += 60 * mins
+                if seconds is not None:
+                    total_seconds += seconds
 
                 data = RateLimitInfo(
                     target=target,

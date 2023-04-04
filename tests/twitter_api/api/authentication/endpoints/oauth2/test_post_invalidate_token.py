@@ -3,9 +3,7 @@ import os
 import pytest
 
 from tests.conftest import synthetic_monitoring_is_disable
-from twitter_api.api.authentication.endpoints.oauth2.post_invalidate_token import (
-    Oauth2PostInvalidateTokenResponseBody,
-)
+from twitter_api.api.responses import Oauth2PostInvalidateTokenResponseBody
 from twitter_api.client.twitter_api_mock_client import TwitterApiMockClient
 from twitter_api.client.twitter_api_real_client import TwitterApiRealClient
 
@@ -18,7 +16,7 @@ class TestOauth2PostInvalidateToken:
     ):
         expected_response = Oauth2PostInvalidateTokenResponseBody(
             access_token=(
-                real_app_auth_v2_client._client._auth.token["access_token"]
+                real_app_auth_v2_client._real_request_client._auth.token["access_token"]
                 # pyright: reportOptionalSubscript=false
                 # pyright: reportOptionalMemberAccess=false
             ),

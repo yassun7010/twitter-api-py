@@ -59,7 +59,7 @@ class V2GetTweetRetweetedByResources(ApiResources):
 
         refer: https://developer.twitter.com/en/docs/twitter-api/tweets/retweets/api-reference/get-tweets-id-retweeted_by
         """
-        return self._client.get(
+        return self.request_client.get(
             endpoint=ENDPOINT,
             response_type=V2GetTweetRetweetedByResponseBody,
             url=ENDPOINT.url.replace(":id", id),

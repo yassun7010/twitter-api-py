@@ -5,27 +5,31 @@ import twitter_api.api.v2.endpoints.tweets.search.all as tweets_search_all
 import twitter_api.api.v2.endpoints.tweets.search.recent as tweets_search_recent
 import twitter_api.api.v2.endpoints.tweets.search.stream as tweets_search_stream
 import twitter_api.api.v2.endpoints.users.tweets as user_tweets
-from twitter_api.api.authentication.endpoints.oauth import post_request_token
-from twitter_api.api.authentication.endpoints.oauth2 import (
-    post_invalidate_token,
-    post_token,
+from twitter_api.api.authentication.endpoints.oauth import (
+    request_token as oauth_request_token,
+)
+from twitter_api.api.authentication.endpoints.oauth2 import invalidate_token, token
+from twitter_api.api.responses import (
+    Oauth2PostInvalidateTokenResponseBody,
+    Oauth2PostTokenResponseBody,
+    OauthPostRequestTokenResponseBody,
+    V2DeleteTweetResponseBody,
+    V2GetTweetResponseBody,
+    V2GetTweetRetweetedByResponseBody,
+    V2GetTweetsResponseBody,
+    V2GetTweetsSearchAllResponseBody,
+    V2GetTweetsSearchRecentResponseBody,
+    V2GetTweetsSearchStreamResponseBody,
+    V2GetUserFollowersResponseBody,
+    V2GetUserLikedTweetsResponseBody,
+    V2GetUserResponseBody,
+    V2GetUsersResponseBody,
+    V2GetUserTweetsResponseBody,
+    V2PostTweetResponseBody,
+    V2PostUserFollowingResponseBody,
 )
 from twitter_api.api.v2.endpoints import tweets, users
-from twitter_api.api.v2.endpoints.tweets.retweeted_by import get_tweet_retweeted_by
-from twitter_api.api.v2.endpoints.tweets.search.all import get_tweets_search_all
-from twitter_api.api.v2.endpoints.tweets.search.recent import get_tweets_search_recent
-from twitter_api.api.v2.endpoints.tweets.search.stream import get_tweets_search_stream
-from twitter_api.api.v2.endpoints.users import (
-    followers,
-    following,
-    get_user,
-    get_users,
-    liked_tweets,
-)
-from twitter_api.api.v2.endpoints.users.followers import get_user_followers
-from twitter_api.api.v2.endpoints.users.following import post_user_following
-from twitter_api.api.v2.endpoints.users.liked_tweets import get_user_liked_tweets
-from twitter_api.api.v2.endpoints.users.tweets import get_user_tweets
+from twitter_api.api.v2.endpoints.users import followers, following, liked_tweets
 from twitter_api.error import TwitterApiError
 from twitter_api.rate_limit.manager.rate_limit_manager import RateLimitManager
 from twitter_api.rate_limit.rate_limit_target import RateLimitTarget
@@ -69,7 +73,7 @@ class TwitterApiMockClient(TwitterApiClient):
         self,
         url: tweets.TweetsUrl,
         response_body: Union[
-            tweets.get_tweets.V2GetTweetsResponseBody,
+            V2GetTweetsResponseBody,
             TwitterApiError,
         ],
     ) -> Self:
@@ -80,7 +84,7 @@ class TwitterApiMockClient(TwitterApiClient):
         self,
         url: tweets.TweetUrl,
         response_body: Union[
-            tweets.get_tweet.V2GetTweetResponseBody,
+            V2GetTweetResponseBody,
             TwitterApiError,
         ],
     ) -> Self:
@@ -91,7 +95,7 @@ class TwitterApiMockClient(TwitterApiClient):
         self,
         url: tweet_retweeted_by.TweetRetweetedByUrl,
         response_body: Union[
-            get_tweet_retweeted_by.V2GetTweetRetweetedByResponseBody,
+            V2GetTweetRetweetedByResponseBody,
             TwitterApiError,
         ],
     ) -> Self:
@@ -102,7 +106,7 @@ class TwitterApiMockClient(TwitterApiClient):
         self,
         url: tweets_search_all.TweetsSearchAllUrl,
         response_body: Union[
-            get_tweets_search_all.V2GetTweetsSearchAllResponseBody,
+            V2GetTweetsSearchAllResponseBody,
             TwitterApiError,
         ],
     ) -> Self:
@@ -113,7 +117,7 @@ class TwitterApiMockClient(TwitterApiClient):
         self,
         url: tweets_search_recent.TweetsSearchRecentUrl,
         response_body: Union[
-            get_tweets_search_recent.V2GetTweetsSearchRecentResponseBody,
+            V2GetTweetsSearchRecentResponseBody,
             TwitterApiError,
         ],
     ) -> Self:
@@ -124,7 +128,7 @@ class TwitterApiMockClient(TwitterApiClient):
         self,
         url: tweets_search_stream.TweetsSearchStreamUrl,
         response_body: Union[
-            get_tweets_search_stream.V2GetTweetsSearchStreamResponseBody,
+            V2GetTweetsSearchStreamResponseBody,
             TwitterApiError,
         ],
     ) -> Self:
@@ -135,7 +139,7 @@ class TwitterApiMockClient(TwitterApiClient):
         self,
         url: users.UsersUrl,
         response_body: Union[
-            get_users.V2GetUsersResponseBody,
+            V2GetUsersResponseBody,
             TwitterApiError,
         ],
     ) -> Self:
@@ -146,7 +150,7 @@ class TwitterApiMockClient(TwitterApiClient):
         self,
         url: users.UserUrl,
         response_body: Union[
-            get_user.V2GetUserResponseBody,
+            V2GetUserResponseBody,
             TwitterApiError,
         ],
     ) -> Self:
@@ -157,7 +161,7 @@ class TwitterApiMockClient(TwitterApiClient):
         self,
         url: liked_tweets.UserLikedTweetsUrl,
         response_body: Union[
-            get_user_liked_tweets.V2GetUserLikedTweetsResponseBody,
+            V2GetUserLikedTweetsResponseBody,
             TwitterApiError,
         ],
     ) -> Self:
@@ -168,7 +172,7 @@ class TwitterApiMockClient(TwitterApiClient):
         self,
         url: followers.UserFollowersUrl,
         response_body: Union[
-            get_user_followers.V2GetUserFollowersResponseBody,
+            V2GetUserFollowersResponseBody,
             TwitterApiError,
         ],
     ) -> Self:
@@ -179,7 +183,7 @@ class TwitterApiMockClient(TwitterApiClient):
         self,
         url: user_tweets.UserTweetsUrl,
         response_body: Union[
-            get_user_tweets.V2GetUserTweetsResponseBody,
+            V2GetUserTweetsResponseBody,
             TwitterApiError,
         ],
     ) -> Self:
@@ -193,9 +197,17 @@ class TwitterApiMockClient(TwitterApiClient):
     @overload
     def inject_post_response_body(
         self,
-        url: post_request_token.Url,
+        url: oauth_request_token.OauthRequestTokenUrl,
+        response_body: Union[OauthPostRequestTokenResponseBody, TwitterApiError],
+    ) -> Self:
+        ...
+
+    @overload
+    def inject_post_response_body(
+        self,
+        url: invalidate_token.Oauth2InvalidateTokenUrl,
         response_body: Union[
-            post_request_token.OauthPostRequestTokenResponseBody,
+            Oauth2PostInvalidateTokenResponseBody,
             TwitterApiError,
         ],
     ) -> Self:
@@ -204,20 +216,9 @@ class TwitterApiMockClient(TwitterApiClient):
     @overload
     def inject_post_response_body(
         self,
-        url: post_invalidate_token.Url,
+        url: token.Oauth2TokenUrl,
         response_body: Union[
-            post_invalidate_token.Oauth2PostInvalidateTokenResponseBody,
-            TwitterApiError,
-        ],
-    ) -> Self:
-        ...
-
-    @overload
-    def inject_post_response_body(
-        self,
-        url: post_token.Url,
-        response_body: Union[
-            post_token.Oauth2PostTokenResponseBody,
+            Oauth2PostTokenResponseBody,
             TwitterApiError,
         ],
     ) -> Self:
@@ -228,7 +229,7 @@ class TwitterApiMockClient(TwitterApiClient):
         self,
         url: tweets.TweetsUrl,
         response_body: Union[
-            tweets.post_tweet.V2PostTweetResponseBody,
+            V2PostTweetResponseBody,
             TwitterApiError,
         ],
     ) -> Self:
@@ -239,7 +240,7 @@ class TwitterApiMockClient(TwitterApiClient):
         self,
         url: following.UserFollowingUrl,
         response_body: Union[
-            post_user_following.V2PostUserFollowingResponseBody,
+            V2PostUserFollowingResponseBody,
             TwitterApiError,
         ],
     ) -> Self:
@@ -254,7 +255,7 @@ class TwitterApiMockClient(TwitterApiClient):
         self,
         url: tweets.TweetUrl,
         response_body: Union[
-            tweets.delete_tweet.V2DeleteTweetResponseBody,
+            V2DeleteTweetResponseBody,
             TwitterApiError,
         ],
     ) -> Self:

@@ -2,9 +2,7 @@ import pytest
 
 from tests.conftest import synthetic_monitoring_is_disable
 from tests.data import JsonDataLoader
-from twitter_api.api.v2.endpoints.users.following.post_user_following import (
-    V2PostUserFollowingResponseBody,
-)
+from twitter_api.api.responses import V2PostUserFollowingResponseBody
 from twitter_api.client.twitter_api_mock_client import TwitterApiMockClient
 from twitter_api.client.twitter_api_real_client import TwitterApiRealClient
 from twitter_api.error import TwitterApiResponseFailed

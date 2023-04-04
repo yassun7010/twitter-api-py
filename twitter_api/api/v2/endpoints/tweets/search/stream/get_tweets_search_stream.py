@@ -62,7 +62,7 @@ class V2GetTweetsSearchStreamResources(ApiResources):
 
         refer: https://developer.twitter.com/en/docs/twitter-api/tweets/filtered-stream/api-reference/get-tweets-search-stream
         """
-        return self._client.get(
+        return self.request_client.get(
             endpoint=ENDPOINT,
             response_type=V2GetTweetsSearchStreamResponseBody,
             query=_make_query(query) if query is not None else None,

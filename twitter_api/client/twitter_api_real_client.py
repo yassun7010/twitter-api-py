@@ -26,11 +26,11 @@ class TwitterApiRealClient(TwitterApiClient):
         self,
         request_client: RealRequestClient,
     ) -> None:
-        self._client = request_client
+        self._real_request_client = request_client
 
     @property
     def _request_client(self) -> RequestClient:
-        return self._client
+        return self._real_request_client
 
     @classmethod
     def from_bearer_token(
@@ -69,7 +69,7 @@ class TwitterApiRealClient(TwitterApiClient):
             ),
         )
 
-        client._client._auth = OAuth2Auth(
+        client._real_request_client._auth = OAuth2Auth(
             token={
                 "access_token": (
                     client.request("https://api.twitter.com/oauth2/token")

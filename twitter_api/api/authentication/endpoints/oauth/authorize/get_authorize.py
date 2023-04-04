@@ -1,15 +1,13 @@
-from typing import Literal, NotRequired, Optional, TypedDict
+from typing import NotRequired, Optional, TypedDict
 
 from twitter_api.client.request.request_client import RequestClient
 from twitter_api.types.endpoint import Endpoint
 from twitter_api.types.screen_name import ScreenName
 
-Url = Literal["https://api.twitter.com/oauth/authorize"]
-
 ENDPOINT = Endpoint("GET", "https://api.twitter.com/oauth/authorize")
 
-GetOauthAuthenticateQueryParameters = TypedDict(
-    "GetOauthAuthenticateQueryParameters",
+OauthGetAuthorizeQueryParameters = TypedDict(
+    "OauthGetAuthorizeQueryParameters",
     {
         "oauth_token": str,
         "force_login": NotRequired[Optional[bool]],
@@ -18,13 +16,13 @@ GetOauthAuthenticateQueryParameters = TypedDict(
 )
 
 
-class GetOauthAuthenticate:
+class OauthGetAuthorize:
     def __init__(self, client: RequestClient) -> None:
         self._client = client
 
     def get(
         self,
-        query: Optional[GetOauthAuthenticateQueryParameters] = None,
+        query: Optional[OauthGetAuthorizeQueryParameters] = None,
     ) -> dict:
         # flake8: noqa E501
         """
