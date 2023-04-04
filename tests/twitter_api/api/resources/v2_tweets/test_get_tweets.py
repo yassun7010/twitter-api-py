@@ -55,11 +55,13 @@ class TestMockV2GetTweets:
             edit_history_tweet_ids=["56789"],
         )
 
-        response = V2GetTweetsResponseBody(data=[tweet for _ in range(10)])
+        expected_response = V2GetTweetsResponseBody(data=[tweet for _ in range(10)])
 
         assert (
             mock_app_auth_v2_client.chain()
-            .inject_get_response_body("https://api.twitter.com/2/tweets", response)
+            .inject_get_response_body(
+                "https://api.twitter.com/2/tweets", expected_response
+            )
             .request("https://api.twitter.com/2/tweets")
             .get(
                 {
@@ -67,4 +69,4 @@ class TestMockV2GetTweets:
                     "expansions": ["attachments.media_keys"],
                 }
             )
-        ) == response
+        ) == expected_response

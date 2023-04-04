@@ -92,7 +92,7 @@ twitter_client = TwitterApiMockClient.from_app_auth_v2_env()
 
 response = (
     twitter_client.chain()
-    .inject_get_response_body("https://api.twitter.com/2/tweets", response)
+    .inject_get_response_body("https://api.twitter.com/2/tweets", expected_response)
     .request("https://api.twitter.com/2/tweets").get(
         {"ids": "1460323737035677698", "expansions": ["attachments.media_keys"]}
     )
