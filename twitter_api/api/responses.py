@@ -7,6 +7,9 @@ from .authentication.endpoints.oauth2.token.post_token import (
 from .authentication.endpoints.oauth.request_token.post_request_token import (
     OauthPostRequestTokenResponseBody,
 )
+from .v2.endpoints.dm_conversations.messages.post_dm_conversations_messages import (
+    V2PostDmConversationMessagesResponseBody,
+)
 from .v2.endpoints.dm_conversations.post_dm_conversations import (
     V2PostDmConversationsResponseBody,
 )
@@ -89,6 +92,7 @@ __all__ = [
     "V2GetUserTweetsResponseBody",
     "V2GetUserTweetsResponseBodyIncludes",
     "V2GetUserTweetsResponseBodyMeta",
+    "V2PostDmConversationMessagesResponseBody",
     "V2PostDmConversationsResponseBody",
     "V2PostDmConversationsWithParticipantMessagesResponseBody",
     "V2PostTweetResponseBody",

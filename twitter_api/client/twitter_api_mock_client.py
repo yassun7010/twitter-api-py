@@ -25,13 +25,14 @@ from twitter_api.api.responses import (
     V2GetUserResponseBody,
     V2GetUsersResponseBody,
     V2GetUserTweetsResponseBody,
+    V2PostDmConversationMessagesResponseBody,
     V2PostDmConversationsResponseBody,
     V2PostDmConversationsWithParticipantMessagesResponseBody,
     V2PostTweetResponseBody,
     V2PostUserFollowingResponseBody,
 )
 from twitter_api.api.v2.endpoints import dm_conversations, tweets, users
-from twitter_api.api.v2.endpoints.dm_conversations import with_messages
+from twitter_api.api.v2.endpoints.dm_conversations import messages, with_messages
 from twitter_api.api.v2.endpoints.users import followers, following, liked_tweets
 from twitter_api.error import TwitterApiError
 from twitter_api.rate_limit.manager.rate_limit_manager import RateLimitManager
@@ -266,6 +267,17 @@ class TwitterApiMockClient(TwitterApiClient):
         url: dm_conversations.DmConversationsUrl,
         response_body: Union[
             V2PostDmConversationsResponseBody,
+            TwitterApiError,
+        ],
+    ) -> Self:
+        ...
+
+    @overload
+    def inject_post_response_body(
+        self,
+        url: messages.DmConversationsMessagesUrl,
+        response_body: Union[
+            V2PostDmConversationMessagesResponseBody,
             TwitterApiError,
         ],
     ) -> Self:
