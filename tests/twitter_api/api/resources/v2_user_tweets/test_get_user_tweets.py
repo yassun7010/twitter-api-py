@@ -41,8 +41,8 @@ class TestMockV2GetUserTweets:
         json_data_loader: JsonDataLoader,
         json_filename: str,
     ):
-        expected_response = V2GetUserTweetsResponseBody(
-            **json_data_loader.load(json_filename)
+        expected_response = V2GetUserTweetsResponseBody.parse_obj(
+            json_data_loader.load(json_filename)
         )
 
         assert (

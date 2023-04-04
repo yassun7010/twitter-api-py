@@ -27,8 +27,8 @@ class TestMockV2GetRetweetedBy:
         mock_app_auth_v2_client: TwitterApiMockClient,
         json_data_loader: JsonDataLoader,
     ):
-        expected_response = V2GetTweetRetweetedByResponseBody(
-            **json_data_loader.load("get_retweeted_by_response.json")
+        expected_response = V2GetTweetRetweetedByResponseBody.parse_obj(
+            json_data_loader.load("get_retweeted_by_response.json")
         )
 
         assert (

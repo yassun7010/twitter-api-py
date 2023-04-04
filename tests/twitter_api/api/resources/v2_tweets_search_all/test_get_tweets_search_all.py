@@ -30,8 +30,8 @@ class TestMockV2GetTweetsSearchAll:
         mock_app_auth_v2_client: TwitterApiMockClient,
         json_data_loader: JsonDataLoader,
     ):
-        expected_response = V2GetTweetsSearchAllResponseBody(
-            **json_data_loader.load("get_tweets_search_all_response.json")
+        expected_response = V2GetTweetsSearchAllResponseBody.parse_obj(
+            json_data_loader.load("get_tweets_search_all_response.json")
         )
 
         assert (

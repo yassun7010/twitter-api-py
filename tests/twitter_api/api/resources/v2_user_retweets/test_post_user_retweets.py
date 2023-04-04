@@ -42,8 +42,8 @@ class TestMockV2GetUserRetweets:
         json_data_loader: JsonDataLoader,
         json_filename: str,
     ):
-        expected_response = V2PostUserRetweetsResponseBody(
-            **json_data_loader.load(json_filename)
+        expected_response = V2PostUserRetweetsResponseBody.parse_obj(
+            json_data_loader.load(json_filename)
         )
 
         assert (

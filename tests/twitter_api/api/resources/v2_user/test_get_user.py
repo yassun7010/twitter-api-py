@@ -37,8 +37,8 @@ class TestMockV2GetUser:
         json_data_loader: JsonDataLoader,
         json_filename: str,
     ):
-        expected_response = V2GetUserResponseBody(
-            **json_data_loader.load(json_filename)
+        expected_response = V2GetUserResponseBody.parse_obj(
+            json_data_loader.load(json_filename)
         )
 
         assert (

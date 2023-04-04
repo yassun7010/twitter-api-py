@@ -39,8 +39,8 @@ class TestMockV2GetUserFollowers:
         json_data_loader: JsonDataLoader,
         json_filename: str,
     ):
-        expected_response = V2GetUserFollowersResponseBody(
-            **json_data_loader.load(json_filename)
+        expected_response = V2GetUserFollowersResponseBody.parse_obj(
+            json_data_loader.load(json_filename)
         )
 
         assert (
