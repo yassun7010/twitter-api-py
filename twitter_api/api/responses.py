@@ -60,9 +60,6 @@ from .v2.endpoints.users.tweets.get_user_tweets import (
 V2PostDmConversationsWithParticipantMessagesResponseBody = (
     participant_messages.V2PostDmConversationsWithParticipantMessagesResponseBody
 )
-V2PostDmConversationsWithParticipantMessagesResponseBodyData = (
-    participant_messages.V2PostDmConversationsWithParticipantMessagesResponseBodyData
-)
 
 
 __all__ = [
@@ -91,7 +88,6 @@ __all__ = [
     "V2GetUserTweetsResponseBodyIncludes",
     "V2GetUserTweetsResponseBodyMeta",
     "V2PostDmConversationsWithParticipantMessagesResponseBody",
-    "V2PostDmConversationsWithParticipantMessagesResponseBodyData",
     "V2PostTweetResponseBody",
     "V2PostUserFollowingResponseBody",
     "V2PostUserFollowingResponseBodyData",

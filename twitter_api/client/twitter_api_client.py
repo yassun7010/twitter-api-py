@@ -11,6 +11,7 @@ from twitter_api.api.authentication.endpoints.oauth2 import (
 from twitter_api.api.authentication.endpoints.oauth2 import token as oauth2_token
 from twitter_api.api.v2.endpoints import tweets as v2_tweets
 from twitter_api.api.v2.endpoints import users as v2_users
+from twitter_api.api.v2.endpoints.dm_conversations import with_messages
 from twitter_api.api.v2.endpoints.tweets import retweeted_by as v2_tweet_retweeted_by
 from twitter_api.api.v2.endpoints.tweets.search import all as v2_tweets_search_all
 from twitter_api.api.v2.endpoints.tweets.search import recent as v2_tweets_search_recent
@@ -151,6 +152,13 @@ class TwitterApiClient(metaclass=ABCMeta):
     ) -> v2_user_tweets.V2UserTweetsResources:
         ...
 
+    @overload
+    def request(
+        self: Self,
+        url: with_messages.DmConversationsWithParticipantMessagesUrl,
+    ) -> with_messages.V2DmConversationsWithParticipantMessagesResources:
+        ...
+
     def request(
         self: Self,
         url: Union[
@@ -169,6 +177,7 @@ class TwitterApiClient(metaclass=ABCMeta):
             v2_user_tweets.UserTweetsUrl,
             v2_users.UsersUrl,
             v2_users.UserUrl,
+            with_messages.DmConversationsWithParticipantMessagesUrl,
         ],
     ):
         """
@@ -233,6 +242,12 @@ class TwitterApiClient(metaclass=ABCMeta):
             )
         elif url == "https://api.twitter.com/2/users/:id/tweets":
             return v2_user_tweets.V2UserTweetsResources(
+                self._request_client,
+            )
+        elif url == (
+            "https://api.twitter.com/2/dm_conversations/with/:participant_id/messages"
+        ):
+            return with_messages.V2DmConversationsWithParticipantMessagesResources(
                 self._request_client,
             )
         else:
