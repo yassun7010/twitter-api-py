@@ -1,6 +1,6 @@
 from typing import Callable, Literal, Optional, overload
 
-from twitter_api.api.api_resources import ApiResources
+from twitter_api.api.resources.api_resources import ApiResources
 from twitter_api.error import RateLimitOverError
 from twitter_api.rate_limit.rate_limit_info import RateLimitInfo
 from twitter_api.rate_limit.rate_limit_target import RateLimitTarget
