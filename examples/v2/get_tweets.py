@@ -12,6 +12,7 @@ try:
         .get(
             {"ids": ["1460323737035677698"]},
         )
+        .data
     )
 
     print(tweets)
