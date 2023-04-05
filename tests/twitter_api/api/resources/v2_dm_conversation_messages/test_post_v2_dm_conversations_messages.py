@@ -12,7 +12,7 @@ from twitter_api.client.twitter_api_real_client import TwitterApiRealClient
 @pytest.mark.skipif(**synthetic_monitoring_is_disable())
 class TestGetV2UserFollowing:
     @pytest.mark.skip("You do not have permission to DM one or more participants.")
-    def test_get_user_following(
+    def test_get_v2_user_following(
         self,
         real_user_auth_v1_client: TwitterApiRealClient,
     ):
@@ -37,7 +37,7 @@ class TestMockGetV2UserFollowing:
             "post_dm_conversations_messages.json",
         ],
     )
-    def test_mock_get_user_following(
+    def test_mock_get_v2_user_following(
         self,
         mock_app_auth_v2_client: TwitterApiMockClient,
         json_data_loader: JsonDataLoader,

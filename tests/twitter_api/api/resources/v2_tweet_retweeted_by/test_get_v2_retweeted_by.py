@@ -11,7 +11,9 @@ from twitter_api.client.twitter_api_real_client import TwitterApiRealClient
 
 @pytest.mark.skipif(**synthetic_monitoring_is_disable())
 class TestGetV2RetweetedBy:
-    def test_get_retweeted_by(self, real_app_auth_v2_client: TwitterApiRealClient):
+    def test_get_v2_tweet_retweeted_by(
+        self, real_app_auth_v2_client: TwitterApiRealClient
+    ):
         real_response = real_app_auth_v2_client.request(
             "https://api.twitter.com/2/tweets/:id/retweeted_by"
         ).get("1460323737035677698")
@@ -22,7 +24,7 @@ class TestGetV2RetweetedBy:
 
 
 class TestMockGetV2RetweetedBy:
-    def test_mock_get_retweeted_by(
+    def test_mock_get_v2_tweet_retweeted_by(
         self,
         mock_app_auth_v2_client: TwitterApiMockClient,
         json_data_loader: JsonDataLoader,

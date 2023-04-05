@@ -11,7 +11,7 @@ from twitter_api.client.twitter_api_real_client import TwitterApiRealClient
 
 @pytest.mark.skipif(**synthetic_monitoring_is_disable())
 class TestGetV2TweetsSearchRecent:
-    def test_get_search_recent(self, real_app_auth_v2_client: TwitterApiRealClient):
+    def test_get_v2_search_recent(self, real_app_auth_v2_client: TwitterApiRealClient):
         real_response = (
             real_app_auth_v2_client.chain()
             .request("https://api.twitter.com/2/tweets/search/recent")
@@ -31,7 +31,7 @@ class TestMockGetV2TweetsSearchRecent:
             "get_tweets_search_recent_response_empty_result.json",
         ],
     )
-    def test_mock_get_search_recent(
+    def test_mock_get_v2_search_recent(
         self,
         mock_app_auth_v2_client: TwitterApiMockClient,
         json_data_loader: JsonDataLoader,

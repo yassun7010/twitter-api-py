@@ -12,7 +12,7 @@ from twitter_api.client.twitter_api_real_client import TwitterApiRealClient
 @pytest.mark.skipif(**synthetic_monitoring_is_disable())
 class TestGetV2TweetsSearchAll:
     @pytest.mark.skipif(True, reason="プレミアムなアカウントでないとテストできない。")
-    def test_get_search_all(self, real_app_auth_v2_client: TwitterApiRealClient):
+    def test_get_v2_search_all(self, real_app_auth_v2_client: TwitterApiRealClient):
         real_response: GetV2TweetsSearchAllResponseBody = (
             real_app_auth_v2_client.chain()
             .request("https://api.twitter.com/2/tweets/search/all")
@@ -25,7 +25,7 @@ class TestGetV2TweetsSearchAll:
 
 
 class TestMockGetV2TweetsSearchAll:
-    def test_mock_get_search_all(
+    def test_mock_get_v2_search_all(
         self,
         mock_app_auth_v2_client: TwitterApiMockClient,
         json_data_loader: JsonDataLoader,

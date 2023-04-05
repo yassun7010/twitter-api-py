@@ -29,7 +29,7 @@ def tweet() -> TweetDetail:
 
 @pytest.mark.skipif(**synthetic_monitoring_is_disable())
 class TestGetV2Tweet:
-    def test_get_tweet(
+    def test_get_v2_tweet(
         self, real_app_auth_v2_client: TwitterApiRealClient, tweet: TweetDetail
     ):
         expected_response = GetV2TweetResponseBody(data=tweet)
@@ -44,7 +44,7 @@ class TestGetV2Tweet:
 
 
 class TestMockGetV2Tweet:
-    def test_mock_get_tweet(
+    def test_mock_get_v2_tweet(
         self, mock_app_auth_v2_client: TwitterApiMockClient, tweet: TweetDetail
     ):
         expected_response = GetV2TweetResponseBody(data=tweet)

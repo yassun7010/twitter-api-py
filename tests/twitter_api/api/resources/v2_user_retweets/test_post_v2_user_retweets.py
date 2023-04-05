@@ -15,7 +15,7 @@ class TestGetV2UserRetweets:
     @pytest.mark.skipif(
         True, reason="[OAuth 1.0a User Context, OAuth 2.0 User Context] が必要らしい。"
     )
-    def test_get_user_following(
+    def test_get_v2_user_following(
         self,
         real_app_auth_v2_client: TwitterApiRealClient,
     ):
@@ -36,7 +36,7 @@ class TestMockGetV2UserRetweets:
             "get_user_retweets_response.json",
         ],
     )
-    def test_mock_get_user_following(
+    def test_mock_get_v2_user_following(
         self,
         mock_app_auth_v2_client: TwitterApiMockClient,
         json_data_loader: JsonDataLoader,

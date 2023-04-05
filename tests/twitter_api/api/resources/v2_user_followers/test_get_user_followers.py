@@ -11,7 +11,7 @@ from twitter_api.client.twitter_api_real_client import TwitterApiRealClient
 
 @pytest.mark.skipif(**synthetic_monitoring_is_disable())
 class TestGetV2UserFollowers:
-    def test_get_user_followers(
+    def test_get_v2_user_followers(
         self,
         real_app_auth_v2_client: TwitterApiRealClient,
     ):
@@ -33,7 +33,7 @@ class TestMockGetV2UserFollowers:
             "get_user_followers_response.json",
         ],
     )
-    def test_mock_get_user_followers(
+    def test_mock_get_v2_user_followers(
         self,
         mock_app_auth_v2_client: TwitterApiMockClient,
         json_data_loader: JsonDataLoader,

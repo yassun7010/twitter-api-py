@@ -11,7 +11,7 @@ from twitter_api.client.twitter_api_real_client import TwitterApiRealClient
 
 @pytest.mark.skipif(**synthetic_monitoring_is_disable())
 class TestGetV2Tweet:
-    def test_get_tweet(self, real_user_auth_v1_client: TwitterApiRealClient):
+    def test_get_v2_tweet(self, real_user_auth_v1_client: TwitterApiRealClient):
         tweet_text = f"テストツイート。{datetime.now().isoformat()}"
         real_response = (
             real_user_auth_v1_client.chain()
@@ -37,7 +37,7 @@ class TestGetV2Tweet:
 
 
 class TestMockGetV2Tweet:
-    def test_mock_get_tweet(self, mock_app_auth_v2_client: TwitterApiMockClient):
+    def test_mock_get_v2_tweet(self, mock_app_auth_v2_client: TwitterApiMockClient):
         tweet = TweetDetail(
             id="1234567890123456789",
             text="ツイートしました。",
