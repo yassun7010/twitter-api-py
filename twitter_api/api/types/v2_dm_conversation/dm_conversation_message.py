@@ -7,7 +7,7 @@ from twitter_api.api.types.v2_dm_conversation.dm_conversation_attachment import 
 DmConversationAttachmentOnly = TypedDict(
     "DmConversationMessage",
     {
-        "attachments": DmConversationAttachment,
+        "attachments": list[DmConversationAttachment],
     },
 )
 
