@@ -2,15 +2,15 @@ from typing import Optional, Self, Union, overload
 
 from twitter_api.api.resources.oauth2_invalidate_token import Oauth2InvalidateTokenUrl
 from twitter_api.api.resources.oauth2_invalidate_token.post_oauth2_invalidate_token import (
-    Oauth2PostInvalidateTokenResponseBody,
+    PostOauth2InvalidateTokenResponseBody,
 )
 from twitter_api.api.resources.oauth2_token import Oauth2TokenUrl
 from twitter_api.api.resources.oauth2_token.post_oauth2_token import (
-    Oauth2PostTokenResponseBody,
+    PostOauth2TokenResponseBody,
 )
 from twitter_api.api.resources.oauth_request_token import OauthRequestTokenUrl
 from twitter_api.api.resources.oauth_request_token.post_oauth_request_token import (
-    OauthPostRequestTokenResponseBody,
+    PostOauthRequestTokenResponseBody,
 )
 from twitter_api.api.resources.v2_dm_conversation_messages import (
     V2DmConversationsMessagesUrl,
@@ -242,7 +242,7 @@ class TwitterApiMockClient(TwitterApiClient):
     def inject_post_response_body(
         self,
         url: OauthRequestTokenUrl,
-        response_body: Union[OauthPostRequestTokenResponseBody, TwitterApiError],
+        response_body: Union[PostOauthRequestTokenResponseBody, TwitterApiError],
     ) -> Self:
         ...
 
@@ -251,7 +251,7 @@ class TwitterApiMockClient(TwitterApiClient):
         self,
         url: Oauth2InvalidateTokenUrl,
         response_body: Union[
-            Oauth2PostInvalidateTokenResponseBody,
+            PostOauth2InvalidateTokenResponseBody,
             TwitterApiError,
         ],
     ) -> Self:
@@ -262,7 +262,7 @@ class TwitterApiMockClient(TwitterApiClient):
         self,
         url: Oauth2TokenUrl,
         response_body: Union[
-            Oauth2PostTokenResponseBody,
+            PostOauth2TokenResponseBody,
             TwitterApiError,
         ],
     ) -> Self:

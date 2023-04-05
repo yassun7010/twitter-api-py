@@ -9,7 +9,7 @@ from twitter_api.error import TwitterApiOAuthVersionWrong
 
 
 @pytest.mark.skipif(**synthetic_monitoring_is_disable())
-class TestOauthPostRequestToken:
+class TestPostOauthRequestToken:
     def test_post_oauth_request_token(
         self, real_app_auth_v2_client: TwitterApiRealClient
     ):
@@ -25,7 +25,7 @@ class TestOauthPostRequestToken:
             )
 
 
-class TestMockOauthPostRequestToken:
+class TestMockPostOauthRequestToken:
     def test_mock_post_oauth_request_token(
         self, mock_app_auth_v2_client: TwitterApiMockClient
     ):

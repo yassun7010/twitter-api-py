@@ -6,8 +6,8 @@ from twitter_api.types.screen_name import ScreenName
 
 ENDPOINT = Endpoint("GET", "https://api.twitter.com/oauth/authorize")
 
-OauthGetAuthorizeQueryParameters = TypedDict(
-    "OauthGetAuthorizeQueryParameters",
+GetOauthAuthorizeQueryParameters = TypedDict(
+    "GetOauthAuthorizeQueryParameters",
     {
         "oauth_token": str,
         "force_login": NotRequired[Optional[bool]],
@@ -16,10 +16,10 @@ OauthGetAuthorizeQueryParameters = TypedDict(
 )
 
 
-class OauthGetAuthorizeResources(RequestClient):
+class GetOauthAuthorizeResources(RequestClient):
     def get(
         self,
-        query: Optional[OauthGetAuthorizeQueryParameters] = None,
+        query: Optional[GetOauthAuthorizeQueryParameters] = None,
     ) -> dict:
         # flake8: noqa E501
         """

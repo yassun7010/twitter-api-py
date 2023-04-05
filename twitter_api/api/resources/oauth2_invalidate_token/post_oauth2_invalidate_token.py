@@ -11,25 +11,25 @@ from twitter_api.types.oauth import AccessToken, ApiKey, ApiSecret
 
 ENDPOINT: Endpoint = Endpoint("POST", "https://api.twitter.com/oauth2/invalidate_token")
 
-Oauth2PostInvalidateTokenQueryParameters = TypedDict(
-    "Oauth2PostInvalidateTokenQueryParameters",
+PostOauth2InvalidateTokenQueryParameters = TypedDict(
+    "PostOauth2InvalidateTokenQueryParameters",
     {
         "access_token": AccessToken,
     },
 )
 
 
-class Oauth2PostInvalidateTokenResponseBody(ExtraPermissiveModel):
+class PostOauth2InvalidateTokenResponseBody(ExtraPermissiveModel):
     access_token: AccessToken
 
 
-class Oauth2PostInvalidateTokenResources(ApiResources):
+class PostOauth2InvalidateTokenResources(ApiResources):
     def post(
         self,
         api_key: ApiKey,
         api_secret: ApiSecret,
-        query: Oauth2PostInvalidateTokenQueryParameters,
-    ) -> Oauth2PostInvalidateTokenResponseBody:
+        query: PostOauth2InvalidateTokenQueryParameters,
+    ) -> PostOauth2InvalidateTokenResponseBody:
         # flake8: noqa E501
         """
         OAuth 2.0 のアプリ用のアクセストークンを削除するために使用する。
@@ -48,7 +48,7 @@ class Oauth2PostInvalidateTokenResources(ApiResources):
 
         return self.request_client.post(
             endpoint=ENDPOINT,
-            response_type=Oauth2PostInvalidateTokenResponseBody,
+            response_type=PostOauth2InvalidateTokenResponseBody,
             auth=False,
             headers={
                 "Authorization": f"Basic {bearer_token.decode()}",

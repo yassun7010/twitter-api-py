@@ -4,16 +4,16 @@ import pytest
 
 from tests.conftest import synthetic_monitoring_is_disable
 from twitter_api.api.resources.oauth2_token.post_oauth2_token import (
-    Oauth2PostTokenResponseBody,
+    PostOauth2TokenResponseBody,
 )
 from twitter_api.client.twitter_api_mock_client import TwitterApiMockClient
 from twitter_api.client.twitter_api_real_client import TwitterApiRealClient
 
 
 @pytest.mark.skipif(**synthetic_monitoring_is_disable())
-class TestOauth2PostToken:
+class TestPostOauth2Token:
     def test_post_oauth2_token(self, real_app_auth_v2_client: TwitterApiRealClient):
-        expected_response = Oauth2PostTokenResponseBody(
+        expected_response = PostOauth2TokenResponseBody(
             token_type="bearer",
             access_token=(
                 real_app_auth_v2_client._real_request_client._auth.token["access_token"]
@@ -38,11 +38,11 @@ class TestOauth2PostToken:
         assert real_response == expected_response
 
 
-class TestMockOauth2PostToken:
+class TestMockPostOauth2Token:
     def test_mock_post_oauth2_token(
         self, mock_app_auth_v2_client: TwitterApiMockClient
     ):
-        expected_response = Oauth2PostTokenResponseBody(
+        expected_response = PostOauth2TokenResponseBody(
             token_type="bearer",
             access_token="AAAAAAAAAAAAAAAAAAAAAOeOmQEAAAAAu",
         )

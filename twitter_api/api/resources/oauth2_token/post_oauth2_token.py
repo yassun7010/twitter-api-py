@@ -12,22 +12,22 @@ from twitter_api.types.oauth import AccessToken, ApiKey, ApiSecret
 ENDPOINT: Endpoint = Endpoint("POST", "https://api.twitter.com/oauth2/token")
 
 
-class Oauth2PostTokenQueryParameters(TypedDict):
+class PostOauth2TokenQueryParameters(TypedDict):
     grant_type: Literal["client_credentials"]
 
 
-class Oauth2PostTokenResponseBody(ExtraPermissiveModel):
+class PostOauth2TokenResponseBody(ExtraPermissiveModel):
     token_type: Literal["bearer"]
     access_token: AccessToken
 
 
-class Oauth2PostTokenResources(ApiResources):
+class PostOauth2TokenResources(ApiResources):
     def post(
         self,
         api_key: ApiKey,
         api_secret: ApiSecret,
-        query: Oauth2PostTokenQueryParameters,
-    ) -> Oauth2PostTokenResponseBody:
+        query: PostOauth2TokenQueryParameters,
+    ) -> PostOauth2TokenResponseBody:
         # flake8: noqa E501
         """
         OAuth 2.0 のアプリ用のアクセストークンのセットを生成するために使用する。
@@ -46,7 +46,7 @@ class Oauth2PostTokenResources(ApiResources):
 
         return self.request_client.post(
             endpoint=ENDPOINT,
-            response_type=Oauth2PostTokenResponseBody,
+            response_type=PostOauth2TokenResponseBody,
             auth=False,
             headers={
                 "Authorization": f"Basic {bearer_token.decode()}",

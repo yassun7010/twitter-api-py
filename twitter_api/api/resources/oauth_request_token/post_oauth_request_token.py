@@ -13,8 +13,8 @@ from twitter_api.types.oauth import ApiKey, ApiSecret, OAuthToken, OAuthTokenSec
 
 ENDPOINT: Endpoint = Endpoint("POST", "https://api.twitter.com/oauth/request_token")
 
-OauthPostRequestTokenQueryParameters = TypedDict(
-    "OauthPostRequestTokenQueryParameters",
+PostOauthRequestTokenQueryParameters = TypedDict(
+    "PostOauthRequestTokenQueryParameters",
     {
         "oauth_callback": str,
         "x_auth_access_type": NotRequired[Optional[Literal["read", "write"]]],
@@ -22,19 +22,19 @@ OauthPostRequestTokenQueryParameters = TypedDict(
 )
 
 
-class OauthPostRequestTokenResponseBody(ExtraPermissiveModel):
+class PostOauthRequestTokenResponseBody(ExtraPermissiveModel):
     oauth_token: OAuthToken
     oauth_token_secret: OAuthTokenSecret
     oauth_callback_confirmed: bool
 
 
-class OauthPostRequestTokenResources(ApiResources):
+class PostOauthRequestTokenResources(ApiResources):
     def post(
         self,
         api_key: ApiKey,
         api_secret: ApiSecret,
-        query: OauthPostRequestTokenQueryParameters,
-    ) -> OauthPostRequestTokenResponseBody:
+        query: PostOauthRequestTokenQueryParameters,
+    ) -> PostOauthRequestTokenResponseBody:
         # flake8: noqa E501
         """
         OAuth 1.0a の最初のステップ。
@@ -49,7 +49,7 @@ class OauthPostRequestTokenResources(ApiResources):
 
         # NOTE: このコードは成功するが、さらなる調査が必要。
         #
-        # return OauthPostRequestTokenResponseBody(
+        # return PostOauthRequestTokenResponseBody(
         #     **OAuth1Session(
         #         client_id=api_key,
         #         client_secret=api_secret,
@@ -59,6 +59,6 @@ class OauthPostRequestTokenResources(ApiResources):
 
         return self.request_client.post(
             endpoint=ENDPOINT,
-            response_type=OauthPostRequestTokenResponseBody,
+            response_type=PostOauthRequestTokenResponseBody,
             query=query,  # type: ignore
         )
