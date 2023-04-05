@@ -12,7 +12,7 @@ from twitter_api.client.twitter_api_real_client import TwitterApiRealClient
 
 @pytest.mark.skipif(**synthetic_monitoring_is_disable())
 class TestPostOauth2InvalidateToken:
-    @pytest.mark.skipif(True, reason="上手く invalidation できない理由を要調査。")
+    @pytest.mark.skip(reason="上手く invalidation できない理由を要調査。")
     def test_post_oauth2_invalidate_token(
         self, real_app_auth_v2_client: TwitterApiRealClient
     ):

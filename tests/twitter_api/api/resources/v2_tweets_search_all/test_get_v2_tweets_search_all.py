@@ -11,7 +11,7 @@ from twitter_api.client.twitter_api_real_client import TwitterApiRealClient
 
 @pytest.mark.skipif(**synthetic_monitoring_is_disable())
 class TestGetV2TweetsSearchAll:
-    @pytest.mark.skipif(True, reason="プレミアムなアカウントでないとテストできない。")
+    @pytest.mark.skip(reason="プレミアムなアカウントでないとテストできない。")
     def test_get_v2_search_all(self, real_app_auth_v2_client: TwitterApiRealClient):
         real_response: GetV2TweetsSearchAllResponseBody = (
             real_app_auth_v2_client.chain()
