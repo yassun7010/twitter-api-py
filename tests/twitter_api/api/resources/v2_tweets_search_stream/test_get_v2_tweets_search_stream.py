@@ -3,14 +3,14 @@ import pytest
 from tests.conftest import synthetic_monitoring_is_disable
 from tests.data import JsonDataLoader
 from twitter_api.api.resources.v2_tweets_search_stream.get_v2_tweets_search_stream import (
-    V2GetTweetsSearchStreamResponseBody,
+    GetV2TweetsSearchStreamResponseBody,
 )
 from twitter_api.client.twitter_api_mock_client import TwitterApiMockClient
 from twitter_api.client.twitter_api_real_client import TwitterApiRealClient
 
 
 @pytest.mark.skipif(**synthetic_monitoring_is_disable())
-class TestV2GetTweetsSearchStream:
+class TestGetV2TweetsSearchStream:
     @pytest.mark.skipif(
         True,
         reason=(
@@ -31,7 +31,7 @@ class TestV2GetTweetsSearchStream:
         assert True
 
 
-class TestMockV2GetTweetsSearchStream:
+class TestMockGetV2TweetsSearchStream:
     @pytest.mark.parametrize(
         "json_filename",
         [
@@ -44,7 +44,7 @@ class TestMockV2GetTweetsSearchStream:
         json_data_loader: JsonDataLoader,
         json_filename: str,
     ):
-        expected_response = V2GetTweetsSearchStreamResponseBody.parse_obj(
+        expected_response = GetV2TweetsSearchStreamResponseBody.parse_obj(
             json_data_loader.load(json_filename)
         )
 

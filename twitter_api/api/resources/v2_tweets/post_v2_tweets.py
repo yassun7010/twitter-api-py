@@ -14,45 +14,45 @@ from twitter_api.types.http import Url, downcast_dict
 ENDPOINT = Endpoint("POST", "https://api.twitter.com/2/tweets")
 
 
-class V2PostTweetsGeospatialInformation(TypedDict):
+class PostV2TweetsGeospatialInformation(TypedDict):
     place_id: PlaceId
     tagged_user_ids: UserId
 
 
-class V2PostTweetsMedia(TypedDict):
+class PostV2TweetsMedia(TypedDict):
     media_ids: list[MediaId]
     tagged_user_ids: list[UserId]
 
 
-class V2PostTweetsPoll(TypedDict):
+class PostV2TweetsPoll(TypedDict):
     options: list[str]
     duration_minutes: int
 
 
-class V2PostTweetsReply(TypedDict):
+class PostV2TweetsReply(TypedDict):
     exclude_reply_user_ids: list[UserId]
     in_reply_to_tweet_id: list[TweetId]
 
 
-class V2PostTweetsRequestBody(TypedDict):
+class PostV2TweetsRequestBody(TypedDict):
     direct_message_deep_link: NotRequired[Optional[Url]]
     for_super_followers_only: NotRequired[Optional[bool]]
-    geo: NotRequired[Optional[V2PostTweetsGeospatialInformation]]
-    media: NotRequired[Optional[V2PostTweetsMedia]]
-    poll: NotRequired[Optional[V2PostTweetsPoll]]
+    geo: NotRequired[Optional[PostV2TweetsGeospatialInformation]]
+    media: NotRequired[Optional[PostV2TweetsMedia]]
+    poll: NotRequired[Optional[PostV2TweetsPoll]]
     quote_tweet_id: NotRequired[Optional[TweetId]]
-    reply: NotRequired[Optional[V2PostTweetsReply]]
+    reply: NotRequired[Optional[PostV2TweetsReply]]
     reply_settings: NotRequired[Optional[Literal["mentionedUsers", "following"]]]
     text: NotRequired[Optional[str]]
 
 
-class V2PostTweetsResponseBody(ExtraPermissiveModel):
+class PostV2TweetsResponseBody(ExtraPermissiveModel):
     data: TweetDetail
 
 
-class V2PostTweetsResources(ApiResources):
+class PostV2TweetsResources(ApiResources):
     @rate_limit(ENDPOINT, "user", requests=200, mins=15)
-    def post(self, request_body: V2PostTweetsRequestBody) -> V2PostTweetsResponseBody:
+    def post(self, request_body: PostV2TweetsRequestBody) -> PostV2TweetsResponseBody:
         # flake8: noqa E501
         """
         ツイートする。
@@ -61,6 +61,6 @@ class V2PostTweetsResources(ApiResources):
         """
         return self.request_client.post(
             endpoint=ENDPOINT,
-            response_type=V2PostTweetsResponseBody,
+            response_type=PostV2TweetsResponseBody,
             json=downcast_dict(request_body),
         )

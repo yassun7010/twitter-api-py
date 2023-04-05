@@ -17,8 +17,8 @@ from twitter_api.types.extra_permissive_model import ExtraPermissiveModel
 
 ENDPOINT = Endpoint("GET", "https://api.twitter.com/2/tweets")
 
-V2GetTweetsQueryParameters = TypedDict(
-    "V2GetTweetsQueryParameters",
+GetV2TweetsQueryParameters = TypedDict(
+    "GetV2TweetsQueryParameters",
     {
         "ids": CommaSeparatable[TweetId],
         "expansions": NotRequired[Optional[CommaSeparatable[Expansion]]],
@@ -31,7 +31,7 @@ V2GetTweetsQueryParameters = TypedDict(
 )
 
 
-def _make_query(query: V2GetTweetsQueryParameters) -> dict:
+def _make_query(query: GetV2TweetsQueryParameters) -> dict:
     return {
         "ids": comma_separated_str(query["ids"]),
         "expansions": comma_separated_str(query.get("expansions")),
@@ -43,19 +43,19 @@ def _make_query(query: V2GetTweetsQueryParameters) -> dict:
     }
 
 
-class V2GetTweetsResponseBodyIncludes(ExtraPermissiveModel):
+class GetV2TweetsResponseBodyIncludes(ExtraPermissiveModel):
     users: list[User]
 
 
-class V2GetTweetsResponseBody(ExtraPermissiveModel):
+class GetV2TweetsResponseBody(ExtraPermissiveModel):
     data: list[TweetDetail]
-    includes: Optional[V2GetTweetsResponseBodyIncludes] = None
+    includes: Optional[GetV2TweetsResponseBodyIncludes] = None
 
 
-class V2GetTweetsResources(ApiResources):
+class GetV2TweetsResources(ApiResources):
     @rate_limit(ENDPOINT, "app", requests=300, mins=15)
     @rate_limit(ENDPOINT, "user", requests=900, mins=15)
-    def get(self, query: V2GetTweetsQueryParameters) -> V2GetTweetsResponseBody:
+    def get(self, query: GetV2TweetsQueryParameters) -> GetV2TweetsResponseBody:
         # flake8: noqa E501
         """
         ツイートの一覧を取得する。
@@ -65,5 +65,5 @@ class V2GetTweetsResources(ApiResources):
         return self.request_client.get(
             endpoint=ENDPOINT,
             query=_make_query(query),
-            response_type=V2GetTweetsResponseBody,
+            response_type=GetV2TweetsResponseBody,
         )

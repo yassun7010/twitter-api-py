@@ -3,14 +3,14 @@ import pytest
 from tests.conftest import synthetic_monitoring_is_disable
 from tests.data import JsonDataLoader
 from twitter_api.api.resources.v2_tweet_retweeted_by.get_v2_tweet_retweeted_by import (
-    V2GetTweetRetweetedByResponseBody,
+    GetV2TweetRetweetedByResponseBody,
 )
 from twitter_api.client.twitter_api_mock_client import TwitterApiMockClient
 from twitter_api.client.twitter_api_real_client import TwitterApiRealClient
 
 
 @pytest.mark.skipif(**synthetic_monitoring_is_disable())
-class TestV2GetRetweetedBy:
+class TestGetV2RetweetedBy:
     def test_get_retweeted_by(self, real_app_auth_v2_client: TwitterApiRealClient):
         real_response = real_app_auth_v2_client.request(
             "https://api.twitter.com/2/tweets/:id/retweeted_by"
@@ -21,13 +21,13 @@ class TestV2GetRetweetedBy:
         assert True
 
 
-class TestMockV2GetRetweetedBy:
+class TestMockGetV2RetweetedBy:
     def test_mock_get_retweeted_by(
         self,
         mock_app_auth_v2_client: TwitterApiMockClient,
         json_data_loader: JsonDataLoader,
     ):
-        expected_response = V2GetTweetRetweetedByResponseBody.parse_obj(
+        expected_response = GetV2TweetRetweetedByResponseBody.parse_obj(
             json_data_loader.load("get_retweeted_by_response.json")
         )
 

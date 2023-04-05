@@ -20,8 +20,8 @@ from twitter_api.utils.functional import map_optional
 
 ENDPOINT = Endpoint("GET", "https://api.twitter.com/2/users/:id/tweets")
 
-V2GetUserTweetsQueryParameters = TypedDict(
-    "V2GetUserTweetsQueryParameters",
+GetV2UserTweetsQueryParameters = TypedDict(
+    "GetV2UserTweetsQueryParameters",
     {
         "start_time": NotRequired[Optional[datetime]],
         "end_time": NotRequired[Optional[datetime]],
@@ -40,7 +40,7 @@ V2GetUserTweetsQueryParameters = TypedDict(
 )
 
 
-def _make_query(query: V2GetUserTweetsQueryParameters) -> dict:
+def _make_query(query: GetV2UserTweetsQueryParameters) -> dict:
     return {
         "start_time": map_optional(lambda x: x.isoformat(), query.get("start_time")),
         "end_time": map_optional(lambda x: x.isoformat(), query.get("end_time")),
@@ -58,7 +58,7 @@ def _make_query(query: V2GetUserTweetsQueryParameters) -> dict:
     }
 
 
-class V2GetUserTweetsResponseBodyMeta(ExtraPermissiveModel):
+class GetV2UserTweetsResponseBodyMeta(ExtraPermissiveModel):
     result_count: int
     oldest_id: TweetId
     newest_id: TweetId
@@ -66,24 +66,24 @@ class V2GetUserTweetsResponseBodyMeta(ExtraPermissiveModel):
     previous_token: Optional[str] = None
 
 
-class V2GetUserTweetsResponseBodyIncludes(ExtraPermissiveModel):
+class GetV2UserTweetsResponseBodyIncludes(ExtraPermissiveModel):
     tweets: Optional[list[Tweet]] = None
 
 
-class V2GetUserTweetsResponseBody(ExtraPermissiveModel):
+class GetV2UserTweetsResponseBody(ExtraPermissiveModel):
     data: list[TweetDetail]
-    meta: V2GetUserTweetsResponseBodyMeta
-    includes: Optional[V2GetUserTweetsResponseBodyIncludes] = None
+    meta: GetV2UserTweetsResponseBodyMeta
+    includes: Optional[GetV2UserTweetsResponseBodyIncludes] = None
 
 
-class V2GetUserTweetsResources(ApiResources):
+class GetV2UserTweetsResources(ApiResources):
     @rate_limit(ENDPOINT, "app", requests=1500, mins=15)
     @rate_limit(ENDPOINT, "user", requests=900, mins=15)
     def get(
         self,
         id: UserId,
-        query: Optional[V2GetUserTweetsQueryParameters] = None,
-    ) -> V2GetUserTweetsResponseBody:
+        query: Optional[GetV2UserTweetsQueryParameters] = None,
+    ) -> GetV2UserTweetsResponseBody:
         # flake8: noqa E501
         """
         ユーザのツイートの一覧を取得する。
@@ -94,5 +94,5 @@ class V2GetUserTweetsResources(ApiResources):
             endpoint=ENDPOINT,
             url=ENDPOINT.url.replace(":id", id),
             query=_make_query(query) if query is not None else None,
-            response_type=V2GetUserTweetsResponseBody,
+            response_type=GetV2UserTweetsResponseBody,
         )

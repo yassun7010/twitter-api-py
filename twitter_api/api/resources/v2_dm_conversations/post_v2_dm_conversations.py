@@ -19,8 +19,8 @@ from twitter_api.types.http import downcast_dict
 ENDPOINT = Endpoint("POST", "https://api.twitter.com/2/dm_conversations")
 
 
-V2PostDmConversationsRequestBody = TypedDict(
-    "V2PostDmConversationsRequestBody",
+PostV2DmConversationsRequestBody = TypedDict(
+    "PostV2DmConversationsRequestBody",
     {
         "conversation_type": Literal["Group"],
         "message": DmConversationMessage,
@@ -29,20 +29,20 @@ V2PostDmConversationsRequestBody = TypedDict(
 )
 
 
-class V2PostDmConversationsResponseBody(ExtraPermissiveModel):
+class PostV2DmConversationsResponseBody(ExtraPermissiveModel):
     dm_conversation_id: DmConversationId
     dm_event_id: DmEventId
 
 
-class V2PostDmConversationsResources(ApiResources):
+class PostV2DmConversationsResources(ApiResources):
     @rate_limit(ENDPOINT, "user", requests=200, mins=15)
     @rate_limit(ENDPOINT, "user", requests=1000, hours=24)
     @rate_limit(ENDPOINT, "app", requests=15000, hours=24)
     def post(
         self,
         participant_id: UserId,
-        request_body: V2PostDmConversationsRequestBody,
-    ) -> V2PostDmConversationsResponseBody:
+        request_body: PostV2DmConversationsRequestBody,
+    ) -> PostV2DmConversationsResponseBody:
         # flake8: noqa E501
         """
         DM 用の新しい会話グループを作成する。
@@ -52,5 +52,5 @@ class V2PostDmConversationsResources(ApiResources):
         return self.request_client.post(
             endpoint=ENDPOINT,
             json=downcast_dict(request_body),
-            response_type=V2PostDmConversationsResponseBody,
+            response_type=PostV2DmConversationsResponseBody,
         )

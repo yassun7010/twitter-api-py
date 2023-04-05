@@ -3,7 +3,7 @@ from textwrap import dedent
 import pytest
 
 from tests.conftest import synthetic_monitoring_is_disable
-from twitter_api.api.resources.v2_tweet.get_v2_tweet import V2GetTweetResponseBody
+from twitter_api.api.resources.v2_tweet.get_v2_tweet import GetV2TweetResponseBody
 from twitter_api.api.types.v2_tweet.tweet_detail import TweetDetail
 from twitter_api.client.twitter_api_mock_client import TwitterApiMockClient
 from twitter_api.client.twitter_api_real_client import TwitterApiRealClient
@@ -28,11 +28,11 @@ def tweet() -> TweetDetail:
 
 
 @pytest.mark.skipif(**synthetic_monitoring_is_disable())
-class TestV2GetTweet:
+class TestGetV2Tweet:
     def test_get_tweet(
         self, real_app_auth_v2_client: TwitterApiRealClient, tweet: TweetDetail
     ):
-        expected_response = V2GetTweetResponseBody(data=tweet)
+        expected_response = GetV2TweetResponseBody(data=tweet)
         real_response = real_app_auth_v2_client.request(
             "https://api.twitter.com/2/tweets/:id"
         ).get(tweet.id)
@@ -43,11 +43,11 @@ class TestV2GetTweet:
         assert real_response == expected_response
 
 
-class TestMockV2GetTweet:
+class TestMockGetV2Tweet:
     def test_mock_get_tweet(
         self, mock_app_auth_v2_client: TwitterApiMockClient, tweet: TweetDetail
     ):
-        expected_response = V2GetTweetResponseBody(data=tweet)
+        expected_response = GetV2TweetResponseBody(data=tweet)
 
         assert (
             mock_app_auth_v2_client.chain()

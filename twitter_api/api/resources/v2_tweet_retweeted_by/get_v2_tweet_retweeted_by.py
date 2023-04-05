@@ -15,8 +15,8 @@ from twitter_api.types.extra_permissive_model import ExtraPermissiveModel
 
 ENDPOINT = Endpoint("GET", "https://api.twitter.com/2/tweets/:id/retweeted_by")
 
-V2GetTweetRetweetedByQueryParameters = TypedDict(
-    "V2GetTweetRetweetedByQueryParameters",
+GetV2TweetRetweetedByQueryParameters = TypedDict(
+    "GetV2TweetRetweetedByQueryParameters",
     {
         "expansions": NotRequired[Optional[CommaSeparatable[Expansion]]],
         "max_results": NotRequired[Optional[int]],
@@ -27,7 +27,7 @@ V2GetTweetRetweetedByQueryParameters = TypedDict(
 )
 
 
-def _make_query(query: V2GetTweetRetweetedByQueryParameters) -> dict:
+def _make_query(query: GetV2TweetRetweetedByQueryParameters) -> dict:
     return {
         "expansions": comma_separated_str(query.get("expansions")),
         "max_results": query.get("expansions"),
@@ -37,22 +37,22 @@ def _make_query(query: V2GetTweetRetweetedByQueryParameters) -> dict:
     }
 
 
-class V2GetTweetRetweetedByResponseBodyMeta(ExtraPermissiveModel):
+class GetV2TweetRetweetedByResponseBodyMeta(ExtraPermissiveModel):
     result_count: int
     next_token: Optional[str] = None
 
 
-class V2GetTweetRetweetedByResponseBody(ExtraPermissiveModel):
+class GetV2TweetRetweetedByResponseBody(ExtraPermissiveModel):
     data: list[Retweet]
-    meta: V2GetTweetRetweetedByResponseBodyMeta
+    meta: GetV2TweetRetweetedByResponseBodyMeta
 
 
-class V2GetTweetRetweetedByResources(ApiResources):
+class GetV2TweetRetweetedByResources(ApiResources):
     @rate_limit(ENDPOINT, "app", requests=75, mins=15)
     @rate_limit(ENDPOINT, "user", requests=75, mins=15)
     def get(
-        self, id: TweetId, query: Optional[V2GetTweetRetweetedByQueryParameters] = None
-    ) -> V2GetTweetRetweetedByResponseBody:
+        self, id: TweetId, query: Optional[GetV2TweetRetweetedByQueryParameters] = None
+    ) -> GetV2TweetRetweetedByResponseBody:
         # flake8: noqa E501
         """
         リツイートされたツイートの一覧を取得する。
@@ -61,7 +61,7 @@ class V2GetTweetRetweetedByResources(ApiResources):
         """
         return self.request_client.get(
             endpoint=ENDPOINT,
-            response_type=V2GetTweetRetweetedByResponseBody,
+            response_type=GetV2TweetRetweetedByResponseBody,
             url=ENDPOINT.url.replace(":id", id),
             query=_make_query(query) if query is not None else None,
         )

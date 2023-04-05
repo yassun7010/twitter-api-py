@@ -2,12 +2,12 @@ from typing import TypeAlias
 
 from typing_extensions import Literal
 
-from .post_v2_dm_conversations_messages import V2PostDmConversationMessagesResources
+from .post_v2_dm_conversations_messages import PostV2DmConversationMessagesResources
 
 V2DmConversationsMessagesUrl: TypeAlias = Literal[
     "https://api.twitter.com/2/dm_conversations/:dm_conversation_id/messages"
 ]
 
 
-class V2DmConversationMessagesResources(V2PostDmConversationMessagesResources):
+class V2DmConversationMessagesResources(PostV2DmConversationMessagesResources):
     pass

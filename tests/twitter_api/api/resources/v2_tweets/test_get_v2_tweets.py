@@ -3,7 +3,7 @@ from textwrap import dedent
 import pytest
 
 from tests.conftest import synthetic_monitoring_is_disable
-from twitter_api.api.resources.v2_tweets.get_v2_tweets import V2GetTweetsResponseBody
+from twitter_api.api.resources.v2_tweets.get_v2_tweets import GetV2TweetsResponseBody
 from twitter_api.api.types.v2_tweet.tweet_detail import TweetDetail
 from twitter_api.client.twitter_api_mock_client import TwitterApiMockClient
 from twitter_api.client.twitter_api_real_client import TwitterApiRealClient
@@ -30,11 +30,11 @@ def tweets() -> list[TweetDetail]:
 
 
 @pytest.mark.skipif(**synthetic_monitoring_is_disable())
-class TestV2GetTweets:
+class TestGetV2Tweets:
     def test_get_tweets(
         self, real_app_auth_v2_client: TwitterApiRealClient, tweets: list[TweetDetail]
     ):
-        expected_response = V2GetTweetsResponseBody(data=tweets)
+        expected_response = GetV2TweetsResponseBody(data=tweets)
         real_response = (
             real_app_auth_v2_client.chain()
             .request("https://api.twitter.com/2/tweets")
@@ -47,7 +47,7 @@ class TestV2GetTweets:
         assert real_response == expected_response
 
 
-class TestMockV2GetTweets:
+class TestMockGetV2Tweets:
     def test_mock_get_tweets(self, mock_app_auth_v2_client: TwitterApiMockClient):
         tweet = TweetDetail(
             id="12345",
@@ -55,7 +55,7 @@ class TestMockV2GetTweets:
             edit_history_tweet_ids=["56789"],
         )
 
-        expected_response = V2GetTweetsResponseBody(data=[tweet for _ in range(10)])
+        expected_response = GetV2TweetsResponseBody(data=[tweet for _ in range(10)])
 
         assert (
             mock_app_auth_v2_client.chain()

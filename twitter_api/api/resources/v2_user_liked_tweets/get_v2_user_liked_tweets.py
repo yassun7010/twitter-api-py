@@ -17,8 +17,8 @@ from twitter_api.types.extra_permissive_model import ExtraPermissiveModel
 
 ENDPOINT = Endpoint("GET", "https://api.twitter.com/2/users/:id/liked_tweets")
 
-V2GetUserLikedTweetsQueryParameters = TypedDict(
-    "V2GetUserLikedTweetsQueryParameters",
+GetV2UserLikedTweetsQueryParameters = TypedDict(
+    "GetV2UserLikedTweetsQueryParameters",
     {
         "expansions": NotRequired[Optional[CommaSeparatable[Expansion]]],
         "pagination_token": NotRequired[Optional[str]],
@@ -32,7 +32,7 @@ V2GetUserLikedTweetsQueryParameters = TypedDict(
 )
 
 
-def _make_query(query: V2GetUserLikedTweetsQueryParameters) -> dict:
+def _make_query(query: GetV2UserLikedTweetsQueryParameters) -> dict:
     return {
         "expansions": comma_separated_str(query.get("expansions")),
         "pagination_token": query.get("pagination_token"),
@@ -45,23 +45,23 @@ def _make_query(query: V2GetUserLikedTweetsQueryParameters) -> dict:
     }
 
 
-class V2GetUserLikedTweetsResponseBodyIncludes(ExtraPermissiveModel):
+class GetV2UserLikedTweetsResponseBodyIncludes(ExtraPermissiveModel):
     tweets: list[Tweet]
 
 
-class V2GetUserLikedTweetsResponseBody(ExtraPermissiveModel):
+class GetV2UserLikedTweetsResponseBody(ExtraPermissiveModel):
     data: list[TweetDetail]
-    includes: Optional[V2GetUserLikedTweetsResponseBodyIncludes] = None
+    includes: Optional[GetV2UserLikedTweetsResponseBodyIncludes] = None
 
 
-class V2GetUserLikedTweetsResources(ApiResources):
+class GetV2UserLikedTweetsResources(ApiResources):
     @rate_limit(ENDPOINT, "app", requests=75, mins=15)
     @rate_limit(ENDPOINT, "user", requests=75, mins=15)
     def get(
         self,
         id: UserId,
-        query: Optional[V2GetUserLikedTweetsQueryParameters] = None,
-    ) -> V2GetUserLikedTweetsResponseBody:
+        query: Optional[GetV2UserLikedTweetsQueryParameters] = None,
+    ) -> GetV2UserLikedTweetsResponseBody:
         # flake8: noqa E501
         """
         ユーザが「いいね」をしているツイートの一覧を取得する。
@@ -72,5 +72,5 @@ class V2GetUserLikedTweetsResources(ApiResources):
             endpoint=ENDPOINT,
             url=ENDPOINT.url.replace(":id", id),
             query=_make_query(query) if query is not None else None,
-            response_type=V2GetUserLikedTweetsResponseBody,
+            response_type=GetV2UserLikedTweetsResponseBody,
         )

@@ -14,23 +14,23 @@ ENDPOINT = Endpoint(
 )
 
 
-V2PostDmConversationMessagesRequestBody = DmConversationMessage
+PostV2DmConversationMessagesRequestBody = DmConversationMessage
 
 
-class V2PostDmConversationMessagesResponseBody(ExtraPermissiveModel):
+class PostV2DmConversationMessagesResponseBody(ExtraPermissiveModel):
     dm_conversation_id: DmConversationId
     dm_event_id: DmEventId
 
 
-class V2PostDmConversationMessagesResources(ApiResources):
+class PostV2DmConversationMessagesResources(ApiResources):
     @rate_limit(ENDPOINT, "user", requests=200, mins=15)
     @rate_limit(ENDPOINT, "user", requests=1000, hours=24)
     @rate_limit(ENDPOINT, "app", requests=15000, hours=24)
     def post(
         self,
         dm_conversation_id: DmConversationId,
-        request_body: V2PostDmConversationMessagesRequestBody,
-    ) -> V2PostDmConversationMessagesResponseBody:
+        request_body: PostV2DmConversationMessagesRequestBody,
+    ) -> PostV2DmConversationMessagesResponseBody:
         # flake8: noqa E501
         """
         指定した会話に Direct Message を送る。
@@ -41,5 +41,5 @@ class V2PostDmConversationMessagesResources(ApiResources):
             endpoint=ENDPOINT,
             url=ENDPOINT.url.replace(":dm_conversation_id", dm_conversation_id),
             json=downcast_dict(request_body),
-            response_type=V2PostDmConversationMessagesResponseBody,
+            response_type=PostV2DmConversationMessagesResponseBody,
         )

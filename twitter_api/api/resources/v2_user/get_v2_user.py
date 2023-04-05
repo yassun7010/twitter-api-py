@@ -14,8 +14,8 @@ from twitter_api.types.extra_permissive_model import ExtraPermissiveModel
 
 ENDPOINT = Endpoint("GET", "https://api.twitter.com/2/users/:id")
 
-V2GetUserQueryParameters = TypedDict(
-    "V2GetUserQueryParameters",
+GetV2UserQueryParameters = TypedDict(
+    "GetV2UserQueryParameters",
     {
         "expansions": NotRequired[Optional[CommaSeparatable[Expansion]]],
         "tweet.fields": NotRequired[Optional[CommaSeparatable[TweetField]]],
@@ -24,7 +24,7 @@ V2GetUserQueryParameters = TypedDict(
 )
 
 
-def _make_query(query: V2GetUserQueryParameters) -> dict:
+def _make_query(query: GetV2UserQueryParameters) -> dict:
     return {
         "expansions": comma_separated_str(query.get("expansions")),
         "tweet.fields": comma_separated_str(query.get("tweet.fields")),
@@ -32,23 +32,23 @@ def _make_query(query: V2GetUserQueryParameters) -> dict:
     }
 
 
-class V2GetUserResponseBodyIncludes(ExtraPermissiveModel):
+class GetV2UserResponseBodyIncludes(ExtraPermissiveModel):
     tweets: list[Tweet]
 
 
-class V2GetUserResponseBody(ExtraPermissiveModel):
+class GetV2UserResponseBody(ExtraPermissiveModel):
     data: User
-    includes: Optional[V2GetUserResponseBodyIncludes] = None
+    includes: Optional[GetV2UserResponseBodyIncludes] = None
 
 
-class V2GetUserResources(ApiResources):
+class GetV2UserResources(ApiResources):
     @rate_limit(ENDPOINT, "app", requests=300, mins=15)
     @rate_limit(ENDPOINT, "user", requests=900, mins=15)
     def get(
         self,
         id: UserId,
-        query: Optional[V2GetUserQueryParameters] = None,
-    ) -> V2GetUserResponseBody:
+        query: Optional[GetV2UserQueryParameters] = None,
+    ) -> GetV2UserResponseBody:
         # flake8: noqa E501
         """
         ユーザの情報を取得する。
@@ -59,5 +59,5 @@ class V2GetUserResources(ApiResources):
             endpoint=ENDPOINT,
             url=ENDPOINT.url.replace(":id", id),
             query=_make_query(query) if query is not None else None,
-            response_type=V2GetUserResponseBody,
+            response_type=GetV2UserResponseBody,
         )

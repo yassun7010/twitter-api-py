@@ -17,8 +17,8 @@ from twitter_api.utils.functional import map_optional
 
 ENDPOINT = Endpoint("GET", "https://api.twitter.com/2/tweets/search/stream")
 
-V2GetTweetsSearchStreamQueryParameters = TypedDict(
-    "V2GetTweetsSearchStreamQueryParameters",
+GetV2TweetsSearchStreamQueryParameters = TypedDict(
+    "GetV2TweetsSearchStreamQueryParameters",
     {
         "backfill_minutes": NotRequired[Optional[int]],
         "start_time": NotRequired[Optional[datetime]],
@@ -33,7 +33,7 @@ V2GetTweetsSearchStreamQueryParameters = TypedDict(
 )
 
 
-def _make_query(query: V2GetTweetsSearchStreamQueryParameters) -> dict:
+def _make_query(query: GetV2TweetsSearchStreamQueryParameters) -> dict:
     return {
         "backfill_minutes": query.get("backfill_minutes"),
         "start_time": map_optional(lambda x: x.isoformat(), query.get("start_time")),
@@ -47,15 +47,15 @@ def _make_query(query: V2GetTweetsSearchStreamQueryParameters) -> dict:
     }
 
 
-class V2GetTweetsSearchStreamResponseBody(ExtraPermissiveModel):
+class GetV2TweetsSearchStreamResponseBody(ExtraPermissiveModel):
     data: Optional[list[TweetDetail]] = None  # データが 1 つも見つからないとき、 None となる。
 
 
-class V2GetTweetsSearchStreamResources(ApiResources):
+class GetV2TweetsSearchStreamResources(ApiResources):
     @rate_limit(ENDPOINT, "app", requests=50, mins=15)
     def get(
-        self, query: Optional[V2GetTweetsSearchStreamQueryParameters] = None
-    ) -> V2GetTweetsSearchStreamResponseBody:
+        self, query: Optional[GetV2TweetsSearchStreamQueryParameters] = None
+    ) -> GetV2TweetsSearchStreamResponseBody:
         # flake8: noqa E501
         """
         ツイートの一覧を検索する。
@@ -64,6 +64,6 @@ class V2GetTweetsSearchStreamResources(ApiResources):
         """
         return self.request_client.get(
             endpoint=ENDPOINT,
-            response_type=V2GetTweetsSearchStreamResponseBody,
+            response_type=GetV2TweetsSearchStreamResponseBody,
             query=_make_query(query) if query is not None else None,
         )

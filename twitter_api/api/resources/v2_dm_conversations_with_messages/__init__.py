@@ -3,7 +3,7 @@ from typing import TypeAlias
 from typing_extensions import Literal
 
 from .post_v2_dm_conversations_with_messages import (
-    V2PostDmConversationsWithParticipantMessagesResources,
+    PostV2DmConversationsWithParticipantMessagesResources,
 )
 
 V2DmConversationsWithParticipantMessagesUrl: TypeAlias = Literal[
@@ -12,6 +12,6 @@ V2DmConversationsWithParticipantMessagesUrl: TypeAlias = Literal[
 
 
 class V2DmConversationsWithParticipantMessagesResources(
-    V2PostDmConversationsWithParticipantMessagesResources
+    PostV2DmConversationsWithParticipantMessagesResources
 ):
     pass

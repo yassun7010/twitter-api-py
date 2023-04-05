@@ -2,13 +2,13 @@ import pytest
 
 from tests.conftest import synthetic_monitoring_is_disable
 from tests.data import JsonDataLoader
-from twitter_api.api.resources.v2_users.get_v2_users import V2GetUsersResponseBody
+from twitter_api.api.resources.v2_users.get_v2_users import GetV2UsersResponseBody
 from twitter_api.client.twitter_api_mock_client import TwitterApiMockClient
 from twitter_api.client.twitter_api_real_client import TwitterApiRealClient
 
 
 @pytest.mark.skipif(**synthetic_monitoring_is_disable())
-class TestV2GetUsers:
+class TestGetV2Users:
     def test_get_users(
         self,
         real_app_auth_v2_client: TwitterApiRealClient,
@@ -24,7 +24,7 @@ class TestV2GetUsers:
         assert True
 
 
-class TestMockV2GetUsers:
+class TestMockGetV2Users:
     @pytest.mark.parametrize(
         "json_filename",
         [
@@ -37,7 +37,7 @@ class TestMockV2GetUsers:
         json_data_loader: JsonDataLoader,
         json_filename: str,
     ):
-        expected_response = V2GetUsersResponseBody.parse_obj(
+        expected_response = GetV2UsersResponseBody.parse_obj(
             json_data_loader.load(json_filename)
         )
 

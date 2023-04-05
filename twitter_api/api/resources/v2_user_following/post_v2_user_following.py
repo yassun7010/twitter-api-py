@@ -9,30 +9,30 @@ from twitter_api.types.http import downcast_dict
 
 ENDPOINT = Endpoint("POST", "https://api.twitter.com/2/users/:id/following")
 
-V2PostUserFollowingRequestBody = TypedDict(
-    "V2PostUserFollowingRequestBody",
+PostV2UserFollowingRequestBody = TypedDict(
+    "PostV2UserFollowingRequestBody",
     {
         "target_user_id": UserId,
     },
 )
 
 
-class V2PostUserFollowingResponseBodyData(ExtraPermissiveModel):
+class PostV2UserFollowingResponseBodyData(ExtraPermissiveModel):
     following: bool
     pending_follow: bool
 
 
-class V2PostUserFollowingResponseBody(ExtraPermissiveModel):
-    data: V2PostUserFollowingResponseBodyData
+class PostV2UserFollowingResponseBody(ExtraPermissiveModel):
+    data: PostV2UserFollowingResponseBodyData
 
 
-class V2PostUserFollowingResources(ApiResources):
+class PostV2UserFollowingResources(ApiResources):
     @rate_limit(ENDPOINT, "user", requests=50, mins=15)
     def post(
         self,
         id: UserId,
-        request_body: V2PostUserFollowingRequestBody,
-    ) -> V2PostUserFollowingResponseBody:
+        request_body: PostV2UserFollowingRequestBody,
+    ) -> PostV2UserFollowingResponseBody:
         # flake8: noqa E501
         """
         ユーザをフォローする。
@@ -43,5 +43,5 @@ class V2PostUserFollowingResources(ApiResources):
             endpoint=ENDPOINT,
             url=ENDPOINT.url.replace(":id", id),
             json=downcast_dict(request_body),
-            response_type=V2PostUserFollowingResponseBody,
+            response_type=PostV2UserFollowingResponseBody,
         )

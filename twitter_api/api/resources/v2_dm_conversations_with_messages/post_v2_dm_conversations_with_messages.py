@@ -15,23 +15,23 @@ ENDPOINT = Endpoint(
 )
 
 
-V2PostDmConversationsWithParticipantMessagesRequestBody = DmConversationMessage
+PostV2DmConversationsWithParticipantMessagesRequestBody = DmConversationMessage
 
 
-class V2PostDmConversationsWithParticipantMessagesResponseBody(ExtraPermissiveModel):
+class PostV2DmConversationsWithParticipantMessagesResponseBody(ExtraPermissiveModel):
     dm_conversation_id: DmConversationId
     dm_event_id: DmEventId
 
 
-class V2PostDmConversationsWithParticipantMessagesResources(ApiResources):
+class PostV2DmConversationsWithParticipantMessagesResources(ApiResources):
     @rate_limit(ENDPOINT, "user", requests=200, mins=15)
     @rate_limit(ENDPOINT, "user", requests=1000, hours=24)
     @rate_limit(ENDPOINT, "app", requests=15000, hours=24)
     def post(
         self,
         participant_id: UserId,
-        request_body: V2PostDmConversationsWithParticipantMessagesRequestBody,
-    ) -> V2PostDmConversationsWithParticipantMessagesResponseBody:
+        request_body: PostV2DmConversationsWithParticipantMessagesRequestBody,
+    ) -> PostV2DmConversationsWithParticipantMessagesResponseBody:
         # flake8: noqa E501
         """
         Direct Message を送る。
@@ -42,5 +42,5 @@ class V2PostDmConversationsWithParticipantMessagesResources(ApiResources):
             endpoint=ENDPOINT,
             url=ENDPOINT.url.replace(":participant_id", participant_id),
             json=downcast_dict(request_body),
-            response_type=V2PostDmConversationsWithParticipantMessagesResponseBody,
+            response_type=PostV2DmConversationsWithParticipantMessagesResponseBody,
         )

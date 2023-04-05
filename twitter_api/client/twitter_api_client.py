@@ -35,11 +35,11 @@ from twitter_api.api.resources.v2_tweets_search_all import (
 )
 from twitter_api.api.resources.v2_tweets_search_recent import V2TweetsSearchRecentUrl
 from twitter_api.api.resources.v2_tweets_search_recent.get_v2_tweets_search_recent import (
-    V2GetTweetsSearchRecentResources,
+    GetV2TweetsSearchRecentResources,
 )
 from twitter_api.api.resources.v2_tweets_search_stream import V2TweetsSearchStreamUrl
 from twitter_api.api.resources.v2_tweets_search_stream.get_v2_tweets_search_stream import (
-    V2GetTweetsSearchStreamResources,
+    GetV2TweetsSearchStreamResources,
 )
 from twitter_api.api.resources.v2_user import V2UserResources, V2UserUrl
 from twitter_api.api.resources.v2_user_followers import (
@@ -143,14 +143,14 @@ class TwitterApiClient(metaclass=ABCMeta):
     def request(
         self: Self,
         url: V2TweetsSearchRecentUrl,
-    ) -> V2GetTweetsSearchRecentResources:
+    ) -> GetV2TweetsSearchRecentResources:
         ...
 
     @overload
     def request(
         self: Self,
         url: V2TweetsSearchStreamUrl,
-    ) -> V2GetTweetsSearchStreamResources:
+    ) -> GetV2TweetsSearchStreamResources:
         ...
 
     @overload
@@ -280,11 +280,11 @@ class TwitterApiClient(metaclass=ABCMeta):
                 self._request_client,
             )
         elif url == "https://api.twitter.com/2/tweets/search/recent":
-            return V2GetTweetsSearchRecentResources(
+            return GetV2TweetsSearchRecentResources(
                 self._request_client,
             )
         elif url == "https://api.twitter.com/2/tweets/search/stream":
-            return V2GetTweetsSearchStreamResources(
+            return GetV2TweetsSearchStreamResources(
                 self._request_client,
             )
         elif url == "https://api.twitter.com/2/users":

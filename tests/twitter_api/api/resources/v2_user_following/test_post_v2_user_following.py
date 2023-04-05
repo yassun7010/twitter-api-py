@@ -3,7 +3,7 @@ import pytest
 from tests.conftest import synthetic_monitoring_is_disable
 from tests.data import JsonDataLoader
 from twitter_api.api.resources.v2_user_following.post_v2_user_following import (
-    V2PostUserFollowingResponseBody,
+    PostV2UserFollowingResponseBody,
 )
 from twitter_api.client.twitter_api_mock_client import TwitterApiMockClient
 from twitter_api.client.twitter_api_real_client import TwitterApiRealClient
@@ -11,7 +11,7 @@ from twitter_api.error import TwitterApiResponseFailed
 
 
 @pytest.mark.skipif(**synthetic_monitoring_is_disable())
-class TestV2GetUserFollowing:
+class TestGetV2UserFollowing:
     @pytest.mark.skipif(
         True, reason="[OAuth 1.0a User Context, OAuth 2.0 User Context] が必要らしい。"
     )
@@ -29,7 +29,7 @@ class TestV2GetUserFollowing:
         assert True
 
 
-class TestMockV2GetUserFollowing:
+class TestMockGetV2UserFollowing:
     @pytest.mark.parametrize(
         "json_filename",
         [
@@ -42,7 +42,7 @@ class TestMockV2GetUserFollowing:
         json_data_loader: JsonDataLoader,
         json_filename: str,
     ):
-        expected_response = V2PostUserFollowingResponseBody.parse_obj(
+        expected_response = PostV2UserFollowingResponseBody.parse_obj(
             json_data_loader.load(json_filename)
         )
 

@@ -14,8 +14,8 @@ from twitter_api.types.extra_permissive_model import ExtraPermissiveModel
 
 ENDPOINT = Endpoint("GET", "https://api.twitter.com/2/users/:id/followers")
 
-V2GetUserFollowersQueryParameters = TypedDict(
-    "V2GetUserFollowersQueryParameters",
+GetV2UserFollowersQueryParameters = TypedDict(
+    "GetV2UserFollowersQueryParameters",
     {
         "expansions": NotRequired[Optional[CommaSeparatable[Expansion]]],
         "pagination_token": NotRequired[Optional[str]],
@@ -26,7 +26,7 @@ V2GetUserFollowersQueryParameters = TypedDict(
 )
 
 
-def _make_query(query: V2GetUserFollowersQueryParameters) -> dict:
+def _make_query(query: GetV2UserFollowersQueryParameters) -> dict:
     return {
         "expansions": comma_separated_str(query.get("expansions")),
         "pagination_token": query.get("pagination_token"),
@@ -36,30 +36,30 @@ def _make_query(query: V2GetUserFollowersQueryParameters) -> dict:
     }
 
 
-class V2GetUserFollowersResponseBodyMeta(ExtraPermissiveModel):
+class GetV2UserFollowersResponseBodyMeta(ExtraPermissiveModel):
     result_count: int
     previous_token: Optional[str] = None
     next_token: Optional[str] = None
 
 
-class V2GetUserFollowersResponseBodyIncludes(ExtraPermissiveModel):
+class GetV2UserFollowersResponseBodyIncludes(ExtraPermissiveModel):
     tweets: list[Tweet]
 
 
-class V2GetUserFollowersResponseBody(ExtraPermissiveModel):
+class GetV2UserFollowersResponseBody(ExtraPermissiveModel):
     data: list[User]
-    meta: V2GetUserFollowersResponseBodyMeta
-    includes: Optional[V2GetUserFollowersResponseBodyIncludes] = None
+    meta: GetV2UserFollowersResponseBodyMeta
+    includes: Optional[GetV2UserFollowersResponseBodyIncludes] = None
 
 
-class V2GetUserFollowersResources(ApiResources):
+class GetV2UserFollowersResources(ApiResources):
     @rate_limit(ENDPOINT, "app", requests=15, mins=15)
     @rate_limit(ENDPOINT, "user", requests=15, mins=15)
     def get(
         self,
         id: UserId,
-        query: Optional[V2GetUserFollowersQueryParameters] = None,
-    ) -> V2GetUserFollowersResponseBody:
+        query: Optional[GetV2UserFollowersQueryParameters] = None,
+    ) -> GetV2UserFollowersResponseBody:
         # flake8: noqa E501
         """
         ユーザのフォロワーの一覧を取得する。
@@ -70,5 +70,5 @@ class V2GetUserFollowersResources(ApiResources):
             endpoint=ENDPOINT,
             url=ENDPOINT.url.replace(":id", id),
             query=_make_query(query) if query is not None else None,
-            response_type=V2GetUserFollowersResponseBody,
+            response_type=GetV2UserFollowersResponseBody,
         )

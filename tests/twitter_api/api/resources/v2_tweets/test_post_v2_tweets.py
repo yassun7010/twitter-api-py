@@ -3,14 +3,14 @@ from datetime import datetime
 import pytest
 
 from tests.conftest import synthetic_monitoring_is_disable
-from twitter_api.api.resources.v2_tweets.post_v2_tweets import V2PostTweetsResponseBody
+from twitter_api.api.resources.v2_tweets.post_v2_tweets import PostV2TweetsResponseBody
 from twitter_api.api.types.v2_tweet.tweet_detail import TweetDetail
 from twitter_api.client.twitter_api_mock_client import TwitterApiMockClient
 from twitter_api.client.twitter_api_real_client import TwitterApiRealClient
 
 
 @pytest.mark.skipif(**synthetic_monitoring_is_disable())
-class TestV2GetTweet:
+class TestGetV2Tweet:
     def test_get_tweet(self, real_user_auth_v1_client: TwitterApiRealClient):
         tweet_text = f"テストツイート。{datetime.now().isoformat()}"
         real_response = (
@@ -36,7 +36,7 @@ class TestV2GetTweet:
         assert real_response.data.text == tweet_text
 
 
-class TestMockV2GetTweet:
+class TestMockGetV2Tweet:
     def test_mock_get_tweet(self, mock_app_auth_v2_client: TwitterApiMockClient):
         tweet = TweetDetail(
             id="1234567890123456789",
@@ -44,7 +44,7 @@ class TestMockV2GetTweet:
             edit_history_tweet_ids=["1234567890123456789"],
         )
 
-        expected_response = V2PostTweetsResponseBody(data=tweet)
+        expected_response = PostV2TweetsResponseBody(data=tweet)
 
         assert (
             mock_app_auth_v2_client.chain()

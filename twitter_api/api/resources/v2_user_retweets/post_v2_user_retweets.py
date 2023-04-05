@@ -10,29 +10,29 @@ from twitter_api.types.http import downcast_dict
 
 ENDPOINT = Endpoint("POST", "https://api.twitter.com/2/users/:id/retweets")
 
-V2PostUserRetweetsRequestBody = TypedDict(
-    "V2PostUserRetweetsRequestBody",
+PostV2UserRetweetsRequestBody = TypedDict(
+    "PostV2UserRetweetsRequestBody",
     {
         "tweet_id": TweetId,
     },
 )
 
 
-class V2PostUserRetweetsResponseBodyData(ExtraPermissiveModel):
+class PostV2UserRetweetsResponseBodyData(ExtraPermissiveModel):
     retweeted: bool
 
 
-class V2PostUserRetweetsResponseBody(ExtraPermissiveModel):
-    data: V2PostUserRetweetsResponseBodyData
+class PostV2UserRetweetsResponseBody(ExtraPermissiveModel):
+    data: PostV2UserRetweetsResponseBodyData
 
 
-class V2PostUserRetweetsResources(ApiResources):
+class PostV2UserRetweetsResources(ApiResources):
     @rate_limit(ENDPOINT, "user", requests=50, mins=15)
     def post(
         self,
         id: UserId,
-        request_body: V2PostUserRetweetsRequestBody,
-    ) -> V2PostUserRetweetsResponseBody:
+        request_body: PostV2UserRetweetsRequestBody,
+    ) -> PostV2UserRetweetsResponseBody:
         # flake8: noqa E501
         """
         ユーザをリツイートする。
@@ -43,5 +43,5 @@ class V2PostUserRetweetsResources(ApiResources):
             endpoint=ENDPOINT,
             url=ENDPOINT.url.replace(":id", id),
             json=downcast_dict(request_body),
-            response_type=V2PostUserRetweetsResponseBody,
+            response_type=PostV2UserRetweetsResponseBody,
         )

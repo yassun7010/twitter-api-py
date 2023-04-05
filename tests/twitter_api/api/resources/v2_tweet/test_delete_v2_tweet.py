@@ -4,15 +4,15 @@ import pytest
 
 from tests.conftest import synthetic_monitoring_is_disable
 from twitter_api.api.resources.v2_tweet.delete_v2_tweet import (
-    V2DeleteTweetResponseBody,
-    V2DeleteTweetResponseBodyData,
+    DeleteV2TweetResponseBody,
+    DeleteV2TweetResponseBodyData,
 )
 from twitter_api.client.twitter_api_mock_client import TwitterApiMockClient
 from twitter_api.client.twitter_api_real_client import TwitterApiRealClient
 
 
 @pytest.mark.skipif(**synthetic_monitoring_is_disable())
-class TestV2DeleteTweet:
+class TestDeleteV2Tweet:
     def test_delete_tweet(self, real_user_auth_v1_client: TwitterApiRealClient):
         tweet_text = f"テストツイート。{datetime.now().isoformat()}"
 
@@ -34,10 +34,10 @@ class TestV2DeleteTweet:
         assert real_response.data.deleted is True
 
 
-class TestMockV2DeleteTweet:
+class TestMockDeleteV2Tweet:
     def test_mock_delete_tweet(self, mock_app_auth_v2_client: TwitterApiMockClient):
-        expected_response = V2DeleteTweetResponseBody(
-            data=V2DeleteTweetResponseBodyData(deleted=True)
+        expected_response = DeleteV2TweetResponseBody(
+            data=DeleteV2TweetResponseBodyData(deleted=True)
         )
 
         assert (

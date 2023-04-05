@@ -21,8 +21,8 @@ from twitter_api.utils.functional import map_optional
 
 ENDPOINT = Endpoint("GET", "https://api.twitter.com/2/tweets/search/all")
 
-V2GetTweetsSearchAllQueryParameters = TypedDict(
-    "V2GetTweetsSearchAllQueryParameters",
+GetV2TweetsSearchAllQueryParameters = TypedDict(
+    "GetV2TweetsSearchAllQueryParameters",
     {
         "query": str | SearchQuery,
         "start_time": NotRequired[Optional[datetime]],
@@ -42,7 +42,7 @@ V2GetTweetsSearchAllQueryParameters = TypedDict(
 )
 
 
-def _make_query(query: V2GetTweetsSearchAllQueryParameters) -> dict:
+def _make_query(query: GetV2TweetsSearchAllQueryParameters) -> dict:
     return {
         "query": parse.quote(str(query["query"])),
         "start_time": map_optional(lambda x: x.isoformat(), query.get("start_time")),
@@ -61,18 +61,18 @@ def _make_query(query: V2GetTweetsSearchAllQueryParameters) -> dict:
     }
 
 
-class V2GetTweetsSearchAllResponseBodyMeta(ExtraPermissiveModel):
+class GetV2TweetsSearchAllResponseBodyMeta(ExtraPermissiveModel):
     result_count: int
     next_token: Optional[str] = None
     previous_token: Optional[str] = None
 
 
-class V2GetTweetsSearchAllResponseBody(ExtraPermissiveModel):
+class GetV2TweetsSearchAllResponseBody(ExtraPermissiveModel):
     data: list[Tweet]
-    meta: V2GetTweetsSearchAllResponseBodyMeta
+    meta: GetV2TweetsSearchAllResponseBodyMeta
 
 
-class V2GetTweetsSearchAllResources(ApiResources):
+class GetV2TweetsSearchAllResources(ApiResources):
     def __init__(self, client: RequestClient) -> None:
         self._client = client
 
@@ -83,8 +83,8 @@ class V2GetTweetsSearchAllResources(ApiResources):
     @rate_limit(ENDPOINT, "app", requests=300, mins=15)
     @rate_limit(ENDPOINT, "app", requests=1, seconds=1)
     def get(
-        self, query: V2GetTweetsSearchAllQueryParameters
-    ) -> V2GetTweetsSearchAllResponseBody:
+        self, query: GetV2TweetsSearchAllQueryParameters
+    ) -> GetV2TweetsSearchAllResponseBody:
         # flake8: noqa E501
         """
         ツイートの一覧を検索する。
@@ -93,6 +93,6 @@ class V2GetTweetsSearchAllResources(ApiResources):
         """
         return self._client.get(
             endpoint=ENDPOINT,
-            response_type=V2GetTweetsSearchAllResponseBody,
+            response_type=GetV2TweetsSearchAllResponseBody,
             query=_make_query(query) if query is not None else None,
         )

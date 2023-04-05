@@ -3,14 +3,14 @@ import pytest
 from tests.conftest import synthetic_monitoring_is_disable
 from tests.data import JsonDataLoader
 from twitter_api.api.resources.v2_dm_conversations_with_messages.post_v2_dm_conversations_with_messages import (
-    V2PostDmConversationsWithParticipantMessagesResponseBody,
+    PostV2DmConversationsWithParticipantMessagesResponseBody,
 )
 from twitter_api.client.twitter_api_mock_client import TwitterApiMockClient
 from twitter_api.client.twitter_api_real_client import TwitterApiRealClient
 
 
 @pytest.mark.skipif(**synthetic_monitoring_is_disable())
-class TestV2GetUserFollowing:
+class TestGetV2UserFollowing:
     @pytest.mark.skip("You do not have permission to DM one or more participants.")
     def test_get_user_following(
         self,
@@ -30,7 +30,7 @@ class TestV2GetUserFollowing:
         assert True
 
 
-class TestMockV2GetUserFollowing:
+class TestMockGetV2UserFollowing:
     @pytest.mark.parametrize(
         "json_filename",
         [
@@ -44,7 +44,7 @@ class TestMockV2GetUserFollowing:
         json_filename: str,
     ):
         expected_response = (
-            V2PostDmConversationsWithParticipantMessagesResponseBody.parse_obj(
+            PostV2DmConversationsWithParticipantMessagesResponseBody.parse_obj(
                 json_data_loader.load(json_filename)
             )
         )

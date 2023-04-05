@@ -16,64 +16,64 @@ from twitter_api.api.resources.v2_dm_conversation_messages import (
     V2DmConversationsMessagesUrl,
 )
 from twitter_api.api.resources.v2_dm_conversation_messages.post_v2_dm_conversations_messages import (
-    V2PostDmConversationMessagesResponseBody,
+    PostV2DmConversationMessagesResponseBody,
 )
 from twitter_api.api.resources.v2_dm_conversations import V2DmConversationsUrl
 from twitter_api.api.resources.v2_dm_conversations.post_v2_dm_conversations import (
-    V2PostDmConversationsResponseBody,
+    PostV2DmConversationsResponseBody,
 )
 from twitter_api.api.resources.v2_dm_conversations_with_messages import (
     V2DmConversationsWithParticipantMessagesUrl,
 )
 from twitter_api.api.resources.v2_dm_conversations_with_messages.post_v2_dm_conversations_with_messages import (
-    V2PostDmConversationsWithParticipantMessagesResponseBody,
+    PostV2DmConversationsWithParticipantMessagesResponseBody,
 )
 from twitter_api.api.resources.v2_tweet import V2TweetUrl
-from twitter_api.api.resources.v2_tweet.delete_v2_tweet import V2DeleteTweetResponseBody
-from twitter_api.api.resources.v2_tweet.get_v2_tweet import V2GetTweetResponseBody
+from twitter_api.api.resources.v2_tweet.delete_v2_tweet import DeleteV2TweetResponseBody
+from twitter_api.api.resources.v2_tweet.get_v2_tweet import GetV2TweetResponseBody
 from twitter_api.api.resources.v2_tweet_retweeted_by import V2TweetRetweetedByUrl
 from twitter_api.api.resources.v2_tweet_retweeted_by.get_v2_tweet_retweeted_by import (
-    V2GetTweetRetweetedByResponseBody,
+    GetV2TweetRetweetedByResponseBody,
 )
 from twitter_api.api.resources.v2_tweets import V2TweetsUrl
-from twitter_api.api.resources.v2_tweets.get_v2_tweets import V2GetTweetsResponseBody
-from twitter_api.api.resources.v2_tweets.post_v2_tweets import V2PostTweetsResponseBody
+from twitter_api.api.resources.v2_tweets.get_v2_tweets import GetV2TweetsResponseBody
+from twitter_api.api.resources.v2_tweets.post_v2_tweets import PostV2TweetsResponseBody
 from twitter_api.api.resources.v2_tweets_search_all import V2TweetsSearchAllUrl
 from twitter_api.api.resources.v2_tweets_search_all.get_v2_tweets_search_all import (
-    V2GetTweetsSearchAllResponseBody,
+    GetV2TweetsSearchAllResponseBody,
 )
 from twitter_api.api.resources.v2_tweets_search_recent import V2TweetsSearchRecentUrl
 from twitter_api.api.resources.v2_tweets_search_recent.get_v2_tweets_search_recent import (
-    V2GetTweetsSearchRecentResponseBody,
+    GetV2TweetsSearchRecentResponseBody,
 )
 from twitter_api.api.resources.v2_tweets_search_stream import V2TweetsSearchStreamUrl
 from twitter_api.api.resources.v2_tweets_search_stream.get_v2_tweets_search_stream import (
-    V2GetTweetsSearchStreamResponseBody,
+    GetV2TweetsSearchStreamResponseBody,
 )
 from twitter_api.api.resources.v2_user import V2UserUrl
-from twitter_api.api.resources.v2_user.get_v2_user import V2GetUserResponseBody
+from twitter_api.api.resources.v2_user.get_v2_user import GetV2UserResponseBody
 from twitter_api.api.resources.v2_user_followers import V2UserFollowersUrl
 from twitter_api.api.resources.v2_user_followers.get_v2_user_followers import (
-    V2GetUserFollowersResponseBody,
+    GetV2UserFollowersResponseBody,
 )
 from twitter_api.api.resources.v2_user_following import V2UserFollowingUrl
 from twitter_api.api.resources.v2_user_following.post_v2_user_following import (
-    V2PostUserFollowingResponseBody,
+    PostV2UserFollowingResponseBody,
 )
 from twitter_api.api.resources.v2_user_liked_tweets import V2UserLikedTweetsUrl
 from twitter_api.api.resources.v2_user_liked_tweets.get_v2_user_liked_tweets import (
-    V2GetUserLikedTweetsResponseBody,
+    GetV2UserLikedTweetsResponseBody,
 )
 from twitter_api.api.resources.v2_user_retweets import V2UserRetweetsUrl
 from twitter_api.api.resources.v2_user_retweets.post_v2_user_retweets import (
-    V2PostUserRetweetsResponseBody,
+    PostV2UserRetweetsResponseBody,
 )
 from twitter_api.api.resources.v2_user_tweets import V2UserTweetsUrl
 from twitter_api.api.resources.v2_user_tweets.get_v2_user_tweets import (
-    V2GetUserTweetsResponseBody,
+    GetV2UserTweetsResponseBody,
 )
 from twitter_api.api.resources.v2_users import V2UsersUrl
-from twitter_api.api.resources.v2_users.get_v2_users import V2GetUsersResponseBody
+from twitter_api.api.resources.v2_users.get_v2_users import GetV2UsersResponseBody
 from twitter_api.error import TwitterApiError
 from twitter_api.rate_limit.manager.rate_limit_manager import RateLimitManager
 from twitter_api.rate_limit.rate_limit_target import RateLimitTarget
@@ -117,7 +117,7 @@ class TwitterApiMockClient(TwitterApiClient):
         self,
         url: V2TweetsUrl,
         response_body: Union[
-            V2GetTweetsResponseBody,
+            GetV2TweetsResponseBody,
             TwitterApiError,
         ],
     ) -> Self:
@@ -128,7 +128,7 @@ class TwitterApiMockClient(TwitterApiClient):
         self,
         url: V2TweetUrl,
         response_body: Union[
-            V2GetTweetResponseBody,
+            GetV2TweetResponseBody,
             TwitterApiError,
         ],
     ) -> Self:
@@ -139,7 +139,7 @@ class TwitterApiMockClient(TwitterApiClient):
         self,
         url: V2TweetRetweetedByUrl,
         response_body: Union[
-            V2GetTweetRetweetedByResponseBody,
+            GetV2TweetRetweetedByResponseBody,
             TwitterApiError,
         ],
     ) -> Self:
@@ -150,7 +150,7 @@ class TwitterApiMockClient(TwitterApiClient):
         self,
         url: V2TweetsSearchAllUrl,
         response_body: Union[
-            V2GetTweetsSearchAllResponseBody,
+            GetV2TweetsSearchAllResponseBody,
             TwitterApiError,
         ],
     ) -> Self:
@@ -161,7 +161,7 @@ class TwitterApiMockClient(TwitterApiClient):
         self,
         url: V2TweetsSearchRecentUrl,
         response_body: Union[
-            V2GetTweetsSearchRecentResponseBody,
+            GetV2TweetsSearchRecentResponseBody,
             TwitterApiError,
         ],
     ) -> Self:
@@ -172,7 +172,7 @@ class TwitterApiMockClient(TwitterApiClient):
         self,
         url: V2TweetsSearchStreamUrl,
         response_body: Union[
-            V2GetTweetsSearchStreamResponseBody,
+            GetV2TweetsSearchStreamResponseBody,
             TwitterApiError,
         ],
     ) -> Self:
@@ -183,7 +183,7 @@ class TwitterApiMockClient(TwitterApiClient):
         self,
         url: V2UsersUrl,
         response_body: Union[
-            V2GetUsersResponseBody,
+            GetV2UsersResponseBody,
             TwitterApiError,
         ],
     ) -> Self:
@@ -194,7 +194,7 @@ class TwitterApiMockClient(TwitterApiClient):
         self,
         url: V2UserUrl,
         response_body: Union[
-            V2GetUserResponseBody,
+            GetV2UserResponseBody,
             TwitterApiError,
         ],
     ) -> Self:
@@ -205,7 +205,7 @@ class TwitterApiMockClient(TwitterApiClient):
         self,
         url: V2UserLikedTweetsUrl,
         response_body: Union[
-            V2GetUserLikedTweetsResponseBody,
+            GetV2UserLikedTweetsResponseBody,
             TwitterApiError,
         ],
     ) -> Self:
@@ -216,7 +216,7 @@ class TwitterApiMockClient(TwitterApiClient):
         self,
         url: V2UserFollowersUrl,
         response_body: Union[
-            V2GetUserFollowersResponseBody,
+            GetV2UserFollowersResponseBody,
             TwitterApiError,
         ],
     ) -> Self:
@@ -227,7 +227,7 @@ class TwitterApiMockClient(TwitterApiClient):
         self,
         url: V2UserTweetsUrl,
         response_body: Union[
-            V2GetUserTweetsResponseBody,
+            GetV2UserTweetsResponseBody,
             TwitterApiError,
         ],
     ) -> Self:
@@ -273,7 +273,7 @@ class TwitterApiMockClient(TwitterApiClient):
         self,
         url: V2TweetsUrl,
         response_body: Union[
-            V2PostTweetsResponseBody,
+            PostV2TweetsResponseBody,
             TwitterApiError,
         ],
     ) -> Self:
@@ -284,7 +284,7 @@ class TwitterApiMockClient(TwitterApiClient):
         self,
         url: V2UserFollowingUrl,
         response_body: Union[
-            V2PostUserFollowingResponseBody,
+            PostV2UserFollowingResponseBody,
             TwitterApiError,
         ],
     ) -> Self:
@@ -295,7 +295,7 @@ class TwitterApiMockClient(TwitterApiClient):
         self,
         url: V2UserRetweetsUrl,
         response_body: Union[
-            V2PostUserRetweetsResponseBody,
+            PostV2UserRetweetsResponseBody,
             TwitterApiError,
         ],
     ) -> Self:
@@ -306,7 +306,7 @@ class TwitterApiMockClient(TwitterApiClient):
         self,
         url: V2DmConversationsWithParticipantMessagesUrl,
         response_body: Union[
-            V2PostDmConversationsWithParticipantMessagesResponseBody,
+            PostV2DmConversationsWithParticipantMessagesResponseBody,
             TwitterApiError,
         ],
     ) -> Self:
@@ -317,7 +317,7 @@ class TwitterApiMockClient(TwitterApiClient):
         self,
         url: V2DmConversationsUrl,
         response_body: Union[
-            V2PostDmConversationsResponseBody,
+            PostV2DmConversationsResponseBody,
             TwitterApiError,
         ],
     ) -> Self:
@@ -328,7 +328,7 @@ class TwitterApiMockClient(TwitterApiClient):
         self,
         url: V2DmConversationsMessagesUrl,
         response_body: Union[
-            V2PostDmConversationMessagesResponseBody,
+            PostV2DmConversationMessagesResponseBody,
             TwitterApiError,
         ],
     ) -> Self:
@@ -343,7 +343,7 @@ class TwitterApiMockClient(TwitterApiClient):
         self,
         url: V2TweetUrl,
         response_body: Union[
-            V2DeleteTweetResponseBody,
+            DeleteV2TweetResponseBody,
             TwitterApiError,
         ],
     ) -> Self:

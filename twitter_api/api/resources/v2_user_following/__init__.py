@@ -1,9 +1,9 @@
 from typing import Literal
 
-from .post_v2_user_following import V2PostUserFollowingResources
+from .post_v2_user_following import PostV2UserFollowingResources
 
 V2UserFollowingUrl = Literal["https://api.twitter.com/2/users/:id/following"]
 
 
-class V2UserFollowingResources(V2PostUserFollowingResources):
+class V2UserFollowingResources(PostV2UserFollowingResources):
     pass

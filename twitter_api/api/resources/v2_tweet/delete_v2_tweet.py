@@ -7,20 +7,20 @@ from twitter_api.types.extra_permissive_model import ExtraPermissiveModel
 ENDPOINT = Endpoint("DELETE", "https://api.twitter.com/2/tweets/:id")
 
 
-class V2DeleteTweetResponseBodyData(ExtraPermissiveModel):
+class DeleteV2TweetResponseBodyData(ExtraPermissiveModel):
     deleted: bool
 
 
-class V2DeleteTweetResponseBody(ExtraPermissiveModel):
-    data: V2DeleteTweetResponseBodyData
+class DeleteV2TweetResponseBody(ExtraPermissiveModel):
+    data: DeleteV2TweetResponseBodyData
 
 
-class V2DeleteTweetResources(ApiResources):
+class DeleteV2TweetResources(ApiResources):
     @rate_limit(ENDPOINT, "user", requests=50, mins=15)
     def delete(
         self,
         id: TweetId,
-    ) -> V2DeleteTweetResponseBody:
+    ) -> DeleteV2TweetResponseBody:
         # flake8: noqa E501
         """
         ツイートを削除する。
@@ -29,6 +29,6 @@ class V2DeleteTweetResources(ApiResources):
         """
         return self.request_client.delete(
             endpoint=ENDPOINT,
-            response_type=V2DeleteTweetResponseBody,
+            response_type=DeleteV2TweetResponseBody,
             url=ENDPOINT.url.replace(":id", id),
         )

@@ -20,8 +20,8 @@ from twitter_api.utils.functional import map_optional
 
 ENDPOINT = Endpoint("GET", "https://api.twitter.com/2/tweets/search/recent")
 
-V2GetTweetsSearchRecentQueryParameters = TypedDict(
-    "V2GetTweetsSearchRecentQueryParameters",
+GetV2TweetsSearchRecentQueryParameters = TypedDict(
+    "GetV2TweetsSearchRecentQueryParameters",
     {
         "query": str | SearchQuery,
         "start_time": NotRequired[Optional[datetime]],
@@ -41,7 +41,7 @@ V2GetTweetsSearchRecentQueryParameters = TypedDict(
 )
 
 
-def _make_query(query: V2GetTweetsSearchRecentQueryParameters) -> dict:
+def _make_query(query: GetV2TweetsSearchRecentQueryParameters) -> dict:
     return {
         "query": str(query["query"]),
         "start_time": map_optional(lambda x: x.isoformat(), query.get("start_time")),
@@ -60,22 +60,22 @@ def _make_query(query: V2GetTweetsSearchRecentQueryParameters) -> dict:
     }
 
 
-class V2GetTweetsSearchRecentResponseBodyMeta(ExtraPermissiveModel):
+class GetV2TweetsSearchRecentResponseBodyMeta(ExtraPermissiveModel):
     result_count: int
     next_token: Optional[str] = None
 
 
-class V2GetTweetsSearchRecentResponseBody(ExtraPermissiveModel):
+class GetV2TweetsSearchRecentResponseBody(ExtraPermissiveModel):
     data: Optional[list[TweetDetail]] = None
-    meta: V2GetTweetsSearchRecentResponseBodyMeta
+    meta: GetV2TweetsSearchRecentResponseBodyMeta
 
 
-class V2GetTweetsSearchRecentResources(ApiResources):
+class GetV2TweetsSearchRecentResources(ApiResources):
     @rate_limit(ENDPOINT, "app", requests=450, mins=15)
     @rate_limit(ENDPOINT, "user", requests=180, mins=15)
     def get(
-        self, query: V2GetTweetsSearchRecentQueryParameters
-    ) -> V2GetTweetsSearchRecentResponseBody:
+        self, query: GetV2TweetsSearchRecentQueryParameters
+    ) -> GetV2TweetsSearchRecentResponseBody:
         # flake8: noqa E501
         """
         ツイートの一覧を検索する。
@@ -84,6 +84,6 @@ class V2GetTweetsSearchRecentResources(ApiResources):
         """
         return self.request_client.get(
             endpoint=ENDPOINT,
-            response_type=V2GetTweetsSearchRecentResponseBody,
+            response_type=GetV2TweetsSearchRecentResponseBody,
             query=_make_query(query) if query is not None else None,
         )
