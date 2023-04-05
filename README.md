@@ -67,7 +67,7 @@ end
 
 ```python
 from twitter_api import TwitterApiClient
-twitter_client = TwitterApiRealClient.from_app_auth_v2_env()
+twitter_client = TwitterApiRealClient.from_app_oauth2_env()
 
 response = (
     twitter_client.request("https://api.twitter.com/2/tweets").get(
@@ -88,7 +88,7 @@ response = (
 ```python
 from twitter_api.client.twitter_api_mock_client import TwitterApiMockClient
 
-twitter_client = TwitterApiMockClient.from_app_auth_v2_env()
+twitter_client = TwitterApiMockClient.from_app_oauth2_env()
 
 response = (
     twitter_client.chain()
@@ -112,7 +112,7 @@ def some_logic(twitter_client: TwitterApiClient):
 
 def test_some_logic():
     twitter_client = (
-        TwitterApiMockClient.from_app_auth_v2_env()
+        TwitterApiMockClient.from_app_oauth2_env()
         .inject_post_response_body("https://api.twitter.com/2/tweets", post_response)
         .inject_get_response_body("https://api.twitter.com/2/tweets", get_response)
         .inject_delete_response_body("https://api.twitter.com/2/tweets", delete_response)

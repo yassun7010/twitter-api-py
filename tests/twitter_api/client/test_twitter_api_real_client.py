@@ -12,22 +12,22 @@ class TestTwitterApiRealClient:
         assert isinstance(real_app_auth_v2_client, TwitterApiRealClient)
 
     @pytest.mark.skipif(**synthetic_monitoring_is_disable())
-    def test_real_client_from_bearer_token(self):
+    def test_real_client_from_app_oauth2_bearer_token(self):
         assert isinstance(
-            TwitterApiRealClient.from_bearer_token_env(),
+            TwitterApiRealClient.from_app_oauth2_bearer_token_env(),
             TwitterApiRealClient,
         )
 
     @pytest.mark.skipif(**synthetic_monitoring_is_disable())
-    def test_real_client_from_app_auth_v2_env(self):
+    def test_real_client_from_app_oauth2_env(self):
         assert isinstance(
-            TwitterApiRealClient.from_app_auth_v2_env(),
+            TwitterApiRealClient.from_app_oauth2_env(),
             TwitterApiRealClient,
         )
 
     @pytest.mark.skipif(**synthetic_monitoring_is_disable())
-    def test_real_client_from_user_auth_v1_env(self):
+    def test_real_client_from_user_oauth1_env(self):
         assert isinstance(
-            TwitterApiRealClient.from_user_auth_v1_env(),
+            TwitterApiRealClient.from_user_oauth1_env(),
             TwitterApiRealClient,
         )

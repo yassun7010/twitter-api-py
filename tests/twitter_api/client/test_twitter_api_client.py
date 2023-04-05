@@ -16,22 +16,22 @@ class TestTwitterApiClient:
             TwitterApiClient()  # type: ignore
 
     @pytest.mark.skipif(**synthetic_monitoring_is_disable())
-    def test_client_from_bearer_token(self):
+    def test_client_from_app_oauth2_bearer_token(self):
         assert isinstance(
-            TwitterApiClient.from_bearer_token_env(),
+            TwitterApiClient.from_app_oauth2_bearer_token_env(),
             TwitterApiRealClient,
         )
 
     @pytest.mark.skipif(**synthetic_monitoring_is_disable())
-    def test_client_from_app_auth_v2_env(self):
+    def test_client_from_app_oauth2_env(self):
         assert isinstance(
-            TwitterApiClient.from_app_auth_v2_env(),
+            TwitterApiClient.from_app_oauth2_env(),
             TwitterApiRealClient,
         )
 
     @pytest.mark.skipif(**synthetic_monitoring_is_disable())
-    def test_client_from_user_auth_v1_env(self):
+    def test_client_from_user_oauth1_env(self):
         assert isinstance(
-            TwitterApiClient.from_user_auth_v1_env(),
+            TwitterApiClient.from_user_oauth1_env(),
             TwitterApiRealClient,
         )

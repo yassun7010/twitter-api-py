@@ -336,70 +336,104 @@ class TwitterApiClient(metaclass=ABCMeta):
             raise NeverError(url)
 
     @classmethod
-    def from_bearer_token(
+    def from_app_oauth2_bearer_token(
         cls,
         bearer_token: str,
         *,
         rate_limit_manager: Optional[RateLimitManager] = None,
     ) -> Self:
-        """Bearer 認証を用いてクライアントを作成する。"""
+        """OAuth 2.0 の Bearer 認証を用いてクライアントを作成する。"""
 
         from .twitter_api_real_client import TwitterApiRealClient
 
-        return TwitterApiRealClient.from_bearer_token(
+        return TwitterApiRealClient.from_app_oauth2_bearer_token(
             bearer_token,
             rate_limit_manager=rate_limit_manager,
         )
 
     @classmethod
-    def from_bearer_token_env(
+    def from_app_oauth2_bearer_token_env(
         cls,
         bearer_token="BEARER_TOEKN",
         rate_limit_manager: Optional[RateLimitManager] = None,
     ):
-        """環境変数から、 Bearer 認証を用いてクライアントを作成する。"""
+        """環境変数から、 OAuth 2.0 の Bearer 認証を用いてクライアントを作成する。"""
 
-        return cls.from_bearer_token(
+        return cls.from_app_oauth2_bearer_token(
             cls._get_env(bearer_token),
             rate_limit_manager=rate_limit_manager,
         )
 
     @classmethod
-    def from_app_auth_v2(
+    def from_app_oauth2(
         cls,
         *,
         api_key: ApiKey,
         api_secret: ApiSecret,
         rate_limit_manager: Optional[RateLimitManager] = None,
     ) -> Self:
-        """アプリ認証を用いてクライアントを作成する。"""
+        """OAuth 2.0 のアプリ認証を用いてクライアントを作成する。"""
 
         from .twitter_api_real_client import TwitterApiRealClient
 
-        return TwitterApiRealClient.from_app_auth_v2(
+        return TwitterApiRealClient.from_app_oauth2(
             api_key=api_key,
             api_secret=api_secret,
             rate_limit_manager=rate_limit_manager,
         )
 
     @classmethod
-    def from_app_auth_v2_env(
+    def from_app_oauth2_env(
         cls,
         *,
         api_key: Env[ApiKey] = "API_KEY",
         api_secret: Env[ApiSecret] = "API_SECRET",
         rate_limit_manager: Optional[RateLimitManager] = None,
     ):
-        """環境変数から、アプリ認証を用いてクライアントを作成する。"""
+        """環境変数から、OAuth 2.0 のアプリ認証を用いてクライアントを作成する。"""
 
-        return cls.from_app_auth_v2(
+        return cls.from_app_oauth2(
             api_key=cls._get_env(api_key),
             api_secret=cls._get_env(api_secret),
             rate_limit_manager=rate_limit_manager,
         )
 
     @classmethod
-    def from_user_auth_v1(
+    def from_user_oauth2(
+        cls,
+        *,
+        api_key: ApiKey,
+        api_secret: ApiSecret,
+        rate_limit_manager: Optional[RateLimitManager] = None,
+    ) -> Self:
+        """OAuth 2.0 のアプリ認証を用いてクライアントを作成する。"""
+
+        from .twitter_api_real_client import TwitterApiRealClient
+
+        return TwitterApiRealClient.from_user_oauth2(
+            api_key=api_key,
+            api_secret=api_secret,
+            rate_limit_manager=rate_limit_manager,
+        )
+
+    @classmethod
+    def from_user_oauth2_env(
+        cls,
+        *,
+        api_key: Env[ApiKey] = "API_KEY",
+        api_secret: Env[ApiSecret] = "API_SECRET",
+        rate_limit_manager: Optional[RateLimitManager] = None,
+    ):
+        """環境変数から、OAuth 2.0 のアプリ認証を用いてクライアントを作成する。"""
+
+        return cls.from_user_oauth2(
+            api_key=cls._get_env(api_key),
+            api_secret=cls._get_env(api_secret),
+            rate_limit_manager=rate_limit_manager,
+        )
+
+    @classmethod
+    def from_user_oauth1(
         cls,
         *,
         api_key: ApiKey,
@@ -412,7 +446,7 @@ class TwitterApiClient(metaclass=ABCMeta):
 
         from .twitter_api_real_client import TwitterApiRealClient
 
-        return TwitterApiRealClient.from_user_auth_v1(
+        return TwitterApiRealClient.from_user_oauth1(
             api_key=api_key,
             api_secret=api_secret,
             access_token=access_token,
@@ -421,7 +455,7 @@ class TwitterApiClient(metaclass=ABCMeta):
         )
 
     @classmethod
-    def from_user_auth_v1_env(
+    def from_user_oauth1_env(
         cls,
         *,
         api_key: Env[ApiKey] = "API_KEY",
@@ -432,7 +466,7 @@ class TwitterApiClient(metaclass=ABCMeta):
     ):
         """環境変数から、アプリ認証を用いてクライアントを作成する。"""
 
-        return cls.from_user_auth_v1(
+        return cls.from_user_oauth1(
             api_key=cls._get_env(api_key),
             api_secret=cls._get_env(api_secret),
             access_token=cls._get_env(access_token),

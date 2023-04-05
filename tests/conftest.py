@@ -34,12 +34,17 @@ def json_data_loader() -> JsonDataLoader:
 
 @pytest.fixture
 def real_app_auth_v2_client() -> TwitterApiRealClient:
-    return TwitterApiRealClient.from_app_auth_v2_env()
+    return TwitterApiRealClient.from_app_oauth2_env()
+
+
+@pytest.fixture
+def real_user_auth_v2_client() -> TwitterApiRealClient:
+    return TwitterApiRealClient.from_user_oauth2_env()
 
 
 @pytest.fixture
 def real_user_auth_v1_client() -> TwitterApiRealClient:
-    return TwitterApiRealClient.from_user_auth_v1_env()
+    return TwitterApiRealClient.from_user_oauth1_env()
 
 
 @pytest.fixture
@@ -47,6 +52,14 @@ def mock_app_auth_v2_client() -> TwitterApiMockClient:
     return TwitterApiMockClient(
         oauth_version="2.0",
         rate_limit_target="app",
+    )
+
+
+@pytest.fixture
+def mock_user_auth_v2_client() -> TwitterApiMockClient:
+    return TwitterApiMockClient(
+        oauth_version="2.0",
+        rate_limit_target="user",
     )
 
 

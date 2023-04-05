@@ -352,7 +352,7 @@ class TwitterApiMockClient(TwitterApiClient):
         return self
 
     @classmethod
-    def from_bearer_token(
+    def from_app_oauth2_bearer_token(
         cls,
         bearer_token: str,
         *,
@@ -365,7 +365,7 @@ class TwitterApiMockClient(TwitterApiClient):
         )
 
     @classmethod
-    def from_app_auth_v2(
+    def from_app_oauth2(
         cls,
         *,
         api_key: ApiKey,
@@ -379,7 +379,7 @@ class TwitterApiMockClient(TwitterApiClient):
         )
 
     @classmethod
-    def from_user_auth_v1(
+    def from_user_oauth1(
         cls,
         *,
         api_key: ApiKey,
