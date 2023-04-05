@@ -19,8 +19,7 @@ class TestGetV2UserFollowing:
         response = (
             real_user_auth_v1_client.chain()
             .request(
-                "https://api.twitter.com/2/dm_conversations/"
-                "with/:participant_id/messages"
+                "https://api.twitter.com/2/dm_conversations/with/:participant_id/messages"
             )
             .post("2244994945", {"text": "DM のテスト。"})
         )
@@ -52,13 +51,11 @@ class TestMockGetV2UserFollowing:
         assert (
             mock_app_auth_v2_client.chain()
             .inject_post_response_body(
-                "https://api.twitter.com/2/dm_conversations/"
-                "with/:participant_id/messages",
+                "https://api.twitter.com/2/dm_conversations/with/:participant_id/messages",
                 expected_response,
             )
             .request(
-                "https://api.twitter.com/2/dm_conversations/"
-                "with/:participant_id/messages"
+                "https://api.twitter.com/2/dm_conversations/with/:participant_id/messages"
             )
             .post("2244994945", {"text": "DM のテスト。"})
         ) == expected_response
