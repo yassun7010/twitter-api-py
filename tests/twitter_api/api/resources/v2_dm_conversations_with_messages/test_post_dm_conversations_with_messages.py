@@ -2,7 +2,7 @@ import pytest
 
 from tests.conftest import synthetic_monitoring_is_disable
 from tests.data import JsonDataLoader
-from twitter_api.api.resources.v2_dm_conversations_with_messages import (
+from twitter_api.api.resources.v2_dm_conversations_with_messages.post_dm_conversations_with_messages import (
     V2PostDmConversationsWithParticipantMessagesResponseBody,
 )
 from twitter_api.client.twitter_api_mock_client import TwitterApiMockClient

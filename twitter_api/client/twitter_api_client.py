@@ -315,8 +315,9 @@ class TwitterApiClient(metaclass=ABCMeta):
             return V2UserTweetsResources(
                 self._request_client,
             )
-        elif url == (
-            "https://api.twitter.com/2/dm_conversations/with/:participant_id/messages"
+        elif (
+            url
+            == "https://api.twitter.com/2/dm_conversations/with/:participant_id/messages"
         ):
             return V2DmConversationsWithParticipantMessagesResources(
                 self._request_client,

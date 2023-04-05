@@ -3,7 +3,7 @@ import os
 import pytest
 
 from tests.conftest import synthetic_monitoring_is_disable
-from twitter_api.api.resources.oauth2_invalidate_token import (
+from twitter_api.api.resources.oauth2_invalidate_token.post_oauth2_invalidate_token import (
     Oauth2PostInvalidateTokenResponseBody,
 )
 from twitter_api.client.twitter_api_mock_client import TwitterApiMockClient

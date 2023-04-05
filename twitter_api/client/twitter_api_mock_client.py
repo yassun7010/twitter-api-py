@@ -1,7 +1,7 @@
 from typing import Optional, Self, Union, overload
 
-from twitter_api.api.resources.oauth2_invalidate_token import (
-    Oauth2InvalidateTokenUrl,
+from twitter_api.api.resources.oauth2_invalidate_token import Oauth2InvalidateTokenUrl
+from twitter_api.api.resources.oauth2_invalidate_token.post_oauth2_invalidate_token import (
     Oauth2PostInvalidateTokenResponseBody,
 )
 from twitter_api.api.resources.oauth2_token import Oauth2TokenUrl
@@ -14,6 +14,8 @@ from twitter_api.api.resources.oauth_request_token.post_oauth_request_token impo
 )
 from twitter_api.api.resources.v2_dm_conversation_messages import (
     V2DmConversationsMessagesUrl,
+)
+from twitter_api.api.resources.v2_dm_conversation_messages.post_dm_conversations_messages import (
     V2PostDmConversationMessagesResponseBody,
 )
 from twitter_api.api.resources.v2_dm_conversations import V2DmConversationsUrl
@@ -22,6 +24,8 @@ from twitter_api.api.resources.v2_dm_conversations.post_dm_conversations import 
 )
 from twitter_api.api.resources.v2_dm_conversations_with_messages import (
     V2DmConversationsWithParticipantMessagesUrl,
+)
+from twitter_api.api.resources.v2_dm_conversations_with_messages.post_dm_conversations_with_messages import (
     V2PostDmConversationsWithParticipantMessagesResponseBody,
 )
 from twitter_api.api.resources.v2_tweet import V2TweetUrl

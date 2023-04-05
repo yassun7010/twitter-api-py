@@ -8,7 +8,7 @@
   "python.formatting.provider": "black",
   "python.globalModuleInstallation": true,
   "python.linting.enabled": true,
-  "python.linting.flake8Args": ["--max-line-length", "88"],
+  "python.linting.flake8Args": ["--max-line-length", "200"],
   "python.linting.flake8Enabled": true,
   "python.linting.mypyEnabled": false,
   "python.linting.pylintEnabled": false,
@@ -23,9 +23,7 @@
     "editor.codeActionsOnSave": {
       "source.organizeImports": true
     },
-    "editor.rulers": [88],
-    "editor.wordWrapColumn": 88,
-    "editor.wordWrap": "wordWrapColumn"
+    "editor.rulers": [88]
   },
   "python.analysis.extraPaths": []
 }
