@@ -69,17 +69,19 @@ class TwitterApiRealClient(TwitterApiClient):
             ),
         )
 
+        access_token = (
+            client.request("https://api.twitter.com/oauth2/token")
+            .post(
+                api_key=api_key,
+                api_secret=api_secret,
+                query={"grant_type": "client_credentials"},
+            )
+            .access_token
+        )
+
         client._real_request_client._auth = OAuth2Auth(
             token={
-                "access_token": (
-                    client.request("https://api.twitter.com/oauth2/token")
-                    .post(
-                        api_key=api_key,
-                        api_secret=api_secret,
-                        query={"grant_type": "client_credentials"},
-                    )
-                    .access_token
-                ),
+                "access_token": access_token,
                 "token_type": "Bearer",
             }
         )
