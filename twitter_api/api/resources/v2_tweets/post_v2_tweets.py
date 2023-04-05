@@ -45,8 +45,8 @@ class _PostV2TweetsRequestBodyBase(TypedDict):
 
 
 class PostV2TweetsRequestBodyMedia(_PostV2TweetsRequestBodyBase):
-    media: PostV2TweetsMedia
     text: NotRequired[Optional[str]]
+    media: PostV2TweetsMedia
 
 
 class PostV2TweetsRequestBodyText(_PostV2TweetsRequestBodyBase):
