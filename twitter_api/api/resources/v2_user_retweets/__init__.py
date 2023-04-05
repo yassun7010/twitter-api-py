@@ -1,6 +1,6 @@
 from typing import Literal
 
-from .post_user_retweets import V2PostUserRetweetsResources
+from .post_v2_user_retweets import V2PostUserRetweetsResources
 
 V2UserRetweetsUrl = Literal["https://api.twitter.com/2/users/:id/retweets"]
 

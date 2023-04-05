@@ -1,6 +1,6 @@
 from typing import Literal
 
-from .post_user_following import V2PostUserFollowingResources
+from .post_v2_user_following import V2PostUserFollowingResources
 
 V2UserFollowingUrl = Literal["https://api.twitter.com/2/users/:id/following"]
 

@@ -15,65 +15,65 @@ from twitter_api.api.resources.oauth_request_token.post_oauth_request_token impo
 from twitter_api.api.resources.v2_dm_conversation_messages import (
     V2DmConversationsMessagesUrl,
 )
-from twitter_api.api.resources.v2_dm_conversation_messages.post_dm_conversations_messages import (
+from twitter_api.api.resources.v2_dm_conversation_messages.post_v2_dm_conversations_messages import (
     V2PostDmConversationMessagesResponseBody,
 )
 from twitter_api.api.resources.v2_dm_conversations import V2DmConversationsUrl
-from twitter_api.api.resources.v2_dm_conversations.post_dm_conversations import (
+from twitter_api.api.resources.v2_dm_conversations.post_v2_dm_conversations import (
     V2PostDmConversationsResponseBody,
 )
 from twitter_api.api.resources.v2_dm_conversations_with_messages import (
     V2DmConversationsWithParticipantMessagesUrl,
 )
-from twitter_api.api.resources.v2_dm_conversations_with_messages.post_dm_conversations_with_messages import (
+from twitter_api.api.resources.v2_dm_conversations_with_messages.post_v2_dm_conversations_with_messages import (
     V2PostDmConversationsWithParticipantMessagesResponseBody,
 )
 from twitter_api.api.resources.v2_tweet import V2TweetUrl
-from twitter_api.api.resources.v2_tweet.delete_tweet import V2DeleteTweetResponseBody
-from twitter_api.api.resources.v2_tweet.get_tweet import V2GetTweetResponseBody
+from twitter_api.api.resources.v2_tweet.delete_v2_tweet import V2DeleteTweetResponseBody
+from twitter_api.api.resources.v2_tweet.get_v2_tweet import V2GetTweetResponseBody
 from twitter_api.api.resources.v2_tweet_retweeted_by import V2TweetRetweetedByUrl
-from twitter_api.api.resources.v2_tweet_retweeted_by.get_tweet_retweeted_by import (
+from twitter_api.api.resources.v2_tweet_retweeted_by.get_v2_tweet_retweeted_by import (
     V2GetTweetRetweetedByResponseBody,
 )
 from twitter_api.api.resources.v2_tweets import V2TweetsUrl
-from twitter_api.api.resources.v2_tweets.get_tweets import V2GetTweetsResponseBody
-from twitter_api.api.resources.v2_tweets.post_tweets import V2PostTweetsResponseBody
+from twitter_api.api.resources.v2_tweets.get_v2_tweets import V2GetTweetsResponseBody
+from twitter_api.api.resources.v2_tweets.post_v2_tweets import V2PostTweetsResponseBody
 from twitter_api.api.resources.v2_tweets_search_all import V2TweetsSearchAllUrl
-from twitter_api.api.resources.v2_tweets_search_all.get_tweets_search_all import (
+from twitter_api.api.resources.v2_tweets_search_all.get_v2_tweets_search_all import (
     V2GetTweetsSearchAllResponseBody,
 )
 from twitter_api.api.resources.v2_tweets_search_recent import V2TweetsSearchRecentUrl
-from twitter_api.api.resources.v2_tweets_search_recent.get_tweets_search_recent import (
+from twitter_api.api.resources.v2_tweets_search_recent.get_v2_tweets_search_recent import (
     V2GetTweetsSearchRecentResponseBody,
 )
 from twitter_api.api.resources.v2_tweets_search_stream import V2TweetsSearchStreamUrl
-from twitter_api.api.resources.v2_tweets_search_stream.get_tweets_search_stream import (
+from twitter_api.api.resources.v2_tweets_search_stream.get_v2_tweets_search_stream import (
     V2GetTweetsSearchStreamResponseBody,
 )
 from twitter_api.api.resources.v2_user import V2UserUrl
-from twitter_api.api.resources.v2_user.get_user import V2GetUserResponseBody
+from twitter_api.api.resources.v2_user.get_v2_user import V2GetUserResponseBody
 from twitter_api.api.resources.v2_user_followers import V2UserFollowersUrl
-from twitter_api.api.resources.v2_user_followers.get_user_followers import (
+from twitter_api.api.resources.v2_user_followers.get_v2_user_followers import (
     V2GetUserFollowersResponseBody,
 )
 from twitter_api.api.resources.v2_user_following import V2UserFollowingUrl
-from twitter_api.api.resources.v2_user_following.post_user_following import (
+from twitter_api.api.resources.v2_user_following.post_v2_user_following import (
     V2PostUserFollowingResponseBody,
 )
 from twitter_api.api.resources.v2_user_liked_tweets import V2UserLikedTweetsUrl
-from twitter_api.api.resources.v2_user_liked_tweets.get_user_liked_tweets import (
+from twitter_api.api.resources.v2_user_liked_tweets.get_v2_user_liked_tweets import (
     V2GetUserLikedTweetsResponseBody,
 )
 from twitter_api.api.resources.v2_user_retweets import V2UserRetweetsUrl
-from twitter_api.api.resources.v2_user_retweets.post_user_retweets import (
+from twitter_api.api.resources.v2_user_retweets.post_v2_user_retweets import (
     V2PostUserRetweetsResponseBody,
 )
 from twitter_api.api.resources.v2_user_tweets import V2UserTweetsUrl
-from twitter_api.api.resources.v2_user_tweets.get_user_tweets import (
+from twitter_api.api.resources.v2_user_tweets.get_v2_user_tweets import (
     V2GetUserTweetsResponseBody,
 )
 from twitter_api.api.resources.v2_users import V2UsersUrl
-from twitter_api.api.resources.v2_users.get_users import V2GetUsersResponseBody
+from twitter_api.api.resources.v2_users.get_v2_users import V2GetUsersResponseBody
 from twitter_api.error import TwitterApiError
 from twitter_api.rate_limit.manager.rate_limit_manager import RateLimitManager
 from twitter_api.rate_limit.rate_limit_target import RateLimitTarget

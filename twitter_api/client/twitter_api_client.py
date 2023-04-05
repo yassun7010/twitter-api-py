@@ -34,11 +34,11 @@ from twitter_api.api.resources.v2_tweets_search_all import (
     V2TweetsSearchAllUrl,
 )
 from twitter_api.api.resources.v2_tweets_search_recent import V2TweetsSearchRecentUrl
-from twitter_api.api.resources.v2_tweets_search_recent.get_tweets_search_recent import (
+from twitter_api.api.resources.v2_tweets_search_recent.get_v2_tweets_search_recent import (
     V2GetTweetsSearchRecentResources,
 )
 from twitter_api.api.resources.v2_tweets_search_stream import V2TweetsSearchStreamUrl
-from twitter_api.api.resources.v2_tweets_search_stream.get_tweets_search_stream import (
+from twitter_api.api.resources.v2_tweets_search_stream.get_v2_tweets_search_stream import (
     V2GetTweetsSearchStreamResources,
 )
 from twitter_api.api.resources.v2_user import V2UserResources, V2UserUrl

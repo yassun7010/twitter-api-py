@@ -3,7 +3,7 @@ from datetime import datetime
 import pytest
 
 from tests.conftest import synthetic_monitoring_is_disable
-from twitter_api.api.resources.v2_tweet.delete_tweet import (
+from twitter_api.api.resources.v2_tweet.delete_v2_tweet import (
     V2DeleteTweetResponseBody,
     V2DeleteTweetResponseBodyData,
 )

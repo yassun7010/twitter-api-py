@@ -3,7 +3,7 @@ from textwrap import dedent
 import pytest
 
 from tests.conftest import synthetic_monitoring_is_disable
-from twitter_api.api.resources.v2_tweets.get_tweets import V2GetTweetsResponseBody
+from twitter_api.api.resources.v2_tweets.get_v2_tweets import V2GetTweetsResponseBody
 from twitter_api.api.types.v2_tweet.tweet_detail import TweetDetail
 from twitter_api.client.twitter_api_mock_client import TwitterApiMockClient
 from twitter_api.client.twitter_api_real_client import TwitterApiRealClient

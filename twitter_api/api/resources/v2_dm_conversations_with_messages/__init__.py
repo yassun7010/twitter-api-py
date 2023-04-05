@@ -2,7 +2,7 @@ from typing import TypeAlias
 
 from typing_extensions import Literal
 
-from .post_dm_conversations_with_messages import (
+from .post_v2_dm_conversations_with_messages import (
     V2PostDmConversationsWithParticipantMessagesResources,
 )
 

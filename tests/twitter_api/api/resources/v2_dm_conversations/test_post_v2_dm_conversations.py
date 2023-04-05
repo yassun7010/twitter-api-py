@@ -2,8 +2,8 @@ import pytest
 
 from tests.conftest import synthetic_monitoring_is_disable
 from tests.data import JsonDataLoader
-from twitter_api.api.resources.v2_dm_conversations_with_messages.post_dm_conversations_with_messages import (
-    V2PostDmConversationsWithParticipantMessagesResponseBody,
+from twitter_api.api.resources.v2_dm_conversations.post_v2_dm_conversations import (
+    V2PostDmConversationsResponseBody,
 )
 from twitter_api.client.twitter_api_mock_client import TwitterApiMockClient
 from twitter_api.client.twitter_api_real_client import TwitterApiRealClient
@@ -18,11 +18,17 @@ class TestV2GetUserFollowing:
     ):
         response = (
             real_user_auth_v1_client.chain()
-            .request(
-                "https://api.twitter.com/2/dm_conversations/"
-                "with/:participant_id/messages"
+            .request("https://api.twitter.com/2/dm_conversations")
+            .post(
+                "2244994945",
+                {
+                    "conversation_type": "Group",
+                    "participant_ids": ["944480690", "906948460078698496"],
+                    "message": {
+                        "text": "Hello to you two, this is a new group conversation"
+                    },
+                },
             )
-            .post("2244994945", {"text": "DM のテスト。"})
         )
 
         print(response.json())
@@ -34,7 +40,7 @@ class TestMockV2GetUserFollowing:
     @pytest.mark.parametrize(
         "json_filename",
         [
-            "post_dm_conversations_with_participant_messages.json",
+            "post_dm_conversations.json",
         ],
     )
     def test_mock_get_user_following(
@@ -43,22 +49,25 @@ class TestMockV2GetUserFollowing:
         json_data_loader: JsonDataLoader,
         json_filename: str,
     ):
-        expected_response = (
-            V2PostDmConversationsWithParticipantMessagesResponseBody.parse_obj(
-                json_data_loader.load(json_filename)
-            )
+        expected_response = V2PostDmConversationsResponseBody.parse_obj(
+            json_data_loader.load(json_filename)
         )
 
         assert (
             mock_app_auth_v2_client.chain()
             .inject_post_response_body(
-                "https://api.twitter.com/2/dm_conversations/"
-                "with/:participant_id/messages",
+                "https://api.twitter.com/2/dm_conversations",
                 expected_response,
             )
-            .request(
-                "https://api.twitter.com/2/dm_conversations/"
-                "with/:participant_id/messages"
+            .request("https://api.twitter.com/2/dm_conversations")
+            .post(
+                "2244994945",
+                {
+                    "conversation_type": "Group",
+                    "participant_ids": ["944480690", "906948460078698496"],
+                    "message": {
+                        "text": "Hello to you two, this is a new group conversation"
+                    },
+                },
             )
-            .post("2244994945", {"text": "DM のテスト。"})
         ) == expected_response

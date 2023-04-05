@@ -2,7 +2,7 @@ from typing import TypeAlias
 
 from typing_extensions import Literal
 
-from .post_dm_conversations_messages import V2PostDmConversationMessagesResources
+from .post_v2_dm_conversations_messages import V2PostDmConversationMessagesResources
 
 V2DmConversationsMessagesUrl: TypeAlias = Literal[
     "https://api.twitter.com/2/dm_conversations/:dm_conversation_id/messages"

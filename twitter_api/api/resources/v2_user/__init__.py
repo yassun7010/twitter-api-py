@@ -1,6 +1,6 @@
 from typing import Literal
 
-from .get_user import V2GetUserResources
+from .get_v2_user import V2GetUserResources
 
 V2UserUrl = Literal["https://api.twitter.com/2/users/:id"]
 

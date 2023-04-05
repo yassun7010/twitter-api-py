@@ -2,8 +2,8 @@ import pytest
 
 from tests.conftest import synthetic_monitoring_is_disable
 from tests.data import JsonDataLoader
-from twitter_api.api.resources.v2_dm_conversation_messages.post_dm_conversations_messages import (
-    V2PostDmConversationMessagesResponseBody,
+from twitter_api.api.resources.v2_dm_conversations_with_messages.post_v2_dm_conversations_with_messages import (
+    V2PostDmConversationsWithParticipantMessagesResponseBody,
 )
 from twitter_api.client.twitter_api_mock_client import TwitterApiMockClient
 from twitter_api.client.twitter_api_real_client import TwitterApiRealClient
@@ -19,8 +19,8 @@ class TestV2GetUserFollowing:
         response = (
             real_user_auth_v1_client.chain()
             .request(
-                "https://api.twitter.com/2/dm_conversations/:dm_conversation_id"
-                "/messages"
+                "https://api.twitter.com/2/dm_conversations/"
+                "with/:participant_id/messages"
             )
             .post("2244994945", {"text": "DM のテスト。"})
         )
@@ -34,7 +34,7 @@ class TestMockV2GetUserFollowing:
     @pytest.mark.parametrize(
         "json_filename",
         [
-            "post_dm_conversations_messages.json",
+            "post_dm_conversations_with_participant_messages.json",
         ],
     )
     def test_mock_get_user_following(
@@ -43,20 +43,22 @@ class TestMockV2GetUserFollowing:
         json_data_loader: JsonDataLoader,
         json_filename: str,
     ):
-        expected_response = V2PostDmConversationMessagesResponseBody.parse_obj(
-            json_data_loader.load(json_filename)
+        expected_response = (
+            V2PostDmConversationsWithParticipantMessagesResponseBody.parse_obj(
+                json_data_loader.load(json_filename)
+            )
         )
 
         assert (
             mock_app_auth_v2_client.chain()
             .inject_post_response_body(
-                "https://api.twitter.com/2/dm_conversations/:dm_conversation_id"
-                "/messages",
+                "https://api.twitter.com/2/dm_conversations/"
+                "with/:participant_id/messages",
                 expected_response,
             )
             .request(
-                "https://api.twitter.com/2/dm_conversations/:dm_conversation_id"
-                "/messages"
+                "https://api.twitter.com/2/dm_conversations/"
+                "with/:participant_id/messages"
             )
             .post("2244994945", {"text": "DM のテスト。"})
         ) == expected_response
