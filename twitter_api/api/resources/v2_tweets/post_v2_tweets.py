@@ -1,4 +1,4 @@
-from typing import Literal, NotRequired, Optional, TypedDict
+from typing import Literal, NotRequired, Optional, TypedDict, Union
 
 from twitter_api.api.resources.api_resources import ApiResources
 from twitter_api.api.types.v2_media.media_id import MediaId
@@ -21,7 +21,7 @@ class PostV2TweetsGeospatialInformation(TypedDict):
 
 class PostV2TweetsMedia(TypedDict):
     media_ids: list[MediaId]
-    tagged_user_ids: list[UserId]
+    tagged_user_ids: NotRequired[list[UserId]]
 
 
 class PostV2TweetsPoll(TypedDict):
@@ -34,16 +34,30 @@ class PostV2TweetsReply(TypedDict):
     in_reply_to_tweet_id: list[TweetId]
 
 
-class PostV2TweetsRequestBody(TypedDict):
+class _PostV2TweetsRequestBodyBase(TypedDict):
     direct_message_deep_link: NotRequired[Optional[Url]]
     for_super_followers_only: NotRequired[Optional[bool]]
     geo: NotRequired[Optional[PostV2TweetsGeospatialInformation]]
-    media: NotRequired[Optional[PostV2TweetsMedia]]
     poll: NotRequired[Optional[PostV2TweetsPoll]]
     quote_tweet_id: NotRequired[Optional[TweetId]]
     reply: NotRequired[Optional[PostV2TweetsReply]]
     reply_settings: NotRequired[Optional[Literal["mentionedUsers", "following"]]]
+
+
+class PostV2TweetsRequestBodyMedia(_PostV2TweetsRequestBodyBase):
+    media: PostV2TweetsMedia
     text: NotRequired[Optional[str]]
+
+
+class PostV2TweetsRequestBodyText(_PostV2TweetsRequestBodyBase):
+    text: str
+    media: NotRequired[Optional[PostV2TweetsMedia]]
+
+
+PostV2TweetsRequestBody = Union[
+    PostV2TweetsRequestBodyText,
+    PostV2TweetsRequestBodyMedia,
+]
 
 
 class PostV2TweetsResponseBody(ExtraPermissiveModel):
