@@ -1,10 +1,12 @@
-from typing import Literal
+from typing import Callable, Literal
 
 Scope = Literal[
     "block.read",
     "block.write",
     "bookmark.read",
     "bookmark.write",
+    "dm.read",
+    "dm.write",
     "follows.read",
     "follows.write",
     "like.read",
@@ -31,6 +33,8 @@ SCOPES: list[Scope] = [
     "block.write",
     "bookmark.read",
     "bookmark.write",
+    "dm.read",
+    "dm.write",
     "follows.read",
     "follows.write",
     "like.read",
@@ -46,3 +50,21 @@ SCOPES: list[Scope] = [
     "tweet.write",
     "users.read",
 ]
+
+
+def oauth2_scopes(
+    *scopes: Scope,
+) -> Callable:
+    """
+    OAuth2 を用いた操作に必要なスコープを表す。
+
+    Twitter の API ドキュメントを補完するメモとして用意されており、操作は何も行われない。
+    """
+
+    def _oauth2_scopes(func):
+        def _wrapper(*args, **kwargs):
+            return func(*args, **kwargs)
+
+        return _wrapper
+
+    return _oauth2_scopes

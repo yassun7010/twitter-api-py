@@ -1,4 +1,5 @@
 from twitter_api.api.resources.api_resources import ApiResources
+from twitter_api.api.types.v2_scope import oauth2_scopes
 from twitter_api.api.types.v2_tweet.tweet_id import TweetId
 from twitter_api.rate_limit.rate_limit_decorator import rate_limit
 from twitter_api.types.endpoint import Endpoint
@@ -16,6 +17,11 @@ class DeleteV2TweetResponseBody(ExtraPermissiveModel):
 
 
 class DeleteV2TweetResources(ApiResources):
+    @oauth2_scopes(
+        "tweet.read",
+        "tweet.write",
+        "users.read",
+    )
     @rate_limit(ENDPOINT, "user", requests=50, mins=15)
     def delete(
         self,

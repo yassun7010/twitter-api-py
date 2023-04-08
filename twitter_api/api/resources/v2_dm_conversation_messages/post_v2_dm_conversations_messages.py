@@ -4,6 +4,7 @@ from twitter_api.api.types.v2_dm_conversation.dm_conversation_message import (
     DmConversationMessage,
 )
 from twitter_api.api.types.v2_dm_event.dm_event_id import DmEventId
+from twitter_api.api.types.v2_scope import oauth2_scopes
 from twitter_api.rate_limit.rate_limit_decorator import rate_limit
 from twitter_api.types.endpoint import Endpoint
 from twitter_api.types.extra_permissive_model import ExtraPermissiveModel
@@ -23,6 +24,12 @@ class PostV2DmConversationMessagesResponseBody(ExtraPermissiveModel):
 
 
 class PostV2DmConversationMessagesResources(ApiResources):
+    @oauth2_scopes(
+        "dm.write",
+        "dm.read",
+        "tweet.read",
+        "users.read",
+    )
     @rate_limit(ENDPOINT, "user", requests=200, mins=15)
     @rate_limit(ENDPOINT, "user", requests=1000, hours=24)
     @rate_limit(ENDPOINT, "app", requests=15000, hours=24)

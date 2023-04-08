@@ -7,6 +7,7 @@ from twitter_api.api.types.v2_expansion import Expansion
 from twitter_api.api.types.v2_media.media_field import MediaField
 from twitter_api.api.types.v2_place.place_field import PlaceField
 from twitter_api.api.types.v2_poll.poll_field import PollField
+from twitter_api.api.types.v2_scope import oauth2_scopes
 from twitter_api.api.types.v2_search_query import SearchQuery
 from twitter_api.api.types.v2_tweet.tweet import Tweet
 from twitter_api.api.types.v2_tweet.tweet_field import TweetField
@@ -73,13 +74,10 @@ class GetV2TweetsSearchAllResponseBody(ExtraPermissiveModel):
 
 
 class GetV2TweetsSearchAllResources(ApiResources):
-    def __init__(self, client: RequestClient) -> None:
-        self._client = client
-
-    @property
-    def request_client(self) -> RequestClient:
-        return self._client
-
+    @oauth2_scopes(
+        "tweet.read",
+        "users.read",
+    )
     @rate_limit(ENDPOINT, "app", requests=300, mins=15)
     @rate_limit(ENDPOINT, "app", requests=1, seconds=1)
     def get(
@@ -91,7 +89,7 @@ class GetV2TweetsSearchAllResources(ApiResources):
 
         refer: https://developer.twitter.com/en/docs/twitter-api/tweets/search/api-reference/get-tweets-search-all
         """
-        return self._client.get(
+        return self.request_client.get(
             endpoint=ENDPOINT,
             response_type=GetV2TweetsSearchAllResponseBody,
             query=_make_query(query) if query is not None else None,

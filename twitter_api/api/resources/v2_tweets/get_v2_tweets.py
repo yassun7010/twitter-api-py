@@ -5,6 +5,7 @@ from twitter_api.api.types.v2_expansion import Expansion
 from twitter_api.api.types.v2_media.media_field import MediaField
 from twitter_api.api.types.v2_place.place_field import PlaceField
 from twitter_api.api.types.v2_poll.poll_field import PollField
+from twitter_api.api.types.v2_scope import oauth2_scopes
 from twitter_api.api.types.v2_tweet.tweet_detail import TweetDetail
 from twitter_api.api.types.v2_tweet.tweet_field import TweetField
 from twitter_api.api.types.v2_tweet.tweet_id import TweetId
@@ -53,6 +54,10 @@ class GetV2TweetsResponseBody(ExtraPermissiveModel):
 
 
 class GetV2TweetsResources(ApiResources):
+    @oauth2_scopes(
+        "tweet.read",
+        "users.read",
+    )
     @rate_limit(ENDPOINT, "app", requests=300, mins=15)
     @rate_limit(ENDPOINT, "user", requests=900, mins=15)
     def get(self, query: GetV2TweetsQueryParameters) -> GetV2TweetsResponseBody:

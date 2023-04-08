@@ -2,6 +2,7 @@ from typing import NotRequired, Optional, TypedDict
 
 from twitter_api.api.resources.api_resources import ApiResources
 from twitter_api.api.types.v2_expansion import Expansion
+from twitter_api.api.types.v2_scope import oauth2_scopes
 from twitter_api.api.types.v2_tweet.tweet import Tweet
 from twitter_api.api.types.v2_tweet.tweet_field import TweetField
 from twitter_api.api.types.v2_user.user import User
@@ -42,6 +43,10 @@ class GetV2UserResponseBody(ExtraPermissiveModel):
 
 
 class GetV2UserResources(ApiResources):
+    @oauth2_scopes(
+        "tweet.read",
+        "users.read",
+    )
     @rate_limit(ENDPOINT, "app", requests=300, mins=15)
     @rate_limit(ENDPOINT, "user", requests=900, mins=15)
     def get(

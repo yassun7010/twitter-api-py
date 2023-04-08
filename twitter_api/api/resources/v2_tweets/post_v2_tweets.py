@@ -3,6 +3,7 @@ from typing import Literal, NotRequired, Optional, TypedDict, Union
 from twitter_api.api.resources.api_resources import ApiResources
 from twitter_api.api.types.v2_media.media_id import MediaId
 from twitter_api.api.types.v2_place.place_id import PlaceId
+from twitter_api.api.types.v2_scope import oauth2_scopes
 from twitter_api.api.types.v2_tweet.tweet_detail import TweetDetail
 from twitter_api.api.types.v2_tweet.tweet_id import TweetId
 from twitter_api.api.types.v2_user.user_id import UserId
@@ -65,6 +66,11 @@ class PostV2TweetsResponseBody(ExtraPermissiveModel):
 
 
 class PostV2TweetsResources(ApiResources):
+    @oauth2_scopes(
+        "tweet.read",
+        "tweet.write",
+        "users.read",
+    )
     @rate_limit(ENDPOINT, "user", requests=200, mins=15)
     def post(self, request_body: PostV2TweetsRequestBody) -> PostV2TweetsResponseBody:
         # flake8: noqa E501
