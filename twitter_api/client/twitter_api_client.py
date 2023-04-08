@@ -2,10 +2,6 @@ import os
 from abc import ABCMeta, abstractmethod
 from typing import Optional, Self, Union, overload
 
-from twitter_api.api.resources.oauth2_authorize import (
-    Oauth2AuthorizeResources,
-    Oauth2AuthorizeUrl,
-)
 from twitter_api.api.resources.oauth2_invalidate_token import (
     Oauth2InvalidateTokenResources,
     Oauth2InvalidateTokenUrl,
@@ -67,10 +63,10 @@ from twitter_api.api.resources.v2_user_tweets import (
     V2UserTweetsUrl,
 )
 from twitter_api.api.resources.v2_users import V2UsersResources, V2UsersUrl
-from twitter_api.api.types.v2_authorization import OAuthV2AuthorizeData
 from twitter_api.api.types.v2_scope import SCOPES, Scope
 from twitter_api.error import NeverError
 from twitter_api.rate_limit.manager.rate_limit_manager import RateLimitManager
+from twitter_api.types.chainable import Chainable
 from twitter_api.types.comma_separatable import CommaSeparatable
 from twitter_api.types.oauth import (
     AccessSecret,
@@ -86,7 +82,7 @@ from twitter_api.types.oauth import (
 from .request.request_client import RequestClient
 
 
-class TwitterApiClient(metaclass=ABCMeta):
+class TwitterApiClient(Chainable, metaclass=ABCMeta):
     """
     Twitter API を操作するためのクライアント
     """
@@ -96,28 +92,11 @@ class TwitterApiClient(metaclass=ABCMeta):
     def _request_client(self) -> RequestClient:
         ...
 
-    def chain(self) -> Self:
-        """
-        メソッドチェーンをキレイに表示させるための関数。
-
-        あくまで black というフォーマッタを用いてコードを書くとき、
-        キレイな見た目にするために使う。ロジック的な意味はない。
-        """
-
-        return self
-
     @overload
     def request(
         self: Self,
         url: OauthRequestTokenUrl,
     ) -> OauthRequestTokenResources:
-        ...
-
-    @overload
-    def request(
-        self: Self,
-        url: Oauth2AuthorizeUrl,
-    ) -> Oauth2AuthorizeResources:
         ...
 
     @overload
@@ -250,7 +229,6 @@ class TwitterApiClient(metaclass=ABCMeta):
         self: Self,
         url: Union[
             OauthRequestTokenUrl,
-            Oauth2AuthorizeUrl,
             Oauth2InvalidateTokenUrl,
             Oauth2TokenUrl,
             V2TweetRetweetedByUrl,
@@ -281,10 +259,6 @@ class TwitterApiClient(metaclass=ABCMeta):
             )
         elif url == "https://api.twitter.com/oauth2/token":
             return Oauth2TokenResources(
-                self._request_client,
-            )
-        elif url == "https://twitter.com/i/oauth2/authorize":
-            return Oauth2AuthorizeResources(
                 self._request_client,
             )
         elif url == "https://api.twitter.com/oauth2/invalidate_token":
@@ -435,7 +409,7 @@ class TwitterApiClient(metaclass=ABCMeta):
         callback_url: CallbackUrl,
         scope: CommaSeparatable[Scope],
         rate_limit_manager: Optional[RateLimitManager] = None,
-    ) -> OAuthV2AuthorizeData:
+    ):
         """
         OAuth 2.0 のユーザ認証を用いてクライアントを作成する。
         """
@@ -460,7 +434,7 @@ class TwitterApiClient(metaclass=ABCMeta):
         callback_url_env: Env[CallbackUrl] = "CALLBACK_URL",
         callback_url: Optional[CallbackUrl] = None,
         rate_limit_manager: Optional[RateLimitManager] = None,
-    ) -> OAuthV2AuthorizeData:
+    ):
         """
         環境変数から、 OAuth 2.0 のユーザ認証を用いてクライアントを作成する。
 

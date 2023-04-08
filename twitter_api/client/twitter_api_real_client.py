@@ -7,7 +7,6 @@ from authlib.integrations.requests_client.oauth2_session import (
     OAuth2Auth,  # pyright: reportMissingImports=false
 )
 
-from twitter_api.api.types.v2_authorization import OAuthV2AuthorizeData
 from twitter_api.api.types.v2_scope import Scope
 from twitter_api.rate_limit.manager.rate_limit_manager import RateLimitManager
 from twitter_api.types.comma_separatable import CommaSeparatable
@@ -109,7 +108,9 @@ class TwitterApiRealClient(TwitterApiClient):
         scope: CommaSeparatable[Scope],
         rate_limit_manager: Optional[RateLimitManager] = None,
     ):
-        return OAuthV2AuthorizeData(
+        from twitter_api.api.types.v2_authorization import OAuthV2AuthorizeClient
+
+        return OAuthV2AuthorizeClient(
             client_id=client_id,
             client_secret=client_secret,
             callback_url=callback_url,

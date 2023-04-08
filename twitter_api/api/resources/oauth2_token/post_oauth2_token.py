@@ -21,9 +21,6 @@ class PostOauth2TokenQueryParameters(TypedDict):
 class PostOauth2TokenResponseBody(ExtraPermissiveModel):
     token_type: Literal["bearer"]
     access_token: AccessToken
-    scope: list[Scope]
-    expires_in: int
-    expires_at: int
 
 
 class PostOauth2TokenResources(ApiResources):

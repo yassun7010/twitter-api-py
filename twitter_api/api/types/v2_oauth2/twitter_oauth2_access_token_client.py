@@ -1,0 +1,90 @@
+import os
+from typing import Optional
+
+from authlib.integrations.requests_client.oauth2_session import OAuth2Session
+
+from twitter_api.api.resources.v2_oauth2_token import V2Oauth2TokenUrl
+from twitter_api.api.resources.v2_oauth2_token.post_v2_oauth2_token import (
+    PostV2OAuth2TokenRerources,
+)
+from twitter_api.types.chainable import Chainable
+from twitter_api.types.oauth import CallbackUrl, ClientId, ClientSecret, Env
+
+
+class TwitterOAuth2AccessTokenClient(Chainable):
+    def __init__(
+        self,
+        authorization_response_url: CallbackUrl,
+        state: str,
+        code_verifier: str,
+        session: OAuth2Session,
+    ):
+        self.authorization_response_url = authorization_response_url
+        self.state = state
+        self.code_verifier = code_verifier
+        self._session = session
+
+    @classmethod
+    def from_authorization_response_url(
+        cls,
+        *,
+        client_id: ClientId,
+        client_secret: ClientSecret,
+        callback_url: CallbackUrl,
+        authorization_response_url: CallbackUrl,
+        state: str,
+        code_verifier: str,
+        session: Optional[OAuth2Session] = None,
+    ):
+        if session is None:
+            session = OAuth2Session(
+                client_id=client_id,
+                client_secret=client_secret,
+                redirect_uri=callback_url,
+            )
+
+        return TwitterOAuth2AccessTokenClient(
+            authorization_response_url=authorization_response_url,
+            state=state,
+            code_verifier=code_verifier,
+            session=session,
+        )
+
+    @classmethod
+    def from_authorization_response_url_env(
+        cls,
+        *,
+        client_id_env: Env[ClientId] = "CLIENT_ID",
+        client_secret_env: Env[ClientSecret] = "CLIENT_SECRET",
+        callback_url_env: Env[CallbackUrl] = "CALLBACK_URL",
+        authorization_response_url: CallbackUrl,
+        state: str,
+        code_verifier: str,
+        callback_url: Optional[CallbackUrl] = None,
+        session: Optional[OAuth2Session] = None,
+    ):
+        return cls.from_authorization_response_url(
+            client_id=cls._get_env(client_id_env),
+            client_secret=cls._get_env(client_secret_env),
+            callback_url=(
+                cls._get_env(callback_url_env) if callback_url is None else callback_url
+            ),
+            authorization_response_url=authorization_response_url,
+            state=state,
+            code_verifier=code_verifier,
+            session=session,
+        )
+
+    def request(self, url: V2Oauth2TokenUrl):
+        return PostV2OAuth2TokenRerources(
+            url=url,
+            authorization_response_url=self.authorization_response_url,
+            state=self.state,
+            code_verifier=self.code_verifier,
+            session=self._session,
+        )
+
+    @classmethod
+    def _get_env(cls, key: Env[str]) -> str:
+        """環境変数を取り出す。"""
+        return os.environ[key]
