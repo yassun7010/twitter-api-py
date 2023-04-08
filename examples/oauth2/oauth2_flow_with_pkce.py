@@ -16,7 +16,7 @@ try:
         )
         .chain()
         .request("https://twitter.com/i/oauth2/authorize")
-        .print_request_url()
+        .open_request_url()
         .input_response_url()
         .request("https://api.twitter.com/2/oauth2/token")
         .post()
