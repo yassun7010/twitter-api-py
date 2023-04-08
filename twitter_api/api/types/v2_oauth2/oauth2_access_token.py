@@ -1,20 +1,17 @@
-from dataclasses import dataclass
-
 from typing_extensions import Literal
 
 from twitter_api.api.types.v2_scope import Scope
 from twitter_api.types.chainable import Chainable
-from twitter_api.types.comma_separatable import CommaSeparatable
+from twitter_api.types.extra_permissive_model import ExtraPermissiveModel
 from twitter_api.types.oauth import AccessToken
 
 
-@dataclass
-class OAuth2AcccessToken(Chainable):
+class OAuth2AcccessToken(Chainable, ExtraPermissiveModel):
     token_type: Literal["bearer"]
     expires_in: int
     expires_at: int
     access_token: AccessToken
-    scope: CommaSeparatable[Scope]
+    scope: list[Scope]
 
     def generate_client(self):
         from twitter_api.client.twitter_api_real_client import TwitterApiRealClient

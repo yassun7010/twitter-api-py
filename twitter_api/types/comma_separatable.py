@@ -17,7 +17,10 @@ Python 上ではカンマ区切りの文字列としても、文字列の配列�
 def comma_separated_str(
     data: Optional[CommaSeparatable[T]],
 ) -> Optional[CommaSeparatedStr]:
-    """カンマ区切りの文字列に変換する。"""
+    """
+    カンマ区切りの文字列に変換する。
+    """
+
     if data is None:
         return None
 
