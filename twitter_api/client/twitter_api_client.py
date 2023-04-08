@@ -2,6 +2,10 @@ import os
 from abc import ABCMeta, abstractmethod
 from typing import Optional, Self, Union, overload
 
+from twitter_api.api.resources.oauth2_authorize import (
+    Oauth2AuthorizeResources,
+    Oauth2AuthorizeUrl,
+)
 from twitter_api.api.resources.oauth2_invalidate_token import (
     Oauth2InvalidateTokenResources,
     Oauth2InvalidateTokenUrl,
@@ -63,9 +67,21 @@ from twitter_api.api.resources.v2_user_tweets import (
     V2UserTweetsUrl,
 )
 from twitter_api.api.resources.v2_users import V2UsersResources, V2UsersUrl
+from twitter_api.api.types.v2_authorization import OAuthV2AuthorizeData
+from twitter_api.api.types.v2_scope import SCOPES, Scope
 from twitter_api.error import NeverError
 from twitter_api.rate_limit.manager.rate_limit_manager import RateLimitManager
-from twitter_api.types.oauth import AccessSecret, AccessToken, ApiKey, ApiSecret, Env
+from twitter_api.types.comma_separatable import CommaSeparatable
+from twitter_api.types.oauth import (
+    AccessSecret,
+    AccessToken,
+    ApiKey,
+    ApiSecret,
+    CallbackUrl,
+    ClientId,
+    ClientSecret,
+    Env,
+)
 
 from .request.request_client import RequestClient
 
@@ -95,6 +111,13 @@ class TwitterApiClient(metaclass=ABCMeta):
         self: Self,
         url: OauthRequestTokenUrl,
     ) -> OauthRequestTokenResources:
+        ...
+
+    @overload
+    def request(
+        self: Self,
+        url: Oauth2AuthorizeUrl,
+    ) -> Oauth2AuthorizeResources:
         ...
 
     @overload
@@ -227,6 +250,7 @@ class TwitterApiClient(metaclass=ABCMeta):
         self: Self,
         url: Union[
             OauthRequestTokenUrl,
+            Oauth2AuthorizeUrl,
             Oauth2InvalidateTokenUrl,
             Oauth2TokenUrl,
             V2TweetRetweetedByUrl,
@@ -257,6 +281,10 @@ class TwitterApiClient(metaclass=ABCMeta):
             )
         elif url == "https://api.twitter.com/oauth2/token":
             return Oauth2TokenResources(
+                self._request_client,
+            )
+        elif url == "https://twitter.com/i/oauth2/authorize":
+            return Oauth2AuthorizeResources(
                 self._request_client,
             )
         elif url == "https://api.twitter.com/oauth2/invalidate_token":
@@ -399,36 +427,56 @@ class TwitterApiClient(metaclass=ABCMeta):
         )
 
     @classmethod
-    def from_user_oauth2(
+    def from_user_oauth2_flow(
         cls,
         *,
-        api_key: ApiKey,
-        api_secret: ApiSecret,
+        client_id: ClientId,
+        client_secret: ClientSecret,
+        callback_url: CallbackUrl,
+        scope: CommaSeparatable[Scope],
         rate_limit_manager: Optional[RateLimitManager] = None,
-    ) -> Self:
-        """OAuth 2.0 のアプリ認証を用いてクライアントを作成する。"""
+    ) -> OAuthV2AuthorizeData:
+        """
+        OAuth 2.0 のユーザ認証を用いてクライアントを作成する。
+        """
 
         from .twitter_api_real_client import TwitterApiRealClient
 
-        return TwitterApiRealClient.from_user_oauth2(
-            api_key=api_key,
-            api_secret=api_secret,
+        return TwitterApiRealClient.from_user_oauth2_flow(
+            client_id=client_id,
+            scope=scope,
+            callback_url=callback_url,
+            client_secret=client_secret,
             rate_limit_manager=rate_limit_manager,
         )
 
     @classmethod
-    def from_user_oauth2_env(
+    def from_user_oauth2_flow_env(
         cls,
         *,
-        api_key: Env[ApiKey] = "API_KEY",
-        api_secret: Env[ApiSecret] = "API_SECRET",
+        scope: Optional[CommaSeparatable[Scope]] = None,
+        client_id_env: Env[ClientId] = "CLIENT_ID",
+        client_secret_env: Env[ClientSecret] = "CLIENT_SECRET",
+        callback_url_env: Env[CallbackUrl] = "CALLBACK_URL",
+        callback_url: Optional[CallbackUrl] = None,
         rate_limit_manager: Optional[RateLimitManager] = None,
-    ):
-        """環境変数から、OAuth 2.0 のアプリ認証を用いてクライアントを作成する。"""
+    ) -> OAuthV2AuthorizeData:
+        """
+        環境変数から、 OAuth 2.0 のユーザ認証を用いてクライアントを作成する。
+        """
 
-        return cls.from_user_oauth2(
-            api_key=cls._get_env(api_key),
-            api_secret=cls._get_env(api_secret),
+        if scope is None:
+            scope = SCOPES
+
+        return cls.from_user_oauth2_flow(
+            client_id=cls._get_env(client_id_env),
+            scope=scope,
+            callback_url=(
+                callback_url
+                if callback_url is not None
+                else cls._get_env(callback_url_env)
+            ),
+            client_secret=cls._get_env(client_secret_env),
             rate_limit_manager=rate_limit_manager,
         )
 

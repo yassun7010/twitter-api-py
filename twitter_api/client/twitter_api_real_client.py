@@ -7,8 +7,19 @@ from authlib.integrations.requests_client.oauth2_session import (
     OAuth2Auth,  # pyright: reportMissingImports=false
 )
 
+from twitter_api.api.types.v2_authorization import OAuthV2AuthorizeData
+from twitter_api.api.types.v2_scope import Scope
 from twitter_api.rate_limit.manager.rate_limit_manager import RateLimitManager
-from twitter_api.types.oauth import AccessSecret, AccessToken, ApiKey, ApiSecret
+from twitter_api.types.comma_separatable import CommaSeparatable
+from twitter_api.types.oauth import (
+    AccessSecret,
+    AccessToken,
+    ApiKey,
+    ApiSecret,
+    CallbackUrl,
+    ClientId,
+    ClientSecret,
+)
 
 from .request.real_request_client import RealRequestClient
 from .request.request_client import RequestClient
@@ -89,38 +100,22 @@ class TwitterApiRealClient(TwitterApiClient):
         return client
 
     @classmethod
-    def from_user_oauth2(
+    def from_user_oauth2_flow(
         cls,
         *,
-        api_key: ApiKey,
-        api_secret: ApiSecret,
+        client_id: ClientId,
+        client_secret: ClientSecret,
+        callback_url: CallbackUrl,
+        scope: CommaSeparatable[Scope],
         rate_limit_manager: Optional[RateLimitManager] = None,
     ):
-        client = TwitterApiRealClient(
-            RealRequestClient(
-                auth=None,
-                oauth_version="2.0",
-                rate_limit_target="app",
-                rate_limit_manager=rate_limit_manager,
-            ),
+        return OAuthV2AuthorizeData(
+            client_id=client_id,
+            client_secret=client_secret,
+            callback_url=callback_url,
+            scope=scope,
+            rate_limit_manager=rate_limit_manager,
         )
-
-        client._real_request_client._auth = OAuth2Auth(
-            token={
-                "access_token": (
-                    client.request("https://api.twitter.com/oauth2/token")
-                    .post(
-                        api_key=api_key,
-                        api_secret=api_secret,
-                        query={"grant_type": "client_credentials"},
-                    )
-                    .access_token
-                ),
-                "token_type": "Bearer",
-            }
-        )
-
-        return client
 
     @classmethod
     def from_user_oauth1(

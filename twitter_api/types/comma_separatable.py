@@ -6,7 +6,7 @@ CommaSeparatedStr: TypeAlias = str
 要素がカンマ区切りで結合された文字列。
 """
 
-CommaSeparatable = Union[CommaSeparatedStr, T, list[T]]
+CommaSeparatable = Union[T, list[T]]
 """
 カンマ区切りとして表現可能な文字列。
 

@@ -2,8 +2,10 @@ import base64
 from typing import Literal, TypedDict
 
 from twitter_api.api.resources.api_resources import ApiResources
+from twitter_api.api.types.v2_scope import Scope
 from twitter_api.client.request.request_client import RequestClient
 from twitter_api.error import TwitterApiOAuthVersionWrong
+from twitter_api.types.comma_separatable import CommaSeparatable
 from twitter_api.types.endpoint import Endpoint
 from twitter_api.types.extra_permissive_model import ExtraPermissiveModel
 from twitter_api.types.http import downcast_dict
@@ -19,6 +21,9 @@ class PostOauth2TokenQueryParameters(TypedDict):
 class PostOauth2TokenResponseBody(ExtraPermissiveModel):
     token_type: Literal["bearer"]
     access_token: AccessToken
+    scope: list[Scope]
+    expires_in: int
+    expires_at: int
 
 
 class PostOauth2TokenResources(ApiResources):

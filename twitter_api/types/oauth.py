@@ -105,3 +105,8 @@ ClientSecret: TypeAlias = str
 """
 OAuth2.0 で認証をするときに必要な秘密キー。
 """
+
+CallbackUrl: TypeAlias = str
+"""
+OAuth でユーザ認証をするときに必要なコールバック URL。
+"""
