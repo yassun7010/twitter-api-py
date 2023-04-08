@@ -463,6 +463,8 @@ class TwitterApiClient(metaclass=ABCMeta):
     ) -> OAuthV2AuthorizeData:
         """
         環境変数から、 OAuth 2.0 のユーザ認証を用いてクライアントを作成する。
+
+        refer: https://developer.twitter.com/en/docs/authentication/oauth-2-0/authorization-code
         """
 
         if scope is None:

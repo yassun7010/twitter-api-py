@@ -81,13 +81,13 @@ class OpenOAuthV2AuthorizationResource:
     code_verifier: str
     _session: OAuth2Session
 
-    def open_authorization_url(self) -> Self:
+    def open_request_url(self) -> Self:
         import webbrowser
 
         webbrowser.open(self.authorization_url)
         return self
 
-    def print_authorization_url(
+    def print_request_url(
         self, message_function: Optional[Callable[[Url], str]] = None
     ) -> Self:
         if message_function is None:
@@ -105,7 +105,7 @@ class OpenOAuthV2AuthorizationResource:
         print(message_function(self.authorization_url))
         return self
 
-    def input_authorization_response_url(
+    def input_response_url(
         self,
         input_url: Optional[Url] = None,
     ):

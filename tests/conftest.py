@@ -42,8 +42,8 @@ def real_user_auth_v2_client() -> TwitterApiRealClient:
     return (
         TwitterApiRealClient.from_user_oauth2_flow_env()
         .request("https://twitter.com/i/oauth2/authorize")
-        .open_authorization_url()
-        .input_authorization_response_url()
+        .open_request_url()
+        .input_response_url()
         .request("https://api.twitter.com/2/oauth2/token")
         .post()
         .generate_client()
