@@ -42,7 +42,9 @@ class TestMockPostOauth2InvalidateToken:
     def test_mock_post_oauth2_invalidate_token(
         self, mock_oauth2_app_client: TwitterApiMockClient
     ):
-        response = PostOauth2InvalidateTokenResponseBody(access_token="")
+        response = PostOauth2InvalidateTokenResponseBody(
+            access_token="DUMMY_ACCESS_TOKEN",
+        )
 
         assert get_extra_fields(response) == {}
 
