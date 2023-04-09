@@ -106,7 +106,9 @@ class TwitterApiRealClient(TwitterApiClient):
         callback_url: CallbackUrl,
         scope: list[Scope],
     ):
-        from twitter_api.api.types.v2_authorization import OAuthV2AuthorizeClient
+        from twitter_api.api.types.v2_oauth2.twitter_oauth2_authorization_client import (
+            TwitterOAuth2AuthorizeClient,
+        )
         from twitter_api.client.sessions.twitter_oauth2_real_session import (
             TwitterOAuth2RealSession,
         )
@@ -118,7 +120,7 @@ class TwitterApiRealClient(TwitterApiClient):
             scope=scope,
         )
 
-        return OAuthV2AuthorizeClient(session)
+        return TwitterOAuth2AuthorizeClient(session)
 
     @classmethod
     def from_oauth1_user(

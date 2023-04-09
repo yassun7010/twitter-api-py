@@ -9,7 +9,7 @@ from twitter_api.types.chainable import Chainable
 
 
 @dataclass
-class OAuthV2AuthorizeClient(Chainable):
+class TwitterOAuth2AuthorizeClient(Chainable):
     def __init__(self, session: TwitterOAuth2Session) -> None:
         self._session = session
 

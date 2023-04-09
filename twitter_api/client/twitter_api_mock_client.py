@@ -423,13 +423,15 @@ class TwitterApiMockClient(TwitterApiClient):
         scope: list[Scope],
         rate_limit_manager: Optional[RateLimitManager] = None,
     ):
-        from twitter_api.api.types.v2_authorization import OAuthV2AuthorizeClient
+        from twitter_api.api.types.v2_oauth2.twitter_oauth2_authorization_client import (
+            TwitterOAuth2AuthorizeClient,
+        )
         from twitter_api.client.sessions.twitter_oauth2_mock_session import (
             TwitterOAuth2MockSession,
         )
 
         session = TwitterOAuth2MockSession(scope=scope)
-        return OAuthV2AuthorizeClient(session=session)
+        return TwitterOAuth2AuthorizeClient(session=session)
 
     @classmethod
     def from_oauth1_user(
