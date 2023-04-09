@@ -1,6 +1,6 @@
 import pytest
 
-from tests.conftest import synthetic_monitoring_is_disable
+from tests.conftest import premium_account_not_set, synthetic_monitoring_is_disable
 from tests.data import JsonDataLoader
 from twitter_api.api.resources.v2_tweets_search_all.get_v2_tweets_search_all import (
     GetV2TweetsSearchAllResponseBody,
@@ -10,8 +10,8 @@ from twitter_api.client.twitter_api_real_client import TwitterApiRealClient
 
 
 @pytest.mark.skipif(**synthetic_monitoring_is_disable())
+@pytest.mark.skipif(**premium_account_not_set())
 class TestGetV2TweetsSearchAll:
-    @pytest.mark.skip(reason="プレミアムなアカウントでないとテストできない。")
     def test_get_v2_search_all(self, real_oauth2_app_client: TwitterApiRealClient):
         real_response: GetV2TweetsSearchAllResponseBody = (
             real_oauth2_app_client.chain()

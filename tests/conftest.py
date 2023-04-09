@@ -34,6 +34,26 @@ def synthetic_monitoring_is_disable() -> dict:
     )
 
 
+def premium_account_not_set() -> dict:
+    """
+    プレミアムアカウントの Access Token が未設定かを確認する。
+
+    下記の環境変数を設定すると、テストが行われる。
+
+    ```env
+    OAUTH2_PREMIUM_ACCESS_TOKEN=XXXXXXXXXXXXXXXXXXXXXXX
+    ```
+    """
+
+    return dict(
+        condition=(
+            "OAUTH2_PREMIUM_ACCESS_TOKEN" not in os.environ
+            or os.environ["OAUTH2_PREMIUM_ACCESS_TOKEN"] == ""
+        ),
+        reason="プレミアムアカウントを持っている場合に実行されます。",
+    )
+
+
 @pytest.fixture
 def json_data_loader() -> JsonDataLoader:
     return JsonDataLoader()
