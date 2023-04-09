@@ -2,7 +2,9 @@ from datetime import datetime
 
 from twitter_api.api.types.v2_oauth2.oauth2_access_token import OAuth2AccessToken
 from twitter_api.api.types.v2_scope import Scope
-from twitter_api.client.sessions.twitter_oauth2_session import TwitterOAuth2Session
+from twitter_api.client.oauth_sessions.twitter_oauth2_session import (
+    TwitterOAuth2Session,
+)
 from twitter_api.types.oauth import CallbackUrl
 
 

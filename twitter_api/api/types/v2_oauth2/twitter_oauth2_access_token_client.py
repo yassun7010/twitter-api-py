@@ -5,10 +5,12 @@ from twitter_api.api.resources.v2_oauth2_token import V2Oauth2TokenUrl
 from twitter_api.api.resources.v2_oauth2_token.post_v2_oauth2_token import (
     PostV2OAuth2TokenRerources,
 )
-from twitter_api.client.sessions.twitter_oauth2_real_session import (
+from twitter_api.client.oauth_sessions.twitter_oauth2_real_session import (
     TwitterOAuth2RealSession,
 )
-from twitter_api.client.sessions.twitter_oauth2_session import TwitterOAuth2Session
+from twitter_api.client.oauth_sessions.twitter_oauth2_session import (
+    TwitterOAuth2Session,
+)
 from twitter_api.types.chainable import Chainable
 from twitter_api.types.oauth import CallbackUrl, ClientId, ClientSecret, Env
 
