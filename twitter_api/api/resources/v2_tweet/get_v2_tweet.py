@@ -50,6 +50,7 @@ def _make_query(
 
 class GetV2TweetResponseBodyIncludes(ExtraPermissiveModel):
     users: list[User]
+    tweets: list[TweetDetail]
 
 
 class GetV2TweetResponseBody(ExtraPermissiveModel):

@@ -7,3 +7,7 @@ class TweetPublicMetrics(ExtraPermissiveModel):
     impression_count: Optional[int] = None
     url_link_clicks: Optional[int] = None
     user_profile_clicks: Optional[int] = None
+    like_count: Optional[int] = None
+    quote_count: Optional[int] = None
+    reply_count: Optional[int] = None
+    retweet_count: Optional[int] = None
