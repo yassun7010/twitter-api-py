@@ -29,7 +29,7 @@ try:
     user = user.open_request_url().input_response_url()
 
     # Backend: アクセストークンを取得し、 Twitter API のクライアントを作成します。
-    client = (
+    access_token = (
         TwitterOAuth2AccessTokenClient.from_authorization_response_url_env(
             callback_url=YOUR_CALLBACK_URL,
             authorization_response_url=user.authorization_response_url,
@@ -38,8 +38,12 @@ try:
         )
         .request("https://api.twitter.com/2/oauth2/token")
         .post()
-        .generate_client()
+        .access_token
     )
+
+    print(f"Access Token: {access_token}")
+
+    client = TwitterApiClient.from_app_oauth2_bearer_token(access_token)
 
     # Twitter API を呼ぶことができるようになりました。
     tweets = (
