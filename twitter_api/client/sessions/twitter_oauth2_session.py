@@ -7,6 +7,8 @@ from twitter_api.types.oauth import CallbackUrl
 class TwitterOAuth2Session(metaclass=ABCMeta):
     @abstractmethod
     def generate_authorization_url(self):
+        # NOTE: 本来実装は不要だが、モジュールの再起読み込みを防ぐため、
+        #       偽のデータを作っている。
         from twitter_api.api.types.v2_oauth2.oauth2_authorization import (
             OAuth2Authorization,
         )
