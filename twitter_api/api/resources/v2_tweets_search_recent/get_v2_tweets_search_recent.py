@@ -1,6 +1,8 @@
 from datetime import datetime
 from typing import Literal, NotRequired, Optional, TypeAlias, TypedDict
 
+from pydantic import Field
+
 from twitter_api.api.resources.api_resources import ApiResources
 from twitter_api.api.types.v2_expansion import Expansion
 from twitter_api.api.types.v2_media.media_field import MediaField
@@ -68,7 +70,7 @@ class GetV2TweetsSearchRecentResponseBodyMeta(ExtraPermissiveModel):
 
 
 class GetV2TweetsSearchRecentResponseBody(ExtraPermissiveModel):
-    data: Optional[list[TweetDetail]] = None
+    data: list[TweetDetail] = Field(default_factory=list)
     meta: GetV2TweetsSearchRecentResponseBodyMeta
 
 
