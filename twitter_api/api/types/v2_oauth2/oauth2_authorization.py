@@ -33,7 +33,7 @@ class OAuth2Authorization(Chainable):
                       Please open Authorization URL using your browser.
                     =====================================================
 
-                        {url}
+                    {url}
                     """
                 )
 
