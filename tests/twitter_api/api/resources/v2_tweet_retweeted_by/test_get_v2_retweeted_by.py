@@ -30,7 +30,7 @@ class TestMockGetV2RetweetedBy:
         json_data_loader: JsonDataLoader,
     ):
         expected_response = GetV2TweetRetweetedByResponseBody.parse_obj(
-            json_data_loader.load("get_retweeted_by_response.json")
+            json_data_loader.load("get_v2_retweeted_by_response.json")
         )
 
         assert (

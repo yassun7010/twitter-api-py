@@ -31,7 +31,7 @@ class TestMockGetV2TweetsSearchAll:
         json_data_loader: JsonDataLoader,
     ):
         expected_response = GetV2TweetsSearchAllResponseBody.parse_obj(
-            json_data_loader.load("get_tweets_search_all_response.json")
+            json_data_loader.load("get_v2_tweets_search_all_response.json")
         )
 
         assert (

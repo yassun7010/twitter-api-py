@@ -27,8 +27,8 @@ class TestMockGetV2TweetsSearchRecent:
     @pytest.mark.parametrize(
         "json_filename",
         [
-            "get_tweets_search_recent_response.json",
-            "get_tweets_search_recent_response_empty_result.json",
+            "get_v2_tweets_search_recent_response.json",
+            "get_v2_tweets_search_recent_response_empty_result.json",
         ],
     )
     def test_mock_get_v2_search_recent(

@@ -28,7 +28,7 @@ class TestMockGetV2Users:
     @pytest.mark.parametrize(
         "json_filename",
         [
-            "get_users_response.json",
+            "get_v2_users_response.json",
         ],
     )
     def test_mock_get_v2_users(

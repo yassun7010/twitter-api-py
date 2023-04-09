@@ -63,7 +63,7 @@ class TestMockGetV2DmConversationsMessages:
     @pytest.mark.parametrize(
         "json_filename",
         [
-            "post_dm_conversations_messages.json",
+            "post_v2_dm_conversations_messages.json",
         ],
     )
     def test_mock_get_v2_dm_conversations_messages(

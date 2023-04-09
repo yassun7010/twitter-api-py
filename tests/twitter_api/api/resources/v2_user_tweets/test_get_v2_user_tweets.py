@@ -30,9 +30,9 @@ class TestMockGetV2UserTweets:
     @pytest.mark.parametrize(
         "json_filename",
         [
-            "get_user_tweets_response_default_fields.json",
-            "get_user_tweets_response_optional_fields.json",
-            "get_user_tweets_response_all_fields.json",
+            "get_v2_user_tweets_response_default_fields.json",
+            "get_v2_user_tweets_response_optional_fields.json",
+            "get_v2_user_tweets_response_all_fields.json",
         ],
     )
     def test_mock_get_v2_user_tweets(

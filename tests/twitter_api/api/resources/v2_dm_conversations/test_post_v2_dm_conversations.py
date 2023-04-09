@@ -54,7 +54,7 @@ class TestMockGetV2UserFollowing:
     @pytest.mark.parametrize(
         "json_filename",
         [
-            "post_dm_conversations.json",
+            "post_v2_dm_conversations.json",
         ],
     )
     def test_mock_get_v2_user_following(

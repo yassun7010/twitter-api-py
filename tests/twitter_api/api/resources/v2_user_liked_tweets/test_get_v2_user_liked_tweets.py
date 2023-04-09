@@ -30,7 +30,7 @@ class TestMockGetV2UserLikedTweets:
     @pytest.mark.parametrize(
         "json_filename",
         [
-            "get_user_liked_tweets_response.json",
+            "get_v2_user_liked_tweets_response.json",
         ],
     )
     def test_mock_get_v2_user_liked_tweets(
