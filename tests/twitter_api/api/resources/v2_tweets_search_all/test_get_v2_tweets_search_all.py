@@ -30,15 +30,15 @@ class TestMockGetV2TweetsSearchAll:
         mock_oauth2_app_client: TwitterApiMockClient,
         json_data_loader: JsonDataLoader,
     ):
-        expected_response = GetV2TweetsSearchAllResponseBody.parse_obj(
+        response = GetV2TweetsSearchAllResponseBody.parse_obj(
             json_data_loader.load("get_v2_tweets_search_all_response.json")
         )
 
         assert (
             mock_oauth2_app_client.chain()
             .inject_get_response_body(
-                "https://api.twitter.com/2/tweets/search/all", expected_response
+                "https://api.twitter.com/2/tweets/search/all", response
             )
             .request("https://api.twitter.com/2/tweets/search/all")
             .get({"query": "ツイート"})
-        ) == expected_response
+        ) == response

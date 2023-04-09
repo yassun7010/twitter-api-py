@@ -11,6 +11,7 @@ from twitter_api.api.types.v2_poll.poll_field import PollField
 from twitter_api.api.types.v2_scope import oauth2_scopes
 from twitter_api.api.types.v2_tweet.tweet_detail import TweetDetail
 from twitter_api.api.types.v2_tweet.tweet_field import TweetField
+from twitter_api.api.types.v2_tweet.tweet_id import TweetId
 from twitter_api.api.types.v2_user.user_field import UserField
 from twitter_api.rate_limit.rate_limit_decorator import rate_limit
 from twitter_api.types.comma_separatable import CommaSeparatable, comma_separated_str
@@ -51,8 +52,16 @@ def _make_query(query: GetV2TweetsSearchStreamQueryParameters) -> dict:
     }
 
 
+class GetV2TweetsSearchStreamResponseBodyMeta(ExtraPermissiveModel):
+    result_count: int
+    next_token: Optional[str] = None
+    newest_id: Optional[TweetId] = None
+    oldest_id: Optional[TweetId] = None
+
+
 class GetV2TweetsSearchStreamResponseBody(ExtraPermissiveModel):
     data: list[TweetDetail] = Field(default_factory=list)
+    meta: GetV2TweetsSearchStreamResponseBodyMeta
 
 
 class GetV2TweetsSearchStreamResources(ApiResources):

@@ -789,37 +789,6 @@
       }
     ]
   },
-  "errors": [
-    {
-      "resource_id": "geet_qcp",
-      "parameter": "entities.mentions.username",
-      "resource_type": "user",
-      "section": "includes",
-      "title": "Authorization Error",
-      "value": "geet_qcp",
-      "detail": "Sorry, you are not authorized to see the user with entities.mentions.username: [geet_qcp].",
-      "type": "https://api.twitter.com/2/problems/not-authorized-for-resource"
-    },
-    {
-      "resource_id": "3117973774",
-      "parameter": "in_reply_to_user_id",
-      "resource_type": "user",
-      "section": "includes",
-      "title": "Authorization Error",
-      "value": "3117973774",
-      "detail": "Sorry, you are not authorized to see the user with in_reply_to_user_id: [3117973774].",
-      "type": "https://api.twitter.com/2/problems/not-authorized-for-resource"
-    },
-    {
-      "value": "1371363774729363460",
-      "detail": "Could not find tweet with referenced_tweets.id: [1371363774729363460].",
-      "title": "Not Found Error",
-      "resource_type": "tweet",
-      "parameter": "referenced_tweets.id",
-      "resource_id": "1371363774729363460",
-      "type": "https://api.twitter.com/2/problems/resource-not-found"
-    }
-  ],
   "meta": {
     "oldest_id": "1372625612460810242",
     "newest_id": "1374405406261268481",

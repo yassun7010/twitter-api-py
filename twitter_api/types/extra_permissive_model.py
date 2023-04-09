@@ -1,3 +1,5 @@
+from typing import Any
+
 from pydantic import Extra
 
 from .model import Model
@@ -24,15 +26,20 @@ class ExtraPermissiveModel(Model):
         extra = Extra.allow
 
 
-def has_extra_fields(model: ExtraPermissiveModel) -> bool:
+def get_extra_fields(model: ExtraPermissiveModel) -> dict[str, Any]:
     """
     Pydanticモデルに未定義のフィールドが含まれているかどうかを判断する。
     """
 
-    fields_set = set(model.__fields_set__)
-    for _, value in model:
+    extras = {}
+    fields_set = set(model.__fields__.keys())
+    for key, value in model:
         if isinstance(value, ExtraPermissiveModel):
-            if has_extra_fields(value):
-                return True
+            extra = get_extra_fields(value)
+            if len(extra) != 0:
+                extras[key] = extra
 
-    return len(set(model.dict().keys()) - fields_set) > 0
+    return {
+        **extras,
+        **{key: getattr(model, key) for key in (set(model.dict().keys()) - fields_set)},
+    }

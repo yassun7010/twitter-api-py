@@ -7,6 +7,7 @@ from twitter_api.api.resources.v2_tweet.get_v2_tweet import GetV2TweetResponseBo
 from twitter_api.api.types.v2_tweet.tweet_detail import TweetDetail
 from twitter_api.client.twitter_api_mock_client import TwitterApiMockClient
 from twitter_api.client.twitter_api_real_client import TwitterApiRealClient
+from twitter_api.types.extra_permissive_model import get_extra_fields
 
 
 @pytest.fixture
@@ -32,28 +33,25 @@ class TestGetV2Tweet:
     def test_get_v2_tweet(
         self, real_oauth2_app_client: TwitterApiRealClient, tweet: TweetDetail
     ):
-        expected_response = GetV2TweetResponseBody(data=tweet)
-        real_response = real_oauth2_app_client.request(
+        response = real_oauth2_app_client.request(
             "https://api.twitter.com/2/tweets/:id"
         ).get(tweet.id)
 
-        print(real_response.json())
-        print(expected_response.json())
+        print(response.json())
 
-        assert real_response == expected_response
+        assert get_extra_fields(response) == {}
 
 
 class TestMockGetV2Tweet:
     def test_mock_get_v2_tweet(
         self, mock_oauth2_app_client: TwitterApiMockClient, tweet: TweetDetail
     ):
-        expected_response = GetV2TweetResponseBody(data=tweet)
+        response = GetV2TweetResponseBody(data=tweet)
 
+        assert get_extra_fields(response) == {}
         assert (
             mock_oauth2_app_client.chain()
-            .inject_get_response_body(
-                "https://api.twitter.com/2/tweets/:id", expected_response
-            )
+            .inject_get_response_body("https://api.twitter.com/2/tweets/:id", response)
             .request("https://api.twitter.com/2/tweets/:id")
             .get(tweet.id)
-        ) == expected_response
+        ) == response

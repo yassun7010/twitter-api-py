@@ -12,6 +12,7 @@ from twitter_api.api.types.v2_tweet.tweet import Tweet
 from twitter_api.api.types.v2_tweet.tweet_detail import TweetDetail
 from twitter_api.api.types.v2_tweet.tweet_field import TweetField
 from twitter_api.api.types.v2_tweet.tweet_id import TweetId
+from twitter_api.api.types.v2_user.user import User
 from twitter_api.api.types.v2_user.user_field import UserField
 from twitter_api.api.types.v2_user.user_id import UserId
 from twitter_api.rate_limit.rate_limit_decorator import rate_limit
@@ -71,6 +72,7 @@ class GetV2UserTweetsResponseBodyMeta(ExtraPermissiveModel):
 
 class GetV2UserTweetsResponseBodyIncludes(ExtraPermissiveModel):
     tweets: Optional[list[Tweet]] = None
+    users: Optional[list[User]] = None
 
 
 class GetV2UserTweetsResponseBody(ExtraPermissiveModel):

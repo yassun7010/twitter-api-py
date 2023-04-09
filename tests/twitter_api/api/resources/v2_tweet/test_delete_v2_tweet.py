@@ -9,6 +9,7 @@ from twitter_api.api.resources.v2_tweet.delete_v2_tweet import (
 )
 from twitter_api.client.twitter_api_mock_client import TwitterApiMockClient
 from twitter_api.client.twitter_api_real_client import TwitterApiRealClient
+from twitter_api.types.extra_permissive_model import get_extra_fields
 
 
 @pytest.mark.skipif(**synthetic_monitoring_is_disable())
@@ -36,15 +37,17 @@ class TestDeleteV2Tweet:
 
 class TestMockDeleteV2Tweet:
     def test_mock_delete_v2_tweet(self, mock_oauth2_app_client: TwitterApiMockClient):
-        expected_response = DeleteV2TweetResponseBody(
+        response = DeleteV2TweetResponseBody(
             data=DeleteV2TweetResponseBodyData(deleted=True)
         )
+
+        assert get_extra_fields(response) == {}
 
         assert (
             mock_oauth2_app_client.chain()
             .inject_delete_response_body(
-                "https://api.twitter.com/2/tweets/:id", expected_response
+                "https://api.twitter.com/2/tweets/:id", response
             )
             .request("https://api.twitter.com/2/tweets/:id")
             .delete("1234567890123456789")
-        ) == expected_response
+        ) == response

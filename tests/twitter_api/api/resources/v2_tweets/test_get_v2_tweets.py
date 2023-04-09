@@ -34,7 +34,7 @@ class TestGetV2Tweets:
     def test_get_v2_tweets(
         self, real_oauth2_app_client: TwitterApiRealClient, tweets: list[TweetDetail]
     ):
-        expected_response = GetV2TweetsResponseBody(data=tweets)
+        response = GetV2TweetsResponseBody(data=tweets)
         real_response = (
             real_oauth2_app_client.chain()
             .request("https://api.twitter.com/2/tweets")
@@ -42,9 +42,9 @@ class TestGetV2Tweets:
         )
 
         print(real_response.json())
-        print(expected_response.json())
+        print(response.json())
 
-        assert real_response == expected_response
+        assert real_response == response
 
 
 class TestMockGetV2Tweets:
@@ -55,13 +55,11 @@ class TestMockGetV2Tweets:
             edit_history_tweet_ids=["56789"],
         )
 
-        expected_response = GetV2TweetsResponseBody(data=[tweet for _ in range(10)])
+        response = GetV2TweetsResponseBody(data=[tweet for _ in range(10)])
 
         assert (
             mock_oauth2_app_client.chain()
-            .inject_get_response_body(
-                "https://api.twitter.com/2/tweets", expected_response
-            )
+            .inject_get_response_body("https://api.twitter.com/2/tweets", response)
             .request("https://api.twitter.com/2/tweets")
             .get(
                 {
@@ -69,4 +67,4 @@ class TestMockGetV2Tweets:
                     "expansions": ["attachments.media_keys"],
                 }
             )
-        ) == expected_response
+        ) == response

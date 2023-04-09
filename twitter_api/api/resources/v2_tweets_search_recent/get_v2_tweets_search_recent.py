@@ -67,6 +67,8 @@ def _make_query(query: GetV2TweetsSearchRecentQueryParameters) -> dict:
 class GetV2TweetsSearchRecentResponseBodyMeta(ExtraPermissiveModel):
     result_count: int
     next_token: Optional[str] = None
+    newest_id: Optional[TweetId] = None
+    oldest_id: Optional[TweetId] = None
 
 
 class GetV2TweetsSearchRecentResponseBody(ExtraPermissiveModel):

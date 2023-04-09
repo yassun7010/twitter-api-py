@@ -49,6 +49,8 @@ class PostV2TweetsSearchStreamRulesResponseBodyMetaSummary(ExtraPermissiveModel)
     not_created: Optional[int] = None
     deleted: Optional[int] = None
     not_deleted: Optional[int] = None
+    invalid: Optional[int] = None
+    valid: Optional[int] = None
 
 
 class PostV2TweetsSearchStreamRulesResponseBodyMeta(ExtraPermissiveModel):

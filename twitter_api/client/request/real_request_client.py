@@ -217,7 +217,7 @@ def _parse_response(
         )
 
     # If only errors will raise
-    if "errors" in data and len(data.keys()) == 1:
+    if "errors" in data:
         raise TwitterApiResponseError(
             endpoint,
             data,

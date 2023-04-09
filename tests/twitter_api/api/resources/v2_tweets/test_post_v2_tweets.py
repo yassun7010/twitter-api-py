@@ -44,13 +44,11 @@ class TestMockGetV2Tweet:
             edit_history_tweet_ids=["1234567890123456789"],
         )
 
-        expected_response = PostV2TweetsResponseBody(data=tweet)
+        response = PostV2TweetsResponseBody(data=tweet)
 
         assert (
             mock_oauth2_app_client.chain()
-            .inject_post_response_body(
-                "https://api.twitter.com/2/tweets", expected_response
-            )
+            .inject_post_response_body("https://api.twitter.com/2/tweets", response)
             .request("https://api.twitter.com/2/tweets")
             .post({"text": tweet.text})
-        ) == expected_response
+        ) == response

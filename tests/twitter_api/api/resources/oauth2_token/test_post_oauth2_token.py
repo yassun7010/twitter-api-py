@@ -8,6 +8,7 @@ from twitter_api.api.resources.oauth2_token.post_oauth2_token import (
 )
 from twitter_api.client.twitter_api_mock_client import TwitterApiMockClient
 from twitter_api.client.twitter_api_real_client import TwitterApiRealClient
+from twitter_api.types.extra_permissive_model import get_extra_fields
 
 
 @pytest.mark.skipif(**synthetic_monitoring_is_disable())
@@ -36,20 +37,23 @@ class TestPostOauth2Token:
         print(expected_response.json())
 
         assert real_response == expected_response
+        assert get_extra_fields(real_response) == {}
 
 
 class TestMockPostOauth2Token:
     def test_mock_post_oauth2_token(self, mock_oauth2_app_client: TwitterApiMockClient):
-        expected_response = PostOauth2TokenResponseBody(
+        response = PostOauth2TokenResponseBody(
             token_type="bearer",
             access_token="AAAAAAAAAAAAAAAAAAAAAOeOmQEAAAAAu",
         )
+
+        assert get_extra_fields(response) == {}
 
         assert (
             mock_oauth2_app_client.chain()
             .inject_post_response_body(
                 "https://api.twitter.com/oauth2/token",
-                expected_response,
+                response,
             )
             .request("https://api.twitter.com/oauth2/token")
             .post(
@@ -57,4 +61,4 @@ class TestMockPostOauth2Token:
                 api_secret="DUMMY_API_SECRET",
                 query={"grant_type": "client_credentials"},
             )
-        ) == expected_response
+        ) == response

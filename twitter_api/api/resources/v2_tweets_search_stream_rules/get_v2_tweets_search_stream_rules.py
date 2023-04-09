@@ -24,6 +24,7 @@ GetV2TweetsSearchStreamRulesQueryParameters = TypedDict(
 
 class GetV2TweetsSearchStreamRulesResponseBodyMeta(ExtraPermissiveModel):
     sent: datetime
+    result_count: Optional[int] = None
 
 
 class GetV2TweetsSearchStreamRulesResponseBody(ExtraPermissiveModel):

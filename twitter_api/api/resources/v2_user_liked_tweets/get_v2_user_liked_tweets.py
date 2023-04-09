@@ -50,9 +50,15 @@ class GetV2UserLikedTweetsResponseBodyIncludes(ExtraPermissiveModel):
     tweets: list[Tweet]
 
 
+class GetV2UserLikedTweetsResponseBodyMeta(ExtraPermissiveModel):
+    next_token: Optional[str] = None
+    result_count: int
+
+
 class GetV2UserLikedTweetsResponseBody(ExtraPermissiveModel):
     data: list[TweetDetail]
     includes: Optional[GetV2UserLikedTweetsResponseBodyIncludes] = None
+    meta: Optional[GetV2UserLikedTweetsResponseBodyMeta] = None
 
 
 class GetV2UserLikedTweetsResources(ApiResources):
