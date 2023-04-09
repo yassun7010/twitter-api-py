@@ -1,5 +1,6 @@
 import sys
 
+from twitter_api.api.types.v2_scope import SCOPES
 from twitter_api.client import TwitterApiClient
 from twitter_api.error import TwitterApiError
 
@@ -9,10 +10,7 @@ try:
     access_token = (
         TwitterApiClient.from_oauth2_user_flow_env(
             callback_url=YOUR_CALLBACK_URL,
-            scope=[
-                "tweet.read",
-                "users.read",
-            ],
+            scope=SCOPES,
         )
         .request("https://twitter.com/i/oauth2/authorize")
         .generate_authorization_url()
@@ -22,6 +20,8 @@ try:
         .post()
         .access_token
     )
+
+    print(f"\nGet Access Token: {access_token}\n")
 
     client = TwitterApiClient.from_oauth2_bearer_token(access_token)
 

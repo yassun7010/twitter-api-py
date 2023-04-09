@@ -127,3 +127,15 @@ def test_some_logic():
 
 Twitter API の挙動がおかしくなったかは、簡単に確認することができます。
 Twitter API が時たま起こす奇妙な挙動のテストケースを教えていただけると、大変助かります。
+
+### OAUTH2_USER_ACCESS_TOKEN の作成方法
+
+外形監視用の自動テストのうち、ユーザ認証されたアクセストークンが必要なテストが存在する。
+
+下記のサンプルを実行すると、ユーザ認証で得られたアクセストークンを得ることができる。
+
+```sh
+poetry shell
+
+python examples/oauth2/user_oauth2.py
+```
