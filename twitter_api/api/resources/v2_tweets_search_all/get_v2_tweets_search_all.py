@@ -18,6 +18,7 @@ from twitter_api.rate_limit.rate_limit_decorator import rate_limit
 from twitter_api.types.comma_separatable import CommaSeparatable, comma_separated_str
 from twitter_api.types.endpoint import Endpoint
 from twitter_api.types.extra_permissive_model import ExtraPermissiveModel
+from twitter_api.utils.datetime import rfc3339
 from twitter_api.utils.functional import map_optional
 
 ENDPOINT = Endpoint("GET", "https://api.twitter.com/2/tweets/search/all")
@@ -46,8 +47,8 @@ GetV2TweetsSearchAllQueryParameters = TypedDict(
 def _make_query(query: GetV2TweetsSearchAllQueryParameters) -> dict:
     return {
         "query": parse.quote(str(query["query"])),
-        "start_time": map_optional(lambda x: x.isoformat(), query.get("start_time")),
-        "end_time": map_optional(lambda x: x.isoformat(), query.get("end_time")),
+        "start_time": map_optional(rfc3339, query.get("start_time")),
+        "end_time": map_optional(rfc3339, query.get("end_time")),
         "since_id": query.get("since_id"),
         "until_id": query.get("until_id"),
         "sort_order": query.get("sort_order"),
