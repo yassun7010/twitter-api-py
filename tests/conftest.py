@@ -3,6 +3,7 @@ import os
 import pytest
 
 from tests.data import JsonDataLoader
+from twitter_api.api.types.v2_user.user_id import UserId
 from twitter_api.client.twitter_api_mock_client import TwitterApiMockClient
 from twitter_api.client.twitter_api_real_client import TwitterApiRealClient
 
@@ -33,6 +34,27 @@ def json_data_loader() -> JsonDataLoader:
 
 
 @pytest.fixture
+def participant_id() -> UserId:
+    """
+    DM への参加者の ID。
+
+    会話を作れるのはアプリ側なのでアプリ側のユーザ ID を用いる。
+    """
+
+    return os.environ["USER_ID"]
+
+
+@pytest.fixture
+def participant_ids(participant_id: UserId) -> list[UserId]:
+    """
+    DM の会話への参加者たちの ID。
+
+    """
+
+    return [participant_id] + os.environ["PARTICIPANT_IDS"].split(",")
+
+
+@pytest.fixture
 def real_oauth2_bearer_client() -> TwitterApiRealClient:
     return TwitterApiRealClient.from_oauth2_bearer_token_env()
 
@@ -48,7 +70,7 @@ def real_oauth2_user_client() -> TwitterApiRealClient:
 
 
 @pytest.fixture
-def real_auth1_user_client() -> TwitterApiRealClient:
+def real_oauth1_user_client() -> TwitterApiRealClient:
     return TwitterApiRealClient.from_oauth1_user_env()
 
 

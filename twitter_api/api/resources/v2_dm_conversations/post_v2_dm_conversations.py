@@ -1,15 +1,10 @@
-from typing import Literal, NotRequired, Optional, TypedDict, Union
+from typing import Literal, TypedDict
 
 from twitter_api.api.resources.api_resources import ApiResources
-from twitter_api.api.types.v2_dm_conversation.dm_conversation_attachment import (
-    DmConversationAttachment,
-)
-from twitter_api.api.types.v2_dm_conversation.dm_conversation_id import DmConversationId
+from twitter_api.api.types.v2_dm_conversation.dm_conversation import DmConversation
 from twitter_api.api.types.v2_dm_conversation.dm_conversation_message import (
     DmConversationMessage,
 )
-from twitter_api.api.types.v2_dm_event.dm_event_id import DmEventId
-from twitter_api.api.types.v2_media.media_id import MediaId
 from twitter_api.api.types.v2_scope import oauth2_scopes
 from twitter_api.api.types.v2_user.user_id import UserId
 from twitter_api.rate_limit.rate_limit_decorator import rate_limit
@@ -31,8 +26,7 @@ PostV2DmConversationsRequestBody = TypedDict(
 
 
 class PostV2DmConversationsResponseBody(ExtraPermissiveModel):
-    dm_conversation_id: DmConversationId
-    dm_event_id: DmEventId
+    data: DmConversation
 
 
 class PostV2DmConversationsResources(ApiResources):

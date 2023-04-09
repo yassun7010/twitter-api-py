@@ -11,10 +11,10 @@ from twitter_api.client.twitter_api_real_client import TwitterApiRealClient
 
 @pytest.mark.skipif(**synthetic_monitoring_is_disable())
 class TestGetV2Tweet:
-    def test_get_v2_tweet(self, real_auth1_user_client: TwitterApiRealClient):
+    def test_get_v2_tweet(self, real_oauth1_user_client: TwitterApiRealClient):
         tweet_text = f"テストツイート。{datetime.now().isoformat()}"
         real_response = (
-            real_auth1_user_client.chain()
+            real_oauth1_user_client.chain()
             .request("https://api.twitter.com/2/tweets")
             .post(
                 {
@@ -28,7 +28,7 @@ class TestGetV2Tweet:
 
         # テストが終わったらデータを消しておく。
         (
-            real_auth1_user_client.chain()
+            real_oauth1_user_client.chain()
             .request("https://api.twitter.com/2/tweets/:id")
             .delete(real_response.data.id)
         )

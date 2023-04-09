@@ -1,9 +1,9 @@
 from twitter_api.api.resources.api_resources import ApiResources
+from twitter_api.api.types.v2_dm_conversation.dm_conversation import DmConversation
 from twitter_api.api.types.v2_dm_conversation.dm_conversation_id import DmConversationId
 from twitter_api.api.types.v2_dm_conversation.dm_conversation_message import (
     DmConversationMessage,
 )
-from twitter_api.api.types.v2_dm_event.dm_event_id import DmEventId
 from twitter_api.api.types.v2_scope import oauth2_scopes
 from twitter_api.rate_limit.rate_limit_decorator import rate_limit
 from twitter_api.types.endpoint import Endpoint
@@ -19,8 +19,7 @@ PostV2DmConversationMessagesRequestBody = DmConversationMessage
 
 
 class PostV2DmConversationMessagesResponseBody(ExtraPermissiveModel):
-    dm_conversation_id: DmConversationId
-    dm_event_id: DmEventId
+    data: DmConversation
 
 
 class PostV2DmConversationMessagesResources(ApiResources):
