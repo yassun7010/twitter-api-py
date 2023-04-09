@@ -1,6 +1,9 @@
 import pytest
 
-from tests.conftest import synthetic_monitoring_is_disable
+from tests.conftest import (
+    check_oauth2_user_access_token,
+    synthetic_monitoring_is_disable,
+)
 from tests.data import JsonDataLoader
 from twitter_api.api.resources.v2_dm_conversations.post_v2_dm_conversations import (
     PostV2DmConversationsResponseBody,
@@ -8,11 +11,6 @@ from twitter_api.api.resources.v2_dm_conversations.post_v2_dm_conversations impo
 from twitter_api.api.types.v2_user.user_id import UserId
 from twitter_api.client.twitter_api_mock_client import TwitterApiMockClient
 from twitter_api.client.twitter_api_real_client import TwitterApiRealClient
-from twitter_api.error import (
-    OAuth2UserAccessTokenExpired,
-    TwitterApiErrorCode,
-    TwitterApiResponseFailed,
-)
 
 
 @pytest.mark.skipif(**synthetic_monitoring_is_disable())
@@ -23,7 +21,7 @@ class TestGetV2UserFollowing:
         participant_ids: list[UserId],
         real_oauth2_user_client: TwitterApiRealClient,
     ):
-        try:
+        with check_oauth2_user_access_token():
             response = (
                 real_oauth2_user_client.chain()
                 .request("https://api.twitter.com/2/dm_conversations")
@@ -40,12 +38,6 @@ class TestGetV2UserFollowing:
             )
 
             print(response.json())
-
-        except TwitterApiResponseFailed as error:
-            if error.status_code == TwitterApiErrorCode.Forbidden:
-                raise OAuth2UserAccessTokenExpired()
-            else:
-                raise error
 
         assert True
 
