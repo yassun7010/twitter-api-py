@@ -7,6 +7,7 @@ from twitter_api.api.resources.v2_tweets_search_stream_rules.post_v2_tweets_sear
 )
 from twitter_api.client.twitter_api_mock_client import TwitterApiMockClient
 from twitter_api.client.twitter_api_real_client import TwitterApiRealClient
+from twitter_api.types.extra_permissive_model import has_extra_fields
 
 
 @pytest.mark.skipif(**synthetic_monitoring_is_disable())
@@ -14,7 +15,7 @@ class TestPostV2TweetsSearchStreamRules:
     def test_post_v2_search_stream_rules_when_add_case(
         self, real_oauth2_app_client: TwitterApiRealClient
     ):
-        real_response = (
+        response = (
             real_oauth2_app_client.chain()
             .request("https://api.twitter.com/2/tweets/search/stream/rules")
             .post(
@@ -27,14 +28,14 @@ class TestPostV2TweetsSearchStreamRules:
             )
         )
 
-        print(real_response.json())
+        print(response.json())
 
-        assert True
+        assert not has_extra_fields(response)
 
     def test_post_v2_search_stream_rules_when_delete_case(
         self, real_oauth2_app_client: TwitterApiRealClient
     ):
-        real_response = (
+        response = (
             real_oauth2_app_client.chain()
             .request("https://api.twitter.com/2/tweets/search/stream/rules")
             .post(
@@ -42,9 +43,9 @@ class TestPostV2TweetsSearchStreamRules:
             )
         )
 
-        print(real_response.json())
+        print(response.json())
 
-        assert True
+        assert not has_extra_fields(response)
 
 
 class TestMockPostV2TweetsSearchStreamRules:
@@ -64,6 +65,8 @@ class TestMockPostV2TweetsSearchStreamRules:
         expected_response = PostV2TweetsSearchStreamRulesResponseBody.parse_obj(
             json_data_loader.load(json_filename)
         )
+
+        assert not has_extra_fields(expected_response)
 
         assert (
             mock_oauth2_app_client.chain()

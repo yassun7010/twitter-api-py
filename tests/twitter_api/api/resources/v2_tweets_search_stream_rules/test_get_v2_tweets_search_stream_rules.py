@@ -7,6 +7,7 @@ from twitter_api.api.resources.v2_tweets_search_stream_rules.get_v2_tweets_searc
 )
 from twitter_api.client.twitter_api_mock_client import TwitterApiMockClient
 from twitter_api.client.twitter_api_real_client import TwitterApiRealClient
+from twitter_api.types.extra_permissive_model import has_extra_fields
 
 
 @pytest.mark.skipif(**synthetic_monitoring_is_disable())
@@ -14,15 +15,15 @@ class TestGetV2TweetsSearchStreamRules:
     def test_get_v2_search_stream_rules(
         self, real_oauth2_app_client: TwitterApiRealClient
     ):
-        real_response = (
+        response = (
             real_oauth2_app_client.chain()
             .request("https://api.twitter.com/2/tweets/search/stream/rules")
             .get()
         )
 
-        print(real_response.json())
+        print(response.json())
 
-        assert True
+        assert not has_extra_fields(response)
 
 
 class TestMockGetV2TweetsSearchStreamRules:
@@ -41,6 +42,8 @@ class TestMockGetV2TweetsSearchStreamRules:
         expected_response = GetV2TweetsSearchStreamRulesResponseBody.parse_obj(
             json_data_loader.load(json_filename)
         )
+
+        assert not has_extra_fields(expected_response)
 
         assert (
             mock_oauth2_app_client.chain()

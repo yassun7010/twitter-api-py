@@ -7,6 +7,7 @@ from twitter_api.api.resources.v2_user_followers.get_v2_user_followers import (
 )
 from twitter_api.client.twitter_api_mock_client import TwitterApiMockClient
 from twitter_api.client.twitter_api_real_client import TwitterApiRealClient
+from twitter_api.types.extra_permissive_model import has_extra_fields
 
 
 @pytest.mark.skipif(**synthetic_monitoring_is_disable())
@@ -15,15 +16,15 @@ class TestGetV2UserFollowers:
         self,
         real_oauth2_app_client: TwitterApiRealClient,
     ):
-        real_response = (
+        response = (
             real_oauth2_app_client.chain()
             .request("https://api.twitter.com/2/users/:id/followers")
             .get("2244994945")
         )
 
-        print(real_response.json())
+        print(response.json())
 
-        assert True
+        assert not has_extra_fields(response)
 
 
 class TestMockGetV2UserFollowers:
@@ -42,6 +43,8 @@ class TestMockGetV2UserFollowers:
         expected_response = GetV2UserFollowersResponseBody.parse_obj(
             json_data_loader.load(json_filename)
         )
+
+        assert not has_extra_fields(expected_response)
 
         assert (
             mock_oauth2_app_client.chain()

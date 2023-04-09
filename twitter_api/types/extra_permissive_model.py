@@ -22,3 +22,17 @@ class ExtraPermissiveModel(Model):
 
     class Config:
         extra = Extra.allow
+
+
+def has_extra_fields(model: ExtraPermissiveModel) -> bool:
+    """
+    Pydanticモデルに未定義のフィールドが含まれているかどうかを判断する。
+    """
+
+    fields_set = set(model.__fields_set__)
+    for _, value in model:
+        if isinstance(value, ExtraPermissiveModel):
+            if has_extra_fields(value):
+                return True
+
+    return len(set(model.dict().keys()) - fields_set) > 0

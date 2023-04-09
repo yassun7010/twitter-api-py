@@ -7,20 +7,21 @@ from twitter_api.api.resources.v2_tweets_search_recent.get_v2_tweets_search_rece
 )
 from twitter_api.client.twitter_api_mock_client import TwitterApiMockClient
 from twitter_api.client.twitter_api_real_client import TwitterApiRealClient
+from twitter_api.types.extra_permissive_model import has_extra_fields
 
 
 @pytest.mark.skipif(**synthetic_monitoring_is_disable())
 class TestGetV2TweetsSearchRecent:
     def test_get_v2_search_recent(self, real_oauth2_app_client: TwitterApiRealClient):
-        real_response = (
+        response = (
             real_oauth2_app_client.chain()
             .request("https://api.twitter.com/2/tweets/search/recent")
             .get({"query": "ツイート", "max_results": 1})
         )
 
-        print(real_response.json())
+        print(response.json())
 
-        assert True
+        assert not has_extra_fields(response)
 
 
 class TestMockGetV2TweetsSearchRecent:
@@ -40,6 +41,8 @@ class TestMockGetV2TweetsSearchRecent:
         expected_response = GetV2TweetsSearchRecentResponseBody.parse_obj(
             json_data_loader.load(json_filename)
         )
+
+        assert not has_extra_fields(expected_response)
 
         assert (
             mock_oauth2_app_client.chain()
