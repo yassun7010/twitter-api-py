@@ -92,7 +92,6 @@ class MockRequestClient(RequestClient, Generic[ResponseModelBody]):
         headers: Optional[Headers] = None,
         query: Optional[QuryParameters] = None,
         body: Optional[RequestJsonBody] = None,
-        json: Optional[RequestJsonBody] = None,
     ) -> ResponseModelBody:
         return self.extract_response_body(endpoint)
 

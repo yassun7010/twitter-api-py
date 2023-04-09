@@ -82,5 +82,5 @@ class PostV2TweetsResources(ApiResources):
         return self.request_client.post(
             endpoint=ENDPOINT,
             response_type=PostV2TweetsResponseBody,
-            json=downcast_dict(request_body),
+            body=downcast_dict(request_body),
         )

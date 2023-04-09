@@ -163,26 +163,34 @@ class TwitterApiResponseFailed(TwitterApiError):
         self._request_headers = request_headers
         self._query = query
         self._request_body = request_body
-        self._response_status_code = response_status_code
+        self.status_code = response_status_code
         self._response_body = response_body
 
     def __str__(self) -> str:
         return ErrorMessage(
             type=self.__class__.__name__,
-            message=code2message(TwitterApiErrorCode(self._response_status_code)),
+            message=code2message(TwitterApiErrorCode(self.status_code)),
             **OrderedDict(
                 endpoint=self._endpoint,
                 url=self._url,
                 reqeust_headers=exclude_none(self._request_headers),
                 query=exclude_none(self._query),
                 request_body=exclude_none(self._request_body),
-                response_status_code=self._response_status_code,
+                response_status_code=self.status_code,
                 response_body=(
                     exclude_none(self._response_body)
                     if not isinstance(self._response_body, bytes)
                     else self._response_body
                 ),
             ),
+        ).to_message()
+
+
+class OAuth2UserAccessTokenExpired(TwitterApiError):
+    def __str__(self) -> str:
+        return ErrorMessage(
+            type=self.__class__.__name__,
+            message="OAuth2.0 のユーザ認証の ACCESS_TOKEN が失効しました。再度発行してください。",
         ).to_message()
 
 

@@ -33,13 +33,17 @@ from twitter_api.api.resources.v2_tweets_search_all import (
     V2TweetsSearchAllResources,
     V2TweetsSearchAllUrl,
 )
-from twitter_api.api.resources.v2_tweets_search_recent import V2TweetsSearchRecentUrl
-from twitter_api.api.resources.v2_tweets_search_recent.get_v2_tweets_search_recent import (
-    GetV2TweetsSearchRecentResources,
+from twitter_api.api.resources.v2_tweets_search_recent import (
+    V2TweetsSearchRecentResources,
+    V2TweetsSearchRecentUrl,
 )
-from twitter_api.api.resources.v2_tweets_search_stream import V2TweetsSearchStreamUrl
-from twitter_api.api.resources.v2_tweets_search_stream.get_v2_tweets_search_stream import (
-    GetV2TweetsSearchStreamResources,
+from twitter_api.api.resources.v2_tweets_search_stream import (
+    V2TweetsSearchStreamResources,
+    V2TweetsSearchStreamUrl,
+)
+from twitter_api.api.resources.v2_tweets_search_stream_rules import (
+    V2TweetsSearchStreamRulesResources,
+    V2TweetsSearchStreamRulesUrl,
 )
 from twitter_api.api.resources.v2_user import V2UserResources, V2UserUrl
 from twitter_api.api.resources.v2_user_followers import (
@@ -144,14 +148,21 @@ class TwitterApiClient(Chainable, metaclass=ABCMeta):
     def request(
         self: Self,
         url: V2TweetsSearchRecentUrl,
-    ) -> GetV2TweetsSearchRecentResources:
+    ) -> V2TweetsSearchRecentResources:
         ...
 
     @overload
     def request(
         self: Self,
         url: V2TweetsSearchStreamUrl,
-    ) -> GetV2TweetsSearchStreamResources:
+    ) -> V2TweetsSearchStreamResources:
+        ...
+
+    @overload
+    def request(
+        self: Self,
+        url: V2TweetsSearchStreamRulesUrl,
+    ) -> V2TweetsSearchStreamRulesResources:
         ...
 
     @overload
@@ -234,6 +245,7 @@ class TwitterApiClient(Chainable, metaclass=ABCMeta):
             V2TweetsSearchAllUrl,
             V2TweetsSearchRecentUrl,
             V2TweetsSearchStreamUrl,
+            V2TweetsSearchStreamRulesUrl,
             V2TweetsUrl,
             V2TweetUrl,
             V2UserFollowersUrl,
@@ -281,11 +293,15 @@ class TwitterApiClient(Chainable, metaclass=ABCMeta):
                 self._request_client,
             )
         elif url == "https://api.twitter.com/2/tweets/search/recent":
-            return GetV2TweetsSearchRecentResources(
+            return V2TweetsSearchRecentResources(
                 self._request_client,
             )
         elif url == "https://api.twitter.com/2/tweets/search/stream":
-            return GetV2TweetsSearchStreamResources(
+            return V2TweetsSearchStreamResources(
+                self._request_client,
+            )
+        elif url == "https://api.twitter.com/2/tweets/search/stream/rules":
+            return V2TweetsSearchStreamRulesResources(
                 self._request_client,
             )
         elif url == "https://api.twitter.com/2/users":

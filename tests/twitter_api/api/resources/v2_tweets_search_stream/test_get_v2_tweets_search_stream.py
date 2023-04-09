@@ -19,7 +19,7 @@ class TestGetV2TweetsSearchStream:
             "まだ作っていないため後回し。"
         ),
     )
-    def test_get_v2_search_recent(self, real_oauth2_app_client: TwitterApiRealClient):
+    def test_get_v2_search_stream(self, real_oauth2_app_client: TwitterApiRealClient):
         real_response = (
             real_oauth2_app_client.chain()
             .request("https://api.twitter.com/2/tweets/search/stream")
@@ -35,10 +35,10 @@ class TestMockGetV2TweetsSearchStream:
     @pytest.mark.parametrize(
         "json_filename",
         [
-            "get_tweets_search_recent_response.json",
+            "get_tweets_search_stream_response.json",
         ],
     )
-    def test_mock_get_v2_search_recent(
+    def test_mock_get_v2_search_stream(
         self,
         mock_oauth2_app_client: TwitterApiMockClient,
         json_data_loader: JsonDataLoader,

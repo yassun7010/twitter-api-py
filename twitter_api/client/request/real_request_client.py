@@ -114,7 +114,6 @@ class RealRequestClient(RequestClient):
         headers: Optional[Headers] = None,
         query: Optional[QuryParameters] = None,
         body: Optional[RequestJsonBody] = None,
-        json: Optional[RequestJsonBody] = None,
     ) -> ResponseModelBody:
         url = endpoint.url if url is None else url
 
@@ -124,8 +123,7 @@ class RealRequestClient(RequestClient):
             method=endpoint.method,
             headers=headers,
             params=query,
-            data=body,
-            json=json,
+            json=body,
             timeout=self.timeout_sec,
         )
 

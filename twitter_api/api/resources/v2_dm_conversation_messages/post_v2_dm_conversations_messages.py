@@ -46,6 +46,6 @@ class PostV2DmConversationMessagesResources(ApiResources):
         return self.request_client.post(
             endpoint=ENDPOINT,
             url=ENDPOINT.url.replace(":dm_conversation_id", dm_conversation_id),
-            json=downcast_dict(request_body),
+            body=downcast_dict(request_body),
             response_type=PostV2DmConversationMessagesResponseBody,
         )

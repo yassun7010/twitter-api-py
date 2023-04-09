@@ -8,6 +8,11 @@ from twitter_api.api.resources.v2_dm_conversations.post_v2_dm_conversations impo
 from twitter_api.api.types.v2_user.user_id import UserId
 from twitter_api.client.twitter_api_mock_client import TwitterApiMockClient
 from twitter_api.client.twitter_api_real_client import TwitterApiRealClient
+from twitter_api.error import (
+    OAuth2UserAccessTokenExpired,
+    TwitterApiErrorCode,
+    TwitterApiResponseFailed,
+)
 
 
 @pytest.mark.skipif(**synthetic_monitoring_is_disable())
@@ -18,22 +23,29 @@ class TestGetV2UserFollowing:
         participant_ids: list[UserId],
         real_oauth2_user_client: TwitterApiRealClient,
     ):
-        response = (
-            real_oauth2_user_client.chain()
-            .request("https://api.twitter.com/2/dm_conversations")
-            .post(
-                participant_id,
-                {
-                    "conversation_type": "Group",
-                    "participant_ids": participant_ids,
-                    "message": {
-                        "text": "Hello to you two, this is a new group conversation"
+        try:
+            response = (
+                real_oauth2_user_client.chain()
+                .request("https://api.twitter.com/2/dm_conversations")
+                .post(
+                    participant_id,
+                    {
+                        "conversation_type": "Group",
+                        "participant_ids": participant_ids,
+                        "message": {
+                            "text": "Hello to you two, this is a new group conversation"
+                        },
                     },
-                },
+                )
             )
-        )
 
-        print(response.json())
+            print(response.json())
+
+        except TwitterApiResponseFailed as error:
+            if error.status_code == TwitterApiErrorCode.Forbidden:
+                raise OAuth2UserAccessTokenExpired()
+            else:
+                raise error
 
         assert True
 

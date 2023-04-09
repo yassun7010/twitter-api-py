@@ -48,6 +48,6 @@ class PostV2UserRetweetsResources(ApiResources):
         return self.request_client.post(
             endpoint=ENDPOINT,
             url=ENDPOINT.url.replace(":id", id),
-            json=downcast_dict(request_body),
+            body=downcast_dict(request_body),
             response_type=PostV2UserRetweetsResponseBody,
         )

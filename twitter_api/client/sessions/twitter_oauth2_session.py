@@ -1,6 +1,6 @@
 from abc import ABCMeta, abstractmethod
 
-from twitter_api.api.types.v2_oauth2.oauth2_access_token import OAuth2AcccessToken
+from twitter_api.api.types.v2_oauth2.oauth2_access_token import OAuth2AccessToken
 from twitter_api.types.oauth import CallbackUrl
 
 
@@ -24,5 +24,5 @@ class TwitterOAuth2Session(metaclass=ABCMeta):
         authorization_response_url: CallbackUrl,
         state: str,
         code_verifier: str,
-    ) -> OAuth2AcccessToken:
+    ) -> OAuth2AccessToken:
         ...

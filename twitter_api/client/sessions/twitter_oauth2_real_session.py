@@ -6,7 +6,7 @@ from authlib.integrations.requests_client.oauth2_session import (  # pyright: re
 
 from twitter_api.api.resources.oauth2_authorize import Oauth2AuthorizeUrl
 from twitter_api.api.resources.v2_oauth2_token import V2Oauth2TokenUrl
-from twitter_api.api.types.v2_oauth2.oauth2_access_token import OAuth2AcccessToken
+from twitter_api.api.types.v2_oauth2.oauth2_access_token import OAuth2AccessToken
 from twitter_api.api.types.v2_oauth2.oauth2_authorization import OAuth2Authorization
 from twitter_api.api.types.v2_scope import Scope
 from twitter_api.client.sessions.twitter_oauth2_session import TwitterOAuth2Session
@@ -51,7 +51,7 @@ class TwitterOAuth2RealSession(TwitterOAuth2Session):
         authorization_response_url: CallbackUrl,
         state: str,
         code_verifier: str,
-    ) -> OAuth2AcccessToken:
+    ) -> OAuth2AccessToken:
         url: V2Oauth2TokenUrl = "https://api.twitter.com/2/oauth2/token"
 
         response = self._session.fetch_token(
@@ -63,7 +63,7 @@ class TwitterOAuth2RealSession(TwitterOAuth2Session):
 
         scope: Any = response.pop("scope", "").split(" ")
 
-        return OAuth2AcccessToken(
+        return OAuth2AccessToken(
             scope=scope,
             **response,
         )

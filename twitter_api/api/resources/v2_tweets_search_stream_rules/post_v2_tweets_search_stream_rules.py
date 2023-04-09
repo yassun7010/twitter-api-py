@@ -1,0 +1,92 @@
+from datetime import datetime
+from typing import NotRequired, Optional, TypedDict
+
+from pydantic import Field
+
+from twitter_api.api.resources.api_resources import ApiResources
+from twitter_api.api.types.v2_rule.rule_id import RuleId
+from twitter_api.api.types.v2_scope import oauth2_scopes
+from twitter_api.api.types.v2_tag import Tag
+from twitter_api.rate_limit.rate_limit_decorator import rate_limit
+from twitter_api.types.endpoint import Endpoint
+from twitter_api.types.extra_permissive_model import ExtraPermissiveModel
+from twitter_api.types.http import downcast_dict
+
+ENDPOINT = Endpoint("POST", "https://api.twitter.com/2/tweets/search/stream/rules")
+
+PostV2TweetsSearchStreamRulesQueryParameters = TypedDict(
+    "PostV2TweetsSearchStreamRulesQueryParameters",
+    {
+        "dry_run": NotRequired[Optional[bool]],
+    },
+)
+
+
+class AddData(TypedDict):
+    value: str
+    tag: NotRequired[Optional[Tag]]
+
+
+class DeleteDataByIds(TypedDict):
+    ids: list[RuleId]
+
+
+class DeleteDataByValues(TypedDict):
+    values: list[str]
+
+
+DeleteData = DeleteDataByIds | DeleteDataByValues
+
+
+class PostV2TweetsSearchStreamRulesRequestBody(TypedDict):
+    add: NotRequired[list[AddData]]
+    delete: NotRequired[Optional[DeleteData]]
+
+
+class PostV2TweetsSearchStreamRulesResponseBodyData(ExtraPermissiveModel):
+    id: RuleId
+    value: str
+    tag: Optional[Tag] = None
+
+
+class PostV2TweetsSearchStreamRulesResponseBodyMetaSummary(ExtraPermissiveModel):
+    created: Optional[int] = None
+    not_created: Optional[int] = None
+    deleted: Optional[int] = None
+    not_deleted: Optional[int] = None
+
+
+class PostV2TweetsSearchStreamRulesResponseBodyMeta(ExtraPermissiveModel):
+    sent: datetime
+    summary: PostV2TweetsSearchStreamRulesResponseBodyMetaSummary
+
+
+class PostV2TweetsSearchStreamRulesResponseBody(ExtraPermissiveModel):
+    data: list[PostV2TweetsSearchStreamRulesResponseBodyData] = Field(
+        default_factory=list
+    )
+    meta: PostV2TweetsSearchStreamRulesResponseBodyMeta
+
+
+class PostV2TweetsSearchStreamRulesResources(ApiResources):
+    @oauth2_scopes(
+        # 不明
+    )
+    @rate_limit(ENDPOINT, "app", requests=450, mins=15)
+    def post(
+        self,
+        request_body: PostV2TweetsSearchStreamRulesRequestBody,
+        query: Optional[PostV2TweetsSearchStreamRulesQueryParameters] = None,
+    ) -> PostV2TweetsSearchStreamRulesResponseBody:
+        # flake8: noqa E501
+        """
+        ツイートの一覧を検索するフィルターを作成する。
+
+        refer: https://developer.twitter.com/en/docs/twitter-api/tweets/filtered-stream/api-reference/post-tweets-search-stream-rules
+        """
+        return self.request_client.post(
+            endpoint=ENDPOINT,
+            response_type=PostV2TweetsSearchStreamRulesResponseBody,
+            query=downcast_dict(query) if query is not None else None,
+            body=downcast_dict(request_body),
+        )

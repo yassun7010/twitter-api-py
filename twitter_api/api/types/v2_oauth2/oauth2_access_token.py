@@ -6,7 +6,7 @@ from twitter_api.types.extra_permissive_model import ExtraPermissiveModel
 from twitter_api.types.oauth import AccessToken
 
 
-class OAuth2AcccessToken(Chainable, ExtraPermissiveModel):
+class OAuth2AccessToken(Chainable, ExtraPermissiveModel):
     token_type: Literal["bearer"]
     expires_in: int
     expires_at: int

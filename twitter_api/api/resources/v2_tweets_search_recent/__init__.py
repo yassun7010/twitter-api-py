@@ -9,5 +9,5 @@ V2TweetsSearchRecentUrl: TypeAlias = Literal[
 ]
 
 
-class TweetRetweetedByRerources(GetV2TweetsSearchRecentResources):
+class V2TweetsSearchRecentResources(GetV2TweetsSearchRecentResources):
     pass
