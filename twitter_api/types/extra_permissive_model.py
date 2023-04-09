@@ -28,7 +28,7 @@ class ExtraPermissiveModel(Model):
 
 def get_extra_fields(model: ExtraPermissiveModel) -> dict[str, Any]:
     """
-    Pydanticモデルに未定義のフィールドが含まれているかどうかを判断する。
+    Pydanticモデルにある未定義のフィールドを返却する。
     """
 
     extras = {}
