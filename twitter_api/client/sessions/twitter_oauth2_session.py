@@ -17,7 +17,7 @@ class TwitterOAuth2Session(metaclass=ABCMeta):
             authorization_url="dummy",
             state="dummy",
             code_verifier="dummy",
-            _session=self,
+            session=self,
         )
 
     @abstractmethod

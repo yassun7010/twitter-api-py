@@ -43,7 +43,7 @@ class TwitterOAuth2RealSession(TwitterOAuth2Session):
             authorization_url=authorization_url,
             state=state,
             code_verifier=code_verifier,
-            _session=self,
+            session=self,
         )
 
     def fetch_token(

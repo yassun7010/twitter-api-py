@@ -19,7 +19,7 @@ class TwitterOAuth2MockSession(TwitterOAuth2Session):
             authorization_url="https://authorization.url.com",
             state="state",
             code_verifier="code_verifier",
-            _session=self,
+            session=self,
         )
 
     def fetch_token(
