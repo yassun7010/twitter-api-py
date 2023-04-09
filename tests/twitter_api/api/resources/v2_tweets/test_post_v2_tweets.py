@@ -11,10 +11,10 @@ from twitter_api.client.twitter_api_real_client import TwitterApiRealClient
 
 @pytest.mark.skipif(**synthetic_monitoring_is_disable())
 class TestGetV2Tweet:
-    def test_get_v2_tweet(self, real_user_auth_v1_client: TwitterApiRealClient):
+    def test_get_v2_tweet(self, real_auth1_user_client: TwitterApiRealClient):
         tweet_text = f"テストツイート。{datetime.now().isoformat()}"
         real_response = (
-            real_user_auth_v1_client.chain()
+            real_auth1_user_client.chain()
             .request("https://api.twitter.com/2/tweets")
             .post(
                 {
@@ -28,7 +28,7 @@ class TestGetV2Tweet:
 
         # テストが終わったらデータを消しておく。
         (
-            real_user_auth_v1_client.chain()
+            real_auth1_user_client.chain()
             .request("https://api.twitter.com/2/tweets/:id")
             .delete(real_response.data.id)
         )
@@ -37,7 +37,7 @@ class TestGetV2Tweet:
 
 
 class TestMockGetV2Tweet:
-    def test_mock_get_v2_tweet(self, mock_app_auth_v2_client: TwitterApiMockClient):
+    def test_mock_get_v2_tweet(self, mock_oauth2_app_client: TwitterApiMockClient):
         tweet = TweetDetail(
             id="1234567890123456789",
             text="ツイートしました。",
@@ -47,7 +47,7 @@ class TestMockGetV2Tweet:
         expected_response = PostV2TweetsResponseBody(data=tweet)
 
         assert (
-            mock_app_auth_v2_client.chain()
+            mock_oauth2_app_client.chain()
             .inject_post_response_body(
                 "https://api.twitter.com/2/tweets", expected_response
             )

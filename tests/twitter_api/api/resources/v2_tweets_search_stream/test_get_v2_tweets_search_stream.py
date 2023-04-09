@@ -19,9 +19,9 @@ class TestGetV2TweetsSearchStream:
             "まだ作っていないため後回し。"
         ),
     )
-    def test_get_v2_search_recent(self, real_app_auth_v2_client: TwitterApiRealClient):
+    def test_get_v2_search_recent(self, real_oauth2_app_client: TwitterApiRealClient):
         real_response = (
-            real_app_auth_v2_client.chain()
+            real_oauth2_app_client.chain()
             .request("https://api.twitter.com/2/tweets/search/stream")
             .get()
         )
@@ -40,7 +40,7 @@ class TestMockGetV2TweetsSearchStream:
     )
     def test_mock_get_v2_search_recent(
         self,
-        mock_app_auth_v2_client: TwitterApiMockClient,
+        mock_oauth2_app_client: TwitterApiMockClient,
         json_data_loader: JsonDataLoader,
         json_filename: str,
     ):
@@ -49,7 +49,7 @@ class TestMockGetV2TweetsSearchStream:
         )
 
         assert (
-            mock_app_auth_v2_client.chain()
+            mock_oauth2_app_client.chain()
             .inject_get_response_body(
                 "https://api.twitter.com/2/tweets/search/stream", expected_response
             )

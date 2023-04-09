@@ -12,18 +12,18 @@ from twitter_api.client.twitter_api_real_client import TwitterApiRealClient
 
 @pytest.mark.skipif(**synthetic_monitoring_is_disable())
 class TestPostOauth2Token:
-    def test_post_oauth2_token(self, real_app_auth_v2_client: TwitterApiRealClient):
+    def test_post_oauth2_token(self, real_oauth2_app_client: TwitterApiRealClient):
         expected_response = PostOauth2TokenResponseBody(
             token_type="bearer",
             access_token=(
-                real_app_auth_v2_client._real_request_client._auth.token["access_token"]
+                real_oauth2_app_client._real_request_client._auth.token["access_token"]
                 # pyright: reportOptionalSubscript=false
                 # pyright: reportOptionalMemberAccess=false
             ),
         )
 
         real_response = (
-            real_app_auth_v2_client.chain()
+            real_oauth2_app_client.chain()
             .request("https://api.twitter.com/oauth2/token")
             .post(
                 api_key=os.environ["API_KEY"],
@@ -39,16 +39,14 @@ class TestPostOauth2Token:
 
 
 class TestMockPostOauth2Token:
-    def test_mock_post_oauth2_token(
-        self, mock_app_auth_v2_client: TwitterApiMockClient
-    ):
+    def test_mock_post_oauth2_token(self, mock_oauth2_app_client: TwitterApiMockClient):
         expected_response = PostOauth2TokenResponseBody(
             token_type="bearer",
             access_token="AAAAAAAAAAAAAAAAAAAAAOeOmQEAAAAAu",
         )
 
         assert (
-            mock_app_auth_v2_client.chain()
+            mock_oauth2_app_client.chain()
             .inject_post_response_body(
                 "https://api.twitter.com/oauth2/token",
                 expected_response,

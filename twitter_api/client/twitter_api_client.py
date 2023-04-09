@@ -67,7 +67,6 @@ from twitter_api.api.types.v2_scope import SCOPES, Scope
 from twitter_api.error import NeverError
 from twitter_api.rate_limit.manager.rate_limit_manager import RateLimitManager
 from twitter_api.types.chainable import Chainable
-from twitter_api.types.comma_separatable import CommaSeparatable
 from twitter_api.types.oauth import (
     AccessSecret,
     AccessToken,
@@ -338,7 +337,7 @@ class TwitterApiClient(Chainable, metaclass=ABCMeta):
             raise NeverError(url)
 
     @classmethod
-    def from_app_oauth2_bearer_token(
+    def from_oauth2_bearer_token(
         cls,
         bearer_token: str,
         *,
@@ -348,26 +347,26 @@ class TwitterApiClient(Chainable, metaclass=ABCMeta):
 
         from .twitter_api_real_client import TwitterApiRealClient
 
-        return TwitterApiRealClient.from_app_oauth2_bearer_token(
+        return TwitterApiRealClient.from_oauth2_bearer_token(
             bearer_token,
             rate_limit_manager=rate_limit_manager,
         )
 
     @classmethod
-    def from_app_oauth2_bearer_token_env(
+    def from_oauth2_bearer_token_env(
         cls,
         bearer_token="BEARER_TOEKN",
         rate_limit_manager: Optional[RateLimitManager] = None,
     ):
         """環境変数から、 OAuth 2.0 の Bearer 認証を用いてクライアントを作成する。"""
 
-        return cls.from_app_oauth2_bearer_token(
+        return cls.from_oauth2_bearer_token(
             cls._get_env(bearer_token),
             rate_limit_manager=rate_limit_manager,
         )
 
     @classmethod
-    def from_app_oauth2(
+    def from_oauth2_app(
         cls,
         *,
         api_key: ApiKey,
@@ -378,14 +377,14 @@ class TwitterApiClient(Chainable, metaclass=ABCMeta):
 
         from .twitter_api_real_client import TwitterApiRealClient
 
-        return TwitterApiRealClient.from_app_oauth2(
+        return TwitterApiRealClient.from_oauth2_app(
             api_key=api_key,
             api_secret=api_secret,
             rate_limit_manager=rate_limit_manager,
         )
 
     @classmethod
-    def from_app_oauth2_env(
+    def from_oauth2_app_env(
         cls,
         *,
         api_key: Env[ApiKey] = "API_KEY",
@@ -394,21 +393,20 @@ class TwitterApiClient(Chainable, metaclass=ABCMeta):
     ):
         """環境変数から、OAuth 2.0 のアプリ認証を用いてクライアントを作成する。"""
 
-        return cls.from_app_oauth2(
+        return cls.from_oauth2_app(
             api_key=cls._get_env(api_key),
             api_secret=cls._get_env(api_secret),
             rate_limit_manager=rate_limit_manager,
         )
 
     @classmethod
-    def from_user_oauth2_flow(
+    def from_oauth2_user_flow(
         cls,
         *,
         client_id: ClientId,
         client_secret: ClientSecret,
         callback_url: CallbackUrl,
-        scope: CommaSeparatable[Scope],
-        rate_limit_manager: Optional[RateLimitManager] = None,
+        scope: list[Scope],
     ):
         """
         OAuth 2.0 のユーザ認証を用いてクライアントを作成する。
@@ -416,24 +414,22 @@ class TwitterApiClient(Chainable, metaclass=ABCMeta):
 
         from .twitter_api_real_client import TwitterApiRealClient
 
-        return TwitterApiRealClient.from_user_oauth2_flow(
+        return TwitterApiRealClient.from_oauth2_user_flow(
             client_id=client_id,
             scope=scope,
             callback_url=callback_url,
             client_secret=client_secret,
-            rate_limit_manager=rate_limit_manager,
         )
 
     @classmethod
-    def from_user_oauth2_flow_env(
+    def from_oauth2_user_flow_env(
         cls,
         *,
-        scope: Optional[CommaSeparatable[Scope]] = None,
+        scope: Optional[list[Scope]] = None,
         client_id_env: Env[ClientId] = "CLIENT_ID",
         client_secret_env: Env[ClientSecret] = "CLIENT_SECRET",
         callback_url_env: Env[CallbackUrl] = "CALLBACK_URL",
         callback_url: Optional[CallbackUrl] = None,
-        rate_limit_manager: Optional[RateLimitManager] = None,
     ):
         """
         環境変数から、 OAuth 2.0 のユーザ認証を用いてクライアントを作成する。
@@ -444,7 +440,7 @@ class TwitterApiClient(Chainable, metaclass=ABCMeta):
         if scope is None:
             scope = SCOPES
 
-        return cls.from_user_oauth2_flow(
+        return cls.from_oauth2_user_flow(
             client_id=cls._get_env(client_id_env),
             scope=scope,
             callback_url=(
@@ -453,11 +449,10 @@ class TwitterApiClient(Chainable, metaclass=ABCMeta):
                 else cls._get_env(callback_url_env)
             ),
             client_secret=cls._get_env(client_secret_env),
-            rate_limit_manager=rate_limit_manager,
         )
 
     @classmethod
-    def from_user_oauth1(
+    def from_oauth1_user(
         cls,
         *,
         api_key: ApiKey,
@@ -470,7 +465,7 @@ class TwitterApiClient(Chainable, metaclass=ABCMeta):
 
         from .twitter_api_real_client import TwitterApiRealClient
 
-        return TwitterApiRealClient.from_user_oauth1(
+        return TwitterApiRealClient.from_oauth1_user(
             api_key=api_key,
             api_secret=api_secret,
             access_token=access_token,
@@ -479,7 +474,7 @@ class TwitterApiClient(Chainable, metaclass=ABCMeta):
         )
 
     @classmethod
-    def from_user_oauth1_env(
+    def from_oauth1_user_env(
         cls,
         *,
         api_key: Env[ApiKey] = "API_KEY",
@@ -490,7 +485,7 @@ class TwitterApiClient(Chainable, metaclass=ABCMeta):
     ):
         """環境変数から、アプリ認証を用いてクライアントを作成する。"""
 
-        return cls.from_user_oauth1(
+        return cls.from_oauth1_user(
             api_key=cls._get_env(api_key),
             api_secret=cls._get_env(api_secret),
             access_token=cls._get_env(access_token),

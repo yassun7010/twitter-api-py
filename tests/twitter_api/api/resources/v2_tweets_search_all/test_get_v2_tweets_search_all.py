@@ -11,10 +11,10 @@ from twitter_api.client.twitter_api_real_client import TwitterApiRealClient
 
 @pytest.mark.skipif(**synthetic_monitoring_is_disable())
 class TestGetV2TweetsSearchAll:
-    @pytest.mark.skip(reason="プレミアムなアカウントでないとテストできない。")
-    def test_get_v2_search_all(self, real_app_auth_v2_client: TwitterApiRealClient):
+    @pytest.mark.skipif(True, reason="プレミアムなアカウントでないとテストできない。")
+    def test_get_v2_search_all(self, real_oauth2_app_client: TwitterApiRealClient):
         real_response: GetV2TweetsSearchAllResponseBody = (
-            real_app_auth_v2_client.chain()
+            real_oauth2_app_client.chain()
             .request("https://api.twitter.com/2/tweets/search/all")
             .get({"query": "conversation_id:1273733248749690880", "max_results": 1})
         )
@@ -27,7 +27,7 @@ class TestGetV2TweetsSearchAll:
 class TestMockGetV2TweetsSearchAll:
     def test_mock_get_v2_search_all(
         self,
-        mock_app_auth_v2_client: TwitterApiMockClient,
+        mock_oauth2_app_client: TwitterApiMockClient,
         json_data_loader: JsonDataLoader,
     ):
         expected_response = GetV2TweetsSearchAllResponseBody.parse_obj(
@@ -35,7 +35,7 @@ class TestMockGetV2TweetsSearchAll:
         )
 
         assert (
-            mock_app_auth_v2_client.chain()
+            mock_oauth2_app_client.chain()
             .inject_get_response_body(
                 "https://api.twitter.com/2/tweets/search/all", expected_response
             )

@@ -55,7 +55,7 @@ class Tweet(ExtraPermissiveModel):
     source: Optional[str] = None
     withheld: Optional[TweetWithheld] = None
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         # 長すぎると可読性が落ちるので 最大 50 文字とする。
         text = textwrap.shorten(self.text, width=50, placeholder="...")
         return f'Tweet(id={self.id}, text="{text}")'

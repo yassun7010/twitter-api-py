@@ -3,6 +3,7 @@ import sys
 from twitter_api.api.types.v2_oauth2.twitter_oauth2_access_token_client import (
     TwitterOAuth2AccessTokenClient,
 )
+from twitter_api.api.types.v2_scope import SCOPES
 from twitter_api.client import TwitterApiClient
 from twitter_api.error import TwitterApiError
 
@@ -11,12 +12,9 @@ YOUR_CALLBACK_URL = "https://127.0.0.1:3000/"
 try:
     # Backend: 認証用の URL を作成します。
     backend = (
-        TwitterApiClient.from_user_oauth2_flow_env(
+        TwitterApiClient.from_oauth2_user_flow_env(
             callback_url=YOUR_CALLBACK_URL,
-            scope=[
-                "tweet.read",
-                "users.read",
-            ],
+            scope=SCOPES,
         )
         .request("https://twitter.com/i/oauth2/authorize")
         .generate_authorization_url()
@@ -41,21 +39,19 @@ try:
         .access_token
     )
 
-    print(f"Access Token: {access_token}")
+    print(f"\nGet Access Token: {access_token}\n")
 
-    client = TwitterApiClient.from_app_oauth2_bearer_token(access_token)
+    client = TwitterApiClient.from_oauth2_bearer_token(access_token)
 
     # Twitter API を呼ぶことができるようになりました。
-    tweets = (
+    tweet = (
         client.chain()
-        .request("https://api.twitter.com/2/tweets")
-        .get(
-            {"ids": ["1460323737035677698"]},
-        )
+        .request("https://api.twitter.com/2/tweets/:id")
+        .get("1460323737035677698")
         .data
     )
 
-    print(tweets)
+    print(tweet)
 
 
 except TwitterApiError as error:

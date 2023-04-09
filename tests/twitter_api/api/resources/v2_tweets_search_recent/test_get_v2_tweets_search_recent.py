@@ -11,9 +11,9 @@ from twitter_api.client.twitter_api_real_client import TwitterApiRealClient
 
 @pytest.mark.skipif(**synthetic_monitoring_is_disable())
 class TestGetV2TweetsSearchRecent:
-    def test_get_v2_search_recent(self, real_app_auth_v2_client: TwitterApiRealClient):
+    def test_get_v2_search_recent(self, real_oauth2_app_client: TwitterApiRealClient):
         real_response = (
-            real_app_auth_v2_client.chain()
+            real_oauth2_app_client.chain()
             .request("https://api.twitter.com/2/tweets/search/recent")
             .get({"query": "ツイート", "max_results": 1})
         )
@@ -33,7 +33,7 @@ class TestMockGetV2TweetsSearchRecent:
     )
     def test_mock_get_v2_search_recent(
         self,
-        mock_app_auth_v2_client: TwitterApiMockClient,
+        mock_oauth2_app_client: TwitterApiMockClient,
         json_data_loader: JsonDataLoader,
         json_filename: str,
     ):
@@ -42,7 +42,7 @@ class TestMockGetV2TweetsSearchRecent:
         )
 
         assert (
-            mock_app_auth_v2_client.chain()
+            mock_oauth2_app_client.chain()
             .inject_get_response_body(
                 "https://api.twitter.com/2/tweets/search/recent", expected_response
             )

@@ -4,7 +4,7 @@ from twitter_api.client import TwitterApiClient
 from twitter_api.error import TwitterApiError
 
 try:
-    client = TwitterApiClient.from_app_oauth2_env()
+    client = TwitterApiClient.from_oauth2_app_env()
 
     tweets = (
         client.chain()

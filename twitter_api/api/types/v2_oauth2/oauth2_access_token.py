@@ -12,8 +12,3 @@ class OAuth2AcccessToken(Chainable, ExtraPermissiveModel):
     expires_at: int
     access_token: AccessToken
     scope: list[Scope]
-
-    def generate_client(self):
-        from twitter_api.client.twitter_api_real_client import TwitterApiRealClient
-
-        return TwitterApiRealClient.from_app_oauth2_bearer_token(self.access_token)

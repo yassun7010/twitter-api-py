@@ -2,8 +2,8 @@ from dataclasses import dataclass
 from textwrap import dedent
 from typing import Callable, Optional, Self
 
-from authlib.integrations.requests_client.oauth2_session import OAuth2Session
-
+from twitter_api.client.sessions.twitter_oauth2_session import TwitterOAuth2Session
+from twitter_api.rate_limit.manager.rate_limit_manager import RateLimitManager
 from twitter_api.types.chainable import Chainable
 from twitter_api.types.http import Url
 
@@ -13,7 +13,8 @@ class OAuth2Authorization(Chainable):
     authorization_url: Url
     state: str
     code_verifier: str
-    _session: OAuth2Session
+    _session: TwitterOAuth2Session
+    _rate_limit_manager: Optional[RateLimitManager] = None
 
     def open_request_url(self) -> Self:
         import webbrowser

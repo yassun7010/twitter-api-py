@@ -74,6 +74,7 @@ from twitter_api.api.resources.v2_user_tweets.get_v2_user_tweets import (
 )
 from twitter_api.api.resources.v2_users import V2UsersUrl
 from twitter_api.api.resources.v2_users.get_v2_users import GetV2UsersResponseBody
+from twitter_api.api.types.v2_scope import Scope
 from twitter_api.error import TwitterApiError
 from twitter_api.rate_limit.manager.rate_limit_manager import RateLimitManager
 from twitter_api.rate_limit.rate_limit_target import RateLimitTarget
@@ -83,6 +84,9 @@ from twitter_api.types.oauth import (
     AccessToken,
     ApiKey,
     ApiSecret,
+    CallbackUrl,
+    ClientId,
+    ClientSecret,
     Env,
     OAuthVersion,
 )
@@ -352,7 +356,7 @@ class TwitterApiMockClient(TwitterApiClient):
         return self
 
     @classmethod
-    def from_app_oauth2_bearer_token(
+    def from_oauth2_bearer_token(
         cls,
         bearer_token: str,
         *,
@@ -365,7 +369,7 @@ class TwitterApiMockClient(TwitterApiClient):
         )
 
     @classmethod
-    def from_app_oauth2(
+    def from_oauth2_app(
         cls,
         *,
         api_key: ApiKey,
@@ -379,7 +383,25 @@ class TwitterApiMockClient(TwitterApiClient):
         )
 
     @classmethod
-    def from_user_oauth1(
+    def from_oauth2_user_flow(
+        cls,
+        *,
+        client_id: ClientId,
+        client_secret: ClientSecret,
+        callback_url: CallbackUrl,
+        scope: list[Scope],
+        rate_limit_manager: Optional[RateLimitManager] = None,
+    ):
+        from twitter_api.api.types.v2_authorization import OAuthV2AuthorizeClient
+        from twitter_api.client.sessions.twitter_oauth2_mock_session import (
+            TwitterOAuth2MockSession,
+        )
+
+        session = TwitterOAuth2MockSession(scope=scope)
+        return OAuthV2AuthorizeClient(session=session)
+
+    @classmethod
+    def from_oauth1_user(
         cls,
         *,
         api_key: ApiKey,

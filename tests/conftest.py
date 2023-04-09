@@ -33,30 +33,22 @@ def json_data_loader() -> JsonDataLoader:
 
 
 @pytest.fixture
-def real_app_auth_v2_client() -> TwitterApiRealClient:
-    return TwitterApiRealClient.from_app_oauth2_env()
+def real_oauth2_app_client() -> TwitterApiRealClient:
+    return TwitterApiRealClient.from_oauth2_app_env()
 
 
 @pytest.fixture
-def real_user_auth_v2_client() -> TwitterApiRealClient:
-    return (
-        TwitterApiRealClient.from_user_oauth2_flow_env()
-        .request("https://twitter.com/i/oauth2/authorize")
-        .open_request_url()
-        .input_response_url()
-        .request("https://api.twitter.com/2/oauth2/token")
-        .post()
-        .generate_client()
-    )
+def real_oauth2_user_client() -> TwitterApiRealClient:
+    return TwitterApiRealClient.from_oauth2_bearer_token_env("OAUTH2_USER_ACCESS_TOKEN")
 
 
 @pytest.fixture
-def real_user_auth_v1_client() -> TwitterApiRealClient:
-    return TwitterApiRealClient.from_user_oauth1_env()
+def real_auth1_user_client() -> TwitterApiRealClient:
+    return TwitterApiRealClient.from_oauth1_user_env()
 
 
 @pytest.fixture
-def mock_app_auth_v2_client() -> TwitterApiMockClient:
+def mock_oauth2_app_client() -> TwitterApiMockClient:
     return TwitterApiMockClient(
         oauth_version="2.0",
         rate_limit_target="app",
@@ -64,7 +56,7 @@ def mock_app_auth_v2_client() -> TwitterApiMockClient:
 
 
 @pytest.fixture
-def mock_user_auth_v2_client() -> TwitterApiMockClient:
+def mock_oauth2_user_client() -> TwitterApiMockClient:
     return TwitterApiMockClient(
         oauth_version="2.0",
         rate_limit_target="user",
@@ -72,7 +64,7 @@ def mock_user_auth_v2_client() -> TwitterApiMockClient:
 
 
 @pytest.fixture
-def mock_app_auth_v1_client() -> TwitterApiMockClient:
+def mock_oauth1_app_client() -> TwitterApiMockClient:
     return TwitterApiMockClient(
         oauth_version="1.0a",
         rate_limit_target="app",
@@ -80,7 +72,7 @@ def mock_app_auth_v1_client() -> TwitterApiMockClient:
 
 
 @pytest.fixture
-def mock_user_auth_v1_client() -> TwitterApiMockClient:
+def mock_oauth1_user_client() -> TwitterApiMockClient:
     return TwitterApiMockClient(
         oauth_version="1.0a",
         rate_limit_target="user",

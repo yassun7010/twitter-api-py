@@ -14,10 +14,10 @@ class TestGetV2UserFollowing:
     @pytest.mark.skip("You do not have permission to DM one or more participants.")
     def test_get_v2_user_following(
         self,
-        real_user_auth_v1_client: TwitterApiRealClient,
+        real_auth1_user_client: TwitterApiRealClient,
     ):
         response = (
-            real_user_auth_v1_client.chain()
+            real_auth1_user_client.chain()
             .request(
                 "https://api.twitter.com/2/dm_conversations/:dm_conversation_id"
                 "/messages"
@@ -39,7 +39,7 @@ class TestMockGetV2UserFollowing:
     )
     def test_mock_get_v2_user_following(
         self,
-        mock_app_auth_v2_client: TwitterApiMockClient,
+        mock_oauth2_app_client: TwitterApiMockClient,
         json_data_loader: JsonDataLoader,
         json_filename: str,
     ):
@@ -48,7 +48,7 @@ class TestMockGetV2UserFollowing:
         )
 
         assert (
-            mock_app_auth_v2_client.chain()
+            mock_oauth2_app_client.chain()
             .inject_post_response_body(
                 "https://api.twitter.com/2/dm_conversations/:dm_conversation_id"
                 "/messages",

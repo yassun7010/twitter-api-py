@@ -6,8 +6,8 @@ from twitter_api.error import TwitterApiError
 YOUR_CALLBACK_URL = "https://127.0.0.1:3000/"
 
 try:
-    client = (
-        TwitterApiClient.from_user_oauth2_flow_env(
+    access_token = (
+        TwitterApiClient.from_oauth2_user_flow_env(
             callback_url=YOUR_CALLBACK_URL,
             scope=[
                 "tweet.read",
@@ -20,8 +20,10 @@ try:
         .input_response_url()
         .request("https://api.twitter.com/2/oauth2/token")
         .post()
-        .generate_client()
+        .access_token
     )
+
+    client = TwitterApiClient.from_oauth2_bearer_token(access_token)
 
     tweets = (
         client.chain()

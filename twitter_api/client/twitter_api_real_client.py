@@ -3,13 +3,12 @@ from typing import Optional
 from authlib.integrations.requests_client.oauth1_session import (
     OAuth1Auth,  # pyright: reportMissingImports=false
 )
-from authlib.integrations.requests_client.oauth2_session import (
-    OAuth2Auth,  # pyright: reportMissingImports=false
+from authlib.integrations.requests_client.oauth2_session import (  # pyright: reportMissingImports=false
+    OAuth2Auth,
 )
 
 from twitter_api.api.types.v2_scope import Scope
 from twitter_api.rate_limit.manager.rate_limit_manager import RateLimitManager
-from twitter_api.types.comma_separatable import CommaSeparatable
 from twitter_api.types.oauth import (
     AccessSecret,
     AccessToken,
@@ -43,7 +42,7 @@ class TwitterApiRealClient(TwitterApiClient):
         return self._real_request_client
 
     @classmethod
-    def from_app_oauth2_bearer_token(
+    def from_oauth2_bearer_token(
         cls,
         bearer_token: str,
         rate_limit_manager: Optional[RateLimitManager] = None,
@@ -63,7 +62,7 @@ class TwitterApiRealClient(TwitterApiClient):
         )
 
     @classmethod
-    def from_app_oauth2(
+    def from_oauth2_app(
         cls,
         *,
         api_key: ApiKey,
@@ -99,27 +98,30 @@ class TwitterApiRealClient(TwitterApiClient):
         return client
 
     @classmethod
-    def from_user_oauth2_flow(
+    def from_oauth2_user_flow(
         cls,
         *,
         client_id: ClientId,
         client_secret: ClientSecret,
         callback_url: CallbackUrl,
-        scope: CommaSeparatable[Scope],
-        rate_limit_manager: Optional[RateLimitManager] = None,
+        scope: list[Scope],
     ):
         from twitter_api.api.types.v2_authorization import OAuthV2AuthorizeClient
+        from twitter_api.client.sessions.twitter_oauth2_real_session import (
+            TwitterOAuth2RealSession,
+        )
 
-        return OAuthV2AuthorizeClient(
+        session = TwitterOAuth2RealSession(
             client_id=client_id,
             client_secret=client_secret,
             callback_url=callback_url,
             scope=scope,
-            rate_limit_manager=rate_limit_manager,
         )
 
+        return OAuthV2AuthorizeClient(session)
+
     @classmethod
-    def from_user_oauth1(
+    def from_oauth1_user(
         cls,
         *,
         api_key: ApiKey,
