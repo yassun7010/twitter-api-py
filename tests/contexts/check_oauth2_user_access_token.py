@@ -18,7 +18,7 @@ def check_oauth2_user_access_token():
     try:
         yield
     except TwitterApiResponseFailed as error:
-        if error.status_code == TwitterApiErrorCode.Forbidden:
+        if error.status_code == TwitterApiErrorCode.Unauthorized.value:
             raise OAuth2UserAccessTokenExpired()
         else:
             raise error
