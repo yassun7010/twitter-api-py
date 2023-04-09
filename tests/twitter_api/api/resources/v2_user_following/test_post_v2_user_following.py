@@ -1,9 +1,7 @@
 import pytest
 
-from tests.conftest import (
-    check_oauth2_user_access_token,
-    synthetic_monitoring_is_disable,
-)
+from tests.conftest import synthetic_monitoring_is_disable
+from tests.contexts.check_oauth2_user_access_token import check_oauth2_user_access_token
 from tests.data import JsonDataLoader
 from twitter_api.api.resources.v2_user_following.post_v2_user_following import (
     PostV2UserFollowingResponseBody,

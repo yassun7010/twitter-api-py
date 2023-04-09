@@ -1,5 +1,4 @@
 import os
-from contextlib import contextmanager
 
 import pytest
 
@@ -7,11 +6,6 @@ from tests.data import JsonDataLoader
 from twitter_api.api.types.v2_user.user_id import UserId
 from twitter_api.client.twitter_api_mock_client import TwitterApiMockClient
 from twitter_api.client.twitter_api_real_client import TwitterApiRealClient
-from twitter_api.error import (
-    OAuth2UserAccessTokenExpired,
-    TwitterApiErrorCode,
-    TwitterApiResponseFailed,
-)
 
 
 def synthetic_monitoring_is_disable() -> dict:
@@ -135,20 +129,3 @@ def mock_oauth1_user_client() -> TwitterApiMockClient:
         oauth_version="1.0a",
         rate_limit_target="user",
     )
-
-
-@contextmanager
-def check_oauth2_user_access_token():
-    """
-    OAuth 2.0 のユーザ認証が失効することで自動テストが失敗することがある。
-
-    ユーザ認証が失効することによってエラーが発生していることが分かるようにエラーを上書きする。
-    """
-
-    try:
-        yield
-    except TwitterApiResponseFailed as error:
-        if error.status_code == TwitterApiErrorCode.Forbidden:
-            raise OAuth2UserAccessTokenExpired()
-        else:
-            raise error

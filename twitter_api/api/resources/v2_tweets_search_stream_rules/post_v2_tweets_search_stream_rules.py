@@ -4,9 +4,10 @@ from typing import NotRequired, Optional, TypedDict
 from pydantic import Field
 
 from twitter_api.api.resources.api_resources import ApiResources
+from twitter_api.api.types.v2_rule.rule import Rule
 from twitter_api.api.types.v2_rule.rule_id import RuleId
+from twitter_api.api.types.v2_rule.rule_tag import RuleTag
 from twitter_api.api.types.v2_scope import oauth2_scopes
-from twitter_api.api.types.v2_tag import Tag
 from twitter_api.rate_limit.rate_limit_decorator import rate_limit
 from twitter_api.types.endpoint import Endpoint
 from twitter_api.types.extra_permissive_model import ExtraPermissiveModel
@@ -24,7 +25,7 @@ PostV2TweetsSearchStreamRulesQueryParameters = TypedDict(
 
 class AddData(TypedDict):
     value: str
-    tag: NotRequired[Optional[Tag]]
+    tag: NotRequired[Optional[RuleTag]]
 
 
 class DeleteDataByIds(TypedDict):
@@ -43,12 +44,6 @@ class PostV2TweetsSearchStreamRulesRequestBody(TypedDict):
     delete: NotRequired[Optional[DeleteData]]
 
 
-class PostV2TweetsSearchStreamRulesResponseBodyData(ExtraPermissiveModel):
-    id: RuleId
-    value: str
-    tag: Optional[Tag] = None
-
-
 class PostV2TweetsSearchStreamRulesResponseBodyMetaSummary(ExtraPermissiveModel):
     created: Optional[int] = None
     not_created: Optional[int] = None
@@ -62,16 +57,11 @@ class PostV2TweetsSearchStreamRulesResponseBodyMeta(ExtraPermissiveModel):
 
 
 class PostV2TweetsSearchStreamRulesResponseBody(ExtraPermissiveModel):
-    data: list[PostV2TweetsSearchStreamRulesResponseBodyData] = Field(
-        default_factory=list
-    )
+    data: list[Rule] = Field(default_factory=list)
     meta: PostV2TweetsSearchStreamRulesResponseBodyMeta
 
 
 class PostV2TweetsSearchStreamRulesResources(ApiResources):
-    @oauth2_scopes(
-        # 不明
-    )
     @rate_limit(ENDPOINT, "app", requests=450, mins=15)
     def post(
         self,
@@ -87,6 +77,6 @@ class PostV2TweetsSearchStreamRulesResources(ApiResources):
         return self.request_client.post(
             endpoint=ENDPOINT,
             response_type=PostV2TweetsSearchStreamRulesResponseBody,
-            query=downcast_dict(query) if query is not None else None,
+            query=downcast_dict(query),
             body=downcast_dict(request_body),
         )

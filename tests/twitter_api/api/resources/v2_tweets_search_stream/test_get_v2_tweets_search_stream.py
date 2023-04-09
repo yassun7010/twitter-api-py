@@ -11,14 +11,7 @@ from twitter_api.client.twitter_api_real_client import TwitterApiRealClient
 
 @pytest.mark.skipif(**synthetic_monitoring_is_disable())
 class TestGetV2TweetsSearchStream:
-    @pytest.mark.skipif(
-        True,
-        reason=(
-            "先にルールを作らないといけないらしい。"
-            "POST /2/tweets/search/stream/rules を作成後にテストする必要があるが、"
-            "まだ作っていないため後回し。"
-        ),
-    )
+    @pytest.mark.skip(reason="応答が戻ってこない。")
     def test_get_v2_search_stream(self, real_oauth2_app_client: TwitterApiRealClient):
         real_response = (
             real_oauth2_app_client.chain()

@@ -53,6 +53,9 @@ from twitter_api.api.resources.v2_tweets_search_stream.get_v2_tweets_search_stre
 from twitter_api.api.resources.v2_tweets_search_stream_rules import (
     V2TweetsSearchStreamRulesUrl,
 )
+from twitter_api.api.resources.v2_tweets_search_stream_rules.get_v2_tweets_search_stream_rules import (
+    GetV2TweetsSearchStreamRulesResponseBody,
+)
 from twitter_api.api.resources.v2_tweets_search_stream_rules.post_v2_tweets_search_stream_rules import (
     PostV2TweetsSearchStreamRulesResponseBody,
 )
@@ -183,6 +186,17 @@ class TwitterApiMockClient(TwitterApiClient):
         url: V2TweetsSearchStreamUrl,
         response_body: Union[
             GetV2TweetsSearchStreamResponseBody,
+            TwitterApiError,
+        ],
+    ) -> Self:
+        ...
+
+    @overload
+    def inject_get_response_body(
+        self,
+        url: V2TweetsSearchStreamRulesUrl,
+        response_body: Union[
+            GetV2TweetsSearchStreamRulesResponseBody,
             TwitterApiError,
         ],
     ) -> Self:
