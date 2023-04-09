@@ -33,6 +33,11 @@ def json_data_loader() -> JsonDataLoader:
 
 
 @pytest.fixture
+def real_oauth2_bearer_client() -> TwitterApiRealClient:
+    return TwitterApiRealClient.from_oauth2_bearer_token_env()
+
+
+@pytest.fixture
 def real_oauth2_app_client() -> TwitterApiRealClient:
     return TwitterApiRealClient.from_oauth2_app_env()
 

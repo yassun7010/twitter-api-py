@@ -17,11 +17,7 @@ class TestPostOauth2InvalidateToken:
         self, real_oauth2_app_client: TwitterApiRealClient
     ):
         expected_response = PostOauth2InvalidateTokenResponseBody(
-            access_token=(
-                real_oauth2_app_client._real_request_client._auth.token["access_token"]
-                # pyright: reportOptionalSubscript=false
-                # pyright: reportOptionalMemberAccess=false
-            ),
+            access_token=os.environ["BEARER_TOEKN"],
         )
 
         real_response = (

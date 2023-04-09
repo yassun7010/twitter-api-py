@@ -1,4 +1,5 @@
 from collections import OrderedDict
+from enum import Enum
 from textwrap import dedent
 from typing import Any, Never, Optional
 
@@ -28,6 +29,66 @@ class TwitterApiException(Exception):
 
 class TwitterApiError(TwitterApiException):
     ...
+
+
+class TwitterApiErrorCode(Enum):
+    """
+    Twitter API が返してくるエラーコード。
+
+    refer: https://developer.twitter.com/en/support/twitter-api/error-troubleshooting
+    """
+
+    OK = 200
+    NotModified = 304
+    BadRequest = 400
+    Unauthorized = 401
+    Forbidden = 403
+    NotFound = 404
+    NotAcceptable = 406
+    ConnectionException = 409
+    Gone = 410
+    UnprocessableEntity = 422
+    TooManyRequests = 429
+    InternalServerError = 500
+    BadGateway = 502
+    ServiceUnavailable = 503
+    GatewayTimeout = 504
+
+
+def code2message(error_code: TwitterApiErrorCode):
+    match error_code:
+        case TwitterApiErrorCode.OK:
+            return "API が成功しています。"
+        case TwitterApiErrorCode.NotModified:
+            return "返却する新しいデータがありません。"
+        case TwitterApiErrorCode.BadRequest:
+            return "リクエストの形式が間違っています。"
+        case TwitterApiErrorCode.Unauthorized:
+            return "このリクエストは証認されていません。"
+        case TwitterApiErrorCode.Forbidden:
+            return "このリクエストは許可されていません。"
+        case TwitterApiErrorCode.NotFound:
+            return "データが見つかりません。"
+        case TwitterApiErrorCode.NotAcceptable:
+            return "アクセスできません。"
+        case TwitterApiErrorCode.ConnectionException:
+            return "接続に失敗しました。"
+        case TwitterApiErrorCode.Gone:
+            return "このリソースは利用できなくなりました。"
+        case TwitterApiErrorCode.UnprocessableEntity:
+            return "処理できないエンティティです。"
+        case TwitterApiErrorCode.TooManyRequests:
+            return "レートリミットか Tweet Cap が制限を超えました。"
+        case TwitterApiErrorCode.InternalServerError:
+            return "Twitter API の内部でエラーが発生しました。"
+        case TwitterApiErrorCode.BadGateway:
+            return "Twitter API がダウンしているか、アップグレード中です。"
+        case TwitterApiErrorCode.ServiceUnavailable:
+            return "リクエスト数が多く処理できません。後でもう一度お試しください。"
+        case TwitterApiErrorCode.GatewayTimeout:
+            return "Twitter API が内部的にダウンしています。後でもう一度お試しください。"
+        case _:
+            return "Twitter API の応答が 200 ではありません。"
 
 
 class NeverError(TwitterApiError):
@@ -108,7 +169,7 @@ class TwitterApiResponseFailed(TwitterApiError):
     def __str__(self) -> str:
         return ErrorMessage(
             type=self.__class__.__name__,
-            message="Twitter API の応答が 200 ではありません。",
+            message=code2message(TwitterApiErrorCode(self._response_status_code)),
             **OrderedDict(
                 endpoint=self._endpoint,
                 url=self._url,
