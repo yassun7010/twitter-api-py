@@ -56,7 +56,7 @@ class TestGetV2Tweet:
         assert get_extra_fields(response) == {}
         assert response == expected_response
 
-    def test_get_v2_tweet_all_query(
+    def test_get_v2_tweet_all_fields(
         self,
         real_oauth2_app_client: TwitterApiRealClient,
         intro_tweet: TweetDetail,
