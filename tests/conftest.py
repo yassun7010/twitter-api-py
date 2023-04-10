@@ -58,15 +58,20 @@ def premium_account_not_set() -> dict:
 
 @pytest.fixture
 def user_id() -> UserId:
+    """
+    アプリ所有者か、承認を得たユーザの UserId 。
+
+    自動テストでは、簡単のためアプリ所有者。
+    """
     return os.environ["USER_ID"]
 
 
 @pytest.fixture
 def participant_id(user_id) -> UserId:
     """
-    DM への参加者の ID。
+    DM への参加者の UserId。
 
-    会話を作れるのはアプリ側なのでアプリ側のユーザ ID を用いる。
+    会話を作れるのはアプリ所有者なので、アプリ所有者の UserId を用いる。
     """
 
     return user_id
@@ -75,8 +80,9 @@ def participant_id(user_id) -> UserId:
 @pytest.fixture
 def participant_ids(participant_id: UserId) -> list[UserId]:
     """
-    DM の会話への参加者たちの ID。
+    DM のグループ会話への参加者たちの UserId。
 
+    グループを作る際、最低 2 人の参加が必要なので、アプリ所有者以外の UserId が必要になる。
     """
 
     return [participant_id] + os.environ["PARTICIPANT_IDS"].split(",")
