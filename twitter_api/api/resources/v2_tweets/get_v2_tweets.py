@@ -46,6 +46,7 @@ def _make_query(query: GetV2TweetsQueryParameters) -> dict:
 
 class GetV2TweetsResponseBodyIncludes(ExtraPermissiveModel):
     users: list[User]
+    tweets: list[TweetDetail]
 
 
 class GetV2TweetsResponseBody(ExtraPermissiveModel):

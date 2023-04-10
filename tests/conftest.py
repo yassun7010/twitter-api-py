@@ -1,4 +1,5 @@
 import os
+from textwrap import dedent
 
 import pytest
 
@@ -8,6 +9,7 @@ from twitter_api.api.types.v2_expansion import Expansion
 from twitter_api.api.types.v2_media.media_field import MediaField
 from twitter_api.api.types.v2_place.place_field import PlaceField
 from twitter_api.api.types.v2_poll.poll_field import PollField
+from twitter_api.api.types.v2_tweet.tweet_detail import TweetDetail
 from twitter_api.api.types.v2_tweet.tweet_field import TweetField
 from twitter_api.api.types.v2_user.user_field import UserField
 from twitter_api.api.types.v2_user.user_id import UserId
@@ -245,19 +247,22 @@ def all_user_fields() -> list[UserField]:
 
 
 @pytest.fixture
-def all_get_v2_tweet_query_parameters(
-    all_expansions: list[Expansion],
-    all_media_fields: list[MediaField],
-    all_place_fields: list[PlaceField],
-    all_poll_fields: list[PollField],
-    all_tweet_fields: list[TweetField],
-    all_user_fields: list[UserField],
-) -> GetV2TweetQueryParameters:
-    return {
-        "expansions": all_expansions,
-        "media.fields": all_media_fields,
-        "place.fields": all_place_fields,
-        "poll.fields": all_poll_fields,
-        "tweet.fields": all_tweet_fields,
-        "user.fields": all_user_fields,
-    }
+def intro_tweet() -> TweetDetail:
+    """
+    Twitter API の公式リファレンスのサンプルに記載されていたツイート。
+    """
+
+    return TweetDetail(
+        id="1460323737035677698",
+        text=dedent(
+            # flake8: noqa E501
+            """
+            Introducing a new era for the Twitter Developer Platform! \n
+            📣The Twitter API v2 is now the primary API and full of new features
+            ⏱Immediate access for most use cases, or apply to get more access for free
+            📖Removed certain restrictions in the Policy
+            https://t.co/Hrm15bkBWJ https://t.co/YFfCDErHsg
+            """
+        ).strip(),
+        edit_history_tweet_ids=["1460323737035677698"],
+    )

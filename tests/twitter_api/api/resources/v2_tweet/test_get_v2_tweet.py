@@ -1,61 +1,62 @@
-from textwrap import dedent
-
 import pytest
 
 from tests.conftest import synthetic_monitoring_is_disable
 from tests.data import JsonDataLoader
-from twitter_api.api.resources.v2_tweet.get_v2_tweet import (
-    GetV2TweetQueryParameters,
-    GetV2TweetResponseBody,
-)
+from twitter_api.api.resources.v2_tweet.get_v2_tweet import GetV2TweetResponseBody
+from twitter_api.api.types.v2_expansion import Expansion
+from twitter_api.api.types.v2_media.media_field import MediaField
+from twitter_api.api.types.v2_place.place_field import PlaceField
+from twitter_api.api.types.v2_poll.poll_field import PollField
 from twitter_api.api.types.v2_tweet.tweet_detail import TweetDetail
+from twitter_api.api.types.v2_tweet.tweet_field import TweetField
+from twitter_api.api.types.v2_user.user_field import UserField
 from twitter_api.client.twitter_api_mock_client import TwitterApiMockClient
 from twitter_api.client.twitter_api_real_client import TwitterApiRealClient
 from twitter_api.types.extra_permissive_model import get_extra_fields
 
 
-@pytest.fixture
-def tweet() -> TweetDetail:
-    return TweetDetail(
-        id="1460323737035677698",
-        text=dedent(
-            # flake8: noqa E501
-            """
-            Introducing a new era for the Twitter Developer Platform! \n
-            📣The Twitter API v2 is now the primary API and full of new features
-            ⏱Immediate access for most use cases, or apply to get more access for free
-            📖Removed certain restrictions in the Policy
-            https://t.co/Hrm15bkBWJ https://t.co/YFfCDErHsg
-            """
-        ).strip(),
-        edit_history_tweet_ids=["1460323737035677698"],
-    )
-
-
 @pytest.mark.skipif(**synthetic_monitoring_is_disable())
 class TestGetV2Tweet:
     def test_get_v2_tweet(
-        self, real_oauth2_app_client: TwitterApiRealClient, tweet: TweetDetail
+        self,
+        real_oauth2_app_client: TwitterApiRealClient,
+        intro_tweet: TweetDetail,
     ):
+        expected_response = GetV2TweetResponseBody(data=intro_tweet)
+
         response = real_oauth2_app_client.request(
             "https://api.twitter.com/2/tweets/:id"
-        ).get(tweet.id)
+        ).get(intro_tweet.id)
 
         print(response.json())
+        print(expected_response.json())
 
         assert get_extra_fields(response) == {}
+        assert response == expected_response
 
     def test_get_v2_tweet_all_query(
         self,
         real_oauth2_app_client: TwitterApiRealClient,
-        tweet: TweetDetail,
-        all_get_v2_tweet_query_parameters: GetV2TweetQueryParameters,
+        intro_tweet: TweetDetail,
+        all_expansions: list[Expansion],
+        all_media_fields: list[MediaField],
+        all_place_fields: list[PlaceField],
+        all_poll_fields: list[PollField],
+        all_tweet_fields: list[TweetField],
+        all_user_fields: list[UserField],
     ):
         response = real_oauth2_app_client.request(
             "https://api.twitter.com/2/tweets/:id"
         ).get(
-            tweet.id,
-            all_get_v2_tweet_query_parameters,
+            intro_tweet.id,
+            {
+                "expansions": all_expansions,
+                "media.fields": all_media_fields,
+                "place.fields": all_place_fields,
+                "poll.fields": all_poll_fields,
+                "tweet.fields": all_tweet_fields,
+                "user.fields": all_user_fields,
+            },
         )
 
         print(response.json())
@@ -75,6 +76,7 @@ class TestMockGetV2Tweet:
         mock_oauth2_app_client: TwitterApiMockClient,
         json_data_loader: JsonDataLoader,
         json_filename: str,
+        intro_tweet: TweetDetail,
     ):
         response = GetV2TweetResponseBody.parse_obj(
             json_data_loader.load(json_filename)
@@ -85,5 +87,5 @@ class TestMockGetV2Tweet:
             mock_oauth2_app_client.chain()
             .inject_get_response_body("https://api.twitter.com/2/tweets/:id", response)
             .request("https://api.twitter.com/2/tweets/:id")
-            .get("1460323737035677698")
+            .get(intro_tweet.id)
         ) == response
