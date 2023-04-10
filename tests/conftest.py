@@ -3,6 +3,13 @@ import os
 import pytest
 
 from tests.data import JsonDataLoader
+from twitter_api.api.resources.v2_tweet.get_v2_tweet import GetV2TweetQueryParameters
+from twitter_api.api.types.v2_expansion import Expansion
+from twitter_api.api.types.v2_media.media_field import MediaField
+from twitter_api.api.types.v2_place.place_field import PlaceField
+from twitter_api.api.types.v2_poll.poll_field import PollField
+from twitter_api.api.types.v2_tweet.tweet_field import TweetField
+from twitter_api.api.types.v2_user.user_field import UserField
 from twitter_api.api.types.v2_user.user_id import UserId
 from twitter_api.client.twitter_api_mock_client import TwitterApiMockClient
 from twitter_api.client.twitter_api_real_client import TwitterApiRealClient
@@ -129,3 +136,128 @@ def mock_oauth1_user_client() -> TwitterApiMockClient:
         oauth_version="1.0a",
         rate_limit_target="user",
     )
+
+
+@pytest.fixture
+def all_expansions() -> list[Expansion]:
+    return [
+        # "attachments.media_keys",
+        "attachments.poll_ids",
+        "author_id",
+        "edit_history_tweet_ids",
+        "entities.mentions.username",
+        "geo.place_id",
+        "in_reply_to_user_id",
+        "referenced_tweets.id",
+        "referenced_tweets.id.author_id",
+    ]
+
+
+@pytest.fixture
+def all_media_fields() -> list[MediaField]:
+    return [
+        "alt_text",
+        "duration_ms",
+        "height",
+        "media_key",
+        "non_public_metrics",
+        "organic_metrics",
+        "preview_image_url",
+        "promoted_metrics",
+        "type",
+        "url",
+        "variants",
+        "width",
+    ]
+
+
+@pytest.fixture
+def all_place_fields() -> list[PlaceField]:
+    return [
+        "contained_within",
+        "country",
+        "country_code",
+        "full_name",
+        "geo",
+        "id",
+        "name",
+        "place_type",
+    ]
+
+
+@pytest.fixture
+def all_poll_fields() -> list[PollField]:
+    return [
+        "duration_minutes",
+        "end_datetime",
+        "id",
+        "options",
+        "voting_status",
+    ]
+
+
+@pytest.fixture
+def all_tweet_fields() -> list[TweetField]:
+    return [
+        "attachments",
+        "author_id",
+        "context_annotations",
+        "conversation_id",
+        "created_at",
+        "edit_controls",
+        "entities",
+        "geo",
+        "id",
+        "in_reply_to_user_id",
+        "lang",
+        # "non_public_metrics",
+        # "organic_metrics",
+        "possibly_sensitive",
+        # "promoted_metrics",
+        "public_metrics",
+        "referenced_tweets",
+        "reply_settings",
+        "source",
+        "text",
+        "withheld",
+    ]
+
+
+@pytest.fixture
+def all_user_fields() -> list[UserField]:
+    return [
+        "created_at",
+        "description",
+        "entities",
+        "id",
+        "location",
+        "name",
+        "pinned_tweet_id",
+        "profile_image_url",
+        "protected",
+        "public_metrics",
+        "url",
+        "username",
+        "verified",
+        "verified_type",
+        "withheld",
+    ]
+
+
+@pytest.fixture
+def all_get_v2_tweet_query_parameters(
+    all_expansions: list[Expansion],
+    all_media_fields: list[MediaField],
+    all_place_fields: list[PlaceField],
+    all_poll_fields: list[PollField],
+    all_tweet_fields: list[TweetField],
+    all_user_fields: list[UserField],
+) -> GetV2TweetQueryParameters:
+    return {
+        "expansions": all_expansions,
+        "media.fields": all_media_fields,
+        "place.fields": all_place_fields,
+        "poll.fields": all_poll_fields,
+        "tweet.fields": all_tweet_fields,
+        "user.fields": all_user_fields,
+    }
