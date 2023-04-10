@@ -15,7 +15,7 @@ from twitter_api.types.extra_permissive_model import get_extra_fields
 @pytest.mark.skipif(**synthetic_monitoring_is_disable())
 class TestDeleteV2Tweet:
     def test_delete_v2_tweet(self, real_oauth1_user_client: TwitterApiRealClient):
-        tweet_text = f"テストツイート。{datetime.now().isoformat()}"
+        tweet_text = f"削除テスト。{datetime.now().isoformat()}"
 
         tweet = (
             real_oauth1_user_client.chain()
