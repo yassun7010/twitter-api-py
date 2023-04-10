@@ -63,6 +63,7 @@ def user_id() -> UserId:
 
     自動テストでは、簡単のためアプリ所有者。
     """
+
     return os.environ["USER_ID"]
 
 
