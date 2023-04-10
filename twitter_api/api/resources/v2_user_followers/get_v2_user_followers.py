@@ -1,5 +1,7 @@
 from typing import NotRequired, Optional, TypedDict
 
+from pydantic import Field
+
 from twitter_api.api.resources.api_resources import ApiResources
 from twitter_api.api.types.v2_expansion import Expansion
 from twitter_api.api.types.v2_scope import oauth2_scopes
@@ -44,7 +46,7 @@ class GetV2UserFollowersResponseBodyMeta(ExtraPermissiveModel):
 
 
 class GetV2UserFollowersResponseBodyIncludes(ExtraPermissiveModel):
-    tweets: list[Tweet]
+    tweets: list[Tweet] = Field(default_factory=list)
 
 
 class GetV2UserFollowersResponseBody(ExtraPermissiveModel):

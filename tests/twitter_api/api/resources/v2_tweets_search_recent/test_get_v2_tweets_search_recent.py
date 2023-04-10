@@ -12,7 +12,22 @@ from twitter_api.types.extra_permissive_model import get_extra_fields
 
 @pytest.mark.skipif(**synthetic_monitoring_is_disable())
 class TestGetV2TweetsSearchRecent:
-    def test_get_v2_search_recent(self, real_oauth2_app_client: TwitterApiRealClient):
+    def test_get_v2_search_recent_when_oauth1(
+        self, real_oauth1_user_client: TwitterApiRealClient
+    ):
+        response = (
+            real_oauth1_user_client.chain()
+            .request("https://api.twitter.com/2/tweets/search/recent")
+            .get({"query": "ツイート", "max_results": 1})
+        )
+
+        print(response.json())
+
+        assert get_extra_fields(response) == {}
+
+    def test_get_v2_search_recent_when_oauth2(
+        self, real_oauth2_app_client: TwitterApiRealClient
+    ):
         response = (
             real_oauth2_app_client.chain()
             .request("https://api.twitter.com/2/tweets/search/recent")

@@ -1,5 +1,7 @@
 from typing import NotRequired, Optional, TypedDict
 
+from pydantic import Field
+
 from twitter_api.api.resources.api_resources import ApiResources
 from twitter_api.api.types.v2_expansion import Expansion
 from twitter_api.api.types.v2_media.media_field import MediaField
@@ -47,7 +49,7 @@ def _make_query(query: GetV2UserLikedTweetsQueryParameters) -> dict:
 
 
 class GetV2UserLikedTweetsResponseBodyIncludes(ExtraPermissiveModel):
-    tweets: list[Tweet]
+    tweets: list[Tweet] = Field(default_factory=list)
 
 
 class GetV2UserLikedTweetsResponseBodyMeta(ExtraPermissiveModel):
