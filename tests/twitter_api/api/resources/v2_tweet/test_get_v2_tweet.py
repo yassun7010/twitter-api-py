@@ -2,7 +2,10 @@ import pytest
 
 from tests.conftest import synthetic_monitoring_is_disable
 from tests.data import JsonDataLoader
-from twitter_api.api.resources.v2_tweet.get_v2_tweet import GetV2TweetResponseBody
+from twitter_api.api.resources.v2_tweet.get_v2_tweet import (
+    GetV2TweetQueryParameters,
+    GetV2TweetResponseBody,
+)
 from twitter_api.api.types.v2_expansion import Expansion
 from twitter_api.api.types.v2_media.media_field import MediaField
 from twitter_api.api.types.v2_place.place_field import PlaceField
@@ -13,6 +16,25 @@ from twitter_api.api.types.v2_user.user_field import UserField
 from twitter_api.client.twitter_api_mock_client import TwitterApiMockClient
 from twitter_api.client.twitter_api_real_client import TwitterApiRealClient
 from twitter_api.types.extra_permissive_model import get_extra_fields
+
+
+@pytest.fixture
+def all_fields(
+    all_expansions: list[Expansion],
+    all_media_fields: list[MediaField],
+    all_place_fields: list[PlaceField],
+    all_poll_fields: list[PollField],
+    all_tweet_fields: list[TweetField],
+    all_user_fields: list[UserField],
+) -> GetV2TweetQueryParameters:
+    return {
+        "expansions": all_expansions,
+        "media.fields": all_media_fields,
+        "place.fields": all_place_fields,
+        "poll.fields": all_poll_fields,
+        "tweet.fields": all_tweet_fields,
+        "user.fields": all_user_fields,
+    }
 
 
 @pytest.mark.skipif(**synthetic_monitoring_is_disable())
@@ -38,25 +60,13 @@ class TestGetV2Tweet:
         self,
         real_oauth2_app_client: TwitterApiRealClient,
         intro_tweet: TweetDetail,
-        all_expansions: list[Expansion],
-        all_media_fields: list[MediaField],
-        all_place_fields: list[PlaceField],
-        all_poll_fields: list[PollField],
-        all_tweet_fields: list[TweetField],
-        all_user_fields: list[UserField],
+        all_fields: GetV2TweetQueryParameters,
     ):
         response = real_oauth2_app_client.request(
             "https://api.twitter.com/2/tweets/:id"
         ).get(
             intro_tweet.id,
-            {
-                "expansions": all_expansions,
-                "media.fields": all_media_fields,
-                "place.fields": all_place_fields,
-                "poll.fields": all_poll_fields,
-                "tweet.fields": all_tweet_fields,
-                "user.fields": all_user_fields,
-            },
+            all_fields,
         )
 
         print(response.json())
@@ -68,7 +78,7 @@ class TestMockGetV2Tweet:
     @pytest.mark.parametrize(
         "json_filename",
         [
-            "get_v2_tweet_all_fields.json",
+            "get_v2_tweet_response_all_fields.json",
         ],
     )
     def test_mock_get_v2_tweet(
@@ -77,6 +87,7 @@ class TestMockGetV2Tweet:
         json_data_loader: JsonDataLoader,
         json_filename: str,
         intro_tweet: TweetDetail,
+        all_fields: GetV2TweetQueryParameters,
     ):
         response = GetV2TweetResponseBody.parse_obj(
             json_data_loader.load(json_filename)
@@ -87,5 +98,8 @@ class TestMockGetV2Tweet:
             mock_oauth2_app_client.chain()
             .inject_get_response_body("https://api.twitter.com/2/tweets/:id", response)
             .request("https://api.twitter.com/2/tweets/:id")
-            .get(intro_tweet.id)
+            .get(
+                intro_tweet.id,
+                all_fields,
+            )
         ) == response
