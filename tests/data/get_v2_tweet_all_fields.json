@@ -1,0 +1,323 @@
+{
+    "data": {
+        "id": "1460323737035677698",
+        "text": "Introducing a new era for the Twitter Developer Platform! \n\n📣The Twitter API v2 is now the primary API and full of new features\n⏱Immediate access for most use cases, or apply to get more access for free\n📖Removed certain restrictions in the Policy\nhttps://t.co/Hrm15bkBWJ https://t.co/YFfCDErHsg",
+        "edit_history_tweet_ids": [
+            "1460323737035677698"
+        ],
+        "attachments": {
+            "media_keys": [
+                "7_1460322142680072196"
+            ]
+        },
+        "author_id": "2244994945",
+        "lang": "en",
+        "context_annotations": [
+            {
+                "domain": {
+                    "id": "30",
+                    "name": "Entities [Entity Service]",
+                    "description": "Entity Service top level domain, every item that is in Entity Service should be in this domain"
+                },
+                "entity": {
+                    "id": "781974596752842752",
+                    "name": "Services"
+                }
+            },
+            {
+                "domain": {
+                    "id": "47",
+                    "name": "Brand",
+                    "description": "Brands and Companies"
+                },
+                "entity": {
+                    "id": "10045225402",
+                    "name": "Twitter"
+                }
+            },
+            {
+                "domain": {
+                    "id": "131",
+                    "name": "Unified Twitter Taxonomy",
+                    "description": "A taxonomy of user interests. "
+                },
+                "entity": {
+                    "id": "10045225402",
+                    "name": "Twitter"
+                }
+            },
+            {
+                "domain": {
+                    "id": "131",
+                    "name": "Unified Twitter Taxonomy",
+                    "description": "A taxonomy of user interests. "
+                },
+                "entity": {
+                    "id": "1196446161223028736",
+                    "name": "Social media"
+                }
+            }
+        ],
+        "conversation_id": "1460323737035677698",
+        "created_at": "2021-11-15T19:08:05+00:00",
+        "edit_controls": {
+            "edits_remaining": 5,
+            "is_edit_eligible": true,
+            "editable_until": "2021-11-15T19:38:05+00:00"
+        },
+        "entities": {
+            "annotations": [
+                {
+                    "start": 30,
+                    "end": 46,
+                    "probability": 0.8024,
+                    "type": "Other",
+                    "normalized_text": "Twitter Developer"
+                },
+                {
+                    "start": 65,
+                    "end": 78,
+                    "probability": 0.6393,
+                    "type": "Other",
+                    "normalized_text": "Twitter API v2"
+                },
+                {
+                    "start": 99,
+                    "end": 101,
+                    "probability": 0.5586,
+                    "type": "Other",
+                    "normalized_text": "API"
+                }
+            ],
+            "urls": [
+                {
+                    "start": 247,
+                    "end": 270,
+                    "url": "https://t.co/Hrm15bkBWJ",
+                    "expanded_url": "https://blog.twitter.com/developer/en_us/topics/tools/2021/build-whats-next-with-the-new-twitter-developer-platform",
+                    "display_url": "blog.twitter.com/developer/en_u…",
+                    "status": "200",
+                    "title": "Build whats next with the new twitter developer platform",
+                    "description": "Today we are introducing three new tools to help developers build faster and more confidently with the Twitter API v2.",
+                    "unwound_url": "https://developer.twitter.com/en/blog/product-news/2021/build-whats-next-with-the-new-twitter-developer-platform",
+                    "images": [
+                        {
+                            "url": "https://pbs.twimg.com/news_img/1624358549831942144/bMHxNRWQ?format=jpg&name=orig",
+                            "width": 500,
+                            "height": 263
+                        },
+                        {
+                            "url": "https://pbs.twimg.com/news_img/1624358549831942144/bMHxNRWQ?format=jpg&name=150x150",
+                            "width": 150,
+                            "height": 150
+                        }
+                    ]
+                },
+                {
+                    "start": 271,
+                    "end": 294,
+                    "url": "https://t.co/YFfCDErHsg",
+                    "expanded_url": "https://twitter.com/TwitterDev/status/1460323737035677698/video/1",
+                    "display_url": "pic.twitter.com/YFfCDErHsg",
+                    "media_key": "7_1460322142680072196"
+                }
+            ]
+        },
+        "possibly_sensitive": false,
+        "public_metrics": {
+            "impression_count": 0,
+            "like_count": 989,
+            "quote_count": 118,
+            "reply_count": 157,
+            "retweet_count": 296
+        },
+        "reply_settings": "everyone"
+    },
+    "includes": {
+        "users": [
+            {
+                "id": "2244994945",
+                "name": "Twitter Dev",
+                "username": "TwitterDev",
+                "created_at": "2013-12-14T04:35:55+00:00",
+                "description": "The voice of the #TwitterDev team and your official source for updates, news, and events, related to the #TwitterAPI.",
+                "entities": {
+                    "url": {
+                        "urls": [
+                            {
+                                "start": 0,
+                                "end": 23,
+                                "url": "https://t.co/9wI31m3ELF",
+                                "expanded_url": "https://developer.twitter.com/en/community",
+                                "display_url": "developer.twitter.com/en/community"
+                            }
+                        ]
+                    },
+                    "description": {
+                        "hashtags": [
+                            {
+                                "start": 17,
+                                "end": 28,
+                                "tag": "TwitterDev"
+                            },
+                            {
+                                "start": 105,
+                                "end": 116,
+                                "tag": "TwitterAPI"
+                            }
+                        ]
+                    }
+                },
+                "location": "127.0.0.1",
+                "pinned_tweet_id": "1641222782594990080",
+                "profile_image_url": "https://pbs.twimg.com/profile_images/1445764922474827784/W2zEPN7U_normal.jpg",
+                "protected": false,
+                "public_metrics": {
+                    "followers_count": 581734,
+                    "following_count": 1944,
+                    "tweet_count": 4072,
+                    "listed_count": 2367
+                },
+                "url": "https://t.co/9wI31m3ELF",
+                "verified": true,
+                "verified_type": "business"
+            }
+        ],
+        "tweets": [
+            {
+                "id": "1460323737035677698",
+                "text": "Introducing a new era for the Twitter Developer Platform! \n\n📣The Twitter API v2 is now the primary API and full of new features\n⏱Immediate access for most use cases, or apply to get more access for free\n📖Removed certain restrictions in the Policy\nhttps://t.co/Hrm15bkBWJ https://t.co/YFfCDErHsg",
+                "edit_history_tweet_ids": [
+                    "1460323737035677698"
+                ],
+                "attachments": {
+                    "media_keys": [
+                        "7_1460322142680072196"
+                    ]
+                },
+                "author_id": "2244994945",
+                "lang": "en",
+                "context_annotations": [
+                    {
+                        "domain": {
+                            "id": "30",
+                            "name": "Entities [Entity Service]",
+                            "description": "Entity Service top level domain, every item that is in Entity Service should be in this domain"
+                        },
+                        "entity": {
+                            "id": "781974596752842752",
+                            "name": "Services"
+                        }
+                    },
+                    {
+                        "domain": {
+                            "id": "47",
+                            "name": "Brand",
+                            "description": "Brands and Companies"
+                        },
+                        "entity": {
+                            "id": "10045225402",
+                            "name": "Twitter"
+                        }
+                    },
+                    {
+                        "domain": {
+                            "id": "131",
+                            "name": "Unified Twitter Taxonomy",
+                            "description": "A taxonomy of user interests. "
+                        },
+                        "entity": {
+                            "id": "10045225402",
+                            "name": "Twitter"
+                        }
+                    },
+                    {
+                        "domain": {
+                            "id": "131",
+                            "name": "Unified Twitter Taxonomy",
+                            "description": "A taxonomy of user interests. "
+                        },
+                        "entity": {
+                            "id": "1196446161223028736",
+                            "name": "Social media"
+                        }
+                    }
+                ],
+                "conversation_id": "1460323737035677698",
+                "created_at": "2021-11-15T19:08:05+00:00",
+                "edit_controls": {
+                    "edits_remaining": 5,
+                    "is_edit_eligible": true,
+                    "editable_until": "2021-11-15T19:38:05+00:00"
+                },
+                "entities": {
+                    "annotations": [
+                        {
+                            "start": 30,
+                            "end": 46,
+                            "probability": 0.8024,
+                            "type": "Other",
+                            "normalized_text": "Twitter Developer"
+                        },
+                        {
+                            "start": 65,
+                            "end": 78,
+                            "probability": 0.6393,
+                            "type": "Other",
+                            "normalized_text": "Twitter API v2"
+                        },
+                        {
+                            "start": 99,
+                            "end": 101,
+                            "probability": 0.5586,
+                            "type": "Other",
+                            "normalized_text": "API"
+                        }
+                    ],
+                    "urls": [
+                        {
+                            "start": 247,
+                            "end": 270,
+                            "url": "https://t.co/Hrm15bkBWJ",
+                            "expanded_url": "https://blog.twitter.com/developer/en_us/topics/tools/2021/build-whats-next-with-the-new-twitter-developer-platform",
+                            "display_url": "blog.twitter.com/developer/en_u…",
+                            "status": "200",
+                            "title": "Build whats next with the new twitter developer platform",
+                            "description": "Today we are introducing three new tools to help developers build faster and more confidently with the Twitter API v2.",
+                            "unwound_url": "https://developer.twitter.com/en/blog/product-news/2021/build-whats-next-with-the-new-twitter-developer-platform",
+                            "images": [
+                                {
+                                    "url": "https://pbs.twimg.com/news_img/1624358549831942144/bMHxNRWQ?format=jpg&name=orig",
+                                    "width": 500,
+                                    "height": 263
+                                },
+                                {
+                                    "url": "https://pbs.twimg.com/news_img/1624358549831942144/bMHxNRWQ?format=jpg&name=150x150",
+                                    "width": 150,
+                                    "height": 150
+                                }
+                            ]
+                        },
+                        {
+                            "start": 271,
+                            "end": 294,
+                            "url": "https://t.co/YFfCDErHsg",
+                            "expanded_url": "https://twitter.com/TwitterDev/status/1460323737035677698/video/1",
+                            "display_url": "pic.twitter.com/YFfCDErHsg",
+                            "media_key": "7_1460322142680072196"
+                        }
+                    ]
+                },
+                "possibly_sensitive": false,
+                "public_metrics": {
+                    "impression_count": 0,
+                    "like_count": 989,
+                    "quote_count": 118,
+                    "reply_count": 157,
+                    "retweet_count": 296
+                },
+                "reply_settings": "everyone"
+            }
+        ]
+    }
+}

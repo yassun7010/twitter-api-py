@@ -3,6 +3,7 @@ from textwrap import dedent
 import pytest
 
 from tests.conftest import synthetic_monitoring_is_disable
+from tests.data import JsonDataLoader
 from twitter_api.api.resources.v2_tweet.get_v2_tweet import GetV2TweetResponseBody
 from twitter_api.api.types.v2_tweet.tweet_detail import TweetDetail
 from twitter_api.client.twitter_api_mock_client import TwitterApiMockClient
@@ -140,15 +141,26 @@ class TestGetV2Tweet:
 
 
 class TestMockGetV2Tweet:
+    @pytest.mark.parametrize(
+        "json_filename",
+        [
+            "get_v2_tweet_all_fields.json",
+        ],
+    )
     def test_mock_get_v2_tweet(
-        self, mock_oauth2_app_client: TwitterApiMockClient, tweet: TweetDetail
+        self,
+        mock_oauth2_app_client: TwitterApiMockClient,
+        json_data_loader: JsonDataLoader,
+        json_filename: str,
     ):
-        response = GetV2TweetResponseBody(data=tweet)
+        response = GetV2TweetResponseBody.parse_obj(
+            json_data_loader.load(json_filename)
+        )
 
         assert get_extra_fields(response) == {}
         assert (
             mock_oauth2_app_client.chain()
             .inject_get_response_body("https://api.twitter.com/2/tweets/:id", response)
             .request("https://api.twitter.com/2/tweets/:id")
-            .get(tweet.id)
+            .get("1460323737035677698")
         ) == response
