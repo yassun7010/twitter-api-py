@@ -2,7 +2,7 @@ import pytest
 
 from tests.conftest import synthetic_monitoring_is_disable
 from tests.contexts.check_oauth2_user_access_token import check_oauth2_user_access_token
-from tests.data import JsonDataLoader
+from tests.data import json_test_data
 from twitter_api.api.resources.v2_dm_conversations.post_v2_dm_conversations import (
     PostV2DmConversationsResponseBody,
 )
@@ -51,11 +51,10 @@ class TestMockGetV2UserFollowing:
     def test_mock_get_v2_user_following(
         self,
         mock_oauth2_app_client: TwitterApiMockClient,
-        json_data_loader: JsonDataLoader,
         json_filename: str,
     ):
-        response = PostV2DmConversationsResponseBody.parse_obj(
-            json_data_loader.load(json_filename)
+        response = PostV2DmConversationsResponseBody.parse_file(
+            json_test_data(json_filename)
         )
 
         assert get_extra_fields(response) == {}

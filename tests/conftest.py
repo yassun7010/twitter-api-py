@@ -3,7 +3,6 @@ from textwrap import dedent
 
 import pytest
 
-from tests.data import JsonDataLoader
 from twitter_api.api.resources.v2_tweet.get_v2_tweet import GetV2TweetQueryParameters
 from twitter_api.api.types.v2_expansion import Expansion
 from twitter_api.api.types.v2_media.media_field import MediaField
@@ -55,11 +54,6 @@ def premium_account_not_set() -> dict:
         ),
         reason="プレミアムアカウントを持っている場合に実行されます。",
     )
-
-
-@pytest.fixture
-def json_data_loader() -> JsonDataLoader:
-    return JsonDataLoader()
 
 
 @pytest.fixture

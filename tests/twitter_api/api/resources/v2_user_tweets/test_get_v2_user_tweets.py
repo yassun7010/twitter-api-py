@@ -1,7 +1,7 @@
 import pytest
 
 from tests.conftest import synthetic_monitoring_is_disable
-from tests.data import JsonDataLoader
+from tests.data import json_test_data
 from twitter_api.api.resources.v2_user_tweets.get_v2_user_tweets import (
     GetV2UserTweetsResponseBody,
 )
@@ -39,11 +39,10 @@ class TestMockGetV2UserTweets:
     def test_mock_get_v2_user_tweets(
         self,
         mock_oauth2_app_client: TwitterApiMockClient,
-        json_data_loader: JsonDataLoader,
         json_filename: str,
     ):
-        response = GetV2UserTweetsResponseBody.parse_obj(
-            json_data_loader.load(json_filename)
+        response = GetV2UserTweetsResponseBody.parse_file(
+            json_test_data(json_filename),
         )
 
         assert get_extra_fields(response) == {}

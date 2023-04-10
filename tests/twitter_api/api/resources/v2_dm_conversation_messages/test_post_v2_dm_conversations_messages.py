@@ -2,7 +2,7 @@ import pytest
 
 from tests.conftest import synthetic_monitoring_is_disable
 from tests.contexts.check_oauth2_user_access_token import check_oauth2_user_access_token
-from tests.data import JsonDataLoader
+from tests.data import json_test_data
 from twitter_api.api.resources.v2_dm_conversation_messages.post_v2_dm_conversations_messages import (
     PostV2DmConversationMessagesResponseBody,
 )
@@ -60,11 +60,10 @@ class TestMockGetV2DmConversationsMessages:
     def test_mock_get_v2_dm_conversations_messages(
         self,
         mock_oauth2_app_client: TwitterApiMockClient,
-        json_data_loader: JsonDataLoader,
         json_filename: str,
     ):
-        response = PostV2DmConversationMessagesResponseBody.parse_obj(
-            json_data_loader.load(json_filename)
+        response = PostV2DmConversationMessagesResponseBody.parse_file(
+            json_test_data(json_filename)
         )
 
         assert get_extra_fields(response) == {}

@@ -1,7 +1,7 @@
 import pytest
 
 from tests.conftest import premium_account_not_set, synthetic_monitoring_is_disable
-from tests.data import JsonDataLoader
+from tests.data import json_test_data
 from twitter_api.api.resources.v2_tweets_search_all.get_v2_tweets_search_all import (
     GetV2TweetsSearchAllResponseBody,
 )
@@ -28,10 +28,9 @@ class TestMockGetV2TweetsSearchAll:
     def test_mock_get_v2_search_all(
         self,
         mock_oauth2_app_client: TwitterApiMockClient,
-        json_data_loader: JsonDataLoader,
     ):
-        response = GetV2TweetsSearchAllResponseBody.parse_obj(
-            json_data_loader.load("get_v2_tweets_search_all_response.json")
+        response = GetV2TweetsSearchAllResponseBody.parse_file(
+            json_test_data("get_v2_tweets_search_all_response.json")
         )
 
         assert (
