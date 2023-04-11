@@ -31,8 +31,10 @@ class Tweet(ExtraPermissiveModel):
     id: TweetId
     text: str
     # 必須なはずだが、一部の API では必須ではないため、必要な API を TweetDetail としている。
+    #
     # このフィールドが存在する場合、少なくとも 1 つの要素が入ることになる。
-    # そのため、 default_factory=list とすることも意図が曖昧になるため、型で分けている。
+    # そのため、 default_factory=list としても意図が曖昧になるため、型で分けている。
+    #
     # edit_history_tweet_ids: Optional[list[TweetId]] = None
 
     # Optional
