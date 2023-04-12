@@ -30,7 +30,6 @@ class PostOauth2InvalidateTokenResources(ApiResources):
         api_secret: ApiSecret,
         query: PostOauth2InvalidateTokenQueryParameters,
     ) -> PostOauth2InvalidateTokenResponseBody:
-        # flake8: noqa E501
         """
         OAuth 2.0 のアプリ用のアクセストークンを削除するために使用する。
 

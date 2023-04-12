@@ -54,7 +54,6 @@ class GetV2UsersResources(ApiResources):
     @rate_limit(ENDPOINT, "app", requests=300, mins=15)
     @rate_limit(ENDPOINT, "user", requests=900, mins=15)
     def get(self, query: GetV2UsersQueryParameters) -> GetV2UsersResponseBody:
-        # flake8: noqa E501
         """
         ユーザの一覧を取得する。
 

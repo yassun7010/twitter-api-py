@@ -20,7 +20,7 @@ from .tweet_withheld import TweetWithheld
 
 
 class Tweet(ExtraPermissiveModel):
-    # flake8: noqa E501
+
     """
     ツイート情報。
 

@@ -1,7 +1,6 @@
 from datetime import datetime
 from typing import Literal, NotRequired, Optional, TypedDict
 
-from examples import oauth2
 from twitter_api.api.resources.api_resources import ApiResources
 from twitter_api.api.types.v2_expansion import Expansion
 from twitter_api.api.types.v2_media.media_field import MediaField
@@ -93,7 +92,6 @@ class GetV2UserTweetsResources(ApiResources):
         id: UserId,
         query: Optional[GetV2UserTweetsQueryParameters] = None,
     ) -> GetV2UserTweetsResponseBody:
-        # flake8: noqa E501
         """
         ユーザのツイートの一覧を取得する。
 

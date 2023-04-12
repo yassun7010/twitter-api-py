@@ -39,7 +39,6 @@ class PostV2UserFollowingResources(ApiResources):
         id: UserId,
         request_body: PostV2UserFollowingRequestBody,
     ) -> PostV2UserFollowingResponseBody:
-        # flake8: noqa E501
         """
         ユーザをフォローする。
 

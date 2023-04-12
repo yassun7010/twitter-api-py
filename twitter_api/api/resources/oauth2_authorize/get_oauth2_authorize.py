@@ -47,7 +47,6 @@ class GetOauth2AuthorizeResources(ApiResources):
         self,
         query: GetOauth2AuthorizeQueryParameters,
     ) -> GetOauth2AuthorizeResponseBody:
-        # flake8: noqa E501
         """
         OAuth 2.0 のアプリ用のアクセストークンのセットを生成するために使用する。
 

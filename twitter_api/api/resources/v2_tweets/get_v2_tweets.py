@@ -64,7 +64,6 @@ class GetV2TweetsResources(ApiResources):
     @rate_limit(ENDPOINT, "app", requests=300, mins=15)
     @rate_limit(ENDPOINT, "user", requests=900, mins=15)
     def get(self, query: GetV2TweetsQueryParameters) -> GetV2TweetsResponseBody:
-        # flake8: noqa E501
         """
         ツイートの一覧を取得する。
 

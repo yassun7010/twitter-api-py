@@ -68,7 +68,6 @@ class GetV2UserFollowersResources(ApiResources):
         id: UserId,
         query: Optional[GetV2UserFollowersQueryParameters] = None,
     ) -> GetV2UserFollowersResponseBody:
-        # flake8: noqa E501
         """
         ユーザのフォロワーの一覧を取得する。
 

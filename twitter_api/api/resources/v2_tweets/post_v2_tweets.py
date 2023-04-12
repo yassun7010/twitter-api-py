@@ -73,7 +73,6 @@ class PostV2TweetsResources(ApiResources):
     )
     @rate_limit(ENDPOINT, "user", requests=200, mins=15)
     def post(self, request_body: PostV2TweetsRequestBody) -> PostV2TweetsResponseBody:
-        # flake8: noqa E501
         """
         ツイートする。
 

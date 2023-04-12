@@ -1,5 +1,5 @@
 from datetime import datetime
-from typing import Literal, NotRequired, Optional, TypeAlias, TypedDict
+from typing import Literal, NotRequired, Optional, TypedDict
 
 from pydantic import Field
 
@@ -14,7 +14,6 @@ from twitter_api.api.types.v2_tweet.tweet_detail import TweetDetail
 from twitter_api.api.types.v2_tweet.tweet_field import TweetField
 from twitter_api.api.types.v2_tweet.tweet_id import TweetId
 from twitter_api.api.types.v2_user.user_field import UserField
-from twitter_api.client.request.request_client import RequestClient
 from twitter_api.rate_limit.rate_limit_decorator import rate_limit
 from twitter_api.types.comma_separatable import CommaSeparatable, comma_separated_str
 from twitter_api.types.endpoint import Endpoint
@@ -86,7 +85,6 @@ class GetV2TweetsSearchRecentResources(ApiResources):
     def get(
         self, query: GetV2TweetsSearchRecentQueryParameters
     ) -> GetV2TweetsSearchRecentResponseBody:
-        # flake8: noqa E501
         """
         ツイートの一覧を検索する。
 

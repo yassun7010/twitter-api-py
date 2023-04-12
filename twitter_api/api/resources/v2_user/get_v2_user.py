@@ -56,7 +56,6 @@ class GetV2UserResources(ApiResources):
         id: UserId,
         query: Optional[GetV2UserQueryParameters] = None,
     ) -> GetV2UserResponseBody:
-        # flake8: noqa E501
         """
         ユーザの情報を取得する。
 

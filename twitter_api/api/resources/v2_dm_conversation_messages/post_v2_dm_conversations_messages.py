@@ -37,7 +37,6 @@ class PostV2DmConversationMessagesResources(ApiResources):
         dm_conversation_id: DmConversationId,
         request_body: PostV2DmConversationMessagesRequestBody,
     ) -> PostV2DmConversationMessagesResponseBody:
-        # flake8: noqa E501
         """
         指定した会話に Direct Message を送る。
 

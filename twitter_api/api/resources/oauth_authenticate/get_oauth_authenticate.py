@@ -1,7 +1,6 @@
-from typing import Literal, NotRequired, Optional, TypedDict
+from typing import NotRequired, Optional, TypedDict
 
 from twitter_api.api.resources.api_resources import ApiResources
-from twitter_api.client.request.request_client import RequestClient
 from twitter_api.types.endpoint import Endpoint
 from twitter_api.types.screen_name import ScreenName
 
@@ -22,7 +21,6 @@ class GetOauthAuthenticate(ApiResources):
         self,
         query: Optional[GetOauthAuthenticateQueryParameters] = None,
     ) -> dict:
-        # flake8: noqa E501
         """
         OAuth 1.0a の2番目のステップ。
         ユーザーアクセストークンのセットを生成するために使用する。

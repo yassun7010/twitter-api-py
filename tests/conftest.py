@@ -3,7 +3,6 @@ from textwrap import dedent
 
 import pytest
 
-from twitter_api.api.resources.v2_tweet.get_v2_tweet import GetV2TweetQueryParameters
 from twitter_api.api.types.v2_expansion import Expansion
 from twitter_api.api.types.v2_media.media_field import MediaField
 from twitter_api.api.types.v2_place.place_field import PlaceField
@@ -256,7 +255,6 @@ def intro_tweet() -> TweetDetail:
     return TweetDetail(
         id="1460323737035677698",
         text=dedent(
-            # flake8: noqa E501
             """
             Introducing a new era for the Twitter Developer Platform! \n
             📣The Twitter API v2 is now the primary API and full of new features

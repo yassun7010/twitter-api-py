@@ -1,4 +1,3 @@
-# flake8: noqa E501
 """
 Twitter の OAuth 認証に必要な情報をまとめた型。
 

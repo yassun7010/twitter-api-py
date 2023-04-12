@@ -27,7 +27,6 @@ class DeleteV2TweetResources(ApiResources):
         self,
         id: TweetId,
     ) -> DeleteV2TweetResponseBody:
-        # flake8: noqa E501
         """
         ツイートを削除する。
 

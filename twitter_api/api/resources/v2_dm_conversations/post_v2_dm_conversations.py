@@ -44,7 +44,6 @@ class PostV2DmConversationsResources(ApiResources):
         participant_id: UserId,
         request_body: PostV2DmConversationsRequestBody,
     ) -> PostV2DmConversationsResponseBody:
-        # flake8: noqa E501
         """
         DM 用の新しい会話グループを作成する。
 

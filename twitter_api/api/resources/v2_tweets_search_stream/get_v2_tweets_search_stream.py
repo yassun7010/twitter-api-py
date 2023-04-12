@@ -73,7 +73,6 @@ class GetV2TweetsSearchStreamResources(ApiResources):
     def get(
         self, query: Optional[GetV2TweetsSearchStreamQueryParameters] = None
     ) -> GetV2TweetsSearchStreamResponseBody:
-        # flake8: noqa E501
         """
         ツイートの一覧を検索する。
 

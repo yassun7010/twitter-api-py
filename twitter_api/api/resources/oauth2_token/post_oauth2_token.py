@@ -2,10 +2,7 @@ import base64
 from typing import Literal, TypedDict
 
 from twitter_api.api.resources.api_resources import ApiResources
-from twitter_api.api.types.v2_scope import Scope
-from twitter_api.client.request.request_client import RequestClient
 from twitter_api.error import TwitterApiOAuthVersionWrong
-from twitter_api.types.comma_separatable import CommaSeparatable
 from twitter_api.types.endpoint import Endpoint
 from twitter_api.types.extra_permissive_model import ExtraPermissiveModel
 from twitter_api.types.http import downcast_dict
@@ -30,7 +27,6 @@ class PostOauth2TokenResources(ApiResources):
         api_secret: ApiSecret,
         query: PostOauth2TokenQueryParameters,
     ) -> PostOauth2TokenResponseBody:
-        # flake8: noqa E501
         """
         OAuth 2.0 のアプリ用のアクセストークンのセットを生成するために使用する。
 

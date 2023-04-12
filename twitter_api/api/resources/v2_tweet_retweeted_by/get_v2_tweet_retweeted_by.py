@@ -6,9 +6,7 @@ from twitter_api.api.types.v2_retweet.retweet import Retweet
 from twitter_api.api.types.v2_scope import oauth2_scopes
 from twitter_api.api.types.v2_tweet.tweet_field import TweetField
 from twitter_api.api.types.v2_tweet.tweet_id import TweetId
-from twitter_api.api.types.v2_user.user import User
 from twitter_api.api.types.v2_user.user_field import UserField
-from twitter_api.client.request.request_client import RequestClient
 from twitter_api.rate_limit.rate_limit_decorator import rate_limit
 from twitter_api.types.comma_separatable import CommaSeparatable, comma_separated_str
 from twitter_api.types.endpoint import Endpoint
@@ -58,7 +56,6 @@ class GetV2TweetRetweetedByResources(ApiResources):
     def get(
         self, id: TweetId, query: Optional[GetV2TweetRetweetedByQueryParameters] = None
     ) -> GetV2TweetRetweetedByResponseBody:
-        # flake8: noqa E501
         """
         リツイートされたツイートの一覧を取得する。
 

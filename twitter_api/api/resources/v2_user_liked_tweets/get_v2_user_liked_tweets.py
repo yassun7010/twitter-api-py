@@ -76,7 +76,6 @@ class GetV2UserLikedTweetsResources(ApiResources):
         id: UserId,
         query: Optional[GetV2UserLikedTweetsQueryParameters] = None,
     ) -> GetV2UserLikedTweetsResponseBody:
-        # flake8: noqa E501
         """
         ユーザが「いいね」をしているツイートの一覧を取得する。
 

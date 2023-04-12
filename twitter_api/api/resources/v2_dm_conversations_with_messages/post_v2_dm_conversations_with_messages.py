@@ -37,7 +37,6 @@ class PostV2DmConversationsWithParticipantMessagesResources(ApiResources):
         participant_id: UserId,
         request_body: PostV2DmConversationsWithParticipantMessagesRequestBody,
     ) -> PostV2DmConversationsWithParticipantMessagesResponseBody:
-        # flake8: noqa E501
         """
         Direct Message を送る。
 

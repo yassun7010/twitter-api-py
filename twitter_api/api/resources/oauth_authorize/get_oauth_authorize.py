@@ -21,7 +21,6 @@ class GetOauthAuthorizeResources(RequestClient):
         self,
         query: Optional[GetOauthAuthorizeQueryParameters] = None,
     ) -> dict:
-        # flake8: noqa E501
         """
         OAuth 1.0a の2番目のステップ。
         ユーザーアクセストークンのセットを生成するために使用する。

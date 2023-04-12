@@ -6,7 +6,6 @@ from pydantic import Field
 from twitter_api.api.resources.api_resources import ApiResources
 from twitter_api.api.types.v2_rule.rule import Rule
 from twitter_api.api.types.v2_rule.rule_id import RuleId
-from twitter_api.api.types.v2_scope import oauth2_scopes
 from twitter_api.rate_limit.rate_limit_decorator import rate_limit
 from twitter_api.types.endpoint import Endpoint
 from twitter_api.types.extra_permissive_model import ExtraPermissiveModel
@@ -38,7 +37,6 @@ class GetV2TweetsSearchStreamRulesResources(ApiResources):
         self,
         query: Optional[GetV2TweetsSearchStreamRulesQueryParameters] = None,
     ) -> GetV2TweetsSearchStreamRulesResponseBody:
-        # flake8: noqa E501
         """
         ツイートの一覧を検索するフィルターの一覧を取得する。
 

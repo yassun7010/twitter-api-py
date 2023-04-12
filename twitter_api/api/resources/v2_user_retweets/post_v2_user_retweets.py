@@ -39,7 +39,6 @@ class PostV2UserRetweetsResources(ApiResources):
         id: UserId,
         request_body: PostV2UserRetweetsRequestBody,
     ) -> PostV2UserRetweetsResponseBody:
-        # flake8: noqa E501
         """
         ユーザをリツイートする。
 

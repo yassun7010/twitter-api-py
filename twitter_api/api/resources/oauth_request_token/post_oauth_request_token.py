@@ -1,11 +1,6 @@
 from typing import Literal, NotRequired, Optional, TypedDict
 
-from authlib.integrations.requests_client.oauth1_session import (
-    OAuth1Session,  # pyright: reportMissingImports=false
-)
-
 from twitter_api.api.resources.api_resources import ApiResources
-from twitter_api.client.request.request_client import RequestClient
 from twitter_api.error import TwitterApiOAuthVersionWrong
 from twitter_api.types.endpoint import Endpoint
 from twitter_api.types.extra_permissive_model import ExtraPermissiveModel
@@ -35,7 +30,6 @@ class PostOauthRequestTokenResources(ApiResources):
         api_secret: ApiSecret,
         query: PostOauthRequestTokenQueryParameters,
     ) -> PostOauthRequestTokenResponseBody:
-        # flake8: noqa E501
         """
         OAuth 1.0a の最初のステップ。
         ユーザーアクセストークンのセットを生成するために使用する。
