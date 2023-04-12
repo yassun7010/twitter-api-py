@@ -1,6 +1,7 @@
 import pytest
 
 from tests.conftest import synthetic_monitoring_is_disable
+from tests.contexts.spawn_real_client import spawn_real_client
 from tests.data import json_test_data
 from twitter_api.api.resources.v2_tweets_search_stream_rules.post_v2_tweets_search_stream_rules import (
     PostV2TweetsSearchStreamRulesResponseBody,
@@ -12,25 +13,37 @@ from twitter_api.types.extra_permissive_model import get_extra_fields
 
 @pytest.mark.skipif(**synthetic_monitoring_is_disable())
 class TestPostV2TweetsSearchStreamRules:
+    @pytest.mark.parametrize(
+        "client_fixture_name,permit",
+        [
+            ("real_oauth1_user_client", False),
+            ("real_oauth2_user_client", False),
+            ("real_oauth2_app_client", True),
+        ],
+    )
     def test_post_v2_search_stream_rules_when_add_case(
-        self, real_oauth2_app_client: TwitterApiRealClient
+        self,
+        client_fixture_name: str,
+        permit: bool,
+        request: pytest.FixtureRequest,
     ):
-        response = (
-            real_oauth2_app_client.chain()
-            .request("https://api.twitter.com/2/tweets/search/stream/rules")
-            .post(
-                {
-                    "add": [
-                        {"value": "cat has:media"},
-                    ]
-                },
-                {"dry_run": True},
+        with spawn_real_client(client_fixture_name, request, permit) as real_client:
+            response = (
+                real_client.chain()
+                .request("https://api.twitter.com/2/tweets/search/stream/rules")
+                .post(
+                    {
+                        "add": [
+                            {"value": "cat has:media"},
+                        ]
+                    },
+                    {"dry_run": True},
+                )
             )
-        )
 
-        print(response.json())
+            print(response.json())
 
-        assert get_extra_fields(response) == {}
+            assert get_extra_fields(response) == {}
 
     def test_post_v2_search_stream_rules_when_delete_case(
         self, real_oauth2_app_client: TwitterApiRealClient
@@ -48,6 +61,7 @@ class TestPostV2TweetsSearchStreamRules:
             )
         )
 
+        # 終わったら削除もしておく。
         response = (
             real_oauth2_app_client.chain()
             .request("https://api.twitter.com/2/tweets/search/stream/rules")

@@ -1,6 +1,7 @@
 import pytest
 
 from tests.conftest import synthetic_monitoring_is_disable
+from tests.contexts.spawn_real_client import spawn_real_client
 from tests.data import json_test_data
 from twitter_api.api.resources.v2_tweets_search_recent.get_v2_tweets_search_recent import (
     GetV2TweetsSearchRecentResponseBody,
@@ -12,18 +13,30 @@ from twitter_api.types.extra_permissive_model import get_extra_fields
 
 @pytest.mark.skipif(**synthetic_monitoring_is_disable())
 class TestGetV2TweetsSearchRecent:
+    @pytest.mark.parametrize(
+        "client_fixture_name,permit",
+        [
+            ("real_oauth1_user_client", True),
+            ("real_oauth2_user_client", True),
+            ("real_oauth2_app_client", True),
+        ],
+    )
     def test_get_v2_search_recent_when_oauth1(
-        self, real_oauth1_user_client: TwitterApiRealClient
+        self,
+        client_fixture_name: str,
+        permit: bool,
+        request: pytest.FixtureRequest,
     ):
-        response = (
-            real_oauth1_user_client.chain()
-            .request("https://api.twitter.com/2/tweets/search/recent")
-            .get({"query": "ツイート", "max_results": 1})
-        )
+        with spawn_real_client(client_fixture_name, request, permit) as real_client:
+            response = (
+                real_client.chain()
+                .request("https://api.twitter.com/2/tweets/search/recent")
+                .get({"query": "ツイート", "max_results": 1})
+            )
 
-        print(response.json())
+            print(response.json())
 
-        assert get_extra_fields(response) == {}
+            assert get_extra_fields(response) == {}
 
     def test_get_v2_search_recent_when_oauth2(
         self, real_oauth2_app_client: TwitterApiRealClient

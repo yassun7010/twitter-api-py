@@ -3,35 +3,34 @@ from datetime import datetime
 import pytest
 
 from tests.conftest import synthetic_monitoring_is_disable
-from tests.contexts.check_oauth2_user_access_token import check_oauth2_user_access_token
+from tests.contexts.spawn_real_client import spawn_real_client
 from twitter_api.api.resources.v2_tweet.delete_v2_tweet import (
     DeleteV2TweetResponseBody,
     DeleteV2TweetResponseBodyData,
 )
 from twitter_api.client.twitter_api_mock_client import TwitterApiMockClient
-from twitter_api.client.twitter_api_real_client import TwitterApiRealClient
 from twitter_api.types.extra_permissive_model import get_extra_fields
 
 
 @pytest.mark.skipif(**synthetic_monitoring_is_disable())
 class TestDeleteV2Tweet:
     @pytest.mark.parametrize(
-        "real_client_name",
+        "client_fixture_name,permit",
         [
-            "real_oauth1_user_client",
-            "real_oauth2_user_client",
+            ("real_oauth1_user_client", True),
+            ("real_oauth2_user_client", True),
+            ("real_oauth2_app_client", False),
         ],
     )
-    def test_delete_v2_tweet_by_client(
+    def test_delete_v2_tweet(
         self,
-        real_client_name: str,
+        client_fixture_name: str,
+        permit: bool,
         request: pytest.FixtureRequest,
     ):
-        real_client: TwitterApiRealClient = request.getfixturevalue(real_client_name)
+        with spawn_real_client(client_fixture_name, request, permit) as real_client:
+            tweet_text = f"削除テスト。{datetime.now().isoformat()}"
 
-        tweet_text = f"削除テスト。{datetime.now().isoformat()}"
-
-        with check_oauth2_user_access_token():
             tweet = (
                 real_client.chain()
                 .request("https://api.twitter.com/2/tweets")

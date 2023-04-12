@@ -1,7 +1,7 @@
 import pytest
 
 from tests.conftest import synthetic_monitoring_is_disable
-from tests.contexts.check_oauth2_user_access_token import check_oauth2_user_access_token
+from tests.contexts.spawn_real_client import spawn_real_client
 from tests.data import json_test_data
 from twitter_api.api.resources.v2_tweets.get_v2_tweets import (
     GetV2TweetsQueryParameters,
@@ -48,24 +48,23 @@ def all_fields(
 @pytest.mark.skipif(**synthetic_monitoring_is_disable())
 class TestGetV2Tweets:
     @pytest.mark.parametrize(
-        "real_client_name",
+        "client_fixture_name,permit",
         [
-            "real_oauth1_user_client",
-            "real_oauth2_app_client",
-            "real_oauth2_user_client",
+            ("real_oauth1_user_client", True),
+            ("real_oauth2_user_client", True),
+            ("real_oauth2_app_client", True),
         ],
     )
-    def test_get_v2_tweets_by_client(
+    def test_get_v2_tweets(
         self,
         tweets: list[TweetDetail],
-        real_client_name: str,
+        client_fixture_name: str,
+        permit: bool,
         request: pytest.FixtureRequest,
     ):
-        real_client: TwitterApiRealClient = request.getfixturevalue(real_client_name)
+        with spawn_real_client(client_fixture_name, request, permit) as real_client:
+            expected_response = GetV2TweetsResponseBody(data=tweets)
 
-        expected_response = GetV2TweetsResponseBody(data=tweets)
-
-        with check_oauth2_user_access_token():
             response = (
                 real_client.chain()
                 .request("https://api.twitter.com/2/tweets")
