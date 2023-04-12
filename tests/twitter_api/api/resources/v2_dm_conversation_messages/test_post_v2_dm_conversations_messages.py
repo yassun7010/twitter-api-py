@@ -14,15 +14,25 @@ from twitter_api.types.extra_permissive_model import get_extra_fields
 
 @pytest.mark.skipif(**synthetic_monitoring_is_disable())
 class TestGetV2DmConversationsMessages:
-    def test_get_v2_dm_conversations_messages(
+    @pytest.mark.parametrize(
+        "real_client_name",
+        [
+            "real_oauth1_user_client",
+            "real_oauth2_user_client",
+        ],
+    )
+    def test_get_v2_dm_conversations_messages_by_client(
         self,
         participant_id: UserId,
         participant_ids: list[UserId],
-        real_oauth2_user_client: TwitterApiRealClient,
+        real_client_name: str,
+        request: pytest.FixtureRequest,
     ):
+        real_client: TwitterApiRealClient = request.getfixturevalue(real_client_name)
+
         with check_oauth2_user_access_token():
             dm_conversation_id = (
-                real_oauth2_user_client.chain()
+                real_client.chain()
                 .request("https://api.twitter.com/2/dm_conversations")
                 .post(
                     participant_id,
@@ -38,7 +48,7 @@ class TestGetV2DmConversationsMessages:
             )
 
             response = (
-                real_oauth2_user_client.chain()
+                real_client.chain()
                 .request(
                     "https://api.twitter.com/2/dm_conversations/:dm_conversation_id/messages"
                 )

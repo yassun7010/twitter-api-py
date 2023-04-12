@@ -1,6 +1,7 @@
 import pytest
 
 from tests.conftest import synthetic_monitoring_is_disable
+from tests.contexts.check_oauth2_user_access_token import check_oauth2_user_access_token
 from tests.data import json_test_data
 from twitter_api.api.resources.v2_tweet.get_v2_tweet import (
     GetV2TweetQueryParameters,
@@ -39,22 +40,34 @@ def all_fields(
 
 @pytest.mark.skipif(**synthetic_monitoring_is_disable())
 class TestGetV2Tweet:
-    def test_get_v2_tweet(
+    @pytest.mark.parametrize(
+        "real_client_name",
+        [
+            "real_oauth1_user_client",
+            "real_oauth2_app_client",
+            "real_oauth2_user_client",
+        ],
+    )
+    def test_get_v2_tweet_by_client(
         self,
-        real_oauth2_app_client: TwitterApiRealClient,
         intro_tweet: TweetDetail,
+        real_client_name: str,
+        request: pytest.FixtureRequest,
     ):
+        real_client: TwitterApiRealClient = request.getfixturevalue(real_client_name)
+
         expected_response = GetV2TweetResponseBody(data=intro_tweet)
 
-        response = real_oauth2_app_client.request(
-            "https://api.twitter.com/2/tweets/:id"
-        ).get(intro_tweet.id)
+        with check_oauth2_user_access_token():
+            response = real_client.request("https://api.twitter.com/2/tweets/:id").get(
+                intro_tweet.id
+            )
 
-        print(response.json())
-        print(expected_response.json())
+            print(response.json())
+            print(expected_response.json())
 
-        assert get_extra_fields(response) == {}
-        assert response == expected_response
+            assert get_extra_fields(response) == {}
+            assert response == expected_response
 
     def test_get_v2_tweet_all_fields(
         self,

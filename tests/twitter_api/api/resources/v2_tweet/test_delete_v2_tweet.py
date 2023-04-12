@@ -3,6 +3,7 @@ from datetime import datetime
 import pytest
 
 from tests.conftest import synthetic_monitoring_is_disable
+from tests.contexts.check_oauth2_user_access_token import check_oauth2_user_access_token
 from twitter_api.api.resources.v2_tweet.delete_v2_tweet import (
     DeleteV2TweetResponseBody,
     DeleteV2TweetResponseBodyData,
@@ -14,25 +15,39 @@ from twitter_api.types.extra_permissive_model import get_extra_fields
 
 @pytest.mark.skipif(**synthetic_monitoring_is_disable())
 class TestDeleteV2Tweet:
-    def test_delete_v2_tweet(self, real_oauth1_user_client: TwitterApiRealClient):
+    @pytest.mark.parametrize(
+        "real_client_name",
+        [
+            "real_oauth1_user_client",
+            "real_oauth2_user_client",
+        ],
+    )
+    def test_delete_v2_tweet_by_client(
+        self,
+        real_client_name: str,
+        request: pytest.FixtureRequest,
+    ):
+        real_client: TwitterApiRealClient = request.getfixturevalue(real_client_name)
+
         tweet_text = f"削除テスト。{datetime.now().isoformat()}"
 
-        tweet = (
-            real_oauth1_user_client.chain()
-            .request("https://api.twitter.com/2/tweets")
-            .post({"text": tweet_text})
-            .data
-        )
+        with check_oauth2_user_access_token():
+            tweet = (
+                real_client.chain()
+                .request("https://api.twitter.com/2/tweets")
+                .post({"text": tweet_text})
+                .data
+            )
 
-        real_response = (
-            real_oauth1_user_client.chain()
-            .request("https://api.twitter.com/2/tweets/:id")
-            .delete(tweet.id)
-        )
+            real_response = (
+                real_client.chain()
+                .request("https://api.twitter.com/2/tweets/:id")
+                .delete(tweet.id)
+            )
 
-        print(real_response.json())
+            print(real_response.json())
 
-        assert real_response.data.deleted is True
+            assert real_response.data.deleted is True
 
 
 class TestMockDeleteV2Tweet:

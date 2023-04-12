@@ -13,16 +13,26 @@ from twitter_api.types.extra_permissive_model import get_extra_fields
 
 
 @pytest.mark.skipif(**synthetic_monitoring_is_disable())
-class TestGetV2UserFollowing:
-    def test_get_v2_user_following(
+class TestPostV2DmConversationsMessages:
+    @pytest.mark.parametrize(
+        "real_client_name",
+        [
+            "real_oauth1_user_client",
+            "real_oauth2_user_client",
+        ],
+    )
+    def test_post_v2_dm_conversations_messages_by_client(
         self,
         participant_id: UserId,
         participant_ids: list[UserId],
-        real_oauth2_user_client: TwitterApiRealClient,
+        real_client_name: str,
+        request: pytest.FixtureRequest,
     ):
+        real_client: TwitterApiRealClient = request.getfixturevalue(real_client_name)
+
         with check_oauth2_user_access_token():
             response = (
-                real_oauth2_user_client.chain()
+                real_client.chain()
                 .request("https://api.twitter.com/2/dm_conversations")
                 .post(
                     participant_id,
@@ -41,14 +51,14 @@ class TestGetV2UserFollowing:
         assert get_extra_fields(response) == {}
 
 
-class TestMockGetV2UserFollowing:
+class TestMockPostV2DmConversationsMessages:
     @pytest.mark.parametrize(
         "json_filename",
         [
             "post_v2_dm_conversations.json",
         ],
     )
-    def test_mock_get_v2_user_following(
+    def test_mock_post_v2_dm_conversations_messages(
         self,
         mock_oauth2_app_client: TwitterApiMockClient,
         json_filename: str,

@@ -12,41 +12,25 @@ from twitter_api.client.twitter_api_real_client import TwitterApiRealClient
 
 @pytest.mark.skipif(**synthetic_monitoring_is_disable())
 class TestGetV2Tweet:
-    def test_get_v2_tweet_by_oauth1_user(
+    @pytest.mark.parametrize(
+        "real_client_name",
+        [
+            "real_oauth1_user_client",
+            "real_oauth2_user_client",
+        ],
+    )
+    def test_get_v2_tweet_by_client(
         self,
-        real_oauth1_user_client: TwitterApiRealClient,
+        real_client_name: str,
+        request: pytest.FixtureRequest,
     ):
+        real_client: TwitterApiRealClient = request.getfixturevalue(real_client_name)
+
         tweet_text = f"テストツイート。{datetime.now().isoformat()}"
-        real_response = (
-            real_oauth1_user_client.chain()
-            .request("https://api.twitter.com/2/tweets")
-            .post(
-                {
-                    "text": tweet_text,
-                }
-            )
-        )
 
-        print(real_response.json())
-        print(tweet_text)
-
-        # テストが終わったらデータを消しておく。
-        (
-            real_oauth1_user_client.chain()
-            .request("https://api.twitter.com/2/tweets/:id")
-            .delete(real_response.data.id)
-        )
-
-        assert real_response.data.text == tweet_text
-
-    def test_get_v2_tweet_by_oauth2_user(
-        self,
-        real_oauth2_user_client: TwitterApiRealClient,
-    ):
         with check_oauth2_user_access_token():
-            tweet_text = f"テストツイート。{datetime.now().isoformat()}"
             real_response = (
-                real_oauth2_user_client.chain()
+                real_client.chain()
                 .request("https://api.twitter.com/2/tweets")
                 .post(
                     {
@@ -60,12 +44,12 @@ class TestGetV2Tweet:
 
             # テストが終わったらデータを消しておく。
             (
-                real_oauth2_user_client.chain()
+                real_client.chain()
                 .request("https://api.twitter.com/2/tweets/:id")
                 .delete(real_response.data.id)
             )
 
-        assert real_response.data.text == tweet_text
+            assert real_response.data.text == tweet_text
 
 
 class TestMockGetV2Tweet:

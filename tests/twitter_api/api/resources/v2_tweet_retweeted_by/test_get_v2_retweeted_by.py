@@ -1,6 +1,7 @@
 import pytest
 
 from tests.conftest import synthetic_monitoring_is_disable
+from tests.contexts.check_oauth2_user_access_token import check_oauth2_user_access_token
 from tests.data import json_test_data
 from twitter_api.api.resources.v2_tweet_retweeted_by.get_v2_tweet_retweeted_by import (
     GetV2TweetRetweetedByResponseBody,
@@ -12,16 +13,29 @@ from twitter_api.types.extra_permissive_model import get_extra_fields
 
 @pytest.mark.skipif(**synthetic_monitoring_is_disable())
 class TestGetV2RetweetedBy:
-    def test_get_v2_tweet_retweeted_by(
-        self, real_oauth2_app_client: TwitterApiRealClient
+    @pytest.mark.parametrize(
+        "real_client_name",
+        [
+            "real_oauth1_user_client",
+            "real_oauth2_app_client",
+            "real_oauth2_user_client",
+        ],
+    )
+    def test_get_v2_tweet_retweeted_by_client(
+        self,
+        real_client_name: str,
+        request: pytest.FixtureRequest,
     ):
-        response = real_oauth2_app_client.request(
-            "https://api.twitter.com/2/tweets/:id/retweeted_by"
-        ).get("1460323737035677698")
+        real_client: TwitterApiRealClient = request.getfixturevalue(real_client_name)
 
-        print(response.json())
+        with check_oauth2_user_access_token():
+            response = real_client.request(
+                "https://api.twitter.com/2/tweets/:id/retweeted_by"
+            ).get("1460323737035677698")
 
-        assert get_extra_fields(response) == {}
+            print(response.json())
+
+            assert get_extra_fields(response) == {}
 
 
 class TestMockGetV2RetweetedBy:
