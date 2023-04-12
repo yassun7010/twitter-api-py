@@ -426,7 +426,7 @@ class TwitterApiMockClient(TwitterApiClient):
         from twitter_api.api.types.v2_oauth2.twitter_oauth2_authorization_client import (
             TwitterOAuth2AuthorizeClient,
         )
-        from twitter_api.client.oauth_sessions.twitter_oauth2_mock_session import (
+        from twitter_api.client.oauth_session.twitter_oauth2_mock_session import (
             TwitterOAuth2MockSession,
         )
 

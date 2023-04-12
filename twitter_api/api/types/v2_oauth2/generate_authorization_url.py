@@ -1,7 +1,5 @@
 from twitter_api.api.resources.oauth2_authorize import Oauth2AuthorizeUrl
-from twitter_api.client.oauth_sessions.twitter_oauth2_session import (
-    TwitterOAuth2Session,
-)
+from twitter_api.client.oauth_session.twitter_oauth2_session import TwitterOAuth2Session
 from twitter_api.types.chainable import Chainable
 
 
