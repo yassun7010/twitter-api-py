@@ -27,10 +27,15 @@ def spawn_real_client(
             yield real_client
 
         except TwitterApiResponseFailed as error:
-            if permit and error.status_code == TwitterApiErrorCode.Forbidden.value:
+            # API が許可していないと考えている認証方法で認証エラーが出た場合のみ、例外を無視する。
+            if not permit and error.status_code == TwitterApiErrorCode.Forbidden.value:
+                pass
+            else:
                 raise error
         except Exception as error:
+            # 認証以外のエラーはそのまま投げる。
             raise error
         else:
+            # 認証が許可されていないはずなのに API を呼べたら例外を投げる。
             if not permit:
                 raise UnsupportedAuthenticationError()
