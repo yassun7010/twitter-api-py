@@ -434,7 +434,7 @@ class TwitterApiMockClient(TwitterApiClient):
         return TwitterOAuth2AuthorizeClient(session=session)
 
     @classmethod
-    def from_oauth1_user(
+    def from_oauth1_app(
         cls,
         *,
         api_key: ApiKey,

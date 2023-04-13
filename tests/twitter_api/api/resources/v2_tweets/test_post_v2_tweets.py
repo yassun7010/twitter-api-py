@@ -14,7 +14,7 @@ class TestGetV2Tweet:
     @pytest.mark.parametrize(
         "client_fixture_name,permit",
         [
-            ("real_oauth1_user_client", True),
+            ("real_oauth1_app_client", True),
             ("real_oauth2_user_client", True),
             ("real_oauth2_app_client", False),
         ],

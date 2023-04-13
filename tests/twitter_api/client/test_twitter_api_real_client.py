@@ -26,8 +26,8 @@ class TestTwitterApiRealClient:
         )
 
     @pytest.mark.skipif(**synthetic_monitoring_is_disable())
-    def test_real_client_from_oauth1_user_env(self):
+    def test_real_client_from_oauth1_app_env(self):
         assert isinstance(
-            TwitterApiRealClient.from_oauth1_user_env(),
+            TwitterApiRealClient.from_oauth1_app_env(),
             TwitterApiRealClient,
         )

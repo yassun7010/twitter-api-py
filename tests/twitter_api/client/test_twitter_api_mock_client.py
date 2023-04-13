@@ -14,8 +14,8 @@ class TestTwitterApiMockClient:
             TwitterApiMockClient,
         )
 
-    def test_mock_client_from_oauth1_user_env(self):
+    def test_mock_client_from_oauth1_app_env(self):
         assert isinstance(
-            TwitterApiMockClient.from_oauth1_user_env(),
+            TwitterApiMockClient.from_oauth1_app_env(),
             TwitterApiMockClient,
         )
