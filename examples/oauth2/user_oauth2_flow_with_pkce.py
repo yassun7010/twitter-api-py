@@ -1,3 +1,4 @@
+import os
 import sys
 
 from twitter_api.api.types.v2_oauth2.twitter_oauth2_access_token_client import (
@@ -6,7 +7,7 @@ from twitter_api.api.types.v2_oauth2.twitter_oauth2_access_token_client import (
 from twitter_api.client import TwitterApiClient
 from twitter_api.error import TwitterApiError
 
-YOUR_CALLBACK_URL = "https://127.0.0.1:3000/"
+YOUR_CALLBACK_URL = os.environ["CALLBACK_URL"]
 
 try:
     # Backend: 認証用の URL を作成します。
