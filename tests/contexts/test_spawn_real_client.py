@@ -1,9 +1,11 @@
 import pytest
 
+from tests.conftest import synthetic_monitoring_is_disable
 from tests.contexts.spawn_real_client import spawn_real_client
 from twitter_api.error import NeverError, UnsupportedAuthenticationError
 
 
+@pytest.mark.skipif(**synthetic_monitoring_is_disable())
 class TestSpawnRealClient:
     def test_spawn_real_client_is_success_when_permit(
         self,
