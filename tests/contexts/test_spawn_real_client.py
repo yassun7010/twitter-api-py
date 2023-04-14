@@ -2,7 +2,7 @@ import pytest
 
 from tests.conftest import synthetic_monitoring_is_disable
 from tests.contexts.spawn_real_client import spawn_real_client
-from twitter_api.error import NeverError, UnsupportedAuthenticationError
+from twitter_api.error import UnsupportedAuthenticationError
 
 
 @pytest.mark.skipif(**synthetic_monitoring_is_disable())
@@ -22,13 +22,13 @@ class TestSpawnRealClient:
         self,
         request: pytest.FixtureRequest,
     ):
-        with pytest.raises(NeverError):
+        with pytest.raises(ValueError):
             with spawn_real_client(
                 "real_oauth2_app_client",
                 request,
                 permit=True,
             ) as _:
-                raise NeverError(None)  # type: ignore
+                raise ValueError()
 
     def test_spawn_real_client_is_success_when_non_permit(
         self,
@@ -44,8 +44,8 @@ class TestSpawnRealClient:
         self,
         request: pytest.FixtureRequest,
     ):
-        with pytest.raises(NeverError):
+        with pytest.raises(ValueError):
             with spawn_real_client(
                 "real_oauth2_app_client", request, permit=False
             ) as _:
-                raise NeverError(None)  # type: ignore
+                raise ValueError()
