@@ -71,6 +71,9 @@ class Tweet(ExtraPermissiveModel):
 
     @property
     def entities_urls(self) -> list[TweetEntitiesUrl]:
+        """
+        ツイート文の中にある URL 情報のリストを返す。
+        """
         if self.entities is None or self.entities.urls is None:
             return []
         else:
@@ -78,20 +81,29 @@ class Tweet(ExtraPermissiveModel):
 
     @property
     def entities_mentions(self) -> list[TweetEntitiesMention]:
+        """
+        ツイート文の中にあるメンション情報のリストを返す。
+        """
         if self.entities is None or self.entities.mentions is None:
             return []
         else:
             return self.entities.mentions
 
     @property
-    def like_count(self) -> Optional[int]:
+    def public_metrics_like_count(self) -> Optional[int]:
+        """
+        「いいね」の数を取得する。
+        """
         if self.public_metrics is None:
             return None
         else:
             return self.public_metrics.like_count
 
     @property
-    def retweet_count(self) -> Optional[int]:
+    def public_metrics_retweet_count(self) -> Optional[int]:
+        """
+        リツイートされた数を取得する。
+        """
         if self.public_metrics is None:
             return None
         else:

@@ -36,7 +36,7 @@ class TestTweet:
             assert url_regex.match(str(url.expanded_url))
 
     def test_has_like_count(self, tweet: Tweet):
-        assert tweet.like_count is not None
+        assert tweet.public_metrics_like_count is not None
 
     def test_has_mensions(self, mention_tweet: Tweet):
         assert len(mention_tweet.entities_mentions) != 0
