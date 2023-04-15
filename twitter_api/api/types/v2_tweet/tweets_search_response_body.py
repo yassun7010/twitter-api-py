@@ -42,12 +42,26 @@ class TweetsSearchResponseBody(ExtraPermissiveModel):
             if tweet.id == id:
                 return tweet
 
+            if tweet.edit_history_tweet_ids is None:
+                continue
+
+            for tweet_id in tweet.edit_history_tweet_ids:
+                if tweet_id == id:
+                    return tweet
+
         if self.includes is None:
             return None
 
         for tweet in self.includes.tweets:
             if tweet.id == id:
                 return tweet
+
+            if tweet.edit_history_tweet_ids is None:
+                continue
+
+            for tweet_id in tweet.edit_history_tweet_ids:
+                if tweet_id == id:
+                    return tweet
 
         return None
 
