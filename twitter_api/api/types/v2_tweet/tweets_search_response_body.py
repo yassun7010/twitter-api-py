@@ -51,7 +51,7 @@ class TweetsSearchResponseBody(ExtraPermissiveModel):
 
         return None
 
-    def retweeted_by(self, retweet: Tweet) -> Optional[Tweet]:
+    def get_retweeted_tweet_by(self, retweet: Tweet) -> Optional[Tweet]:
         """
         リツイート元のツイートを返す。
         """
@@ -69,7 +69,7 @@ class TweetsSearchResponseBody(ExtraPermissiveModel):
 
         return None
 
-    def quoted_by(self, quote_tweet: Tweet) -> Optional[Tweet]:
+    def get_quoted_tweet_by(self, quote_tweet: Tweet) -> Optional[Tweet]:
         """
         引用元のツイートを返す。
         """
@@ -87,7 +87,7 @@ class TweetsSearchResponseBody(ExtraPermissiveModel):
 
         return None
 
-    def replied_by(self, reply_tweet: Tweet) -> Optional[Tweet]:
+    def get_replied_tweet_by(self, reply_tweet: Tweet) -> Optional[Tweet]:
         """
         返信元のツイートを返す。
         """
@@ -105,7 +105,7 @@ class TweetsSearchResponseBody(ExtraPermissiveModel):
 
         return None
 
-    def mentioned_users(self, tweet: Tweet) -> list[User]:
+    def get_mentioned_users_by(self, tweet: Tweet) -> list[User]:
         """
         メンションしているユーザのリストを返す。
         """

@@ -21,43 +21,42 @@ class TestTweetsSearchResponseBody:
         retweet = response.find_tweet("1647123314605965312")
         assert retweet is not None
 
-        retweeted_tweet = response.retweeted_by(retweet)
+        retweeted_tweet = response.get_retweeted_tweet_by(retweet)
 
         assert retweeted_tweet is not None
         assert retweeted_tweet.id == "1647031756388962305"
 
     @pytest.mark.skip("同じレスポンスの中に引用元のツイートが存在しない。")
-    def test_get_quoted_tweet(
+    def test_get_quoted_tweet_by(
         self,
         response: TweetsSearchResponseBody,
     ):
         quote_tweet = response.find_tweet("1647031756388962305")
         assert quote_tweet is not None
 
-        quoted_tweet = response.quoted_by(quote_tweet)
+        quoted_tweet = response.get_quoted_tweet_by(quote_tweet)
 
         assert quoted_tweet is None
 
-    def test_get_replied_tweet(
+    def test_get_replied_tweet_by(
         self,
         response: TweetsSearchResponseBody,
     ):
         reply_tweet = response.find_tweet("1647123304380268545")
         assert reply_tweet is not None
 
-        replied_tweet = response.replied_by(reply_tweet)
+        replied_tweet = response.get_replied_tweet_by(reply_tweet)
 
         assert replied_tweet is not None
         assert replied_tweet.id == "1647122898220621824"
 
-    def test_get_mentioned_users(
+    def test_get_mentioned_users_by(
         self,
         response: TweetsSearchResponseBody,
     ):
-        reply_tweet = response.find_tweet("1647123304380268545")
+        reply_tweet = response.find_tweet("1647123313993601026")
         assert reply_tweet is not None
 
-        replied_tweet = response.replied_by(reply_tweet)
+        mentioned_users = response.get_mentioned_users_by(reply_tweet)
 
-        assert replied_tweet is not None
-        assert replied_tweet.id == "1647122898220621824"
+        assert [user.id for user in mentioned_users] == ["183584495"]
