@@ -78,8 +78,8 @@ class GetV2TweetsSearchRecentResponseBodyIncludes(ExtraPermissiveModel):
 
 class GetV2TweetsSearchRecentResponseBody(ExtraPermissiveModel):
     data: list[TweetDetail] = Field(default_factory=list)
-    includes: Optional[GetV2TweetsSearchRecentResponseBodyIncludes] = None
     meta: GetV2TweetsSearchRecentResponseBodyMeta
+    includes: Optional[GetV2TweetsSearchRecentResponseBodyIncludes] = None
     errors: Optional[list[dict]] = None
 
 

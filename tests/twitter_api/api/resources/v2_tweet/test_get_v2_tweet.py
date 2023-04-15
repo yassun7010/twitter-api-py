@@ -23,7 +23,7 @@ from twitter_api.types.extra_permissive_model import get_extra_fields
 
 
 @pytest.fixture
-def tweet_all_fields() -> ConvinientTweetDetail:
+def all_fields_tweet() -> ConvinientTweetDetail:
     return ConvinientTweetDetail.parse_obj(
         GetV2TweetResponseBody.parse_file(
             json_test_data("get_v2_tweet_response_all_fields.json"),
@@ -97,6 +97,22 @@ class TestGetV2Tweet:
 
         assert get_extra_fields(response) == {}
 
+    def test_get_v2_tweet_retweeted(
+        self,
+        real_oauth2_app_client: TwitterApiRealClient,
+        all_fields: GetV2TweetQueryParameters,
+    ):
+        response = real_oauth2_app_client.request(
+            "https://api.twitter.com/2/tweets/:id"
+        ).get(
+            "1275781448855891968",
+            all_fields,
+        )
+
+        print(response.json())
+
+        assert get_extra_fields(response) == {}
+
 
 class TestMockGetV2Tweet:
     @pytest.mark.parametrize(
@@ -127,26 +143,16 @@ class TestMockGetV2Tweet:
             )
         ) == response
 
+    def test_has_tweet_text(self, all_fields_tweet: ConvinientTweetDetail):
+        assert len(all_fields_tweet.text) > 0
 
-class TestGetV2TweetResponse:
-    def test_has_tweet_text(self, tweet_all_fields: ConvinientTweetDetail):
-        assert len(tweet_all_fields.text) > 0
-
-    def test_has_url(self, tweet_all_fields: ConvinientTweetDetail):
+    def test_has_url(self, all_fields_tweet: ConvinientTweetDetail):
         url_regex = re.compile(r"^https?://(?:[-\w.]|(?:%[\da-fA-F]{2}))+")
 
-        assert len(tweet_all_fields.entities_urls) != 0
+        assert len(all_fields_tweet.entities_urls) != 0
 
-        for url in tweet_all_fields.entities_urls:
+        for url in all_fields_tweet.entities_urls:
             assert url_regex.match(str(url.expanded_url))
 
-    def test_has_like_count(self, tweet_all_fields: ConvinientTweetDetail):
-        assert tweet_all_fields.like_count
-
-    def test_is_mention(self):
-        # メンションのツイートデータが必要
-        pass
-
-    def test_is_quote(self):
-        # 引用ツイートのツイートデータが必要
-        pass
+    def test_has_like_count(self, all_fields_tweet: ConvinientTweetDetail):
+        assert all_fields_tweet.like_count is not None
