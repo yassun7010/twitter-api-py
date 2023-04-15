@@ -60,7 +60,7 @@ class TestGetV2TweetsSearchRecent:
             .get(
                 {
                     "query": "ツイート",
-                    "max_results": 100,
+                    "max_results": 10,
                     "expansions": all_expansions,
                     "media.fields": all_media_fields,
                     "place.fields": all_place_fields,

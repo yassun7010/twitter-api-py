@@ -11,7 +11,7 @@ from twitter_api.api.types.v2_user.user import User
 from twitter_api.types.extra_permissive_model import ExtraPermissiveModel
 
 
-class TweetsSearchResponseBodyIncludes(ExtraPermissiveModel):
+class TweetsResponseBodyIncludes(ExtraPermissiveModel):
     users: list[User] = Field(default_factory=list)
     tweets: list[Tweet] = Field(default_factory=list)
     places: list[Place] = Field(default_factory=list)
@@ -19,18 +19,9 @@ class TweetsSearchResponseBodyIncludes(ExtraPermissiveModel):
     polls: list[Poll] = Field(default_factory=list)
 
 
-class TweetsSearchResponseBodyMeta(ExtraPermissiveModel):
-    result_count: int
-    next_token: Optional[str] = None
-    previous_token: Optional[str] = None
-    newest_id: Optional[TweetId] = None
-    oldest_id: Optional[TweetId] = None
-
-
-class TweetsSearchResponseBody(ExtraPermissiveModel):
+class TweetsResponseBody(ExtraPermissiveModel):
     data: list[Tweet] = Field(default_factory=list)
-    meta: TweetsSearchResponseBodyMeta
-    includes: Optional[TweetsSearchResponseBodyIncludes] = None
+    includes: Optional[TweetsResponseBodyIncludes] = None
     errors: Optional[list[dict]] = None
 
     def find_tweet_by(self, id: TweetId | Tweet) -> Optional[Tweet]:
@@ -151,3 +142,15 @@ class TweetsSearchResponseBody(ExtraPermissiveModel):
                     users.append(user)
 
         return users
+
+
+class TweetsResponseBodyMeta(ExtraPermissiveModel):
+    result_count: int
+    next_token: Optional[str] = None
+    previous_token: Optional[str] = None
+    newest_id: Optional[TweetId] = None
+    oldest_id: Optional[TweetId] = None
+
+
+class TweetsSearchResponseBody(TweetsResponseBody):
+    meta: TweetsResponseBodyMeta

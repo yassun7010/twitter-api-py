@@ -14,6 +14,7 @@ from twitter_api.api.types.v2_scope import oauth2_scopes
 from twitter_api.api.types.v2_tweet.tweet import Tweet
 from twitter_api.api.types.v2_tweet.tweet_field import TweetField
 from twitter_api.api.types.v2_tweet.tweet_id import TweetId
+from twitter_api.api.types.v2_tweet.tweets_response_body import TweetsResponseBody
 from twitter_api.api.types.v2_user.user import User
 from twitter_api.api.types.v2_user.user_field import UserField
 from twitter_api.rate_limit.rate_limit_decorator import rate_limit
@@ -49,18 +50,8 @@ def _make_query(query: GetV2TweetsQueryParameters) -> dict:
     }
 
 
-class GetV2TweetsResponseBodyIncludes(ExtraPermissiveModel):
-    users: list[User] = Field(default_factory=list)
-    tweets: list[Tweet] = Field(default_factory=list)
-    places: list[Place] = Field(default_factory=list)
-    media: list[Media] = Field(default_factory=list)
-    polls: list[Poll] = Field(default_factory=list)
-
-
-class GetV2TweetsResponseBody(ExtraPermissiveModel):
-    data: list[Tweet]
-    includes: Optional[GetV2TweetsResponseBodyIncludes] = None
-    errors: Optional[list[dict]] = None
+class GetV2TweetsResponseBody(TweetsResponseBody):
+    pass
 
 
 class GetV2TweetsResources(ApiResources):

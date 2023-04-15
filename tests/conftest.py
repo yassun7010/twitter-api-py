@@ -4,12 +4,12 @@ from textwrap import dedent
 import pytest
 
 from twitter_api.api.types.v2_expansion import Expansion
-from twitter_api.api.types.v2_media.media_field import MediaField
-from twitter_api.api.types.v2_place.place_field import PlaceField
-from twitter_api.api.types.v2_poll.poll_field import PollField
+from twitter_api.api.types.v2_media.media_field import ALL_MEDIA_FIELDS, MediaField
+from twitter_api.api.types.v2_place.place_field import ALL_PLACE_FIELDS, PlaceField
+from twitter_api.api.types.v2_poll.poll_field import ALL_POLL_FIELDS, PollField
 from twitter_api.api.types.v2_tweet.tweet import Tweet
 from twitter_api.api.types.v2_tweet.tweet_field import TweetField
-from twitter_api.api.types.v2_user.user_field import UserField
+from twitter_api.api.types.v2_user.user_field import ALL_USER_FIELDS, UserField
 from twitter_api.api.types.v2_user.user_id import UserId
 from twitter_api.client.twitter_api_mock_client import TwitterApiMockClient
 from twitter_api.client.twitter_api_real_client import TwitterApiRealClient
@@ -67,7 +67,7 @@ def user_id() -> UserId:
 
 
 @pytest.fixture
-def participant_id(user_id) -> UserId:
+def participant_id(user_id: UserId) -> UserId:
     """
     DM への参加者の UserId。
 
@@ -149,45 +149,17 @@ def all_expansions() -> list[Expansion]:
 
 @pytest.fixture
 def all_media_fields() -> list[MediaField]:
-    return [
-        "alt_text",
-        "duration_ms",
-        "height",
-        "media_key",
-        "non_public_metrics",
-        "organic_metrics",
-        "preview_image_url",
-        "promoted_metrics",
-        "type",
-        "url",
-        "variants",
-        "width",
-    ]
+    return ALL_MEDIA_FIELDS
 
 
 @pytest.fixture
 def all_place_fields() -> list[PlaceField]:
-    return [
-        "contained_within",
-        "country",
-        "country_code",
-        "full_name",
-        "geo",
-        "id",
-        "name",
-        "place_type",
-    ]
+    return ALL_PLACE_FIELDS
 
 
 @pytest.fixture
 def all_poll_fields() -> list[PollField]:
-    return [
-        "duration_minutes",
-        "end_datetime",
-        "id",
-        "options",
-        "voting_status",
-    ]
+    return ALL_POLL_FIELDS
 
 
 @pytest.fixture
@@ -219,23 +191,7 @@ def all_tweet_fields() -> list[TweetField]:
 
 @pytest.fixture
 def all_user_fields() -> list[UserField]:
-    return [
-        "created_at",
-        "description",
-        "entities",
-        "id",
-        "location",
-        "name",
-        "pinned_tweet_id",
-        "profile_image_url",
-        "protected",
-        "public_metrics",
-        "url",
-        "username",
-        "verified",
-        "verified_type",
-        "withheld",
-    ]
+    return ALL_USER_FIELDS
 
 
 @pytest.fixture
