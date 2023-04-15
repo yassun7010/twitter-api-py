@@ -54,3 +54,15 @@ class TestConvinientTweetsSearchResponseBody:
 
         assert replied_tweet is not None
         assert replied_tweet.id == "1647122898220621824"
+
+    def test_get_mentioned_users(
+        self,
+        all_fields_response: ConvinientTweetsSearchResponseBody,
+    ):
+        reply_tweet = all_fields_response.find_tweet("1647123304380268545")
+        assert reply_tweet is not None
+
+        replied_tweet = all_fields_response.replied_by(reply_tweet)
+
+        assert replied_tweet is not None
+        assert replied_tweet.id == "1647122898220621824"

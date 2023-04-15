@@ -1,0 +1,24 @@
+{
+    "author_id": "1235426387957370880",
+    "created_at": "2020-06-24T17:19:05.000Z",
+    "entities": {
+        "mentions": [
+            {
+                "start": 3,
+                "end": 18,
+                "username": "DavidYankovich"
+            }
+        ]
+    },
+    "id": "1275840884769259523",
+    "lang": "en",
+    "possibly_sensitive": false,
+    "referenced_tweets": [
+        {
+            "type": "retweeted",
+            "id": "1275834637437276165"
+        }
+    ],
+    "source": "Twitter for iPhone",
+    "text": "RT @DavidYankovich: A man who admitted his own guilt twice is getting freed from prison while black folks who jump a turnstile in NYC subwa…"
+}
