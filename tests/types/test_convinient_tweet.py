@@ -19,7 +19,7 @@ def all_fields_tweet() -> ConvinientTweet:
 @pytest.fixture
 def mention_tweet() -> ConvinientTweet:
     return ConvinientTweet.parse_file(
-        json_test_data("tweet_mention.json"),
+        json_test_data("mention_tweet.json"),
     )
 
 
