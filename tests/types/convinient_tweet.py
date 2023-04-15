@@ -1,7 +1,6 @@
 from typing import Optional
 
 from twitter_api.api.types.v2_tweet.tweet import Tweet
-from twitter_api.api.types.v2_tweet.tweet_detail import TweetDetail
 from twitter_api.api.types.v2_tweet.tweet_entities_mention import TweetEntitiesMention
 from twitter_api.api.types.v2_tweet.tweet_entities_url import TweetEntitiesUrl
 from twitter_api.api.types.v2_tweet.tweet_id import TweetId
@@ -98,7 +97,3 @@ class ConvinientTweet(Tweet):
         リプライツイートであるかどうか。
         """
         return self.replied_target is not None
-
-
-class ConvinientTweetDetail(TweetDetail, ConvinientTweet):
-    pass

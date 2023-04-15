@@ -6,7 +6,7 @@ from twitter_api.api.resources.api_resources import ApiResources
 from twitter_api.api.types.v2_expansion import Expansion
 from twitter_api.api.types.v2_retweet.retweet import Retweet
 from twitter_api.api.types.v2_scope import oauth2_scopes
-from twitter_api.api.types.v2_tweet.tweet_detail import TweetDetail
+from twitter_api.api.types.v2_tweet.tweet import Tweet
 from twitter_api.api.types.v2_tweet.tweet_field import TweetField
 from twitter_api.api.types.v2_tweet.tweet_id import TweetId
 from twitter_api.api.types.v2_user.user_field import UserField
@@ -40,7 +40,7 @@ def _make_query(query: GetV2TweetRetweetedByQueryParameters) -> dict:
 
 
 class GetV2TweetRetweetedByResponseBodyIncludes(ExtraPermissiveModel):
-    tweets: list[TweetDetail] = Field(default_factory=list)
+    tweets: list[Tweet] = Field(default_factory=list)
 
 
 class GetV2TweetRetweetedByResponseBodyMeta(ExtraPermissiveModel):

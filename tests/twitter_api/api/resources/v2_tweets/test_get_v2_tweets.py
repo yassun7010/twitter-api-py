@@ -11,7 +11,7 @@ from twitter_api.api.types.v2_expansion import Expansion
 from twitter_api.api.types.v2_media.media_field import MediaField
 from twitter_api.api.types.v2_place.place_field import PlaceField
 from twitter_api.api.types.v2_poll.poll_field import PollField
-from twitter_api.api.types.v2_tweet.tweet_detail import TweetDetail
+from twitter_api.api.types.v2_tweet.tweet import Tweet
 from twitter_api.api.types.v2_tweet.tweet_field import TweetField
 from twitter_api.api.types.v2_user.user_field import UserField
 from twitter_api.client.twitter_api_mock_client import TwitterApiMockClient
@@ -20,13 +20,13 @@ from twitter_api.types.extra_permissive_model import get_extra_fields
 
 
 @pytest.fixture
-def tweets(intro_tweet: TweetDetail) -> list[TweetDetail]:
+def tweets(intro_tweet: Tweet) -> list[Tweet]:
     return [intro_tweet]
 
 
 @pytest.fixture
 def all_fields(
-    tweets: list[TweetDetail],
+    tweets: list[Tweet],
     all_expansions: list[Expansion],
     all_media_fields: list[MediaField],
     all_place_fields: list[PlaceField],
@@ -57,7 +57,7 @@ class TestGetV2Tweets:
     )
     def test_get_v2_tweets(
         self,
-        tweets: list[TweetDetail],
+        tweets: list[Tweet],
         client_fixture_name: str,
         permit: bool,
         request: pytest.FixtureRequest,

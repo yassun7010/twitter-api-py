@@ -15,7 +15,6 @@ from twitter_api.api.types.v2_poll.poll_field import PollField
 from twitter_api.api.types.v2_scope import oauth2_scopes
 from twitter_api.api.types.v2_search_query import SearchQuery
 from twitter_api.api.types.v2_tweet.tweet import Tweet
-from twitter_api.api.types.v2_tweet.tweet_detail import TweetDetail
 from twitter_api.api.types.v2_tweet.tweet_field import TweetField
 from twitter_api.api.types.v2_tweet.tweet_id import TweetId
 from twitter_api.api.types.v2_user.user import User
@@ -77,7 +76,7 @@ class GetV2TweetsSearchAllResponseBodyMeta(ExtraPermissiveModel):
 
 class GetV2TweetsSearchAllResponseBodyIncludes(ExtraPermissiveModel):
     users: list[User] = Field(default_factory=list)
-    tweets: list[TweetDetail] = Field(default_factory=list)
+    tweets: list[Tweet] = Field(default_factory=list)
     places: list[Place] = Field(default_factory=list)
     media: list[Media] = Field(default_factory=list)
     polls: list[Poll] = Field(default_factory=list)

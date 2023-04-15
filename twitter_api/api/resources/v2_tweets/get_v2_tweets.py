@@ -11,7 +11,7 @@ from twitter_api.api.types.v2_place.place_field import PlaceField
 from twitter_api.api.types.v2_poll.poll import Poll
 from twitter_api.api.types.v2_poll.poll_field import PollField
 from twitter_api.api.types.v2_scope import oauth2_scopes
-from twitter_api.api.types.v2_tweet.tweet_detail import TweetDetail
+from twitter_api.api.types.v2_tweet.tweet import Tweet
 from twitter_api.api.types.v2_tweet.tweet_field import TweetField
 from twitter_api.api.types.v2_tweet.tweet_id import TweetId
 from twitter_api.api.types.v2_user.user import User
@@ -51,14 +51,14 @@ def _make_query(query: GetV2TweetsQueryParameters) -> dict:
 
 class GetV2TweetsResponseBodyIncludes(ExtraPermissiveModel):
     users: list[User] = Field(default_factory=list)
-    tweets: list[TweetDetail] = Field(default_factory=list)
+    tweets: list[Tweet] = Field(default_factory=list)
     places: list[Place] = Field(default_factory=list)
     media: list[Media] = Field(default_factory=list)
     polls: list[Poll] = Field(default_factory=list)
 
 
 class GetV2TweetsResponseBody(ExtraPermissiveModel):
-    data: list[TweetDetail]
+    data: list[Tweet]
     includes: Optional[GetV2TweetsResponseBodyIncludes] = None
     errors: Optional[list[dict]] = None
 

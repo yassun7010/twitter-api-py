@@ -4,7 +4,7 @@ from twitter_api.api.resources.api_resources import ApiResources
 from twitter_api.api.types.v2_media.media_id import MediaId
 from twitter_api.api.types.v2_place.place_id import PlaceId
 from twitter_api.api.types.v2_scope import oauth2_scopes
-from twitter_api.api.types.v2_tweet.tweet_detail import TweetDetail
+from twitter_api.api.types.v2_tweet.tweet import Tweet
 from twitter_api.api.types.v2_tweet.tweet_id import TweetId
 from twitter_api.api.types.v2_user.user_id import UserId
 from twitter_api.rate_limit.rate_limit_decorator import rate_limit
@@ -62,7 +62,7 @@ PostV2TweetsRequestBody = Union[
 
 
 class PostV2TweetsResponseBody(ExtraPermissiveModel):
-    data: TweetDetail
+    data: Tweet
 
 
 class PostV2TweetsResources(ApiResources):

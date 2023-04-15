@@ -12,7 +12,6 @@ from twitter_api.api.types.v2_poll.poll import Poll
 from twitter_api.api.types.v2_poll.poll_field import PollField
 from twitter_api.api.types.v2_scope import oauth2_scopes
 from twitter_api.api.types.v2_tweet.tweet import Tweet
-from twitter_api.api.types.v2_tweet.tweet_detail import TweetDetail
 from twitter_api.api.types.v2_tweet.tweet_field import TweetField
 from twitter_api.api.types.v2_user.user import User
 from twitter_api.api.types.v2_user.user_field import UserField
@@ -66,7 +65,7 @@ class GetV2UserLikedTweetsResponseBodyMeta(ExtraPermissiveModel):
 
 
 class GetV2UserLikedTweetsResponseBody(ExtraPermissiveModel):
-    data: list[TweetDetail]
+    data: list[Tweet]
     includes: Optional[GetV2UserLikedTweetsResponseBodyIncludes] = None
     meta: Optional[GetV2UserLikedTweetsResponseBodyMeta] = None
     errors: Optional[list[dict]] = None

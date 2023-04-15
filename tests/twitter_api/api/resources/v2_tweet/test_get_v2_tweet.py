@@ -3,7 +3,7 @@ import pytest
 from tests.conftest import synthetic_monitoring_is_disable
 from tests.contexts.spawn_real_client import spawn_real_client
 from tests.data import json_test_data
-from tests.types.convinient_tweet import ConvinientTweetDetail
+from tests.types.convinient_tweet import ConvinientTweet
 from twitter_api.api.resources.v2_tweet.get_v2_tweet import (
     GetV2TweetQueryParameters,
     GetV2TweetResponseBody,
@@ -12,7 +12,7 @@ from twitter_api.api.types.v2_expansion import Expansion
 from twitter_api.api.types.v2_media.media_field import MediaField
 from twitter_api.api.types.v2_place.place_field import PlaceField
 from twitter_api.api.types.v2_poll.poll_field import PollField
-from twitter_api.api.types.v2_tweet.tweet_detail import TweetDetail
+from twitter_api.api.types.v2_tweet.tweet import Tweet
 from twitter_api.api.types.v2_tweet.tweet_field import TweetField
 from twitter_api.api.types.v2_user.user_field import UserField
 from twitter_api.client.twitter_api_mock_client import TwitterApiMockClient
@@ -21,8 +21,8 @@ from twitter_api.types.extra_permissive_model import get_extra_fields
 
 
 @pytest.fixture
-def all_fields_tweet() -> ConvinientTweetDetail:
-    return ConvinientTweetDetail.parse_obj(
+def all_fields_tweet() -> ConvinientTweet:
+    return ConvinientTweet.parse_obj(
         GetV2TweetResponseBody.parse_file(
             json_test_data("get_v2_tweet_response_all_fields.json"),
         ).data
@@ -60,7 +60,7 @@ class TestGetV2Tweet:
     )
     def test_get_v2_tweet(
         self,
-        intro_tweet: TweetDetail,
+        intro_tweet: Tweet,
         client_fixture_name: str,
         permit: bool,
         request: pytest.FixtureRequest,
@@ -81,7 +81,7 @@ class TestGetV2Tweet:
     def test_get_v2_tweet_all_fields(
         self,
         real_oauth2_app_client: TwitterApiRealClient,
-        intro_tweet: TweetDetail,
+        intro_tweet: Tweet,
         all_fields: GetV2TweetQueryParameters,
     ):
         response = real_oauth2_app_client.request(
@@ -106,7 +106,7 @@ class TestMockGetV2Tweet:
     def test_mock_get_v2_tweet(
         self,
         mock_oauth2_app_client: TwitterApiMockClient,
-        intro_tweet: TweetDetail,
+        intro_tweet: Tweet,
         all_fields: GetV2TweetQueryParameters,
         json_filename: str,
     ):
