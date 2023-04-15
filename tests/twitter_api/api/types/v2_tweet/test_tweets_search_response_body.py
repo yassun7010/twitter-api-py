@@ -14,7 +14,16 @@ def response() -> TweetsSearchResponseBody:
 
 
 class TestTweetsSearchResponseBody:
-    def test_find_retweeted_tweet(
+    def test_find_tweet_by(
+        self,
+        response: TweetsSearchResponseBody,
+    ):
+        retweeted_tweet = response.find_tweet_by("1647123314605965312")
+
+        assert retweeted_tweet is not None
+        assert retweeted_tweet.id == "1647123314605965312"
+
+    def test_find_retweeted_tweet_by(
         self,
         response: TweetsSearchResponseBody,
     ):
