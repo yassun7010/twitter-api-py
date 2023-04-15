@@ -123,8 +123,17 @@ class TweetResponseBody(FindTweets):
         if isinstance(id, Tweet):
             id = id.id
 
-        if self.data.id == id:
+        if _check_self(id, self.data):
             return self.data
+
+        if self.includes is None:
+            return None
+
+        for tweet in self.includes.tweets:
+            if _check_self(id, tweet):
+                return tweet
+
+        return None
 
 
 class TweetsResponseBody(FindTweets):
@@ -135,29 +144,15 @@ class TweetsResponseBody(FindTweets):
             id = id.id
 
         for tweet in self.data:
-            if tweet.id == id:
+            if _check_self(id, tweet):
                 return tweet
-
-            if tweet.edit_history_tweet_ids is None:
-                continue
-
-            for tweet_id in tweet.edit_history_tweet_ids:
-                if tweet_id == id:
-                    return tweet
 
         if self.includes is None:
             return None
 
         for tweet in self.includes.tweets:
-            if tweet.id == id:
+            if _check_self(id, tweet):
                 return tweet
-
-            if tweet.edit_history_tweet_ids is None:
-                continue
-
-            for tweet_id in tweet.edit_history_tweet_ids:
-                if tweet_id == id:
-                    return tweet
 
         return None
 
@@ -172,3 +167,20 @@ class TweetsResponseBodyMeta(ExtraPermissiveModel):
 
 class TweetsSearchResponseBody(TweetsResponseBody):
     meta: TweetsResponseBodyMeta
+
+
+def _check_self(origin: TweetId, target: Tweet) -> bool:
+    """
+    同じツイートを指しているか。
+
+    編集履歴を遡って判定する。
+    """
+
+    if target.id == origin:
+        return True
+
+    if target.edit_history_tweet_ids is not None:
+        for target_id in target.edit_history_tweet_ids:
+            if target_id == origin:
+                return True
+    return False
