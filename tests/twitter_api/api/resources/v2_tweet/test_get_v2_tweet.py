@@ -1,8 +1,11 @@
+import re
+
 import pytest
 
 from tests.conftest import synthetic_monitoring_is_disable
 from tests.contexts.spawn_real_client import spawn_real_client
 from tests.data import json_test_data
+from tests.types.convinient_tweet import ConvinientTweetDetail
 from twitter_api.api.resources.v2_tweet.get_v2_tweet import (
     GetV2TweetQueryParameters,
     GetV2TweetResponseBody,
@@ -17,6 +20,15 @@ from twitter_api.api.types.v2_user.user_field import UserField
 from twitter_api.client.twitter_api_mock_client import TwitterApiMockClient
 from twitter_api.client.twitter_api_real_client import TwitterApiRealClient
 from twitter_api.types.extra_permissive_model import get_extra_fields
+
+
+@pytest.fixture
+def tweet_all_fields() -> ConvinientTweetDetail:
+    return ConvinientTweetDetail.parse_obj(
+        GetV2TweetResponseBody.parse_file(
+            json_test_data("get_v2_tweet_response_all_fields.json"),
+        ).data
+    )
 
 
 @pytest.fixture
@@ -114,3 +126,27 @@ class TestMockGetV2Tweet:
                 all_fields,
             )
         ) == response
+
+
+class TestGetV2TweetResponse:
+    def test_has_tweet_text(self, tweet_all_fields: ConvinientTweetDetail):
+        assert len(tweet_all_fields.text) > 0
+
+    def test_has_url(self, tweet_all_fields: ConvinientTweetDetail):
+        url_regex = re.compile(r"^https?://(?:[-\w.]|(?:%[\da-fA-F]{2}))+")
+
+        assert len(tweet_all_fields.entities_urls) != 0
+
+        for url in tweet_all_fields.entities_urls:
+            assert url_regex.match(str(url.expanded_url))
+
+    def test_has_like_count(self, tweet_all_fields: ConvinientTweetDetail):
+        assert tweet_all_fields.like_count
+
+    def test_is_mention(self):
+        # メンションのツイートデータが必要
+        pass
+
+    def test_is_quote(self):
+        # 引用ツイートのツイートデータが必要
+        pass

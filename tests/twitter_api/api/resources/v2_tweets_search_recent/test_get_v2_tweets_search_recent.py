@@ -6,6 +6,12 @@ from tests.data import json_test_data
 from twitter_api.api.resources.v2_tweets_search_recent.get_v2_tweets_search_recent import (
     GetV2TweetsSearchRecentResponseBody,
 )
+from twitter_api.api.types.v2_expansion import Expansion
+from twitter_api.api.types.v2_media.media_field import MediaField
+from twitter_api.api.types.v2_place.place_field import PlaceField
+from twitter_api.api.types.v2_poll.poll_field import PollField
+from twitter_api.api.types.v2_tweet.tweet_field import TweetField
+from twitter_api.api.types.v2_user.user_field import UserField
 from twitter_api.client.twitter_api_mock_client import TwitterApiMockClient
 from twitter_api.client.twitter_api_real_client import TwitterApiRealClient
 from twitter_api.types.extra_permissive_model import get_extra_fields
@@ -31,20 +37,38 @@ class TestGetV2TweetsSearchRecent:
             response = (
                 real_client.chain()
                 .request("https://api.twitter.com/2/tweets/search/recent")
-                .get({"query": "ツイート", "max_results": 1})
+                .get({"query": "ツイート", "max_results": 10})
             )
 
             print(response.json())
 
             assert get_extra_fields(response) == {}
 
-    def test_get_v2_search_recent_when_oauth2(
-        self, real_oauth2_app_client: TwitterApiRealClient
+    def test_get_v2_search_recent_all_fields(
+        self,
+        real_oauth2_app_client: TwitterApiRealClient,
+        all_expansions: list[Expansion],
+        all_media_fields: list[MediaField],
+        all_place_fields: list[PlaceField],
+        all_poll_fields: list[PollField],
+        all_tweet_fields: list[TweetField],
+        all_user_fields: list[UserField],
     ):
         response = (
             real_oauth2_app_client.chain()
             .request("https://api.twitter.com/2/tweets/search/recent")
-            .get({"query": "ツイート", "max_results": 1})
+            .get(
+                {
+                    "query": "ツイート",
+                    "max_results": 100,
+                    "expansions": all_expansions,
+                    "media.fields": all_media_fields,
+                    "place.fields": all_place_fields,
+                    "poll.fields": all_poll_fields,
+                    "tweet.fields": all_tweet_fields,
+                    "user.fields": all_user_fields,
+                }
+            )
         )
 
         print(response.json())
@@ -57,6 +81,7 @@ class TestMockGetV2TweetsSearchRecent:
         "json_filename",
         [
             "get_v2_tweets_search_recent_response.json",
+            "get_v2_tweets_search_recent_response_all_fields.json",
             "get_v2_tweets_search_recent_response_empty_result.json",
         ],
     )

@@ -5,11 +5,11 @@ from twitter_api.types.http import Url
 
 
 class TweetEntitiesUrl(ExtraPermissiveModel):
-    start: Optional[int] = None
-    end: Optional[int] = None
-    url: Optional[Url] = None
-    expanded_url: Optional[Url] = None
-    display_url: Optional[Url] = None
+    start: int
+    end: int
+    url: Url
+    expanded_url: Url
+    display_url: Url
     status: Optional[str] = None
     title: Optional[str] = None
     description: Optional[str] = None

@@ -10,5 +10,5 @@ DomainId = str
 class Domain(ExtraPermissiveModel):
     id: DomainId
     name: str
-    description: str
+    description: Optional[str] = None
     entity: Optional[Entity] = None

@@ -13,6 +13,7 @@ from twitter_api.api.types.v2_search_query import SearchQuery
 from twitter_api.api.types.v2_tweet.tweet_detail import TweetDetail
 from twitter_api.api.types.v2_tweet.tweet_field import TweetField
 from twitter_api.api.types.v2_tweet.tweet_id import TweetId
+from twitter_api.api.types.v2_user.user import User
 from twitter_api.api.types.v2_user.user_field import UserField
 from twitter_api.rate_limit.rate_limit_decorator import rate_limit
 from twitter_api.types.comma_separatable import CommaSeparatable, comma_separated_str
@@ -53,11 +54,11 @@ def _make_query(query: GetV2TweetsSearchRecentQueryParameters) -> dict:
         "until_id": query.get("until_id"),
         "sort_order": query.get("sort_order"),
         "next_token": query.get("next_token"),
-        "max_results": query.get("expansions"),
+        "max_results": query.get("max_results"),
         "expansions": comma_separated_str(query.get("expansions")),
-        "place.fields": query.get("place.fields"),
-        "media.fields": query.get("media.fields"),
-        "poll.fields": query.get("poll.fields"),
+        "place.fields": comma_separated_str(query.get("place.fields")),
+        "media.fields": comma_separated_str(query.get("media.fields")),
+        "poll.fields": comma_separated_str(query.get("poll.fields")),
         "tweet.fields": comma_separated_str(query.get("tweet.fields")),
         "user.fields": comma_separated_str(query.get("user.fields")),
     }
@@ -70,9 +71,16 @@ class GetV2TweetsSearchRecentResponseBodyMeta(ExtraPermissiveModel):
     oldest_id: Optional[TweetId] = None
 
 
+class GetV2TweetsSearchRecentResponseBodyIncludes(ExtraPermissiveModel):
+    users: list[User] = Field(default_factory=list)
+    tweets: list[TweetDetail] = Field(default_factory=list)
+
+
 class GetV2TweetsSearchRecentResponseBody(ExtraPermissiveModel):
     data: list[TweetDetail] = Field(default_factory=list)
+    includes: Optional[GetV2TweetsSearchRecentResponseBodyIncludes] = None
     meta: GetV2TweetsSearchRecentResponseBodyMeta
+    errors: Optional[dict] = None
 
 
 class GetV2TweetsSearchRecentResources(ApiResources):
