@@ -11,7 +11,7 @@ from twitter_api.api.types.v2_scope import oauth2_scopes
 from twitter_api.api.types.v2_search_query import SearchQuery
 from twitter_api.api.types.v2_tweet.tweet_field import TweetField
 from twitter_api.api.types.v2_tweet.tweet_id import TweetId
-from twitter_api.api.types.v2_tweet.tweets_response_body import TweetsSearchResponseBody
+from twitter_api.api.types.v2_tweet.tweet_response_body import TweetsSearchResponseBody
 from twitter_api.api.types.v2_user.user_field import UserField
 from twitter_api.rate_limit.rate_limit_decorator import rate_limit
 from twitter_api.types.comma_separatable import CommaSeparatable, comma_separated_str

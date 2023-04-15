@@ -1,3 +1,4 @@
+from abc import ABCMeta, abstractmethod
 from typing import Optional
 
 from pydantic import Field
@@ -19,47 +20,18 @@ class TweetsResponseBodyIncludes(ExtraPermissiveModel):
     polls: list[Poll] = Field(default_factory=list)
 
 
-class TweetsResponseBody(ExtraPermissiveModel):
-    data: list[Tweet] = Field(default_factory=list)
+class FindTweets(ExtraPermissiveModel, metaclass=ABCMeta):
     includes: Optional[TweetsResponseBodyIncludes] = None
     errors: Optional[list[dict]] = None
 
+    @abstractmethod
     def find_tweet_by(self, id: TweetId | Tweet) -> Optional[Tweet]:
         """
         TweetId からツイートを検索する。
 
         Tweet を入力とした場合、入力した Tweet が Response の中にあるかを調べる。
         """
-
-        if isinstance(id, Tweet):
-            id = id.id
-
-        for tweet in self.data:
-            if tweet.id == id:
-                return tweet
-
-            if tweet.edit_history_tweet_ids is None:
-                continue
-
-            for tweet_id in tweet.edit_history_tweet_ids:
-                if tweet_id == id:
-                    return tweet
-
-        if self.includes is None:
-            return None
-
-        for tweet in self.includes.tweets:
-            if tweet.id == id:
-                return tweet
-
-            if tweet.edit_history_tweet_ids is None:
-                continue
-
-            for tweet_id in tweet.edit_history_tweet_ids:
-                if tweet_id == id:
-                    return tweet
-
-        return None
+        ...
 
     def find_retweeted_tweet_by(self, retweet: TweetId | Tweet) -> Optional[Tweet]:
         """
@@ -142,6 +114,52 @@ class TweetsResponseBody(ExtraPermissiveModel):
                     users.append(user)
 
         return users
+
+
+class TweetResponseBody(FindTweets):
+    data: Tweet
+
+    def find_tweet_by(self, id: TweetId | Tweet) -> Optional[Tweet]:
+        if isinstance(id, Tweet):
+            id = id.id
+
+        if self.data.id == id:
+            return self.data
+
+
+class TweetsResponseBody(FindTweets):
+    data: list[Tweet] = Field(default_factory=list)
+
+    def find_tweet_by(self, id: TweetId | Tweet) -> Optional[Tweet]:
+        if isinstance(id, Tweet):
+            id = id.id
+
+        for tweet in self.data:
+            if tweet.id == id:
+                return tweet
+
+            if tweet.edit_history_tweet_ids is None:
+                continue
+
+            for tweet_id in tweet.edit_history_tweet_ids:
+                if tweet_id == id:
+                    return tweet
+
+        if self.includes is None:
+            return None
+
+        for tweet in self.includes.tweets:
+            if tweet.id == id:
+                return tweet
+
+            if tweet.edit_history_tweet_ids is None:
+                continue
+
+            for tweet_id in tweet.edit_history_tweet_ids:
+                if tweet_id == id:
+                    return tweet
+
+        return None
 
 
 class TweetsResponseBodyMeta(ExtraPermissiveModel):

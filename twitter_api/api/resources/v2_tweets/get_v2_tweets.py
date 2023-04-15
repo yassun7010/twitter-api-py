@@ -14,7 +14,7 @@ from twitter_api.api.types.v2_scope import oauth2_scopes
 from twitter_api.api.types.v2_tweet.tweet import Tweet
 from twitter_api.api.types.v2_tweet.tweet_field import TweetField
 from twitter_api.api.types.v2_tweet.tweet_id import TweetId
-from twitter_api.api.types.v2_tweet.tweets_response_body import TweetsResponseBody
+from twitter_api.api.types.v2_tweet.tweet_response_body import TweetsResponseBody
 from twitter_api.api.types.v2_user.user import User
 from twitter_api.api.types.v2_user.user_field import UserField
 from twitter_api.rate_limit.rate_limit_decorator import rate_limit

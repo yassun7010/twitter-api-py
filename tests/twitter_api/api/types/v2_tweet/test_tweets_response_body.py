@@ -1,7 +1,7 @@
 import pytest
 
 from tests.data import json_test_data
-from twitter_api.api.types.v2_tweet.tweets_response_body import TweetsSearchResponseBody
+from twitter_api.api.types.v2_tweet.tweet_response_body import TweetsSearchResponseBody
 
 
 @pytest.fixture
