@@ -20,7 +20,7 @@
 1 つは直接 HttpClient で API を呼び出すことです。
 
 ```ruby
-HttpClient.get("https://api.twitter.com/2/users/2244994945")
+HttpClient.new.get("https://api.twitter.com/2/users/2244994945")
 ```
 
 この開発方法は決して快適ではありません。
@@ -37,7 +37,7 @@ HttpClient.get("https://api.twitter.com/2/users/2244994945")
 もう一つは有名な Gem を使うことです。
 
 ```ruby
-api.tweets
+api.users
 ```
 
 この方法は記述量が少なくなるかもしれませんが、致命的な問題を抱えていると思います。
