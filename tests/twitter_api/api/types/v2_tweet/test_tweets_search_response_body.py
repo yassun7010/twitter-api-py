@@ -7,7 +7,7 @@ from twitter_api.api.types.v2_tweet.tweets_search_response_body import (
 
 
 @pytest.fixture
-def all_fields_response() -> TweetsSearchResponseBody:
+def response() -> TweetsSearchResponseBody:
     return TweetsSearchResponseBody.parse_file(
         json_test_data("get_v2_tweets_search_recent_response_all_fields.json"),
     )
@@ -16,12 +16,12 @@ def all_fields_response() -> TweetsSearchResponseBody:
 class TestTweetsSearchResponseBody:
     def test_get_retweeted_tweet(
         self,
-        all_fields_response: TweetsSearchResponseBody,
+        response: TweetsSearchResponseBody,
     ):
-        retweet = all_fields_response.find_tweet("1647123314605965312")
+        retweet = response.find_tweet("1647123314605965312")
         assert retweet is not None
 
-        retweeted_tweet = all_fields_response.retweeted_by(retweet)
+        retweeted_tweet = response.retweeted_by(retweet)
 
         assert retweeted_tweet is not None
         assert retweeted_tweet.id == "1647031756388962305"
@@ -29,35 +29,35 @@ class TestTweetsSearchResponseBody:
     @pytest.mark.skip("同じレスポンスの中に引用元のツイートが存在しない。")
     def test_get_quoted_tweet(
         self,
-        all_fields_response: TweetsSearchResponseBody,
+        response: TweetsSearchResponseBody,
     ):
-        quote_tweet = all_fields_response.find_tweet("1647031756388962305")
+        quote_tweet = response.find_tweet("1647031756388962305")
         assert quote_tweet is not None
 
-        quoted_tweet = all_fields_response.quoted_by(quote_tweet)
+        quoted_tweet = response.quoted_by(quote_tweet)
 
         assert quoted_tweet is None
 
     def test_get_replied_tweet(
         self,
-        all_fields_response: TweetsSearchResponseBody,
+        response: TweetsSearchResponseBody,
     ):
-        reply_tweet = all_fields_response.find_tweet("1647123304380268545")
+        reply_tweet = response.find_tweet("1647123304380268545")
         assert reply_tweet is not None
 
-        replied_tweet = all_fields_response.replied_by(reply_tweet)
+        replied_tweet = response.replied_by(reply_tweet)
 
         assert replied_tweet is not None
         assert replied_tweet.id == "1647122898220621824"
 
     def test_get_mentioned_users(
         self,
-        all_fields_response: TweetsSearchResponseBody,
+        response: TweetsSearchResponseBody,
     ):
-        reply_tweet = all_fields_response.find_tweet("1647123304380268545")
+        reply_tweet = response.find_tweet("1647123304380268545")
         assert reply_tweet is not None
 
-        replied_tweet = all_fields_response.replied_by(reply_tweet)
+        replied_tweet = response.replied_by(reply_tweet)
 
         assert replied_tweet is not None
         assert replied_tweet.id == "1647122898220621824"
