@@ -103,6 +103,7 @@ class TweetsSearchResponseBody(ExtraPermissiveModel):
 
         if target.quoted_target is None:
             return None
+
         quote_tweet_id = target.quoted_target
 
         for tweet in self.includes.tweets:
@@ -123,6 +124,7 @@ class TweetsSearchResponseBody(ExtraPermissiveModel):
 
         if target.replied_target is None:
             return None
+
         reply_tweet_id = target.replied_target
 
         for tweet in self.includes.tweets:
