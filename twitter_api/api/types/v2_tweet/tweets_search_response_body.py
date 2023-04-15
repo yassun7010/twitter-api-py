@@ -33,7 +33,7 @@ class TweetsSearchResponseBody(ExtraPermissiveModel):
     includes: Optional[TweetsSearchResponseBodyIncludes] = None
     errors: Optional[list[dict]] = None
 
-    def find_tweet(self, id: TweetId) -> Optional[Tweet]:
+    def find_tweet_by(self, id: TweetId) -> Optional[Tweet]:
         """
         TweetId からツイートを検索する。
         """
@@ -65,9 +65,9 @@ class TweetsSearchResponseBody(ExtraPermissiveModel):
 
         return None
 
-    def get_retweeted_tweet_by(self, retweet: Tweet) -> Optional[Tweet]:
+    def find_retweeted_tweet_by(self, retweet: Tweet) -> Optional[Tweet]:
         """
-        リツイート元のツイートを返す。
+        リツイート元のツイートを検索する。
         """
 
         if self.includes is None:
@@ -83,9 +83,9 @@ class TweetsSearchResponseBody(ExtraPermissiveModel):
 
         return None
 
-    def get_quoted_tweet_by(self, quote_tweet: Tweet) -> Optional[Tweet]:
+    def find_quoted_tweet_by(self, quote_tweet: Tweet) -> Optional[Tweet]:
         """
-        引用元のツイートを返す。
+        引用元のツイートを検索する。
         """
 
         if self.includes is None:
@@ -101,9 +101,9 @@ class TweetsSearchResponseBody(ExtraPermissiveModel):
 
         return None
 
-    def get_replied_tweet_by(self, reply_tweet: Tweet) -> Optional[Tweet]:
+    def find_replied_tweet_by(self, reply_tweet: Tweet) -> Optional[Tweet]:
         """
-        返信元のツイートを返す。
+        返信元のツイートを検索する。
         """
 
         if self.includes is None:
@@ -119,9 +119,9 @@ class TweetsSearchResponseBody(ExtraPermissiveModel):
 
         return None
 
-    def get_mentioned_users_by(self, tweet: Tweet) -> list[User]:
+    def find_mentioned_users_by(self, tweet: Tweet) -> list[User]:
         """
-        メンションしているユーザのリストを返す。
+        メンションしているユーザのリストを検索する。
         """
 
         if self.includes is None:
