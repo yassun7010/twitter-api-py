@@ -1,9 +1,6 @@
 import pytest
 
 from tests.data import json_test_data
-from twitter_api.api.resources.v2_tweets_search_recent.get_v2_tweets_search_recent import (
-    GetV2TweetsSearchRecentResponseBody,
-)
 from twitter_api.api.types.v2_tweet.tweets_search_response_body import (
     TweetsSearchResponseBody,
 )
@@ -11,10 +8,8 @@ from twitter_api.api.types.v2_tweet.tweets_search_response_body import (
 
 @pytest.fixture
 def all_fields_response() -> TweetsSearchResponseBody:
-    return TweetsSearchResponseBody.parse_obj(
-        GetV2TweetsSearchRecentResponseBody.parse_file(
-            json_test_data("get_v2_tweets_search_recent_response_all_fields.json"),
-        )
+    return TweetsSearchResponseBody.parse_file(
+        json_test_data("get_v2_tweets_search_recent_response_all_fields.json"),
     )
 
 
