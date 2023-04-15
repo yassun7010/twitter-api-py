@@ -373,7 +373,7 @@ class TwitterApiClient(Chainable, metaclass=ABCMeta):
         cls,
         bearer_token_env="BEARER_TOEKN",
         rate_limit_manager: Optional[RateLimitManager] = None,
-    ):
+    ) -> Self:
         """環境変数から、 OAuth 2.0 の Bearer 認証を用いてクライアントを作成する。"""
 
         return cls.from_oauth2_bearer_token(
@@ -406,7 +406,7 @@ class TwitterApiClient(Chainable, metaclass=ABCMeta):
         api_key_env: Env[ApiKey] = "API_KEY",
         api_secret_env: Env[ApiSecret] = "API_SECRET",
         rate_limit_manager: Optional[RateLimitManager] = None,
-    ):
+    ) -> Self:
         """環境変数から、OAuth 2.0 のアプリ認証を用いてクライアントを作成する。"""
 
         return cls.from_oauth2_app(
@@ -476,7 +476,7 @@ class TwitterApiClient(Chainable, metaclass=ABCMeta):
         access_token: AccessToken,
         access_secret: AccessSecret,
         rate_limit_manager: Optional[RateLimitManager] = None,
-    ):
+    ) -> Self:
         """OAuth1.0a のアプリ認証を用いてクライアントを作成する。"""
 
         from .twitter_api_real_client import TwitterApiRealClient
@@ -498,7 +498,7 @@ class TwitterApiClient(Chainable, metaclass=ABCMeta):
         access_token_env: Env[AccessToken] = "ACCESS_TOKEN",
         access_secret_env: Env[AccessSecret] = "ACCESS_SECRET",
         rate_limit_manager: Optional[RateLimitManager] = None,
-    ):
+    ) -> Self:
         """環境変数から、OAuth1.0a のアプリ認証を用いてクライアントを作成する。"""
 
         return cls.from_oauth1_app(
