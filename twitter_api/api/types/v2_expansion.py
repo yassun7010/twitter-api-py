@@ -1,6 +1,6 @@
-from typing import Literal
+from typing import Literal, TypeAlias
 
-Expansion = Literal[
+Expansion: TypeAlias = Literal[
     "attachments.poll_ids",
     "attachments.media_keys",
     "author_id",
