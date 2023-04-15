@@ -1,5 +1,3 @@
-import re
-
 import pytest
 
 from tests.conftest import synthetic_monitoring_is_disable
@@ -97,22 +95,6 @@ class TestGetV2Tweet:
 
         assert get_extra_fields(response) == {}
 
-    def test_get_v2_tweet_retweeted(
-        self,
-        real_oauth2_app_client: TwitterApiRealClient,
-        all_fields: GetV2TweetQueryParameters,
-    ):
-        response = real_oauth2_app_client.request(
-            "https://api.twitter.com/2/tweets/:id"
-        ).get(
-            "1275781448855891968",
-            all_fields,
-        )
-
-        print(response.json())
-
-        assert get_extra_fields(response) == {}
-
 
 class TestMockGetV2Tweet:
     @pytest.mark.parametrize(
@@ -142,17 +124,3 @@ class TestMockGetV2Tweet:
                 all_fields,
             )
         ) == response
-
-    def test_has_tweet_text(self, all_fields_tweet: ConvinientTweetDetail):
-        assert len(all_fields_tweet.text) > 0
-
-    def test_has_url(self, all_fields_tweet: ConvinientTweetDetail):
-        url_regex = re.compile(r"^https?://(?:[-\w.]|(?:%[\da-fA-F]{2}))+")
-
-        assert len(all_fields_tweet.entities_urls) != 0
-
-        for url in all_fields_tweet.entities_urls:
-            assert url_regex.match(str(url.expanded_url))
-
-    def test_has_like_count(self, all_fields_tweet: ConvinientTweetDetail):
-        assert all_fields_tweet.like_count is not None

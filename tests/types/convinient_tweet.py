@@ -2,6 +2,7 @@ from typing import Optional
 
 from twitter_api.api.types.v2_tweet.tweet import Tweet
 from twitter_api.api.types.v2_tweet.tweet_detail import TweetDetail
+from twitter_api.api.types.v2_tweet.tweet_entities_mention import TweetEntitiesMention
 from twitter_api.api.types.v2_tweet.tweet_entities_url import TweetEntitiesUrl
 from twitter_api.api.types.v2_tweet.tweet_id import TweetId
 
@@ -13,6 +14,13 @@ class ConvinientTweet(Tweet):
             return []
         else:
             return self.entities.urls
+
+    @property
+    def entities_mentions(self) -> list[TweetEntitiesMention]:
+        if self.entities is None or self.entities.mentions is None:
+            return []
+        else:
+            return self.entities.mentions
 
     @property
     def like_count(self) -> Optional[int]:
