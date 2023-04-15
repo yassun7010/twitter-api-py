@@ -1,8 +1,6 @@
 from datetime import datetime
 from typing import Literal, NotRequired, Optional, TypedDict
 
-from pydantic import Field
-
 from twitter_api.api.resources.api_resources import ApiResources
 from twitter_api.api.types.v2_expansion import Expansion
 from twitter_api.api.types.v2_media.media_field import MediaField
@@ -10,15 +8,15 @@ from twitter_api.api.types.v2_place.place_field import PlaceField
 from twitter_api.api.types.v2_poll.poll_field import PollField
 from twitter_api.api.types.v2_scope import oauth2_scopes
 from twitter_api.api.types.v2_search_query import SearchQuery
-from twitter_api.api.types.v2_tweet.tweet import Tweet
 from twitter_api.api.types.v2_tweet.tweet_field import TweetField
 from twitter_api.api.types.v2_tweet.tweet_id import TweetId
-from twitter_api.api.types.v2_user.user import User
+from twitter_api.api.types.v2_tweet.tweets_search_response_body import (
+    TweetsSearchResponseBody,
+)
 from twitter_api.api.types.v2_user.user_field import UserField
 from twitter_api.rate_limit.rate_limit_decorator import rate_limit
 from twitter_api.types.comma_separatable import CommaSeparatable, comma_separated_str
 from twitter_api.types.endpoint import Endpoint
-from twitter_api.types.extra_permissive_model import ExtraPermissiveModel
 from twitter_api.utils.datetime import rfc3339
 from twitter_api.utils.functional import map_optional
 
@@ -64,23 +62,8 @@ def _make_query(query: GetV2TweetsSearchRecentQueryParameters) -> dict:
     }
 
 
-class GetV2TweetsSearchRecentResponseBodyMeta(ExtraPermissiveModel):
-    result_count: int
-    next_token: Optional[str] = None
-    newest_id: Optional[TweetId] = None
-    oldest_id: Optional[TweetId] = None
-
-
-class GetV2TweetsSearchRecentResponseBodyIncludes(ExtraPermissiveModel):
-    users: list[User] = Field(default_factory=list)
-    tweets: list[Tweet] = Field(default_factory=list)
-
-
-class GetV2TweetsSearchRecentResponseBody(ExtraPermissiveModel):
-    data: list[Tweet] = Field(default_factory=list)
-    meta: GetV2TweetsSearchRecentResponseBodyMeta
-    includes: Optional[GetV2TweetsSearchRecentResponseBodyIncludes] = None
-    errors: Optional[list[dict]] = None
+class GetV2TweetsSearchRecentResponseBody(TweetsSearchResponseBody):
+    pass
 
 
 class GetV2TweetsSearchRecentResources(ApiResources):
@@ -92,7 +75,7 @@ class GetV2TweetsSearchRecentResources(ApiResources):
     @rate_limit(ENDPOINT, "user", requests=180, mins=15)
     def get(
         self, query: GetV2TweetsSearchRecentQueryParameters
-    ) -> GetV2TweetsSearchRecentResponseBody:
+    ) -> TweetsSearchResponseBody:
         """
         ツイートの一覧を検索する。
 
@@ -100,6 +83,6 @@ class GetV2TweetsSearchRecentResources(ApiResources):
         """
         return self.request_client.get(
             endpoint=ENDPOINT,
-            response_type=GetV2TweetsSearchRecentResponseBody,
+            response_type=TweetsSearchResponseBody,
             query=_make_query(query) if query is not None else None,
         )

@@ -3,7 +3,6 @@ import pytest
 from tests.conftest import synthetic_monitoring_is_disable
 from tests.contexts.spawn_real_client import spawn_real_client
 from tests.data import json_test_data
-from tests.types.convinient_tweet import ConvinientTweet
 from twitter_api.api.resources.v2_tweet.get_v2_tweet import (
     GetV2TweetQueryParameters,
     GetV2TweetResponseBody,
@@ -18,15 +17,6 @@ from twitter_api.api.types.v2_user.user_field import UserField
 from twitter_api.client.twitter_api_mock_client import TwitterApiMockClient
 from twitter_api.client.twitter_api_real_client import TwitterApiRealClient
 from twitter_api.types.extra_permissive_model import get_extra_fields
-
-
-@pytest.fixture
-def all_fields_tweet() -> ConvinientTweet:
-    return ConvinientTweet.parse_obj(
-        GetV2TweetResponseBody.parse_file(
-            json_test_data("get_v2_tweet_response_all_fields.json"),
-        ).data
-    )
 
 
 @pytest.fixture

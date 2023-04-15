@@ -1,27 +1,27 @@
 import pytest
 
 from tests.data import json_test_data
-from tests.types.convinient_tweets_search_response_body import (
-    ConvinientTweetsSearchResponseBody,
-)
 from twitter_api.api.resources.v2_tweets_search_recent.get_v2_tweets_search_recent import (
     GetV2TweetsSearchRecentResponseBody,
+)
+from twitter_api.api.types.v2_tweet.tweets_search_response_body import (
+    TweetsSearchResponseBody,
 )
 
 
 @pytest.fixture
-def all_fields_response() -> ConvinientTweetsSearchResponseBody:
-    return ConvinientTweetsSearchResponseBody.parse_obj(
+def all_fields_response() -> TweetsSearchResponseBody:
+    return TweetsSearchResponseBody.parse_obj(
         GetV2TweetsSearchRecentResponseBody.parse_file(
             json_test_data("get_v2_tweets_search_recent_response_all_fields.json"),
         )
     )
 
 
-class TestConvinientTweetsSearchResponseBody:
+class TestTweetsSearchResponseBody:
     def test_get_retweeted_tweet(
         self,
-        all_fields_response: ConvinientTweetsSearchResponseBody,
+        all_fields_response: TweetsSearchResponseBody,
     ):
         retweet = all_fields_response.find_tweet("1647123314605965312")
         assert retweet is not None
@@ -34,7 +34,7 @@ class TestConvinientTweetsSearchResponseBody:
     @pytest.mark.skip("同じレスポンスの中に引用元のツイートが存在しない。")
     def test_get_quoted_tweet(
         self,
-        all_fields_response: ConvinientTweetsSearchResponseBody,
+        all_fields_response: TweetsSearchResponseBody,
     ):
         quote_tweet = all_fields_response.find_tweet("1647031756388962305")
         assert quote_tweet is not None
@@ -45,7 +45,7 @@ class TestConvinientTweetsSearchResponseBody:
 
     def test_get_replied_tweet(
         self,
-        all_fields_response: ConvinientTweetsSearchResponseBody,
+        all_fields_response: TweetsSearchResponseBody,
     ):
         reply_tweet = all_fields_response.find_tweet("1647123304380268545")
         assert reply_tweet is not None
@@ -57,7 +57,7 @@ class TestConvinientTweetsSearchResponseBody:
 
     def test_get_mentioned_users(
         self,
-        all_fields_response: ConvinientTweetsSearchResponseBody,
+        all_fields_response: TweetsSearchResponseBody,
     ):
         reply_tweet = all_fields_response.find_tweet("1647123304380268545")
         assert reply_tweet is not None

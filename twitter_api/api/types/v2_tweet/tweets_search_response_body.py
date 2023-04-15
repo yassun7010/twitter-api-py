@@ -2,31 +2,38 @@ from typing import Optional
 
 from pydantic import Field
 
-from tests.types.convinient_tweet import ConvinientTweet
+from twitter_api.api.types.v2_media.media import Media
+from twitter_api.api.types.v2_place.place import Place
+from twitter_api.api.types.v2_poll.poll import Poll
+from twitter_api.api.types.v2_tweet.tweet import Tweet
 from twitter_api.api.types.v2_tweet.tweet_id import TweetId
 from twitter_api.api.types.v2_user.user import User
 from twitter_api.types.extra_permissive_model import ExtraPermissiveModel
 
 
-class ConvinientTweetsSearchResponseBodyIncludes(ExtraPermissiveModel):
+class TweetsSearchResponseBodyIncludes(ExtraPermissiveModel):
     users: list[User] = Field(default_factory=list)
-    tweets: list[ConvinientTweet] = Field(default_factory=list)
+    tweets: list[Tweet] = Field(default_factory=list)
+    places: list[Place] = Field(default_factory=list)
+    media: list[Media] = Field(default_factory=list)
+    polls: list[Poll] = Field(default_factory=list)
 
 
-class ConvinientTweetsSearchResponseBodyMeta(ExtraPermissiveModel):
+class TweetsSearchResponseBodyMeta(ExtraPermissiveModel):
     result_count: int
     next_token: Optional[str] = None
+    previous_token: Optional[str] = None
     newest_id: Optional[TweetId] = None
     oldest_id: Optional[TweetId] = None
 
 
-class ConvinientTweetsSearchResponseBody(ExtraPermissiveModel):
-    data: list[ConvinientTweet] = Field(default_factory=list)
-    includes: Optional[ConvinientTweetsSearchResponseBodyIncludes] = None
-    meta: ConvinientTweetsSearchResponseBodyMeta
+class TweetsSearchResponseBody(ExtraPermissiveModel):
+    data: list[Tweet] = Field(default_factory=list)
+    meta: TweetsSearchResponseBodyMeta
+    includes: Optional[TweetsSearchResponseBodyIncludes] = None
     errors: Optional[list[dict]] = None
 
-    def find_tweet(self, id: TweetId) -> Optional[ConvinientTweet]:
+    def find_tweet(self, id: TweetId) -> Optional[Tweet]:
         """
         TweetId からツイートを検索する。
         """
@@ -44,7 +51,7 @@ class ConvinientTweetsSearchResponseBody(ExtraPermissiveModel):
 
         return None
 
-    def retweeted_by(self, retweet: ConvinientTweet) -> Optional[ConvinientTweet]:
+    def retweeted_by(self, retweet: Tweet) -> Optional[Tweet]:
         """
         リツイート元のツイートを返す。
         """
@@ -62,7 +69,7 @@ class ConvinientTweetsSearchResponseBody(ExtraPermissiveModel):
 
         return None
 
-    def quoted_by(self, quote_tweet: ConvinientTweet) -> Optional[ConvinientTweet]:
+    def quoted_by(self, quote_tweet: Tweet) -> Optional[Tweet]:
         """
         引用元のツイートを返す。
         """
@@ -80,7 +87,7 @@ class ConvinientTweetsSearchResponseBody(ExtraPermissiveModel):
 
         return None
 
-    def replied_by(self, reply_tweet: ConvinientTweet) -> Optional[ConvinientTweet]:
+    def replied_by(self, reply_tweet: Tweet) -> Optional[Tweet]:
         """
         返信元のツイートを返す。
         """
@@ -98,7 +105,7 @@ class ConvinientTweetsSearchResponseBody(ExtraPermissiveModel):
 
         return None
 
-    def mentioned_users(self, tweet: ConvinientTweet) -> list[User]:
+    def mentioned_users(self, tweet: Tweet) -> list[User]:
         """
         メンションしているユーザのリストを返す。
         """
