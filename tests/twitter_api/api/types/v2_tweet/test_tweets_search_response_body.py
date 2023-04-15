@@ -18,10 +18,7 @@ class TestTweetsSearchResponseBody:
         self,
         response: TweetsSearchResponseBody,
     ):
-        retweet = response.find_tweet_by("1647123314605965312")
-        assert retweet is not None
-
-        retweeted_tweet = response.find_retweeted_tweet_by(retweet)
+        retweeted_tweet = response.find_retweeted_tweet_by("1647123314605965312")
 
         assert retweeted_tweet is not None
         assert retweeted_tweet.id == "1647031756388962305"
@@ -31,10 +28,7 @@ class TestTweetsSearchResponseBody:
         self,
         response: TweetsSearchResponseBody,
     ):
-        quote_tweet = response.find_tweet_by("1647031756388962305")
-        assert quote_tweet is not None
-
-        quoted_tweet = response.find_quoted_tweet_by(quote_tweet)
+        quoted_tweet = response.find_quoted_tweet_by("1647031756388962305")
 
         assert quoted_tweet is None
 
@@ -42,10 +36,7 @@ class TestTweetsSearchResponseBody:
         self,
         response: TweetsSearchResponseBody,
     ):
-        reply_tweet = response.find_tweet_by("1647123304380268545")
-        assert reply_tweet is not None
-
-        replied_tweet = response.find_replied_tweet_by(reply_tweet)
+        replied_tweet = response.find_replied_tweet_by("1647123304380268545")
 
         assert replied_tweet is not None
         assert replied_tweet.id == "1647122898220621824"
@@ -54,9 +45,6 @@ class TestTweetsSearchResponseBody:
         self,
         response: TweetsSearchResponseBody,
     ):
-        reply_tweet = response.find_tweet_by("1647123313993601026")
-        assert reply_tweet is not None
-
-        mentioned_users = response.find_mentioned_users_by(reply_tweet)
+        mentioned_users = response.find_mentioned_users_by("1647123313993601026")
 
         assert [user.id for user in mentioned_users] == ["183584495"]

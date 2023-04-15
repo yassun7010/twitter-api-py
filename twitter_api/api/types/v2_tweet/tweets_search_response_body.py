@@ -33,10 +33,15 @@ class TweetsSearchResponseBody(ExtraPermissiveModel):
     includes: Optional[TweetsSearchResponseBodyIncludes] = None
     errors: Optional[list[dict]] = None
 
-    def find_tweet_by(self, id: TweetId) -> Optional[Tweet]:
+    def find_tweet_by(self, id: TweetId | Tweet) -> Optional[Tweet]:
         """
         TweetId からツイートを検索する。
+
+        Tweet を入力とした場合、入力した Tweet が Response の中にあるかを調べる。
         """
+
+        if isinstance(id, Tweet):
+            id = id.id
 
         for tweet in self.data:
             if tweet.id == id:
@@ -65,17 +70,20 @@ class TweetsSearchResponseBody(ExtraPermissiveModel):
 
         return None
 
-    def find_retweeted_tweet_by(self, retweet: Tweet) -> Optional[Tweet]:
+    def find_retweeted_tweet_by(self, retweet: TweetId | Tweet) -> Optional[Tweet]:
         """
         リツイート元のツイートを検索する。
         """
 
-        if self.includes is None:
+        target = self.find_tweet_by(retweet)
+
+        if target is None or self.includes is None:
             return None
 
-        if retweet.retweeted_target is None:
+        if target.retweeted_target is None:
             return None
-        retweeted_id = retweet.retweeted_target
+
+        retweeted_id = target.retweeted_target
 
         for tweet in self.includes.tweets:
             if retweeted_id == tweet.id:
@@ -83,17 +91,19 @@ class TweetsSearchResponseBody(ExtraPermissiveModel):
 
         return None
 
-    def find_quoted_tweet_by(self, quote_tweet: Tweet) -> Optional[Tweet]:
+    def find_quoted_tweet_by(self, quote_tweet: TweetId | Tweet) -> Optional[Tweet]:
         """
         引用元のツイートを検索する。
         """
 
-        if self.includes is None:
+        target = self.find_tweet_by(quote_tweet)
+
+        if target is None or self.includes is None:
             return None
 
-        if quote_tweet.quoted_target is None:
+        if target.quoted_target is None:
             return None
-        quote_tweet_id = quote_tweet.quoted_target
+        quote_tweet_id = target.quoted_target
 
         for tweet in self.includes.tweets:
             if quote_tweet_id == tweet.id:
@@ -101,17 +111,19 @@ class TweetsSearchResponseBody(ExtraPermissiveModel):
 
         return None
 
-    def find_replied_tweet_by(self, reply_tweet: Tweet) -> Optional[Tweet]:
+    def find_replied_tweet_by(self, reply_tweet: TweetId | Tweet) -> Optional[Tweet]:
         """
         返信元のツイートを検索する。
         """
 
-        if self.includes is None:
+        target = self.find_tweet_by(reply_tweet)
+
+        if target is None or self.includes is None:
             return None
 
-        if reply_tweet.replied_target is None:
+        if target.replied_target is None:
             return None
-        reply_tweet_id = reply_tweet.replied_target
+        reply_tweet_id = target.replied_target
 
         for tweet in self.includes.tweets:
             if reply_tweet_id == tweet.id:
@@ -119,18 +131,20 @@ class TweetsSearchResponseBody(ExtraPermissiveModel):
 
         return None
 
-    def find_mentioned_users_by(self, tweet: Tweet) -> list[User]:
+    def find_mentioned_users_by(self, tweet: TweetId | Tweet) -> list[User]:
         """
         メンションしているユーザのリストを検索する。
         """
 
-        if self.includes is None:
+        target = self.find_tweet_by(tweet)
+
+        if target is None or self.includes is None:
             return []
 
         users: list[User] = []
 
         for user in self.includes.users:
-            for mentioned in tweet.entities_mentions:
+            for mentioned in target.entities_mentions:
                 if mentioned.username == user.username:
                     users.append(user)
 
