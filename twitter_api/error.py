@@ -1,3 +1,4 @@
+import json
 from collections import OrderedDict
 from enum import Enum
 from textwrap import dedent
@@ -221,12 +222,20 @@ class TwitterApiResponseValidationError(TwitterApiError):
         self._error = error
 
     def __str__(self) -> str:
+        response_body = exclude_none(self._response_body)
+
+        # 文字が長すぎる場合、切り取る。
+        response_body_str = json.dumps(response_body, ensure_ascii=False)
+        max_length = 1000
+        if len(response_body_str) > max_length:
+            response_body = response_body_str[: max_length - 3] + "..."
+
         return ErrorMessage(
             type=self.__class__.__name__,
             message="Twitter API の応答の型が想定とは一致していません。",
             **dict(
                 endpoint=self._endpoint,
-                response_body=exclude_none(self._response_body),
+                response_body=response_body,
                 error=self._error.errors(),
             ),
         ).to_message()

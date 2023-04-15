@@ -5,13 +5,17 @@ from pydantic import Field
 
 from twitter_api.api.resources.api_resources import ApiResources
 from twitter_api.api.types.v2_expansion import Expansion
+from twitter_api.api.types.v2_media.media import Media
 from twitter_api.api.types.v2_media.media_field import MediaField
+from twitter_api.api.types.v2_place.place import Place
 from twitter_api.api.types.v2_place.place_field import PlaceField
+from twitter_api.api.types.v2_poll.poll import Poll
 from twitter_api.api.types.v2_poll.poll_field import PollField
 from twitter_api.api.types.v2_scope import oauth2_scopes
 from twitter_api.api.types.v2_tweet.tweet_detail import TweetDetail
 from twitter_api.api.types.v2_tweet.tweet_field import TweetField
 from twitter_api.api.types.v2_tweet.tweet_id import TweetId
+from twitter_api.api.types.v2_user.user import User
 from twitter_api.api.types.v2_user.user_field import UserField
 from twitter_api.rate_limit.rate_limit_decorator import rate_limit
 from twitter_api.types.comma_separatable import CommaSeparatable, comma_separated_str
@@ -59,8 +63,17 @@ class GetV2TweetsSearchStreamResponseBodyMeta(ExtraPermissiveModel):
     oldest_id: Optional[TweetId] = None
 
 
+class GetV2TweetsSearchStreamResponseBodyIncludes(ExtraPermissiveModel):
+    users: list[User] = Field(default_factory=list)
+    tweets: list[TweetDetail] = Field(default_factory=list)
+    places: list[Place] = Field(default_factory=list)
+    media: list[Media] = Field(default_factory=list)
+    polls: list[Poll] = Field(default_factory=list)
+
+
 class GetV2TweetsSearchStreamResponseBody(ExtraPermissiveModel):
     data: list[TweetDetail] = Field(default_factory=list)
+    includes: Optional[GetV2TweetsSearchStreamResponseBodyIncludes] = None
     meta: GetV2TweetsSearchStreamResponseBodyMeta
 
 

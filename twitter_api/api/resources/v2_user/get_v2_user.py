@@ -42,6 +42,7 @@ class GetV2UserResponseBodyIncludes(ExtraPermissiveModel):
 class GetV2UserResponseBody(ExtraPermissiveModel):
     data: User
     includes: Optional[GetV2UserResponseBodyIncludes] = None
+    errors: Optional[list[dict]] = None
 
 
 class GetV2UserResources(ApiResources):

@@ -1,13 +1,17 @@
 from datetime import datetime
 from typing import Literal, NotRequired, Optional, TypedDict
 
+from pydantic import Field
+
 from twitter_api.api.resources.api_resources import ApiResources
 from twitter_api.api.types.v2_expansion import Expansion
+from twitter_api.api.types.v2_media.media import Media
 from twitter_api.api.types.v2_media.media_field import MediaField
+from twitter_api.api.types.v2_place.place import Place
 from twitter_api.api.types.v2_place.place_field import PlaceField
+from twitter_api.api.types.v2_poll.poll import Poll
 from twitter_api.api.types.v2_poll.poll_field import PollField
 from twitter_api.api.types.v2_scope import oauth2_scopes
-from twitter_api.api.types.v2_tweet.tweet import Tweet
 from twitter_api.api.types.v2_tweet.tweet_detail import TweetDetail
 from twitter_api.api.types.v2_tweet.tweet_field import TweetField
 from twitter_api.api.types.v2_tweet.tweet_id import TweetId
@@ -70,14 +74,18 @@ class GetV2UserTweetsResponseBodyMeta(ExtraPermissiveModel):
 
 
 class GetV2UserTweetsResponseBodyIncludes(ExtraPermissiveModel):
-    tweets: Optional[list[Tweet]] = None
-    users: Optional[list[User]] = None
+    users: list[User] = Field(default_factory=list)
+    tweets: list[TweetDetail] = Field(default_factory=list)
+    places: list[Place] = Field(default_factory=list)
+    media: list[Media] = Field(default_factory=list)
+    polls: list[Poll] = Field(default_factory=list)
 
 
 class GetV2UserTweetsResponseBody(ExtraPermissiveModel):
     data: list[TweetDetail]
     meta: GetV2UserTweetsResponseBodyMeta
     includes: Optional[GetV2UserTweetsResponseBodyIncludes] = None
+    errors: Optional[list[dict]] = None
 
 
 class GetV2UserTweetsResources(ApiResources):

@@ -53,6 +53,7 @@ class GetV2UserFollowersResponseBody(ExtraPermissiveModel):
     data: list[User]
     meta: GetV2UserFollowersResponseBodyMeta
     includes: Optional[GetV2UserFollowersResponseBodyIncludes] = None
+    errors: Optional[list[dict]] = None
 
 
 class GetV2UserFollowersResources(ApiResources):

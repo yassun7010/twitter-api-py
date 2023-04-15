@@ -20,7 +20,6 @@ from .tweet_withheld import TweetWithheld
 
 
 class Tweet(ExtraPermissiveModel):
-
     """
     ツイート情報。
 
@@ -35,7 +34,11 @@ class Tweet(ExtraPermissiveModel):
     # このフィールドが存在する場合、少なくとも 1 つの要素が入ることになる。
     # そのため、 default_factory=list としても意図が曖昧になるため、型で分けている。
     #
-    # edit_history_tweet_ids: Optional[list[TweetId]] = None
+    # API によっては、クエリに `expansions=edit_history_tweet_ids` を与えた場合に出力されるものがある。
+    #
+    # refer: https://developer.twitter.com/en/docs/twitter-api/tweets/likes/api-reference/get-users-id-liked_tweets
+    #
+    edit_history_tweet_ids: Optional[list[TweetId]] = None
 
     # Optional
     attachments: Optional[TweetAttachments] = None

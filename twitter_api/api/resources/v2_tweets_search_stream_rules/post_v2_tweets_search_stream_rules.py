@@ -60,6 +60,7 @@ class PostV2TweetsSearchStreamRulesResponseBodyMeta(ExtraPermissiveModel):
 class PostV2TweetsSearchStreamRulesResponseBody(ExtraPermissiveModel):
     data: list[Rule] = Field(default_factory=list)
     meta: PostV2TweetsSearchStreamRulesResponseBodyMeta
+    errors: Optional[list[dict]] = None
 
 
 class PostV2TweetsSearchStreamRulesResources(ApiResources):

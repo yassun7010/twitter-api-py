@@ -2,16 +2,23 @@ from datetime import datetime
 from typing import Literal, NotRequired, Optional, TypedDict
 from urllib import parse
 
+from pydantic import Field
+
 from twitter_api.api.resources.api_resources import ApiResources
 from twitter_api.api.types.v2_expansion import Expansion
+from twitter_api.api.types.v2_media.media import Media
 from twitter_api.api.types.v2_media.media_field import MediaField
+from twitter_api.api.types.v2_place.place import Place
 from twitter_api.api.types.v2_place.place_field import PlaceField
+from twitter_api.api.types.v2_poll.poll import Poll
 from twitter_api.api.types.v2_poll.poll_field import PollField
 from twitter_api.api.types.v2_scope import oauth2_scopes
 from twitter_api.api.types.v2_search_query import SearchQuery
 from twitter_api.api.types.v2_tweet.tweet import Tweet
+from twitter_api.api.types.v2_tweet.tweet_detail import TweetDetail
 from twitter_api.api.types.v2_tweet.tweet_field import TweetField
 from twitter_api.api.types.v2_tweet.tweet_id import TweetId
+from twitter_api.api.types.v2_user.user import User
 from twitter_api.api.types.v2_user.user_field import UserField
 from twitter_api.rate_limit.rate_limit_decorator import rate_limit
 from twitter_api.types.comma_separatable import CommaSeparatable, comma_separated_str
@@ -68,9 +75,19 @@ class GetV2TweetsSearchAllResponseBodyMeta(ExtraPermissiveModel):
     previous_token: Optional[str] = None
 
 
+class GetV2TweetsSearchAllResponseBodyIncludes(ExtraPermissiveModel):
+    users: list[User] = Field(default_factory=list)
+    tweets: list[TweetDetail] = Field(default_factory=list)
+    places: list[Place] = Field(default_factory=list)
+    media: list[Media] = Field(default_factory=list)
+    polls: list[Poll] = Field(default_factory=list)
+
+
 class GetV2TweetsSearchAllResponseBody(ExtraPermissiveModel):
     data: list[Tweet]
     meta: GetV2TweetsSearchAllResponseBodyMeta
+    includes: Optional[GetV2TweetsSearchAllResponseBodyIncludes] = None
+    errors: Optional[list[dict]] = None
 
 
 class GetV2TweetsSearchAllResources(ApiResources):

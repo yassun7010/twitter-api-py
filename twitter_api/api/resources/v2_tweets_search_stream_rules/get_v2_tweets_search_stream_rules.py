@@ -29,6 +29,7 @@ class GetV2TweetsSearchStreamRulesResponseBodyMeta(ExtraPermissiveModel):
 class GetV2TweetsSearchStreamRulesResponseBody(ExtraPermissiveModel):
     data: list[Rule] = Field(default_factory=list)
     meta: GetV2TweetsSearchStreamRulesResponseBodyMeta
+    errors: Optional[list[dict]] = None
 
 
 class GetV2TweetsSearchStreamRulesResources(ApiResources):
