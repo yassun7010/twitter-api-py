@@ -54,10 +54,7 @@ try:
     )
 
     # Twitter API を呼ぶことができるようになりました。
-    client = TwitterApiClient.from_oauth1_app_env(
-        access_token=token.oauth_token,
-        access_secret=token.oauth_token_secret,
-    )
+    client = token.generate_client()
 
     tweets = (
         client.chain()
