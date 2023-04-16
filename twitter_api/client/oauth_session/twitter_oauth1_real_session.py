@@ -72,9 +72,9 @@ class TwitterOAuth1RealSession(TwitterOAuth1Session):
         )
 
     def generate_client(self, access_token: AccessToken, access_secret: AccessSecret):
-        from twitter_api.client.twitter_api_mock_client import TwitterApiMockClient
+        from twitter_api.client.twitter_api_real_client import TwitterApiRealClient
 
-        return TwitterApiMockClient.from_oauth1_app(
+        return TwitterApiRealClient.from_oauth1_app(
             api_key=self._api_key,
             api_secret=self._api_secret,
             access_token=access_token,

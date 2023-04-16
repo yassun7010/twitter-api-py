@@ -27,7 +27,7 @@ try:
     user = backend
 
     # Frontend: ユーザは承認ボタンを押した後、リダイレクトした CallbackURL をバックエンドに返します。
-    user = user.open_request_url().input_response_url()
+    user = user.print_request_url().input_response_url()
 
     # Backend: アクセストークンを取得し、 Twitter API のクライアントを作成します。
     access_token = (
@@ -53,9 +53,6 @@ try:
         .get("1460323737035677698")
         .data
     )
-
-    print(tweet)
-
 
 except TwitterApiError as error:
     print(error, file=sys.stderr)

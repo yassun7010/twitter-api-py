@@ -1,23 +1,22 @@
 import os
 import sys
 
-from twitter_api.api.types.v2_scope import SCOPES
 from twitter_api.client import TwitterApiClient
 from twitter_api.error import TwitterApiError
 
 YOUR_CALLBACK_URL = os.environ["CALLBACK_URL"]
 
+
 try:
     client = (
-        TwitterApiClient.from_oauth2_user_flow_env(
-            callback_url=YOUR_CALLBACK_URL,
-            scope=SCOPES,
-        )
-        .request("https://twitter.com/i/oauth2/authorize")
+        TwitterApiClient.from_oauth1_user_flow_env()
+        .request("https://api.twitter.com/oauth/request_token")
+        .post()
+        .request("https://api.twitter.com/oauth/authorize")
         .generate_authorization_url()
         .open_request_url()
         .input_response_url()
-        .request("https://api.twitter.com/2/oauth2/token")
+        .request("https://api.twitter.com/oauth/access_token")
         .post()
         .generate_client()
     )

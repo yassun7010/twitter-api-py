@@ -16,6 +16,9 @@ class OAuth1Authorization(Chainable):
         self._session = session
 
     def open_request_url(self) -> Self:
+        """
+        ブラウザで認証画面を開く。
+        """
         import webbrowser
 
         webbrowser.open(self.authorization_url)
@@ -24,6 +27,9 @@ class OAuth1Authorization(Chainable):
     def print_request_url(
         self, message_function: Optional[Callable[[Url], str]] = None
     ) -> Self:
+        """
+        コンソール上に認証画面の URL を出力する。
+        """
         if message_function is None:
 
             def default_message_function(url: Url):
