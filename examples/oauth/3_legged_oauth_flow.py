@@ -56,6 +56,7 @@ try:
         access_secret=token.oauth_token_secret,
     )
 
+    # Twitter API を呼ぶことができるようになりました。
     tweets = (
         client.chain()
         .request("https://api.twitter.com/2/tweets")
