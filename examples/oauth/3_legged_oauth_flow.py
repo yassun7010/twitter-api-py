@@ -42,6 +42,7 @@ try:
         .post()
     )
 
+    # 認証トークンを取得完了！
     print("\n🌟 Create User OAuth Token!! 🌟\n", file=sys.stderr)
     print(
         dedent(
@@ -52,12 +53,12 @@ try:
         ).strip()
     )
 
+    # Twitter API を呼ぶことができるようになりました。
     client = TwitterApiClient.from_oauth1_app_env(
         access_token=token.oauth_token,
         access_secret=token.oauth_token_secret,
     )
 
-    # Twitter API を呼ぶことができるようになりました。
     tweets = (
         client.chain()
         .request("https://api.twitter.com/2/tweets/:id")
