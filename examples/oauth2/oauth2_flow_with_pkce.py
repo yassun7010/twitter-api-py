@@ -1,3 +1,9 @@
+"""
+OAuth 2.0 を用いたユーザ認証のフローを説明するサンプル。
+
+refer: https://developer.twitter.com/en/docs/authentication/oauth-2-0/authorization-code
+"""
+
 import os
 import sys
 from textwrap import dedent

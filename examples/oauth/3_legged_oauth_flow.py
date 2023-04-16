@@ -1,3 +1,9 @@
+"""
+OAuth 1.0a を用いたユーザ認証のフローを説明するサンプル。
+
+refer: https://developer.twitter.com/en/docs/authentication/oauth-1-0a/obtaining-user-access-tokens
+"""
+
 import os
 import sys
 from textwrap import dedent
