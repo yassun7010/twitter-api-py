@@ -35,4 +35,10 @@ class TwitterOAuth2MockSession(TwitterOAuth2Session):
             expires_at=int(datetime.now().timestamp()) + expires_in,
             access_token="access_token",
             scope=self._scope,
+            _session=self,
         )
+
+    def generate_client(self, access_token: str):
+        from twitter_api.client.twitter_api_mock_client import TwitterApiMockClient
+
+        return TwitterApiMockClient.from_oauth2_bearer_token(bearer_token=access_token)

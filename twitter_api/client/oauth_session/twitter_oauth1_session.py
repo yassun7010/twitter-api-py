@@ -1,6 +1,5 @@
 from abc import ABCMeta, abstractmethod
 
-from twitter_api.client.twitter_api_client import TwitterApiClient
 from twitter_api.types.oauth import AccessSecret, AccessToken, CallbackUrl
 
 
@@ -47,6 +46,10 @@ class TwitterOAuth1Session(metaclass=ABCMeta):
 
     @abstractmethod
     def generate_client(self, access_token: AccessToken, access_secret: AccessSecret):
+        # NOTE: 本来実装は不要だが、モジュールの再起読み込みを防ぐため、
+        #       偽のデータを作っている。
+        from twitter_api.client.twitter_api_client import TwitterApiClient
+
         return TwitterApiClient.from_oauth1_app(
             api_key="api_key",
             api_secret="api_secret",

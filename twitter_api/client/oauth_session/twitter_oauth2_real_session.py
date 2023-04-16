@@ -65,5 +65,13 @@ class TwitterOAuth2RealSession(TwitterOAuth2Session):
 
         return OAuth2AccessToken(
             scope=scope,
+            _session=self,
             **response,
         )
+
+    def generate_client(self, access_token: str):
+        # NOTE: 本来実装は不要だが、モジュールの再起読み込みを防ぐため、
+        #       偽のデータを作っている。
+        from twitter_api.client.twitter_api_real_client import TwitterApiRealClient
+
+        return TwitterApiRealClient.from_oauth2_bearer_token(bearer_token=access_token)
