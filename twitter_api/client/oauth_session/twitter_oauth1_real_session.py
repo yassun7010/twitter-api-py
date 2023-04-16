@@ -11,7 +11,13 @@ from twitter_api.api.types.oauth1.twitter_oauth1_authorization_client import (
 )
 from twitter_api.client.oauth_session.twitter_oauth1_session import TwitterOAuth1Session
 from twitter_api.client.twitter_api_real_client import TwitterApiRealClient
-from twitter_api.types.oauth import ApiKey, ApiSecret, CallbackUrl
+from twitter_api.types.oauth import (
+    AccessSecret,
+    AccessToken,
+    ApiKey,
+    ApiSecret,
+    CallbackUrl,
+)
 
 
 class TwitterOAuth1RealSession(TwitterOAuth1Session):
@@ -22,6 +28,8 @@ class TwitterOAuth1RealSession(TwitterOAuth1Session):
         api_secret: ApiSecret,
         callback_url: CallbackUrl,
     ) -> None:
+        self._api_key = api_key
+        self._api_secret = api_secret
         self._session = OAuth1Session(
             client_id=api_key,
             client_secret=api_secret,
@@ -60,4 +68,15 @@ class TwitterOAuth1RealSession(TwitterOAuth1Session):
             oauth_token_secret=data["oauth_token_secret"],
             user_id=data["user_id"],
             screen_name=data["screen_name"],
+            _session=self,
+        )
+
+    def generate_client(self, access_token: AccessToken, access_secret: AccessSecret):
+        from twitter_api.client.twitter_api_mock_client import TwitterApiMockClient
+
+        return TwitterApiMockClient.from_oauth1_app(
+            api_key=self._api_key,
+            api_secret=self._api_secret,
+            access_token=access_token,
+            access_secret=access_secret,
         )

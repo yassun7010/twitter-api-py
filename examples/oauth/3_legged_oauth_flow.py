@@ -8,7 +8,7 @@ YOUR_CALLBACK_URL = os.environ["CALLBACK_URL"]
 
 
 try:
-    token = (
+    client = (
         TwitterApiClient.from_oauth1_user_flow_env()
         .request("https://api.twitter.com/oauth/request_token")
         .post()
@@ -18,13 +18,7 @@ try:
         .input_response_url()
         .request("https://api.twitter.com/oauth/access_token")
         .post()
-    )
-
-    client = TwitterApiClient.from_oauth1_app(
-        api_key=os.environ["API_KEY"],
-        api_secret=os.environ["API_SECRET"],
-        access_token=token.oauth_token,
-        access_secret=token.oauth_token_secret,
+        .generate_client()
     )
 
     tweets = (
