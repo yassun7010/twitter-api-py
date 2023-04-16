@@ -3,7 +3,7 @@ from twitter_api.client.oauth_session.twitter_oauth2_session import TwitterOAuth
 from twitter_api.types.chainable import Chainable
 
 
-class GenerateAuthorizationUrl(Chainable):
+class GenerateAuthorizationUrlOAuth2Session(Chainable):
     def __init__(
         self,
         url: Oauth2AuthorizeUrl,
