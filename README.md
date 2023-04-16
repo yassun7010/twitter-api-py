@@ -158,7 +158,7 @@ Twitter API が時たま起こす奇妙な挙動のテストケースを教え�
 ```sh
 poetry shell
 
-python examples/oauth2/user_oauth2_flow_with_pkce.py
+python examples/oauth2/oauth2_flow_with_pkce.py
 
 # Twitter の OAuth2.0 認証のリンクがターミナルに出力されるので、リンク先へ飛び、アプリ認証に同意する。
 # 設定したコールバックURL に飛ばされるので、飛ばされた先の URL をコピーし、ターミナルに貼り付ける。
