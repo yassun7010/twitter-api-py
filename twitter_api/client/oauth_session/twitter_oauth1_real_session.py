@@ -1,14 +1,13 @@
 from typing import Optional
 
 from authlib.integrations.requests_client.oauth1_session import (  # pyright: reportMissingImports=false
-    OAuth1Auth,
     OAuth1Session,
 )
 
 from twitter_api.api.resources.oauth_access_token import OauthAccessTokenUrl
-from twitter_api.api.resources.oauth_authorize import OauthAuthorizeUrl
 from twitter_api.api.resources.oauth_request_token import OauthRequestTokenUrl
 from twitter_api.api.types.oauth1.oauth1_authorization import OAuth1Authorization
+from twitter_api.api.types.oauth1.oauth1_request_url import OAuth1RequestUrl
 from twitter_api.api.types.oauth1.twitter_oauth1_authorization_client import (
     TwitterOAuth1AuthorizeClient,
 )
@@ -50,9 +49,10 @@ class TwitterOAuth1RealSession(TwitterOAuth1Session):
 
         return TwitterOAuth1AuthorizeClient(session=self)
 
-    def generate_authorization_url(self) -> OAuth1Authorization:
-        url: OauthAuthorizeUrl = "https://api.twitter.com/oauth/authorize"
-
+    def generate_authorization_url(
+        self,
+        url: OAuth1RequestUrl,
+    ) -> OAuth1Authorization:
         return OAuth1Authorization(
             authorization_url=self._session.create_authorization_url(url),
             session=self,

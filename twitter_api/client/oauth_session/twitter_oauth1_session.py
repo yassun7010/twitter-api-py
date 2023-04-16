@@ -1,5 +1,6 @@
 from abc import ABCMeta, abstractmethod
 
+from twitter_api.api.types.oauth1.oauth1_request_url import OAuth1RequestUrl
 from twitter_api.types.oauth import AccessSecret, AccessToken, CallbackUrl
 
 
@@ -15,7 +16,10 @@ class TwitterOAuth1Session(metaclass=ABCMeta):
         return TwitterOAuth1AuthorizeClient(**{})
 
     @abstractmethod
-    def generate_authorization_url(self):
+    def generate_authorization_url(
+        self,
+        url: OAuth1RequestUrl,
+    ):
         # NOTE: 本来実装は不要だが、モジュールの再起読み込みを防ぐため、
         #       偽のデータを作っている。
         from twitter_api.api.types.oauth1.oauth1_authorization import (

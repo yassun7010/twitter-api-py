@@ -1,7 +1,7 @@
+from twitter_api.api.types.oauth1.oauth1_request_url import OAuth1RequestUrl
 from twitter_api.api.types.oauth1.twitter_oauth1_authorization_client import (
     TwitterOAuth1AuthorizeClient,
 )
-from twitter_api.api.types.v2_scope import Scope
 from twitter_api.client.oauth_session.twitter_oauth1_session import TwitterOAuth1Session
 from twitter_api.types.oauth import AccessSecret, AccessToken, CallbackUrl
 
@@ -10,7 +10,10 @@ class TwitterOAuth1MockSession(TwitterOAuth1Session):
     def request_token(self) -> TwitterOAuth1AuthorizeClient:
         return TwitterOAuth1AuthorizeClient(session=self)
 
-    def generate_authorization_url(self):
+    def generate_authorization_url(
+        self,
+        url: OAuth1RequestUrl,
+    ):
         from twitter_api.api.types.oauth1.oauth1_authorization import (
             OAuth1Authorization,
         )

@@ -53,6 +53,12 @@ class OAuth2Authorization(Chainable):
         *,
         message_function: Optional[Callable[[], str]] = None,
     ):
+        """
+        認証画面で承認した後にリダイレクトされるコールバックURL を入力する。
+
+        引数の input_url に値を入れると、プロンプトで問い合わせを行わない。
+        """
+
         from twitter_api.api.types.v2_oauth2.twitter_oauth2_access_token_client import (
             TwitterOAuth2AccessTokenClient,
         )
