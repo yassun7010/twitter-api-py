@@ -1,5 +1,6 @@
+import sys
 from textwrap import dedent
-from typing import Callable, Optional, Self
+from typing import Callable, Optional, Self, TextIO
 
 from twitter_api.client.oauth_session.twitter_oauth1_session import TwitterOAuth1Session
 from twitter_api.types.chainable import Chainable
@@ -25,7 +26,9 @@ class OAuth1Authorization(Chainable):
         return self
 
     def print_request_url(
-        self, message_function: Optional[Callable[[Url], str]] = None
+        self,
+        message_function: Optional[Callable[[Url], str]] = None,
+        file: TextIO = sys.stderr,
     ) -> Self:
         """
         コンソール上に認証画面の URL を出力する。
@@ -40,12 +43,13 @@ class OAuth1Authorization(Chainable):
                     =====================================================
 
                     {url}
+
                     """
                 )
 
             message_function = default_message_function
 
-        print(message_function(self.authorization_url))
+        print(message_function(self.authorization_url), file=file)
 
         return self
 
@@ -54,6 +58,7 @@ class OAuth1Authorization(Chainable):
         input_url: Optional[Url] = None,
         *,
         message_function: Optional[Callable[[], str]] = None,
+        file: TextIO = sys.stderr,
     ):
         """
         認証画面で承認した後にリダイレクトされるコールバックURL を入力する。
@@ -79,7 +84,8 @@ class OAuth1Authorization(Chainable):
             if input_url != "":
                 break
 
-            input_url = input(message_function())
+            file.write(message_function())
+            input_url = input()
 
         return TwitterOAuth1AccessTokenClient(
             authorization_response_url=input_url,

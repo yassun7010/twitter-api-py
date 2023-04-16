@@ -46,12 +46,13 @@ try:
         .post()
     )
 
+    print("\n🌟 Create User OAuth Token!! 🌟\n", file=sys.stderr)
     print(
         dedent(
             f"""
-            🌟 Get Access Token: {token.access_token}
+            OAUTH2_USER_ACCESS_TOKEN={token.access_token}
             """
-        )
+        ).strip()
     )
 
     client = TwitterApiClient.from_oauth2_bearer_token(token.access_token)
