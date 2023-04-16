@@ -106,7 +106,7 @@ def test_some_logic():
     twitter_client = (
         TwitterApiMockClient.from_oauth2_app_env()
         .inject_post_response_body("https://api.twitter.com/2/tweets", post_response)
-        .inject_get_response_body("https://api.twitter.com/2/tweets", get_response)
+        .inject_get_response_body("https://api.twitter.com/2/tweets/:id", get_response)
         .inject_delete_response_body("https://api.twitter.com/2/tweets", delete_response)
     )
 
