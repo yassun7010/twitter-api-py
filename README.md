@@ -98,7 +98,6 @@ response = (
 実際には、 `TwitterApiClient` を使う関数をプロジェクトで作成し、テスト時には関数を利用する前に、データ注入をすることになるでしょう。
 
 ```python
-
 def some_logic(twitter_client: TwitterApiClient):
     ...
 
