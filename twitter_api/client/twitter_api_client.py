@@ -432,9 +432,9 @@ class TwitterApiClient(Chainable, metaclass=ABCMeta):
 
         return TwitterApiRealClient.from_oauth2_user_flow(
             client_id=client_id,
+            client_secret=client_secret,
             scope=scope,
             callback_url=callback_url,
-            client_secret=client_secret,
         )
 
     @classmethod
@@ -458,13 +458,13 @@ class TwitterApiClient(Chainable, metaclass=ABCMeta):
 
         return cls.from_oauth2_user_flow(
             client_id=cls._get_env(client_id_env),
+            client_secret=cls._get_env(client_secret_env),
             scope=scope,
             callback_url=(
                 callback_url
                 if callback_url is not None
                 else cls._get_env(callback_url_env)
             ),
-            client_secret=cls._get_env(client_secret_env),
         )
 
     @classmethod
@@ -507,6 +507,51 @@ class TwitterApiClient(Chainable, metaclass=ABCMeta):
             access_token=cls._get_env(access_token_env),
             access_secret=cls._get_env(access_secret_env),
             rate_limit_manager=rate_limit_manager,
+        )
+
+    @classmethod
+    def from_oauth1_user_flow(
+        cls,
+        *,
+        api_key: ApiKey,
+        api_secret: ApiSecret,
+        callback_url: CallbackUrl,
+    ):
+        """
+        OAuth 1.0a のユーザ認証を用いてクライアントを作成する。
+        """
+
+        from .twitter_api_real_client import TwitterApiRealClient
+
+        return TwitterApiRealClient.from_oauth1_user_flow(
+            api_key=api_key,
+            api_secret=api_secret,
+            callback_url=callback_url,
+        )
+
+    @classmethod
+    def from_oauth1_user_flow_env(
+        cls,
+        *,
+        api_key_env: Env[ApiKey] = "API_KEY",
+        api_secret_env: Env[ApiSecret] = "API_SECRET",
+        callback_url_env: Env[CallbackUrl] = "CALLBACK_URL",
+        callback_url: Optional[CallbackUrl] = None,
+    ):
+        """
+        環境変数から、 OAuth 1.0a のユーザ認証を用いてクライアントを作成する。
+
+        refer: https://developer.twitter.com/en/docs/authentication/oauth-1-0a/obtaining-user-access-tokens
+        """
+
+        return cls.from_oauth1_user_flow(
+            api_key=cls._get_env(api_key_env),
+            api_secret=cls._get_env(api_secret_env),
+            callback_url=(
+                callback_url
+                if callback_url is not None
+                else cls._get_env(callback_url_env)
+            ),
         )
 
     @classmethod

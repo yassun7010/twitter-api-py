@@ -145,3 +145,26 @@ class TwitterApiRealClient(TwitterApiClient):
                 rate_limit_manager=rate_limit_manager,
             ),
         )
+
+    @classmethod
+    def from_oauth1_user_flow(
+        cls,
+        *,
+        api_key: ApiKey,
+        api_secret: ApiSecret,
+        callback_url: CallbackUrl,
+    ):
+        from twitter_api.api.types.oauth1.twitter_oauth1_request_token_client import (
+            TwitterOAuth1RequestTokenClient,
+        )
+        from twitter_api.client.oauth_session.twitter_oauth1_real_session import (
+            TwitterOAuth1RealSession,
+        )
+
+        session = TwitterOAuth1RealSession(
+            api_key=api_key,
+            api_secret=api_secret,
+            callback_url=callback_url,
+        )
+
+        return TwitterOAuth1RequestTokenClient(session)

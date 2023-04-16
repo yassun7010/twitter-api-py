@@ -11,13 +11,11 @@ ENDPOINT = Endpoint("POST", "https://api.twitter.com/2/oauth2/token")
 class PostV2OAuth2TokenRerources(Chainable):
     def __init__(
         self,
-        url: Url,
         authorization_response_url: CallbackUrl,
         state: str,
         code_verifier: str,
         session: TwitterOAuth2Session,
     ) -> None:
-        self._url = url
         self._authorization_response_url = authorization_response_url
         self._state = state
         self._code_verifier = code_verifier

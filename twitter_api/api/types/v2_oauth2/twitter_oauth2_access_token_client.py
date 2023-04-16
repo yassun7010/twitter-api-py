@@ -28,7 +28,6 @@ class TwitterOAuth2AccessTokenClient(Chainable):
 
     def request(self, url: V2Oauth2TokenUrl):
         return PostV2OAuth2TokenRerources(
-            url=url,
             authorization_response_url=self.authorization_response_url,
             state=self.state,
             code_verifier=self.code_verifier,
