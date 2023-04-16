@@ -39,7 +39,7 @@ class TwitterOAuth1RealSession(TwitterOAuth1Session):
     def request_token(self) -> TwitterOAuth1AuthorizeClient:
         url: OauthRequestTokenUrl = "https://api.twitter.com/oauth/request_token"
 
-        token = self._session.fetch_request_token(url)
+        self._session.fetch_request_token(url)
 
         return TwitterOAuth1AuthorizeClient(session=self)
 

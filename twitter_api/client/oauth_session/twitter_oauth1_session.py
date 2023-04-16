@@ -12,7 +12,7 @@ class TwitterOAuth1Session(metaclass=ABCMeta):
             TwitterOAuth1AuthorizeClient,
         )
 
-        return TwitterOAuth1AuthorizeClient(session=self)
+        return TwitterOAuth1AuthorizeClient(**{})
 
     @abstractmethod
     def generate_authorization_url(self):
@@ -22,10 +22,7 @@ class TwitterOAuth1Session(metaclass=ABCMeta):
             OAuth1Authorization,
         )
 
-        return OAuth1Authorization(
-            authorization_url="dummy",
-            session=self,
-        )
+        return OAuth1Authorization(**{})
 
     @abstractmethod
     def fetch_token(
@@ -36,13 +33,7 @@ class TwitterOAuth1Session(metaclass=ABCMeta):
         #       偽のデータを作っている。
         from twitter_api.api.types.oauth1.oauth1_access_token import OAuth1AccessToken
 
-        return OAuth1AccessToken(
-            oauth_token="oauth_token",
-            oauth_token_secret="oauth_token_secret",
-            user_id="user_id",
-            screen_name="screen_name",
-            _session=self,
-        )
+        return OAuth1AccessToken(**{})
 
     @abstractmethod
     def generate_client(self, access_token: AccessToken, access_secret: AccessSecret):
@@ -50,9 +41,4 @@ class TwitterOAuth1Session(metaclass=ABCMeta):
         #       偽のデータを作っている。
         from twitter_api.client.twitter_api_client import TwitterApiClient
 
-        return TwitterApiClient.from_oauth1_app(
-            api_key="api_key",
-            api_secret="api_secret",
-            access_token=access_token,
-            access_secret=access_secret,
-        )
+        return TwitterApiClient.from_oauth1_app(**{})

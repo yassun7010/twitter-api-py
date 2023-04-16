@@ -12,12 +12,7 @@ class TwitterOAuth2Session(metaclass=ABCMeta):
             OAuth2Authorization,
         )
 
-        return OAuth2Authorization(
-            authorization_url="dummy",
-            state="dummy",
-            code_verifier="dummy",
-            session=self,
-        )
+        return OAuth2Authorization(**{})
 
     @abstractmethod
     def fetch_token(
@@ -32,14 +27,7 @@ class TwitterOAuth2Session(metaclass=ABCMeta):
             OAuth2AccessToken,
         )
 
-        return OAuth2AccessToken(
-            token_type="bearer",
-            expires_in=0,
-            expires_at=0,
-            access_token="access_token",
-            scope=[],
-            _session=self,
-        )
+        return OAuth2AccessToken(**{})
 
     @abstractmethod
     def generate_client(self, access_token: str):
@@ -47,4 +35,4 @@ class TwitterOAuth2Session(metaclass=ABCMeta):
         #       偽のデータを作っている。
         from twitter_api.client.twitter_api_client import TwitterApiClient
 
-        return TwitterApiClient.from_oauth2_bearer_token(bearer_token=access_token)
+        return TwitterApiClient.from_oauth2_bearer_token(**{})
