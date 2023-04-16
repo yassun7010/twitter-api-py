@@ -17,8 +17,9 @@ class TestPostV2DmConversationsMessages:
         "client_fixture_name,permit",
         [
             ("real_oauth1_app_client", True),
-            ("real_oauth2_user_client", True),
+            ("real_oauth1_user_client", True),
             ("real_oauth2_app_client", False),
+            ("real_oauth2_user_client", True),
         ],
     )
     def test_post_v2_dm_conversations_messages(

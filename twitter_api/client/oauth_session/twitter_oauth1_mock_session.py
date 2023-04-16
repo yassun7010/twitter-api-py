@@ -7,9 +7,6 @@ from twitter_api.types.oauth import AccessSecret, AccessToken, CallbackUrl
 
 
 class TwitterOAuth1MockSession(TwitterOAuth1Session):
-    def __init__(self, *, scope: list[Scope]) -> None:
-        self._scope = scope
-
     def request_token(self) -> TwitterOAuth1AuthorizeClient:
         return TwitterOAuth1AuthorizeClient(session=self)
 

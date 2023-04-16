@@ -1,4 +1,7 @@
+from typing import Optional
+
 from authlib.integrations.requests_client.oauth1_session import (  # pyright: reportMissingImports=false
+    OAuth1Auth,
     OAuth1Session,
 )
 
@@ -10,7 +13,9 @@ from twitter_api.api.types.oauth1.twitter_oauth1_authorization_client import (
     TwitterOAuth1AuthorizeClient,
 )
 from twitter_api.client.oauth_session.twitter_oauth1_session import TwitterOAuth1Session
+from twitter_api.client.request.real_request_client import RealRequestClient
 from twitter_api.client.twitter_api_real_client import TwitterApiRealClient
+from twitter_api.rate_limit.manager.rate_limit_manager import RateLimitManager
 from twitter_api.types.oauth import (
     AccessSecret,
     AccessToken,
@@ -27,6 +32,7 @@ class TwitterOAuth1RealSession(TwitterOAuth1Session):
         api_key: ApiKey,
         api_secret: ApiSecret,
         callback_url: CallbackUrl,
+        rate_limit_manager: Optional[RateLimitManager] = None,
     ) -> None:
         self._api_key = api_key
         self._api_secret = api_secret
@@ -35,6 +41,7 @@ class TwitterOAuth1RealSession(TwitterOAuth1Session):
             client_secret=api_secret,
             redirect_uri=callback_url,
         )
+        self._rate_limit_manager = rate_limit_manager
 
     def request_token(self) -> TwitterOAuth1AuthorizeClient:
         url: OauthRequestTokenUrl = "https://api.twitter.com/oauth/request_token"
@@ -79,4 +86,5 @@ class TwitterOAuth1RealSession(TwitterOAuth1Session):
             api_secret=self._api_secret,
             access_token=access_token,
             access_secret=access_secret,
+            rate_limit_manager=self._rate_limit_manager,
         )

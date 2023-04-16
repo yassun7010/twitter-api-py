@@ -39,8 +39,8 @@ try:
     print(
         dedent(
             f"""
-            Get Access Token: {token.oauth_token}
-            Get Access Secret: {token.oauth_token_secret}
+            🌟 Get Access Token: {token.oauth_token}
+            🌟 Get Access Secret: {token.oauth_token_secret}
             """
         )
     )

@@ -11,7 +11,10 @@ try:
     client = (
         TwitterApiClient.from_oauth2_user_flow_env(
             callback_url=YOUR_CALLBACK_URL,
-            scope=SCOPES,
+            scope=[
+                "tweet.read",
+                "users.read",
+            ],
         )
         .request("https://twitter.com/i/oauth2/authorize")
         .generate_authorization_url()

@@ -497,6 +497,8 @@ class TwitterApiClient(Chainable, metaclass=ABCMeta):
         api_secret_env: Env[ApiSecret] = "API_SECRET",
         access_token_env: Env[AccessToken] = "ACCESS_TOKEN",
         access_secret_env: Env[AccessSecret] = "ACCESS_SECRET",
+        access_token: Optional[AccessToken] = None,
+        access_secret: Optional[AccessSecret] = None,
         rate_limit_manager: Optional[RateLimitManager] = None,
     ) -> Self:
         """環境変数から、OAuth1.0a のアプリ認証を用いてクライアントを作成する。"""
@@ -504,8 +506,16 @@ class TwitterApiClient(Chainable, metaclass=ABCMeta):
         return cls.from_oauth1_app(
             api_key=cls._get_env(api_key_env),
             api_secret=cls._get_env(api_secret_env),
-            access_token=cls._get_env(access_token_env),
-            access_secret=cls._get_env(access_secret_env),
+            access_token=(
+                access_token
+                if access_token is not None
+                else cls._get_env(access_token_env)
+            ),
+            access_secret=(
+                access_secret
+                if access_secret is not None
+                else cls._get_env(access_secret_env)
+            ),
             rate_limit_manager=rate_limit_manager,
         )
 

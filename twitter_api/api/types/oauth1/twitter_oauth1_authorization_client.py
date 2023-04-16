@@ -12,6 +12,5 @@ class TwitterOAuth1AuthorizeClient(Chainable):
 
     def request(self, url: OauthAuthorizeUrl) -> GenerateAuthorizationUrlOAuth1Session:
         return GenerateAuthorizationUrlOAuth1Session(
-            url,
             self._session,
         )

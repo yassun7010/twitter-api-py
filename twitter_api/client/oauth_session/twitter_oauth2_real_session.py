@@ -10,6 +10,7 @@ from twitter_api.api.types.v2_oauth2.oauth2_access_token import OAuth2AccessToke
 from twitter_api.api.types.v2_oauth2.oauth2_authorization import OAuth2Authorization
 from twitter_api.api.types.v2_scope import Scope
 from twitter_api.client.oauth_session.twitter_oauth2_session import TwitterOAuth2Session
+from twitter_api.rate_limit.manager.rate_limit_manager import RateLimitManager
 from twitter_api.types.oauth import CallbackUrl, ClientId, ClientSecret
 from twitter_api.utils.oauth import generate_code_verifier
 
@@ -22,6 +23,7 @@ class TwitterOAuth2RealSession(TwitterOAuth2Session):
         client_secret: ClientSecret,
         callback_url: CallbackUrl,
         scope: Optional[list[Scope]] = None,
+        rate_limit_manager: Optional[RateLimitManager] = None,
     ) -> None:
         self._session = OAuth2Session(
             client_id=client_id,
@@ -30,6 +32,7 @@ class TwitterOAuth2RealSession(TwitterOAuth2Session):
             scope=scope,
             code_challenge_method="S256",
         )
+        self._rate_limit_manager = rate_limit_manager
 
     def generate_authorization_url(self) -> OAuth2Authorization:
         url: Oauth2AuthorizeUrl = "https://twitter.com/i/oauth2/authorize"
@@ -70,8 +73,9 @@ class TwitterOAuth2RealSession(TwitterOAuth2Session):
         )
 
     def generate_client(self, access_token: str):
-        # NOTE: 本来実装は不要だが、モジュールの再起読み込みを防ぐため、
-        #       偽のデータを作っている。
         from twitter_api.client.twitter_api_real_client import TwitterApiRealClient
 
-        return TwitterApiRealClient.from_oauth2_bearer_token(bearer_token=access_token)
+        return TwitterApiRealClient.from_oauth2_bearer_token(
+            bearer_token=access_token,
+            rate_limit_manager=self._rate_limit_manager,
+        )

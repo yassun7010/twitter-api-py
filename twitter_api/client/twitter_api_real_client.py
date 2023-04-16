@@ -153,6 +153,7 @@ class TwitterApiRealClient(TwitterApiClient):
         api_key: ApiKey,
         api_secret: ApiSecret,
         callback_url: CallbackUrl,
+        rate_limit_manager: Optional[RateLimitManager] = None,
     ):
         from twitter_api.api.types.oauth1.twitter_oauth1_request_token_client import (
             TwitterOAuth1RequestTokenClient,
@@ -165,6 +166,7 @@ class TwitterApiRealClient(TwitterApiClient):
             api_key=api_key,
             api_secret=api_secret,
             callback_url=callback_url,
+            rate_limit_manager=rate_limit_manager,
         )
 
         return TwitterOAuth1RequestTokenClient(session)

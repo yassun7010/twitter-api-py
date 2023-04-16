@@ -450,6 +450,25 @@ class TwitterApiMockClient(TwitterApiClient):
         )
 
     @classmethod
+    def from_oauth1_user_flow(
+        cls,
+        *,
+        api_key: ApiKey,
+        api_secret: ApiSecret,
+        callback_url: CallbackUrl,
+        rate_limit_manager: Optional[RateLimitManager] = None,
+    ):
+        from twitter_api.api.types.oauth1.twitter_oauth1_request_token_client import (
+            TwitterOAuth1RequestTokenClient,
+        )
+        from twitter_api.client.oauth_session.twitter_oauth1_mock_session import (
+            TwitterOAuth1MockSession,
+        )
+
+        session = TwitterOAuth1MockSession()
+        return TwitterOAuth1RequestTokenClient(session=session)
+
+    @classmethod
     def _get_env(cls, key: Env[str]) -> str:
         """
         環境変数を取り出す。
