@@ -37,7 +37,7 @@ HttpClient.new.get("https://api.twitter.com/2/users/2244994945")
 もう一つは有名な Gem を使うことです。
 
 ```ruby
-api.users
+api.users(params)
 ```
 
 この方法は記述量が少なくなるかもしれませんが、致命的な問題を抱えていると思います。
