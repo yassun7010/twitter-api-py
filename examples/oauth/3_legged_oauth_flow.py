@@ -45,7 +45,10 @@ try:
         )
     )
 
-    client = token.generate_client()
+    client = TwitterApiClient.from_oauth1_app_env(
+        access_token=token.oauth_token,
+        access_secret=token.oauth_token_secret,
+    )
 
     tweets = (
         client.chain()
