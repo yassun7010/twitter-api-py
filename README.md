@@ -113,14 +113,42 @@ def test_some_logic():
     assert some_logic(twitter_client) is True
 ```
 
-## 外形監視用の自動テスト
+## 開発者向け
+
+### 初回構築
+
+```sh
+# .env を読み取るプラグインを入れておく。
+poetry self add poetry-dotenv-plugin
+
+# 必要な物をインストール
+poetry install
+```
+
+### サンプルの実行
+
+```sh
+poetry run python example/${EXAMPLE_FILE}.py
+```
+
+### 自動テストの実行
+
+```sh
+# 静的解析の実行
+poetry run task lint
+
+# 自動テストの実行
+poetry run task test
+```
+
+### 外形監視用の自動テスト
 
 本ツールには Twitter API を実際にたたいて応答を確認する自動テストが用意されています。
 
 Twitter API の挙動がおかしくなったかは、簡単に確認することができます。
 Twitter API が時たま起こす奇妙な挙動のテストケースを教えていただけると、大変助かります。
 
-### 外形監視用の自動テスト用の環境変数の設定
+#### 外形監視用の自動テスト用の環境変数の設定
 
 1. `.env.local` をコピーし、 `.env` を作成する。
 2. [Twitter 開発者のページ](https://developer.twitter.com/en/portal/projects-and-apps) へ移動し、下記を取得する。
@@ -144,7 +172,7 @@ Twitter API が時たま起こす奇妙な挙動のテストケースを教え�
     - SYNTHETIC_MONITORING_TEST
 
 
-### OAUTH2_USER_ACCESS_TOKEN の作成方法
+#### OAUTH2_USER_ACCESS_TOKEN の作成方法
 
 外形監視用の自動テストのうち、ユーザ認証されたアクセストークンが必要なテストが存在する。
 （自動テスト上でアクセストークンが失効すると、 OAuth2UserAccessTokenExpired が発生する。）
