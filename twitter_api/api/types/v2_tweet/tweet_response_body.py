@@ -116,9 +116,11 @@ class FindTweets(ExtraPermissiveModel, metaclass=ABCMeta):
         return users
 
 
-class TweetResponseBody(FindTweets):
+class TweetResponseBodyData(ExtraPermissiveModel):
     data: Tweet
 
+
+class TweetResponseBody(FindTweets, TweetResponseBodyData):
     def find_tweet_by(self, id: TweetId | Tweet) -> Optional[Tweet]:
         if isinstance(id, Tweet):
             id = id.id
@@ -136,9 +138,11 @@ class TweetResponseBody(FindTweets):
         return None
 
 
-class TweetsResponseBody(FindTweets):
+class TweetsResponseBodyData(ExtraPermissiveModel):
     data: list[Tweet] = Field(default_factory=list)
 
+
+class TweetsResponseBody(FindTweets, TweetsResponseBodyData):
     def find_tweet_by(self, id: TweetId | Tweet) -> Optional[Tweet]:
         if isinstance(id, Tweet):
             id = id.id
