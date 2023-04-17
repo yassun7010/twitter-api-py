@@ -13,7 +13,7 @@ from twitter_api.types.extra_permissive_model import get_extra_fields
 
 @pytest.mark.skipif(**synthetic_monitoring_is_disable())
 class TestPostOauth2InvalidateToken:
-    @pytest.mark.skip(reason="上手く invalidation できない理由を要調査。")
+    @pytest.mark.xfail(reason="上手く invalidation できない理由を要調査。")
     def test_post_oauth2_invalidate_token(
         self, real_oauth2_app_client: TwitterApiRealClient
     ):

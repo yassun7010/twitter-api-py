@@ -30,7 +30,7 @@ class TestTweetsSearchResponseBody:
         assert retweeted_tweet is not None
         assert retweeted_tweet.id == "1647031756388962305"
 
-    @pytest.mark.skip("同じレスポンスの中に引用元のツイートが存在しない。")
+    @pytest.mark.xfail(reason="同じレスポンスの中に引用元のツイートが存在しない。")
     def test_find_quoted_tweet_by(
         self,
         response: TweetsSearchResponseBody,
