@@ -11,7 +11,7 @@ from textwrap import dedent
 from twitter_api.api.types.v2_oauth2.twitter_oauth2_access_token_client import (
     TwitterOAuth2AccessTokenClient,
 )
-from twitter_api.api.types.v2_scope import SCOPES
+from twitter_api.api.types.v2_scope import ALL_SCOPES
 from twitter_api.client import TwitterApiClient
 from twitter_api.error import TwitterApiError
 
@@ -22,7 +22,7 @@ try:
     backend = (
         TwitterApiClient.from_oauth2_user_flow_env(
             callback_url=YOUR_CALLBACK_URL,
-            scope=SCOPES,
+            scope=ALL_SCOPES,
         )
         .request("https://twitter.com/i/oauth2/authorize")
         .generate_authorization_url()

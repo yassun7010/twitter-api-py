@@ -67,7 +67,7 @@ from twitter_api.api.resources.v2_user_tweets import (
     V2UserTweetsUrl,
 )
 from twitter_api.api.resources.v2_users import V2UsersResources, V2UsersUrl
-from twitter_api.api.types.v2_scope import SCOPES, Scope
+from twitter_api.api.types.v2_scope import ALL_SCOPES, Scope
 from twitter_api.error import NeverError
 from twitter_api.rate_limit.manager.rate_limit_manager import RateLimitManager
 from twitter_api.types.chainable import Chainable
@@ -454,7 +454,7 @@ class TwitterApiClient(Chainable, metaclass=ABCMeta):
         """
 
         if scope is None:
-            scope = SCOPES
+            scope = ALL_SCOPES
 
         return cls.from_oauth2_user_flow(
             client_id=cls._get_env(client_id_env),

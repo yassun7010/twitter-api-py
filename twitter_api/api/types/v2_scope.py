@@ -28,7 +28,7 @@ OAuth2.0 で用いるスコープ。
 Refer: https://developer.twitter.com/en/docs/authentication/oauth-2-0/authorization-code
 """
 
-SCOPES: list[Scope] = [
+ALL_SCOPES: list[Scope] = [
     "block.read",
     "block.write",
     "bookmark.read",
