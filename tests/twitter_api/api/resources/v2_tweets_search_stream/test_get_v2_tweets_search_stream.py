@@ -12,7 +12,7 @@ from twitter_api.types.extra_permissive_model import get_extra_fields
 
 @pytest.mark.skipif(**synthetic_monitoring_is_disable())
 class TestGetV2TweetsSearchStream:
-    @pytest.mark.xfail(reason="応答が戻ってこない。")
+    @pytest.mark.skip(reason="応答が戻ってこない。")
     @pytest.mark.parametrize(
         "client_fixture_name,permit",
         [
