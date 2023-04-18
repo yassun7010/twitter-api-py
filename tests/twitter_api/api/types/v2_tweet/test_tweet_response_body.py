@@ -38,7 +38,7 @@ class TestTweetsSearchResponseBody:
         quoted_tweet = response.find_quoted_tweet_by("1647121928971522048")
 
         assert quoted_tweet is not None
-        assert quoted_tweet == "1647073612271321093"
+        assert quoted_tweet.id == "1647073612271321093"
 
     def test_find_replied_tweet_by(
         self,
