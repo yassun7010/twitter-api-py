@@ -110,7 +110,7 @@ class Tweet(ExtraPermissiveModel):
             return self.public_metrics.retweet_count
 
     @property
-    def retweeted_target(self) -> Optional[TweetId]:
+    def retweeted_tweet_id(self) -> Optional[TweetId]:
         """
         リツイート元の TweetID を取得する。
         """
@@ -124,14 +124,23 @@ class Tweet(ExtraPermissiveModel):
         return None
 
     @property
-    def is_retweet(self) -> bool:
+    def is_retweet(self) -> Optional[bool]:
         """
         リツイートかどうか。
+
+        None の場合、判断できる情報がない。
         """
-        return self.retweeted_target is not None
+        if self.referenced_tweets is None:
+            return None
+
+        for tweet in self.referenced_tweets:
+            if tweet.type == "retweeted":
+                return True
+
+        return False
 
     @property
-    def quoted_target(self) -> Optional[TweetId]:
+    def quoted_tweet_id(self) -> Optional[TweetId]:
         """
         引用元の TweetID を取得する。
         """
@@ -145,14 +154,24 @@ class Tweet(ExtraPermissiveModel):
         return None
 
     @property
-    def is_quote(self) -> bool:
+    def is_quote(self) -> Optional[bool]:
         """
         引用ツイートであるかどうか。
+
+        None の場合、判断できる情報がない。
         """
-        return self.quoted_target is not None
+
+        if self.referenced_tweets is None:
+            return None
+
+        for tweet in self.referenced_tweets:
+            if tweet.type == "quoted":
+                return True
+
+        return False
 
     @property
-    def replied_target(self) -> Optional[TweetId]:
+    def replied_tweet_id(self) -> Optional[TweetId]:
         """
         リプライ元の TweetId を取得する。
         """
@@ -166,8 +185,17 @@ class Tweet(ExtraPermissiveModel):
         return None
 
     @property
-    def is_reply(self) -> bool:
+    def is_reply(self) -> Optional[bool]:
         """
         リプライツイートであるかどうか。
+
+        None の場合、判断できる情報がない。
         """
-        return self.replied_target is not None
+        if self.referenced_tweets is None:
+            return None
+
+        for tweet in self.referenced_tweets:
+            if tweet.type == "replied_to":
+                return True
+
+        return False

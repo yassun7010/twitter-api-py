@@ -43,10 +43,10 @@ class FindTweets(ExtraPermissiveModel, metaclass=ABCMeta):
         if target is None or self.includes is None:
             return None
 
-        if target.retweeted_target is None:
+        if target.retweeted_tweet_id is None:
             return None
 
-        retweeted_id = target.retweeted_target
+        retweeted_id = target.retweeted_tweet_id
 
         for tweet in self.includes.tweets:
             if retweeted_id == tweet.id:
@@ -64,10 +64,10 @@ class FindTweets(ExtraPermissiveModel, metaclass=ABCMeta):
         if target is None or self.includes is None:
             return None
 
-        if target.quoted_target is None:
+        if target.quoted_tweet_id is None:
             return None
 
-        quote_tweet_id = target.quoted_target
+        quote_tweet_id = target.quoted_tweet_id
 
         for tweet in self.includes.tweets:
             if quote_tweet_id == tweet.id:
@@ -85,10 +85,10 @@ class FindTweets(ExtraPermissiveModel, metaclass=ABCMeta):
         if target is None or self.includes is None:
             return None
 
-        if target.replied_target is None:
+        if target.replied_tweet_id is None:
             return None
 
-        reply_tweet_id = target.replied_target
+        reply_tweet_id = target.replied_tweet_id
 
         for tweet in self.includes.tweets:
             if reply_tweet_id == tweet.id:
