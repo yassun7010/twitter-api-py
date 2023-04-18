@@ -70,9 +70,9 @@ class GetV2TweetResources(ApiResources):
         query: Optional[GetV2TweetQueryParameters] = None,
     ) -> GetV2TweetResponseBody:
         """
-        ツイートの一覧を取得する。
+        ツイートを取得する。
 
-        refer: https://developer.twitter.com/en/docs/twitter-api/tweets/lookup/api-reference/get-tweets
+        refer: https://developer.twitter.com/en/docs/twitter-api/tweets/lookup/api-reference/get-tweets-id
         """
         return self.request_client.get(
             endpoint=ENDPOINT,

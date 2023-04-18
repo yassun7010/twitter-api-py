@@ -6,7 +6,7 @@ null = None
 true = True
 """Json のデータをそのままコードにコピーして利用できるように、 true を定義しておく。"""
 
-false = True
+false = False
 """Json のデータをそのままコードにコピーして利用できるように、 false を定義しておく。"""
 
 
