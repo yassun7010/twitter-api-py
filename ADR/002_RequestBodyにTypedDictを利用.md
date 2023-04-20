@@ -59,7 +59,7 @@ async def get_tweets(
 ```python
 TwitterApiClient.from_app_oauth_env()
     .get_tweets(
-        GetV2TweetsRequestBody(**{
+        GetV2TweetsRequestBody.parse_obj({
             "ids": ["12345"],
             "media.fields": ["public_metrics"]
         })
