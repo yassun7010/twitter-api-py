@@ -1,3 +1,5 @@
+import itertools
+
 import pytest
 
 from tests.conftest import synthetic_monitoring_is_disable
@@ -11,6 +13,10 @@ from twitter_api.api.types.v2_media.media_field import MediaField
 from twitter_api.api.types.v2_place.place_field import PlaceField
 from twitter_api.api.types.v2_poll.poll_field import PollField
 from twitter_api.api.types.v2_tweet.tweet_field import TweetField
+from twitter_api.api.types.v2_tweet.tweet_response_body import (
+    TweetsResponseBodyIncludes,
+    TweetsResponseBodyMeta,
+)
 from twitter_api.api.types.v2_user.user_field import UserField
 from twitter_api.client.twitter_api_mock_client import TwitterApiMockClient
 from twitter_api.client.twitter_api_real_client import TwitterApiRealClient
@@ -55,26 +61,32 @@ class TestGetV2TweetsSearchRecent:
         all_tweet_fields: list[TweetField],
         all_user_fields: list[UserField],
     ):
-        response = (
-            real_oauth2_app_client.chain()
-            .request("https://api.twitter.com/2/tweets/search/recent")
-            .get(
-                {
-                    "query": "ツイート",
-                    "max_results": 10,
-                    "expansions": all_expansions,
-                    "media.fields": all_media_fields,
-                    "place.fields": all_place_fields,
-                    "poll.fields": all_poll_fields,
-                    "tweet.fields": all_tweet_fields,
-                    "user.fields": all_user_fields,
-                }
+        next_token = None
+        for i in range(5):
+            response = (
+                real_oauth2_app_client.chain()
+                .request("https://api.twitter.com/2/tweets/search/recent")
+                .get(
+                    {
+                        "query": "#japan test",
+                        "max_results": 100,
+                        "expansions": all_expansions,
+                        "media.fields": all_media_fields,
+                        "place.fields": all_place_fields,
+                        "poll.fields": all_poll_fields,
+                        "tweet.fields": all_tweet_fields,
+                        "user.fields": all_user_fields,
+                        "next_token": next_token,
+                    }
+                )
             )
-        )
 
-        print(response.json())
+            assert get_extra_fields(response) == {}
 
-        assert get_extra_fields(response) == {}
+            if response.meta.next_token is None:
+                break
+
+            next_token = response.meta.next_token
 
 
 class TestMockGetV2TweetsSearchRecent:
@@ -111,3 +123,59 @@ class TestMockGetV2TweetsSearchRecent:
                 }
             )
         ) == response
+
+    def test_mock_get_v2_search_recent_recent(
+        self,
+        mock_oauth2_app_client: TwitterApiMockClient,
+        all_expansions: list[Expansion],
+        all_media_fields: list[MediaField],
+        all_place_fields: list[PlaceField],
+        all_poll_fields: list[PollField],
+        all_tweet_fields: list[TweetField],
+        all_user_fields: list[UserField],
+    ):
+        total_response = None
+        next_token = None
+        for i in itertools.count(1):
+            response = (
+                mock_oauth2_app_client.chain()
+                .inject_get_response_body(
+                    "https://api.twitter.com/2/tweets/search/recent",
+                    GetV2TweetsSearchRecentResponseBody.parse_file(
+                        json_test_data(
+                            f"get_v2_tweets_search_recent_response/response_{i:02}.json"
+                        )
+                    ),
+                )
+                .request("https://api.twitter.com/2/tweets/search/recent")
+                .get(
+                    {
+                        "query": "#japan test",
+                        "max_results": 100,
+                        "expansions": all_expansions,
+                        "media.fields": all_media_fields,
+                        "place.fields": all_place_fields,
+                        "poll.fields": all_poll_fields,
+                        "tweet.fields": all_tweet_fields,
+                        "user.fields": all_user_fields,
+                        "next_token": next_token,
+                    }
+                )
+            )
+
+            assert get_extra_fields(response) == {}
+
+            next_token: str | None = response.meta.next_token
+
+            if total_response is None:
+                total_response = response
+                continue
+
+            total_response.extend(response)
+
+            if next_token is None:
+                break
+
+        assert total_response is not None
+        assert len(total_response.data) == 104
+        assert get_extra_fields(total_response) == {}

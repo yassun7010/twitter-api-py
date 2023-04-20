@@ -1,5 +1,5 @@
 from abc import ABCMeta, abstractmethod
-from typing import Optional
+from typing import Optional, Self
 
 from pydantic import Field
 
@@ -19,9 +19,18 @@ class TweetsResponseBodyIncludes(ExtraPermissiveModel):
     media: list[Media] = Field(default_factory=list)
     polls: list[Poll] = Field(default_factory=list)
 
+    def extend(self, other: Self) -> None:
+        self.users.extend(other.users)
+        self.tweets.extend(other.tweets)
+        self.places.extend(other.places)
+        self.media.extend(other.media)
+        self.polls.extend(other.polls)
+
 
 class FindTweets(ExtraPermissiveModel, metaclass=ABCMeta):
-    includes: Optional[TweetsResponseBodyIncludes] = None
+    includes: TweetsResponseBodyIncludes = Field(
+        default_factory=TweetsResponseBodyIncludes,
+    )
     errors: Optional[list[dict]] = None
 
     @abstractmethod
@@ -163,14 +172,43 @@ class TweetsResponseBody(FindTweets, TweetsResponseBodyData):
 
 class TweetsResponseBodyMeta(ExtraPermissiveModel):
     result_count: int
-    next_token: Optional[str] = None
-    previous_token: Optional[str] = None
     newest_id: Optional[TweetId] = None
     oldest_id: Optional[TweetId] = None
+    next_token: Optional[str] = None
+    previous_token: Optional[str] = None
+
+    def extend(self, other: Self) -> None:
+        self.result_count += other.result_count
+
+        if self.newest_id is not None and other.newest_id is not None:
+            if int(self.newest_id) < int(other.newest_id):
+                self.newest_id = other.newest_id
+        elif other.newest_id is not None:
+            self.newest_id = other.newest_id
+
+        if self.oldest_id is not None and other.oldest_id is not None:
+            if int(self.oldest_id) < int(other.oldest_id):
+                self.oldest_id = other.oldest_id
+        elif other.oldest_id is not None:
+            self.oldest_id = other.oldest_id
+
+        self.next_token = self.next_token
+        self.previous_token = None
 
 
 class TweetsSearchResponseBody(TweetsResponseBody):
     meta: TweetsResponseBodyMeta
+
+    def extend(self, other: Self) -> None:
+        self.data.extend(other.data)
+        self.includes.extend(other.includes)
+        self.meta.extend(other.meta)
+
+        if other.errors is not None:
+            if self.errors is not None:
+                self.errors.extend(other.errors)
+            else:
+                self.errors = other.errors
 
 
 def _check_self(origin: TweetId, target: Tweet) -> bool:

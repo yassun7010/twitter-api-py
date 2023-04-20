@@ -7,7 +7,7 @@ from twitter_api.api.types.v2_tweet.tweet_response_body import TweetsSearchRespo
 @pytest.fixture
 def response() -> TweetsSearchResponseBody:
     return TweetsSearchResponseBody.parse_file(
-        json_test_data("get_v2_tweets_search_recent_response_all_fields.json"),
+        json_test_data("get_v2_tweets_search_recent_response/total_response.json"),
     )
 
 
@@ -16,43 +16,42 @@ class TestTweetsSearchResponseBody:
         self,
         response: TweetsSearchResponseBody,
     ):
-        retweeted_tweet = response.find_tweet_by("1647123314605965312")
+        retweeted_tweet = response.find_tweet_by("1648980229258612736")
 
         assert retweeted_tweet is not None
-        assert retweeted_tweet.id == "1647123314605965312"
+        assert retweeted_tweet.id == "1648980229258612736"
 
     def test_find_retweeted_tweet_by(
         self,
         response: TweetsSearchResponseBody,
     ):
-        retweeted_tweet = response.find_retweeted_tweet_by("1647123314605965312")
+        retweeted_tweet = response.find_retweeted_tweet_by("1648955380469317634")
 
         assert retweeted_tweet is not None
-        assert retweeted_tweet.id == "1647031756388962305"
+        assert retweeted_tweet.id == "1648303577893412865"
 
-    @pytest.mark.xfail(reason="同じレスポンスの中に引用元のツイートが存在しない。 next_token をたたく必要がある。")
     def test_find_quoted_tweet_by(
         self,
         response: TweetsSearchResponseBody,
     ):
-        quoted_tweet = response.find_quoted_tweet_by("1647121928971522048")
+        quoted_tweet = response.find_quoted_tweet_by("1648702929942052865")
 
         assert quoted_tweet is not None
-        assert quoted_tweet.id == "1647073612271321093"
+        assert quoted_tweet.id == "1648387817490493441"
 
     def test_find_replied_tweet_by(
         self,
         response: TweetsSearchResponseBody,
     ):
-        replied_tweet = response.find_replied_tweet_by("1647123304380268545")
+        replied_tweet = response.find_replied_tweet_by("1648220109431865346")
 
         assert replied_tweet is not None
-        assert replied_tweet.id == "1647122898220621824"
+        assert replied_tweet.id == "1648209168766054401"
 
     def test_find_mentioned_users_by(
         self,
         response: TweetsSearchResponseBody,
     ):
-        mentioned_users = response.find_mentioned_users_by("1647123313993601026")
+        mentioned_users = response.find_mentioned_users_by("1648220109431865346")
 
-        assert [user.id for user in mentioned_users] == ["183584495"]
+        assert [user.id for user in mentioned_users] == ["128262047"]

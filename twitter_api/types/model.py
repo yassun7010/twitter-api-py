@@ -53,7 +53,7 @@ class Model(BaseModel):
         """
         pydantic のデフォルトとは異なり、
         exclude_unset と exclude_none をデフォルトで有効にしている。
-        また、ensure_ascii を無向にしている。
+        また、ensure_ascii を無効にしている。
         """
 
         return super().json(
