@@ -62,7 +62,7 @@ class TestGetV2TweetsSearchRecent:
         all_user_fields: list[UserField],
     ):
         next_token = None
-        for i in range(3):
+        for _ in range(3):
             response = (
                 real_oauth2_app_client.chain()
                 .request("https://api.twitter.com/2/tweets/search/recent")
