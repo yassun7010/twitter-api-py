@@ -1,13 +1,9 @@
 from typing import Optional, Type
 
+import httpx
 import pydantic
-import requests
-from authlib.integrations.requests_client.oauth1_session import (
-    OAuth1Auth,  # pyright: reportMissingImports=false
-)
-from authlib.integrations.requests_client.oauth2_session import (
-    OAuth2Auth,  # pyright: reportMissingImports=false
-)
+from authlib.integrations.httpx_client.oauth1_client import OAuth1Auth
+from authlib.integrations.httpx_client.oauth2_client import OAuth2Auth
 
 from twitter_api.error import (
     TwitterApiOAuthTokenV1NotFound,
@@ -44,11 +40,11 @@ class RealRequestClient(RequestClient):
         oauth_version: OAuthVersion,
         rate_limit_target: RateLimitTarget,
         rate_limit_manager: Optional[RateLimitManager] = None,
-        session: Optional[requests.Session] = None,
+        session: Optional[httpx.Client] = None,
         timeout_sec: Optional[float] = None,
     ) -> None:
         if session is None:
-            session = requests.Session()
+            session = httpx.Client()
 
         self._oauth_version: OAuthVersion = oauth_version
         self._rate_limit_target: RateLimitTarget = rate_limit_target
@@ -176,7 +172,7 @@ class RealRequestClient(RequestClient):
 
 def _parse_response(
     endpoint: Endpoint,
-    response: requests.Response,
+    response: httpx.Response,
     response_type: Type[ResponseModelBody],
     url: Url,
     headers: Optional[Headers] = None,
@@ -189,7 +185,7 @@ def _parse_response(
         try:
             data = response.json()
         except ValueError:
-            if not response.ok:
+            if response.is_error:
                 raise TwitterApiResponseFailed(
                     endpoint,
                     url=url,
@@ -205,7 +201,7 @@ def _parse_response(
                     response.content,
                 )
 
-    if not response.ok:
+    if response.is_error:
         raise TwitterApiResponseFailed(
             endpoint,
             url=url,

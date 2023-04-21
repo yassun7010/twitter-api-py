@@ -1,11 +1,7 @@
 from typing import Optional
 
-from authlib.integrations.requests_client.oauth1_session import (
-    OAuth1Auth,  # pyright: reportMissingImports=false
-)
-from authlib.integrations.requests_client.oauth2_session import (  # pyright: reportMissingImports=false
-    OAuth2Auth,
-)
+from authlib.integrations.httpx_client.oauth1_client import OAuth1Auth
+from authlib.integrations.httpx_client.oauth2_client import OAuth2Auth
 
 from twitter_api.api.types.v2_scope import Scope
 from twitter_api.rate_limit.manager.rate_limit_manager import RateLimitManager

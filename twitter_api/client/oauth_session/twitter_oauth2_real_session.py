@@ -1,8 +1,6 @@
 from typing import Any, Optional
 
-from authlib.integrations.requests_client.oauth2_session import (  # pyright: reportMissingImports=false
-    OAuth2Session,
-)
+from authlib.integrations.httpx_client.oauth2_client import OAuth2Client
 
 from twitter_api.api.resources.oauth2_authorize import Oauth2AuthorizeUrl
 from twitter_api.api.resources.v2_oauth2_token import V2Oauth2TokenUrl
@@ -25,7 +23,7 @@ class TwitterOAuth2RealSession(TwitterOAuth2Session):
         scope: Optional[list[Scope]] = None,
         rate_limit_manager: Optional[RateLimitManager] = None,
     ) -> None:
-        self._session = OAuth2Session(
+        self._session = OAuth2Client(
             client_id=client_id,
             client_secret=client_secret,
             redirect_uri=callback_url,

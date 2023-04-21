@@ -1,8 +1,6 @@
 from typing import Optional
 
-from authlib.integrations.requests_client.oauth1_session import (  # pyright: reportMissingImports=false
-    OAuth1Session,
-)
+from authlib.integrations.httpx_client.oauth1_client import OAuth1Client
 
 from twitter_api.api.resources.oauth_access_token import OauthAccessTokenUrl
 from twitter_api.api.resources.oauth_request_token import OauthRequestTokenUrl
@@ -35,7 +33,7 @@ class TwitterOAuth1RealSession(TwitterOAuth1Session):
     ) -> None:
         self._api_key = api_key
         self._api_secret = api_secret
-        self._session = OAuth1Session(
+        self._session = OAuth1Client(
             client_id=api_key,
             client_secret=api_secret,
             redirect_uri=callback_url,
