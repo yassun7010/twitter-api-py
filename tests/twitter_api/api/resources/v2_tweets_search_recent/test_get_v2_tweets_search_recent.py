@@ -13,10 +13,6 @@ from twitter_api.api.types.v2_media.media_field import MediaField
 from twitter_api.api.types.v2_place.place_field import PlaceField
 from twitter_api.api.types.v2_poll.poll_field import PollField
 from twitter_api.api.types.v2_tweet.tweet_field import TweetField
-from twitter_api.api.types.v2_tweet.tweet_response_body import (
-    TweetsResponseBodyIncludes,
-    TweetsResponseBodyMeta,
-)
 from twitter_api.api.types.v2_user.user_field import UserField
 from twitter_api.client.twitter_api_async_mock_client import TwitterApiAsyncMockClient
 from twitter_api.client.twitter_api_mock_client import TwitterApiMockClient
