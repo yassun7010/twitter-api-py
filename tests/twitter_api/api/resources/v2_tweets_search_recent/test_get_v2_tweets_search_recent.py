@@ -243,14 +243,14 @@ class TestAsyncMockGetV2TweetsSearchRecent:
         ] == responses
 
     @pytest.mark.asyncio
-    async def test_async_mock_get_v2_search_recent_flattened(
+    async def test_async_mock_get_v2_search_recent_collected(
         self,
         oauth2_app_async_mock_client: TwitterApiAsyncMockClient,
         json_files: list[str],
     ):
         response = GetV2TweetsSearchRecentResponseBody.parse_file(
             json_test_data(
-                "get_v2_tweets_search_recent_response/flattened_response.json"
+                "get_v2_tweets_search_recent_response/collected_response.json"
             )
         )
 
@@ -268,7 +268,7 @@ class TestAsyncMockGetV2TweetsSearchRecent:
             await (
                 oauth2_app_async_mock_client.chain()
                 .resource("https://api.twitter.com/2/tweets/search/recent")
-                .get_flattened(
+                .get_collected(
                     {
                         "query": "モックされているので、この検索条件に意味はない",
                         "expansions": ["attachments.poll_ids"],

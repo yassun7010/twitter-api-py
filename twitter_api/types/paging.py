@@ -59,7 +59,7 @@ async def get_paging_response_iter(
             return
 
 
-async def get_flattend_paging_response(
+async def get_collected_paging_response(
     get_func: Callable[
         [AnyQueryParameters],
         Coroutine[Any, Any, AnyPageResponseBody],
