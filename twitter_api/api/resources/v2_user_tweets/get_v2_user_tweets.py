@@ -1,5 +1,6 @@
 from datetime import datetime
-from typing import Literal, NotRequired, Optional, TypedDict
+from functools import partial
+from typing import AsyncGenerator, Literal, NotRequired, Optional, Self, TypedDict
 
 from pydantic import Field
 
@@ -22,6 +23,11 @@ from twitter_api.rate_limit.rate_limit_decorator import rate_limit
 from twitter_api.types.comma_separatable import CommaSeparatable, comma_separated_str
 from twitter_api.types.endpoint import Endpoint
 from twitter_api.types.extra_permissive_model import ExtraPermissiveModel
+from twitter_api.types.paring import (
+    PageResponseBody,
+    get_flattend_search_response,
+    get_search_response_iter,
+)
 from twitter_api.utils.datetime import rfc3339
 from twitter_api.utils.functional import map_optional
 
@@ -65,14 +71,6 @@ def _make_query(query: GetV2UserTweetsQueryParameters) -> dict:
     }
 
 
-class GetV2UserTweetsResponseBodyMeta(ExtraPermissiveModel):
-    result_count: int
-    oldest_id: TweetId
-    newest_id: TweetId
-    next_token: Optional[str] = None
-    previous_token: Optional[str] = None
-
-
 class GetV2UserTweetsResponseBodyIncludes(ExtraPermissiveModel):
     users: list[User] = Field(default_factory=list)
     tweets: list[Tweet] = Field(default_factory=list)
@@ -80,12 +78,48 @@ class GetV2UserTweetsResponseBodyIncludes(ExtraPermissiveModel):
     media: list[Media] = Field(default_factory=list)
     polls: list[Poll] = Field(default_factory=list)
 
+    def extend(self, other: Self) -> None:
+        self.users.extend(other.users)
+        self.tweets.extend(other.tweets)
+        self.places.extend(other.places)
+        self.media.extend(other.media)
+        self.polls.extend(other.polls)
 
-class GetV2UserTweetsResponseBody(ExtraPermissiveModel):
+
+class GetV2UserTweetsResponseBodyMeta(ExtraPermissiveModel):
+    result_count: int
+    oldest_id: TweetId
+    newest_id: TweetId
+    next_token: Optional[str] = None
+    previous_token: Optional[str] = None
+
+    def extend(self, other: Self) -> None:
+        self.result_count += other.result_count
+        self.next_token = None
+        self.previous_token = None
+
+
+class GetV2UserTweetsResponseBody(ExtraPermissiveModel, PageResponseBody):
     data: list[Tweet]
+    includes: GetV2UserTweetsResponseBodyIncludes = Field(
+        default_factory=GetV2UserTweetsResponseBodyIncludes,
+    )
     meta: GetV2UserTweetsResponseBodyMeta
-    includes: Optional[GetV2UserTweetsResponseBodyIncludes] = None
     errors: Optional[list[dict]] = None
+
+    def meta_next_token(self) -> str | None:
+        return self.meta.next_token
+
+    def extend(self, other: Self) -> None:
+        self.data.extend(other.data)
+        self.meta.extend(other.meta)
+        self.includes.extend(other.includes)
+
+        if other.errors is not None:
+            if self.errors is not None:
+                self.errors.extend(other.errors)
+            else:
+                self.errors = other.errors
 
 
 class GetV2UserTweetsResources(ApiResources):
@@ -120,3 +154,13 @@ class AsyncGetV2UserTweetsResources(GetV2UserTweetsResources):
         query: Optional[GetV2UserTweetsQueryParameters] = None,
     ) -> GetV2UserTweetsResponseBody:
         return super().get(id, query)
+
+    async def get_iter(
+        self, id: UserId, query: GetV2UserTweetsQueryParameters
+    ) -> AsyncGenerator[GetV2UserTweetsResponseBody, None]:
+        return get_search_response_iter(partial(self.get, id), query)
+
+    async def get_flattened(
+        self, id: UserId, query: GetV2UserTweetsQueryParameters
+    ) -> GetV2UserTweetsResponseBody:
+        return await get_flattend_search_response(partial(self.get, id), query)

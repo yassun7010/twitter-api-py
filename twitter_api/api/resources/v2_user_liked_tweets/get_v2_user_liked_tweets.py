@@ -1,4 +1,5 @@
-from typing import NotRequired, Optional, TypedDict
+from functools import partial
+from typing import AsyncGenerator, NotRequired, Optional, Self, TypedDict
 
 from pydantic import Field
 
@@ -20,6 +21,11 @@ from twitter_api.rate_limit.rate_limit_decorator import rate_limit
 from twitter_api.types.comma_separatable import CommaSeparatable, comma_separated_str
 from twitter_api.types.endpoint import Endpoint
 from twitter_api.types.extra_permissive_model import ExtraPermissiveModel
+from twitter_api.types.paring import (
+    PageResponseBody,
+    get_flattend_search_response,
+    get_search_response_iter,
+)
 
 ENDPOINT = Endpoint("GET", "https://api.twitter.com/2/users/:id/liked_tweets")
 
@@ -58,17 +64,51 @@ class GetV2UserLikedTweetsResponseBodyIncludes(ExtraPermissiveModel):
     media: list[Media] = Field(default_factory=list)
     polls: list[Poll] = Field(default_factory=list)
 
+    def extend(self, other: Self) -> None:
+        self.users.extend(other.users)
+        self.tweets.extend(other.tweets)
+        self.places.extend(other.places)
+        self.media.extend(other.media)
+        self.polls.extend(other.polls)
+
 
 class GetV2UserLikedTweetsResponseBodyMeta(ExtraPermissiveModel):
-    next_token: Optional[str] = None
     result_count: int
+    next_token: Optional[str] = None
+    previous_token: Optional[str] = None
+
+    def extend(self, other: Self) -> None:
+        self.result_count += other.result_count
+        self.next_token = None
+        self.previous_token = None
 
 
-class GetV2UserLikedTweetsResponseBody(ExtraPermissiveModel):
-    data: list[Tweet]
-    includes: Optional[GetV2UserLikedTweetsResponseBodyIncludes] = None
+class GetV2UserLikedTweetsResponseBody(ExtraPermissiveModel, PageResponseBody):
+    data: list[Tweet] = Field(default_factory=list)
     meta: Optional[GetV2UserLikedTweetsResponseBodyMeta] = None
+    includes: GetV2UserLikedTweetsResponseBodyIncludes = Field(
+        default_factory=GetV2UserLikedTweetsResponseBodyIncludes,
+    )
     errors: Optional[list[dict]] = None
+
+    def meta_next_token(self) -> str | None:
+        if self.meta is None:
+            return None
+
+        return self.meta.next_token
+
+    def extend(self, other: Self) -> None:
+        self.data.extend(other.data)
+        self.includes.extend(other.includes)
+
+        if self.meta is not None and other.meta is not None:
+            self.meta.extend(other.meta)
+
+        if other.errors is not None:
+            if self.errors is not None:
+                self.errors.extend(other.errors)
+            else:
+                self.errors = other.errors
 
 
 class GetV2UserLikedTweetsResources(ApiResources):
@@ -104,3 +144,13 @@ class AsyncGetV2UserLikedTweetsResources(GetV2UserLikedTweetsResources):
         query: Optional[GetV2UserLikedTweetsQueryParameters] = None,
     ) -> GetV2UserLikedTweetsResponseBody:
         return super().get(id, query)
+
+    async def get_iter(
+        self, id: UserId, query: GetV2UserLikedTweetsQueryParameters
+    ) -> AsyncGenerator[GetV2UserLikedTweetsResponseBody, None]:
+        return get_search_response_iter(partial(self.get, id), query)
+
+    async def get_flattened(
+        self, id: UserId, query: GetV2UserLikedTweetsQueryParameters
+    ) -> GetV2UserLikedTweetsResponseBody:
+        return await get_flattend_search_response(partial(self.get, id), query)

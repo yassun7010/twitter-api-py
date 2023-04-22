@@ -1,4 +1,5 @@
-from typing import NotRequired, Optional, TypedDict
+from functools import partial
+from typing import AsyncGenerator, NotRequired, Optional, Self, TypedDict
 
 from pydantic import Field
 
@@ -14,6 +15,11 @@ from twitter_api.rate_limit.rate_limit_decorator import rate_limit
 from twitter_api.types.comma_separatable import CommaSeparatable, comma_separated_str
 from twitter_api.types.endpoint import Endpoint
 from twitter_api.types.extra_permissive_model import ExtraPermissiveModel
+from twitter_api.types.paring import (
+    PageResponseBody,
+    get_flattend_search_response,
+    get_search_response_iter,
+)
 
 ENDPOINT = Endpoint("GET", "https://api.twitter.com/2/users/:id/followers")
 
@@ -41,19 +47,43 @@ def _make_query(query: GetV2UserFollowersQueryParameters) -> dict:
 
 class GetV2UserFollowersResponseBodyMeta(ExtraPermissiveModel):
     result_count: int
-    previous_token: Optional[str] = None
     next_token: Optional[str] = None
+    previous_token: Optional[str] = None
+
+    def extend(self, other: Self) -> None:
+        self.result_count += other.result_count
+        self.next_token = None
+        self.previous_token = None
 
 
 class GetV2UserFollowersResponseBodyIncludes(ExtraPermissiveModel):
     tweets: list[Tweet] = Field(default_factory=list)
 
+    def extend(self, other: Self) -> None:
+        self.tweets.extend(other.tweets)
 
-class GetV2UserFollowersResponseBody(ExtraPermissiveModel):
-    data: list[User]
+
+class GetV2UserFollowersResponseBody(ExtraPermissiveModel, PageResponseBody):
+    data: list[User] = Field(default_factory=list)
     meta: GetV2UserFollowersResponseBodyMeta
-    includes: Optional[GetV2UserFollowersResponseBodyIncludes] = None
+    includes: GetV2UserFollowersResponseBodyIncludes = Field(
+        default_factory=GetV2UserFollowersResponseBodyIncludes,
+    )
     errors: Optional[list[dict]] = None
+
+    def meta_next_token(self) -> str | None:
+        return self.meta.next_token
+
+    def extend(self, other: Self) -> None:
+        self.data.extend(other.data)
+        self.meta.extend(other.meta)
+        self.includes.extend(other.includes)
+
+        if other.errors is not None:
+            if self.errors is not None:
+                self.errors.extend(other.errors)
+            else:
+                self.errors = other.errors
 
 
 class GetV2UserFollowersResources(ApiResources):
@@ -89,3 +119,13 @@ class AsyncGetV2UserFollowersResources(GetV2UserFollowersResources):
         query: Optional[GetV2UserFollowersQueryParameters] = None,
     ) -> GetV2UserFollowersResponseBody:
         return super().get(id, query)
+
+    async def get_iter(
+        self, id: UserId, query: GetV2UserFollowersQueryParameters
+    ) -> AsyncGenerator[GetV2UserFollowersResponseBody, None]:
+        return get_search_response_iter(partial(self.get, id), query)
+
+    async def get_flattened(
+        self, id: UserId, query: GetV2UserFollowersQueryParameters
+    ) -> GetV2UserFollowersResponseBody:
+        return await get_flattend_search_response(partial(self.get, id), query)

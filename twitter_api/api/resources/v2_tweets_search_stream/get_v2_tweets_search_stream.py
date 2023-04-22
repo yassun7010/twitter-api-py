@@ -1,5 +1,5 @@
 from datetime import datetime
-from typing import NotRequired, Optional, TypedDict
+from typing import AsyncGenerator, NotRequired, Optional, TypedDict
 
 from twitter_api.api.resources.api_resources import ApiResources
 from twitter_api.api.types.v2_expansion import Expansion
@@ -13,6 +13,10 @@ from twitter_api.api.types.v2_user.user_field import UserField
 from twitter_api.rate_limit.rate_limit_decorator import rate_limit
 from twitter_api.types.comma_separatable import CommaSeparatable, comma_separated_str
 from twitter_api.types.endpoint import Endpoint
+from twitter_api.types.paring import (
+    get_flattend_search_response,
+    get_search_response_iter,
+)
 from twitter_api.utils.datetime import rfc3339
 from twitter_api.utils.functional import map_optional
 
@@ -78,3 +82,13 @@ class AsyncGetV2TweetsSearchStreamResources(GetV2TweetsSearchStreamResources):
         self, query: Optional[GetV2TweetsSearchStreamQueryParameters] = None
     ) -> GetV2TweetsSearchStreamResponseBody:
         return super().get(query)
+
+    async def get_iter(
+        self, query: GetV2TweetsSearchStreamQueryParameters
+    ) -> AsyncGenerator[GetV2TweetsSearchStreamResponseBody, None]:
+        return get_search_response_iter(self.get, query)
+
+    async def get_flattened(
+        self, query: GetV2TweetsSearchStreamQueryParameters
+    ) -> GetV2TweetsSearchStreamResponseBody:
+        return await get_flattend_search_response(self.get, query)

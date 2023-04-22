@@ -1,5 +1,14 @@
 from abc import ABCMeta, abstractmethod
-from typing import Optional, Self
+from typing import (
+    Any,
+    AsyncGenerator,
+    Callable,
+    Coroutine,
+    Optional,
+    Self,
+    TypedDict,
+    TypeVar,
+)
 
 from pydantic import Field
 
@@ -10,6 +19,7 @@ from twitter_api.api.types.v2_tweet.tweet import Tweet
 from twitter_api.api.types.v2_tweet.tweet_id import TweetId
 from twitter_api.api.types.v2_user.user import User
 from twitter_api.types.extra_permissive_model import ExtraPermissiveModel
+from twitter_api.types.paring import PageResponseBody
 
 
 class TweetsResponseBodyIncludes(ExtraPermissiveModel):
@@ -192,12 +202,15 @@ class TweetsResponseBodyMeta(ExtraPermissiveModel):
         elif other.oldest_id is not None:
             self.oldest_id = other.oldest_id
 
-        self.next_token = self.next_token
+        self.next_token = None
         self.previous_token = None
 
 
-class TweetsSearchResponseBody(TweetsResponseBody):
+class TweetsSearchResponseBody(TweetsResponseBody, PageResponseBody):
     meta: TweetsResponseBodyMeta
+
+    def meta_next_token(self) -> str | None:
+        return self.meta.next_token
 
     def extend(self, other: Self) -> None:
         self.data.extend(other.data)
