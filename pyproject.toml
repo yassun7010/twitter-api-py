@@ -16,7 +16,6 @@ python = "^3.11"
 pydantic = "^1.10.7"
 authlib = "^1.2.0"
 httpx = "^0.24.0"
-urllib3 = "^1.26.15"
 
 [tool.poetry.group.dev.dependencies]
 flake8 = "^6.0.0"
