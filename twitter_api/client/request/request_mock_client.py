@@ -57,7 +57,7 @@ class RequestMockClient(RequestClient, Generic[ResponseModelBody]):
     ):
         self._store.append((endpoint, response_body))
 
-    def extract_response_body(self, endpoint: Endpoint) -> ResponseModelBody:
+    def _extract_response_body(self, endpoint: Endpoint) -> ResponseModelBody:
         if len(self._store) == 0:
             raise MockResponseNotFound()
 
@@ -80,7 +80,7 @@ class RequestMockClient(RequestClient, Generic[ResponseModelBody]):
         auth: bool = True,
         query: Optional[QuryParameters] = None,
     ) -> ResponseModelBody:
-        return self.extract_response_body(endpoint)
+        return self._extract_response_body(endpoint)
 
     def post(
         self,
@@ -93,7 +93,7 @@ class RequestMockClient(RequestClient, Generic[ResponseModelBody]):
         query: Optional[QuryParameters] = None,
         body: Optional[RequestJsonBody] = None,
     ) -> ResponseModelBody:
-        return self.extract_response_body(endpoint)
+        return self._extract_response_body(endpoint)
 
     def delete(
         self,
@@ -105,4 +105,4 @@ class RequestMockClient(RequestClient, Generic[ResponseModelBody]):
         headers: Optional[Headers] = None,
         query: Optional[QuryParameters] = None,
     ) -> ResponseModelBody:
-        return self.extract_response_body(endpoint)
+        return self._extract_response_body(endpoint)
