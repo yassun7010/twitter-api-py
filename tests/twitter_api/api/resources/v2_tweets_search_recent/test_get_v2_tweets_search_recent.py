@@ -214,49 +214,33 @@ class TestAsyncMockGetV2TweetsSearchRecent:
         oauth2_app_async_mock_client: TwitterApiAsyncMockClient,
         json_files: list[str],
     ):
-        response = GetV2TweetsSearchRecentResponseBody.parse_file(
-            json_test_data(
-                "get_v2_tweets_search_recent_response/flattened_response.json"
-            )
-        )
+        responses = [
+            GetV2TweetsSearchRecentResponseBody.parse_file(json_test_data(json_file))
+            for json_file in json_files
+        ]
 
-        assert get_extra_fields(response) == {}
+        for response in responses:
+            assert get_extra_fields(response) == {}
 
-        for json_file in json_files:
             oauth2_app_async_mock_client.inject_get_response_body(
                 "https://api.twitter.com/2/tweets/search/recent",
-                GetV2TweetsSearchRecentResponseBody.parse_file(
-                    json_test_data(json_file)
-                ),
+                response,
             )
 
-        def merge(
-            self: GetV2TweetsSearchRecentResponseBody,
-            other: GetV2TweetsSearchRecentResponseBody,
-        ):
-            self.extend(other)
-            return self
-
-        assert (
-            reduce(
-                merge,
-                [
-                    res
-                    async for res in await (
-                        oauth2_app_async_mock_client.chain()
-                        .resource("https://api.twitter.com/2/tweets/search/recent")
-                        .get_iter(
-                            {
-                                "query": "モックされているので、この検索条件に意味はない",
-                                "expansions": ["attachments.poll_ids"],
-                                "media.fields": ["preview_image_url"],
-                            }
-                        )
-                    )
-                ],
+        assert [
+            res
+            async for res in await (
+                oauth2_app_async_mock_client.chain()
+                .resource("https://api.twitter.com/2/tweets/search/recent")
+                .get_iter(
+                    {
+                        "query": "モックされているので、この検索条件に意味はない",
+                        "expansions": ["attachments.poll_ids"],
+                        "media.fields": ["preview_image_url"],
+                    }
+                )
             )
-            == response
-        )
+        ] == responses
 
     @pytest.mark.asyncio
     async def test_async_mock_get_v2_search_recent_flattened(
