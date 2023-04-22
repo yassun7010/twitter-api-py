@@ -13,10 +13,10 @@ class TestGetV2User:
     @pytest.mark.parametrize(
         "client_fixture_name,permit",
         [
-            ("real_oauth1_app_client", True),
-            ("real_oauth1_user_client", True),
-            ("real_oauth2_app_client", True),
-            ("real_oauth2_user_client", True),
+            ("oauth1_app_real_client", True),
+            ("oauth1_user_real_client", True),
+            ("oauth2_app_real_client", True),
+            ("oauth2_user_real_client", True),
         ],
     )
     def test_get_v2_user(
@@ -46,7 +46,7 @@ class TestMockGetV2User:
     )
     def test_mock_get_v2_user(
         self,
-        mock_oauth2_app_client: TwitterApiMockClient,
+        oauth2_app_mock_client: TwitterApiMockClient,
         json_filename: str,
     ):
         response = GetV2UserResponseBody.parse_file(
@@ -56,7 +56,7 @@ class TestMockGetV2User:
         assert get_extra_fields(response) == {}
 
         assert (
-            mock_oauth2_app_client.chain()
+            oauth2_app_mock_client.chain()
             .inject_get_response_body("https://api.twitter.com/2/users/:id", response)
             .resource("https://api.twitter.com/2/users/:id")
             .get("2244994945")

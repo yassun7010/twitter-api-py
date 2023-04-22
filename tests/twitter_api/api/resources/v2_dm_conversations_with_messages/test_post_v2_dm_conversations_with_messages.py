@@ -16,10 +16,10 @@ class TestPostV2DmConversationsWithMessages:
     @pytest.mark.parametrize(
         "client_fixture_name,permit",
         [
-            ("real_oauth1_app_client", True),
-            ("real_oauth1_user_client", True),
-            ("real_oauth2_app_client", False),
-            ("real_oauth2_user_client", True),
+            ("oauth1_app_real_client", True),
+            ("oauth1_user_real_client", True),
+            ("oauth2_app_real_client", False),
+            ("oauth2_user_real_client", True),
         ],
     )
     def test_post_v2_dm_conversations_with_messages(
@@ -52,7 +52,7 @@ class TestMockPostV2DmConversationsWithMessages:
     )
     def test_mock_post_v2_dm_conversations_with_messages(
         self,
-        mock_oauth2_app_client: TwitterApiMockClient,
+        oauth2_app_mock_client: TwitterApiMockClient,
         json_filename: str,
     ):
         response = PostV2DmConversationsWithParticipantMessagesResponseBody.parse_file(
@@ -62,7 +62,7 @@ class TestMockPostV2DmConversationsWithMessages:
         assert get_extra_fields(response) == {}
 
         assert (
-            mock_oauth2_app_client.chain()
+            oauth2_app_mock_client.chain()
             .inject_post_response_body(
                 "https://api.twitter.com/2/dm_conversations/with/:participant_id/messages",
                 response,

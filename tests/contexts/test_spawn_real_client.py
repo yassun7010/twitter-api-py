@@ -12,7 +12,7 @@ class TestSpawnRealClient:
         request: pytest.FixtureRequest,
     ):
         with spawn_real_client(
-            "real_oauth2_app_client",
+            "oauth2_app_real_client",
             request,
             permit=True,
         ) as _:
@@ -24,7 +24,7 @@ class TestSpawnRealClient:
     ):
         with pytest.raises(ValueError):
             with spawn_real_client(
-                "real_oauth2_app_client",
+                "oauth2_app_real_client",
                 request,
                 permit=True,
             ) as _:
@@ -36,7 +36,7 @@ class TestSpawnRealClient:
     ):
         with pytest.raises(UnsupportedAuthenticationError):
             with spawn_real_client(
-                "real_oauth2_app_client", request, permit=False
+                "oauth2_app_real_client", request, permit=False
             ) as _:
                 pass
 
@@ -46,6 +46,6 @@ class TestSpawnRealClient:
     ):
         with pytest.raises(ValueError):
             with spawn_real_client(
-                "real_oauth2_app_client", request, permit=False
+                "oauth2_app_real_client", request, permit=False
             ) as _:
                 raise ValueError()

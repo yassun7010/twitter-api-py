@@ -17,10 +17,10 @@ class TestDeleteV2Tweet:
     @pytest.mark.parametrize(
         "client_fixture_name,permit",
         [
-            ("real_oauth1_app_client", True),
-            ("real_oauth1_user_client", True),
-            ("real_oauth2_app_client", False),
-            ("real_oauth2_user_client", True),
+            ("oauth1_app_real_client", True),
+            ("oauth1_user_real_client", True),
+            ("oauth2_app_real_client", False),
+            ("oauth2_user_real_client", True),
         ],
     )
     def test_delete_v2_tweet(
@@ -51,7 +51,7 @@ class TestDeleteV2Tweet:
 
 
 class TestMockDeleteV2Tweet:
-    def test_mock_delete_v2_tweet(self, mock_oauth2_app_client: TwitterApiMockClient):
+    def test_mock_delete_v2_tweet(self, oauth2_app_mock_client: TwitterApiMockClient):
         response = DeleteV2TweetResponseBody(
             data=DeleteV2TweetResponseBodyData(deleted=True)
         )
@@ -59,7 +59,7 @@ class TestMockDeleteV2Tweet:
         assert get_extra_fields(response) == {}
 
         assert (
-            mock_oauth2_app_client.chain()
+            oauth2_app_mock_client.chain()
             .inject_delete_response_body(
                 "https://api.twitter.com/2/tweets/:id", response
             )

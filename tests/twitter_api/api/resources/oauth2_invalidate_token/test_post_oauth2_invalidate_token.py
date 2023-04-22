@@ -15,14 +15,14 @@ from twitter_api.types.extra_permissive_model import get_extra_fields
 class TestPostOauth2InvalidateToken:
     @pytest.mark.xfail(reason="上手く invalidation できない理由を要調査。")
     def test_post_oauth2_invalidate_token(
-        self, real_oauth2_app_client: TwitterApiRealClient
+        self, oauth2_app_real_client: TwitterApiRealClient
     ):
         expected_response = PostOauth2InvalidateTokenResponseBody(
             access_token=os.environ["BEARER_TOEKN"],
         )
 
         real_response = (
-            real_oauth2_app_client.chain()
+            oauth2_app_real_client.chain()
             .resource("https://api.twitter.com/oauth2/invalidate_token")
             .post(
                 api_key=os.environ["API_KEY"],
@@ -40,7 +40,7 @@ class TestPostOauth2InvalidateToken:
 
 class TestMockPostOauth2InvalidateToken:
     def test_mock_post_oauth2_invalidate_token(
-        self, mock_oauth2_app_client: TwitterApiMockClient
+        self, oauth2_app_mock_client: TwitterApiMockClient
     ):
         response = PostOauth2InvalidateTokenResponseBody(
             access_token="DUMMY_ACCESS_TOKEN",
@@ -49,7 +49,7 @@ class TestMockPostOauth2InvalidateToken:
         assert get_extra_fields(response) == {}
 
         assert (
-            mock_oauth2_app_client.chain()
+            oauth2_app_mock_client.chain()
             .inject_post_response_body(
                 "https://api.twitter.com/oauth2/invalidate_token",
                 response,

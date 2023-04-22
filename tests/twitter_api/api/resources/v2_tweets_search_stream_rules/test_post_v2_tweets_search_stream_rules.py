@@ -16,10 +16,10 @@ class TestPostV2TweetsSearchStreamRules:
     @pytest.mark.parametrize(
         "client_fixture_name,permit",
         [
-            ("real_oauth1_app_client", False),
-            ("real_oauth1_user_client", False),
-            ("real_oauth2_app_client", True),
-            ("real_oauth2_user_client", False),
+            ("oauth1_app_real_client", False),
+            ("oauth1_user_real_client", False),
+            ("oauth2_app_real_client", True),
+            ("oauth2_user_real_client", False),
         ],
     )
     def test_post_v2_search_stream_rules_when_add_case(
@@ -47,11 +47,11 @@ class TestPostV2TweetsSearchStreamRules:
             assert get_extra_fields(response) == {}
 
     def test_post_v2_search_stream_rules_when_delete_case(
-        self, real_oauth2_app_client: TwitterApiRealClient
+        self, oauth2_app_real_client: TwitterApiRealClient
     ):
         value = "dog has:media"
         (
-            real_oauth2_app_client.chain()
+            oauth2_app_real_client.chain()
             .resource("https://api.twitter.com/2/tweets/search/stream/rules")
             .post(
                 {
@@ -64,7 +64,7 @@ class TestPostV2TweetsSearchStreamRules:
 
         # 終わったら削除もしておく。
         response = (
-            real_oauth2_app_client.chain()
+            oauth2_app_real_client.chain()
             .resource("https://api.twitter.com/2/tweets/search/stream/rules")
             .post(
                 {"delete": {"values": [value]}},
@@ -86,7 +86,7 @@ class TestMockPostV2TweetsSearchStreamRules:
     )
     def test_mock_post_v2_search_stream_rules(
         self,
-        mock_oauth2_app_client: TwitterApiMockClient,
+        oauth2_app_mock_client: TwitterApiMockClient,
         json_filename: str,
     ):
         response = PostV2TweetsSearchStreamRulesResponseBody.parse_file(
@@ -96,7 +96,7 @@ class TestMockPostV2TweetsSearchStreamRules:
         assert get_extra_fields(response) == {}
 
         assert (
-            mock_oauth2_app_client.chain()
+            oauth2_app_mock_client.chain()
             .inject_post_response_body(
                 "https://api.twitter.com/2/tweets/search/stream/rules",
                 response,

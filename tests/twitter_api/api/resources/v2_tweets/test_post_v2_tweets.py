@@ -14,10 +14,10 @@ class TestGetV2Tweet:
     @pytest.mark.parametrize(
         "client_fixture_name,permit",
         [
-            ("real_oauth1_app_client", True),
-            ("real_oauth1_user_client", True),
-            ("real_oauth2_app_client", False),
-            ("real_oauth2_user_client", True),
+            ("oauth1_app_real_client", True),
+            ("oauth1_user_real_client", True),
+            ("oauth2_app_real_client", False),
+            ("oauth2_user_real_client", True),
         ],
     )
     def test_get_v2_tweet(
@@ -53,7 +53,7 @@ class TestGetV2Tweet:
 
 
 class TestMockGetV2Tweet:
-    def test_mock_get_v2_tweet(self, mock_oauth2_app_client: TwitterApiMockClient):
+    def test_mock_get_v2_tweet(self, oauth2_app_mock_client: TwitterApiMockClient):
         tweet = Tweet(
             id="1234567890123456789",
             text="ツイートしました。",
@@ -63,7 +63,7 @@ class TestMockGetV2Tweet:
         response = PostV2TweetsResponseBody(data=tweet)
 
         assert (
-            mock_oauth2_app_client.chain()
+            oauth2_app_mock_client.chain()
             .inject_post_response_body("https://api.twitter.com/2/tweets", response)
             .resource("https://api.twitter.com/2/tweets")
             .post({"text": tweet.text})

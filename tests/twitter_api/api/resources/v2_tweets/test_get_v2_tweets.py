@@ -51,10 +51,10 @@ class TestGetV2Tweets:
     @pytest.mark.parametrize(
         "client_fixture_name,permit",
         [
-            ("real_oauth1_app_client", True),
-            ("real_oauth1_user_client", True),
-            ("real_oauth2_app_client", True),
-            ("real_oauth2_user_client", True),
+            ("oauth1_app_real_client", True),
+            ("oauth1_user_real_client", True),
+            ("oauth2_app_real_client", True),
+            ("oauth2_user_real_client", True),
         ],
     )
     def test_get_v2_tweets(
@@ -81,11 +81,11 @@ class TestGetV2Tweets:
 
     def test_get_v2_tweet_all_fields(
         self,
-        real_oauth2_app_client: TwitterApiRealClient,
+        oauth2_app_real_client: TwitterApiRealClient,
         all_fields: GetV2TweetsQueryParameters,
     ):
         response = (
-            real_oauth2_app_client.chain()
+            oauth2_app_real_client.chain()
             .resource("https://api.twitter.com/2/tweets")
             .get(all_fields)
         )
@@ -104,7 +104,7 @@ class TestMockGetV2Tweets:
     )
     def test_mock_get_v2_tweets(
         self,
-        mock_oauth2_app_client: TwitterApiMockClient,
+        oauth2_app_mock_client: TwitterApiMockClient,
         all_fields: GetV2TweetsQueryParameters,
         json_filename: str,
     ):
@@ -113,7 +113,7 @@ class TestMockGetV2Tweets:
         )
 
         assert (
-            mock_oauth2_app_client.chain()
+            oauth2_app_mock_client.chain()
             .inject_get_response_body("https://api.twitter.com/2/tweets", response)
             .resource("https://api.twitter.com/2/tweets")
             .get(all_fields)
@@ -128,7 +128,7 @@ class TestMockGetV2Tweets:
     )
     async def test_async_mock_get_v2_tweets(
         self,
-        mock_oauth2_app_async_client: TwitterApiAsyncMockClient,
+        oauth2_app_async_mock_client: TwitterApiAsyncMockClient,
         all_fields: GetV2TweetsQueryParameters,
         json_filename: str,
     ):
@@ -138,7 +138,7 @@ class TestMockGetV2Tweets:
 
         assert (
             await (
-                mock_oauth2_app_async_client.chain()
+                oauth2_app_async_mock_client.chain()
                 .inject_get_response_body("https://api.twitter.com/2/tweets", response)
                 .resource("https://api.twitter.com/2/tweets")
                 .get(all_fields)

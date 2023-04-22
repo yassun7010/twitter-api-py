@@ -28,10 +28,10 @@ class TestGetV2TweetsSearchRecent:
     @pytest.mark.parametrize(
         "client_fixture_name,permit",
         [
-            ("real_oauth1_app_client", True),
-            ("real_oauth1_user_client", True),
-            ("real_oauth2_app_client", True),
-            ("real_oauth2_user_client", True),
+            ("oauth1_app_real_client", True),
+            ("oauth1_user_real_client", True),
+            ("oauth2_app_real_client", True),
+            ("oauth2_user_real_client", True),
         ],
     )
     def test_get_v2_search_recent_when_oauth1(
@@ -53,7 +53,7 @@ class TestGetV2TweetsSearchRecent:
 
     def test_get_v2_search_recent_all_fields(
         self,
-        real_oauth2_app_client: TwitterApiRealClient,
+        oauth2_app_real_client: TwitterApiRealClient,
         all_expansions: list[Expansion],
         all_media_fields: list[MediaField],
         all_place_fields: list[PlaceField],
@@ -64,7 +64,7 @@ class TestGetV2TweetsSearchRecent:
         next_token = None
         for _ in range(3):
             response = (
-                real_oauth2_app_client.chain()
+                oauth2_app_real_client.chain()
                 .resource("https://api.twitter.com/2/tweets/search/recent")
                 .get(
                     {
@@ -100,7 +100,7 @@ class TestMockGetV2TweetsSearchRecent:
     )
     def test_mock_get_v2_search_recent(
         self,
-        mock_oauth2_app_client: TwitterApiMockClient,
+        oauth2_app_mock_client: TwitterApiMockClient,
         json_filename: str,
     ):
         response = GetV2TweetsSearchRecentResponseBody.parse_file(
@@ -110,7 +110,7 @@ class TestMockGetV2TweetsSearchRecent:
         assert get_extra_fields(response) == {}
 
         assert (
-            mock_oauth2_app_client.chain()
+            oauth2_app_mock_client.chain()
             .inject_get_response_body(
                 "https://api.twitter.com/2/tweets/search/recent", response
             )
@@ -126,7 +126,7 @@ class TestMockGetV2TweetsSearchRecent:
 
     def test_mock_get_v2_search_recent_recent(
         self,
-        mock_oauth2_app_client: TwitterApiMockClient,
+        oauth2_app_mock_client: TwitterApiMockClient,
         all_expansions: list[Expansion],
         all_media_fields: list[MediaField],
         all_place_fields: list[PlaceField],
@@ -138,7 +138,7 @@ class TestMockGetV2TweetsSearchRecent:
         next_token = None
         for i in itertools.count(1):
             response = (
-                mock_oauth2_app_client.chain()
+                oauth2_app_mock_client.chain()
                 .inject_get_response_body(
                     "https://api.twitter.com/2/tweets/search/recent",
                     GetV2TweetsSearchRecentResponseBody.parse_file(

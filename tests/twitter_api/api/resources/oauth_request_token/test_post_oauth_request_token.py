@@ -11,11 +11,11 @@ from twitter_api.error import TwitterApiOAuthVersionWrong
 @pytest.mark.skipif(**synthetic_monitoring_is_disable())
 class TestPostOauthRequestToken:
     def test_post_oauth_request_token(
-        self, real_oauth2_app_client: TwitterApiRealClient
+        self, oauth2_app_real_client: TwitterApiRealClient
     ):
         with pytest.raises(TwitterApiOAuthVersionWrong):
             (
-                real_oauth2_app_client.chain()
+                oauth2_app_real_client.chain()
                 .resource("https://api.twitter.com/oauth/request_token")
                 .post(
                     api_key=os.environ["API_KEY"],
@@ -27,11 +27,27 @@ class TestPostOauthRequestToken:
 
 class TestMockPostOauthRequestToken:
     def test_mock_post_oauth_request_token(
-        self, mock_oauth2_app_client: TwitterApiMockClient
+        self, oauth2_app_mock_client: TwitterApiMockClient
     ):
         with pytest.raises(TwitterApiOAuthVersionWrong):
             (
-                mock_oauth2_app_client.chain()
+                oauth2_app_mock_client.chain()
+                .resource("https://api.twitter.com/oauth/request_token")
+                .post(
+                    api_key="DUMMY_API_KEY",
+                    api_secret="DUMMY_API_SECRET",
+                    query={"oauth_callback": "https://120.0.0.1:8080"},
+                )
+            )
+
+
+class TestAsyncMockPostOauthRequestToken:
+    def test_mock_post_oauth_request_token(
+        self, oauth2_app_mock_client: TwitterApiMockClient
+    ):
+        with pytest.raises(TwitterApiOAuthVersionWrong):
+            (
+                oauth2_app_mock_client.chain()
                 .resource("https://api.twitter.com/oauth/request_token")
                 .post(
                     api_key="DUMMY_API_KEY",

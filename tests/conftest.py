@@ -91,27 +91,27 @@ def participant_ids(participant_id: UserId) -> list[UserId]:
 
 
 @pytest.fixture
-def real_oauth2_bearer_client() -> TwitterApiRealClient:
+def oauth2_bearer_real_client() -> TwitterApiRealClient:
     return TwitterApiRealClient.from_oauth2_bearer_token_env()
 
 
 @pytest.fixture
-def real_oauth2_app_client() -> TwitterApiRealClient:
+def oauth2_app_real_client() -> TwitterApiRealClient:
     return TwitterApiRealClient.from_oauth2_app_env()
 
 
 @pytest.fixture
-def real_oauth2_user_client() -> TwitterApiRealClient:
+def oauth2_user_real_client() -> TwitterApiRealClient:
     return TwitterApiRealClient.from_oauth2_bearer_token_env("OAUTH2_USER_ACCESS_TOKEN")
 
 
 @pytest.fixture
-def real_oauth1_app_client() -> TwitterApiRealClient:
+def oauth1_app_real_client() -> TwitterApiRealClient:
     return TwitterApiRealClient.from_oauth1_app_env()
 
 
 @pytest.fixture
-def real_oauth1_user_client() -> TwitterApiRealClient:
+def oauth1_user_real_client() -> TwitterApiRealClient:
     return TwitterApiRealClient.from_oauth1_app_env(
         access_token_env="OAUTH1_USER_ACCESS_TOKEN",
         access_secret_env="OAUTH1_USER_ACCESS_SECRET",
@@ -119,29 +119,29 @@ def real_oauth1_user_client() -> TwitterApiRealClient:
 
 
 @pytest.fixture
-def real_oauth2_bearer_async_client() -> TwitterApiAsyncRealClient:
+def oauth2_bearer_async_real_client() -> TwitterApiAsyncRealClient:
     return TwitterApiAsyncRealClient.from_oauth2_bearer_token_env()
 
 
 @pytest.fixture
-def real_oauth2_app_async_client() -> TwitterApiAsyncRealClient:
+def oauth2_app_async_real_client() -> TwitterApiAsyncRealClient:
     return TwitterApiAsyncRealClient.from_oauth2_app_env()
 
 
 @pytest.fixture
-def real_oauth2_user_async_client() -> TwitterApiAsyncRealClient:
+def oauth2_user_async_real_client() -> TwitterApiAsyncRealClient:
     return TwitterApiAsyncRealClient.from_oauth2_bearer_token_env(
         "OAUTH2_USER_ACCESS_TOKEN"
     )
 
 
 @pytest.fixture
-def real_oauth1_app_async_client() -> TwitterApiAsyncRealClient:
+def oauth1_app_async_real_client() -> TwitterApiAsyncRealClient:
     return TwitterApiAsyncRealClient.from_oauth1_app_env()
 
 
 @pytest.fixture
-def real_oauth1_user_async_client() -> TwitterApiAsyncRealClient:
+def oauth1_user_async_real_client() -> TwitterApiAsyncRealClient:
     return TwitterApiAsyncRealClient.from_oauth1_app_env(
         access_token_env="OAUTH1_USER_ACCESS_TOKEN",
         access_secret_env="OAUTH1_USER_ACCESS_SECRET",
@@ -149,7 +149,7 @@ def real_oauth1_user_async_client() -> TwitterApiAsyncRealClient:
 
 
 @pytest.fixture
-def mock_oauth2_app_client() -> TwitterApiMockClient:
+def oauth2_app_mock_client() -> TwitterApiMockClient:
     return TwitterApiMockClient(
         oauth_version="2.0",
         rate_limit_target="app",
@@ -157,7 +157,7 @@ def mock_oauth2_app_client() -> TwitterApiMockClient:
 
 
 @pytest.fixture
-def mock_oauth2_user_client() -> TwitterApiMockClient:
+def oauth2_user_mock_client() -> TwitterApiMockClient:
     return TwitterApiMockClient(
         oauth_version="2.0",
         rate_limit_target="user",
@@ -165,7 +165,7 @@ def mock_oauth2_user_client() -> TwitterApiMockClient:
 
 
 @pytest.fixture
-def mock_oauth1_app_client() -> TwitterApiMockClient:
+def oauth1_app_mock_client() -> TwitterApiMockClient:
     return TwitterApiMockClient(
         oauth_version="1.0a",
         rate_limit_target="app",
@@ -173,7 +173,7 @@ def mock_oauth1_app_client() -> TwitterApiMockClient:
 
 
 @pytest.fixture
-def mock_oauth1_user_client() -> TwitterApiMockClient:
+def oauth1_user_mock_client() -> TwitterApiMockClient:
     return TwitterApiMockClient(
         oauth_version="1.0a",
         rate_limit_target="user",
@@ -181,7 +181,7 @@ def mock_oauth1_user_client() -> TwitterApiMockClient:
 
 
 @pytest.fixture
-def mock_oauth2_app_async_client() -> TwitterApiAsyncMockClient:
+def oauth2_app_async_mock_client() -> TwitterApiAsyncMockClient:
     return TwitterApiAsyncMockClient(
         oauth_version="2.0",
         rate_limit_target="app",
@@ -189,7 +189,7 @@ def mock_oauth2_app_async_client() -> TwitterApiAsyncMockClient:
 
 
 @pytest.fixture
-def mock_oauth2_user_async_client() -> TwitterApiAsyncMockClient:
+def oauth2_user_async_mock_client() -> TwitterApiAsyncMockClient:
     return TwitterApiAsyncMockClient(
         oauth_version="2.0",
         rate_limit_target="user",
@@ -197,7 +197,7 @@ def mock_oauth2_user_async_client() -> TwitterApiAsyncMockClient:
 
 
 @pytest.fixture
-def mock_oauth1_app_async_client() -> TwitterApiAsyncMockClient:
+def oauth1_app_async_mock_client() -> TwitterApiAsyncMockClient:
     return TwitterApiAsyncMockClient(
         oauth_version="1.0a",
         rate_limit_target="app",
@@ -205,7 +205,7 @@ def mock_oauth1_app_async_client() -> TwitterApiAsyncMockClient:
 
 
 @pytest.fixture
-def mock_oauth1_user_async_client() -> TwitterApiAsyncMockClient:
+def oauth1_user_async_mock_client() -> TwitterApiAsyncMockClient:
     return TwitterApiAsyncMockClient(
         oauth_version="1.0a",
         rate_limit_target="user",

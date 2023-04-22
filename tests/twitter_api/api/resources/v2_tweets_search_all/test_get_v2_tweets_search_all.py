@@ -15,10 +15,10 @@ class TestGetV2TweetsSearchAll:
     @pytest.mark.parametrize(
         "client_fixture_name,permit",
         [
-            ("real_oauth1_app_client", True),
-            ("real_oauth1_user_client", True),
-            ("real_oauth2_app_client", False),
-            ("real_oauth2_user_client", True),
+            ("oauth1_app_real_client", True),
+            ("oauth1_user_real_client", True),
+            ("oauth2_app_real_client", False),
+            ("oauth2_user_real_client", True),
         ],
     )
     def test_get_v2_search_all(
@@ -42,14 +42,14 @@ class TestGetV2TweetsSearchAll:
 class TestMockGetV2TweetsSearchAll:
     def test_mock_get_v2_search_all(
         self,
-        mock_oauth2_app_client: TwitterApiMockClient,
+        oauth2_app_mock_client: TwitterApiMockClient,
     ):
         response = GetV2TweetsSearchAllResponseBody.parse_file(
             json_test_data("get_v2_tweets_search_all_response.json")
         )
 
         assert (
-            mock_oauth2_app_client.chain()
+            oauth2_app_mock_client.chain()
             .inject_get_response_body(
                 "https://api.twitter.com/2/tweets/search/all", response
             )

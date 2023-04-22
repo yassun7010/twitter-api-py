@@ -15,10 +15,10 @@ class TestGetV2RetweetedBy:
     @pytest.mark.parametrize(
         "client_fixture_name,permit",
         [
-            ("real_oauth1_app_client", True),
-            ("real_oauth1_user_client", True),
-            ("real_oauth2_app_client", True),
-            ("real_oauth2_user_client", True),
+            ("oauth1_app_real_client", True),
+            ("oauth1_user_real_client", True),
+            ("oauth2_app_real_client", True),
+            ("oauth2_user_real_client", True),
         ],
     )
     def test_get_v2_tweet_retweeted_by(
@@ -40,7 +40,7 @@ class TestGetV2RetweetedBy:
 class TestMockGetV2RetweetedBy:
     def test_mock_get_v2_tweet_retweeted_by(
         self,
-        mock_oauth2_app_client: TwitterApiMockClient,
+        oauth2_app_mock_client: TwitterApiMockClient,
     ):
         response = GetV2TweetRetweetedByResponseBody.parse_file(
             json_test_data("get_v2_retweeted_by_response.json")
@@ -49,7 +49,7 @@ class TestMockGetV2RetweetedBy:
         assert get_extra_fields(response) == {}
 
         assert (
-            mock_oauth2_app_client.chain()
+            oauth2_app_mock_client.chain()
             .inject_get_response_body(
                 "https://api.twitter.com/2/tweets/:id/retweeted_by", response
             )
