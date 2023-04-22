@@ -31,7 +31,7 @@ class TestGetV2Tweet:
 
             real_response = (
                 real_client.chain()
-                .request("https://api.twitter.com/2/tweets")
+                .resource("https://api.twitter.com/2/tweets")
                 .post(
                     {
                         "text": tweet_text,
@@ -45,7 +45,7 @@ class TestGetV2Tweet:
             # テストが終わったらデータを消しておく。
             (
                 real_client.chain()
-                .request("https://api.twitter.com/2/tweets/:id")
+                .resource("https://api.twitter.com/2/tweets/:id")
                 .delete(real_response.data.id)
             )
 
@@ -65,6 +65,6 @@ class TestMockGetV2Tweet:
         assert (
             mock_oauth2_app_client.chain()
             .inject_post_response_body("https://api.twitter.com/2/tweets", response)
-            .request("https://api.twitter.com/2/tweets")
+            .resource("https://api.twitter.com/2/tweets")
             .post({"text": tweet.text})
         ) == response

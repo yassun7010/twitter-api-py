@@ -30,7 +30,7 @@ class TestGetV2UserFollowers:
         with spawn_real_client(client_fixture_name, request, permit) as real_client:
             response = (
                 real_client.chain()
-                .request("https://api.twitter.com/2/users/:id/followers")
+                .resource("https://api.twitter.com/2/users/:id/followers")
                 .get("2244994945")
             )
 
@@ -62,6 +62,6 @@ class TestMockGetV2UserFollowers:
             .inject_get_response_body(
                 "https://api.twitter.com/2/users/:id/followers", response
             )
-            .request("https://api.twitter.com/2/users/:id/followers")
+            .resource("https://api.twitter.com/2/users/:id/followers")
             .get("2244994945")
         ) == response

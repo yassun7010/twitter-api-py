@@ -30,7 +30,7 @@ class TestGetV2TweetsSearchAll:
         with spawn_real_client(client_fixture_name, request, permit) as real_client:
             real_response: GetV2TweetsSearchAllResponseBody = (
                 real_client.chain()
-                .request("https://api.twitter.com/2/tweets/search/all")
+                .resource("https://api.twitter.com/2/tweets/search/all")
                 .get({"query": "conversation_id:1273733248749690880", "max_results": 1})
             )
 
@@ -53,6 +53,6 @@ class TestMockGetV2TweetsSearchAll:
             .inject_get_response_body(
                 "https://api.twitter.com/2/tweets/search/all", response
             )
-            .request("https://api.twitter.com/2/tweets/search/all")
+            .resource("https://api.twitter.com/2/tweets/search/all")
             .get({"query": "ツイート"})
         ) == response

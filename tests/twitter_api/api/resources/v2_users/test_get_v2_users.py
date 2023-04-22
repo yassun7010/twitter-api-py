@@ -28,7 +28,7 @@ class TestGetV2Users:
         with spawn_real_client(client_fixture_name, request, permit) as real_client:
             response = (
                 real_client.chain()
-                .request("https://api.twitter.com/2/users")
+                .resource("https://api.twitter.com/2/users")
                 .get({"ids": ["2244994945"]})
             )
 
@@ -58,6 +58,6 @@ class TestMockGetV2Users:
         assert (
             mock_oauth2_app_client.chain()
             .inject_get_response_body("https://api.twitter.com/2/users", response)
-            .request("https://api.twitter.com/2/users")
+            .resource("https://api.twitter.com/2/users")
             .get({"ids": ["2244994945"]})
         ) == response

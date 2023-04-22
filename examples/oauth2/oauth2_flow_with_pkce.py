@@ -24,7 +24,7 @@ try:
             callback_url=YOUR_CALLBACK_URL,
             scope=ALL_SCOPES,
         )
-        .request("https://twitter.com/i/oauth2/authorize")
+        .resource("https://twitter.com/i/oauth2/authorize")
         .generate_authorization_url()
     )
 
@@ -42,7 +42,7 @@ try:
             code_verifier=backend.code_verifier,
             state=backend.state,
         )
-        .request("https://api.twitter.com/2/oauth2/token")
+        .resource("https://api.twitter.com/2/oauth2/token")
         .post()
     )
 
@@ -61,7 +61,7 @@ try:
 
     tweet = (
         client.chain()
-        .request("https://api.twitter.com/2/tweets/:id")
+        .resource("https://api.twitter.com/2/tweets/:id")
         .get("1460323737035677698")
         .data
     )

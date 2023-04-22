@@ -30,7 +30,7 @@ class TestGetV2TweetsSearchStreamRules:
         with spawn_real_client(client_fixture_name, request, permit) as real_client:
             response = (
                 real_client.chain()
-                .request("https://api.twitter.com/2/tweets/search/stream/rules")
+                .resource("https://api.twitter.com/2/tweets/search/stream/rules")
                 .get()
             )
 
@@ -63,6 +63,6 @@ class TestMockGetV2TweetsSearchStreamRules:
                 "https://api.twitter.com/2/tweets/search/stream/rules",
                 response,
             )
-            .request("https://api.twitter.com/2/tweets/search/stream/rules")
+            .resource("https://api.twitter.com/2/tweets/search/stream/rules")
             .get()
         ) == response

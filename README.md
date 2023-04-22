@@ -64,7 +64,7 @@ from twitter_api import TwitterApiClient
 twitter_client = TwitterApiRealClient.from_oauth2_app_env()
 
 response = (
-    twitter_client.request("https://api.twitter.com/2/tweets").get(
+    twitter_client.resource("https://api.twitter.com/2/tweets").get(
         {"ids": "1460323737035677698", "expansions": ["attachments.media_keys"]}
     )
 )
@@ -87,7 +87,7 @@ twitter_client = TwitterApiMockClient.from_oauth2_app_env()
 response = (
     twitter_client.chain()
     .inject_get_response_body("https://api.twitter.com/2/tweets", expected_response)
-    .request("https://api.twitter.com/2/tweets").get(
+    .resource("https://api.twitter.com/2/tweets").get(
         {"ids": "1460323737035677698", "expansions": ["attachments.media_keys"]}
     )
 )

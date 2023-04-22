@@ -23,7 +23,7 @@ class TestPostOauth2InvalidateToken:
 
         real_response = (
             real_oauth2_app_client.chain()
-            .request("https://api.twitter.com/oauth2/invalidate_token")
+            .resource("https://api.twitter.com/oauth2/invalidate_token")
             .post(
                 api_key=os.environ["API_KEY"],
                 api_secret=os.environ["API_SECRET"],
@@ -54,7 +54,7 @@ class TestMockPostOauth2InvalidateToken:
                 "https://api.twitter.com/oauth2/invalidate_token",
                 response,
             )
-            .request("https://api.twitter.com/oauth2/invalidate_token")
+            .resource("https://api.twitter.com/oauth2/invalidate_token")
             .post(
                 api_key="DUMMY_API_KEY",
                 api_secret="DUMMY_API_SECRET",

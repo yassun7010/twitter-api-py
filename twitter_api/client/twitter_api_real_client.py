@@ -75,7 +75,7 @@ class TwitterApiRealClient(TwitterApiClient):
         )
 
         access_token = (
-            client.request("https://api.twitter.com/oauth2/token")
+            client.resource("https://api.twitter.com/oauth2/token")
             .post(
                 api_key=api_key,
                 api_secret=api_secret,

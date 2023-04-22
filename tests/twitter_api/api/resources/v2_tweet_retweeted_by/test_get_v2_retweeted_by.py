@@ -28,7 +28,7 @@ class TestGetV2RetweetedBy:
         request: pytest.FixtureRequest,
     ):
         with spawn_real_client(client_fixture_name, request, permit) as real_client:
-            response = real_client.request(
+            response = real_client.resource(
                 "https://api.twitter.com/2/tweets/:id/retweeted_by"
             ).get("1460323737035677698")
 
@@ -53,6 +53,6 @@ class TestMockGetV2RetweetedBy:
             .inject_get_response_body(
                 "https://api.twitter.com/2/tweets/:id/retweeted_by", response
             )
-            .request("https://api.twitter.com/2/tweets/:id/retweeted_by")
+            .resource("https://api.twitter.com/2/tweets/:id/retweeted_by")
             .get("1234567890123456789")
         ) == response

@@ -10,7 +10,7 @@ class TwitterOAuth1RequestTokenClient(Chainable):
     def __init__(self, session: TwitterOAuth1Session) -> None:
         self._session = session
 
-    def request(
+    def resource(
         self, url: OauthRequestTokenUrl
     ) -> PostOAuth1RequestTokenSessionResources:
         return PostOAuth1RequestTokenSessionResources(

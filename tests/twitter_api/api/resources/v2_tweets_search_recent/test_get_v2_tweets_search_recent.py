@@ -43,7 +43,7 @@ class TestGetV2TweetsSearchRecent:
         with spawn_real_client(client_fixture_name, request, permit) as real_client:
             response = (
                 real_client.chain()
-                .request("https://api.twitter.com/2/tweets/search/recent")
+                .resource("https://api.twitter.com/2/tweets/search/recent")
                 .get({"query": "ツイート", "max_results": 10})
             )
 
@@ -65,7 +65,7 @@ class TestGetV2TweetsSearchRecent:
         for _ in range(3):
             response = (
                 real_oauth2_app_client.chain()
-                .request("https://api.twitter.com/2/tweets/search/recent")
+                .resource("https://api.twitter.com/2/tweets/search/recent")
                 .get(
                     {
                         "query": "#japan test",
@@ -114,7 +114,7 @@ class TestMockGetV2TweetsSearchRecent:
             .inject_get_response_body(
                 "https://api.twitter.com/2/tweets/search/recent", response
             )
-            .request("https://api.twitter.com/2/tweets/search/recent")
+            .resource("https://api.twitter.com/2/tweets/search/recent")
             .get(
                 {
                     "query": "モックされているので、この検索条件に意味はない",
@@ -147,7 +147,7 @@ class TestMockGetV2TweetsSearchRecent:
                         )
                     ),
                 )
-                .request("https://api.twitter.com/2/tweets/search/recent")
+                .resource("https://api.twitter.com/2/tweets/search/recent")
                 .get(
                     {
                         "query": "#japan test",

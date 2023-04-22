@@ -18,10 +18,10 @@ class TestTwitterApiAsyncMockClient:
         assert isinstance(
             (
                 TwitterApiAsyncMockClient.from_oauth2_user_flow_env()
-                .request("https://twitter.com/i/oauth2/authorize")
+                .resource("https://twitter.com/i/oauth2/authorize")
                 .generate_authorization_url()
                 .input_response_url("https://localhost:3000")
-                .request("https://api.twitter.com/2/oauth2/token")
+                .resource("https://api.twitter.com/2/oauth2/token")
                 .post()
                 .generate_client()
             ),
@@ -38,12 +38,12 @@ class TestTwitterApiAsyncMockClient:
         assert isinstance(
             (
                 TwitterApiAsyncMockClient.from_oauth1_user_flow_env()
-                .request("https://api.twitter.com/oauth/request_token")
+                .resource("https://api.twitter.com/oauth/request_token")
                 .post()
-                .request("https://api.twitter.com/oauth/authorize")
+                .resource("https://api.twitter.com/oauth/authorize")
                 .generate_authorization_url()
                 .input_response_url("https://localhost:3000")
-                .request("https://api.twitter.com/oauth/access_token")
+                .resource("https://api.twitter.com/oauth/access_token")
                 .post()
                 .generate_client()
             ),

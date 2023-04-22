@@ -32,7 +32,7 @@ class TestPostV2DmConversationsWithMessages:
         with spawn_real_client(client_fixture_name, request, permit) as real_client:
             response = (
                 real_client.chain()
-                .request(
+                .resource(
                     "https://api.twitter.com/2/dm_conversations/with/:participant_id/messages"
                 )
                 .post(participant_id, {"text": "DM のテスト。"})
@@ -67,7 +67,7 @@ class TestMockPostV2DmConversationsWithMessages:
                 "https://api.twitter.com/2/dm_conversations/with/:participant_id/messages",
                 response,
             )
-            .request(
+            .resource(
                 "https://api.twitter.com/2/dm_conversations/with/:participant_id/messages"
             )
             .post("2244994945", {"text": "DM のテスト。"})

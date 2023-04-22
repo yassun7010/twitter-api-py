@@ -8,7 +8,7 @@ try:
 
     tweets = (
         client.chain()
-        .request("https://api.twitter.com/2/tweets")
+        .resource("https://api.twitter.com/2/tweets")
         .get(
             {"ids": ["1460323737035677698"]},
         )

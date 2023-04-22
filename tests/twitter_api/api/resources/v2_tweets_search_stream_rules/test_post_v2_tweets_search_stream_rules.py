@@ -31,7 +31,7 @@ class TestPostV2TweetsSearchStreamRules:
         with spawn_real_client(client_fixture_name, request, permit) as real_client:
             response = (
                 real_client.chain()
-                .request("https://api.twitter.com/2/tweets/search/stream/rules")
+                .resource("https://api.twitter.com/2/tweets/search/stream/rules")
                 .post(
                     {
                         "add": [
@@ -52,7 +52,7 @@ class TestPostV2TweetsSearchStreamRules:
         value = "dog has:media"
         (
             real_oauth2_app_client.chain()
-            .request("https://api.twitter.com/2/tweets/search/stream/rules")
+            .resource("https://api.twitter.com/2/tweets/search/stream/rules")
             .post(
                 {
                     "add": [
@@ -65,7 +65,7 @@ class TestPostV2TweetsSearchStreamRules:
         # 終わったら削除もしておく。
         response = (
             real_oauth2_app_client.chain()
-            .request("https://api.twitter.com/2/tweets/search/stream/rules")
+            .resource("https://api.twitter.com/2/tweets/search/stream/rules")
             .post(
                 {"delete": {"values": [value]}},
             )
@@ -101,7 +101,7 @@ class TestMockPostV2TweetsSearchStreamRules:
                 "https://api.twitter.com/2/tweets/search/stream/rules",
                 response,
             )
-            .request("https://api.twitter.com/2/tweets/search/stream/rules")
+            .resource("https://api.twitter.com/2/tweets/search/stream/rules")
             .post(
                 {
                     "add": [

@@ -12,7 +12,7 @@ class TwitterOAuth1AuthorizeClient(Chainable):
     def __init__(self, session: TwitterOAuth1Session) -> None:
         self._session = session
 
-    def request(self, url: OAuth1RequestUrl) -> OAuth1GenerateAuthorizationUrlSession:
+    def resource(self, url: OAuth1RequestUrl) -> OAuth1GenerateAuthorizationUrlSession:
         return OAuth1GenerateAuthorizationUrlSession(
             url,
             self._session,

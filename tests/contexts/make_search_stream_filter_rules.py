@@ -17,7 +17,7 @@ def make_search_stream_filter_rules(
 
     added_rules = (
         client.chain()
-        .request("https://api.twitter.com/2/tweets/search/stream/rules")
+        .resource("https://api.twitter.com/2/tweets/search/stream/rules")
         .post(
             {"add": filters},
         )
@@ -27,7 +27,7 @@ def make_search_stream_filter_rules(
 
     (
         client.chain()
-        .request("https://api.twitter.com/2/tweets/search/stream/rules")
+        .resource("https://api.twitter.com/2/tweets/search/stream/rules")
         .post(
             {
                 "delete": {

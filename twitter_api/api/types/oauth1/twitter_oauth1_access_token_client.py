@@ -22,7 +22,7 @@ class TwitterOAuth1AccessTokenClient(Chainable):
         self.authorization_response_url = authorization_response_url
         self._session = session
 
-    def request(self, url: OauthAccessTokenUrl):
+    def resource(self, url: OauthAccessTokenUrl):
         return OauthAccessTokenResources(
             session=self._session,
             authorization_response_url=self.authorization_response_url,

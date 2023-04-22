@@ -34,14 +34,14 @@ class TestDeleteV2Tweet:
 
             tweet = (
                 real_client.chain()
-                .request("https://api.twitter.com/2/tweets")
+                .resource("https://api.twitter.com/2/tweets")
                 .post({"text": tweet_text})
                 .data
             )
 
             real_response = (
                 real_client.chain()
-                .request("https://api.twitter.com/2/tweets/:id")
+                .resource("https://api.twitter.com/2/tweets/:id")
                 .delete(tweet.id)
             )
 
@@ -63,6 +63,6 @@ class TestMockDeleteV2Tweet:
             .inject_delete_response_body(
                 "https://api.twitter.com/2/tweets/:id", response
             )
-            .request("https://api.twitter.com/2/tweets/:id")
+            .resource("https://api.twitter.com/2/tweets/:id")
             .delete("1234567890123456789")
         ) == response

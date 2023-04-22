@@ -25,7 +25,7 @@ class TestPostOauth2Token:
 
         real_response = (
             real_oauth2_app_client.chain()
-            .request("https://api.twitter.com/oauth2/token")
+            .resource("https://api.twitter.com/oauth2/token")
             .post(
                 api_key=os.environ["API_KEY"],
                 api_secret=os.environ["API_SECRET"],
@@ -55,7 +55,7 @@ class TestMockPostOauth2Token:
                 "https://api.twitter.com/oauth2/token",
                 response,
             )
-            .request("https://api.twitter.com/oauth2/token")
+            .resource("https://api.twitter.com/oauth2/token")
             .post(
                 api_key="DUMMY_API_KEY",
                 api_secret="DUMMY_API_SECRET",

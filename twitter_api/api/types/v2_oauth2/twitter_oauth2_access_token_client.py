@@ -26,7 +26,7 @@ class TwitterOAuth2AccessTokenClient(Chainable):
         self.code_verifier = code_verifier
         self._session = session
 
-    def request(self, url: V2Oauth2TokenUrl):
+    def resource(self, url: V2Oauth2TokenUrl):
         return PostV2OAuth2TokenRerources(
             authorization_response_url=self.authorization_response_url,
             state=self.state,

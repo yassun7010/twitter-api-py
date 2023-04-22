@@ -16,18 +16,18 @@ try:
                 "users.read",
             ],
         )
-        .request("https://twitter.com/i/oauth2/authorize")
+        .resource("https://twitter.com/i/oauth2/authorize")
         .generate_authorization_url()
         .open_request_url()
         .input_response_url()
-        .request("https://api.twitter.com/2/oauth2/token")
+        .resource("https://api.twitter.com/2/oauth2/token")
         .post()
         .generate_client()
     )
 
     tweets = (
         client.chain()
-        .request("https://api.twitter.com/2/tweets")
+        .resource("https://api.twitter.com/2/tweets")
         .get(
             {"ids": ["1460323737035677698"]},
         )
