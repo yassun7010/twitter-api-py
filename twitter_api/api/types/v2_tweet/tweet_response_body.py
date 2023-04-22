@@ -209,6 +209,7 @@ class TweetsResponseBodyMeta(ExtraPermissiveModel):
 class TweetsSearchResponseBody(TweetsResponseBody, PageResponseBody):
     meta: TweetsResponseBodyMeta
 
+    @property
     def meta_next_token(self) -> str | None:
         return self.meta.next_token
 

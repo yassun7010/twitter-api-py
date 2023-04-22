@@ -91,6 +91,7 @@ class GetV2UserLikedTweetsResponseBody(ExtraPermissiveModel, PageResponseBody):
     )
     errors: Optional[list[dict]] = None
 
+    @property
     def meta_next_token(self) -> str | None:
         if self.meta is None:
             return None

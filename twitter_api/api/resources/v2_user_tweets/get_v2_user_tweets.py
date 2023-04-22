@@ -107,6 +107,7 @@ class GetV2UserTweetsResponseBody(ExtraPermissiveModel, PageResponseBody):
     meta: GetV2UserTweetsResponseBodyMeta
     errors: Optional[list[dict]] = None
 
+    @property
     def meta_next_token(self) -> str | None:
         return self.meta.next_token
 

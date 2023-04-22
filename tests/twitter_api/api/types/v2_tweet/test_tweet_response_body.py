@@ -7,7 +7,7 @@ from twitter_api.api.types.v2_tweet.tweet_response_body import TweetsSearchRespo
 @pytest.fixture
 def response() -> TweetsSearchResponseBody:
     return TweetsSearchResponseBody.parse_file(
-        json_test_data("get_v2_tweets_search_recent_response/total_response.json"),
+        json_test_data("get_v2_tweets_search_recent_response/flattened_response.json"),
     )
 
 

@@ -71,6 +71,7 @@ class GetV2TweetRetweetedByResponseBody(ExtraPermissiveModel, PageResponseBody):
     )
     errors: Optional[list[dict]] = None
 
+    @property
     def meta_next_token(self) -> str | None:
         return self.meta.next_token
 

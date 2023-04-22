@@ -1,6 +1,59 @@
 {
   "data": [
     {
+      "id": "1649036032292077568",
+      "text": "RT @ChinasaNworu: Missile ships of #Russia’s Pacific Fleet fired Moskit cruise missiles at a mock enemy target in the Sea of #Japan. @real_…",
+      "edit_history_tweet_ids": [
+        "1649036032292077568"
+      ],
+      "author_id": "1568703173119860736",
+      "lang": "en",
+      "conversation_id": "1649036032292077568",
+      "created_at": "2023-04-20T13:03:22+00:00",
+      "edit_controls": {
+        "edits_remaining": 5,
+        "is_edit_eligible": false,
+        "editable_until": "2023-04-20T13:33:22+00:00"
+      },
+      "entities": {
+        "hashtags": [
+          {
+            "start": 35,
+            "end": 42,
+            "tag": "Russia"
+          },
+          {
+            "start": 125,
+            "end": 131,
+            "tag": "Japan"
+          }
+        ],
+        "mentions": [
+          {
+            "start": 3,
+            "end": 16,
+            "username": "ChinasaNworu",
+            "id": "3252528612"
+          }
+        ]
+      },
+      "possibly_sensitive": false,
+      "public_metrics": {
+        "impression_count": 0,
+        "like_count": 0,
+        "quote_count": 0,
+        "reply_count": 0,
+        "retweet_count": 683
+      },
+      "referenced_tweets": [
+        {
+          "type": "retweeted",
+          "id": "1640635965390700549"
+        }
+      ],
+      "reply_settings": "everyone"
+    },
+    {
       "id": "1648980229258612736",
       "text": "Test.\n#cat #shintoshrine #chigasaki #shonan #kanagawa #japan #neko #azalea #wisteria #猫 #第六天神社 #神社 #茅ヶ崎 #湘南 #神奈川 #神社猫 #つつじ #躑躅 #藤\nhttps://t.co/RIto5mNQss",
       "edit_history_tweet_ids": [
@@ -244,7 +297,7 @@
       },
       "possibly_sensitive": false,
       "public_metrics": {
-        "impression_count": 30,
+        "impression_count": 39,
         "like_count": 1,
         "quote_count": 0,
         "reply_count": 0,
@@ -394,7 +447,7 @@
       },
       "possibly_sensitive": false,
       "public_metrics": {
-        "impression_count": 25,
+        "impression_count": 26,
         "like_count": 0,
         "quote_count": 0,
         "reply_count": 0,
@@ -489,7 +542,7 @@
       },
       "possibly_sensitive": false,
       "public_metrics": {
-        "impression_count": 361,
+        "impression_count": 363,
         "like_count": 0,
         "quote_count": 0,
         "reply_count": 0,
@@ -832,14 +885,14 @@
           {
             "start": 260,
             "end": 264,
-            "probability": 0.7855,
+            "probability": 0.7945,
             "type": "Place",
             "normalized_text": "Japan"
           },
           {
             "start": 267,
             "end": 269,
-            "probability": 0.791,
+            "probability": 0.8014,
             "type": "Place",
             "normalized_text": "USA"
           }
@@ -1015,6 +1068,36 @@
         "editable_until": "2023-04-19T12:54:17+00:00"
       },
       "entities": {
+        "annotations": [
+          {
+            "start": 36,
+            "end": 41,
+            "probability": 0.9591,
+            "type": "Place",
+            "normalized_text": "Russia"
+          },
+          {
+            "start": 45,
+            "end": 57,
+            "probability": 0.6369,
+            "type": "Place",
+            "normalized_text": "Pacific Fleet"
+          },
+          {
+            "start": 65,
+            "end": 70,
+            "probability": 0.3778,
+            "type": "Other",
+            "normalized_text": "Moskit"
+          },
+          {
+            "start": 126,
+            "end": 130,
+            "probability": 0.9091,
+            "type": "Place",
+            "normalized_text": "Japan"
+          }
+        ],
         "hashtags": [
           {
             "start": 35,
@@ -1042,7 +1125,7 @@
         "like_count": 0,
         "quote_count": 0,
         "reply_count": 0,
-        "retweet_count": 682
+        "retweet_count": 683
       },
       "referenced_tweets": [
         {
@@ -1296,7 +1379,7 @@
       },
       "possibly_sensitive": false,
       "public_metrics": {
-        "impression_count": 7,
+        "impression_count": 8,
         "like_count": 0,
         "quote_count": 0,
         "reply_count": 0,
@@ -1361,7 +1444,7 @@
       },
       "possibly_sensitive": false,
       "public_metrics": {
-        "impression_count": 467,
+        "impression_count": 468,
         "like_count": 7,
         "quote_count": 0,
         "reply_count": 0,
@@ -1679,7 +1762,7 @@
       },
       "possibly_sensitive": false,
       "public_metrics": {
-        "impression_count": 12,
+        "impression_count": 13,
         "like_count": 0,
         "quote_count": 0,
         "reply_count": 0,
@@ -1908,7 +1991,7 @@
       },
       "possibly_sensitive": false,
       "public_metrics": {
-        "impression_count": 309,
+        "impression_count": 318,
         "like_count": 9,
         "quote_count": 0,
         "reply_count": 1,
@@ -2630,7 +2713,7 @@
       },
       "possibly_sensitive": false,
       "public_metrics": {
-        "impression_count": 89,
+        "impression_count": 90,
         "like_count": 1,
         "quote_count": 0,
         "reply_count": 0,
@@ -3880,7 +3963,7 @@
         "like_count": 0,
         "quote_count": 0,
         "reply_count": 0,
-        "retweet_count": 682
+        "retweet_count": 683
       },
       "referenced_tweets": [
         {
@@ -3963,7 +4046,7 @@
         "like_count": 0,
         "quote_count": 0,
         "reply_count": 0,
-        "retweet_count": 682
+        "retweet_count": 683
       },
       "referenced_tweets": [
         {
@@ -5455,7 +5538,7 @@
       },
       "possibly_sensitive": false,
       "public_metrics": {
-        "impression_count": 577,
+        "impression_count": 578,
         "like_count": 2,
         "quote_count": 0,
         "reply_count": 0,
@@ -5536,7 +5619,7 @@
         "like_count": 0,
         "quote_count": 0,
         "reply_count": 0,
-        "retweet_count": 682
+        "retweet_count": 683
       },
       "referenced_tweets": [
         {
@@ -5833,7 +5916,7 @@
         "like_count": 0,
         "quote_count": 0,
         "reply_count": 0,
-        "retweet_count": 682
+        "retweet_count": 683
       },
       "referenced_tweets": [
         {
@@ -5939,7 +6022,7 @@
       },
       "possibly_sensitive": false,
       "public_metrics": {
-        "impression_count": 563,
+        "impression_count": 564,
         "like_count": 4,
         "quote_count": 0,
         "reply_count": 0,
@@ -6445,7 +6528,7 @@
       },
       "possibly_sensitive": false,
       "public_metrics": {
-        "impression_count": 2741,
+        "impression_count": 2744,
         "like_count": 21,
         "quote_count": 0,
         "reply_count": 0,
@@ -6794,7 +6877,7 @@
         "like_count": 0,
         "quote_count": 0,
         "reply_count": 0,
-        "retweet_count": 682
+        "retweet_count": 683
       },
       "referenced_tweets": [
         {
@@ -11589,8 +11672,401 @@
       },
       "possibly_sensitive": false,
       "public_metrics": {
-        "impression_count": 691,
+        "impression_count": 692,
         "like_count": 4,
+        "quote_count": 0,
+        "reply_count": 0,
+        "retweet_count": 0
+      },
+      "reply_settings": "everyone"
+    },
+    {
+      "id": "1646659361614479360",
+      "text": "RT @LeilaniAthenai1: 1963年ケネディ大統領：核実験禁止条約についてラジオ演説\n「統計的に少数でも病気になる #子供 は数字ではない」「肺の中の毒」と吸気被ばくにも\n#JFK 　https://t.co/6HrJlIVeqn\n#radiation #cov…",
+      "edit_history_tweet_ids": [
+        "1646659361614479360"
+      ],
+      "author_id": "1423622412470390791",
+      "lang": "ja",
+      "context_annotations": [
+        {
+          "domain": {
+            "id": "10",
+            "name": "Person",
+            "description": "Named people in the world like Nelson Mandela"
+          },
+          "entity": {
+            "id": "923552037635112960",
+            "name": "John F. Kennedy",
+            "description": "Former US President John F. Kennedy"
+          }
+        },
+        {
+          "domain": {
+            "id": "35",
+            "name": "Politician",
+            "description": "Politicians in the world, like Joe Biden"
+          },
+          "entity": {
+            "id": "923552037635112960",
+            "name": "John F. Kennedy",
+            "description": "Former US President John F. Kennedy"
+          }
+        },
+        {
+          "domain": {
+            "id": "131",
+            "name": "Unified Twitter Taxonomy",
+            "description": "A taxonomy of user interests. "
+          },
+          "entity": {
+            "id": "847878884917886977",
+            "name": "Politics",
+            "description": "Politics"
+          }
+        },
+        {
+          "domain": {
+            "id": "131",
+            "name": "Unified Twitter Taxonomy",
+            "description": "A taxonomy of user interests. "
+          },
+          "entity": {
+            "id": "923552037635112960",
+            "name": "John F. Kennedy",
+            "description": "Former US President John F. Kennedy"
+          }
+        },
+        {
+          "domain": {
+            "id": "131",
+            "name": "Unified Twitter Taxonomy",
+            "description": "A taxonomy of user interests. "
+          },
+          "entity": {
+            "id": "1070032753834438656",
+            "name": "Political figures",
+            "description": "Politician"
+          }
+        }
+      ],
+      "conversation_id": "1646659361614479360",
+      "created_at": "2023-04-13T23:39:19+00:00",
+      "edit_controls": {
+        "edits_remaining": 5,
+        "is_edit_eligible": false,
+        "editable_until": "2023-04-14T00:09:19+00:00"
+      },
+      "entities": {
+        "annotations": [
+          {
+            "start": 21,
+            "end": 32,
+            "probability": 0.5737,
+            "type": "Person",
+            "normalized_text": "1963年ケネディ大統領"
+          }
+        ],
+        "hashtags": [
+          {
+            "start": 66,
+            "end": 69,
+            "tag": "子供"
+          },
+          {
+            "start": 94,
+            "end": 98,
+            "tag": "JFK"
+          },
+          {
+            "start": 124,
+            "end": 134,
+            "tag": "radiation"
+          }
+        ],
+        "mentions": [
+          {
+            "start": 3,
+            "end": 19,
+            "username": "LeilaniAthenai1",
+            "id": "1423622412470390791"
+          }
+        ],
+        "urls": [
+          {
+            "start": 100,
+            "end": 123,
+            "url": "https://t.co/6HrJlIVeqn",
+            "expanded_url": "https://www.jfklibrary.org/archives/other-resources/john-f-kennedy-speeches/nuclear-test-ban-treaty-19630726",
+            "display_url": "jfklibrary.org/archives/other…",
+            "status": "200",
+            "title": "Radio and Television Address to the American People on the Nuclear Test Ban Treaty, July 26, 1963 | JFK Library",
+            "description": "Listen to the speech.    View related documents.",
+            "unwound_url": "https://www.jfklibrary.org/archives/other-resources/john-f-kennedy-speeches/nuclear-test-ban-treaty-19630726",
+            "images": [
+              {
+                "url": "https://pbs.twimg.com/news_img/1646659408062189569/VR5Ir5Os?format=jpg&name=orig",
+                "width": 33,
+                "height": 31
+              },
+              {
+                "url": "https://pbs.twimg.com/news_img/1646659408062189569/VR5Ir5Os?format=jpg&name=150x150",
+                "width": 31,
+                "height": 31
+              }
+            ]
+          }
+        ]
+      },
+      "possibly_sensitive": false,
+      "public_metrics": {
+        "impression_count": 0,
+        "like_count": 0,
+        "quote_count": 0,
+        "reply_count": 0,
+        "retweet_count": 8
+      },
+      "referenced_tweets": [
+        {
+          "type": "retweeted",
+          "id": "1434764866133250048"
+        }
+      ],
+      "reply_settings": "everyone"
+    },
+    {
+      "id": "1646656124664389633",
+      "text": "RT @LACASA4218: https://t.co/w4FXYi3QIp Good news from #Japan  ! \nNo more proof of #vaccine or #covid negative test starting May 8 , 2023!!!",
+      "edit_history_tweet_ids": [
+        "1646656124664389633"
+      ],
+      "author_id": "1269090759564832770",
+      "lang": "en",
+      "context_annotations": [
+        {
+          "domain": {
+            "id": "123",
+            "name": "Ongoing News Story",
+            "description": "Ongoing News Stories like 'Brexit'"
+          },
+          "entity": {
+            "id": "1220701888179359745",
+            "name": "COVID-19"
+          }
+        },
+        {
+          "domain": {
+            "id": "131",
+            "name": "Unified Twitter Taxonomy",
+            "description": "A taxonomy of user interests. "
+          },
+          "entity": {
+            "id": "1220701888179359745",
+            "name": "COVID-19"
+          }
+        }
+      ],
+      "conversation_id": "1646656124664389633",
+      "created_at": "2023-04-13T23:26:28+00:00",
+      "edit_controls": {
+        "edits_remaining": 5,
+        "is_edit_eligible": false,
+        "editable_until": "2023-04-13T23:56:28+00:00"
+      },
+      "entities": {
+        "annotations": [
+          {
+            "start": 56,
+            "end": 60,
+            "probability": 0.9933,
+            "type": "Place",
+            "normalized_text": "Japan"
+          },
+          {
+            "start": 96,
+            "end": 100,
+            "probability": 0.9403,
+            "type": "Other",
+            "normalized_text": "covid"
+          }
+        ],
+        "hashtags": [
+          {
+            "start": 55,
+            "end": 61,
+            "tag": "Japan"
+          },
+          {
+            "start": 83,
+            "end": 91,
+            "tag": "vaccine"
+          },
+          {
+            "start": 95,
+            "end": 101,
+            "tag": "covid"
+          }
+        ],
+        "mentions": [
+          {
+            "start": 3,
+            "end": 14,
+            "username": "LACASA4218",
+            "id": "1517240366667161600"
+          }
+        ],
+        "urls": [
+          {
+            "start": 16,
+            "end": 39,
+            "url": "https://t.co/w4FXYi3QIp",
+            "expanded_url": "https://www.japan.travel/en/practical-coronavirus-information/travelers/",
+            "display_url": "japan.travel/en/practical-c…",
+            "status": "200",
+            "title": "For Travelers | COVID-19: New Normal Travel in Japan | Travel Japan（Japan National Tourism Organization）",
+            "description": "Get ready for your dream trip to Japan! From 11th October, tourists from all countries or regions can visit Japan with a valid vaccination certificate or a Covid-19 negative test certificate.",
+            "unwound_url": "https://www.japan.travel/en/practical-coronavirus-information/travelers/",
+            "images": [
+              {
+                "url": "https://pbs.twimg.com/news_img/1645230158536753152/BF7jkmub?format=jpg&name=orig",
+                "width": 1000,
+                "height": 667
+              },
+              {
+                "url": "https://pbs.twimg.com/news_img/1645230158536753152/BF7jkmub?format=jpg&name=150x150",
+                "width": 150,
+                "height": 150
+              }
+            ]
+          }
+        ]
+      },
+      "possibly_sensitive": false,
+      "public_metrics": {
+        "impression_count": 0,
+        "like_count": 0,
+        "quote_count": 0,
+        "reply_count": 0,
+        "retweet_count": 4
+      },
+      "referenced_tweets": [
+        {
+          "type": "retweeted",
+          "id": "1646373532514017282"
+        }
+      ],
+      "reply_settings": "everyone"
+    },
+    {
+      "id": "1646517609700130830",
+      "text": "Watch: North Korean missile test leads to warning sirens in Japan\n\nDownload the A-Time News App and get updated with the latest news all over the world! https://t.co/bsTxunqDHU\n\n#Japan #NorthKoreanmissile",
+      "edit_history_tweet_ids": [
+        "1646517609700130830"
+      ],
+      "author_id": "1582239128925503489",
+      "lang": "en",
+      "context_annotations": [
+        {
+          "domain": {
+            "id": "6",
+            "name": "Sports Event"
+          },
+          "entity": {
+            "id": "1631808186574417920",
+            "name": "Chennai Super Kings vs Lucknow Super Giants"
+          }
+        },
+        {
+          "domain": {
+            "id": "29",
+            "name": "Events [Entity Service]",
+            "description": "Real world events. "
+          },
+          "entity": {
+            "id": "1631808186574417920",
+            "name": "Chennai Super Kings vs Lucknow Super Giants"
+          }
+        },
+        {
+          "domain": {
+            "id": "83",
+            "name": "Cricket Match",
+            "description": "Sports Event specific to Cricket matches"
+          },
+          "entity": {
+            "id": "1631808186574417920",
+            "name": "Chennai Super Kings vs Lucknow Super Giants"
+          }
+        }
+      ],
+      "conversation_id": "1646517609700130830",
+      "created_at": "2023-04-13T14:16:03+00:00",
+      "edit_controls": {
+        "edits_remaining": 5,
+        "is_edit_eligible": true,
+        "editable_until": "2023-04-13T14:46:03+00:00"
+      },
+      "entities": {
+        "annotations": [
+          {
+            "start": 60,
+            "end": 64,
+            "probability": 0.9867,
+            "type": "Place",
+            "normalized_text": "Japan"
+          },
+          {
+            "start": 80,
+            "end": 90,
+            "probability": 0.7431,
+            "type": "Other",
+            "normalized_text": "A-Time News"
+          },
+          {
+            "start": 179,
+            "end": 183,
+            "probability": 0.981,
+            "type": "Place",
+            "normalized_text": "Japan"
+          },
+          {
+            "start": 186,
+            "end": 203,
+            "probability": 0.9498,
+            "type": "Place",
+            "normalized_text": "NorthKoreanmissile"
+          }
+        ],
+        "hashtags": [
+          {
+            "start": 178,
+            "end": 184,
+            "tag": "Japan"
+          },
+          {
+            "start": 185,
+            "end": 204,
+            "tag": "NorthKoreanmissile"
+          }
+        ],
+        "urls": [
+          {
+            "start": 153,
+            "end": 176,
+            "url": "https://t.co/bsTxunqDHU",
+            "expanded_url": "http://atimenews.net/appstore.html",
+            "display_url": "atimenews.net/appstore.html",
+            "status": "200",
+            "title": "A-Time News",
+            "description": "My description",
+            "unwound_url": "https://atimenews.net/appstore.html"
+          }
+        ]
+      },
+      "possibly_sensitive": false,
+      "public_metrics": {
+        "impression_count": 0,
+        "like_count": 0,
         "quote_count": 0,
         "reply_count": 0,
         "retweet_count": 0
@@ -11600,6 +12076,41 @@
   ],
   "includes": {
     "users": [
+      {
+        "id": "1568703173119860736",
+        "name": "EMMY RASTA NWAFOR SHEDRACK",
+        "username": "RastaEmmy",
+        "created_at": "2022-09-10T20:50:52+00:00",
+        "description": "ROMA COORDINATOR",
+        "location": "ROMA COORDINATOR ",
+        "profile_image_url": "https://pbs.twimg.com/profile_images/1568703578910375937/JVneYTsY_normal.jpg",
+        "protected": false,
+        "public_metrics": {
+          "followers_count": 3,
+          "following_count": 53,
+          "tweet_count": 2657,
+          "listed_count": 0
+        },
+        "verified": false,
+        "verified_type": "none"
+      },
+      {
+        "id": "3252528612",
+        "name": "Chinasa Nworu",
+        "username": "ChinasaNworu",
+        "created_at": "2015-06-22T11:08:47+00:00",
+        "description": "Biafra Self -Determination Activist",
+        "profile_image_url": "https://pbs.twimg.com/profile_images/1625452516258242560/W0k7zEnS_normal.jpg",
+        "protected": false,
+        "public_metrics": {
+          "followers_count": 89366,
+          "following_count": 376,
+          "tweet_count": 8335,
+          "listed_count": 49
+        },
+        "verified": false,
+        "verified_type": "none"
+      },
       {
         "id": "1604134815242268673",
         "name": "Lazy Bum in Shonan",
@@ -11626,7 +12137,7 @@
         "public_metrics": {
           "followers_count": 9,
           "following_count": 17,
-          "tweet_count": 122,
+          "tweet_count": 123,
           "listed_count": 0
         },
         "url": "https://t.co/eT2SXxZdHJ",
@@ -11645,7 +12156,7 @@
         "public_metrics": {
           "followers_count": 10442,
           "following_count": 409,
-          "tweet_count": 558916,
+          "tweet_count": 558913,
           "listed_count": 60
         },
         "verified": false,
@@ -11663,7 +12174,7 @@
         "public_metrics": {
           "followers_count": 3130,
           "following_count": 2797,
-          "tweet_count": 78844,
+          "tweet_count": 78860,
           "listed_count": 12
         },
         "verified": false,
@@ -11725,9 +12236,9 @@
         "profile_image_url": "https://pbs.twimg.com/profile_images/1641113520002539521/7ciqsgO9_normal.jpg",
         "protected": false,
         "public_metrics": {
-          "followers_count": 3311,
+          "followers_count": 3310,
           "following_count": 226,
-          "tweet_count": 37352,
+          "tweet_count": 37369,
           "listed_count": 28
         },
         "verified": false,
@@ -11759,9 +12270,9 @@
         "profile_image_url": "https://pbs.twimg.com/profile_images/1642497599784759297/vaaAHjQl_normal.jpg",
         "protected": false,
         "public_metrics": {
-          "followers_count": 2764,
+          "followers_count": 2777,
           "following_count": 204,
-          "tweet_count": 32479,
+          "tweet_count": 32481,
           "listed_count": 15
         },
         "verified": false,
@@ -11825,7 +12336,7 @@
         "public_metrics": {
           "followers_count": 34,
           "following_count": 292,
-          "tweet_count": 561,
+          "tweet_count": 562,
           "listed_count": 0
         },
         "url": "https://t.co/UfNO9LQBeJ",
@@ -11870,23 +12381,6 @@
           "listed_count": 42
         },
         "url": "https://t.co/PVZdNFmQYh",
-        "verified": false,
-        "verified_type": "none"
-      },
-      {
-        "id": "3252528612",
-        "name": "Chinasa Nworu",
-        "username": "ChinasaNworu",
-        "created_at": "2015-06-22T11:08:47+00:00",
-        "description": "Biafra Self -Determination Activist",
-        "profile_image_url": "https://pbs.twimg.com/profile_images/1625452516258242560/W0k7zEnS_normal.jpg",
-        "protected": false,
-        "public_metrics": {
-          "followers_count": 89362,
-          "following_count": 376,
-          "tweet_count": 8335,
-          "listed_count": 49
-        },
         "verified": false,
         "verified_type": "none"
       },
@@ -12020,43 +12514,10 @@
         "public_metrics": {
           "followers_count": 10,
           "following_count": 4,
-          "tweet_count": 162,
+          "tweet_count": 166,
           "listed_count": 0
         },
         "url": "https://t.co/z1G2AyteJH",
-        "verified": false,
-        "verified_type": "none"
-      },
-      {
-        "id": "1262633850179641345",
-        "name": "Global Defense Insight",
-        "username": "Defense_Talks",
-        "created_at": "2020-05-19T06:57:49+00:00",
-        "description": "Global Defense Insight is a non-partisan publication with a focus on the business of defense, aerospace, and national security.",
-        "entities": {
-          "url": {
-            "urls": [
-              {
-                "start": 0,
-                "end": 23,
-                "url": "https://t.co/DsJaHD3D6V",
-                "expanded_url": "https://defensetalks.com/",
-                "display_url": "defensetalks.com"
-              }
-            ]
-          }
-        },
-        "location": "Pakistan",
-        "pinned_tweet_id": "1638918851315236864",
-        "profile_image_url": "https://pbs.twimg.com/profile_images/1633697123559518216/b5gui5TS_normal.jpg",
-        "protected": false,
-        "public_metrics": {
-          "followers_count": 14211,
-          "following_count": 2,
-          "tweet_count": 20279,
-          "listed_count": 146
-        },
-        "url": "https://t.co/DsJaHD3D6V",
         "verified": false,
         "verified_type": "none"
       },
@@ -12128,45 +12589,12 @@
         "public_metrics": {
           "followers_count": 1816,
           "following_count": 4967,
-          "tweet_count": 3864,
+          "tweet_count": 3863,
           "listed_count": 1
         },
         "url": "https://t.co/FPTwUc0PMl",
         "verified": true,
         "verified_type": "blue"
-      },
-      {
-        "id": "3648463632",
-        "name": "Maj General (Dr.) S B Asthana,SM,VSM,PhD (Veteran)",
-        "username": "asthana_shashi",
-        "created_at": "2015-09-22T12:21:35+00:00",
-        "description": "Global Strategic & Military Analyst. Governing Council CEE, IOED,IPC, GACC +few UN orgs.  Director USI of India. Author,TV analyst. Ex DG Infantry.",
-        "entities": {
-          "url": {
-            "urls": [
-              {
-                "start": 0,
-                "end": 23,
-                "url": "https://t.co/3NOsRis8p2",
-                "expanded_url": "https://asthanawrites.org/",
-                "display_url": "asthanawrites.org"
-              }
-            ]
-          }
-        },
-        "location": "India",
-        "pinned_tweet_id": "1379033062470656004",
-        "profile_image_url": "https://pbs.twimg.com/profile_images/703926127899729920/CjtmYHeM_normal.jpg",
-        "protected": false,
-        "public_metrics": {
-          "followers_count": 3311,
-          "following_count": 993,
-          "tweet_count": 27958,
-          "listed_count": 23
-        },
-        "url": "https://t.co/3NOsRis8p2",
-        "verified": false,
-        "verified_type": "none"
       },
       {
         "id": "844136511079559168",
@@ -12215,10 +12643,10 @@
         "profile_image_url": "https://pbs.twimg.com/profile_images/1493249620612313090/Y-SGiQs5_normal.jpg",
         "protected": false,
         "public_metrics": {
-          "followers_count": 118345,
+          "followers_count": 118350,
           "following_count": 841,
-          "tweet_count": 113330,
-          "listed_count": 1437
+          "tweet_count": 113332,
+          "listed_count": 1436
         },
         "verified": false,
         "verified_type": "none"
@@ -12262,24 +12690,6 @@
         "verified_type": "none"
       },
       {
-        "id": "1070015282385743872",
-        "name": "Petbunny 💙",
-        "username": "Petbunny4",
-        "created_at": "2018-12-04T18:01:38+00:00",
-        "description": "",
-        "pinned_tweet_id": "1634604428878573568",
-        "profile_image_url": "https://pbs.twimg.com/profile_images/1345088599402885122/uNbRAq9Z_normal.jpg",
-        "protected": false,
-        "public_metrics": {
-          "followers_count": 3130,
-          "following_count": 2797,
-          "tweet_count": 78844,
-          "listed_count": 12
-        },
-        "verified": false,
-        "verified_type": "none"
-      },
-      {
         "id": "2879691410",
         "name": "kit",
         "username": "FreeScot45",
@@ -12291,7 +12701,7 @@
         "protected": false,
         "public_metrics": {
           "followers_count": 4010,
-          "following_count": 4991,
+          "following_count": 4990,
           "tweet_count": 155789,
           "listed_count": 170
         },
@@ -12487,7 +12897,7 @@
         "public_metrics": {
           "followers_count": 14352,
           "following_count": 763,
-          "tweet_count": 2665,
+          "tweet_count": 2667,
           "listed_count": 32
         },
         "url": "https://t.co/7PWUAZ3qya",
@@ -12575,26 +12985,8 @@
         "public_metrics": {
           "followers_count": 1885,
           "following_count": 1567,
-          "tweet_count": 153924,
+          "tweet_count": 153936,
           "listed_count": 18
-        },
-        "verified": false,
-        "verified_type": "none"
-      },
-      {
-        "id": "1070015282385743872",
-        "name": "Petbunny 💙",
-        "username": "Petbunny4",
-        "created_at": "2018-12-04T18:01:38+00:00",
-        "description": "",
-        "pinned_tweet_id": "1634604428878573568",
-        "profile_image_url": "https://pbs.twimg.com/profile_images/1345088599402885122/uNbRAq9Z_normal.jpg",
-        "protected": false,
-        "public_metrics": {
-          "followers_count": 3130,
-          "following_count": 2797,
-          "tweet_count": 78844,
-          "listed_count": 12
         },
         "verified": false,
         "verified_type": "none"
@@ -12661,7 +13053,7 @@
         "public_metrics": {
           "followers_count": 2210,
           "following_count": 2278,
-          "tweet_count": 97796,
+          "tweet_count": 97807,
           "listed_count": 12
         },
         "verified": false,
@@ -12692,7 +13084,7 @@
         "public_metrics": {
           "followers_count": 369,
           "following_count": 2,
-          "tweet_count": 3743,
+          "tweet_count": 3747,
           "listed_count": 0
         },
         "url": "https://t.co/sEKdVbUAyi",
@@ -12817,7 +13209,7 @@
         "public_metrics": {
           "followers_count": 6086,
           "following_count": 1,
-          "tweet_count": 224701,
+          "tweet_count": 224720,
           "listed_count": 47
         },
         "url": "https://t.co/5iwjkB3coI",
@@ -12950,28 +13342,10 @@
         "profile_image_url": "https://pbs.twimg.com/profile_images/1600065954926444544/uKUzTzih_normal.jpg",
         "protected": false,
         "public_metrics": {
-          "followers_count": 2224,
+          "followers_count": 2225,
           "following_count": 5001,
           "tweet_count": 113476,
           "listed_count": 18
-        },
-        "verified": false,
-        "verified_type": "none"
-      },
-      {
-        "id": "1070015282385743872",
-        "name": "Petbunny 💙",
-        "username": "Petbunny4",
-        "created_at": "2018-12-04T18:01:38+00:00",
-        "description": "",
-        "pinned_tweet_id": "1634604428878573568",
-        "profile_image_url": "https://pbs.twimg.com/profile_images/1345088599402885122/uNbRAq9Z_normal.jpg",
-        "protected": false,
-        "public_metrics": {
-          "followers_count": 3130,
-          "following_count": 2797,
-          "tweet_count": 78844,
-          "listed_count": 12
         },
         "verified": false,
         "verified_type": "none"
@@ -13005,25 +13379,8 @@
         "public_metrics": {
           "followers_count": 1200,
           "following_count": 1380,
-          "tweet_count": 145023,
+          "tweet_count": 145022,
           "listed_count": 6
-        },
-        "verified": false,
-        "verified_type": "none"
-      },
-      {
-        "id": "3252528612",
-        "name": "Chinasa Nworu",
-        "username": "ChinasaNworu",
-        "created_at": "2015-06-22T11:08:47+00:00",
-        "description": "Biafra Self -Determination Activist",
-        "profile_image_url": "https://pbs.twimg.com/profile_images/1625452516258242560/W0k7zEnS_normal.jpg",
-        "protected": false,
-        "public_metrics": {
-          "followers_count": 89362,
-          "following_count": 376,
-          "tweet_count": 8335,
-          "listed_count": 49
         },
         "verified": false,
         "verified_type": "none"
@@ -13039,7 +13396,7 @@
         "public_metrics": {
           "followers_count": 1813,
           "following_count": 2767,
-          "tweet_count": 344215,
+          "tweet_count": 344157,
           "listed_count": 9
         },
         "verified": false,
@@ -13070,7 +13427,7 @@
         "public_metrics": {
           "followers_count": 260,
           "following_count": 203,
-          "tweet_count": 78828,
+          "tweet_count": 78831,
           "listed_count": 8
         },
         "url": "http://t.co/xu6Dg7ZIrR",
@@ -13126,7 +13483,7 @@
         "public_metrics": {
           "followers_count": 6974,
           "following_count": 5061,
-          "tweet_count": 106404,
+          "tweet_count": 106411,
           "listed_count": 431
         },
         "url": "https://t.co/U2O9EIE9zr",
@@ -13187,9 +13544,9 @@
         "profile_image_url": "https://pbs.twimg.com/profile_images/1142339080073678848/Slkhl6pj_normal.png",
         "protected": false,
         "public_metrics": {
-          "followers_count": 19794,
+          "followers_count": 19793,
           "following_count": 325,
-          "tweet_count": 583805,
+          "tweet_count": 583807,
           "listed_count": 2148
         },
         "url": "https://t.co/rJH9N8QUBB",
@@ -13208,7 +13565,7 @@
         "public_metrics": {
           "followers_count": 3701,
           "following_count": 3443,
-          "tweet_count": 818947,
+          "tweet_count": 818954,
           "listed_count": 206
         },
         "verified": false,
@@ -13239,65 +13596,9 @@
         "public_metrics": {
           "followers_count": 794,
           "following_count": 1664,
-          "tweet_count": 11844,
+          "tweet_count": 11846,
           "listed_count": 7
         },
-        "verified": false,
-        "verified_type": "none"
-      },
-      {
-        "id": "73185544",
-        "name": "Isabella P.P",
-        "username": "ISAbella_P_PARF",
-        "created_at": "2009-09-10T18:32:51+00:00",
-        "description": "Investigative Journalist #EnvironmentalJustice #HumanRights https://t.co/kIrrytlHBh",
-        "entities": {
-          "url": {
-            "urls": [
-              {
-                "start": 0,
-                "end": 23,
-                "url": "https://t.co/U2O9EIE9zr",
-                "expanded_url": "http://www.facebook.com/pages/Isabellas-Vegan-page/83552172515",
-                "display_url": "facebook.com/pages/Isabella…"
-              }
-            ]
-          },
-          "description": {
-            "urls": [
-              {
-                "start": 60,
-                "end": 83,
-                "url": "https://t.co/kIrrytlHBh",
-                "expanded_url": "https://mastodon.world/@ISAbella_P_PARF",
-                "display_url": "mastodon.world/@ISAbella_P_PA…"
-              }
-            ],
-            "hashtags": [
-              {
-                "start": 25,
-                "end": 46,
-                "tag": "EnvironmentalJustice"
-              },
-              {
-                "start": 47,
-                "end": 59,
-                "tag": "HumanRights"
-              }
-            ]
-          }
-        },
-        "location": "Switzerland ",
-        "pinned_tweet_id": "770531803409031168",
-        "profile_image_url": "https://pbs.twimg.com/profile_images/734141897694957569/NmkAl0-2_normal.jpg",
-        "protected": false,
-        "public_metrics": {
-          "followers_count": 6974,
-          "following_count": 5061,
-          "tweet_count": 106404,
-          "listed_count": 431
-        },
-        "url": "https://t.co/U2O9EIE9zr",
         "verified": false,
         "verified_type": "none"
       },
@@ -13348,7 +13649,7 @@
         "protected": false,
         "public_metrics": {
           "followers_count": 3297,
-          "following_count": 2759,
+          "following_count": 2760,
           "tweet_count": 6993,
           "listed_count": 21
         },
@@ -13379,7 +13680,7 @@
         "profile_image_url": "https://pbs.twimg.com/profile_images/1061914878275977217/tF7xfYAu_normal.jpg",
         "protected": false,
         "public_metrics": {
-          "followers_count": 521987,
+          "followers_count": 521993,
           "following_count": 7457,
           "tweet_count": 75814,
           "listed_count": 12363
@@ -13415,9 +13716,9 @@
         "profile_image_url": "https://pbs.twimg.com/profile_images/1638986903474130946/nLA6UULq_normal.jpg",
         "protected": false,
         "public_metrics": {
-          "followers_count": 2486,
+          "followers_count": 2487,
           "following_count": 57,
-          "tweet_count": 215160,
+          "tweet_count": 215204,
           "listed_count": 24
         },
         "verified": false,
@@ -13467,7 +13768,7 @@
         "public_metrics": {
           "followers_count": 26426,
           "following_count": 4063,
-          "tweet_count": 9856,
+          "tweet_count": 9857,
           "listed_count": 848
         },
         "url": "https://t.co/osoDBtjH2r",
@@ -13520,23 +13821,6 @@
           "following_count": 289,
           "tweet_count": 15235,
           "listed_count": 1
-        },
-        "verified": false,
-        "verified_type": "none"
-      },
-      {
-        "id": "3252528612",
-        "name": "Chinasa Nworu",
-        "username": "ChinasaNworu",
-        "created_at": "2015-06-22T11:08:47+00:00",
-        "description": "Biafra Self -Determination Activist",
-        "profile_image_url": "https://pbs.twimg.com/profile_images/1625452516258242560/W0k7zEnS_normal.jpg",
-        "protected": false,
-        "public_metrics": {
-          "followers_count": 89362,
-          "following_count": 376,
-          "tweet_count": 8335,
-          "listed_count": 49
         },
         "verified": false,
         "verified_type": "none"
@@ -13630,9 +13914,9 @@
         "profile_image_url": "https://pbs.twimg.com/profile_images/1597498230354444288/JdUFxqKW_normal.jpg",
         "protected": false,
         "public_metrics": {
-          "followers_count": 19829,
-          "following_count": 5109,
-          "tweet_count": 20234,
+          "followers_count": 19827,
+          "following_count": 5108,
+          "tweet_count": 20231,
           "listed_count": 20
         },
         "url": "https://t.co/CGHvFNTJWw",
@@ -13662,7 +13946,7 @@
         "profile_image_url": "https://pbs.twimg.com/profile_images/1457813529348567041/PBfd8I6D_normal.jpg",
         "protected": false,
         "public_metrics": {
-          "followers_count": 17422,
+          "followers_count": 17421,
           "following_count": 17011,
           "tweet_count": 267223,
           "listed_count": 268
@@ -13717,10 +14001,10 @@
         "profile_image_url": "https://pbs.twimg.com/profile_images/1528162654069698567/U8gJKrdl_normal.jpg",
         "protected": false,
         "public_metrics": {
-          "followers_count": 98729,
+          "followers_count": 98733,
           "following_count": 909,
-          "tweet_count": 49823,
-          "listed_count": 1020
+          "tweet_count": 49827,
+          "listed_count": 1019
         },
         "url": "https://t.co/FlJHjeJ8rJ",
         "verified": true,
@@ -13736,67 +14020,12 @@
         "profile_image_url": "https://pbs.twimg.com/profile_images/1259511373219934215/2GHMqnPK_normal.jpg",
         "protected": false,
         "public_metrics": {
-          "followers_count": 1736,
+          "followers_count": 1735,
           "following_count": 1011,
-          "tweet_count": 397733,
+          "tweet_count": 397755,
           "listed_count": 48
         },
         "verified": false,
-        "verified_type": "none"
-      },
-      {
-        "id": "48534642",
-        "name": "Sharmine Narwani",
-        "username": "snarwani",
-        "created_at": "2009-06-18T23:36:56+00:00",
-        "description": "Columnist @TheCradleMedia; West Asian geopolitics; Frmr Senior Associate, St Antony's College, Oxford Univ. @ColumbiaJourn\nArchive: https://t.co/kY89b9vJZA",
-        "entities": {
-          "url": {
-            "urls": [
-              {
-                "start": 0,
-                "end": 23,
-                "url": "https://t.co/FlJHjeJ8rJ",
-                "expanded_url": "https://thecradle.co",
-                "display_url": "thecradle.co"
-              }
-            ]
-          },
-          "description": {
-            "urls": [
-              {
-                "start": 132,
-                "end": 155,
-                "url": "https://t.co/kY89b9vJZA",
-                "expanded_url": "http://mideastshuffle.com",
-                "display_url": "mideastshuffle.com"
-              }
-            ],
-            "mentions": [
-              {
-                "start": 10,
-                "end": 25,
-                "username": "TheCradleMedia"
-              },
-              {
-                "start": 108,
-                "end": 122,
-                "username": "ColumbiaJourn"
-              }
-            ]
-          }
-        },
-        "pinned_tweet_id": "1601249199126814720",
-        "profile_image_url": "https://pbs.twimg.com/profile_images/1528162654069698567/U8gJKrdl_normal.jpg",
-        "protected": false,
-        "public_metrics": {
-          "followers_count": 98729,
-          "following_count": 909,
-          "tweet_count": 49823,
-          "listed_count": 1020
-        },
-        "url": "https://t.co/FlJHjeJ8rJ",
-        "verified": true,
         "verified_type": "none"
       },
       {
@@ -13811,7 +14040,7 @@
         "public_metrics": {
           "followers_count": 540,
           "following_count": 2881,
-          "tweet_count": 17161,
+          "tweet_count": 17159,
           "listed_count": 2
         },
         "verified": false,
@@ -13859,10 +14088,10 @@
         "profile_image_url": "https://pbs.twimg.com/profile_images/1529107170448523264/q3VwEx38_normal.jpg",
         "protected": false,
         "public_metrics": {
-          "followers_count": 39755645,
+          "followers_count": 39755460,
           "following_count": 17,
-          "tweet_count": 362806,
-          "listed_count": 135594
+          "tweet_count": 362809,
+          "listed_count": 135589
         },
         "url": "https://t.co/4zUWrLAYqP",
         "verified": true,
@@ -13892,7 +14121,7 @@
         "profile_image_url": "https://pbs.twimg.com/profile_images/1284549177809100805/pHrRRPdQ_normal.jpg",
         "protected": false,
         "public_metrics": {
-          "followers_count": 17722,
+          "followers_count": 17723,
           "following_count": 1448,
           "tweet_count": 16056,
           "listed_count": 28
@@ -13991,7 +14220,7 @@
         "profile_image_url": "https://pbs.twimg.com/profile_images/1427292844612595720/RC1YSvuT_normal.jpg",
         "protected": false,
         "public_metrics": {
-          "followers_count": 78891552,
+          "followers_count": 78890160,
           "following_count": 1190,
           "tweet_count": 52814,
           "listed_count": 80244
@@ -14019,23 +14248,6 @@
         "verified_type": "none"
       },
       {
-        "id": "3252528612",
-        "name": "Chinasa Nworu",
-        "username": "ChinasaNworu",
-        "created_at": "2015-06-22T11:08:47+00:00",
-        "description": "Biafra Self -Determination Activist",
-        "profile_image_url": "https://pbs.twimg.com/profile_images/1625452516258242560/W0k7zEnS_normal.jpg",
-        "protected": false,
-        "public_metrics": {
-          "followers_count": 89362,
-          "following_count": 376,
-          "tweet_count": 8335,
-          "listed_count": 49
-        },
-        "verified": false,
-        "verified_type": "none"
-      },
-      {
         "id": "1596177244711686144",
         "name": "Mohammad Jafar Abbas محمد جعفر عباس",
         "username": "MOHAMMA45237549",
@@ -14047,7 +14259,7 @@
         "public_metrics": {
           "followers_count": 419,
           "following_count": 5006,
-          "tweet_count": 981,
+          "tweet_count": 982,
           "listed_count": 2
         },
         "verified": false,
@@ -14076,9 +14288,9 @@
         "profile_image_url": "https://pbs.twimg.com/profile_images/1632284819546677250/6ehapdjk_normal.jpg",
         "protected": false,
         "public_metrics": {
-          "followers_count": 810,
-          "following_count": 2099,
-          "tweet_count": 54493,
+          "followers_count": 809,
+          "following_count": 2101,
+          "tweet_count": 54522,
           "listed_count": 0
         },
         "url": "https://t.co/PARTHwshJ6",
@@ -14109,9 +14321,9 @@
         "profile_image_url": "https://pbs.twimg.com/profile_images/1543079890894917632/FyUQclT3_normal.jpg",
         "protected": false,
         "public_metrics": {
-          "followers_count": 4299,
+          "followers_count": 4298,
           "following_count": 9,
-          "tweet_count": 5435,
+          "tweet_count": 5436,
           "listed_count": 11
         },
         "url": "https://t.co/cl9nUB80py",
@@ -14162,7 +14374,7 @@
         "public_metrics": {
           "followers_count": 249,
           "following_count": 1035,
-          "tweet_count": 2615,
+          "tweet_count": 2616,
           "listed_count": 1
         },
         "verified": false,
@@ -14249,9 +14461,9 @@
         "profile_image_url": "https://pbs.twimg.com/profile_images/1637675020569780224/aGuAgBKe_normal.jpg",
         "protected": false,
         "public_metrics": {
-          "followers_count": 626024,
+          "followers_count": 626021,
           "following_count": 113,
-          "tweet_count": 265298,
+          "tweet_count": 265307,
           "listed_count": 3614
         },
         "url": "https://t.co/MDJ3I7diVl",
@@ -14343,39 +14555,6 @@
         "verified_type": "none"
       },
       {
-        "id": "1543079359837241344",
-        "name": "RTA English",
-        "username": "rtaenglish1",
-        "created_at": "2022-07-02T03:50:25+00:00",
-        "description": "Afghanistan broadcaster since 1925. RTA delivers national and international news, insightful analysis, and must-see videos.",
-        "entities": {
-          "url": {
-            "urls": [
-              {
-                "start": 0,
-                "end": 23,
-                "url": "https://t.co/cl9nUB80py",
-                "expanded_url": "https://bit.ly/3SpTxgx",
-                "display_url": "bit.ly/3SpTxgx"
-              }
-            ]
-          }
-        },
-        "location": " 14th Street Wazir Akbar Khan",
-        "pinned_tweet_id": "1648683559723335681",
-        "profile_image_url": "https://pbs.twimg.com/profile_images/1543079890894917632/FyUQclT3_normal.jpg",
-        "protected": false,
-        "public_metrics": {
-          "followers_count": 4299,
-          "following_count": 9,
-          "tweet_count": 5435,
-          "listed_count": 11
-        },
-        "url": "https://t.co/cl9nUB80py",
-        "verified": false,
-        "verified_type": "none"
-      },
-      {
         "id": "835335990214557698",
         "name": "Jerilyn",
         "username": "jlyn2605",
@@ -14446,9 +14625,9 @@
         "profile_image_url": "https://pbs.twimg.com/profile_images/141022351/logo_b-s_normal.GIF",
         "protected": false,
         "public_metrics": {
-          "followers_count": 3160,
+          "followers_count": 3161,
           "following_count": 3610,
-          "tweet_count": 481780,
+          "tweet_count": 481778,
           "listed_count": 12
         },
         "url": "http://t.co/E9nXa9P6fg",
@@ -14497,9 +14676,9 @@
         "profile_image_url": "https://pbs.twimg.com/profile_images/1120993292676628480/MHKZHFHw_normal.png",
         "protected": false,
         "public_metrics": {
-          "followers_count": 586804,
+          "followers_count": 586812,
           "following_count": 646,
-          "tweet_count": 382661,
+          "tweet_count": 382672,
           "listed_count": 9212
         },
         "url": "https://t.co/Qhu5Ty8u0t",
@@ -14559,64 +14738,6 @@
         "verified_type": "none"
       },
       {
-        "id": "29097819",
-        "name": "The Epoch Times",
-        "username": "EpochTimes",
-        "created_at": "2009-04-05T23:54:55+00:00",
-        "description": "Independent, award-winning reporting based on Truth and Tradition. Newsletters: https://t.co/0F3JANwb8P | Watch: https://t.co/M1G2gEVJmq | Play: https://t.co/pDrVrN4Qcy",
-        "entities": {
-          "url": {
-            "urls": [
-              {
-                "start": 0,
-                "end": 23,
-                "url": "https://t.co/MDJ3I7diVl",
-                "expanded_url": "https://www.theepochtimes.com/",
-                "display_url": "theepochtimes.com"
-              }
-            ]
-          },
-          "description": {
-            "urls": [
-              {
-                "start": 80,
-                "end": 103,
-                "url": "https://t.co/0F3JANwb8P",
-                "expanded_url": "http://ept.ms/–Newsletters",
-                "display_url": "ept.ms/–Newsletters"
-              },
-              {
-                "start": 113,
-                "end": 136,
-                "url": "https://t.co/M1G2gEVJmq",
-                "expanded_url": "http://epochtv.com",
-                "display_url": "epochtv.com"
-              },
-              {
-                "start": 145,
-                "end": 168,
-                "url": "https://t.co/pDrVrN4Qcy",
-                "expanded_url": "http://epochfun.com",
-                "display_url": "epochfun.com"
-              }
-            ]
-          }
-        },
-        "location": "New York, USA",
-        "pinned_tweet_id": "1615354395813883905",
-        "profile_image_url": "https://pbs.twimg.com/profile_images/1637675020569780224/aGuAgBKe_normal.jpg",
-        "protected": false,
-        "public_metrics": {
-          "followers_count": 626024,
-          "following_count": 113,
-          "tweet_count": 265298,
-          "listed_count": 3614
-        },
-        "url": "https://t.co/MDJ3I7diVl",
-        "verified": true,
-        "verified_type": "business"
-      },
-      {
         "id": "1379720482417741825",
         "name": "Marcin",
         "username": "Marcin_34m",
@@ -14660,7 +14781,7 @@
         "public_metrics": {
           "followers_count": 62,
           "following_count": 600,
-          "tweet_count": 4945,
+          "tweet_count": 4946,
           "listed_count": 1
         },
         "verified": false,
@@ -14691,9 +14812,9 @@
         "profile_image_url": "https://pbs.twimg.com/profile_images/1637828078469619713/ug6AgsKN_normal.jpg",
         "protected": false,
         "public_metrics": {
-          "followers_count": 42,
+          "followers_count": 43,
           "following_count": 74,
-          "tweet_count": 662,
+          "tweet_count": 666,
           "listed_count": 0
         },
         "verified": false,
@@ -14778,7 +14899,7 @@
         "public_metrics": {
           "followers_count": 144,
           "following_count": 193,
-          "tweet_count": 1609,
+          "tweet_count": 1610,
           "listed_count": 0
         },
         "verified": false,
@@ -14796,7 +14917,7 @@
         "public_metrics": {
           "followers_count": 456,
           "following_count": 28,
-          "tweet_count": 1015159,
+          "tweet_count": 1015190,
           "listed_count": 53
         },
         "verified": false,
@@ -14813,62 +14934,11 @@
         "public_metrics": {
           "followers_count": 62,
           "following_count": 890,
-          "tweet_count": 27880,
+          "tweet_count": 27884,
           "listed_count": 1
         },
         "verified": false,
         "verified_type": "none"
-      },
-      {
-        "id": "19489239",
-        "name": "The Jerusalem Post",
-        "username": "Jerusalem_Post",
-        "created_at": "2009-01-25T14:17:26+00:00",
-        "description": "Israel and world news from the Jewish state's leading and best-selling English newspaper | Newsletter: https://t.co/5UiuB1NXaN | Telegram: https://t.co/D7WI3zun1t…",
-        "entities": {
-          "url": {
-            "urls": [
-              {
-                "start": 0,
-                "end": 23,
-                "url": "https://t.co/Qhu5Ty8u0t",
-                "expanded_url": "http://www.jpost.com",
-                "display_url": "jpost.com"
-              }
-            ]
-          },
-          "description": {
-            "urls": [
-              {
-                "start": 103,
-                "end": 126,
-                "url": "https://t.co/5UiuB1NXaN",
-                "expanded_url": "http://bit.ly/2PuiCZc",
-                "display_url": "bit.ly/2PuiCZc"
-              },
-              {
-                "start": 139,
-                "end": 162,
-                "url": "https://t.co/D7WI3zun1t",
-                "expanded_url": "http://t.me/The_Jerusalem_",
-                "display_url": "t.me/The_Jerusalem_"
-              }
-            ]
-          }
-        },
-        "location": "Israel",
-        "pinned_tweet_id": "1633742614246596611",
-        "profile_image_url": "https://pbs.twimg.com/profile_images/1120993292676628480/MHKZHFHw_normal.png",
-        "protected": false,
-        "public_metrics": {
-          "followers_count": 586804,
-          "following_count": 646,
-          "tweet_count": 382661,
-          "listed_count": 9212
-        },
-        "url": "https://t.co/Qhu5Ty8u0t",
-        "verified": true,
-        "verified_type": "business"
       },
       {
         "id": "1595062627319046144",
@@ -14894,7 +14964,7 @@
         "public_metrics": {
           "followers_count": 28,
           "following_count": 129,
-          "tweet_count": 550,
+          "tweet_count": 554,
           "listed_count": 1
         },
         "url": "https://t.co/0yROtj0rXQ",
@@ -14913,7 +14983,7 @@
         "public_metrics": {
           "followers_count": 351,
           "following_count": 2866,
-          "tweet_count": 351242,
+          "tweet_count": 351319,
           "listed_count": 1
         },
         "verified": false,
@@ -14957,14 +15027,14 @@
           }
         },
         "location": "India",
-        "pinned_tweet_id": "1649012724523839493",
+        "pinned_tweet_id": "1649027432400445441",
         "profile_image_url": "https://pbs.twimg.com/profile_images/1395253672678809601/s-kiJ9xn_normal.png",
         "protected": false,
         "public_metrics": {
-          "followers_count": 6260375,
+          "followers_count": 6260335,
           "following_count": 113,
-          "tweet_count": 1149752,
-          "listed_count": 6881
+          "tweet_count": 1149802,
+          "listed_count": 6880
         },
         "url": "https://t.co/saDvonpTo3",
         "verified": true,
@@ -14980,9 +15050,9 @@
         "profile_image_url": "https://pbs.twimg.com/profile_images/1501504482877886464/bEg-KuS1_normal.jpg",
         "protected": false,
         "public_metrics": {
-          "followers_count": 7426,
+          "followers_count": 7427,
           "following_count": 1389,
-          "tweet_count": 5334,
+          "tweet_count": 5340,
           "listed_count": 62
         },
         "verified": false,
@@ -15001,7 +15071,7 @@
         "public_metrics": {
           "followers_count": 311,
           "following_count": 1262,
-          "tweet_count": 16193,
+          "tweet_count": 16201,
           "listed_count": 6
         },
         "verified": false,
@@ -15045,7 +15115,7 @@
         "public_metrics": {
           "followers_count": 0,
           "following_count": 7,
-          "tweet_count": 4651,
+          "tweet_count": 4663,
           "listed_count": 0
         },
         "url": "https://t.co/HVmTVXESyq",
@@ -15064,7 +15134,7 @@
         "public_metrics": {
           "followers_count": 93,
           "following_count": 781,
-          "tweet_count": 2335,
+          "tweet_count": 2390,
           "listed_count": 0
         },
         "verified": false,
@@ -15081,7 +15151,7 @@
         "profile_image_url": "https://pbs.twimg.com/profile_images/1640769791219875840/lZJjUgkH_normal.jpg",
         "protected": false,
         "public_metrics": {
-          "followers_count": 135,
+          "followers_count": 136,
           "following_count": 405,
           "tweet_count": 316,
           "listed_count": 1
@@ -15127,7 +15197,7 @@
         "protected": false,
         "public_metrics": {
           "followers_count": 941,
-          "following_count": 4064,
+          "following_count": 4065,
           "tweet_count": 9020,
           "listed_count": 4
         },
@@ -15146,27 +15216,8 @@
         "public_metrics": {
           "followers_count": 46,
           "following_count": 139,
-          "tweet_count": 2083,
+          "tweet_count": 2198,
           "listed_count": 0
-        },
-        "verified": false,
-        "verified_type": "none"
-      },
-      {
-        "id": "1517240366667161600",
-        "name": "LA_CASA",
-        "username": "LACASA4218",
-        "created_at": "2022-04-21T20:35:24+00:00",
-        "description": "Amateur golfer, world traveler and lifetime freedom subscriber!\nYou know what you know, you know what you don't know, you don't know what you don't know!",
-        "location": "Santa Monica, CA",
-        "pinned_tweet_id": "1648867045809983488",
-        "profile_image_url": "https://pbs.twimg.com/profile_images/1640769791219875840/lZJjUgkH_normal.jpg",
-        "protected": false,
-        "public_metrics": {
-          "followers_count": 135,
-          "following_count": 405,
-          "tweet_count": 316,
-          "listed_count": 1
         },
         "verified": false,
         "verified_type": "none"
@@ -15181,8 +15232,8 @@
         "protected": false,
         "public_metrics": {
           "followers_count": 22,
-          "following_count": 46,
-          "tweet_count": 5161,
+          "following_count": 44,
+          "tweet_count": 5164,
           "listed_count": 0
         },
         "verified": false,
@@ -15211,29 +15262,11 @@
         "protected": false,
         "public_metrics": {
           "followers_count": 130,
-          "following_count": 260,
-          "tweet_count": 17066,
+          "following_count": 259,
+          "tweet_count": 17069,
           "listed_count": 1
         },
         "url": "https://t.co/olZmezFSzU",
-        "verified": false,
-        "verified_type": "none"
-      },
-      {
-        "id": "1596177244711686144",
-        "name": "Mohammad Jafar Abbas محمد جعفر عباس",
-        "username": "MOHAMMA45237549",
-        "created_at": "2022-11-25T16:21:57+00:00",
-        "description": "Indian Muslim",
-        "location": "Jaunpur, (U.P.) India",
-        "profile_image_url": "https://pbs.twimg.com/profile_images/1596177382297440257/U6R7x4ta_normal.png",
-        "protected": false,
-        "public_metrics": {
-          "followers_count": 419,
-          "following_count": 5006,
-          "tweet_count": 981,
-          "listed_count": 2
-        },
         "verified": false,
         "verified_type": "none"
       },
@@ -15249,7 +15282,7 @@
         "public_metrics": {
           "followers_count": 24,
           "following_count": 44,
-          "tweet_count": 43105,
+          "tweet_count": 43108,
           "listed_count": 32
         },
         "verified": false,
@@ -15335,7 +15368,7 @@
         "public_metrics": {
           "followers_count": 12,
           "following_count": 313,
-          "tweet_count": 1305,
+          "tweet_count": 1313,
           "listed_count": 0
         },
         "url": "https://t.co/tvzidqZzot",
@@ -15360,71 +15393,6 @@
         "verified_type": "none"
       },
       {
-        "id": "10228272",
-        "name": "YouTube",
-        "username": "YouTube",
-        "created_at": "2007-11-13T21:43:46+00:00",
-        "description": "like and subscribe.",
-        "entities": {
-          "url": {
-            "urls": [
-              {
-                "start": 0,
-                "end": 23,
-                "url": "https://t.co/bUisN3YzpE",
-                "expanded_url": "http://youtube.com",
-                "display_url": "youtube.com"
-              }
-            ]
-          }
-        },
-        "location": "San Bruno, CA",
-        "profile_image_url": "https://pbs.twimg.com/profile_images/1427292844612595720/RC1YSvuT_normal.jpg",
-        "protected": false,
-        "public_metrics": {
-          "followers_count": 78891552,
-          "following_count": 1190,
-          "tweet_count": 52814,
-          "listed_count": 80244
-        },
-        "url": "https://t.co/bUisN3YzpE",
-        "verified": true,
-        "verified_type": "business"
-      },
-      {
-        "id": "739866916613988352",
-        "name": "Statecraft",
-        "username": "statecraftdaily",
-        "created_at": "2016-06-06T17:09:53+00:00",
-        "description": "Statecraft is a digital global affairs daily that investigates the relationship between the politics of the Global South and the world at large.",
-        "entities": {
-          "url": {
-            "urls": [
-              {
-                "start": 0,
-                "end": 23,
-                "url": "https://t.co/x9dbEZFUWh",
-                "expanded_url": "https://www.statecraft.co.in/",
-                "display_url": "statecraft.co.in"
-              }
-            ]
-          }
-        },
-        "location": "Mumbai, India",
-        "pinned_tweet_id": "1290248549914087424",
-        "profile_image_url": "https://pbs.twimg.com/profile_images/1284549177809100805/pHrRRPdQ_normal.jpg",
-        "protected": false,
-        "public_metrics": {
-          "followers_count": 17722,
-          "following_count": 1448,
-          "tweet_count": 16056,
-          "listed_count": 28
-        },
-        "url": "https://t.co/x9dbEZFUWh",
-        "verified": true,
-        "verified_type": "blue"
-      },
-      {
         "id": "972555446396403713",
         "name": "yanhuali(澳喜特战旅)",
         "username": "yanhuali2",
@@ -15434,9 +15402,9 @@
         "profile_image_url": "https://pbs.twimg.com/profile_images/1643766137157718016/-xWDCzdn_normal.jpg",
         "protected": false,
         "public_metrics": {
-          "followers_count": 1268,
+          "followers_count": 1267,
           "following_count": 830,
-          "tweet_count": 108808,
+          "tweet_count": 108802,
           "listed_count": 6
         },
         "verified": false,
@@ -15464,7 +15432,7 @@
         "profile_image_url": "https://pbs.twimg.com/profile_images/1353869110304792576/VwsJ24SR_normal.jpg",
         "protected": false,
         "public_metrics": {
-          "followers_count": 92532,
+          "followers_count": 92529,
           "following_count": 437,
           "tweet_count": 3035,
           "listed_count": 60
@@ -15472,9 +15440,324 @@
         "url": "https://t.co/AULJoeI6pQ",
         "verified": false,
         "verified_type": "none"
+      },
+      {
+        "id": "1423622412470390791",
+        "name": "Leilani Athenaire",
+        "username": "LeilaniAthenai1",
+        "created_at": "2021-08-06T12:31:33+00:00",
+        "description": "U.S. citizen raised in Japan & in the U.S. with a half sister \nEnglish's our 2nd language\n#NoNukes #脱原発 よろしくお願いします\nSee our blog↓ when we're suspended again.",
+        "entities": {
+          "url": {
+            "urls": [
+              {
+                "start": 0,
+                "end": 23,
+                "url": "https://t.co/HNTwd2eYdT",
+                "expanded_url": "https://peaceandharmony.seesaa.net/",
+                "display_url": "peaceandharmony.seesaa.net"
+              }
+            ]
+          },
+          "description": {
+            "hashtags": [
+              {
+                "start": 90,
+                "end": 98,
+                "tag": "NoNukes"
+              },
+              {
+                "start": 99,
+                "end": 103,
+                "tag": "脱原発"
+              }
+            ]
+          }
+        },
+        "location": "Planet Earth",
+        "pinned_tweet_id": "1424886613612535815",
+        "profile_image_url": "https://pbs.twimg.com/profile_images/1429785622328217617/b7oc95o7_normal.jpg",
+        "protected": false,
+        "public_metrics": {
+          "followers_count": 368,
+          "following_count": 571,
+          "tweet_count": 30077,
+          "listed_count": 6
+        },
+        "url": "https://t.co/HNTwd2eYdT",
+        "verified": false,
+        "verified_type": "none"
+      },
+      {
+        "id": "1269090759564832770",
+        "name": "巴顿（George Patton)",
+        "username": "Patton0604",
+        "created_at": "2020-06-06T02:16:40+00:00",
+        "description": "修身 齐家 治国 平天下 NEW FEDERAL STATE OF CHINA",
+        "entities": {
+          "url": {
+            "urls": [
+              {
+                "start": 0,
+                "end": 23,
+                "url": "https://t.co/pewrm497Rc",
+                "expanded_url": "http://www.freemilesguo.com",
+                "display_url": "freemilesguo.com"
+              }
+            ]
+          }
+        },
+        "pinned_tweet_id": "1440543667144458240",
+        "profile_image_url": "https://pbs.twimg.com/profile_images/1411920982093316102/0M_vG6FA_normal.jpg",
+        "protected": false,
+        "public_metrics": {
+          "followers_count": 24101,
+          "following_count": 780,
+          "tweet_count": 11878,
+          "listed_count": 41
+        },
+        "url": "https://t.co/pewrm497Rc",
+        "verified": true,
+        "verified_type": "blue"
+      },
+      {
+        "id": "1517240366667161600",
+        "name": "LA_CASA",
+        "username": "LACASA4218",
+        "created_at": "2022-04-21T20:35:24+00:00",
+        "description": "Amateur golfer, world traveler and lifetime freedom subscriber!\nYou know what you know, you know what you don't know, you don't know what you don't know!",
+        "location": "Santa Monica, CA",
+        "pinned_tweet_id": "1648867045809983488",
+        "profile_image_url": "https://pbs.twimg.com/profile_images/1640769791219875840/lZJjUgkH_normal.jpg",
+        "protected": false,
+        "public_metrics": {
+          "followers_count": 136,
+          "following_count": 405,
+          "tweet_count": 316,
+          "listed_count": 1
+        },
+        "verified": false,
+        "verified_type": "none"
+      },
+      {
+        "id": "1582239128925503489",
+        "name": "A Time News",
+        "username": "RealATimeNews",
+        "created_at": "2022-10-18T05:17:04+00:00",
+        "description": "On point.",
+        "entities": {
+          "url": {
+            "urls": [
+              {
+                "start": 0,
+                "end": 23,
+                "url": "https://t.co/tHliAklqUr",
+                "expanded_url": "http://atimenews.net",
+                "display_url": "atimenews.net"
+              }
+            ]
+          }
+        },
+        "location": "Philippines",
+        "profile_image_url": "https://pbs.twimg.com/profile_images/1625762729616347136/lHBAXDc__normal.jpg",
+        "protected": false,
+        "public_metrics": {
+          "followers_count": 14,
+          "following_count": 0,
+          "tweet_count": 14891,
+          "listed_count": 0
+        },
+        "url": "https://t.co/tHliAklqUr",
+        "verified": false,
+        "verified_type": "none"
       }
     ],
     "tweets": [
+      {
+        "id": "1649036032292077568",
+        "text": "RT @ChinasaNworu: Missile ships of #Russia’s Pacific Fleet fired Moskit cruise missiles at a mock enemy target in the Sea of #Japan. @real_…",
+        "edit_history_tweet_ids": [
+          "1649036032292077568"
+        ],
+        "author_id": "1568703173119860736",
+        "lang": "en",
+        "conversation_id": "1649036032292077568",
+        "created_at": "2023-04-20T13:03:22+00:00",
+        "edit_controls": {
+          "edits_remaining": 5,
+          "is_edit_eligible": false,
+          "editable_until": "2023-04-20T13:33:22+00:00"
+        },
+        "entities": {
+          "hashtags": [
+            {
+              "start": 35,
+              "end": 42,
+              "tag": "Russia"
+            },
+            {
+              "start": 125,
+              "end": 131,
+              "tag": "Japan"
+            }
+          ],
+          "mentions": [
+            {
+              "start": 3,
+              "end": 16,
+              "username": "ChinasaNworu",
+              "id": "3252528612"
+            }
+          ]
+        },
+        "possibly_sensitive": false,
+        "public_metrics": {
+          "impression_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "reply_count": 0,
+          "retweet_count": 683
+        },
+        "referenced_tweets": [
+          {
+            "type": "retweeted",
+            "id": "1640635965390700549"
+          }
+        ],
+        "reply_settings": "everyone"
+      },
+      {
+        "id": "1640635965390700549",
+        "text": "Missile ships of #Russia’s Pacific Fleet fired Moskit cruise missiles at a mock enemy target in the Sea of #Japan. @real_IpobDOS @UNWatch @ForeignAffairs @ForeignPolicy @GoitaAssimi @USinNigeria https://t.co/Oik45zxS1b",
+        "edit_history_tweet_ids": [
+          "1640635965390700549"
+        ],
+        "author_id": "3252528612",
+        "lang": "en",
+        "conversation_id": "1640635965390700549",
+        "created_at": "2023-03-28T08:44:30+00:00",
+        "edit_controls": {
+          "edits_remaining": 5,
+          "is_edit_eligible": true,
+          "editable_until": "2023-03-28T09:14:30+00:00"
+        },
+        "entities": {
+          "annotations": [
+            {
+              "start": 18,
+              "end": 23,
+              "probability": 0.9629,
+              "type": "Place",
+              "normalized_text": "Russia"
+            },
+            {
+              "start": 27,
+              "end": 39,
+              "probability": 0.5353,
+              "type": "Place",
+              "normalized_text": "Pacific Fleet"
+            },
+            {
+              "start": 47,
+              "end": 52,
+              "probability": 0.3889,
+              "type": "Other",
+              "normalized_text": "Moskit"
+            },
+            {
+              "start": 108,
+              "end": 112,
+              "probability": 0.9365,
+              "type": "Place",
+              "normalized_text": "Japan"
+            }
+          ],
+          "hashtags": [
+            {
+              "start": 17,
+              "end": 24,
+              "tag": "Russia"
+            },
+            {
+              "start": 107,
+              "end": 113,
+              "tag": "Japan"
+            }
+          ],
+          "mentions": [
+            {
+              "start": 115,
+              "end": 128,
+              "username": "real_IpobDOS",
+              "id": "987317488374329347"
+            },
+            {
+              "start": 129,
+              "end": 137,
+              "username": "UNWatch",
+              "id": "83435676"
+            },
+            {
+              "start": 138,
+              "end": 153,
+              "username": "ForeignAffairs",
+              "id": "21114659"
+            },
+            {
+              "start": 154,
+              "end": 168,
+              "username": "ForeignPolicy",
+              "id": "26792275"
+            },
+            {
+              "start": 169,
+              "end": 181,
+              "username": "GoitaAssimi",
+              "id": "1354776830608347139"
+            },
+            {
+              "start": 182,
+              "end": 194,
+              "username": "USinNigeria",
+              "id": "69281027"
+            }
+          ],
+          "urls": [
+            {
+              "start": 195,
+              "end": 218,
+              "url": "https://t.co/Oik45zxS1b",
+              "expanded_url": "https://www.aljazeera.com/news/2023/3/28/russia-test-fires-supersonic-missiles-at-target-in-sea-of-japan",
+              "display_url": "aljazeera.com/news/2023/3/28…",
+              "status": "200",
+              "title": "Russia test fires supersonic missiles at target in Sea of Japan",
+              "description": "Missile ships of Russia’s Pacific Fleet fired Moskit cruise missiles at a mock enemy target in the Sea of Japan.",
+              "unwound_url": "https://www.aljazeera.com/news/2023/3/28/russia-test-fires-supersonic-missiles-at-target-in-sea-of-japan",
+              "images": [
+                {
+                  "url": "https://pbs.twimg.com/news_img/1646174798936961026/oU8sqjg2?format=jpg&name=orig",
+                  "width": 1200,
+                  "height": 675
+                },
+                {
+                  "url": "https://pbs.twimg.com/news_img/1646174798936961026/oU8sqjg2?format=jpg&name=150x150",
+                  "width": 150,
+                  "height": 150
+                }
+              ]
+            }
+          ]
+        },
+        "possibly_sensitive": false,
+        "public_metrics": {
+          "impression_count": 5290,
+          "like_count": 441,
+          "quote_count": 3,
+          "reply_count": 2,
+          "retweet_count": 683
+        },
+        "reply_settings": "everyone"
+      },
       {
         "id": "1648980229258612736",
         "text": "Test.\n#cat #shintoshrine #chigasaki #shonan #kanagawa #japan #neko #azalea #wisteria #猫 #第六天神社 #神社 #茅ヶ崎 #湘南 #神奈川 #神社猫 #つつじ #躑躅 #藤\nhttps://t.co/RIto5mNQss",
@@ -15719,7 +16002,7 @@
         },
         "possibly_sensitive": false,
         "public_metrics": {
-          "impression_count": 30,
+          "impression_count": 39,
           "like_count": 1,
           "quote_count": 0,
           "reply_count": 0,
@@ -15915,7 +16198,7 @@
         },
         "possibly_sensitive": false,
         "public_metrics": {
-          "impression_count": 25,
+          "impression_count": 26,
           "like_count": 0,
           "quote_count": 0,
           "reply_count": 0,
@@ -16010,7 +16293,7 @@
         },
         "possibly_sensitive": false,
         "public_metrics": {
-          "impression_count": 361,
+          "impression_count": 363,
           "like_count": 0,
           "quote_count": 0,
           "reply_count": 0,
@@ -16109,7 +16392,7 @@
         },
         "possibly_sensitive": false,
         "public_metrics": {
-          "impression_count": 4311,
+          "impression_count": 4367,
           "like_count": 50,
           "quote_count": 4,
           "reply_count": 5,
@@ -16308,7 +16591,7 @@
         },
         "possibly_sensitive": false,
         "public_metrics": {
-          "impression_count": 309,
+          "impression_count": 318,
           "like_count": 9,
           "quote_count": 0,
           "reply_count": 1,
@@ -16588,14 +16871,14 @@
             {
               "start": 260,
               "end": 264,
-              "probability": 0.7855,
+              "probability": 0.7945,
               "type": "Place",
               "normalized_text": "Japan"
             },
             {
               "start": 267,
               "end": 269,
-              "probability": 0.791,
+              "probability": 0.8014,
               "type": "Place",
               "normalized_text": "USA"
             }
@@ -16771,6 +17054,36 @@
           "editable_until": "2023-04-19T12:54:17+00:00"
         },
         "entities": {
+          "annotations": [
+            {
+              "start": 36,
+              "end": 41,
+              "probability": 0.9591,
+              "type": "Place",
+              "normalized_text": "Russia"
+            },
+            {
+              "start": 45,
+              "end": 57,
+              "probability": 0.6369,
+              "type": "Place",
+              "normalized_text": "Pacific Fleet"
+            },
+            {
+              "start": 65,
+              "end": 70,
+              "probability": 0.3778,
+              "type": "Other",
+              "normalized_text": "Moskit"
+            },
+            {
+              "start": 126,
+              "end": 130,
+              "probability": 0.9091,
+              "type": "Place",
+              "normalized_text": "Japan"
+            }
+          ],
           "hashtags": [
             {
               "start": 35,
@@ -16798,7 +17111,7 @@
           "like_count": 0,
           "quote_count": 0,
           "reply_count": 0,
-          "retweet_count": 682
+          "retweet_count": 683
         },
         "referenced_tweets": [
           {
@@ -16806,138 +17119,6 @@
             "id": "1640635965390700549"
           }
         ],
-        "reply_settings": "everyone"
-      },
-      {
-        "id": "1640635965390700549",
-        "text": "Missile ships of #Russia’s Pacific Fleet fired Moskit cruise missiles at a mock enemy target in the Sea of #Japan. @real_IpobDOS @UNWatch @ForeignAffairs @ForeignPolicy @GoitaAssimi @USinNigeria https://t.co/Oik45zxS1b",
-        "edit_history_tweet_ids": [
-          "1640635965390700549"
-        ],
-        "author_id": "3252528612",
-        "lang": "en",
-        "conversation_id": "1640635965390700549",
-        "created_at": "2023-03-28T08:44:30+00:00",
-        "edit_controls": {
-          "edits_remaining": 5,
-          "is_edit_eligible": true,
-          "editable_until": "2023-03-28T09:14:30+00:00"
-        },
-        "entities": {
-          "annotations": [
-            {
-              "start": 18,
-              "end": 23,
-              "probability": 0.9629,
-              "type": "Place",
-              "normalized_text": "Russia"
-            },
-            {
-              "start": 27,
-              "end": 39,
-              "probability": 0.5353,
-              "type": "Place",
-              "normalized_text": "Pacific Fleet"
-            },
-            {
-              "start": 47,
-              "end": 52,
-              "probability": 0.3889,
-              "type": "Other",
-              "normalized_text": "Moskit"
-            },
-            {
-              "start": 108,
-              "end": 112,
-              "probability": 0.9365,
-              "type": "Place",
-              "normalized_text": "Japan"
-            }
-          ],
-          "hashtags": [
-            {
-              "start": 17,
-              "end": 24,
-              "tag": "Russia"
-            },
-            {
-              "start": 107,
-              "end": 113,
-              "tag": "Japan"
-            }
-          ],
-          "mentions": [
-            {
-              "start": 115,
-              "end": 128,
-              "username": "real_IpobDOS",
-              "id": "987317488374329347"
-            },
-            {
-              "start": 129,
-              "end": 137,
-              "username": "UNWatch",
-              "id": "83435676"
-            },
-            {
-              "start": 138,
-              "end": 153,
-              "username": "ForeignAffairs",
-              "id": "21114659"
-            },
-            {
-              "start": 154,
-              "end": 168,
-              "username": "ForeignPolicy",
-              "id": "26792275"
-            },
-            {
-              "start": 169,
-              "end": 181,
-              "username": "GoitaAssimi",
-              "id": "1354776830608347139"
-            },
-            {
-              "start": 182,
-              "end": 194,
-              "username": "USinNigeria",
-              "id": "69281027"
-            }
-          ],
-          "urls": [
-            {
-              "start": 195,
-              "end": 218,
-              "url": "https://t.co/Oik45zxS1b",
-              "expanded_url": "https://www.aljazeera.com/news/2023/3/28/russia-test-fires-supersonic-missiles-at-target-in-sea-of-japan",
-              "display_url": "aljazeera.com/news/2023/3/28…",
-              "status": "200",
-              "title": "Russia test fires supersonic missiles at target in Sea of Japan",
-              "description": "Missile ships of Russia’s Pacific Fleet fired Moskit cruise missiles at a mock enemy target in the Sea of Japan.",
-              "unwound_url": "https://www.aljazeera.com/news/2023/3/28/russia-test-fires-supersonic-missiles-at-target-in-sea-of-japan",
-              "images": [
-                {
-                  "url": "https://pbs.twimg.com/news_img/1646174798936961026/oU8sqjg2?format=jpg&name=orig",
-                  "width": 1200,
-                  "height": 675
-                },
-                {
-                  "url": "https://pbs.twimg.com/news_img/1646174798936961026/oU8sqjg2?format=jpg&name=150x150",
-                  "width": 150,
-                  "height": 150
-                }
-              ]
-            }
-          ]
-        },
-        "possibly_sensitive": false,
-        "public_metrics": {
-          "impression_count": 5288,
-          "like_count": 440,
-          "quote_count": 3,
-          "reply_count": 2,
-          "retweet_count": 682
-        },
         "reply_settings": "everyone"
       },
       {
@@ -17076,7 +17257,7 @@
         },
         "possibly_sensitive": false,
         "public_metrics": {
-          "impression_count": 467,
+          "impression_count": 468,
           "like_count": 7,
           "quote_count": 0,
           "reply_count": 0,
@@ -17249,76 +17430,11 @@
         },
         "possibly_sensitive": false,
         "public_metrics": {
-          "impression_count": 7,
+          "impression_count": 8,
           "like_count": 0,
           "quote_count": 0,
           "reply_count": 0,
           "retweet_count": 0
-        },
-        "reply_settings": "everyone"
-      },
-      {
-        "id": "1648617501864099840",
-        "text": "#Japan | Test-firing of a Japan Ground Self-Defense Forces Type 12 anti-ship missile. 🇯🇵 https://t.co/DZ85MOzD1w",
-        "edit_history_tweet_ids": [
-          "1648617501864099840"
-        ],
-        "attachments": {
-          "media_keys": [
-            "3_1648617422121996290"
-          ]
-        },
-        "author_id": "1262633850179641345",
-        "lang": "en",
-        "conversation_id": "1648617501864099840",
-        "created_at": "2023-04-19T09:20:16+00:00",
-        "edit_controls": {
-          "edits_remaining": 5,
-          "is_edit_eligible": true,
-          "editable_until": "2023-04-19T09:50:16+00:00"
-        },
-        "entities": {
-          "annotations": [
-            {
-              "start": 1,
-              "end": 5,
-              "probability": 0.985,
-              "type": "Place",
-              "normalized_text": "Japan"
-            },
-            {
-              "start": 26,
-              "end": 37,
-              "probability": 0.4905,
-              "type": "Other",
-              "normalized_text": "Japan Ground"
-            }
-          ],
-          "hashtags": [
-            {
-              "start": 0,
-              "end": 6,
-              "tag": "Japan"
-            }
-          ],
-          "urls": [
-            {
-              "start": 89,
-              "end": 112,
-              "url": "https://t.co/DZ85MOzD1w",
-              "expanded_url": "https://twitter.com/Defense_Talks/status/1648617501864099840/photo/1",
-              "display_url": "pic.twitter.com/DZ85MOzD1w",
-              "media_key": "3_1648617422121996290"
-            }
-          ]
-        },
-        "possibly_sensitive": false,
-        "public_metrics": {
-          "impression_count": 467,
-          "like_count": 7,
-          "quote_count": 0,
-          "reply_count": 0,
-          "retweet_count": 1
         },
         "reply_settings": "everyone"
       },
@@ -17632,7 +17748,7 @@
         },
         "possibly_sensitive": false,
         "public_metrics": {
-          "impression_count": 12,
+          "impression_count": 13,
           "like_count": 0,
           "quote_count": 0,
           "reply_count": 0,
@@ -17729,148 +17845,6 @@
           {
             "type": "retweeted",
             "id": "1648559682615750656"
-          }
-        ],
-        "reply_settings": "everyone"
-      },
-      {
-        "id": "1648559682615750656",
-        "text": "Its a chain reaction. #NorthKorea will respond with missile test &amp;  #US #ROK &amp; #Japan will cry foul, conduct more drills like this, will  be responded by #NorthKorea again. Spiral will continue &amp; #China will watch happily &amp; benefit most. Threat for #SouthKorea #Japan will remain. https://t.co/R1LsxWUKKO",
-        "edit_history_tweet_ids": [
-          "1648559682615750656"
-        ],
-        "author_id": "3648463632",
-        "lang": "en",
-        "conversation_id": "1648559682615750656",
-        "created_at": "2023-04-19T05:30:31+00:00",
-        "edit_controls": {
-          "edits_remaining": 5,
-          "is_edit_eligible": true,
-          "editable_until": "2023-04-19T06:00:31+00:00"
-        },
-        "entities": {
-          "annotations": [
-            {
-              "start": 23,
-              "end": 32,
-              "probability": 0.9363,
-              "type": "Place",
-              "normalized_text": "NorthKorea"
-            },
-            {
-              "start": 73,
-              "end": 74,
-              "probability": 0.9751,
-              "type": "Place",
-              "normalized_text": "US"
-            },
-            {
-              "start": 77,
-              "end": 79,
-              "probability": 0.4886,
-              "type": "Place",
-              "normalized_text": "ROK"
-            },
-            {
-              "start": 88,
-              "end": 92,
-              "probability": 0.9877,
-              "type": "Place",
-              "normalized_text": "Japan"
-            },
-            {
-              "start": 163,
-              "end": 172,
-              "probability": 0.9526,
-              "type": "Place",
-              "normalized_text": "NorthKorea"
-            },
-            {
-              "start": 209,
-              "end": 213,
-              "probability": 0.9839,
-              "type": "Place",
-              "normalized_text": "China"
-            },
-            {
-              "start": 266,
-              "end": 275,
-              "probability": 0.9853,
-              "type": "Place",
-              "normalized_text": "SouthKorea"
-            },
-            {
-              "start": 278,
-              "end": 282,
-              "probability": 0.9852,
-              "type": "Place",
-              "normalized_text": "Japan"
-            }
-          ],
-          "hashtags": [
-            {
-              "start": 22,
-              "end": 33,
-              "tag": "NorthKorea"
-            },
-            {
-              "start": 72,
-              "end": 75,
-              "tag": "US"
-            },
-            {
-              "start": 76,
-              "end": 80,
-              "tag": "ROK"
-            },
-            {
-              "start": 87,
-              "end": 93,
-              "tag": "Japan"
-            },
-            {
-              "start": 162,
-              "end": 173,
-              "tag": "NorthKorea"
-            },
-            {
-              "start": 208,
-              "end": 214,
-              "tag": "China"
-            },
-            {
-              "start": 265,
-              "end": 276,
-              "tag": "SouthKorea"
-            },
-            {
-              "start": 277,
-              "end": 283,
-              "tag": "Japan"
-            }
-          ],
-          "urls": [
-            {
-              "start": 297,
-              "end": 320,
-              "url": "https://t.co/R1LsxWUKKO",
-              "expanded_url": "https://twitter.com/IndoPac_Info/status/1648541353616310273",
-              "display_url": "twitter.com/IndoPac_Info/s…"
-            }
-          ]
-        },
-        "possibly_sensitive": false,
-        "public_metrics": {
-          "impression_count": 309,
-          "like_count": 9,
-          "quote_count": 0,
-          "reply_count": 1,
-          "retweet_count": 2
-        },
-        "referenced_tweets": [
-          {
-            "type": "quoted",
-            "id": "1648541353616310273"
           }
         ],
         "reply_settings": "everyone"
@@ -18028,7 +18002,7 @@
         },
         "possibly_sensitive": false,
         "public_metrics": {
-          "impression_count": 9941,
+          "impression_count": 9980,
           "like_count": 158,
           "quote_count": 2,
           "reply_count": 2,
@@ -18105,115 +18079,6 @@
           "quote_count": 0,
           "reply_count": 0,
           "retweet_count": 1
-        },
-        "reply_settings": "everyone"
-      },
-      {
-        "id": "1648303577893412865",
-        "text": "#Dolphin #Taiji #Japan #toxicmercurylevels \n\nJapan’s ‘toxic’ dolphin meat contains mercury☠️ up to 100 times safe level, test shows.\nExclusive: Conservation group @ActForDolphins has lodged a complaint with police, demanding the meat be removed from sale.\nhttps://t.co/S22vvJYwOC https://t.co/lbzZSWsGCh",
-        "edit_history_tweet_ids": [
-          "1648303577893412865"
-        ],
-        "attachments": {
-          "media_keys": [
-            "3_1648303573233442816"
-          ]
-        },
-        "author_id": "1070015282385743872",
-        "lang": "en",
-        "conversation_id": "1648303577893412865",
-        "created_at": "2023-04-18T12:32:51+00:00",
-        "edit_controls": {
-          "edits_remaining": 5,
-          "is_edit_eligible": true,
-          "editable_until": "2023-04-18T13:02:51+00:00"
-        },
-        "entities": {
-          "annotations": [
-            {
-              "start": 1,
-              "end": 7,
-              "probability": 0.3477,
-              "type": "Other",
-              "normalized_text": "Dolphin"
-            },
-            {
-              "start": 10,
-              "end": 14,
-              "probability": 0.835,
-              "type": "Place",
-              "normalized_text": "Taiji"
-            },
-            {
-              "start": 17,
-              "end": 21,
-              "probability": 0.9715,
-              "type": "Place",
-              "normalized_text": "Japan"
-            },
-            {
-              "start": 45,
-              "end": 49,
-              "probability": 0.9636,
-              "type": "Place",
-              "normalized_text": "Japan"
-            }
-          ],
-          "hashtags": [
-            {
-              "start": 0,
-              "end": 8,
-              "tag": "Dolphin"
-            },
-            {
-              "start": 9,
-              "end": 15,
-              "tag": "Taiji"
-            },
-            {
-              "start": 16,
-              "end": 22,
-              "tag": "Japan"
-            },
-            {
-              "start": 23,
-              "end": 42,
-              "tag": "toxicmercurylevels"
-            }
-          ],
-          "mentions": [
-            {
-              "start": 163,
-              "end": 178,
-              "username": "ActForDolphins",
-              "id": "887663300116271104"
-            }
-          ],
-          "urls": [
-            {
-              "start": 256,
-              "end": 279,
-              "url": "https://t.co/S22vvJYwOC",
-              "expanded_url": "https://www.theguardian.com/world/2023/apr/18/japans-toxic-dolphin-meat-contains-mercury-up-to-100-times-safe-level-test-shows",
-              "display_url": "theguardian.com/world/2023/apr…"
-            },
-            {
-              "start": 280,
-              "end": 303,
-              "url": "https://t.co/lbzZSWsGCh",
-              "expanded_url": "https://twitter.com/Petbunny4/status/1648303577893412865/photo/1",
-              "display_url": "pic.twitter.com/lbzZSWsGCh",
-              "media_key": "3_1648303573233442816"
-            }
-          ]
-        },
-        "possibly_sensitive": true,
-        "public_metrics": {
-          "impression_count": 72,
-          "like_count": 4,
-          "quote_count": 0,
-          "reply_count": 0,
-          "retweet_count": 6
         },
         "reply_settings": "everyone"
       },
@@ -18703,120 +18568,11 @@
         },
         "possibly_sensitive": false,
         "public_metrics": {
-          "impression_count": 89,
+          "impression_count": 90,
           "like_count": 1,
           "quote_count": 0,
           "reply_count": 0,
           "retweet_count": 0
-        },
-        "reply_settings": "everyone"
-      },
-      {
-        "id": "1648303577893412865",
-        "text": "#Dolphin #Taiji #Japan #toxicmercurylevels \n\nJapan’s ‘toxic’ dolphin meat contains mercury☠️ up to 100 times safe level, test shows.\nExclusive: Conservation group @ActForDolphins has lodged a complaint with police, demanding the meat be removed from sale.\nhttps://t.co/S22vvJYwOC https://t.co/lbzZSWsGCh",
-        "edit_history_tweet_ids": [
-          "1648303577893412865"
-        ],
-        "attachments": {
-          "media_keys": [
-            "3_1648303573233442816"
-          ]
-        },
-        "author_id": "1070015282385743872",
-        "lang": "en",
-        "conversation_id": "1648303577893412865",
-        "created_at": "2023-04-18T12:32:51+00:00",
-        "edit_controls": {
-          "edits_remaining": 5,
-          "is_edit_eligible": true,
-          "editable_until": "2023-04-18T13:02:51+00:00"
-        },
-        "entities": {
-          "annotations": [
-            {
-              "start": 1,
-              "end": 7,
-              "probability": 0.3477,
-              "type": "Other",
-              "normalized_text": "Dolphin"
-            },
-            {
-              "start": 10,
-              "end": 14,
-              "probability": 0.835,
-              "type": "Place",
-              "normalized_text": "Taiji"
-            },
-            {
-              "start": 17,
-              "end": 21,
-              "probability": 0.9715,
-              "type": "Place",
-              "normalized_text": "Japan"
-            },
-            {
-              "start": 45,
-              "end": 49,
-              "probability": 0.9636,
-              "type": "Place",
-              "normalized_text": "Japan"
-            }
-          ],
-          "hashtags": [
-            {
-              "start": 0,
-              "end": 8,
-              "tag": "Dolphin"
-            },
-            {
-              "start": 9,
-              "end": 15,
-              "tag": "Taiji"
-            },
-            {
-              "start": 16,
-              "end": 22,
-              "tag": "Japan"
-            },
-            {
-              "start": 23,
-              "end": 42,
-              "tag": "toxicmercurylevels"
-            }
-          ],
-          "mentions": [
-            {
-              "start": 163,
-              "end": 178,
-              "username": "ActForDolphins",
-              "id": "887663300116271104"
-            }
-          ],
-          "urls": [
-            {
-              "start": 256,
-              "end": 279,
-              "url": "https://t.co/S22vvJYwOC",
-              "expanded_url": "https://www.theguardian.com/world/2023/apr/18/japans-toxic-dolphin-meat-contains-mercury-up-to-100-times-safe-level-test-shows",
-              "display_url": "theguardian.com/world/2023/apr…"
-            },
-            {
-              "start": 280,
-              "end": 303,
-              "url": "https://t.co/lbzZSWsGCh",
-              "expanded_url": "https://twitter.com/Petbunny4/status/1648303577893412865/photo/1",
-              "display_url": "pic.twitter.com/lbzZSWsGCh",
-              "media_key": "3_1648303573233442816"
-            }
-          ]
-        },
-        "possibly_sensitive": true,
-        "public_metrics": {
-          "impression_count": 72,
-          "like_count": 4,
-          "quote_count": 0,
-          "reply_count": 0,
-          "retweet_count": 6
         },
         "reply_settings": "everyone"
       },
@@ -19509,115 +19265,6 @@
         "reply_settings": "everyone"
       },
       {
-        "id": "1648303577893412865",
-        "text": "#Dolphin #Taiji #Japan #toxicmercurylevels \n\nJapan’s ‘toxic’ dolphin meat contains mercury☠️ up to 100 times safe level, test shows.\nExclusive: Conservation group @ActForDolphins has lodged a complaint with police, demanding the meat be removed from sale.\nhttps://t.co/S22vvJYwOC https://t.co/lbzZSWsGCh",
-        "edit_history_tweet_ids": [
-          "1648303577893412865"
-        ],
-        "attachments": {
-          "media_keys": [
-            "3_1648303573233442816"
-          ]
-        },
-        "author_id": "1070015282385743872",
-        "lang": "en",
-        "conversation_id": "1648303577893412865",
-        "created_at": "2023-04-18T12:32:51+00:00",
-        "edit_controls": {
-          "edits_remaining": 5,
-          "is_edit_eligible": true,
-          "editable_until": "2023-04-18T13:02:51+00:00"
-        },
-        "entities": {
-          "annotations": [
-            {
-              "start": 1,
-              "end": 7,
-              "probability": 0.3477,
-              "type": "Other",
-              "normalized_text": "Dolphin"
-            },
-            {
-              "start": 10,
-              "end": 14,
-              "probability": 0.835,
-              "type": "Place",
-              "normalized_text": "Taiji"
-            },
-            {
-              "start": 17,
-              "end": 21,
-              "probability": 0.9715,
-              "type": "Place",
-              "normalized_text": "Japan"
-            },
-            {
-              "start": 45,
-              "end": 49,
-              "probability": 0.9636,
-              "type": "Place",
-              "normalized_text": "Japan"
-            }
-          ],
-          "hashtags": [
-            {
-              "start": 0,
-              "end": 8,
-              "tag": "Dolphin"
-            },
-            {
-              "start": 9,
-              "end": 15,
-              "tag": "Taiji"
-            },
-            {
-              "start": 16,
-              "end": 22,
-              "tag": "Japan"
-            },
-            {
-              "start": 23,
-              "end": 42,
-              "tag": "toxicmercurylevels"
-            }
-          ],
-          "mentions": [
-            {
-              "start": 163,
-              "end": 178,
-              "username": "ActForDolphins",
-              "id": "887663300116271104"
-            }
-          ],
-          "urls": [
-            {
-              "start": 256,
-              "end": 279,
-              "url": "https://t.co/S22vvJYwOC",
-              "expanded_url": "https://www.theguardian.com/world/2023/apr/18/japans-toxic-dolphin-meat-contains-mercury-up-to-100-times-safe-level-test-shows",
-              "display_url": "theguardian.com/world/2023/apr…"
-            },
-            {
-              "start": 280,
-              "end": 303,
-              "url": "https://t.co/lbzZSWsGCh",
-              "expanded_url": "https://twitter.com/Petbunny4/status/1648303577893412865/photo/1",
-              "display_url": "pic.twitter.com/lbzZSWsGCh",
-              "media_key": "3_1648303573233442816"
-            }
-          ]
-        },
-        "possibly_sensitive": true,
-        "public_metrics": {
-          "impression_count": 72,
-          "like_count": 4,
-          "quote_count": 0,
-          "reply_count": 0,
-          "retweet_count": 6
-        },
-        "reply_settings": "everyone"
-      },
-      {
         "id": "1648293098148057089",
         "text": "RT @ChinasaNworu: Missile ships of #Russia’s Pacific Fleet fired Moskit cruise missiles at a mock enemy target in the Sea of #Japan. @real_…",
         "edit_history_tweet_ids": [
@@ -19690,7 +19337,7 @@
           "like_count": 0,
           "quote_count": 0,
           "reply_count": 0,
-          "retweet_count": 682
+          "retweet_count": 683
         },
         "referenced_tweets": [
           {
@@ -19698,138 +19345,6 @@
             "id": "1640635965390700549"
           }
         ],
-        "reply_settings": "everyone"
-      },
-      {
-        "id": "1640635965390700549",
-        "text": "Missile ships of #Russia’s Pacific Fleet fired Moskit cruise missiles at a mock enemy target in the Sea of #Japan. @real_IpobDOS @UNWatch @ForeignAffairs @ForeignPolicy @GoitaAssimi @USinNigeria https://t.co/Oik45zxS1b",
-        "edit_history_tweet_ids": [
-          "1640635965390700549"
-        ],
-        "author_id": "3252528612",
-        "lang": "en",
-        "conversation_id": "1640635965390700549",
-        "created_at": "2023-03-28T08:44:30+00:00",
-        "edit_controls": {
-          "edits_remaining": 5,
-          "is_edit_eligible": true,
-          "editable_until": "2023-03-28T09:14:30+00:00"
-        },
-        "entities": {
-          "annotations": [
-            {
-              "start": 18,
-              "end": 23,
-              "probability": 0.9629,
-              "type": "Place",
-              "normalized_text": "Russia"
-            },
-            {
-              "start": 27,
-              "end": 39,
-              "probability": 0.5353,
-              "type": "Place",
-              "normalized_text": "Pacific Fleet"
-            },
-            {
-              "start": 47,
-              "end": 52,
-              "probability": 0.3889,
-              "type": "Other",
-              "normalized_text": "Moskit"
-            },
-            {
-              "start": 108,
-              "end": 112,
-              "probability": 0.9365,
-              "type": "Place",
-              "normalized_text": "Japan"
-            }
-          ],
-          "hashtags": [
-            {
-              "start": 17,
-              "end": 24,
-              "tag": "Russia"
-            },
-            {
-              "start": 107,
-              "end": 113,
-              "tag": "Japan"
-            }
-          ],
-          "mentions": [
-            {
-              "start": 115,
-              "end": 128,
-              "username": "real_IpobDOS",
-              "id": "987317488374329347"
-            },
-            {
-              "start": 129,
-              "end": 137,
-              "username": "UNWatch",
-              "id": "83435676"
-            },
-            {
-              "start": 138,
-              "end": 153,
-              "username": "ForeignAffairs",
-              "id": "21114659"
-            },
-            {
-              "start": 154,
-              "end": 168,
-              "username": "ForeignPolicy",
-              "id": "26792275"
-            },
-            {
-              "start": 169,
-              "end": 181,
-              "username": "GoitaAssimi",
-              "id": "1354776830608347139"
-            },
-            {
-              "start": 182,
-              "end": 194,
-              "username": "USinNigeria",
-              "id": "69281027"
-            }
-          ],
-          "urls": [
-            {
-              "start": 195,
-              "end": 218,
-              "url": "https://t.co/Oik45zxS1b",
-              "expanded_url": "https://www.aljazeera.com/news/2023/3/28/russia-test-fires-supersonic-missiles-at-target-in-sea-of-japan",
-              "display_url": "aljazeera.com/news/2023/3/28…",
-              "status": "200",
-              "title": "Russia test fires supersonic missiles at target in Sea of Japan",
-              "description": "Missile ships of Russia’s Pacific Fleet fired Moskit cruise missiles at a mock enemy target in the Sea of Japan.",
-              "unwound_url": "https://www.aljazeera.com/news/2023/3/28/russia-test-fires-supersonic-missiles-at-target-in-sea-of-japan",
-              "images": [
-                {
-                  "url": "https://pbs.twimg.com/news_img/1646174798936961026/oU8sqjg2?format=jpg&name=orig",
-                  "width": 1200,
-                  "height": 675
-                },
-                {
-                  "url": "https://pbs.twimg.com/news_img/1646174798936961026/oU8sqjg2?format=jpg&name=150x150",
-                  "width": 150,
-                  "height": 150
-                }
-              ]
-            }
-          ]
-        },
-        "possibly_sensitive": false,
-        "public_metrics": {
-          "impression_count": 5288,
-          "like_count": 440,
-          "quote_count": 3,
-          "reply_count": 2,
-          "retweet_count": 682
-        },
         "reply_settings": "everyone"
       },
       {
@@ -19905,7 +19420,7 @@
           "like_count": 0,
           "quote_count": 0,
           "reply_count": 0,
-          "retweet_count": 682
+          "retweet_count": 683
         },
         "referenced_tweets": [
           {
@@ -20915,214 +20430,6 @@
         "reply_settings": "everyone"
       },
       {
-        "id": "1648190201255034880",
-        "text": "#Japan’s #dolphin meat contains #mercury up to 100 times safe level, test shows https://t.co/XSxoGOq7k6\n\n#MarineLife #Dolphins",
-        "edit_history_tweet_ids": [
-          "1648190201255034880"
-        ],
-        "author_id": "73185544",
-        "lang": "en",
-        "context_annotations": [
-          {
-            "domain": {
-              "id": "46",
-              "name": "Business Taxonomy",
-              "description": "Categories within Brand Verticals that narrow down the scope of Brands"
-            },
-            "entity": {
-              "id": "1557697078762958848",
-              "name": "Pet Business",
-              "description": "Brands, companies, advertisers and every non-person handle with the profit intent related to Pets such as pet food, toys, cleaning"
-            }
-          },
-          {
-            "domain": {
-              "id": "30",
-              "name": "Entities [Entity Service]",
-              "description": "Entity Service top level domain, every item that is in Entity Service should be in this domain"
-            },
-            "entity": {
-              "id": "852262932607926273",
-              "name": "Pets",
-              "description": "Pets"
-            }
-          },
-          {
-            "domain": {
-              "id": "30",
-              "name": "Entities [Entity Service]",
-              "description": "Entity Service top level domain, every item that is in Entity Service should be in this domain"
-            },
-            "entity": {
-              "id": "854692455005921281",
-              "name": "Science",
-              "description": "Science"
-            }
-          },
-          {
-            "domain": {
-              "id": "30",
-              "name": "Entities [Entity Service]",
-              "description": "Entity Service top level domain, every item that is in Entity Service should be in this domain"
-            },
-            "entity": {
-              "id": "1129086092202860544",
-              "name": "Marine life"
-            }
-          },
-          {
-            "domain": {
-              "id": "131",
-              "name": "Unified Twitter Taxonomy",
-              "description": "A taxonomy of user interests. "
-            },
-            "entity": {
-              "id": "839543325212319744",
-              "name": "Animals"
-            }
-          },
-          {
-            "domain": {
-              "id": "131",
-              "name": "Unified Twitter Taxonomy",
-              "description": "A taxonomy of user interests. "
-            },
-            "entity": {
-              "id": "854692455005921281",
-              "name": "Science",
-              "description": "Science"
-            }
-          },
-          {
-            "domain": {
-              "id": "131",
-              "name": "Unified Twitter Taxonomy",
-              "description": "A taxonomy of user interests. "
-            },
-            "entity": {
-              "id": "1129086092202860544",
-              "name": "Marine life"
-            }
-          },
-          {
-            "domain": {
-              "id": "131",
-              "name": "Unified Twitter Taxonomy",
-              "description": "A taxonomy of user interests. "
-            },
-            "entity": {
-              "id": "1243202777972498433",
-              "name": "Oceanography"
-            }
-          },
-          {
-            "domain": {
-              "id": "164",
-              "name": "Fields of study",
-              "description": "for all fields of study, e.g., futurology, microbiology "
-            },
-            "entity": {
-              "id": "854692455005921281",
-              "name": "Science",
-              "description": "Science"
-            }
-          }
-        ],
-        "conversation_id": "1648190201255034880",
-        "created_at": "2023-04-18T05:02:20+00:00",
-        "edit_controls": {
-          "edits_remaining": 5,
-          "is_edit_eligible": false,
-          "editable_until": "2023-04-18T05:32:20+00:00"
-        },
-        "entities": {
-          "annotations": [
-            {
-              "start": 1,
-              "end": 5,
-              "probability": 0.9822,
-              "type": "Place",
-              "normalized_text": "Japan"
-            },
-            {
-              "start": 106,
-              "end": 115,
-              "probability": 0.8513,
-              "type": "Organization",
-              "normalized_text": "MarineLife"
-            },
-            {
-              "start": 118,
-              "end": 125,
-              "probability": 0.8778,
-              "type": "Organization",
-              "normalized_text": "Dolphins"
-            }
-          ],
-          "hashtags": [
-            {
-              "start": 0,
-              "end": 6,
-              "tag": "Japan"
-            },
-            {
-              "start": 9,
-              "end": 17,
-              "tag": "dolphin"
-            },
-            {
-              "start": 32,
-              "end": 40,
-              "tag": "mercury"
-            },
-            {
-              "start": 105,
-              "end": 116,
-              "tag": "MarineLife"
-            },
-            {
-              "start": 117,
-              "end": 126,
-              "tag": "Dolphins"
-            }
-          ],
-          "urls": [
-            {
-              "start": 80,
-              "end": 103,
-              "url": "https://t.co/XSxoGOq7k6",
-              "expanded_url": "https://www.theguardian.com/world/2023/apr/18/japans-toxic-dolphin-meat-contains-mercury-up-to-100-times-safe-level-test-shows?CMP=share_btn_tw",
-              "display_url": "theguardian.com/world/2023/apr…",
-              "status": "200",
-              "title": "Japan’s ‘toxic’ dolphin meat contains mercury up to 100 times safe level, test shows",
-              "description": "Exclusive: Conservation group Action for Dolphins has lodged a complaint with police, demanding the meat be removed from sale",
-              "unwound_url": "https://www.theguardian.com/world/2023/apr/18/japans-toxic-dolphin-meat-contains-mercury-up-to-100-times-safe-level-test-shows?CMP=share_btn_tw",
-              "images": [
-                {
-                  "url": "https://pbs.twimg.com/news_img/1648135489164115968/OC7b1YVb?format=jpg&name=orig",
-                  "width": 1200,
-                  "height": 630
-                },
-                {
-                  "url": "https://pbs.twimg.com/news_img/1648135489164115968/OC7b1YVb?format=jpg&name=150x150",
-                  "width": 150,
-                  "height": 150
-                }
-              ]
-            }
-          ]
-        },
-        "possibly_sensitive": false,
-        "public_metrics": {
-          "impression_count": 52,
-          "like_count": 0,
-          "quote_count": 0,
-          "reply_count": 1,
-          "retweet_count": 1
-        },
-        "reply_settings": "everyone"
-      },
-      {
         "id": "1648182329641259013",
         "text": "Japan’s ‘toxic’ #dolphin meat contains mercury up to 100 times safe level, test shows | #Japan | ⁦@guardianeco⁩ #MarinePollution  https://t.co/wylCA6sYzV",
         "edit_history_tweet_ids": [
@@ -21656,7 +20963,7 @@
         },
         "possibly_sensitive": false,
         "public_metrics": {
-          "impression_count": 577,
+          "impression_count": 578,
           "like_count": 2,
           "quote_count": 0,
           "reply_count": 0,
@@ -21737,7 +21044,7 @@
           "like_count": 0,
           "quote_count": 0,
           "reply_count": 0,
-          "retweet_count": 682
+          "retweet_count": 683
         },
         "referenced_tweets": [
           {
@@ -21745,138 +21052,6 @@
             "id": "1640635965390700549"
           }
         ],
-        "reply_settings": "everyone"
-      },
-      {
-        "id": "1640635965390700549",
-        "text": "Missile ships of #Russia’s Pacific Fleet fired Moskit cruise missiles at a mock enemy target in the Sea of #Japan. @real_IpobDOS @UNWatch @ForeignAffairs @ForeignPolicy @GoitaAssimi @USinNigeria https://t.co/Oik45zxS1b",
-        "edit_history_tweet_ids": [
-          "1640635965390700549"
-        ],
-        "author_id": "3252528612",
-        "lang": "en",
-        "conversation_id": "1640635965390700549",
-        "created_at": "2023-03-28T08:44:30+00:00",
-        "edit_controls": {
-          "edits_remaining": 5,
-          "is_edit_eligible": true,
-          "editable_until": "2023-03-28T09:14:30+00:00"
-        },
-        "entities": {
-          "annotations": [
-            {
-              "start": 18,
-              "end": 23,
-              "probability": 0.9629,
-              "type": "Place",
-              "normalized_text": "Russia"
-            },
-            {
-              "start": 27,
-              "end": 39,
-              "probability": 0.5353,
-              "type": "Place",
-              "normalized_text": "Pacific Fleet"
-            },
-            {
-              "start": 47,
-              "end": 52,
-              "probability": 0.3889,
-              "type": "Other",
-              "normalized_text": "Moskit"
-            },
-            {
-              "start": 108,
-              "end": 112,
-              "probability": 0.9365,
-              "type": "Place",
-              "normalized_text": "Japan"
-            }
-          ],
-          "hashtags": [
-            {
-              "start": 17,
-              "end": 24,
-              "tag": "Russia"
-            },
-            {
-              "start": 107,
-              "end": 113,
-              "tag": "Japan"
-            }
-          ],
-          "mentions": [
-            {
-              "start": 115,
-              "end": 128,
-              "username": "real_IpobDOS",
-              "id": "987317488374329347"
-            },
-            {
-              "start": 129,
-              "end": 137,
-              "username": "UNWatch",
-              "id": "83435676"
-            },
-            {
-              "start": 138,
-              "end": 153,
-              "username": "ForeignAffairs",
-              "id": "21114659"
-            },
-            {
-              "start": 154,
-              "end": 168,
-              "username": "ForeignPolicy",
-              "id": "26792275"
-            },
-            {
-              "start": 169,
-              "end": 181,
-              "username": "GoitaAssimi",
-              "id": "1354776830608347139"
-            },
-            {
-              "start": 182,
-              "end": 194,
-              "username": "USinNigeria",
-              "id": "69281027"
-            }
-          ],
-          "urls": [
-            {
-              "start": 195,
-              "end": 218,
-              "url": "https://t.co/Oik45zxS1b",
-              "expanded_url": "https://www.aljazeera.com/news/2023/3/28/russia-test-fires-supersonic-missiles-at-target-in-sea-of-japan",
-              "display_url": "aljazeera.com/news/2023/3/28…",
-              "status": "200",
-              "title": "Russia test fires supersonic missiles at target in Sea of Japan",
-              "description": "Missile ships of Russia’s Pacific Fleet fired Moskit cruise missiles at a mock enemy target in the Sea of Japan.",
-              "unwound_url": "https://www.aljazeera.com/news/2023/3/28/russia-test-fires-supersonic-missiles-at-target-in-sea-of-japan",
-              "images": [
-                {
-                  "url": "https://pbs.twimg.com/news_img/1646174798936961026/oU8sqjg2?format=jpg&name=orig",
-                  "width": 1200,
-                  "height": 675
-                },
-                {
-                  "url": "https://pbs.twimg.com/news_img/1646174798936961026/oU8sqjg2?format=jpg&name=150x150",
-                  "width": 150,
-                  "height": 150
-                }
-              ]
-            }
-          ]
-        },
-        "possibly_sensitive": false,
-        "public_metrics": {
-          "impression_count": 5288,
-          "like_count": 440,
-          "quote_count": 3,
-          "reply_count": 2,
-          "retweet_count": 682
-        },
         "reply_settings": "everyone"
       },
       {
@@ -22166,7 +21341,7 @@
           "like_count": 0,
           "quote_count": 0,
           "reply_count": 0,
-          "retweet_count": 682
+          "retweet_count": 683
         },
         "referenced_tweets": [
           {
@@ -22272,7 +21447,7 @@
         },
         "possibly_sensitive": false,
         "public_metrics": {
-          "impression_count": 563,
+          "impression_count": 564,
           "like_count": 4,
           "quote_count": 0,
           "reply_count": 0,
@@ -22540,7 +21715,7 @@
         },
         "possibly_sensitive": false,
         "public_metrics": {
-          "impression_count": 2741,
+          "impression_count": 2744,
           "like_count": 21,
           "quote_count": 0,
           "reply_count": 0,
@@ -22669,161 +21844,6 @@
           {
             "type": "retweeted",
             "id": "1647602586621550592"
-          }
-        ],
-        "reply_settings": "everyone"
-      },
-      {
-        "id": "1647602586621550592",
-        "text": "I find it too convenient, this juxtaposition of events: a failed attack on #Japan's PM, the N. Korean missile test to panic Japan, US-Japan-S. Korea military exercises, and the rush to bolster western-led security orgs. https://t.co/9lQsHNW5re",
-        "edit_history_tweet_ids": [
-          "1647602586621550592"
-        ],
-        "author_id": "48534642",
-        "lang": "en",
-        "context_annotations": [
-          {
-            "domain": {
-              "id": "10",
-              "name": "Person",
-              "description": "Named people in the world like Nelson Mandela"
-            },
-            "entity": {
-              "id": "1415412351449268224",
-              "name": "Fumio Kishida",
-              "description": "Japanese politician"
-            }
-          },
-          {
-            "domain": {
-              "id": "35",
-              "name": "Politician",
-              "description": "Politicians in the world, like Joe Biden"
-            },
-            "entity": {
-              "id": "1415412351449268224",
-              "name": "Fumio Kishida",
-              "description": "Japanese politician"
-            }
-          },
-          {
-            "domain": {
-              "id": "131",
-              "name": "Unified Twitter Taxonomy",
-              "description": "A taxonomy of user interests. "
-            },
-            "entity": {
-              "id": "847878884917886977",
-              "name": "Politics",
-              "description": "Politics"
-            }
-          },
-          {
-            "domain": {
-              "id": "131",
-              "name": "Unified Twitter Taxonomy",
-              "description": "A taxonomy of user interests. "
-            },
-            "entity": {
-              "id": "1070032753834438656",
-              "name": "Political figures",
-              "description": "Politician"
-            }
-          },
-          {
-            "domain": {
-              "id": "131",
-              "name": "Unified Twitter Taxonomy",
-              "description": "A taxonomy of user interests. "
-            },
-            "entity": {
-              "id": "1415412351449268224",
-              "name": "Fumio Kishida",
-              "description": "Japanese politician"
-            }
-          }
-        ],
-        "conversation_id": "1647602586621550592",
-        "created_at": "2023-04-16T14:07:22+00:00",
-        "edit_controls": {
-          "edits_remaining": 5,
-          "is_edit_eligible": true,
-          "editable_until": "2023-04-16T14:37:22+00:00"
-        },
-        "entities": {
-          "annotations": [
-            {
-              "start": 76,
-              "end": 80,
-              "probability": 0.9601,
-              "type": "Place",
-              "normalized_text": "Japan"
-            },
-            {
-              "start": 124,
-              "end": 128,
-              "probability": 0.8092,
-              "type": "Place",
-              "normalized_text": "Japan"
-            },
-            {
-              "start": 131,
-              "end": 132,
-              "probability": 0.9213,
-              "type": "Place",
-              "normalized_text": "US"
-            },
-            {
-              "start": 134,
-              "end": 138,
-              "probability": 0.8476,
-              "type": "Place",
-              "normalized_text": "Japan"
-            },
-            {
-              "start": 140,
-              "end": 140,
-              "probability": 0.4866,
-              "type": "Place",
-              "normalized_text": "S"
-            },
-            {
-              "start": 143,
-              "end": 147,
-              "probability": 0.4937,
-              "type": "Place",
-              "normalized_text": "Korea"
-            }
-          ],
-          "hashtags": [
-            {
-              "start": 75,
-              "end": 81,
-              "tag": "Japan"
-            }
-          ],
-          "urls": [
-            {
-              "start": 220,
-              "end": 243,
-              "url": "https://t.co/9lQsHNW5re",
-              "expanded_url": "https://twitter.com/BBCWorld/status/1647495980009283584",
-              "display_url": "twitter.com/BBCWorld/statu…"
-            }
-          ]
-        },
-        "possibly_sensitive": false,
-        "public_metrics": {
-          "impression_count": 2741,
-          "like_count": 21,
-          "quote_count": 0,
-          "reply_count": 0,
-          "retweet_count": 3
-        },
-        "referenced_tweets": [
-          {
-            "type": "quoted",
-            "id": "1647495980009283584"
           }
         ],
         "reply_settings": "everyone"
@@ -23184,7 +22204,7 @@
         },
         "possibly_sensitive": false,
         "public_metrics": {
-          "impression_count": 324646,
+          "impression_count": 324709,
           "like_count": 347,
           "quote_count": 8,
           "reply_count": 72,
@@ -23527,7 +22547,7 @@
           "like_count": 0,
           "quote_count": 0,
           "reply_count": 0,
-          "retweet_count": 682
+          "retweet_count": 683
         },
         "referenced_tweets": [
           {
@@ -23535,138 +22555,6 @@
             "id": "1640635965390700549"
           }
         ],
-        "reply_settings": "everyone"
-      },
-      {
-        "id": "1640635965390700549",
-        "text": "Missile ships of #Russia’s Pacific Fleet fired Moskit cruise missiles at a mock enemy target in the Sea of #Japan. @real_IpobDOS @UNWatch @ForeignAffairs @ForeignPolicy @GoitaAssimi @USinNigeria https://t.co/Oik45zxS1b",
-        "edit_history_tweet_ids": [
-          "1640635965390700549"
-        ],
-        "author_id": "3252528612",
-        "lang": "en",
-        "conversation_id": "1640635965390700549",
-        "created_at": "2023-03-28T08:44:30+00:00",
-        "edit_controls": {
-          "edits_remaining": 5,
-          "is_edit_eligible": true,
-          "editable_until": "2023-03-28T09:14:30+00:00"
-        },
-        "entities": {
-          "annotations": [
-            {
-              "start": 18,
-              "end": 23,
-              "probability": 0.9629,
-              "type": "Place",
-              "normalized_text": "Russia"
-            },
-            {
-              "start": 27,
-              "end": 39,
-              "probability": 0.5353,
-              "type": "Place",
-              "normalized_text": "Pacific Fleet"
-            },
-            {
-              "start": 47,
-              "end": 52,
-              "probability": 0.3889,
-              "type": "Other",
-              "normalized_text": "Moskit"
-            },
-            {
-              "start": 108,
-              "end": 112,
-              "probability": 0.9365,
-              "type": "Place",
-              "normalized_text": "Japan"
-            }
-          ],
-          "hashtags": [
-            {
-              "start": 17,
-              "end": 24,
-              "tag": "Russia"
-            },
-            {
-              "start": 107,
-              "end": 113,
-              "tag": "Japan"
-            }
-          ],
-          "mentions": [
-            {
-              "start": 115,
-              "end": 128,
-              "username": "real_IpobDOS",
-              "id": "987317488374329347"
-            },
-            {
-              "start": 129,
-              "end": 137,
-              "username": "UNWatch",
-              "id": "83435676"
-            },
-            {
-              "start": 138,
-              "end": 153,
-              "username": "ForeignAffairs",
-              "id": "21114659"
-            },
-            {
-              "start": 154,
-              "end": 168,
-              "username": "ForeignPolicy",
-              "id": "26792275"
-            },
-            {
-              "start": 169,
-              "end": 181,
-              "username": "GoitaAssimi",
-              "id": "1354776830608347139"
-            },
-            {
-              "start": 182,
-              "end": 194,
-              "username": "USinNigeria",
-              "id": "69281027"
-            }
-          ],
-          "urls": [
-            {
-              "start": 195,
-              "end": 218,
-              "url": "https://t.co/Oik45zxS1b",
-              "expanded_url": "https://www.aljazeera.com/news/2023/3/28/russia-test-fires-supersonic-missiles-at-target-in-sea-of-japan",
-              "display_url": "aljazeera.com/news/2023/3/28…",
-              "status": "200",
-              "title": "Russia test fires supersonic missiles at target in Sea of Japan",
-              "description": "Missile ships of Russia’s Pacific Fleet fired Moskit cruise missiles at a mock enemy target in the Sea of Japan.",
-              "unwound_url": "https://www.aljazeera.com/news/2023/3/28/russia-test-fires-supersonic-missiles-at-target-in-sea-of-japan",
-              "images": [
-                {
-                  "url": "https://pbs.twimg.com/news_img/1646174798936961026/oU8sqjg2?format=jpg&name=orig",
-                  "width": 1200,
-                  "height": 675
-                },
-                {
-                  "url": "https://pbs.twimg.com/news_img/1646174798936961026/oU8sqjg2?format=jpg&name=150x150",
-                  "width": 150,
-                  "height": 150
-                }
-              ]
-            }
-          ]
-        },
-        "possibly_sensitive": false,
-        "public_metrics": {
-          "impression_count": 5288,
-          "like_count": 440,
-          "quote_count": 3,
-          "reply_count": 2,
-          "retweet_count": 682
-        },
         "reply_settings": "everyone"
       },
       {
@@ -24615,100 +23503,6 @@
         "reply_settings": "everyone"
       },
       {
-        "id": "1647105176946327553",
-        "text": "#Japan, #SouthKorea and the #UnitedStates have agreed to enhance security cooperation in response to rising threats from #NorthKorea, as they condemned the country’s test of its first-ever solid-fuel intercontinental ballistic missile (ICBM). https://t.co/a1g81PwOGE",
-        "edit_history_tweet_ids": [
-          "1647105176946327553"
-        ],
-        "attachments": {
-          "media_keys": [
-            "3_1647104424249008129"
-          ]
-        },
-        "author_id": "1543079359837241344",
-        "lang": "en",
-        "conversation_id": "1647105176946327553",
-        "created_at": "2023-04-15T05:10:50+00:00",
-        "edit_controls": {
-          "edits_remaining": 5,
-          "is_edit_eligible": true,
-          "editable_until": "2023-04-15T05:40:50+00:00"
-        },
-        "entities": {
-          "annotations": [
-            {
-              "start": 1,
-              "end": 5,
-              "probability": 0.9906,
-              "type": "Place",
-              "normalized_text": "Japan"
-            },
-            {
-              "start": 9,
-              "end": 18,
-              "probability": 0.9898,
-              "type": "Place",
-              "normalized_text": "SouthKorea"
-            },
-            {
-              "start": 29,
-              "end": 40,
-              "probability": 0.6014,
-              "type": "Organization",
-              "normalized_text": "UnitedStates"
-            },
-            {
-              "start": 122,
-              "end": 131,
-              "probability": 0.9747,
-              "type": "Place",
-              "normalized_text": "NorthKorea"
-            }
-          ],
-          "hashtags": [
-            {
-              "start": 0,
-              "end": 6,
-              "tag": "Japan"
-            },
-            {
-              "start": 8,
-              "end": 19,
-              "tag": "SouthKorea"
-            },
-            {
-              "start": 28,
-              "end": 41,
-              "tag": "UnitedStates"
-            },
-            {
-              "start": 121,
-              "end": 132,
-              "tag": "NorthKorea"
-            }
-          ],
-          "urls": [
-            {
-              "start": 243,
-              "end": 266,
-              "url": "https://t.co/a1g81PwOGE",
-              "expanded_url": "https://twitter.com/rtaenglish1/status/1647105176946327553/photo/1",
-              "display_url": "pic.twitter.com/a1g81PwOGE",
-              "media_key": "3_1647104424249008129"
-            }
-          ]
-        },
-        "possibly_sensitive": false,
-        "public_metrics": {
-          "impression_count": 192,
-          "like_count": 6,
-          "quote_count": 0,
-          "reply_count": 0,
-          "retweet_count": 1
-        },
-        "reply_settings": "everyone"
-      },
-      {
         "id": "1647069543431380992",
         "text": "RT @EpochTimes: #NorthKorea’s 40-minute test launch of a new solid-fuel ICBM caused evacuations on #Japan’s Hokkaido Island, and analysts t…",
         "edit_history_tweet_ids": [
@@ -25284,88 +24078,6 @@
             "id": "1647043309653860352"
           }
         ],
-        "reply_settings": "everyone"
-      },
-      {
-        "id": "1647043309653860352",
-        "text": "#NorthKorea’s 40-minute test launch of a new solid-fuel ICBM caused evacuations on #Japan’s Hokkaido Island, and analysts to sound the alarm that the new missile would make it easier for the regime to launch a nuclear attack. https://t.co/aqss3ZOKJV",
-        "edit_history_tweet_ids": [
-          "1647043309653860352"
-        ],
-        "author_id": "29097819",
-        "lang": "en",
-        "conversation_id": "1647043309653860352",
-        "created_at": "2023-04-15T01:05:00+00:00",
-        "edit_controls": {
-          "edits_remaining": 5,
-          "is_edit_eligible": true,
-          "editable_until": "2023-04-15T01:35:00+00:00"
-        },
-        "entities": {
-          "annotations": [
-            {
-              "start": 1,
-              "end": 10,
-              "probability": 0.9555,
-              "type": "Place",
-              "normalized_text": "NorthKorea"
-            },
-            {
-              "start": 56,
-              "end": 59,
-              "probability": 0.5672,
-              "type": "Other",
-              "normalized_text": "ICBM"
-            },
-            {
-              "start": 84,
-              "end": 88,
-              "probability": 0.9768,
-              "type": "Place",
-              "normalized_text": "Japan"
-            },
-            {
-              "start": 92,
-              "end": 106,
-              "probability": 0.8167,
-              "type": "Place",
-              "normalized_text": "Hokkaido Island"
-            }
-          ],
-          "hashtags": [
-            {
-              "start": 0,
-              "end": 11,
-              "tag": "NorthKorea"
-            },
-            {
-              "start": 83,
-              "end": 89,
-              "tag": "Japan"
-            }
-          ],
-          "urls": [
-            {
-              "start": 226,
-              "end": 249,
-              "url": "https://t.co/aqss3ZOKJV",
-              "expanded_url": "https://www.theepochtimes.com/north-koreas-powerful-new-missile-allows-it-to-rapidly-launch-a-nuclear-strike-analyst-warns_5195729.html?utm_medium=social&utm_source=twitter&utm_campaign=digitalsub",
-              "display_url": "theepochtimes.com/north-koreas-p…",
-              "status": "200",
-              "title": "North Korea's Powerful New Missile Allows It to 'Rapidly' Launch a Nuclear Strike, Analyst Warns",
-              "description": "North Korea’s 40-minute test launch of a new solid-fuel intercontinental ballistic missile on April 13 caused evacuations on ...",
-              "unwound_url": "https://www.theepochtimes.com/north-koreas-powerful-new-missile-allows-it-to-rapidly-launch-a-nuclear-strike-analyst-warns_5195729.html?utm_medium=social&utm_source=twitter&utm_campaign=digitalsub"
-            }
-          ]
-        },
-        "possibly_sensitive": false,
-        "public_metrics": {
-          "impression_count": 10639,
-          "like_count": 35,
-          "quote_count": 1,
-          "reply_count": 2,
-          "retweet_count": 21
-        },
         "reply_settings": "everyone"
       },
       {
@@ -26066,112 +24778,6 @@
             "id": "1647033936722141189"
           }
         ],
-        "reply_settings": "everyone"
-      },
-      {
-        "id": "1647033936722141189",
-        "text": "The representatives \"urged the DPRK to stop all destabilizing activities immediately\" and \"reaffirmed that a DPRK nuclear test, if conducted, would be met with a strong and resolute response from the international community.\"\n\n#NorthKorea | #Japan | #US\n\nhttps://t.co/xF9MIXrzgo",
-        "edit_history_tweet_ids": [
-          "1647033936722141189"
-        ],
-        "author_id": "19489239",
-        "lang": "en",
-        "conversation_id": "1647033936722141189",
-        "created_at": "2023-04-15T00:27:45+00:00",
-        "edit_controls": {
-          "edits_remaining": 5,
-          "is_edit_eligible": true,
-          "editable_until": "2023-04-15T00:57:45+00:00"
-        },
-        "entities": {
-          "annotations": [
-            {
-              "start": 31,
-              "end": 34,
-              "probability": 0.4553,
-              "type": "Organization",
-              "normalized_text": "DPRK"
-            },
-            {
-              "start": 109,
-              "end": 112,
-              "probability": 0.4998,
-              "type": "Other",
-              "normalized_text": "DPRK"
-            },
-            {
-              "start": 228,
-              "end": 237,
-              "probability": 0.9713,
-              "type": "Place",
-              "normalized_text": "NorthKorea"
-            },
-            {
-              "start": 242,
-              "end": 246,
-              "probability": 0.9856,
-              "type": "Place",
-              "normalized_text": "Japan"
-            },
-            {
-              "start": 251,
-              "end": 252,
-              "probability": 0.9756,
-              "type": "Place",
-              "normalized_text": "US"
-            }
-          ],
-          "hashtags": [
-            {
-              "start": 227,
-              "end": 238,
-              "tag": "NorthKorea"
-            },
-            {
-              "start": 241,
-              "end": 247,
-              "tag": "Japan"
-            },
-            {
-              "start": 250,
-              "end": 253,
-              "tag": "US"
-            }
-          ],
-          "urls": [
-            {
-              "start": 255,
-              "end": 278,
-              "url": "https://t.co/xF9MIXrzgo",
-              "expanded_url": "https://www.jpost.com/breaking-news/article-739275",
-              "display_url": "jpost.com/breaking-news/…",
-              "status": "200",
-              "title": "US, Japan, South Korea to hold missile defense exercises to deter threat",
-              "description": "The United States, Japan and South Korea said in a joint statement they discussed the regularization of missil",
-              "unwound_url": "https://www.jpost.com/breaking-news/article-739275",
-              "images": [
-                {
-                  "url": "https://pbs.twimg.com/news_img/1647033937217060865/vMu7MzeG?format=jpg&name=orig",
-                  "width": 690,
-                  "height": 407
-                },
-                {
-                  "url": "https://pbs.twimg.com/news_img/1647033937217060865/vMu7MzeG?format=jpg&name=150x150",
-                  "width": 150,
-                  "height": 150
-                }
-              ]
-            }
-          ]
-        },
-        "possibly_sensitive": false,
-        "public_metrics": {
-          "impression_count": 3222,
-          "like_count": 1,
-          "quote_count": 0,
-          "reply_count": 0,
-          "retweet_count": 2
-        },
         "reply_settings": "everyone"
       },
       {
@@ -27422,7 +26028,7 @@
         },
         "possibly_sensitive": false,
         "public_metrics": {
-          "impression_count": 752,
+          "impression_count": 753,
           "like_count": 5,
           "quote_count": 0,
           "reply_count": 1,
@@ -27638,115 +26244,6 @@
             "id": "1646373532514017282"
           }
         ],
-        "reply_settings": "everyone"
-      },
-      {
-        "id": "1646373532514017282",
-        "text": "https://t.co/w4FXYi3QIp Good news from #Japan  ! \nNo more proof of #vaccine or #covid negative test starting May 8 , 2023!!!",
-        "edit_history_tweet_ids": [
-          "1646373532514017282"
-        ],
-        "author_id": "1517240366667161600",
-        "lang": "en",
-        "context_annotations": [
-          {
-            "domain": {
-              "id": "123",
-              "name": "Ongoing News Story",
-              "description": "Ongoing News Stories like 'Brexit'"
-            },
-            "entity": {
-              "id": "1220701888179359745",
-              "name": "COVID-19"
-            }
-          },
-          {
-            "domain": {
-              "id": "131",
-              "name": "Unified Twitter Taxonomy",
-              "description": "A taxonomy of user interests. "
-            },
-            "entity": {
-              "id": "1220701888179359745",
-              "name": "COVID-19"
-            }
-          }
-        ],
-        "conversation_id": "1646373532514017282",
-        "created_at": "2023-04-13T04:43:32+00:00",
-        "edit_controls": {
-          "edits_remaining": 5,
-          "is_edit_eligible": true,
-          "editable_until": "2023-04-13T05:13:32+00:00"
-        },
-        "entities": {
-          "annotations": [
-            {
-              "start": 40,
-              "end": 44,
-              "probability": 0.9959,
-              "type": "Place",
-              "normalized_text": "Japan"
-            },
-            {
-              "start": 80,
-              "end": 84,
-              "probability": 0.9506,
-              "type": "Other",
-              "normalized_text": "covid"
-            }
-          ],
-          "hashtags": [
-            {
-              "start": 39,
-              "end": 45,
-              "tag": "Japan"
-            },
-            {
-              "start": 67,
-              "end": 75,
-              "tag": "vaccine"
-            },
-            {
-              "start": 79,
-              "end": 85,
-              "tag": "covid"
-            }
-          ],
-          "urls": [
-            {
-              "start": 0,
-              "end": 23,
-              "url": "https://t.co/w4FXYi3QIp",
-              "expanded_url": "https://www.japan.travel/en/practical-coronavirus-information/travelers/",
-              "display_url": "japan.travel/en/practical-c…",
-              "status": "200",
-              "title": "For Travelers | COVID-19: New Normal Travel in Japan | Travel Japan（Japan National Tourism Organization）",
-              "description": "Get ready for your dream trip to Japan! From 11th October, tourists from all countries or regions can visit Japan with a valid vaccination certificate or a Covid-19 negative test certificate.",
-              "unwound_url": "https://www.japan.travel/en/practical-coronavirus-information/travelers/",
-              "images": [
-                {
-                  "url": "https://pbs.twimg.com/news_img/1645230158536753152/BF7jkmub?format=jpg&name=orig",
-                  "width": 1000,
-                  "height": 667
-                },
-                {
-                  "url": "https://pbs.twimg.com/news_img/1645230158536753152/BF7jkmub?format=jpg&name=150x150",
-                  "width": 150,
-                  "height": 150
-                }
-              ]
-            }
-          ]
-        },
-        "possibly_sensitive": false,
-        "public_metrics": {
-          "impression_count": 752,
-          "like_count": 5,
-          "quote_count": 0,
-          "reply_count": 1,
-          "retweet_count": 4
-        },
         "reply_settings": "everyone"
       },
       {
@@ -29071,13 +27568,767 @@
         },
         "possibly_sensitive": false,
         "public_metrics": {
-          "impression_count": 691,
+          "impression_count": 692,
           "like_count": 4,
           "quote_count": 0,
           "reply_count": 0,
           "retweet_count": 0
         },
         "reply_settings": "everyone"
+      },
+      {
+        "id": "1646659361614479360",
+        "text": "RT @LeilaniAthenai1: 1963年ケネディ大統領：核実験禁止条約についてラジオ演説\n「統計的に少数でも病気になる #子供 は数字ではない」「肺の中の毒」と吸気被ばくにも\n#JFK 　https://t.co/6HrJlIVeqn\n#radiation #cov…",
+        "edit_history_tweet_ids": [
+          "1646659361614479360"
+        ],
+        "author_id": "1423622412470390791",
+        "lang": "ja",
+        "context_annotations": [
+          {
+            "domain": {
+              "id": "10",
+              "name": "Person",
+              "description": "Named people in the world like Nelson Mandela"
+            },
+            "entity": {
+              "id": "923552037635112960",
+              "name": "John F. Kennedy",
+              "description": "Former US President John F. Kennedy"
+            }
+          },
+          {
+            "domain": {
+              "id": "35",
+              "name": "Politician",
+              "description": "Politicians in the world, like Joe Biden"
+            },
+            "entity": {
+              "id": "923552037635112960",
+              "name": "John F. Kennedy",
+              "description": "Former US President John F. Kennedy"
+            }
+          },
+          {
+            "domain": {
+              "id": "131",
+              "name": "Unified Twitter Taxonomy",
+              "description": "A taxonomy of user interests. "
+            },
+            "entity": {
+              "id": "847878884917886977",
+              "name": "Politics",
+              "description": "Politics"
+            }
+          },
+          {
+            "domain": {
+              "id": "131",
+              "name": "Unified Twitter Taxonomy",
+              "description": "A taxonomy of user interests. "
+            },
+            "entity": {
+              "id": "923552037635112960",
+              "name": "John F. Kennedy",
+              "description": "Former US President John F. Kennedy"
+            }
+          },
+          {
+            "domain": {
+              "id": "131",
+              "name": "Unified Twitter Taxonomy",
+              "description": "A taxonomy of user interests. "
+            },
+            "entity": {
+              "id": "1070032753834438656",
+              "name": "Political figures",
+              "description": "Politician"
+            }
+          }
+        ],
+        "conversation_id": "1646659361614479360",
+        "created_at": "2023-04-13T23:39:19+00:00",
+        "edit_controls": {
+          "edits_remaining": 5,
+          "is_edit_eligible": false,
+          "editable_until": "2023-04-14T00:09:19+00:00"
+        },
+        "entities": {
+          "annotations": [
+            {
+              "start": 21,
+              "end": 32,
+              "probability": 0.5737,
+              "type": "Person",
+              "normalized_text": "1963年ケネディ大統領"
+            }
+          ],
+          "hashtags": [
+            {
+              "start": 66,
+              "end": 69,
+              "tag": "子供"
+            },
+            {
+              "start": 94,
+              "end": 98,
+              "tag": "JFK"
+            },
+            {
+              "start": 124,
+              "end": 134,
+              "tag": "radiation"
+            }
+          ],
+          "mentions": [
+            {
+              "start": 3,
+              "end": 19,
+              "username": "LeilaniAthenai1",
+              "id": "1423622412470390791"
+            }
+          ],
+          "urls": [
+            {
+              "start": 100,
+              "end": 123,
+              "url": "https://t.co/6HrJlIVeqn",
+              "expanded_url": "https://www.jfklibrary.org/archives/other-resources/john-f-kennedy-speeches/nuclear-test-ban-treaty-19630726",
+              "display_url": "jfklibrary.org/archives/other…",
+              "status": "200",
+              "title": "Radio and Television Address to the American People on the Nuclear Test Ban Treaty, July 26, 1963 | JFK Library",
+              "description": "Listen to the speech.    View related documents.",
+              "unwound_url": "https://www.jfklibrary.org/archives/other-resources/john-f-kennedy-speeches/nuclear-test-ban-treaty-19630726",
+              "images": [
+                {
+                  "url": "https://pbs.twimg.com/news_img/1646659408062189569/VR5Ir5Os?format=jpg&name=orig",
+                  "width": 33,
+                  "height": 31
+                },
+                {
+                  "url": "https://pbs.twimg.com/news_img/1646659408062189569/VR5Ir5Os?format=jpg&name=150x150",
+                  "width": 31,
+                  "height": 31
+                }
+              ]
+            }
+          ]
+        },
+        "possibly_sensitive": false,
+        "public_metrics": {
+          "impression_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "reply_count": 0,
+          "retweet_count": 8
+        },
+        "referenced_tweets": [
+          {
+            "type": "retweeted",
+            "id": "1434764866133250048"
+          }
+        ],
+        "reply_settings": "everyone"
+      },
+      {
+        "id": "1434764866133250048",
+        "text": "1963年ケネディ大統領：核実験禁止条約についてラジオ演説\n「統計的に少数でも病気になる #子供 は数字ではない」「肺の中の毒」と吸気被ばくにも\n#JFK 　https://t.co/6HrJlIVeqn\n#radiation #covid19 #Fukushima #children #people \n#Japan govt ignores risk of inhaling radioactive dust\n#脱原発 https://t.co/L1OyynXrg2",
+        "edit_history_tweet_ids": [
+          "1434764866133250048"
+        ],
+        "attachments": {
+          "media_keys": [
+            "3_1434761061211598852",
+            "3_1434763021759356932",
+            "3_1434764687489392640",
+            "3_1434764718380437505"
+          ]
+        },
+        "author_id": "1423622412470390791",
+        "lang": "ja",
+        "context_annotations": [
+          {
+            "domain": {
+              "id": "10",
+              "name": "Person",
+              "description": "Named people in the world like Nelson Mandela"
+            },
+            "entity": {
+              "id": "923552037635112960",
+              "name": "John F. Kennedy",
+              "description": "Former US President John F. Kennedy"
+            }
+          },
+          {
+            "domain": {
+              "id": "35",
+              "name": "Politician",
+              "description": "Politicians in the world, like Joe Biden"
+            },
+            "entity": {
+              "id": "923552037635112960",
+              "name": "John F. Kennedy",
+              "description": "Former US President John F. Kennedy"
+            }
+          },
+          {
+            "domain": {
+              "id": "123",
+              "name": "Ongoing News Story",
+              "description": "Ongoing News Stories like 'Brexit'"
+            },
+            "entity": {
+              "id": "1220701888179359745",
+              "name": "COVID-19"
+            }
+          },
+          {
+            "domain": {
+              "id": "131",
+              "name": "Unified Twitter Taxonomy",
+              "description": "A taxonomy of user interests. "
+            },
+            "entity": {
+              "id": "847878884917886977",
+              "name": "Politics",
+              "description": "Politics"
+            }
+          },
+          {
+            "domain": {
+              "id": "131",
+              "name": "Unified Twitter Taxonomy",
+              "description": "A taxonomy of user interests. "
+            },
+            "entity": {
+              "id": "923552037635112960",
+              "name": "John F. Kennedy",
+              "description": "Former US President John F. Kennedy"
+            }
+          },
+          {
+            "domain": {
+              "id": "131",
+              "name": "Unified Twitter Taxonomy",
+              "description": "A taxonomy of user interests. "
+            },
+            "entity": {
+              "id": "1070032753834438656",
+              "name": "Political figures",
+              "description": "Politician"
+            }
+          },
+          {
+            "domain": {
+              "id": "131",
+              "name": "Unified Twitter Taxonomy",
+              "description": "A taxonomy of user interests. "
+            },
+            "entity": {
+              "id": "1220701888179359745",
+              "name": "COVID-19"
+            }
+          }
+        ],
+        "conversation_id": "1434764866133250048",
+        "created_at": "2021-09-06T06:26:15+00:00",
+        "edit_controls": {
+          "edits_remaining": 5,
+          "is_edit_eligible": true,
+          "editable_until": "2021-09-06T06:56:15+00:00"
+        },
+        "entities": {
+          "annotations": [
+            {
+              "start": 0,
+              "end": 11,
+              "probability": 0.5279,
+              "type": "Person",
+              "normalized_text": "1963年ケネディ大統領"
+            }
+          ],
+          "hashtags": [
+            {
+              "start": 45,
+              "end": 48,
+              "tag": "子供"
+            },
+            {
+              "start": 73,
+              "end": 77,
+              "tag": "JFK"
+            },
+            {
+              "start": 103,
+              "end": 113,
+              "tag": "radiation"
+            },
+            {
+              "start": 114,
+              "end": 122,
+              "tag": "covid19"
+            },
+            {
+              "start": 123,
+              "end": 133,
+              "tag": "Fukushima"
+            },
+            {
+              "start": 134,
+              "end": 143,
+              "tag": "children"
+            },
+            {
+              "start": 144,
+              "end": 151,
+              "tag": "people"
+            },
+            {
+              "start": 153,
+              "end": 159,
+              "tag": "Japan"
+            },
+            {
+              "start": 207,
+              "end": 211,
+              "tag": "脱原発"
+            }
+          ],
+          "urls": [
+            {
+              "start": 79,
+              "end": 102,
+              "url": "https://t.co/6HrJlIVeqn",
+              "expanded_url": "https://www.jfklibrary.org/archives/other-resources/john-f-kennedy-speeches/nuclear-test-ban-treaty-19630726",
+              "display_url": "jfklibrary.org/archives/other…",
+              "status": "200",
+              "title": "Radio and Television Address to the American People on the Nuclear Test Ban Treaty, July 26, 1963 | JFK Library",
+              "description": "Listen to the speech.    View related documents.",
+              "unwound_url": "https://www.jfklibrary.org/archives/other-resources/john-f-kennedy-speeches/nuclear-test-ban-treaty-19630726",
+              "images": [
+                {
+                  "url": "https://pbs.twimg.com/news_img/1646659408062189569/VR5Ir5Os?format=jpg&name=orig",
+                  "width": 33,
+                  "height": 31
+                },
+                {
+                  "url": "https://pbs.twimg.com/news_img/1646659408062189569/VR5Ir5Os?format=jpg&name=150x150",
+                  "width": 31,
+                  "height": 31
+                }
+              ]
+            },
+            {
+              "start": 212,
+              "end": 235,
+              "url": "https://t.co/L1OyynXrg2",
+              "expanded_url": "https://twitter.com/LeilaniAthenai1/status/1434764866133250048/photo/1",
+              "display_url": "pic.twitter.com/L1OyynXrg2",
+              "media_key": "3_1434761061211598852"
+            },
+            {
+              "start": 212,
+              "end": 235,
+              "url": "https://t.co/L1OyynXrg2",
+              "expanded_url": "https://twitter.com/LeilaniAthenai1/status/1434764866133250048/photo/1",
+              "display_url": "pic.twitter.com/L1OyynXrg2",
+              "media_key": "3_1434763021759356932"
+            },
+            {
+              "start": 212,
+              "end": 235,
+              "url": "https://t.co/L1OyynXrg2",
+              "expanded_url": "https://twitter.com/LeilaniAthenai1/status/1434764866133250048/photo/1",
+              "display_url": "pic.twitter.com/L1OyynXrg2",
+              "media_key": "3_1434764687489392640"
+            },
+            {
+              "start": 212,
+              "end": 235,
+              "url": "https://t.co/L1OyynXrg2",
+              "expanded_url": "https://twitter.com/LeilaniAthenai1/status/1434764866133250048/photo/1",
+              "display_url": "pic.twitter.com/L1OyynXrg2",
+              "media_key": "3_1434764718380437505"
+            }
+          ]
+        },
+        "possibly_sensitive": false,
+        "public_metrics": {
+          "impression_count": 0,
+          "like_count": 4,
+          "quote_count": 0,
+          "reply_count": 0,
+          "retweet_count": 8
+        },
+        "reply_settings": "everyone"
+      },
+      {
+        "id": "1646656124664389633",
+        "text": "RT @LACASA4218: https://t.co/w4FXYi3QIp Good news from #Japan  ! \nNo more proof of #vaccine or #covid negative test starting May 8 , 2023!!!",
+        "edit_history_tweet_ids": [
+          "1646656124664389633"
+        ],
+        "author_id": "1269090759564832770",
+        "lang": "en",
+        "context_annotations": [
+          {
+            "domain": {
+              "id": "123",
+              "name": "Ongoing News Story",
+              "description": "Ongoing News Stories like 'Brexit'"
+            },
+            "entity": {
+              "id": "1220701888179359745",
+              "name": "COVID-19"
+            }
+          },
+          {
+            "domain": {
+              "id": "131",
+              "name": "Unified Twitter Taxonomy",
+              "description": "A taxonomy of user interests. "
+            },
+            "entity": {
+              "id": "1220701888179359745",
+              "name": "COVID-19"
+            }
+          }
+        ],
+        "conversation_id": "1646656124664389633",
+        "created_at": "2023-04-13T23:26:28+00:00",
+        "edit_controls": {
+          "edits_remaining": 5,
+          "is_edit_eligible": false,
+          "editable_until": "2023-04-13T23:56:28+00:00"
+        },
+        "entities": {
+          "annotations": [
+            {
+              "start": 56,
+              "end": 60,
+              "probability": 0.9933,
+              "type": "Place",
+              "normalized_text": "Japan"
+            },
+            {
+              "start": 96,
+              "end": 100,
+              "probability": 0.9403,
+              "type": "Other",
+              "normalized_text": "covid"
+            }
+          ],
+          "hashtags": [
+            {
+              "start": 55,
+              "end": 61,
+              "tag": "Japan"
+            },
+            {
+              "start": 83,
+              "end": 91,
+              "tag": "vaccine"
+            },
+            {
+              "start": 95,
+              "end": 101,
+              "tag": "covid"
+            }
+          ],
+          "mentions": [
+            {
+              "start": 3,
+              "end": 14,
+              "username": "LACASA4218",
+              "id": "1517240366667161600"
+            }
+          ],
+          "urls": [
+            {
+              "start": 16,
+              "end": 39,
+              "url": "https://t.co/w4FXYi3QIp",
+              "expanded_url": "https://www.japan.travel/en/practical-coronavirus-information/travelers/",
+              "display_url": "japan.travel/en/practical-c…",
+              "status": "200",
+              "title": "For Travelers | COVID-19: New Normal Travel in Japan | Travel Japan（Japan National Tourism Organization）",
+              "description": "Get ready for your dream trip to Japan! From 11th October, tourists from all countries or regions can visit Japan with a valid vaccination certificate or a Covid-19 negative test certificate.",
+              "unwound_url": "https://www.japan.travel/en/practical-coronavirus-information/travelers/",
+              "images": [
+                {
+                  "url": "https://pbs.twimg.com/news_img/1645230158536753152/BF7jkmub?format=jpg&name=orig",
+                  "width": 1000,
+                  "height": 667
+                },
+                {
+                  "url": "https://pbs.twimg.com/news_img/1645230158536753152/BF7jkmub?format=jpg&name=150x150",
+                  "width": 150,
+                  "height": 150
+                }
+              ]
+            }
+          ]
+        },
+        "possibly_sensitive": false,
+        "public_metrics": {
+          "impression_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "reply_count": 0,
+          "retweet_count": 4
+        },
+        "referenced_tweets": [
+          {
+            "type": "retweeted",
+            "id": "1646373532514017282"
+          }
+        ],
+        "reply_settings": "everyone"
+      },
+      {
+        "id": "1646373532514017282",
+        "text": "https://t.co/w4FXYi3QIp Good news from #Japan  ! \nNo more proof of #vaccine or #covid negative test starting May 8 , 2023!!!",
+        "edit_history_tweet_ids": [
+          "1646373532514017282"
+        ],
+        "author_id": "1517240366667161600",
+        "lang": "en",
+        "context_annotations": [
+          {
+            "domain": {
+              "id": "123",
+              "name": "Ongoing News Story",
+              "description": "Ongoing News Stories like 'Brexit'"
+            },
+            "entity": {
+              "id": "1220701888179359745",
+              "name": "COVID-19"
+            }
+          },
+          {
+            "domain": {
+              "id": "131",
+              "name": "Unified Twitter Taxonomy",
+              "description": "A taxonomy of user interests. "
+            },
+            "entity": {
+              "id": "1220701888179359745",
+              "name": "COVID-19"
+            }
+          }
+        ],
+        "conversation_id": "1646373532514017282",
+        "created_at": "2023-04-13T04:43:32+00:00",
+        "edit_controls": {
+          "edits_remaining": 5,
+          "is_edit_eligible": true,
+          "editable_until": "2023-04-13T05:13:32+00:00"
+        },
+        "entities": {
+          "annotations": [
+            {
+              "start": 40,
+              "end": 44,
+              "probability": 0.9959,
+              "type": "Place",
+              "normalized_text": "Japan"
+            },
+            {
+              "start": 80,
+              "end": 84,
+              "probability": 0.9506,
+              "type": "Other",
+              "normalized_text": "covid"
+            }
+          ],
+          "hashtags": [
+            {
+              "start": 39,
+              "end": 45,
+              "tag": "Japan"
+            },
+            {
+              "start": 67,
+              "end": 75,
+              "tag": "vaccine"
+            },
+            {
+              "start": 79,
+              "end": 85,
+              "tag": "covid"
+            }
+          ],
+          "urls": [
+            {
+              "start": 0,
+              "end": 23,
+              "url": "https://t.co/w4FXYi3QIp",
+              "expanded_url": "https://www.japan.travel/en/practical-coronavirus-information/travelers/",
+              "display_url": "japan.travel/en/practical-c…",
+              "status": "200",
+              "title": "For Travelers | COVID-19: New Normal Travel in Japan | Travel Japan（Japan National Tourism Organization）",
+              "description": "Get ready for your dream trip to Japan! From 11th October, tourists from all countries or regions can visit Japan with a valid vaccination certificate or a Covid-19 negative test certificate.",
+              "unwound_url": "https://www.japan.travel/en/practical-coronavirus-information/travelers/",
+              "images": [
+                {
+                  "url": "https://pbs.twimg.com/news_img/1645230158536753152/BF7jkmub?format=jpg&name=orig",
+                  "width": 1000,
+                  "height": 667
+                },
+                {
+                  "url": "https://pbs.twimg.com/news_img/1645230158536753152/BF7jkmub?format=jpg&name=150x150",
+                  "width": 150,
+                  "height": 150
+                }
+              ]
+            }
+          ]
+        },
+        "possibly_sensitive": false,
+        "public_metrics": {
+          "impression_count": 753,
+          "like_count": 5,
+          "quote_count": 0,
+          "reply_count": 1,
+          "retweet_count": 4
+        },
+        "reply_settings": "everyone"
+      },
+      {
+        "id": "1646517609700130830",
+        "text": "Watch: North Korean missile test leads to warning sirens in Japan\n\nDownload the A-Time News App and get updated with the latest news all over the world! https://t.co/bsTxunqDHU\n\n#Japan #NorthKoreanmissile",
+        "edit_history_tweet_ids": [
+          "1646517609700130830"
+        ],
+        "author_id": "1582239128925503489",
+        "lang": "en",
+        "context_annotations": [
+          {
+            "domain": {
+              "id": "6",
+              "name": "Sports Event"
+            },
+            "entity": {
+              "id": "1631808186574417920",
+              "name": "Chennai Super Kings vs Lucknow Super Giants"
+            }
+          },
+          {
+            "domain": {
+              "id": "29",
+              "name": "Events [Entity Service]",
+              "description": "Real world events. "
+            },
+            "entity": {
+              "id": "1631808186574417920",
+              "name": "Chennai Super Kings vs Lucknow Super Giants"
+            }
+          },
+          {
+            "domain": {
+              "id": "83",
+              "name": "Cricket Match",
+              "description": "Sports Event specific to Cricket matches"
+            },
+            "entity": {
+              "id": "1631808186574417920",
+              "name": "Chennai Super Kings vs Lucknow Super Giants"
+            }
+          }
+        ],
+        "conversation_id": "1646517609700130830",
+        "created_at": "2023-04-13T14:16:03+00:00",
+        "edit_controls": {
+          "edits_remaining": 5,
+          "is_edit_eligible": true,
+          "editable_until": "2023-04-13T14:46:03+00:00"
+        },
+        "entities": {
+          "annotations": [
+            {
+              "start": 60,
+              "end": 64,
+              "probability": 0.9867,
+              "type": "Place",
+              "normalized_text": "Japan"
+            },
+            {
+              "start": 80,
+              "end": 90,
+              "probability": 0.7431,
+              "type": "Other",
+              "normalized_text": "A-Time News"
+            },
+            {
+              "start": 179,
+              "end": 183,
+              "probability": 0.981,
+              "type": "Place",
+              "normalized_text": "Japan"
+            },
+            {
+              "start": 186,
+              "end": 203,
+              "probability": 0.9498,
+              "type": "Place",
+              "normalized_text": "NorthKoreanmissile"
+            }
+          ],
+          "hashtags": [
+            {
+              "start": 178,
+              "end": 184,
+              "tag": "Japan"
+            },
+            {
+              "start": 185,
+              "end": 204,
+              "tag": "NorthKoreanmissile"
+            }
+          ],
+          "urls": [
+            {
+              "start": 153,
+              "end": 176,
+              "url": "https://t.co/bsTxunqDHU",
+              "expanded_url": "http://atimenews.net/appstore.html",
+              "display_url": "atimenews.net/appstore.html",
+              "status": "200",
+              "title": "A-Time News",
+              "description": "My description",
+              "unwound_url": "https://atimenews.net/appstore.html"
+            }
+          ]
+        },
+        "possibly_sensitive": false,
+        "public_metrics": {
+          "impression_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "reply_count": 0,
+          "retweet_count": 0
+        },
+        "reply_settings": "everyone"
+      }
+    ],
+    "places": [
+      {
+        "id": "48c0f74f6d819e70",
+        "full_name": "Jaunpur, India",
+        "name": "Jaunpur",
+        "country": "インド",
+        "country_code": "IN",
+        "geo": {
+          "type": "Feature",
+          "bbox": [
+            82.4033664,
+            25.6332299,
+            82.8697847,
+            25.904952
+          ],
+          "properties": {}
+        },
+        "place_type": "city"
       }
     ]
   },
@@ -29165,9 +28416,8 @@
     }
   ],
   "meta": {
-    "result_count": 100,
-    "newest_id": "1648980229258612736",
-    "oldest_id": "1648630517368262657",
-    "next_token": "b26v89c19zqg8o3fqkd21kkdp7z1bfnpqte45x5stixkt"
+    "result_count": 104,
+    "newest_id": "1649036032292077568",
+    "oldest_id": "1646678394250358785"
   }
 }
