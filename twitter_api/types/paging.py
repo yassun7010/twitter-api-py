@@ -62,7 +62,7 @@ async def get_flattend_search_response(
     query: AnyQueryParameters,
 ) -> AnyPageResponseBody:
     """
-    ページングされたレスポンスを返す API に対して、全てのデータを取得し、結合した状態で返す。
+    ページングされたレスポンスを返す API に対して、最後までデータを読み取り、結合した状態で返す。
     """
     paging = get_search_response_iter(get_func, query)
     first = await paging.__anext__()
