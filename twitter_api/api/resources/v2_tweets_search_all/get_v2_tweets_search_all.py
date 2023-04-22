@@ -1,5 +1,5 @@
 from datetime import datetime
-from typing import AsyncGenerator, Literal, NotRequired, Optional, TypedDict
+from typing import AsyncGenerator, Generator, Literal, NotRequired, Optional, TypedDict
 from urllib import parse
 
 from twitter_api.api.resources.api_resources import ApiResources
@@ -17,8 +17,10 @@ from twitter_api.rate_limit.rate_limit import rate_limit
 from twitter_api.types.comma_separatable import CommaSeparatable, comma_separated_str
 from twitter_api.types.endpoint import Endpoint
 from twitter_api.types.paging import (
-    get_collected_paging_response,
-    get_paging_response_iter,
+    get_collected_paging_response_async,
+    get_collected_paging_response_sync,
+    get_paging_response_iter_async,
+    get_paging_response_iter_sync,
 )
 from twitter_api.utils.datetime import rfc3339
 from twitter_api.utils.functional import map_optional
@@ -90,6 +92,16 @@ class GetV2TweetsSearchAllResources(ApiResources):
             query=_make_query(query) if query is not None else None,
         )
 
+    def get_iter(
+        self, query: GetV2TweetsSearchAllQueryParameters
+    ) -> Generator[GetV2TweetsSearchAllResponseBody, None, None]:
+        return get_paging_response_iter_sync(self.get, query)
+
+    def get_collected(
+        self, query: GetV2TweetsSearchAllQueryParameters
+    ) -> GetV2TweetsSearchAllResponseBody:
+        return get_collected_paging_response_sync(self.get, query)
+
 
 class AsyncGetV2TweetsSearchAllResources(GetV2TweetsSearchAllResources):
     async def get(
@@ -100,9 +112,9 @@ class AsyncGetV2TweetsSearchAllResources(GetV2TweetsSearchAllResources):
     async def get_iter(
         self, query: GetV2TweetsSearchAllQueryParameters
     ) -> AsyncGenerator[GetV2TweetsSearchAllResponseBody, None]:
-        return get_paging_response_iter(self.get, query)
+        return get_paging_response_iter_async(self.get, query)
 
     async def get_collected(
         self, query: GetV2TweetsSearchAllQueryParameters
     ) -> GetV2TweetsSearchAllResponseBody:
-        return await get_collected_paging_response(self.get, query)
+        return await get_collected_paging_response_async(self.get, query)

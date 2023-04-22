@@ -1,5 +1,5 @@
 from functools import partial
-from typing import AsyncGenerator, NotRequired, Optional, Self, TypedDict
+from typing import AsyncGenerator, Generator, NotRequired, Optional, Self, TypedDict
 
 from pydantic import Field
 
@@ -17,8 +17,10 @@ from twitter_api.types.endpoint import Endpoint
 from twitter_api.types.extra_permissive_model import ExtraPermissiveModel
 from twitter_api.types.paging import (
     PageResponseBody,
-    get_collected_paging_response,
-    get_paging_response_iter,
+    get_collected_paging_response_async,
+    get_collected_paging_response_sync,
+    get_paging_response_iter_async,
+    get_paging_response_iter_sync,
 )
 
 ENDPOINT = Endpoint("GET", "https://api.twitter.com/2/tweets/:id/retweeted_by")
@@ -109,6 +111,16 @@ class GetV2TweetRetweetedByResources(ApiResources):
             query=_make_query(query) if query is not None else None,
         )
 
+    def get_iter(
+        self, id: TweetId, query: Optional[GetV2TweetRetweetedByQueryParameters] = None
+    ) -> Generator[GetV2TweetRetweetedByResponseBody, None, None]:
+        return get_paging_response_iter_sync(partial(self.get, id), query)
+
+    def get_collected(
+        self, id: TweetId, query: Optional[GetV2TweetRetweetedByQueryParameters] = None
+    ) -> GetV2TweetRetweetedByResponseBody:
+        return get_collected_paging_response_sync(partial(self.get, id), query)
+
 
 class AsyncGetV2TweetRetweetedByResources(GetV2TweetRetweetedByResources):
     async def get(
@@ -120,11 +132,11 @@ class AsyncGetV2TweetRetweetedByResources(GetV2TweetRetweetedByResources):
         )
 
     async def get_iter(
-        self, id: TweetId, query: GetV2TweetRetweetedByQueryParameters
+        self, id: TweetId, query: Optional[GetV2TweetRetweetedByQueryParameters] = None
     ) -> AsyncGenerator[GetV2TweetRetweetedByResponseBody, None]:
-        return get_paging_response_iter(partial(self.get, id), query)
+        return get_paging_response_iter_async(partial(self.get, id), query)
 
     async def get_collected(
-        self, id: TweetId, query: GetV2TweetRetweetedByQueryParameters
+        self, id: TweetId, query: Optional[GetV2TweetRetweetedByQueryParameters] = None
     ) -> GetV2TweetRetweetedByResponseBody:
-        return await get_collected_paging_response(partial(self.get, id), query)
+        return await get_collected_paging_response_async(partial(self.get, id), query)
