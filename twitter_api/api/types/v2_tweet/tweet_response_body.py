@@ -157,11 +157,11 @@ class TweetResponseBody(FindTweets, TweetResponseBodyData):
         return None
 
 
-class TweetsResponseBodyData(ExtraPermissiveModel):
+class _TweetsResponseBodyData(ExtraPermissiveModel):
     data: list[Tweet] = Field(default_factory=list)
 
 
-class TweetsResponseBody(FindTweets, TweetsResponseBodyData):
+class TweetsResponseBody(FindTweets, _TweetsResponseBodyData):
     def find_tweet_by(self, id: TweetId | Tweet) -> Optional[Tweet]:
         if isinstance(id, Tweet):
             id = id.id
@@ -206,9 +206,13 @@ class TweetsResponseBodyMeta(ExtraPermissiveModel):
         self.previous_token = None
 
 
-class TweetsSearchResponseBody(TweetsResponseBody, PageResponseBody):
+class _TweetsSearchResponseBody(ExtraPermissiveModel):
     meta: TweetsResponseBodyMeta
 
+
+class TweetsSearchResponseBody(
+    TweetsResponseBody, _TweetsSearchResponseBody, PageResponseBody
+):
     @property
     def meta_next_token(self) -> str | None:
         return self.meta.next_token
