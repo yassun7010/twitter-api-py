@@ -12,7 +12,7 @@ from twitter_api.types.http import (
 )
 
 
-class AsyncRequestClient(RequestClient):
+class RequestAsyncClient(RequestClient):
     @abstractmethod
     async def get(
         self,

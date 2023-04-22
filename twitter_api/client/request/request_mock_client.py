@@ -23,7 +23,7 @@ from .request_client import (
 )
 
 
-class MockRequestClient(RequestClient, Generic[ResponseModelBody]):
+class RequestMockClient(RequestClient, Generic[ResponseModelBody]):
     def __init__(
         self,
         *,

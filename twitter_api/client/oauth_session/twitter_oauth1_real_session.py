@@ -10,8 +10,6 @@ from twitter_api.api.types.oauth1.twitter_oauth1_authorization_client import (
     TwitterOAuth1AuthorizeClient,
 )
 from twitter_api.client.oauth_session.twitter_oauth1_session import TwitterOAuth1Session
-from twitter_api.client.request.real_request_client import RealRequestClient
-from twitter_api.client.twitter_api_real_client import TwitterApiRealClient
 from twitter_api.rate_limit.manager.rate_limit_manager import RateLimitManager
 from twitter_api.types.oauth import (
     AccessSecret,

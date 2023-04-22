@@ -16,8 +16,8 @@ from twitter_api.types.oauth import (
     ClientSecret,
 )
 
-from .request.real_request_client import RealRequestClient
 from .request.request_client import RequestClient
+from .request.request_real_client import RequestRealClient
 
 
 class TwitterApiAsyncRealClient(TwitterApiAsyncClient):
@@ -29,7 +29,7 @@ class TwitterApiAsyncRealClient(TwitterApiAsyncClient):
 
     def __init__(
         self,
-        request_client: RealRequestClient,
+        request_client: RequestRealClient,
     ) -> None:
         self._real_request_client = request_client
 
@@ -44,7 +44,7 @@ class TwitterApiAsyncRealClient(TwitterApiAsyncClient):
         rate_limit_manager: Optional[RateLimitManager] = None,
     ):
         return TwitterApiAsyncRealClient(
-            RealRequestClient(
+            RequestRealClient(
                 auth=OAuth2Auth(
                     token={
                         "access_token": bearer_token,
@@ -66,7 +66,7 @@ class TwitterApiAsyncRealClient(TwitterApiAsyncClient):
         rate_limit_manager: Optional[RateLimitManager] = None,
     ):
         client = TwitterApiAsyncRealClient(
-            RealRequestClient(
+            RequestRealClient(
                 auth=None,
                 oauth_version="2.0",
                 rate_limit_target="app",
@@ -129,7 +129,7 @@ class TwitterApiAsyncRealClient(TwitterApiAsyncClient):
         rate_limit_manager: Optional[RateLimitManager] = None,
     ):
         return TwitterApiAsyncRealClient(
-            RealRequestClient(
+            RequestRealClient(
                 auth=OAuth1Auth(
                     client_id=api_key,
                     client_secret=api_secret,

@@ -32,7 +32,7 @@ from .request_client import (
 OAuth = OAuth2Auth | OAuth1Auth
 
 
-class RealRequestClient(RequestClient):
+class RequestRealClient(RequestClient):
     def __init__(
         self,
         *,

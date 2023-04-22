@@ -100,8 +100,8 @@ from twitter_api.types.oauth import (
     OAuthVersion,
 )
 
-from .request.mock_request_client import MockRequestClient
 from .request.request_client import RequestClient
+from .request.request_mock_client import RequestMockClient
 from .twitter_api_client import TwitterApiClient
 
 
@@ -115,7 +115,7 @@ class TwitterApiMockClient(TwitterApiClient):
         rate_limit_target: RateLimitTarget,
         rate_limit_manager: Optional[RateLimitManager] = None,
     ) -> None:
-        self._client = MockRequestClient(
+        self._client = RequestMockClient(
             oauth_version=oauth_version,
             rate_limit_target=rate_limit_target,
             rate_limit_manager=rate_limit_manager,

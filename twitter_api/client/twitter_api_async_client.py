@@ -72,7 +72,7 @@ from twitter_api.api.resources.v2_user_tweets import (
 )
 from twitter_api.api.resources.v2_users import AsyncV2UsersResources, V2UsersUrl
 from twitter_api.api.types.v2_scope import ALL_SCOPES, Scope
-from twitter_api.client.request.async_request_client import AsyncRequestClient
+from twitter_api.client.request.request_async_client import RequestAsyncClient
 from twitter_api.client.twitter_api_client import TwitterApiClient
 from twitter_api.error import NeverError
 from twitter_api.rate_limit.manager.rate_limit_manager import RateLimitManager
@@ -95,7 +95,7 @@ class TwitterApiAsyncClient(TwitterApiClient):
 
     @property
     @abstractmethod
-    def _request_client(self) -> AsyncRequestClient:
+    def _request_client(self) -> RequestAsyncClient:
         ...
 
     @overload
