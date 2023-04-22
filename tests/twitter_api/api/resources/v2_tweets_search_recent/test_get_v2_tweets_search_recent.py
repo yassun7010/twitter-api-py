@@ -232,7 +232,7 @@ class TestAsyncMockGetV2TweetsSearchRecent:
             async for res in await (
                 oauth2_app_async_mock_client.chain()
                 .resource("https://api.twitter.com/2/tweets/search/recent")
-                .get_iter(
+                .get_paging(
                     {
                         "query": "モックされているので、この検索条件に意味はない",
                         "expansions": ["attachments.poll_ids"],
@@ -268,7 +268,7 @@ class TestAsyncMockGetV2TweetsSearchRecent:
             await (
                 oauth2_app_async_mock_client.chain()
                 .resource("https://api.twitter.com/2/tweets/search/recent")
-                .get_collected(
+                .get_collected_paging(
                     {
                         "query": "モックされているので、この検索条件に意味はない",
                         "expansions": ["attachments.poll_ids"],

@@ -139,14 +139,14 @@ class GetV2UserLikedTweetsResources(ApiResources):
             response_type=GetV2UserLikedTweetsResponseBody,
         )
 
-    def get_iter(
+    def get_paging(
         self,
         id: UserId,
         query: Optional[GetV2UserLikedTweetsQueryParameters] = None,
     ) -> Generator[GetV2UserLikedTweetsResponseBody, None, None]:
         return get_paging_response_iter_sync(partial(self.get, id), query)
 
-    def get_collected(
+    def get_collected_paging(
         self,
         id: UserId,
         query: Optional[GetV2UserLikedTweetsQueryParameters] = None,
@@ -162,14 +162,14 @@ class AsyncGetV2UserLikedTweetsResources(GetV2UserLikedTweetsResources):
     ) -> GetV2UserLikedTweetsResponseBody:
         return super().get(id, query)
 
-    async def get_iter(
+    async def get_paging(
         self,
         id: UserId,
         query: Optional[GetV2UserLikedTweetsQueryParameters] = None,
     ) -> AsyncGenerator[GetV2UserLikedTweetsResponseBody, None]:
         return get_paging_response_iter_async(partial(self.get, id), query)
 
-    async def get_collected(
+    async def get_collected_paging(
         self,
         id: UserId,
         query: Optional[GetV2UserLikedTweetsQueryParameters] = None,

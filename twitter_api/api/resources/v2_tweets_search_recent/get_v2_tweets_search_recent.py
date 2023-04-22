@@ -91,12 +91,12 @@ class GetV2TweetsSearchRecentResources(ApiResources):
             query=_make_query(query) if query is not None else None,
         )
 
-    def get_iter(
+    def get_paging(
         self, query: GetV2TweetsSearchRecentQueryParameters
     ) -> Generator[GetV2TweetsSearchRecentResponseBody, None, None]:
         return get_paging_response_iter_sync(self.get, query)
 
-    def get_collected(
+    def get_collected_paging(
         self, query: GetV2TweetsSearchRecentQueryParameters
     ) -> GetV2TweetsSearchRecentResponseBody:
         return get_collected_paging_response_sync(self.get, query)
@@ -108,12 +108,12 @@ class AsyncGetV2TweetsSearchRecentResources(GetV2TweetsSearchRecentResources):
     ) -> GetV2TweetsSearchRecentResponseBody:
         return super().get(query)
 
-    async def get_iter(
+    async def get_paging(
         self, query: GetV2TweetsSearchRecentQueryParameters
     ) -> AsyncGenerator[GetV2TweetsSearchRecentResponseBody, None]:
         return get_paging_response_iter_async(self.get, query)
 
-    async def get_collected(
+    async def get_collected_paging(
         self, query: GetV2TweetsSearchRecentQueryParameters
     ) -> GetV2TweetsSearchRecentResponseBody:
         return await get_collected_paging_response_async(self.get, query)
