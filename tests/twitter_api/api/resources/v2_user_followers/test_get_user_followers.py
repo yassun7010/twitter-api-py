@@ -6,6 +6,7 @@ from tests.data import json_test_data
 from twitter_api.api.resources.v2_user_followers.get_v2_user_followers import (
     GetV2UserFollowersResponseBody,
 )
+from twitter_api.client.twitter_api_async_mock_client import TwitterApiAsyncMockClient
 from twitter_api.client.twitter_api_mock_client import TwitterApiMockClient
 from twitter_api.types.extra_permissive_model import get_extra_fields
 
@@ -65,3 +66,28 @@ class TestMockGetV2UserFollowers:
             .resource("https://api.twitter.com/2/users/:id/followers")
             .get("2244994945")
         ) == response
+
+
+class TestAsyncMockGetV2UserFollowers:
+    @pytest.mark.asyncio
+    async def test_async_mock_get_v2_user_followers(
+        self,
+        oauth2_app_async_mock_client: TwitterApiAsyncMockClient,
+    ):
+        response = GetV2UserFollowersResponseBody.parse_file(
+            json_test_data("get_v2_user_followers_response.json")
+        )
+
+        assert get_extra_fields(response) == {}
+
+        assert (
+            await (
+                oauth2_app_async_mock_client.chain()
+                .inject_get_response_body(
+                    "https://api.twitter.com/2/users/:id/followers", response
+                )
+                .resource("https://api.twitter.com/2/users/:id/followers")
+                .get("2244994945")
+            )
+            == response
+        )

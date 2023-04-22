@@ -18,6 +18,7 @@ from twitter_api.api.types.v2_tweet.tweet_response_body import (
     TweetsResponseBodyMeta,
 )
 from twitter_api.api.types.v2_user.user_field import UserField
+from twitter_api.client.twitter_api_async_mock_client import TwitterApiAsyncMockClient
 from twitter_api.client.twitter_api_mock_client import TwitterApiMockClient
 from twitter_api.client.twitter_api_real_client import TwitterApiRealClient
 from twitter_api.types.extra_permissive_model import get_extra_fields
@@ -179,3 +180,34 @@ class TestMockGetV2TweetsSearchRecent:
         assert total_response is not None
         assert len(total_response.data) == 104
         assert get_extra_fields(total_response) == {}
+
+
+class TestAsyncMockGetV2TweetsSearchRecent:
+    @pytest.mark.asyncio
+    async def test_async_mock_get_v2_search_recent(
+        self,
+        oauth2_app_async_mock_client: TwitterApiAsyncMockClient,
+    ):
+        response = GetV2TweetsSearchRecentResponseBody.parse_file(
+            json_test_data("get_v2_tweets_search_recent_response.json")
+        )
+
+        assert get_extra_fields(response) == {}
+
+        assert (
+            await (
+                oauth2_app_async_mock_client.chain()
+                .inject_get_response_body(
+                    "https://api.twitter.com/2/tweets/search/recent", response
+                )
+                .resource("https://api.twitter.com/2/tweets/search/recent")
+                .get(
+                    {
+                        "query": "モックされているので、この検索条件に意味はない",
+                        "expansions": ["attachments.poll_ids"],
+                        "media.fields": ["preview_image_url"],
+                    }
+                )
+            )
+            == response
+        )

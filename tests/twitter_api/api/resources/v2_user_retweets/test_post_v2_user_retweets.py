@@ -6,6 +6,7 @@ from tests.data import json_test_data
 from twitter_api.api.resources.v2_user_retweets.post_v2_user_retweets import (
     PostV2UserRetweetsResponseBody,
 )
+from twitter_api.client.twitter_api_async_mock_client import TwitterApiAsyncMockClient
 from twitter_api.client.twitter_api_mock_client import TwitterApiMockClient
 from twitter_api.types.extra_permissive_model import get_extra_fields
 
@@ -64,3 +65,28 @@ class TestMockGetV2UserRetweets:
             .resource("https://api.twitter.com/2/users/:id/retweets")
             .post("2244994945", {"tweet_id": "1228393702244134912"})
         ) == response
+
+
+class TestAsyncMockGetV2UserRetweets:
+    @pytest.mark.asyncio
+    async def test_async_mock_get_v2_user_following(
+        self,
+        oauth2_app_async_mock_client: TwitterApiAsyncMockClient,
+    ):
+        response = PostV2UserRetweetsResponseBody.parse_file(
+            json_test_data("get_v2_user_retweets_response.json")
+        )
+
+        assert get_extra_fields(response) == {}
+
+        assert (
+            await (
+                oauth2_app_async_mock_client.chain()
+                .inject_post_response_body(
+                    "https://api.twitter.com/2/users/:id/retweets", response
+                )
+                .resource("https://api.twitter.com/2/users/:id/retweets")
+                .post("2244994945", {"tweet_id": "1228393702244134912"})
+            )
+            == response
+        )

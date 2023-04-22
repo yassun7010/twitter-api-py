@@ -6,6 +6,7 @@ from tests.data import json_test_data
 from twitter_api.api.resources.v2_user_liked_tweets.get_v2_user_liked_tweets import (
     GetV2UserLikedTweetsResponseBody,
 )
+from twitter_api.client.twitter_api_async_mock_client import TwitterApiAsyncMockClient
 from twitter_api.client.twitter_api_mock_client import TwitterApiMockClient
 from twitter_api.types.extra_permissive_model import get_extra_fields
 
@@ -65,3 +66,28 @@ class TestMockGetV2UserLikedTweets:
             .resource("https://api.twitter.com/2/users/:id/liked_tweets")
             .get("2244994945")
         ) == response
+
+
+class TestAsyncMockGetV2UserLikedTweets:
+    @pytest.mark.asyncio
+    async def test_async_mock_get_v2_user_liked_tweets(
+        self,
+        oauth2_app_async_mock_client: TwitterApiAsyncMockClient,
+    ):
+        response = GetV2UserLikedTweetsResponseBody.parse_file(
+            json_test_data("get_v2_user_liked_tweets_response.json"),
+        )
+
+        assert get_extra_fields(response) == {}
+
+        assert (
+            await (
+                oauth2_app_async_mock_client.chain()
+                .inject_get_response_body(
+                    "https://api.twitter.com/2/users/:id/liked_tweets", response
+                )
+                .resource("https://api.twitter.com/2/users/:id/liked_tweets")
+                .get("2244994945")
+            )
+            == response
+        )

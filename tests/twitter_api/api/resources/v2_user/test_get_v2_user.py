@@ -4,6 +4,7 @@ from tests.conftest import synthetic_monitoring_is_disable
 from tests.contexts.spawn_real_client import spawn_real_client
 from tests.data import json_test_data
 from twitter_api.api.resources.v2_user.get_v2_user import GetV2UserResponseBody
+from twitter_api.client.twitter_api_async_mock_client import TwitterApiAsyncMockClient
 from twitter_api.client.twitter_api_mock_client import TwitterApiMockClient
 from twitter_api.types.extra_permissive_model import get_extra_fields
 
@@ -61,3 +62,28 @@ class TestMockGetV2User:
             .resource("https://api.twitter.com/2/users/:id")
             .get("2244994945")
         ) == response
+
+
+class TestAsyncMockGetV2User:
+    @pytest.mark.asyncio
+    async def test_async_mock_get_v2_user(
+        self,
+        oauth2_app_async_mock_client: TwitterApiAsyncMockClient,
+    ):
+        response = GetV2UserResponseBody.parse_file(
+            json_test_data("get_v2_user_response.json"),
+        )
+
+        assert get_extra_fields(response) == {}
+
+        assert (
+            await (
+                oauth2_app_async_mock_client.chain()
+                .inject_get_response_body(
+                    "https://api.twitter.com/2/users/:id", response
+                )
+                .resource("https://api.twitter.com/2/users/:id")
+                .get("2244994945")
+            )
+            == response
+        )

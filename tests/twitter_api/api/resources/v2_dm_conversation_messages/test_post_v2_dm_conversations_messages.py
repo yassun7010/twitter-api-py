@@ -7,6 +7,7 @@ from twitter_api.api.resources.v2_dm_conversation_messages.post_v2_dm_conversati
     PostV2DmConversationMessagesResponseBody,
 )
 from twitter_api.api.types.v2_user.user_id import UserId
+from twitter_api.client.twitter_api_async_mock_client import TwitterApiAsyncMockClient
 from twitter_api.client.twitter_api_mock_client import TwitterApiMockClient
 from twitter_api.types.extra_permissive_model import get_extra_fields
 
@@ -89,3 +90,31 @@ class TestMockGetV2DmConversationsMessages:
             )
             .post("2244994945", {"text": "DM のテスト。"})
         ) == response
+
+
+class TestAsyncMockGetV2DmConversationsMessages:
+    @pytest.mark.asyncio
+    async def test_async_mock_get_v2_dm_conversations_messages(
+        self,
+        oauth2_app_async_mock_client: TwitterApiAsyncMockClient,
+    ):
+        response = PostV2DmConversationMessagesResponseBody.parse_file(
+            json_test_data("post_v2_dm_conversations_messages.json")
+        )
+
+        assert get_extra_fields(response) == {}
+
+        assert (
+            await (
+                oauth2_app_async_mock_client.chain()
+                .inject_post_response_body(
+                    "https://api.twitter.com/2/dm_conversations/:dm_conversation_id/messages",
+                    response,
+                )
+                .resource(
+                    "https://api.twitter.com/2/dm_conversations/:dm_conversation_id/messages"
+                )
+                .post("2244994945", {"text": "DM のテスト。"})
+            )
+            == response
+        )

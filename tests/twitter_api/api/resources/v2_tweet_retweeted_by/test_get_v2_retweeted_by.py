@@ -6,6 +6,7 @@ from tests.data import json_test_data
 from twitter_api.api.resources.v2_tweet_retweeted_by.get_v2_tweet_retweeted_by import (
     GetV2TweetRetweetedByResponseBody,
 )
+from twitter_api.client.twitter_api_async_mock_client import TwitterApiAsyncMockClient
 from twitter_api.client.twitter_api_mock_client import TwitterApiMockClient
 from twitter_api.types.extra_permissive_model import get_extra_fields
 
@@ -56,3 +57,28 @@ class TestMockGetV2RetweetedBy:
             .resource("https://api.twitter.com/2/tweets/:id/retweeted_by")
             .get("1234567890123456789")
         ) == response
+
+
+class TestAsyncMockGetV2RetweetedBy:
+    @pytest.mark.asyncio
+    async def test_async_mock_get_v2_tweet_retweeted_by(
+        self,
+        oauth2_app_async_mock_client: TwitterApiAsyncMockClient,
+    ):
+        response = GetV2TweetRetweetedByResponseBody.parse_file(
+            json_test_data("get_v2_retweeted_by_response.json")
+        )
+
+        assert get_extra_fields(response) == {}
+
+        assert (
+            await (
+                oauth2_app_async_mock_client.chain()
+                .inject_get_response_body(
+                    "https://api.twitter.com/2/tweets/:id/retweeted_by", response
+                )
+                .resource("https://api.twitter.com/2/tweets/:id/retweeted_by")
+                .get("1234567890123456789")
+            )
+            == response
+        )

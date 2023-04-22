@@ -8,6 +8,7 @@ from twitter_api.api.resources.v2_tweet.delete_v2_tweet import (
     DeleteV2TweetResponseBody,
     DeleteV2TweetResponseBodyData,
 )
+from twitter_api.client.twitter_api_async_mock_client import TwitterApiAsyncMockClient
 from twitter_api.client.twitter_api_mock_client import TwitterApiMockClient
 from twitter_api.types.extra_permissive_model import get_extra_fields
 
@@ -66,3 +67,28 @@ class TestMockDeleteV2Tweet:
             .resource("https://api.twitter.com/2/tweets/:id")
             .delete("1234567890123456789")
         ) == response
+
+
+class TestAsyncMockDeleteV2Tweet:
+    @pytest.mark.asyncio
+    async def test_async_mock_delete_v2_tweet(
+        self,
+        oauth2_app_async_mock_client: TwitterApiAsyncMockClient,
+    ):
+        response = DeleteV2TweetResponseBody(
+            data=DeleteV2TweetResponseBodyData(deleted=True)
+        )
+
+        assert get_extra_fields(response) == {}
+
+        assert (
+            await (
+                oauth2_app_async_mock_client.chain()
+                .inject_delete_response_body(
+                    "https://api.twitter.com/2/tweets/:id", response
+                )
+                .resource("https://api.twitter.com/2/tweets/:id")
+                .delete("1234567890123456789")
+            )
+            == response
+        )

@@ -7,6 +7,7 @@ from twitter_api.api.resources.v2_dm_conversations.post_v2_dm_conversations impo
     PostV2DmConversationsResponseBody,
 )
 from twitter_api.api.types.v2_user.user_id import UserId
+from twitter_api.client.twitter_api_async_mock_client import TwitterApiAsyncMockClient
 from twitter_api.client.twitter_api_mock_client import TwitterApiMockClient
 from twitter_api.types.extra_permissive_model import get_extra_fields
 
@@ -87,3 +88,38 @@ class TestMockPostV2DmConversationsMessages:
                 },
             )
         ) == response
+
+
+class TestAsyncMockPostV2DmConversationsMessages:
+    @pytest.mark.asyncio
+    async def test_async_mock_post_v2_dm_conversations_messages(
+        self,
+        oauth2_app_async_mock_client: TwitterApiAsyncMockClient,
+    ):
+        response = PostV2DmConversationsResponseBody.parse_file(
+            json_test_data("post_v2_dm_conversations.json")
+        )
+
+        assert get_extra_fields(response) == {}
+
+        assert (
+            await (
+                oauth2_app_async_mock_client.chain()
+                .inject_post_response_body(
+                    "https://api.twitter.com/2/dm_conversations",
+                    response,
+                )
+                .resource("https://api.twitter.com/2/dm_conversations")
+                .post(
+                    "2244994945",
+                    {
+                        "conversation_type": "Group",
+                        "participant_ids": ["944480690", "906948460078698496"],
+                        "message": {
+                            "text": "Hello to you two, this is a new group conversation"
+                        },
+                    },
+                )
+            )
+            == response
+        )

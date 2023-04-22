@@ -6,6 +6,7 @@ from tests.data import json_test_data
 from twitter_api.api.resources.v2_tweets_search_all.get_v2_tweets_search_all import (
     GetV2TweetsSearchAllResponseBody,
 )
+from twitter_api.client.twitter_api_async_mock_client import TwitterApiAsyncMockClient
 from twitter_api.client.twitter_api_mock_client import TwitterApiMockClient
 
 
@@ -56,3 +57,26 @@ class TestMockGetV2TweetsSearchAll:
             .resource("https://api.twitter.com/2/tweets/search/all")
             .get({"query": "ツイート"})
         ) == response
+
+
+class TestAsyncMockGetV2TweetsSearchAll:
+    @pytest.mark.asyncio
+    async def test_async_mock_get_v2_search_all(
+        self,
+        oauth2_app_async_mock_client: TwitterApiAsyncMockClient,
+    ):
+        response = GetV2TweetsSearchAllResponseBody.parse_file(
+            json_test_data("get_v2_tweets_search_all_response.json")
+        )
+
+        assert (
+            await (
+                oauth2_app_async_mock_client.chain()
+                .inject_get_response_body(
+                    "https://api.twitter.com/2/tweets/search/all", response
+                )
+                .resource("https://api.twitter.com/2/tweets/search/all")
+                .get({"query": "ツイート"})
+            )
+            == response
+        )

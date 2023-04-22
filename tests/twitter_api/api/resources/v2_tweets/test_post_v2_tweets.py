@@ -6,6 +6,7 @@ from tests.conftest import synthetic_monitoring_is_disable
 from tests.contexts.spawn_real_client import spawn_real_client
 from twitter_api.api.resources.v2_tweets.post_v2_tweets import PostV2TweetsResponseBody
 from twitter_api.api.types.v2_tweet.tweet import Tweet
+from twitter_api.client.twitter_api_async_mock_client import TwitterApiAsyncMockClient
 from twitter_api.client.twitter_api_mock_client import TwitterApiMockClient
 
 
@@ -68,3 +69,27 @@ class TestMockGetV2Tweet:
             .resource("https://api.twitter.com/2/tweets")
             .post({"text": tweet.text})
         ) == response
+
+
+class TestAsyncMockGetV2Tweet:
+    @pytest.mark.asyncio
+    async def test_async_mock_get_v2_tweet(
+        self, oauth2_app_async_mock_client: TwitterApiAsyncMockClient
+    ):
+        tweet = Tweet(
+            id="1234567890123456789",
+            text="ツイートしました。",
+            edit_history_tweet_ids=["1234567890123456789"],
+        )
+
+        response = PostV2TweetsResponseBody(data=tweet)
+
+        assert (
+            await (
+                oauth2_app_async_mock_client.chain()
+                .inject_post_response_body("https://api.twitter.com/2/tweets", response)
+                .resource("https://api.twitter.com/2/tweets")
+                .post({"text": tweet.text})
+            )
+            == response
+        )
