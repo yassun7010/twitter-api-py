@@ -236,4 +236,8 @@ def _remove_none_field(data: Optional[dict]) -> Optional[dict]:
     if data is None:
         return None
 
-    return {k: v for k, v in data.items() if v is not None}
+    return {
+        k: _remove_none_field(v) if isinstance(v, dict) else v
+        for k, v in data.items()
+        if v is not None
+    }
