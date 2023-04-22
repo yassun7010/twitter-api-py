@@ -39,6 +39,11 @@ async def get_paging_response_iter(
 ) -> AsyncGenerator[AnyPageResponseBody, None]:
     """
     ページングされたレスポンスを返す API に対して、ページングをイテレータで返す。
+
+    この関数は Async 用にしか用意されていない。
+    理由は、同期の場合レートリミットの制限に引っかかると即時でエラーを返す仕様のため。
+
+    非同期の場合、レートリミットエラーになった際に処理を別のタスクに返す RateLimitManager が用意されている。
     """
     next_token = query.get("next_token")
 
