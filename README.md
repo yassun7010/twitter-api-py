@@ -129,7 +129,7 @@ poetry install
 ### サンプルの実行
 
 ```sh
-poetry run python example/${EXAMPLE_FILE}.py
+poetry run python examples/${EXAMPLE_FILE}.py
 ```
 
 ### 自動テストの実行
