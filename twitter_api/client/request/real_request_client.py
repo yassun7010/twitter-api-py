@@ -86,7 +86,7 @@ class RealRequestClient(RequestClient):
             url=url,
             auth=self._auth if auth else None,
             method=endpoint.method,
-            params=query,
+            params=_remove_none_field(query),
             timeout=self.timeout_sec,
         )
 
@@ -118,8 +118,8 @@ class RealRequestClient(RequestClient):
             auth=self._auth if auth else None,
             method=endpoint.method,
             headers=headers,
-            params=query,
-            json=body,
+            params=_remove_none_field(query),
+            json=_remove_none_field(body),
             timeout=self.timeout_sec,
         )
 
@@ -153,7 +153,7 @@ class RealRequestClient(RequestClient):
             auth=self._auth if auth else None,
             method=endpoint.method,
             headers=headers,
-            params=query,
+            params=_remove_none_field(query),
             timeout=self.timeout_sec,
         )
 
@@ -230,3 +230,10 @@ def _parse_response(
         return response_type(**data)
     except pydantic.ValidationError as error:
         raise TwitterApiResponseValidationError(endpoint, data, error)
+
+
+def _remove_none_field(data: Optional[dict]) -> Optional[dict]:
+    if data is None:
+        return None
+
+    return {k: v for k, v in data.items() if v is not None}

@@ -135,6 +135,7 @@ class TwitterApiRealClient(TwitterApiClient):
                     client_secret=api_secret,
                     token=access_token,
                     token_secret=access_secret,
+                    force_include_body=True,
                 ),
                 oauth_version="1.0a",
                 rate_limit_target="user",
