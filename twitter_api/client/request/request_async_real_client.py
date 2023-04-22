@@ -1,4 +1,4 @@
-from typing import Optional, Type
+from typing import Optional, Self, Type
 
 import httpx
 from authlib.integrations.httpx_client.oauth1_client import OAuth1Auth
@@ -159,3 +159,10 @@ class RequestAsyncRealClient(RequestAsyncClient):
             headers,
             query,
         )
+
+    async def __aenter__(self) -> Self:
+        await self._session.__aenter__()
+        return self
+
+    async def __aexit__(self, exc_type, exc_value, traceback) -> None:
+        await self._session.__aexit__(exc_type, exc_value, traceback)

@@ -1,3 +1,5 @@
+import pytest
+
 from twitter_api.client.twitter_api_async_mock_client import TwitterApiAsyncMockClient
 
 
@@ -49,3 +51,8 @@ class TestTwitterApiAsyncMockClient:
             ),
             TwitterApiAsyncMockClient,
         )
+
+    @pytest.mark.asyncio
+    async def test_client_async_with(self):
+        async with TwitterApiAsyncMockClient.from_oauth2_app_env() as client:
+            assert isinstance(client, TwitterApiAsyncMockClient)

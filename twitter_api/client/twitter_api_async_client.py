@@ -6,7 +6,10 @@ from twitter_api.api.resources.oauth2_invalidate_token import (
     AsyncOauth2InvalidateTokenResources,
     Oauth2InvalidateTokenUrl,
 )
-from twitter_api.api.resources.oauth2_token import Oauth2TokenResources, Oauth2TokenUrl
+from twitter_api.api.resources.oauth2_token import (
+    AsyncOauth2TokenResources,
+    Oauth2TokenUrl,
+)
 from twitter_api.api.resources.v2_dm_conversation_messages import (
     AsyncV2DmConversationMessagesResources,
     V2DmConversationsMessagesUrl,
@@ -94,7 +97,7 @@ class TwitterApiAsyncClient(TwitterApiClient):
     def resource(
         self: Self,
         url: Oauth2TokenUrl,
-    ) -> Oauth2TokenResources:
+    ) -> AsyncOauth2TokenResources:
         ...
 
     @overload
@@ -252,7 +255,7 @@ class TwitterApiAsyncClient(TwitterApiClient):
         """
 
         if url == "https://api.twitter.com/oauth2/token":
-            return Oauth2TokenResources(
+            return AsyncOauth2TokenResources(
                 self._request_client,
             )
         elif url == "https://api.twitter.com/oauth2/invalidate_token":
@@ -542,6 +545,12 @@ class TwitterApiAsyncClient(TwitterApiClient):
                 else cls._get_env(callback_url_env)
             ),
         )
+
+    async def __aenter__(self) -> Self:
+        return self
+
+    async def __aexit__(self, exc_type, exc_value, traceback) -> None:
+        pass
 
     @classmethod
     def _get_env(cls, key: Env[str]) -> str:
