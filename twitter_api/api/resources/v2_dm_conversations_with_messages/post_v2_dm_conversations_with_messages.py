@@ -5,7 +5,7 @@ from twitter_api.api.types.v2_dm_conversation.dm_conversation_message import (
 )
 from twitter_api.api.types.v2_scope import oauth2_scopes
 from twitter_api.api.types.v2_user.user_id import UserId
-from twitter_api.rate_limit.rate_limit_decorator import rate_limit
+from twitter_api.rate_limit.rate_limit import rate_limit
 from twitter_api.types.endpoint import Endpoint
 from twitter_api.types.extra_permissive_model import ExtraPermissiveModel
 from twitter_api.types.http import downcast_dict

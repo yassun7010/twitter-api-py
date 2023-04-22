@@ -6,7 +6,7 @@ from pydantic import Field
 from twitter_api.api.resources.api_resources import ApiResources
 from twitter_api.api.types.v2_rule.rule import Rule
 from twitter_api.api.types.v2_rule.rule_id import RuleId
-from twitter_api.rate_limit.rate_limit_decorator import rate_limit
+from twitter_api.rate_limit.rate_limit import rate_limit
 from twitter_api.types.endpoint import Endpoint
 from twitter_api.types.extra_permissive_model import ExtraPermissiveModel
 from twitter_api.types.http import downcast_dict

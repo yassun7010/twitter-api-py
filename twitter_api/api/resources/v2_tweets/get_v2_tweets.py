@@ -10,7 +10,7 @@ from twitter_api.api.types.v2_tweet.tweet_field import TweetField
 from twitter_api.api.types.v2_tweet.tweet_id import TweetId
 from twitter_api.api.types.v2_tweet.tweet_response_body import TweetsResponseBody
 from twitter_api.api.types.v2_user.user_field import UserField
-from twitter_api.rate_limit.rate_limit_decorator import rate_limit
+from twitter_api.rate_limit.rate_limit import rate_limit
 from twitter_api.types.comma_separatable import CommaSeparatable, comma_separated_str
 from twitter_api.types.endpoint import Endpoint
 

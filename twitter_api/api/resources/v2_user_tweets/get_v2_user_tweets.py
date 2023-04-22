@@ -19,7 +19,7 @@ from twitter_api.api.types.v2_tweet.tweet_id import TweetId
 from twitter_api.api.types.v2_user.user import User
 from twitter_api.api.types.v2_user.user_field import UserField
 from twitter_api.api.types.v2_user.user_id import UserId
-from twitter_api.rate_limit.rate_limit_decorator import rate_limit
+from twitter_api.rate_limit.rate_limit import rate_limit
 from twitter_api.types.comma_separatable import CommaSeparatable, comma_separated_str
 from twitter_api.types.endpoint import Endpoint
 from twitter_api.types.extra_permissive_model import ExtraPermissiveModel
