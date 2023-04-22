@@ -3,6 +3,7 @@ import os
 import pytest
 
 from tests.conftest import synthetic_monitoring_is_disable
+from twitter_api.client.twitter_api_async_mock_client import TwitterApiAsyncMockClient
 from twitter_api.client.twitter_api_mock_client import TwitterApiMockClient
 from twitter_api.client.twitter_api_real_client import TwitterApiRealClient
 from twitter_api.error import TwitterApiOAuthVersionWrong
@@ -42,12 +43,13 @@ class TestMockPostOauthRequestToken:
 
 
 class TestAsyncMockPostOauthRequestToken:
-    def test_mock_post_oauth_request_token(
-        self, oauth2_app_mock_client: TwitterApiMockClient
+    @pytest.mark.asyncio
+    async def test_mock_post_oauth_request_token(
+        self, oauth2_app_async_mock_client: TwitterApiAsyncMockClient
     ):
         with pytest.raises(TwitterApiOAuthVersionWrong):
-            (
-                oauth2_app_mock_client.chain()
+            await (
+                oauth2_app_async_mock_client.chain()
                 .resource("https://api.twitter.com/oauth/request_token")
                 .post(
                     api_key="DUMMY_API_KEY",
