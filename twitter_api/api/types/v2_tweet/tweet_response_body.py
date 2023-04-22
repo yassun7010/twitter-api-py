@@ -19,7 +19,7 @@ from twitter_api.api.types.v2_tweet.tweet import Tweet
 from twitter_api.api.types.v2_tweet.tweet_id import TweetId
 from twitter_api.api.types.v2_user.user import User
 from twitter_api.types.extra_permissive_model import ExtraPermissiveModel
-from twitter_api.types.paring import PageResponseBody
+from twitter_api.types.paging import PageResponseBody
 
 
 class TweetsResponseBodyIncludes(ExtraPermissiveModel):

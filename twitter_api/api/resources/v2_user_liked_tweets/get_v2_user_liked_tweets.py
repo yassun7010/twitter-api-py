@@ -21,7 +21,7 @@ from twitter_api.rate_limit.rate_limit_decorator import rate_limit
 from twitter_api.types.comma_separatable import CommaSeparatable, comma_separated_str
 from twitter_api.types.endpoint import Endpoint
 from twitter_api.types.extra_permissive_model import ExtraPermissiveModel
-from twitter_api.types.paring import (
+from twitter_api.types.paging import (
     PageResponseBody,
     get_flattend_search_response,
     get_search_response_iter,
