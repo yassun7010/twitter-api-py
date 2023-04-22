@@ -28,7 +28,7 @@ class DictRateLimitManager(RateLimitManager):
         self,
         rate_limit_info: RateLimitInfo,
         now: Optional[datetime] = None,
-    ) -> bool:
+    ) -> Optional[float]:
         if now is None:
             now = datetime.now()
 
@@ -47,4 +47,15 @@ class DictRateLimitManager(RateLimitManager):
         del status.request_datetimes[:index]
 
         # 窓に入っているデータの数が、制限を超えていたらリミットオーバ
-        return len(status.request_datetimes) > rate_limit_info.requests
+        if len(status.request_datetimes) > rate_limit_info.requests:
+            # 窓からはみ出ている古いデータの時間幅を待ち時間として返す。
+            wait_time_seconds = (
+                status.request_datetimes[
+                    len(status.request_datetimes) - rate_limit_info.requests
+                ]
+                - status.request_datetimes[0]
+            ).total_seconds()
+
+            return max(wait_time_seconds, 0)
+        else:
+            return None

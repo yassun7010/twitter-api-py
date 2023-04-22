@@ -53,5 +53,5 @@ class TestDictRateLimitManager:
                 rate_limit_info=rate_limit_info,
                 now=start_datetime + timedelta(seconds=len(request_datetimes)),
             )
-            is result
-        )
+            is not None
+        ) is result

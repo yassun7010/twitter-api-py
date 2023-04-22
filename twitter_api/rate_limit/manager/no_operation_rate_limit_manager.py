@@ -16,5 +16,5 @@ class NoOperationRateLimitManager(RateLimitManager):
         self,
         rate_limit_info: RateLimitInfo,
         now: Optional[datetime] = None,
-    ) -> bool:
-        return False
+    ) -> Optional[float]:
+        return None

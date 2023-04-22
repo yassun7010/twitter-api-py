@@ -1,8 +1,13 @@
 from abc import ABCMeta, abstractmethod
+from contextlib import asynccontextmanager, contextmanager
 from datetime import datetime
+from logging import getLogger
 from typing import Optional
 
+from twitter_api.error import RateLimitOverError
 from twitter_api.rate_limit.rate_limit_info import RateLimitInfo
+
+logger = getLogger(__file__)
 
 
 class RateLimitManager(metaclass=ABCMeta):
@@ -11,5 +16,30 @@ class RateLimitManager(metaclass=ABCMeta):
         self,
         rate_limit_info: RateLimitInfo,
         now: Optional[datetime] = None,
-    ) -> bool:
+    ) -> Optional[float]:
+        """
+        レートリミットオーバーかを調べ、超えている場合は必要な待ち時間[秒]を返す。
+        """
         ...
+
+    @asynccontextmanager
+    async def handle_rate_limit_exceeded_async(self, rate_limit_info: RateLimitInfo):
+        """
+        非同期的な TwitterApiAsyncClient を用いている場合のレートリミットの処理方法。
+        """
+
+        if self.check_limit_over(rate_limit_info) is not None:
+            raise RateLimitOverError(rate_limit_info)
+
+        yield
+
+    @contextmanager
+    def handle_rate_limit_exceeded_sync(self, rate_limit_info: RateLimitInfo):
+        """
+        同期的な TwitterApiClient を用いている場合のレートリミットの処理方法。
+        """
+
+        if self.check_limit_over(rate_limit_info) is not None:
+            raise RateLimitOverError(rate_limit_info)
+
+        yield
