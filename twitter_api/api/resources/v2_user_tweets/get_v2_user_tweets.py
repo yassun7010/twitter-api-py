@@ -111,3 +111,12 @@ class GetV2UserTweetsResources(ApiResources):
             query=_make_query(query) if query is not None else None,
             response_type=GetV2UserTweetsResponseBody,
         )
+
+
+class AsyncGetV2UserTweetsResources(GetV2UserTweetsResources):
+    async def get(
+        self,
+        id: UserId,
+        query: Optional[GetV2UserTweetsQueryParameters] = None,
+    ) -> GetV2UserTweetsResponseBody:
+        return super().get(id, query)

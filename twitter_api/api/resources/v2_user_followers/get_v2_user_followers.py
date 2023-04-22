@@ -80,3 +80,12 @@ class GetV2UserFollowersResources(ApiResources):
             query=_make_query(query) if query is not None else None,
             response_type=GetV2UserFollowersResponseBody,
         )
+
+
+class AsyncGetV2UserFollowersResources(GetV2UserFollowersResources):
+    async def get(
+        self,
+        id: UserId,
+        query: Optional[GetV2UserFollowersQueryParameters] = None,
+    ) -> GetV2UserFollowersResponseBody:
+        return super().get(id, query)

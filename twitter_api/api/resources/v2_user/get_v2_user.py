@@ -68,3 +68,12 @@ class GetV2UserResources(ApiResources):
             query=_make_query(query) if query is not None else None,
             response_type=GetV2UserResponseBody,
         )
+
+
+class AsyncGetV2UserResources(GetV2UserResources):
+    async def get(
+        self,
+        id: UserId,
+        query: Optional[GetV2UserQueryParameters] = None,
+    ) -> GetV2UserResponseBody:
+        return super().get(id, query)

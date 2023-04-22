@@ -14,6 +14,7 @@ from twitter_api.api.types.v2_poll.poll_field import PollField
 from twitter_api.api.types.v2_tweet.tweet import Tweet
 from twitter_api.api.types.v2_tweet.tweet_field import TweetField
 from twitter_api.api.types.v2_user.user_field import UserField
+from twitter_api.client.twitter_api_async_mock_client import TwitterApiAsyncMockClient
 from twitter_api.client.twitter_api_mock_client import TwitterApiMockClient
 from twitter_api.client.twitter_api_real_client import TwitterApiRealClient
 from twitter_api.types.extra_permissive_model import get_extra_fields
@@ -117,3 +118,30 @@ class TestMockGetV2Tweets:
             .request("https://api.twitter.com/2/tweets")
             .get(all_fields)
         ) == response
+
+    @pytest.mark.asyncio
+    @pytest.mark.parametrize(
+        "json_filename",
+        [
+            "get_v2_tweets_response_all_fields.json",
+        ],
+    )
+    async def test_async_mock_get_v2_tweets(
+        self,
+        mock_oauth2_app_async_client: TwitterApiAsyncMockClient,
+        all_fields: GetV2TweetsQueryParameters,
+        json_filename: str,
+    ):
+        response = GetV2TweetsResponseBody.parse_file(
+            json_test_data(json_filename),
+        )
+
+        assert (
+            await (
+                mock_oauth2_app_async_client.chain()
+                .inject_get_response_body("https://api.twitter.com/2/tweets", response)
+                .request("https://api.twitter.com/2/tweets")
+                .get(all_fields)
+            )
+            == response
+        )

@@ -55,3 +55,17 @@ class PostOauth2InvalidateTokenResources(ApiResources):
             },
             query=downcast_dict(query),
         )
+
+
+class AsyncPostOauth2InvalidateTokenResources(PostOauth2InvalidateTokenResources):
+    async def post(
+        self,
+        api_key: ApiKey,
+        api_secret: ApiSecret,
+        query: PostOauth2InvalidateTokenQueryParameters,
+    ) -> PostOauth2InvalidateTokenResponseBody:
+        return super().post(
+            api_key,
+            api_secret,
+            query,
+        )

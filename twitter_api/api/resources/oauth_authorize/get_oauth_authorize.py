@@ -28,3 +28,11 @@ class GetOauthAuthorizeResources(RequestClient):
         refer: https://developer.twitter.com/en/docs/authentication/api-reference/authorize
         """
         ...
+
+
+class AsyncGetOauthAuthorizeResources(GetOauthAuthorizeResources):
+    async def get(
+        self,
+        query: Optional[GetOauthAuthorizeQueryParameters] = None,
+    ) -> dict:
+        return super().get(query)

@@ -48,3 +48,17 @@ class PostV2DmConversationsWithParticipantMessagesResources(ApiResources):
             body=downcast_dict(request_body),
             response_type=PostV2DmConversationsWithParticipantMessagesResponseBody,
         )
+
+
+class AsyncPostV2DmConversationsWithParticipantMessagesResources(
+    PostV2DmConversationsWithParticipantMessagesResources
+):
+    async def post(
+        self,
+        participant_id: UserId,
+        request_body: PostV2DmConversationsWithParticipantMessagesRequestBody,
+    ) -> PostV2DmConversationsWithParticipantMessagesResponseBody:
+        return super().post(
+            participant_id,
+            request_body,
+        )

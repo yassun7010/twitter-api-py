@@ -76,3 +76,13 @@ class GetV2TweetRetweetedByResources(ApiResources):
             url=ENDPOINT.url.replace(":id", id),
             query=_make_query(query) if query is not None else None,
         )
+
+
+class AsyncGetV2TweetRetweetedByResources(GetV2TweetRetweetedByResources):
+    async def get(
+        self, id: TweetId, query: Optional[GetV2TweetRetweetedByQueryParameters] = None
+    ) -> GetV2TweetRetweetedByResponseBody:
+        return super().get(
+            id,
+            query,
+        )

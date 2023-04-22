@@ -83,3 +83,10 @@ class PostV2TweetsResources(ApiResources):
             response_type=PostV2TweetsResponseBody,
             body=downcast_dict(request_body),
         )
+
+
+class AsyncPostV2TweetsResources(PostV2TweetsResources):
+    async def post(
+        self, request_body: PostV2TweetsRequestBody
+    ) -> PostV2TweetsResponseBody:
+        return super().post(request_body)

@@ -84,3 +84,10 @@ class GetV2TweetsSearchRecentResources(ApiResources):
             response_type=GetV2TweetsSearchRecentResponseBody,
             query=_make_query(query) if query is not None else None,
         )
+
+
+class AsyncGetV2TweetsSearchRecentResources(GetV2TweetsSearchRecentResources):
+    async def get(
+        self, query: GetV2TweetsSearchRecentQueryParameters
+    ) -> GetV2TweetsSearchRecentResponseBody:
+        return super().get(query)

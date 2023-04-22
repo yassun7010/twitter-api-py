@@ -65,3 +65,8 @@ class GetV2UsersResources(ApiResources):
             query=_make_query(query),
             response_type=GetV2UsersResponseBody,
         )
+
+
+class AsyncGetV2UsersResources(GetV2UsersResources):
+    async def get(self, query: GetV2UsersQueryParameters) -> GetV2UsersResponseBody:
+        return super().get(query)

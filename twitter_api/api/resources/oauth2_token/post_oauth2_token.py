@@ -52,3 +52,17 @@ class PostOauth2TokenResources(ApiResources):
             },
             query=downcast_dict(query),
         )
+
+
+class AsyncPostOauth2TokenResources(PostOauth2TokenResources):
+    async def post(
+        self,
+        api_key: ApiKey,
+        api_secret: ApiSecret,
+        query: PostOauth2TokenQueryParameters,
+    ) -> PostOauth2TokenResponseBody:
+        return super().post(
+            api_key,
+            api_secret,
+            query,
+        )

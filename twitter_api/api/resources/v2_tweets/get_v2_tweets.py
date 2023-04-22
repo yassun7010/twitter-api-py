@@ -1,26 +1,18 @@
 from typing import NotRequired, Optional, TypedDict
 
-from pydantic import Field
-
 from twitter_api.api.resources.api_resources import ApiResources
 from twitter_api.api.types.v2_expansion import Expansion
-from twitter_api.api.types.v2_media.media import Media
 from twitter_api.api.types.v2_media.media_field import MediaField
-from twitter_api.api.types.v2_place.place import Place
 from twitter_api.api.types.v2_place.place_field import PlaceField
-from twitter_api.api.types.v2_poll.poll import Poll
 from twitter_api.api.types.v2_poll.poll_field import PollField
 from twitter_api.api.types.v2_scope import oauth2_scopes
-from twitter_api.api.types.v2_tweet.tweet import Tweet
 from twitter_api.api.types.v2_tweet.tweet_field import TweetField
 from twitter_api.api.types.v2_tweet.tweet_id import TweetId
 from twitter_api.api.types.v2_tweet.tweet_response_body import TweetsResponseBody
-from twitter_api.api.types.v2_user.user import User
 from twitter_api.api.types.v2_user.user_field import UserField
 from twitter_api.rate_limit.rate_limit_decorator import rate_limit
 from twitter_api.types.comma_separatable import CommaSeparatable, comma_separated_str
 from twitter_api.types.endpoint import Endpoint
-from twitter_api.types.extra_permissive_model import ExtraPermissiveModel
 
 ENDPOINT = Endpoint("GET", "https://api.twitter.com/2/tweets")
 
@@ -72,3 +64,8 @@ class GetV2TweetsResources(ApiResources):
             query=_make_query(query),
             response_type=GetV2TweetsResponseBody,
         )
+
+
+class AsyncGetV2TweetsResources(GetV2TweetsResources):
+    async def get(self, query: GetV2TweetsQueryParameters) -> GetV2TweetsResponseBody:
+        return super().get(query)

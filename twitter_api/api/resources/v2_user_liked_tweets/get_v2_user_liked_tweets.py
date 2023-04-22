@@ -95,3 +95,12 @@ class GetV2UserLikedTweetsResources(ApiResources):
             query=_make_query(query) if query is not None else None,
             response_type=GetV2UserLikedTweetsResponseBody,
         )
+
+
+class AsyncGetV2UserLikedTweetsResources(GetV2UserLikedTweetsResources):
+    async def get(
+        self,
+        id: UserId,
+        query: Optional[GetV2UserLikedTweetsQueryParameters] = None,
+    ) -> GetV2UserLikedTweetsResponseBody:
+        return super().get(id, query)

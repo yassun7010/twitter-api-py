@@ -56,3 +56,17 @@ class PostOauthRequestTokenResources(ApiResources):
             response_type=PostOauthRequestTokenResponseBody,
             query=query,  # type: ignore
         )
+
+
+class AsyncPostOauthRequestTokenResources(PostOauthRequestTokenResources):
+    async def post(
+        self,
+        api_key: ApiKey,
+        api_secret: ApiSecret,
+        query: PostOauthRequestTokenQueryParameters,
+    ) -> PostOauthRequestTokenResponseBody:
+        return super().post(
+            api_key,
+            api_secret,
+            query,
+        )

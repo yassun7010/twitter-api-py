@@ -48,3 +48,15 @@ class PostV2DmConversationMessagesResources(ApiResources):
             body=downcast_dict(request_body),
             response_type=PostV2DmConversationMessagesResponseBody,
         )
+
+
+class AsyncPostV2DmConversationMessagesResources(PostV2DmConversationMessagesResources):
+    async def post(
+        self,
+        dm_conversation_id: DmConversationId,
+        request_body: PostV2DmConversationMessagesRequestBody,
+    ) -> PostV2DmConversationMessagesResponseBody:
+        return super().post(
+            dm_conversation_id,
+            request_body,
+        )

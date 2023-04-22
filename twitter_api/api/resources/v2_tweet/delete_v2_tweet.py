@@ -37,3 +37,11 @@ class DeleteV2TweetResources(ApiResources):
             response_type=DeleteV2TweetResponseBody,
             url=ENDPOINT.url.replace(":id", id),
         )
+
+
+class AsyncDeleteV2TweetResources(DeleteV2TweetResources):
+    async def delete(
+        self,
+        id: TweetId,
+    ) -> DeleteV2TweetResponseBody:
+        return super().delete(id)

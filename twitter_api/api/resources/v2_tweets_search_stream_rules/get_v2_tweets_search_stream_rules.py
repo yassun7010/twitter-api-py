@@ -48,3 +48,11 @@ class GetV2TweetsSearchStreamRulesResources(ApiResources):
             response_type=GetV2TweetsSearchStreamRulesResponseBody,
             query=downcast_dict(query),
         )
+
+
+class AsyncGetV2TweetsSearchStreamRulesResources(GetV2TweetsSearchStreamRulesResources):
+    async def get(
+        self,
+        query: Optional[GetV2TweetsSearchStreamRulesQueryParameters] = None,
+    ) -> GetV2TweetsSearchStreamRulesResponseBody:
+        return super().get(query)

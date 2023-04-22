@@ -50,3 +50,12 @@ class PostV2UserRetweetsResources(ApiResources):
             body=downcast_dict(request_body),
             response_type=PostV2UserRetweetsResponseBody,
         )
+
+
+class AsyncPostV2UserRetweetsResources(PostV2UserRetweetsResources):
+    async def post(
+        self,
+        id: UserId,
+        request_body: PostV2UserRetweetsRequestBody,
+    ) -> PostV2UserRetweetsResponseBody:
+        return super().post(id, request_body)

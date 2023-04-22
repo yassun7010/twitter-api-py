@@ -23,3 +23,8 @@ class PostOauthAccessTokenResources:
         """
 
         return self._session.fetch_token(self._authorization_response_url)
+
+
+class AsyncPostOauthAccessTokenResources(PostOauthAccessTokenResources):
+    async def post(self) -> OAuth1AccessToken:
+        return super().post()

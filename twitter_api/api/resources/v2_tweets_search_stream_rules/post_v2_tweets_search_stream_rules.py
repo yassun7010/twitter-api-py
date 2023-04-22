@@ -81,3 +81,14 @@ class PostV2TweetsSearchStreamRulesResources(ApiResources):
             query=downcast_dict(query),
             body=downcast_dict(request_body),
         )
+
+
+class AsyncPostV2TweetsSearchStreamRulesResources(
+    PostV2TweetsSearchStreamRulesResources
+):
+    async def post(
+        self,
+        request_body: PostV2TweetsSearchStreamRulesRequestBody,
+        query: Optional[PostV2TweetsSearchStreamRulesQueryParameters] = None,
+    ) -> PostV2TweetsSearchStreamRulesResponseBody:
+        return super().post(request_body, query)

@@ -50,3 +50,12 @@ class PostV2UserFollowingResources(ApiResources):
             body=downcast_dict(request_body),
             response_type=PostV2UserFollowingResponseBody,
         )
+
+
+class AsyncPostV2UserFollowingResources(PostV2UserFollowingResources):
+    async def post(
+        self,
+        id: UserId,
+        request_body: PostV2UserFollowingRequestBody,
+    ) -> PostV2UserFollowingResponseBody:
+        return super().post(id, request_body)
