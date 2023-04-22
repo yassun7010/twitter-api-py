@@ -37,6 +37,9 @@ async def get_search_response_iter(
     ],
     query: AnyQueryParameters,
 ) -> AsyncGenerator[AnyPageResponseBody, None]:
+    """
+    ページングされたレスポンスを返す API に対して、ページングをイテレータで返す。
+    """
     next_token = query.get("next_token")
 
     while True:
@@ -58,6 +61,9 @@ async def get_flattend_search_response(
     ],
     query: AnyQueryParameters,
 ) -> AnyPageResponseBody:
+    """
+    ページングされたレスポンスを返す API に対して、全てのデータを取得し、結合した状態で返す。
+    """
     paging = get_search_response_iter(get_func, query)
     first = await paging.__anext__()
 
