@@ -8,11 +8,11 @@ import os
 import sys
 from textwrap import dedent
 
-from twitter_api.api.types.v2_oauth2.twitter_oauth2_access_token_client import (
-    TwitterOAuth2AccessTokenClient,
-)
 from twitter_api.api.types.v2_scope import ALL_SCOPES
 from twitter_api.client import TwitterApiClient
+from twitter_api.client.oauth_flow.twitter_oauth2_access_token_client import (
+    TwitterOAuth2AccessTokenClient,
+)
 from twitter_api.error import TwitterApiError
 
 YOUR_CALLBACK_URL = os.environ["CALLBACK_URL"]

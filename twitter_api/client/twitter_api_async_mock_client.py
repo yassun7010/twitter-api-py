@@ -53,7 +53,7 @@ class TwitterApiAsyncMockClient(TwitterApiMockClient, TwitterApiAsyncClient):
         scope: list[Scope],
         rate_limit_manager: Optional[RateLimitManager] = None,
     ):
-        from twitter_api.api.types.v2_oauth2.twitter_oauth2_authorization_client import (
+        from twitter_api.client.oauth_flow.twitter_oauth2_authorization_client import (
             TwitterOAuth2AuthorizeClient,
         )
         from twitter_api.client.oauth_session.twitter_oauth2_async_mock_session import (
@@ -88,7 +88,7 @@ class TwitterApiAsyncMockClient(TwitterApiMockClient, TwitterApiAsyncClient):
         callback_url: CallbackUrl,
         rate_limit_manager: Optional[RateLimitManager] = None,
     ):
-        from twitter_api.api.types.oauth1.twitter_oauth1_request_token_client import (
+        from twitter_api.client.oauth_flow.twitter_oauth1_request_token_client import (
             TwitterOAuth1RequestTokenClient,
         )
         from twitter_api.client.oauth_session.twitter_oauth1_async_mock_session import (

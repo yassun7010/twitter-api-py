@@ -2,12 +2,19 @@ from typing import Optional
 
 from authlib.integrations.httpx_client.oauth1_client import OAuth1Client
 
-from twitter_api.api.resources.oauth_access_token import OauthAccessTokenUrl
-from twitter_api.api.resources.oauth_request_token import OauthRequestTokenUrl
 from twitter_api.api.types.oauth1.oauth1_authorization import OAuth1Authorization
-from twitter_api.api.types.oauth1.oauth1_request_url import OAuth1RequestUrl
-from twitter_api.api.types.oauth1.twitter_oauth1_authorization_client import (
+from twitter_api.client.oauth_flow.twitter_oauth1_authorization_client import (
     TwitterOAuth1AuthorizeClient,
+)
+from twitter_api.client.oauth_session.resources.oauth_access_token import (
+    OauthAccessTokenUrl,
+)
+from twitter_api.client.oauth_session.resources.oauth_authenticate import (
+    OauthAuthenticateUrl,
+)
+from twitter_api.client.oauth_session.resources.oauth_authorize import OauthAuthorizeUrl
+from twitter_api.client.oauth_session.resources.oauth_request_token import (
+    OauthRequestTokenUrl,
 )
 from twitter_api.client.oauth_session.twitter_oauth1_session import TwitterOAuth1Session
 from twitter_api.rate_limit.manager.rate_limit_manager import RateLimitManager
@@ -47,7 +54,7 @@ class TwitterOAuth1RealSession(TwitterOAuth1Session):
 
     def generate_authorization_url(
         self,
-        url: OAuth1RequestUrl,
+        url: OauthAuthenticateUrl | OauthAuthorizeUrl,
     ) -> OAuth1Authorization:
         return OAuth1Authorization(
             authorization_url=self._session.create_authorization_url(url),

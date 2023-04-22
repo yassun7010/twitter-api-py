@@ -4,6 +4,7 @@ import os
 import random
 import re
 import string
+from time import time
 
 UNICODE_ASCII_CHARACTER_SET = string.ascii_letters + string.digits
 
@@ -11,6 +12,10 @@ UNICODE_ASCII_CHARACTER_SET = string.ascii_letters + string.digits
 def generate_token(length=30, chars=UNICODE_ASCII_CHARACTER_SET):
     rand = random.SystemRandom()
     return "".join(rand.choice(chars) for _ in range(length))
+
+
+def generate_timestamp():
+    return str(int(time()))
 
 
 def generate_code_verifier() -> str:

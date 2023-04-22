@@ -4,6 +4,9 @@ from authlib.integrations.httpx_client.oauth1_client import OAuth1Auth
 from authlib.integrations.httpx_client.oauth2_client import OAuth2Auth
 
 from twitter_api.api.types.v2_scope import Scope
+from twitter_api.client.oauth_flow.twitter_oauth1_request_token_client import (
+    TwitterOAuth1RequestTokenClient,
+)
 from twitter_api.rate_limit.manager.rate_limit_manager import RateLimitManager
 from twitter_api.types.oauth import (
     AccessSecret,
@@ -102,7 +105,7 @@ class TwitterApiRealClient(TwitterApiClient):
         callback_url: CallbackUrl,
         scope: list[Scope],
     ):
-        from twitter_api.api.types.v2_oauth2.twitter_oauth2_authorization_client import (
+        from twitter_api.client.oauth_flow.twitter_oauth2_authorization_client import (
             TwitterOAuth2AuthorizeClient,
         )
         from twitter_api.client.oauth_session.twitter_oauth2_real_session import (
@@ -152,9 +155,6 @@ class TwitterApiRealClient(TwitterApiClient):
         callback_url: CallbackUrl,
         rate_limit_manager: Optional[RateLimitManager] = None,
     ):
-        from twitter_api.api.types.oauth1.twitter_oauth1_request_token_client import (
-            TwitterOAuth1RequestTokenClient,
-        )
         from twitter_api.client.oauth_session.twitter_oauth1_real_session import (
             TwitterOAuth1RealSession,
         )

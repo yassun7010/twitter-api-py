@@ -8,10 +8,6 @@ from twitter_api.api.resources.oauth2_token import Oauth2TokenUrl
 from twitter_api.api.resources.oauth2_token.post_oauth2_token import (
     PostOauth2TokenResponseBody,
 )
-from twitter_api.api.resources.oauth_request_token import OauthRequestTokenUrl
-from twitter_api.api.resources.oauth_request_token.post_oauth_request_token import (
-    PostOauthRequestTokenResponseBody,
-)
 from twitter_api.api.resources.v2_dm_conversation_messages import (
     V2DmConversationsMessagesUrl,
 )
@@ -265,14 +261,6 @@ class TwitterApiMockClient(TwitterApiClient):
     @overload
     def inject_post_response_body(
         self,
-        url: OauthRequestTokenUrl,
-        response_body: Union[PostOauthRequestTokenResponseBody, TwitterApiError],
-    ) -> Self:
-        ...
-
-    @overload
-    def inject_post_response_body(
-        self,
         url: Oauth2InvalidateTokenUrl,
         response_body: Union[
             PostOauth2InvalidateTokenResponseBody,
@@ -423,7 +411,7 @@ class TwitterApiMockClient(TwitterApiClient):
         scope: list[Scope],
         rate_limit_manager: Optional[RateLimitManager] = None,
     ):
-        from twitter_api.api.types.v2_oauth2.twitter_oauth2_authorization_client import (
+        from twitter_api.client.oauth_flow.twitter_oauth2_authorization_client import (
             TwitterOAuth2AuthorizeClient,
         )
         from twitter_api.client.oauth_session.twitter_oauth2_mock_session import (
@@ -458,7 +446,7 @@ class TwitterApiMockClient(TwitterApiClient):
         callback_url: CallbackUrl,
         rate_limit_manager: Optional[RateLimitManager] = None,
     ):
-        from twitter_api.api.types.oauth1.twitter_oauth1_request_token_client import (
+        from twitter_api.client.oauth_flow.twitter_oauth1_request_token_client import (
             TwitterOAuth1RequestTokenClient,
         )
         from twitter_api.client.oauth_session.twitter_oauth1_mock_session import (

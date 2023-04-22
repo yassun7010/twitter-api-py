@@ -1,7 +1,7 @@
 import os
 from typing import Optional
 
-from twitter_api.api.resources.oauth_access_token import (
+from twitter_api.client.oauth_session.resources.oauth_access_token import (
     OauthAccessTokenResources,
     OauthAccessTokenUrl,
 )

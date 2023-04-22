@@ -7,10 +7,6 @@ from twitter_api.api.resources.oauth2_invalidate_token import (
     Oauth2InvalidateTokenUrl,
 )
 from twitter_api.api.resources.oauth2_token import Oauth2TokenResources, Oauth2TokenUrl
-from twitter_api.api.resources.oauth_request_token import (
-    OauthRequestTokenResources,
-    OauthRequestTokenUrl,
-)
 from twitter_api.api.resources.v2_dm_conversation_messages import (
     V2DmConversationMessagesResources,
     V2DmConversationsMessagesUrl,
@@ -93,13 +89,6 @@ class TwitterApiClient(Chainable, metaclass=ABCMeta):
     @property
     @abstractmethod
     def _request_client(self) -> RequestClient:
-        ...
-
-    @overload
-    def resource(
-        self: Self,
-        url: OauthRequestTokenUrl,
-    ) -> OauthRequestTokenResources:
         ...
 
     @overload
@@ -238,7 +227,6 @@ class TwitterApiClient(Chainable, metaclass=ABCMeta):
     def resource(
         self: Self,
         url: Union[
-            OauthRequestTokenUrl,
             Oauth2InvalidateTokenUrl,
             Oauth2TokenUrl,
             V2TweetRetweetedByUrl,
@@ -264,11 +252,7 @@ class TwitterApiClient(Chainable, metaclass=ABCMeta):
         操作したい URI を指定し、実行可能な操作方法を返却します。
         """
 
-        if url == "https://api.twitter.com/oauth/request_token":
-            return OauthRequestTokenResources(
-                self._request_client,
-            )
-        elif url == "https://api.twitter.com/oauth2/token":
+        if url == "https://api.twitter.com/oauth2/token":
             return Oauth2TokenResources(
                 self._request_client,
             )

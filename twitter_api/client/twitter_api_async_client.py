@@ -7,10 +7,6 @@ from twitter_api.api.resources.oauth2_invalidate_token import (
     Oauth2InvalidateTokenUrl,
 )
 from twitter_api.api.resources.oauth2_token import Oauth2TokenResources, Oauth2TokenUrl
-from twitter_api.api.resources.oauth_request_token import (
-    AsyncOauthRequestTokenResources,
-    OauthRequestTokenUrl,
-)
 from twitter_api.api.resources.v2_dm_conversation_messages import (
     AsyncV2DmConversationMessagesResources,
     V2DmConversationsMessagesUrl,
@@ -23,11 +19,7 @@ from twitter_api.api.resources.v2_dm_conversations_with_messages import (
     AsyncV2DmConversationsWithParticipantMessagesResources,
     V2DmConversationsWithParticipantMessagesUrl,
 )
-from twitter_api.api.resources.v2_tweet import (
-    AsyncV2TweetResources,
-    V2TweetResources,
-    V2TweetUrl,
-)
+from twitter_api.api.resources.v2_tweet import AsyncV2TweetResources, V2TweetUrl
 from twitter_api.api.resources.v2_tweet_retweeted_by import (
     AsyncV2TweetRetweetedByRerources,
     V2TweetRetweetedByUrl,
@@ -96,13 +88,6 @@ class TwitterApiAsyncClient(TwitterApiClient):
     @property
     @abstractmethod
     def _request_client(self) -> RequestAsyncClient:
-        ...
-
-    @overload
-    def resource(
-        self: Self,
-        url: OauthRequestTokenUrl,
-    ) -> AsyncOauthRequestTokenResources:
         ...
 
     @overload
@@ -241,7 +226,6 @@ class TwitterApiAsyncClient(TwitterApiClient):
     def resource(
         self: Self,
         url: Union[
-            OauthRequestTokenUrl,
             Oauth2InvalidateTokenUrl,
             Oauth2TokenUrl,
             V2TweetRetweetedByUrl,
@@ -267,11 +251,7 @@ class TwitterApiAsyncClient(TwitterApiClient):
         操作したい URI を指定し、実行可能な操作方法を返却します。
         """
 
-        if url == "https://api.twitter.com/oauth/request_token":
-            return AsyncOauthRequestTokenResources(
-                self._request_client,
-            )
-        elif url == "https://api.twitter.com/oauth2/token":
+        if url == "https://api.twitter.com/oauth2/token":
             return Oauth2TokenResources(
                 self._request_client,
             )

@@ -102,7 +102,7 @@ class TwitterApiAsyncRealClient(TwitterApiAsyncClient):
         callback_url: CallbackUrl,
         scope: list[Scope],
     ):
-        from twitter_api.api.types.v2_oauth2.twitter_oauth2_authorization_client import (
+        from twitter_api.client.oauth_flow.twitter_oauth2_authorization_client import (
             TwitterOAuth2AuthorizeClient,
         )
         from twitter_api.client.oauth_session.twitter_oauth2_real_session import (
@@ -152,7 +152,7 @@ class TwitterApiAsyncRealClient(TwitterApiAsyncClient):
         callback_url: CallbackUrl,
         rate_limit_manager: Optional[RateLimitManager] = None,
     ):
-        from twitter_api.api.types.oauth1.twitter_oauth1_request_token_client import (
+        from twitter_api.client.oauth_flow.twitter_oauth1_request_token_client import (
             TwitterOAuth1RequestTokenClient,
         )
         from twitter_api.client.oauth_session.twitter_oauth1_real_session import (

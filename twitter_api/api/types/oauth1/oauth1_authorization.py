@@ -66,7 +66,7 @@ class OAuth1Authorization(Chainable):
         引数の input_url に値を入れると、プロンプトで問い合わせを行わない。
         """
 
-        from twitter_api.api.types.oauth1.twitter_oauth1_access_token_client import (
+        from twitter_api.client.oauth_flow.twitter_oauth1_access_token_client import (
             TwitterOAuth1AccessTokenClient,
         )
 
