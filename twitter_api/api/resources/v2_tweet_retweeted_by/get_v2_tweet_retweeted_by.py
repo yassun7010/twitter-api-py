@@ -17,8 +17,8 @@ from twitter_api.types.endpoint import Endpoint
 from twitter_api.types.extra_permissive_model import ExtraPermissiveModel
 from twitter_api.types.paging import (
     PageResponseBody,
-    get_flattend_search_response,
-    get_search_response_iter,
+    get_flattend_paging_response,
+    get_paging_response_iter,
 )
 
 ENDPOINT = Endpoint("GET", "https://api.twitter.com/2/tweets/:id/retweeted_by")
@@ -122,9 +122,9 @@ class AsyncGetV2TweetRetweetedByResources(GetV2TweetRetweetedByResources):
     async def get_iter(
         self, id: TweetId, query: GetV2TweetRetweetedByQueryParameters
     ) -> AsyncGenerator[GetV2TweetRetweetedByResponseBody, None]:
-        return get_search_response_iter(partial(self.get, id), query)
+        return get_paging_response_iter(partial(self.get, id), query)
 
     async def get_flattened(
         self, id: TweetId, query: GetV2TweetRetweetedByQueryParameters
     ) -> GetV2TweetRetweetedByResponseBody:
-        return await get_flattend_search_response(partial(self.get, id), query)
+        return await get_flattend_paging_response(partial(self.get, id), query)

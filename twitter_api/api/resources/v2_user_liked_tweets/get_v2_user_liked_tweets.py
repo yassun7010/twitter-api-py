@@ -23,8 +23,8 @@ from twitter_api.types.endpoint import Endpoint
 from twitter_api.types.extra_permissive_model import ExtraPermissiveModel
 from twitter_api.types.paging import (
     PageResponseBody,
-    get_flattend_search_response,
-    get_search_response_iter,
+    get_flattend_paging_response,
+    get_paging_response_iter,
 )
 
 ENDPOINT = Endpoint("GET", "https://api.twitter.com/2/users/:id/liked_tweets")
@@ -149,9 +149,9 @@ class AsyncGetV2UserLikedTweetsResources(GetV2UserLikedTweetsResources):
     async def get_iter(
         self, id: UserId, query: GetV2UserLikedTweetsQueryParameters
     ) -> AsyncGenerator[GetV2UserLikedTweetsResponseBody, None]:
-        return get_search_response_iter(partial(self.get, id), query)
+        return get_paging_response_iter(partial(self.get, id), query)
 
     async def get_flattened(
         self, id: UserId, query: GetV2UserLikedTweetsQueryParameters
     ) -> GetV2UserLikedTweetsResponseBody:
-        return await get_flattend_search_response(partial(self.get, id), query)
+        return await get_flattend_paging_response(partial(self.get, id), query)

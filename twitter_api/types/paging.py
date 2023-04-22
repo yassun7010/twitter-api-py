@@ -30,7 +30,7 @@ AnyPageResponseBody = TypeVar(
 )
 
 
-async def get_search_response_iter(
+async def get_paging_response_iter(
     get_func: Callable[
         [AnyQueryParameters],
         Coroutine[Any, Any, AnyPageResponseBody],
@@ -54,7 +54,7 @@ async def get_search_response_iter(
             return
 
 
-async def get_flattend_search_response(
+async def get_flattend_paging_response(
     get_func: Callable[
         [AnyQueryParameters],
         Coroutine[Any, Any, AnyPageResponseBody],
@@ -64,7 +64,7 @@ async def get_flattend_search_response(
     """
     ページングされたレスポンスを返す API に対して、最後までデータを読み取り、結合した状態で返す。
     """
-    paging = get_search_response_iter(get_func, query)
+    paging = get_paging_response_iter(get_func, query)
     first = await paging.__anext__()
 
     async for page in paging:

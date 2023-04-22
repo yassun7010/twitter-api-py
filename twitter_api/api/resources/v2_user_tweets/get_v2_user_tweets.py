@@ -25,8 +25,8 @@ from twitter_api.types.endpoint import Endpoint
 from twitter_api.types.extra_permissive_model import ExtraPermissiveModel
 from twitter_api.types.paging import (
     PageResponseBody,
-    get_flattend_search_response,
-    get_search_response_iter,
+    get_flattend_paging_response,
+    get_paging_response_iter,
 )
 from twitter_api.utils.datetime import rfc3339
 from twitter_api.utils.functional import map_optional
@@ -159,9 +159,9 @@ class AsyncGetV2UserTweetsResources(GetV2UserTweetsResources):
     async def get_iter(
         self, id: UserId, query: GetV2UserTweetsQueryParameters
     ) -> AsyncGenerator[GetV2UserTweetsResponseBody, None]:
-        return get_search_response_iter(partial(self.get, id), query)
+        return get_paging_response_iter(partial(self.get, id), query)
 
     async def get_flattened(
         self, id: UserId, query: GetV2UserTweetsQueryParameters
     ) -> GetV2UserTweetsResponseBody:
-        return await get_flattend_search_response(partial(self.get, id), query)
+        return await get_flattend_paging_response(partial(self.get, id), query)
