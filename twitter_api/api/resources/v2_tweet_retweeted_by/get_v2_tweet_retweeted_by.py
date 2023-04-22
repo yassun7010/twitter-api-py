@@ -111,12 +111,12 @@ class GetV2TweetRetweetedByResources(ApiResources):
             query=_make_query(query) if query is not None else None,
         )
 
-    def get_paging(
+    def get_paging_responses(
         self, id: TweetId, query: Optional[GetV2TweetRetweetedByQueryParameters] = None
     ) -> Generator[GetV2TweetRetweetedByResponseBody, None, None]:
         return get_paging_response_iter_sync(partial(self.get, id), query)
 
-    def get_collected_paging(
+    def get_collected_response(
         self, id: TweetId, query: Optional[GetV2TweetRetweetedByQueryParameters] = None
     ) -> GetV2TweetRetweetedByResponseBody:
         return get_collected_paging_response_sync(partial(self.get, id), query)
@@ -131,12 +131,12 @@ class AsyncGetV2TweetRetweetedByResources(GetV2TweetRetweetedByResources):
             query,
         )
 
-    async def get_paging(
+    async def get_paging_responses(
         self, id: TweetId, query: Optional[GetV2TweetRetweetedByQueryParameters] = None
     ) -> AsyncGenerator[GetV2TweetRetweetedByResponseBody, None]:
         return get_paging_response_iter_async(partial(self.get, id), query)
 
-    async def get_collected_paging(
+    async def get_collected_response(
         self, id: TweetId, query: Optional[GetV2TweetRetweetedByQueryParameters] = None
     ) -> GetV2TweetRetweetedByResponseBody:
         return await get_collected_paging_response_async(partial(self.get, id), query)
