@@ -114,7 +114,7 @@ class GetV2UserFollowersResources(ApiResources):
             response_type=GetV2UserFollowersResponseBody,
         )
 
-    def get_paging_responses(
+    def get_paging_response_iter(
         self,
         id: UserId,
         query: Optional[GetV2UserFollowersQueryParameters] = None,
@@ -137,7 +137,7 @@ class AsyncGetV2UserFollowersResources(GetV2UserFollowersResources):
     ) -> GetV2UserFollowersResponseBody:
         return super().get(id, query)
 
-    async def get_paging_responses(
+    async def get_paging_response_iter(
         self,
         id: UserId,
         query: Optional[GetV2UserFollowersQueryParameters] = None,

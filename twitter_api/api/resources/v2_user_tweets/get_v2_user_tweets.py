@@ -157,7 +157,7 @@ class GetV2UserTweetsResources(ApiResources):
             response_type=GetV2UserTweetsResponseBody,
         )
 
-    def get_paging_responses(
+    def get_paging_response_iter(
         self,
         id: UserId,
         query: Optional[GetV2UserTweetsQueryParameters] = None,
@@ -180,7 +180,7 @@ class AsyncGetV2UserTweetsResources(GetV2UserTweetsResources):
     ) -> GetV2UserTweetsResponseBody:
         return super().get(id, query)
 
-    async def get_paging_responses(
+    async def get_paging_response_iter(
         self,
         id: UserId,
         query: Optional[GetV2UserTweetsQueryParameters] = None,
