@@ -32,10 +32,10 @@ class SleepRateLimitHandler(RateLimitManager, metaclass=ABCMeta):
     async def handle_rate_limit_exceeded_async(self, rate_limit_info: RateLimitInfo):
         while True:
             # レートリミットを超えてしまっていたら、必要な待ち時間分だけ待つ。
-            wait_time = self.check_limit_over(rate_limit_info)
-            if wait_time is not None:
+            wait_time_seconds = self.check_limit_over(rate_limit_info)
+            if wait_time_seconds is not None:
                 logger.warning(RateLimitOverWarning(rate_limit_info))
-                await asyncio.sleep(wait_time)
+                await asyncio.sleep(wait_time_seconds)
                 continue
 
             try:
@@ -53,16 +53,16 @@ class SleepRateLimitHandler(RateLimitManager, metaclass=ABCMeta):
     def handle_rate_limit_exceeded_sync(self, rate_limit_info: RateLimitInfo):
         while True:
             # レートリミットを超えてしまっていたら、必要な待ち時間分だけ待つ。
-            wait_time = self.check_limit_over(rate_limit_info)
-            if wait_time is not None:
+            wait_time_seconds = self.check_limit_over(rate_limit_info)
+            if wait_time_seconds is not None:
                 logger.warning(RateLimitOverWarning(rate_limit_info))
-                time.sleep(wait_time)
+                time.sleep(wait_time_seconds)
                 continue
 
             try:
                 yield
             except TwitterApiResponseFailed as error:
-                # レートリミットのエラーでないなら上流に投げる。
+                # レートリミット以外のエラーなら上流に投げる。
                 if error.status_code != TwitterApiErrorCode.TooManyRequests.value:
                     raise error
 
