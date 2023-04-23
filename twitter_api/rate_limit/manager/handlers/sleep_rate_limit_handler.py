@@ -48,6 +48,8 @@ class SleepRateLimitHandler(RateLimitManager, metaclass=ABCMeta):
                 # 予期しないレートリミットに遭遇した場合、投機的な待機を行う
                 logger.warning(UnmanagedRateLimitOverWarning())
                 await asyncio.sleep(self.random_sleep_seconds())
+            else:
+                return
 
     @contextmanager
     def handle_rate_limit_exceeded_sync(self, rate_limit_info: RateLimitInfo):
@@ -69,3 +71,5 @@ class SleepRateLimitHandler(RateLimitManager, metaclass=ABCMeta):
                 # 予期しないレートリミットに遭遇した場合、投機的な待機を行う
                 logger.warning(UnmanagedRateLimitOverWarning())
                 time.sleep(self.random_sleep_seconds())
+            else:
+                return
