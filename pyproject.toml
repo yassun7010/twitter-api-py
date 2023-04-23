@@ -1,7 +1,7 @@
 [tool.poetry]
 authors = ["yassun4dev <yassun4dev@outlook.com>"]
 description = "Twitter API Client by Typed Python."
-name = "twitter-api"
+name = "twitter-api-py"
 packages = [{include = "twitter_api"}]
 readme = "README.md"
 version = "0.1.0"
