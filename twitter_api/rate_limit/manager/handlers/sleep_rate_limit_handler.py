@@ -15,9 +15,7 @@ logger = getLogger(__file__)
 
 class SleepRateLimitHandler(RateLimitManager, metaclass=ABCMeta):
     """
-    レートリミットに遭遇した場合、スリープするマネージャ。
-
-    これ自体は抽象クラスなので、他の RateLimitManager と組み合わせる必要がある。
+    レートリミットに遭遇した場合、スリープする handler。
     """
 
     def random_sleep_seconds(self) -> float:
