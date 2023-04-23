@@ -4,6 +4,9 @@
     <a href="https://github.com/yassun4dev/twitter-api-py/actions">
         <img src="https://github.com/yassun4dev/twitter-api-py/actions/workflows/test-suite.yml/badge.svg" alt="Test Suite">
     </a>
+    <a href="https://pypi.org/project/twitter_api_py/">
+        <img src="https://badge.fury.io/py/twitter_api_py.svg" alt="Package version">
+    </a>
 </p>
 
 ![demo](https://raw.githubusercontent.com/yassun4dev/twitter-api-py/main/images/demo.gif)
