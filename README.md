@@ -6,7 +6,7 @@
     </a>
 </p>
 
-![demo](images/demo.gif)
+![demo](https://raw.githubusercontent.com/yassun4dev/twitter-api-py/main/images/demo.gif)
 
 ## Install
 
