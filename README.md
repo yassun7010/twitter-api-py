@@ -36,7 +36,7 @@ response = (
     twitter_client.resource("https://api.twitter.com/2/tweets")
     .get({
         "ids": "1460323737035677698",
-        "expansions": ["attachments.media_keys"]
+        "expansions": ["referenced_tweets.id"]
     })
 )
 ```
