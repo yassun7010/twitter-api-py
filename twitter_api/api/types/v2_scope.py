@@ -58,7 +58,7 @@ def oauth2_scopes(
     """
     OAuth2 を用いた操作に必要なスコープを表す。
 
-    Twitter の API ドキュメントを補完するメモとして用意されており、操作は何も行われない。
+    Twitter の API ドキュメントを補完するメモとして用意されており、処理は何も行われない。
     """
 
     def _oauth2_scopes(func):
