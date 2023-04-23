@@ -123,7 +123,7 @@ class GetV2TweetRetweetedByResources(ApiResources):
         """
         return get_paging_response_iter_sync(partial(self.get, id), query)
 
-    def get_collected_response(
+    def get_collected_paging_response(
         self, id: TweetId, query: Optional[GetV2TweetRetweetedByQueryParameters] = None
     ) -> GetV2TweetRetweetedByResponseBody:
         """
@@ -150,7 +150,7 @@ class AsyncGetV2TweetRetweetedByResources(GetV2TweetRetweetedByResources):
     ) -> AsyncGenerator[GetV2TweetRetweetedByResponseBody, None]:
         return get_paging_response_iter_async(partial(self.get, id), query)
 
-    async def get_collected_response(
+    async def get_collected_paging_response(
         self, id: TweetId, query: Optional[GetV2TweetRetweetedByQueryParameters] = None
     ) -> GetV2TweetRetweetedByResponseBody:
         return await get_collected_paging_response_async(partial(self.get, id), query)

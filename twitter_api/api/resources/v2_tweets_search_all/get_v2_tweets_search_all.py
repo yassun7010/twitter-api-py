@@ -104,7 +104,7 @@ class GetV2TweetsSearchAllResources(ApiResources):
         """
         return get_paging_response_iter_sync(self.get, query)
 
-    def get_collected_response(
+    def get_collected_paging_response(
         self, query: GetV2TweetsSearchAllQueryParameters
     ) -> GetV2TweetsSearchAllResponseBody:
         """
@@ -128,7 +128,7 @@ class AsyncGetV2TweetsSearchAllResources(GetV2TweetsSearchAllResources):
     ) -> AsyncGenerator[GetV2TweetsSearchAllResponseBody, None]:
         return get_paging_response_iter_async(self.get, query)
 
-    async def get_collected_response(
+    async def get_collected_paging_response(
         self, query: GetV2TweetsSearchAllQueryParameters
     ) -> GetV2TweetsSearchAllResponseBody:
         return await get_collected_paging_response_async(self.get, query)

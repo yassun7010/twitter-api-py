@@ -171,7 +171,7 @@ class GetV2UserTweetsResources(ApiResources):
         """
         return get_paging_response_iter_sync(partial(self.get, id), query)
 
-    def get_collected_response(
+    def get_collected_paging_response(
         self,
         id: UserId,
         query: Optional[GetV2UserTweetsQueryParameters] = None,
@@ -201,7 +201,7 @@ class AsyncGetV2UserTweetsResources(GetV2UserTweetsResources):
     ) -> AsyncGenerator[GetV2UserTweetsResponseBody, None]:
         return get_paging_response_iter_async(partial(self.get, id), query)
 
-    async def get_collected_response(
+    async def get_collected_paging_response(
         self,
         id: UserId,
         query: Optional[GetV2UserTweetsQueryParameters] = None,

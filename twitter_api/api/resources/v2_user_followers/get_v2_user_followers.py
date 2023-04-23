@@ -128,7 +128,7 @@ class GetV2UserFollowersResources(ApiResources):
         """
         return get_paging_response_iter_sync(partial(self.get, id), query)
 
-    def get_collected_response(
+    def get_collected_paging_response(
         self,
         id: UserId,
         query: Optional[GetV2UserFollowersQueryParameters] = None,
@@ -158,7 +158,7 @@ class AsyncGetV2UserFollowersResources(GetV2UserFollowersResources):
     ) -> AsyncGenerator[GetV2UserFollowersResponseBody, None]:
         return get_paging_response_iter_async(partial(self.get, id), query)
 
-    async def get_collected_response(
+    async def get_collected_paging_response(
         self,
         id: UserId,
         query: Optional[GetV2UserFollowersQueryParameters] = None,
