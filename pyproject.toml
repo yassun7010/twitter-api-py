@@ -6,6 +6,7 @@ packages = [{include = "twitter_api"}]
 readme = "README.md"
 version = "0.1.0"
 license = "BSD-3-Clause"
+repository = "https://github.com/yassun4dev/twitter-api-py"
 classifiers = [
     "Development Status :: 4 - Beta",
     "Topic :: Software Development :: Libraries",
