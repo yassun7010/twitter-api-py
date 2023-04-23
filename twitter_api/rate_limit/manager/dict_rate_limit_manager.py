@@ -3,6 +3,9 @@ from dataclasses import dataclass
 from datetime import datetime, timedelta
 from typing import Optional
 
+from twitter_api.rate_limit.manager.handlers.raise_rate_limit_handler import (
+    RaiseRateLimitHandler,
+)
 from twitter_api.rate_limit.manager.rate_limit_manager import RateLimitManager
 from twitter_api.rate_limit.rate_limit_info import RateLimitInfo
 
@@ -13,7 +16,7 @@ class RateLimitStatus:
     request_datetimes: list[datetime]
 
 
-class DictRateLimitManager(RateLimitManager):
+class DictRateLimitManager(RaiseRateLimitHandler):
     """
     単純なハッシュマップによるレートリミットの管理を行うマネージャ。
 

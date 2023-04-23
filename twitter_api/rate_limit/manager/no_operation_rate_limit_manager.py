@@ -1,11 +1,13 @@
 from datetime import datetime
 from typing import Optional
 
-from twitter_api.rate_limit.manager.rate_limit_manager import RateLimitManager
+from twitter_api.rate_limit.manager.handlers.raise_rate_limit_handler import (
+    RaiseRateLimitHandler,
+)
 from twitter_api.rate_limit.rate_limit_info import RateLimitInfo
 
 
-class NoOperationRateLimitManager(RateLimitManager):
+class NoOperationRateLimitManager(RaiseRateLimitHandler):
     """
     レートリミットに関して、クライアント側で何も制御しないマネージャ。
 

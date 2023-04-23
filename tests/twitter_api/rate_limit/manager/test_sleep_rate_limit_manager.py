@@ -2,18 +2,18 @@ from datetime import datetime
 
 import pytest
 
+from twitter_api.rate_limit.manager.handlers.sleep_rate_limit_handler import (
+    SleepRateLimitHandler,
+)
 from twitter_api.rate_limit.manager.no_operation_rate_limit_manager import (
     NoOperationRateLimitManager,
-)
-from twitter_api.rate_limit.manager.sleep_rate_limit_manager import (
-    SleepRateLimitManager,
 )
 from twitter_api.rate_limit.rate_limit_info import RateLimitInfo
 from twitter_api.types.endpoint import Endpoint
 
 
-class NoOperationSleepRateLimitManager(
-    NoOperationRateLimitManager, SleepRateLimitManager
+class NoOperationSleepRateLimitHandler(
+    NoOperationRateLimitManager, SleepRateLimitHandler
 ):
     def random_sleep_seconds(self) -> float:
         """
@@ -32,13 +32,13 @@ def rate_limit_info() -> RateLimitInfo:
     )
 
 
-class TestSleepRateLimitManager:
+class TestSleepRateLimitHandler:
     def test_check_limit_over(
         self,
         rate_limit_info: RateLimitInfo,
     ):
         assert (
-            NoOperationSleepRateLimitManager().check_limit_over(
+            NoOperationSleepRateLimitHandler().check_limit_over(
                 rate_limit_info=rate_limit_info,
             )
             is None

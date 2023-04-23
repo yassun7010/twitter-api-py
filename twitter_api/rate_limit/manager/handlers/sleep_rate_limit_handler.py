@@ -13,7 +13,7 @@ from twitter_api.warning import RateLimitOverWarning, UnmanagedRateLimitOverWarn
 logger = getLogger(__file__)
 
 
-class SleepRateLimitManager(RateLimitManager, metaclass=ABCMeta):
+class SleepRateLimitHandler(RateLimitManager, metaclass=ABCMeta):
     """
     レートリミットに遭遇した場合、スリープするマネージャ。
 
