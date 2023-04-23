@@ -144,6 +144,13 @@ class GetV2UserLikedTweetsResources(ApiResources):
         id: UserId,
         query: Optional[GetV2UserLikedTweetsQueryParameters] = None,
     ) -> Generator[GetV2UserLikedTweetsResponseBody, None, None]:
+        """
+        ユーザが「いいね」をしているツイートの一覧を取得する。
+
+        ページングされた API のレスポンスをイテレータで返す。
+
+        refer: https://developer.twitter.com/en/docs/twitter-api/tweets/likes/api-reference/get-users-id-liked_tweets
+        """
         return get_paging_response_iter_sync(partial(self.get, id), query)
 
     def get_collected_response(
@@ -151,6 +158,13 @@ class GetV2UserLikedTweetsResources(ApiResources):
         id: UserId,
         query: Optional[GetV2UserLikedTweetsQueryParameters] = None,
     ) -> GetV2UserLikedTweetsResponseBody:
+        """
+        ユーザが「いいね」をしているツイートの一覧を取得する。
+
+        ページングされた API のレスポンスをまとめて一つのレスポンスとして返す。
+
+        refer: https://developer.twitter.com/en/docs/twitter-api/tweets/likes/api-reference/get-users-id-liked_tweets
+        """
         return get_collected_paging_response_sync(partial(self.get, id), query)
 
 

@@ -95,11 +95,25 @@ class GetV2TweetsSearchAllResources(ApiResources):
     def get_paging_response_iter(
         self, query: GetV2TweetsSearchAllQueryParameters
     ) -> Generator[GetV2TweetsSearchAllResponseBody, None, None]:
+        """
+        ツイートの一覧を検索する。
+
+        ページングされた API のレスポンスをイテレータで返す。
+
+        refer: https://developer.twitter.com/en/docs/twitter-api/tweets/search/api-reference/get-tweets-search-all
+        """
         return get_paging_response_iter_sync(self.get, query)
 
     def get_collected_response(
         self, query: GetV2TweetsSearchAllQueryParameters
     ) -> GetV2TweetsSearchAllResponseBody:
+        """
+        ツイートの一覧を検索する。
+
+        ページングされた API のレスポンスをまとめて一つのレスポンスとして返す。
+
+        refer: https://developer.twitter.com/en/docs/twitter-api/tweets/search/api-reference/get-tweets-search-all
+        """
         return get_collected_paging_response_sync(self.get, query)
 
 

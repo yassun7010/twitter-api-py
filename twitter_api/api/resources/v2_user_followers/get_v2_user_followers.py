@@ -119,6 +119,13 @@ class GetV2UserFollowersResources(ApiResources):
         id: UserId,
         query: Optional[GetV2UserFollowersQueryParameters] = None,
     ) -> Generator[GetV2UserFollowersResponseBody, None, None]:
+        """
+        ユーザのフォロワーの一覧を取得する。
+
+        ページングされた API のレスポンスをイテレータで返す。
+
+        refer: https://developer.twitter.com/en/docs/twitter-api/users/follows/api-reference/get-users-id-followers
+        """
         return get_paging_response_iter_sync(partial(self.get, id), query)
 
     def get_collected_response(
@@ -126,6 +133,13 @@ class GetV2UserFollowersResources(ApiResources):
         id: UserId,
         query: Optional[GetV2UserFollowersQueryParameters] = None,
     ) -> GetV2UserFollowersResponseBody:
+        """
+        ユーザのフォロワーの一覧を取得する。
+
+        ページングされた API のレスポンスをまとめて一つのレスポンスとして返す。
+
+        refer: https://developer.twitter.com/en/docs/twitter-api/users/follows/api-reference/get-users-id-followers
+        """
         return get_collected_paging_response_sync(partial(self.get, id), query)
 
 

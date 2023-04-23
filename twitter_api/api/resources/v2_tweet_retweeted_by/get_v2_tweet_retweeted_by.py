@@ -114,11 +114,25 @@ class GetV2TweetRetweetedByResources(ApiResources):
     def get_paging_response_iter(
         self, id: TweetId, query: Optional[GetV2TweetRetweetedByQueryParameters] = None
     ) -> Generator[GetV2TweetRetweetedByResponseBody, None, None]:
+        """
+        リツイートされたツイートの一覧を取得する。
+
+        ページングされた API のレスポンスをイテレータで返す。
+
+        refer: https://developer.twitter.com/en/docs/twitter-api/tweets/retweets/api-reference/get-tweets-id-retweeted_by
+        """
         return get_paging_response_iter_sync(partial(self.get, id), query)
 
     def get_collected_response(
         self, id: TweetId, query: Optional[GetV2TweetRetweetedByQueryParameters] = None
     ) -> GetV2TweetRetweetedByResponseBody:
+        """
+        リツイートされたツイートの一覧を取得する。
+
+        ページングされた API のレスポンスをまとめて一つのレスポンスとして返す。
+
+        refer: https://developer.twitter.com/en/docs/twitter-api/tweets/retweets/api-reference/get-tweets-id-retweeted_by
+        """
         return get_collected_paging_response_sync(partial(self.get, id), query)
 
 

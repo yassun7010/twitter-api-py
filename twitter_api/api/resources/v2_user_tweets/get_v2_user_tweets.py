@@ -162,6 +162,13 @@ class GetV2UserTweetsResources(ApiResources):
         id: UserId,
         query: Optional[GetV2UserTweetsQueryParameters] = None,
     ) -> Generator[GetV2UserTweetsResponseBody, None, None]:
+        """
+        ユーザのツイートの一覧を取得する。
+
+        ページングされた API のレスポンスをイテレータで返す。
+
+        refer: https://developer.twitter.com/en/docs/twitter-api/tweets/timelines/api-reference/get-users-id-tweets
+        """
         return get_paging_response_iter_sync(partial(self.get, id), query)
 
     def get_collected_response(
@@ -169,6 +176,13 @@ class GetV2UserTweetsResources(ApiResources):
         id: UserId,
         query: Optional[GetV2UserTweetsQueryParameters] = None,
     ) -> GetV2UserTweetsResponseBody:
+        """
+        ユーザのツイートの一覧を取得する。
+
+        ページングされた API のレスポンスをまとめて一つのレスポンスとして返す。
+
+        refer: https://developer.twitter.com/en/docs/twitter-api/tweets/timelines/api-reference/get-users-id-tweets
+        """
         return get_collected_paging_response_sync(partial(self.get, id), query)
 
 
