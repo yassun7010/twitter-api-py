@@ -1,3 +1,4 @@
+import json
 import sys
 
 from twitter_api.api.types.v2_expansion import ALL_EXPANSIONS
@@ -29,7 +30,8 @@ try:
         .data
     )
 
-    print(tweets)
+    for tweet in tweets:
+        print(tweet.json(indent=2))
 
 except TwitterApiError as error:
     print(error, file=sys.stderr)
