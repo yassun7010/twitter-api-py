@@ -67,12 +67,11 @@ class TestGetV2TweetsSearchRecent:
         all_tweet_fields: list[TweetField],
         all_user_fields: list[UserField],
     ):
-        next_token = None
-        for _ in range(3):
-            response = (
+        for response, _ in zip(
+            (
                 oauth2_app_real_client.chain()
                 .resource("https://api.twitter.com/2/tweets/search/recent")
-                .get(
+                .get_paging_response_iter(
                     {
                         "query": "#japan test",
                         "max_results": 100,
@@ -82,17 +81,12 @@ class TestGetV2TweetsSearchRecent:
                         "poll.fields": all_poll_fields,
                         "tweet.fields": all_tweet_fields,
                         "user.fields": all_user_fields,
-                        "next_token": next_token,
                     }
                 )
-            )
-
+            ),
+            range(3),  # テスト時間が伸びるのも嫌なので、3つまで取り出す。
+        ):
             assert get_extra_fields(response) == {}
-
-            if response.meta.next_token is None:
-                break
-
-            next_token = response.meta.next_token
 
 
 class TestMockGetV2TweetsSearchRecent:
