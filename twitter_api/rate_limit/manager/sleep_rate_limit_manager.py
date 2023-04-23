@@ -9,7 +9,7 @@ from twitter_api.rate_limit.manager.no_operation_rate_limit_manager import (
     NoOperationRateLimitManager,
 )
 from twitter_api.rate_limit.rate_limit_info import RateLimitInfo
-from twitter_api.warning import RateLimitOverWarning, UnexpectedRateLimitOverWarning
+from twitter_api.warning import RateLimitOverWarning, UnmanagedRateLimitOverWarning
 
 logger = getLogger(__file__)
 
@@ -45,7 +45,7 @@ class SleepRateLimitManager(NoOperationRateLimitManager):
                     raise error
 
                 # 予期しないレートリミットに遭遇した場合、投機的な待機を行う
-                logger.warning(UnexpectedRateLimitOverWarning())
+                logger.warning(UnmanagedRateLimitOverWarning())
                 await asyncio.sleep(self.random_sleep_seconds())
 
     @contextmanager
@@ -66,5 +66,5 @@ class SleepRateLimitManager(NoOperationRateLimitManager):
                     raise error
 
                 # 予期しないレートリミットに遭遇した場合、投機的な待機を行う
-                logger.warning(UnexpectedRateLimitOverWarning())
+                logger.warning(UnmanagedRateLimitOverWarning())
                 time.sleep(self.random_sleep_seconds())

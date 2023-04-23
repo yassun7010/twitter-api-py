@@ -14,6 +14,6 @@ class RateLimitOverWarning(TwitterApiWarning):
         return f"レートリミットを超えています。{self._rate_limit}"
 
 
-class UnexpectedRateLimitOverWarning(TwitterApiWarning):
+class UnmanagedRateLimitOverWarning(TwitterApiWarning):
     def __str__(self) -> str:
-        return f"認識していないレートリミットに遭遇しました。"
+        return f"管理していないレートリミットに遭遇しました。"
