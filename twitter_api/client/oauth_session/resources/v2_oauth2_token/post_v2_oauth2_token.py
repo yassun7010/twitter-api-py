@@ -25,9 +25,9 @@ class PostV2OAuth2TokenRerources(OAuth2SessionResources):
 
     def post(self) -> OAuth2AccessToken:
         """
-        OAuth 認証のトークンを発行する。
+        OAuth2.0 のユーザ認証（PKCE）の最後のステップ。認証のトークンを発行する。
 
-        OAuth 2.0 のユーザ認証（PKCE）をする過程で必要になるが、API 専用のページはドキュメントに存在しない。
+        API 専用のページはドキュメントに存在しない。
 
         refer: https://developer.twitter.com/en/docs/authentication/oauth-2-0/authorization-code
         """

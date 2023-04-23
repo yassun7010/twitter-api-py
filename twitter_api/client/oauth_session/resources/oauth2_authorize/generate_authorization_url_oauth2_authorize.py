@@ -5,4 +5,12 @@ from twitter_api.client.oauth_session.resources.session_resources import (
 
 class GenerateAuthorizationUrlOAuth2AuthorizeSessionResources(OAuth2SessionResources):
     def generate_authorization_url(self):
+        """
+        OAuth 2.0 のユーザ認証（PKCE）の最初のステップ。
+
+        ユーザーアクセストークンのセットを生成するために、
+        Twitter 認証用のページへのアクセス用 URL を生成する。
+
+        refer: https://developer.twitter.com/en/docs/authentication/oauth-2-0/authorization-code
+        """
         return self._session.generate_authorization_url()
