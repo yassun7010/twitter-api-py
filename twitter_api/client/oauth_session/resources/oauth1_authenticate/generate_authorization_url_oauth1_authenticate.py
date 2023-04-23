@@ -3,7 +3,9 @@ from twitter_api.client.oauth_session.resources.session_resources import (
 )
 
 
-class GenerateAuthorizationUrlOAuthAuthenticateSessionResources(OAuth1SessionResources):
+class GenerateAuthorizationUrlOAuth1AuthenticateSessionResources(
+    OAuth1SessionResources
+):
     def generate_authorization_url(self):
         """
         OAuth 1.0a の 2 番目のステップ。

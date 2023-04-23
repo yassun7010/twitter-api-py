@@ -6,15 +6,17 @@ from twitter_api.api.types.oauth1.oauth1_authorization import OAuth1Authorizatio
 from twitter_api.client.oauth_flow.twitter_oauth1_authorization_client import (
     TwitterOAuth1AuthorizeClient,
 )
-from twitter_api.client.oauth_session.resources.oauth_access_token import (
-    OauthAccessTokenUrl,
+from twitter_api.client.oauth_session.resources.oauth1_access_token import (
+    Oauth1AccessTokenUrl,
 )
-from twitter_api.client.oauth_session.resources.oauth_authenticate import (
-    OauthAuthenticateUrl,
+from twitter_api.client.oauth_session.resources.oauth1_authenticate import (
+    OauthAuth1enticateUrl,
 )
-from twitter_api.client.oauth_session.resources.oauth_authorize import OauthAuthorizeUrl
-from twitter_api.client.oauth_session.resources.oauth_request_token import (
-    OauthRequestTokenUrl,
+from twitter_api.client.oauth_session.resources.oauth1_authorize import (
+    Oauth1AuthorizeUrl,
+)
+from twitter_api.client.oauth_session.resources.oauth1_request_token import (
+    Oauth1RequestTokenUrl,
 )
 from twitter_api.client.oauth_session.twitter_oauth1_session import TwitterOAuth1Session
 from twitter_api.rate_limit.manager.rate_limit_manager import RateLimitManager
@@ -46,7 +48,7 @@ class TwitterOAuth1RealSession(TwitterOAuth1Session):
         self._rate_limit_manager = rate_limit_manager
 
     def request_token(self) -> TwitterOAuth1AuthorizeClient:
-        url: OauthRequestTokenUrl = "https://api.twitter.com/oauth/request_token"
+        url: Oauth1RequestTokenUrl = "https://api.twitter.com/oauth/request_token"
 
         self._session.fetch_request_token(url)
 
@@ -54,7 +56,7 @@ class TwitterOAuth1RealSession(TwitterOAuth1Session):
 
     def generate_authorization_url(
         self,
-        url: OauthAuthenticateUrl | OauthAuthorizeUrl,
+        url: OauthAuth1enticateUrl | Oauth1AuthorizeUrl,
     ) -> OAuth1Authorization:
         return OAuth1Authorization(
             authorization_url=self._session.create_authorization_url(url),
@@ -67,7 +69,7 @@ class TwitterOAuth1RealSession(TwitterOAuth1Session):
     ):
         from twitter_api.api.types.oauth1.oauth1_access_token import OAuth1AccessToken
 
-        url: OauthAccessTokenUrl = "https://api.twitter.com/oauth/access_token"
+        url: Oauth1AccessTokenUrl = "https://api.twitter.com/oauth/access_token"
 
         self._session.parse_authorization_response(authorization_response_url)
 

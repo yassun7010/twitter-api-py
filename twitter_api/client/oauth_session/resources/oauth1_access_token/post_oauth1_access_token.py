@@ -6,7 +6,7 @@ from twitter_api.client.oauth_session.twitter_oauth1_session import TwitterOAuth
 from twitter_api.types.oauth import CallbackUrl
 
 
-class PostOauthAccessTokenResources(OAuth1SessionResources):
+class PostOauth1AccessTokenResources(OAuth1SessionResources):
     def __init__(
         self,
         authorization_response_url: CallbackUrl,

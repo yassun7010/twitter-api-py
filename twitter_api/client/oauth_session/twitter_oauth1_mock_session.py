@@ -1,10 +1,12 @@
 from twitter_api.client.oauth_flow.twitter_oauth1_authorization_client import (
     TwitterOAuth1AuthorizeClient,
 )
-from twitter_api.client.oauth_session.resources.oauth_authenticate import (
-    OauthAuthenticateUrl,
+from twitter_api.client.oauth_session.resources.oauth1_authenticate import (
+    OauthAuth1enticateUrl,
 )
-from twitter_api.client.oauth_session.resources.oauth_authorize import OauthAuthorizeUrl
+from twitter_api.client.oauth_session.resources.oauth1_authorize import (
+    Oauth1AuthorizeUrl,
+)
 from twitter_api.client.oauth_session.twitter_oauth1_session import TwitterOAuth1Session
 from twitter_api.types.oauth import AccessSecret, AccessToken, CallbackUrl
 
@@ -15,7 +17,7 @@ class TwitterOAuth1MockSession(TwitterOAuth1Session):
 
     def generate_authorization_url(
         self,
-        url: OauthAuthenticateUrl | OauthAuthorizeUrl,
+        url: OauthAuth1enticateUrl | Oauth1AuthorizeUrl,
     ):
         from twitter_api.api.types.oauth1.oauth1_authorization import (
             OAuth1Authorization,

@@ -1,9 +1,9 @@
 import os
 from typing import Optional
 
-from twitter_api.client.oauth_session.resources.oauth_access_token import (
-    OauthAccessTokenResources,
-    OauthAccessTokenUrl,
+from twitter_api.client.oauth_session.resources.oauth1_access_token import (
+    Oauth1AccessTokenResources,
+    Oauth1AccessTokenUrl,
 )
 from twitter_api.client.oauth_session.twitter_oauth1_real_session import (
     TwitterOAuth1RealSession,
@@ -22,8 +22,8 @@ class TwitterOAuth1AccessTokenClient(Chainable):
         self.authorization_response_url = authorization_response_url
         self._session = session
 
-    def resource(self, url: OauthAccessTokenUrl):
-        return OauthAccessTokenResources(
+    def resource(self, url: Oauth1AccessTokenUrl):
+        return Oauth1AccessTokenResources(
             session=self._session,
             authorization_response_url=self.authorization_response_url,
         )
