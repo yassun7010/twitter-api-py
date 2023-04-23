@@ -45,7 +45,7 @@ response = (
 
 A mock client is provided by the library to simplify the writing of test code.
 
-This client has the same interface as TwitterApiClient/TwitterApiAsyncClient, and also provides methods (inject_*_response_body) for injecting test data.
+This client has the same interface as TwitterApiClient/TwitterApiAsyncClient, and also provides methods (`inject_*_response_body`) for injecting test data.
 
 ```python
 from twitter_api import TwitterApiClient
