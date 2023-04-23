@@ -25,7 +25,7 @@ class RateLimitManager(metaclass=ABCMeta):
         self, rate_limit_info: RateLimitInfo
     ) -> AsyncGenerator[None, None]:
         """
-        非同期的な TwitterApiAsyncClient を用いている場合のレートリミットの処理方法。
+        非同期的な TwitterApiAsyncClient を用いている場合のレートリミットの対応方法。
         """
 
         yield
@@ -36,7 +36,7 @@ class RateLimitManager(metaclass=ABCMeta):
         self, rate_limit_info: RateLimitInfo
     ) -> Generator[None, None, None]:
         """
-        同期的な TwitterApiClient を用いている場合のレートリミットの処理方法。
+        同期的な TwitterApiClient を用いている場合のレートリミットの対応方法。
         """
 
         yield
