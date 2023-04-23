@@ -1,10 +1,21 @@
 [tool.poetry]
 authors = ["yassun4dev <yassun4dev@outlook.com>"]
-description = ""
+description = "Twitter API Client by Typed Python."
 name = "twitter-api"
 packages = [{include = "twitter_api"}]
 readme = "README.md"
 version = "0.1.0"
+license = "BSD-3-Clause"
+requires-python = ">=3.11"
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Topic :: Software Development :: Libraries",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: BSD License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3 :: Only",
+]
 
 [tool.taskipy.tasks]
 test = "pytest"
