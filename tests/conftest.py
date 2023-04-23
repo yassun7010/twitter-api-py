@@ -3,13 +3,7 @@ from textwrap import dedent
 
 import pytest
 
-from twitter_api.api.types.v2_expansion import Expansion
-from twitter_api.api.types.v2_media.media_field import ALL_MEDIA_FIELDS, MediaField
-from twitter_api.api.types.v2_place.place_field import ALL_PLACE_FIELDS, PlaceField
-from twitter_api.api.types.v2_poll.poll_field import ALL_POLL_FIELDS, PollField
 from twitter_api.api.types.v2_tweet.tweet import Tweet
-from twitter_api.api.types.v2_tweet.tweet_field import TweetField
-from twitter_api.api.types.v2_user.user_field import ALL_USER_FIELDS, UserField
 from twitter_api.api.types.v2_user.user_id import UserId
 from twitter_api.client.twitter_api_async_mock_client import TwitterApiAsyncMockClient
 from twitter_api.client.twitter_api_async_real_client import TwitterApiAsyncRealClient
@@ -210,68 +204,6 @@ def oauth1_user_async_mock_client() -> TwitterApiAsyncMockClient:
         oauth_version="1.0a",
         rate_limit_target="user",
     )
-
-
-@pytest.fixture
-def all_expansions() -> list[Expansion]:
-    return [
-        # "attachments.media_keys",
-        "attachments.poll_ids",
-        "author_id",
-        "edit_history_tweet_ids",
-        "entities.mentions.username",
-        "geo.place_id",
-        "in_reply_to_user_id",
-        "referenced_tweets.id",
-        "referenced_tweets.id.author_id",
-    ]
-
-
-@pytest.fixture
-def all_media_fields() -> list[MediaField]:
-    return ALL_MEDIA_FIELDS
-
-
-@pytest.fixture
-def all_place_fields() -> list[PlaceField]:
-    return ALL_PLACE_FIELDS
-
-
-@pytest.fixture
-def all_poll_fields() -> list[PollField]:
-    return ALL_POLL_FIELDS
-
-
-@pytest.fixture
-def all_tweet_fields() -> list[TweetField]:
-    return [
-        "attachments",
-        "author_id",
-        "context_annotations",
-        "conversation_id",
-        "created_at",
-        "edit_controls",
-        "entities",
-        "geo",
-        "id",
-        "in_reply_to_user_id",
-        "lang",
-        # "non_public_metrics",
-        # "organic_metrics",
-        "possibly_sensitive",
-        # "promoted_metrics",
-        "public_metrics",
-        "referenced_tweets",
-        "reply_settings",
-        "source",
-        "text",
-        "withheld",
-    ]
-
-
-@pytest.fixture
-def all_user_fields() -> list[UserField]:
-    return ALL_USER_FIELDS
 
 
 @pytest.fixture

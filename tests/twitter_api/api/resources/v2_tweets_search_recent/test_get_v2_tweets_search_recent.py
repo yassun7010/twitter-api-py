@@ -1,5 +1,4 @@
 import itertools
-from functools import reduce
 
 import pytest
 
@@ -9,12 +8,12 @@ from tests.data import json_test_data
 from twitter_api.api.resources.v2_tweets_search_recent.get_v2_tweets_search_recent import (
     GetV2TweetsSearchRecentResponseBody,
 )
-from twitter_api.api.types.v2_expansion import Expansion
-from twitter_api.api.types.v2_media.media_field import MediaField
-from twitter_api.api.types.v2_place.place_field import PlaceField
-from twitter_api.api.types.v2_poll.poll_field import PollField
-from twitter_api.api.types.v2_tweet.tweet_field import TweetField
-from twitter_api.api.types.v2_user.user_field import UserField
+from twitter_api.api.types.v2_expansion import ALL_EXPANSIONS
+from twitter_api.api.types.v2_media.media_field import ALL_MEDIA_FIELDS
+from twitter_api.api.types.v2_place.place_field import ALL_PLACE_FIELDS
+from twitter_api.api.types.v2_poll.poll_field import ALL_POLL_FIELDS
+from twitter_api.api.types.v2_tweet.tweet_field import ALL_PUBLIC_TWEET_FIELDS
+from twitter_api.api.types.v2_user.user_field import ALL_USER_FIELDS
 from twitter_api.client.twitter_api_async_mock_client import TwitterApiAsyncMockClient
 from twitter_api.client.twitter_api_mock_client import TwitterApiMockClient
 from twitter_api.client.twitter_api_real_client import TwitterApiRealClient
@@ -60,12 +59,6 @@ class TestGetV2TweetsSearchRecent:
     def test_get_v2_search_recent_all_fields(
         self,
         oauth2_app_real_client: TwitterApiRealClient,
-        all_expansions: list[Expansion],
-        all_media_fields: list[MediaField],
-        all_place_fields: list[PlaceField],
-        all_poll_fields: list[PollField],
-        all_tweet_fields: list[TweetField],
-        all_user_fields: list[UserField],
     ):
         for response, _ in zip(
             (
@@ -75,12 +68,12 @@ class TestGetV2TweetsSearchRecent:
                     {
                         "query": "#japan test",
                         "max_results": 100,
-                        "expansions": all_expansions,
-                        "media.fields": all_media_fields,
-                        "place.fields": all_place_fields,
-                        "poll.fields": all_poll_fields,
-                        "tweet.fields": all_tweet_fields,
-                        "user.fields": all_user_fields,
+                        "expansions": ALL_EXPANSIONS,
+                        "media.fields": ALL_MEDIA_FIELDS,
+                        "place.fields": ALL_PLACE_FIELDS,
+                        "poll.fields": ALL_POLL_FIELDS,
+                        "tweet.fields": ALL_PUBLIC_TWEET_FIELDS,
+                        "user.fields": ALL_USER_FIELDS,
                     }
                 )
             ),
@@ -127,12 +120,6 @@ class TestMockGetV2TweetsSearchRecent:
     def test_mock_get_v2_search_recent_recent(
         self,
         oauth2_app_mock_client: TwitterApiMockClient,
-        all_expansions: list[Expansion],
-        all_media_fields: list[MediaField],
-        all_place_fields: list[PlaceField],
-        all_poll_fields: list[PollField],
-        all_tweet_fields: list[TweetField],
-        all_user_fields: list[UserField],
         json_files: list[str],
     ):
         for json_file in json_files:
@@ -153,12 +140,12 @@ class TestMockGetV2TweetsSearchRecent:
                     {
                         "query": "#japan test",
                         "max_results": 100,
-                        "expansions": all_expansions,
-                        "media.fields": all_media_fields,
-                        "place.fields": all_place_fields,
-                        "poll.fields": all_poll_fields,
-                        "tweet.fields": all_tweet_fields,
-                        "user.fields": all_user_fields,
+                        "expansions": ALL_EXPANSIONS,
+                        "media.fields": ALL_MEDIA_FIELDS,
+                        "place.fields": ALL_PLACE_FIELDS,
+                        "poll.fields": ALL_POLL_FIELDS,
+                        "tweet.fields": ALL_PUBLIC_TWEET_FIELDS,
+                        "user.fields": ALL_USER_FIELDS,
                         "next_token": next_token,
                     }
                 )
