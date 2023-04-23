@@ -177,6 +177,72 @@ class TestMockGetV2TweetsSearchRecent:
             if next_token is None:
                 break
 
+    def test_mock_get_paging_response_iter_v2_search_recent(
+        self,
+        oauth2_app_mock_client: TwitterApiMockClient,
+        json_files: list[str],
+    ):
+        responses = [
+            GetV2TweetsSearchRecentResponseBody.parse_file(json_test_data(json_file))
+            for json_file in json_files
+        ]
+
+        for response in responses:
+            assert get_extra_fields(response) == {}
+
+            oauth2_app_mock_client.inject_get_response_body(
+                "https://api.twitter.com/2/tweets/search/recent",
+                response,
+            )
+
+        assert [
+            res
+            for res in (
+                oauth2_app_mock_client.chain()
+                .resource("https://api.twitter.com/2/tweets/search/recent")
+                .get_paging_response_iter(
+                    {
+                        "query": "モックされているので、この検索条件に意味はない",
+                        "expansions": ["attachments.poll_ids"],
+                        "media.fields": ["preview_image_url"],
+                    }
+                )
+            )
+        ] == responses
+
+    def test_mock_get_collected_response_v2_search(
+        self,
+        oauth2_app_mock_client: TwitterApiMockClient,
+        json_files: list[str],
+    ):
+        response = GetV2TweetsSearchRecentResponseBody.parse_file(
+            json_test_data(
+                "get_v2_tweets_search_recent_response/collected_response.json"
+            )
+        )
+
+        assert get_extra_fields(response) == {}
+
+        for json_file in json_files:
+            oauth2_app_mock_client.inject_get_response_body(
+                "https://api.twitter.com/2/tweets/search/recent",
+                GetV2TweetsSearchRecentResponseBody.parse_file(
+                    json_test_data(json_file)
+                ),
+            )
+
+        assert (
+            oauth2_app_mock_client.chain()
+            .resource("https://api.twitter.com/2/tweets/search/recent")
+            .get_collected_response(
+                {
+                    "query": "モックされているので、この検索条件に意味はない",
+                    "expansions": ["attachments.poll_ids"],
+                    "media.fields": ["preview_image_url"],
+                }
+            )
+        ) == response
+
 
 class TestAsyncMockGetV2TweetsSearchRecent:
     @pytest.mark.asyncio
@@ -187,8 +253,6 @@ class TestAsyncMockGetV2TweetsSearchRecent:
         response = GetV2TweetsSearchRecentResponseBody.parse_file(
             json_test_data("get_v2_tweets_search_recent_response.json")
         )
-
-        assert get_extra_fields(response) == {}
 
         assert (
             await (
@@ -209,7 +273,7 @@ class TestAsyncMockGetV2TweetsSearchRecent:
         )
 
     @pytest.mark.asyncio
-    async def test_async_mock_get_v2_search_recent_iter(
+    async def test_async_mock_get_paging_response_iter_v2_search_recent(
         self,
         oauth2_app_async_mock_client: TwitterApiAsyncMockClient,
         json_files: list[str],
@@ -220,8 +284,6 @@ class TestAsyncMockGetV2TweetsSearchRecent:
         ]
 
         for response in responses:
-            assert get_extra_fields(response) == {}
-
             oauth2_app_async_mock_client.inject_get_response_body(
                 "https://api.twitter.com/2/tweets/search/recent",
                 response,
@@ -243,7 +305,7 @@ class TestAsyncMockGetV2TweetsSearchRecent:
         ] == responses
 
     @pytest.mark.asyncio
-    async def test_async_mock_get_v2_search_recent_collected(
+    async def test_async_mock_get_collected_response_v2_search(
         self,
         oauth2_app_async_mock_client: TwitterApiAsyncMockClient,
         json_files: list[str],
@@ -253,8 +315,6 @@ class TestAsyncMockGetV2TweetsSearchRecent:
                 "get_v2_tweets_search_recent_response/collected_response.json"
             )
         )
-
-        assert get_extra_fields(response) == {}
 
         for json_file in json_files:
             oauth2_app_async_mock_client.inject_get_response_body(
