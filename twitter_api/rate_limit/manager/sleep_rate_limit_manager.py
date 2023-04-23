@@ -1,22 +1,23 @@
 import asyncio
 import random
 import time
+from abc import ABCMeta
 from contextlib import asynccontextmanager, contextmanager
 from logging import getLogger
 
 from twitter_api.error import TwitterApiErrorCode, TwitterApiResponseFailed
-from twitter_api.rate_limit.manager.no_operation_rate_limit_manager import (
-    NoOperationRateLimitManager,
-)
+from twitter_api.rate_limit.manager.rate_limit_manager import RateLimitManager
 from twitter_api.rate_limit.rate_limit_info import RateLimitInfo
 from twitter_api.warning import RateLimitOverWarning, UnmanagedRateLimitOverWarning
 
 logger = getLogger(__file__)
 
 
-class SleepRateLimitManager(NoOperationRateLimitManager):
+class SleepRateLimitManager(RateLimitManager, metaclass=ABCMeta):
     """
     レートリミットに遭遇した場合、スリープするマネージャ。
+
+    これ自体は抽象クラスなので、他の RateLimitManager と組み合わせる必要がある。
     """
 
     def random_sleep_seconds(self) -> float:
