@@ -1,4 +1,4 @@
-from twitter_api.api.types.v2_oauth2.oauth2_access_token import OAuth2AccessToken
+from twitter_api.api.types.oauth2.oauth2_access_token import OAuth2AccessToken
 from twitter_api.client.oauth_session.resources.session_resources import (
     OAuth2SessionResources,
 )

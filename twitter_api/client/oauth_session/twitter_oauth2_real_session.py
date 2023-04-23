@@ -2,8 +2,8 @@ from typing import Any, Optional
 
 from authlib.integrations.httpx_client.oauth2_client import OAuth2Client
 
-from twitter_api.api.types.v2_oauth2.oauth2_access_token import OAuth2AccessToken
-from twitter_api.api.types.v2_oauth2.oauth2_authorization import OAuth2Authorization
+from twitter_api.api.types.oauth2.oauth2_access_token import OAuth2AccessToken
+from twitter_api.api.types.oauth2.oauth2_authorization import OAuth2Authorization
 from twitter_api.api.types.v2_scope import Scope
 from twitter_api.client.oauth_session.resources.oauth2_authorize import (
     Oauth2AuthorizeUrl,

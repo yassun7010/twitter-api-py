@@ -8,7 +8,7 @@ class TwitterOAuth2Session(metaclass=ABCMeta):
     def generate_authorization_url(self):
         # NOTE: 本来実装は不要だが、モジュールの再起読み込みを防ぐため、
         #       偽のデータを作っている。
-        from twitter_api.api.types.v2_oauth2.oauth2_authorization import (
+        from twitter_api.api.types.oauth2.oauth2_authorization import (
             OAuth2Authorization,
         )
 
@@ -23,9 +23,7 @@ class TwitterOAuth2Session(metaclass=ABCMeta):
     ):
         # NOTE: 本来実装は不要だが、モジュールの再起読み込みを防ぐため、
         #       偽のデータを作っている。
-        from twitter_api.api.types.v2_oauth2.oauth2_access_token import (
-            OAuth2AccessToken,
-        )
+        from twitter_api.api.types.oauth2.oauth2_access_token import OAuth2AccessToken
 
         return OAuth2AccessToken(**{})
 

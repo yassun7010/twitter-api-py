@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from twitter_api.api.types.v2_oauth2.oauth2_access_token import OAuth2AccessToken
+from twitter_api.api.types.oauth2.oauth2_access_token import OAuth2AccessToken
 from twitter_api.api.types.v2_scope import Scope
 from twitter_api.client.oauth_session.twitter_oauth2_session import TwitterOAuth2Session
 from twitter_api.types.oauth import CallbackUrl
@@ -11,7 +11,7 @@ class TwitterOAuth2MockSession(TwitterOAuth2Session):
         self._scope = scope
 
     def generate_authorization_url(self):
-        from twitter_api.api.types.v2_oauth2.oauth2_authorization import (
+        from twitter_api.api.types.oauth2.oauth2_authorization import (
             OAuth2Authorization,
         )
 
