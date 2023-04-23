@@ -28,8 +28,6 @@ pip install twitter_api_py
 ## Usage
 The simplest way to use the library is as follows:
 
-As a characteristic feature of the library, it explicitly prompts the user to write the Endpoint URL, which makes it clear from the source code which Twitter API is being called.
-
 ```python
 from twitter_api import TwitterApiClient
 
@@ -43,6 +41,8 @@ response = (
     })
 )
 ```
+
+As a characteristic feature of the library, it explicitly prompts the user to write the Endpoint URL, which makes it clear from the source code which Twitter API is being called.
 
 ## Test Code
 
