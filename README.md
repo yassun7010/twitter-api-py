@@ -11,7 +11,7 @@
 ## Install
 
 ```sh
-pip install twitter_api
+pip install twitter_api_py
 ```
 
 ## Features
