@@ -1,11 +1,5 @@
 # <p align="center">✨✨ Twitter API Client by Typed Python ✨✨</p>
 
-<p align="center">
-  <a href="https://www.python-httpx.org/">
-    <img width="200" height="164" src="images/twitter.png" alt='HTTPX'>
-  </a>
-</p>
-
 ![demo](images/demo.gif)
 
 ## Install
