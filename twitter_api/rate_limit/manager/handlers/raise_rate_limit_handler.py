@@ -7,6 +7,10 @@ from twitter_api.rate_limit.rate_limit_info import RateLimitInfo
 
 
 class RaiseRateLimitHandler(RateLimitManager):
+    """
+    レートリミットオーバーが発生した場合、例外を投げるもっとも単純な handler。
+    """
+
     @asynccontextmanager
     async def handle_rate_limit_async(
         self, rate_limit_info: RateLimitInfo
