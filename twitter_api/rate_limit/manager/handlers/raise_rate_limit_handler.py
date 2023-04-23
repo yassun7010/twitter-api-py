@@ -8,7 +8,7 @@ from twitter_api.rate_limit.rate_limit_info import RateLimitInfo
 
 class RaiseRateLimitHandler(RateLimitManager):
     @asynccontextmanager
-    async def handle_rate_limit_exceeded_async(
+    async def handle_rate_limit_async(
         self, rate_limit_info: RateLimitInfo
     ) -> AsyncGenerator[None, None]:
         """
@@ -21,7 +21,7 @@ class RaiseRateLimitHandler(RateLimitManager):
         yield
 
     @contextmanager
-    def handle_rate_limit_exceeded_sync(
+    def handle_rate_limit_sync(
         self, rate_limit_info: RateLimitInfo
     ) -> Generator[None, None, None]:
         """

@@ -71,7 +71,7 @@ def rate_limit(
         ):
             rate_limit_manager = self.request_client.rate_limit_manager
 
-            async with rate_limit_manager.handle_rate_limit_exceeded_async(
+            async with rate_limit_manager.handle_rate_limit_async(
                 rate_limit_info,
             ):
                 return await func(self, *args, **kwargs)
@@ -81,7 +81,7 @@ def rate_limit(
         ):
             rate_limit_manager = self.request_client.rate_limit_manager
 
-            with rate_limit_manager.handle_rate_limit_exceeded_sync(
+            with rate_limit_manager.handle_rate_limit_sync(
                 rate_limit_info,
             ):
                 return func(self, *args, **kwargs)

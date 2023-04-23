@@ -29,7 +29,7 @@ class SleepRateLimitHandler(RateLimitManager, metaclass=ABCMeta):
         return random.randint(5 * 60, 15 * 60)
 
     @asynccontextmanager
-    async def handle_rate_limit_exceeded_async(self, rate_limit_info: RateLimitInfo):
+    async def handle_rate_limit_async(self, rate_limit_info: RateLimitInfo):
         while True:
             # レートリミットを超えてしまっていたら、必要な待ち時間分だけ待つ。
             wait_time_seconds = self.check_limit_over(rate_limit_info)
@@ -52,7 +52,7 @@ class SleepRateLimitHandler(RateLimitManager, metaclass=ABCMeta):
                 return
 
     @contextmanager
-    def handle_rate_limit_exceeded_sync(self, rate_limit_info: RateLimitInfo):
+    def handle_rate_limit_sync(self, rate_limit_info: RateLimitInfo):
         while True:
             # レートリミットを超えてしまっていたら、必要な待ち時間分だけ待つ。
             wait_time_seconds = self.check_limit_over(rate_limit_info)
