@@ -1,4 +1,3 @@
-import json
 import sys
 
 from twitter_api.api.types.v2_expansion import ALL_EXPANSIONS
