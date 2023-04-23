@@ -1,5 +1,11 @@
 # <p align="center">✨✨ Twitter API Client by Typed Python ✨✨</p>
 
+<p align="center">
+    <a href="https://github.com/yassun4dev/twitter-api-py/actions">
+        <img src="https://github.com/yassun4dev/twitter-api-py/actions/workflows/test-suite.yml/badge.svg" alt="Test Suite">
+    </a>
+</p>
+
 ![demo](images/demo.gif)
 
 ## Install
