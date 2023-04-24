@@ -24,7 +24,7 @@ class TwitterOAuth2RealSession(TwitterOAuth2Session):
         client_secret: ClientSecret,
         callback_url: CallbackUrl,
         scope: Optional[list[Scope]],
-        rate_limit_manager: Optional[RateLimitManager],
+        rate_limit_manager: RateLimitManager,
         event_hooks: Optional[httpx.EventHook],
         limits: httpx.Limits,
         mounts: Optional[Mapping[str, httpx.BaseTransport]],

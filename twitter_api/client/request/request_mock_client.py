@@ -5,6 +5,7 @@ from twitter_api.error import (
     MockResponseNotFound,
     TwitterApiError,
 )
+from twitter_api.rate_limit.manager import DEFAULT_RATE_LIMIT_MANAGER
 from twitter_api.rate_limit.manager.no_operation_rate_limit_manager import (
     NoOperationRateLimitManager,
 )
@@ -29,7 +30,7 @@ class RequestMockClient(RequestClient, Generic[ResponseModelBody]):
         *,
         oauth_version: OAuthVersion,
         rate_limit_target: RateLimitTarget,
-        rate_limit_manager: Optional[RateLimitManager] = None,
+        rate_limit_manager: RateLimitManager,
     ):
         self._store: list[tuple[Endpoint, ResponseModelBody | TwitterApiError]] = []
         self._oauth_version: OAuthVersion = oauth_version

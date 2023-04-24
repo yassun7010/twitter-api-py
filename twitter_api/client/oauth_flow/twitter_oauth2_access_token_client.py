@@ -9,6 +9,7 @@ from twitter_api.client.oauth_session.twitter_oauth2_real_session import (
     TwitterOAuth2RealSession,
 )
 from twitter_api.client.oauth_session.twitter_oauth2_session import TwitterOAuth2Session
+from twitter_api.rate_limit.manager import DEFAULT_RATE_LIMIT_MANAGER
 from twitter_api.rate_limit.manager.rate_limit_manager import RateLimitManager
 from twitter_api.types import httpx
 from twitter_api.types.chainable import Chainable
@@ -46,7 +47,7 @@ class TwitterOAuth2AccessTokenClient(Chainable):
         authorization_response_url: CallbackUrl,
         state: str,
         code_verifier: str,
-        rate_limit_manager: Optional[RateLimitManager] = None,
+        rate_limit_manager: RateLimitManager = DEFAULT_RATE_LIMIT_MANAGER,
         event_hooks: Optional[httpx.EventHook] = None,
         limits: httpx.Limits = httpx.DEFAULT_LIMITS,
         mounts: Optional[Mapping[str, httpx.BaseTransport]] = None,

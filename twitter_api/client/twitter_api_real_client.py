@@ -7,6 +7,7 @@ from twitter_api.api.types.v2_scope import Scope
 from twitter_api.client.oauth_flow.twitter_oauth1_request_token_client import (
     TwitterOAuth1RequestTokenClient,
 )
+from twitter_api.rate_limit.manager import DEFAULT_RATE_LIMIT_MANAGER
 from twitter_api.rate_limit.manager.rate_limit_manager import RateLimitManager
 from twitter_api.types import httpx
 from twitter_api.types.oauth import (
@@ -45,7 +46,7 @@ class TwitterApiRealClient(TwitterApiClient):
     def from_oauth2_bearer_token(
         cls,
         bearer_token: str,
-        rate_limit_manager: Optional[RateLimitManager] = None,
+        rate_limit_manager: RateLimitManager = DEFAULT_RATE_LIMIT_MANAGER,
         event_hooks: Optional[httpx.EventHook] = None,
         limits: httpx.Limits = httpx.DEFAULT_LIMITS,
         mounts: Optional[Mapping[str, httpx.BaseTransport]] = None,
@@ -81,7 +82,7 @@ class TwitterApiRealClient(TwitterApiClient):
         *,
         api_key: ApiKey,
         api_secret: ApiSecret,
-        rate_limit_manager: Optional[RateLimitManager] = None,
+        rate_limit_manager: RateLimitManager = DEFAULT_RATE_LIMIT_MANAGER,
         event_hooks: Optional[httpx.EventHook] = None,
         limits: httpx.Limits = httpx.DEFAULT_LIMITS,
         mounts: Optional[Mapping[str, httpx.BaseTransport]] = None,
@@ -125,7 +126,7 @@ class TwitterApiRealClient(TwitterApiClient):
         client_secret: ClientSecret,
         callback_url: CallbackUrl,
         scope: list[Scope],
-        rate_limit_manager: Optional[RateLimitManager] = None,
+        rate_limit_manager: RateLimitManager = DEFAULT_RATE_LIMIT_MANAGER,
         event_hooks: Optional[httpx.EventHook] = None,
         limits: httpx.Limits = httpx.DEFAULT_LIMITS,
         mounts: Optional[Mapping[str, httpx.BaseTransport]] = None,
@@ -166,7 +167,7 @@ class TwitterApiRealClient(TwitterApiClient):
         api_secret: ApiSecret,
         access_token: AccessToken,
         access_secret: AccessSecret,
-        rate_limit_manager: Optional[RateLimitManager] = None,
+        rate_limit_manager: RateLimitManager = DEFAULT_RATE_LIMIT_MANAGER,
         event_hooks: Optional[httpx.EventHook] = None,
         limits: httpx.Limits = httpx.DEFAULT_LIMITS,
         mounts: Optional[Mapping[str, httpx.BaseTransport]] = None,
@@ -204,7 +205,7 @@ class TwitterApiRealClient(TwitterApiClient):
         api_key: ApiKey,
         api_secret: ApiSecret,
         callback_url: CallbackUrl,
-        rate_limit_manager: Optional[RateLimitManager] = None,
+        rate_limit_manager: RateLimitManager = DEFAULT_RATE_LIMIT_MANAGER,
         event_hooks: Optional[httpx.EventHook] = None,
         limits: httpx.Limits = httpx.DEFAULT_LIMITS,
         mounts: Optional[Mapping[str, httpx.BaseTransport]] = None,

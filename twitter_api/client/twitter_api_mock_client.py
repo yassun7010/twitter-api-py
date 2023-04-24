@@ -81,6 +81,7 @@ from twitter_api.api.resources.v2_users import V2UsersUrl
 from twitter_api.api.resources.v2_users.get_v2_users import GetV2UsersResponseBody
 from twitter_api.api.types.v2_scope import Scope
 from twitter_api.error import TwitterApiError
+from twitter_api.rate_limit.manager import DEFAULT_RATE_LIMIT_MANAGER
 from twitter_api.rate_limit.manager.rate_limit_manager import RateLimitManager
 from twitter_api.rate_limit.rate_limit_target import RateLimitTarget
 from twitter_api.types import httpx
@@ -108,7 +109,7 @@ class _TwitterApiMockClientBase:
         *,
         oauth_version: OAuthVersion,
         rate_limit_target: RateLimitTarget,
-        rate_limit_manager: Optional[RateLimitManager] = None,
+        rate_limit_manager: RateLimitManager = DEFAULT_RATE_LIMIT_MANAGER,
     ) -> None:
         self._client = RequestMockClient(
             oauth_version=oauth_version,
@@ -382,7 +383,7 @@ class TwitterApiMockClient(_TwitterApiMockClientBase, TwitterApiClient):
         cls,
         bearer_token: str,
         *,
-        rate_limit_manager: Optional[RateLimitManager] = None,
+        rate_limit_manager: RateLimitManager = DEFAULT_RATE_LIMIT_MANAGER,
         event_hooks: Optional[httpx.EventHook] = None,
         limits: httpx.Limits = httpx.DEFAULT_LIMITS,
         mounts: Optional[Mapping[str, httpx.BaseTransport]] = None,
@@ -403,7 +404,7 @@ class TwitterApiMockClient(_TwitterApiMockClientBase, TwitterApiClient):
         *,
         api_key: ApiKey,
         api_secret: ApiSecret,
-        rate_limit_manager: Optional[RateLimitManager] = None,
+        rate_limit_manager: RateLimitManager = DEFAULT_RATE_LIMIT_MANAGER,
         event_hooks: Optional[httpx.EventHook] = None,
         limits: httpx.Limits = httpx.DEFAULT_LIMITS,
         mounts: Optional[Mapping[str, httpx.BaseTransport]] = None,
@@ -426,7 +427,7 @@ class TwitterApiMockClient(_TwitterApiMockClientBase, TwitterApiClient):
         client_secret: ClientSecret,
         callback_url: CallbackUrl,
         scope: list[Scope],
-        rate_limit_manager: Optional[RateLimitManager] = None,
+        rate_limit_manager: RateLimitManager = DEFAULT_RATE_LIMIT_MANAGER,
         event_hooks: Optional[httpx.EventHook] = None,
         limits: httpx.Limits = httpx.DEFAULT_LIMITS,
         mounts: Optional[Mapping[str, httpx.BaseTransport]] = None,
@@ -453,7 +454,7 @@ class TwitterApiMockClient(_TwitterApiMockClientBase, TwitterApiClient):
         api_secret: ApiSecret,
         access_token: AccessToken,
         access_secret: AccessSecret,
-        rate_limit_manager: Optional[RateLimitManager] = None,
+        rate_limit_manager: RateLimitManager = DEFAULT_RATE_LIMIT_MANAGER,
         event_hooks: Optional[httpx.EventHook] = None,
         limits: httpx.Limits = httpx.DEFAULT_LIMITS,
         mounts: Optional[Mapping[str, httpx.BaseTransport]] = None,
@@ -475,7 +476,7 @@ class TwitterApiMockClient(_TwitterApiMockClientBase, TwitterApiClient):
         api_key: ApiKey,
         api_secret: ApiSecret,
         callback_url: CallbackUrl,
-        rate_limit_manager: Optional[RateLimitManager] = None,
+        rate_limit_manager: RateLimitManager = DEFAULT_RATE_LIMIT_MANAGER,
         event_hooks: Optional[httpx.EventHook] = None,
         limits: httpx.Limits = httpx.DEFAULT_LIMITS,
         mounts: Optional[Mapping[str, httpx.BaseTransport]] = None,

@@ -65,6 +65,7 @@ from twitter_api.api.resources.v2_user_tweets import (
 from twitter_api.api.resources.v2_users import V2UsersResources, V2UsersUrl
 from twitter_api.api.types.v2_scope import ALL_SCOPES, Scope
 from twitter_api.error import NeverError
+from twitter_api.rate_limit.manager import DEFAULT_RATE_LIMIT_MANAGER
 from twitter_api.rate_limit.manager.rate_limit_manager import RateLimitManager
 from twitter_api.types import httpx
 from twitter_api.types.chainable import Chainable
@@ -342,7 +343,7 @@ class TwitterApiClient(Chainable, metaclass=ABCMeta):
         cls,
         bearer_token: str,
         *,
-        rate_limit_manager: Optional[RateLimitManager] = None,
+        rate_limit_manager: RateLimitManager = DEFAULT_RATE_LIMIT_MANAGER,
         event_hooks: Optional[httpx.EventHook] = None,
         limits: httpx.Limits = httpx.DEFAULT_LIMITS,
         mounts: Optional[Mapping[str, httpx.BaseTransport]] = None,
@@ -371,7 +372,7 @@ class TwitterApiClient(Chainable, metaclass=ABCMeta):
     def from_oauth2_bearer_token_env(
         cls,
         bearer_token_env="BEARER_TOEKN",
-        rate_limit_manager: Optional[RateLimitManager] = None,
+        rate_limit_manager: RateLimitManager = DEFAULT_RATE_LIMIT_MANAGER,
         event_hooks: Optional[httpx.EventHook] = None,
         limits: httpx.Limits = httpx.DEFAULT_LIMITS,
         mounts: Optional[Mapping[str, httpx.BaseTransport]] = None,
@@ -400,7 +401,7 @@ class TwitterApiClient(Chainable, metaclass=ABCMeta):
         *,
         api_key: ApiKey,
         api_secret: ApiSecret,
-        rate_limit_manager: Optional[RateLimitManager] = None,
+        rate_limit_manager: RateLimitManager = DEFAULT_RATE_LIMIT_MANAGER,
         event_hooks: Optional[httpx.EventHook] = None,
         limits: httpx.Limits = httpx.DEFAULT_LIMITS,
         mounts: Optional[Mapping[str, httpx.BaseTransport]] = None,
@@ -432,7 +433,7 @@ class TwitterApiClient(Chainable, metaclass=ABCMeta):
         *,
         api_key_env: Env[ApiKey] = "API_KEY",
         api_secret_env: Env[ApiSecret] = "API_SECRET",
-        rate_limit_manager: Optional[RateLimitManager] = None,
+        rate_limit_manager: RateLimitManager = DEFAULT_RATE_LIMIT_MANAGER,
         event_hooks: Optional[httpx.EventHook] = None,
         limits: httpx.Limits = httpx.DEFAULT_LIMITS,
         mounts: Optional[Mapping[str, httpx.BaseTransport]] = None,
@@ -464,7 +465,7 @@ class TwitterApiClient(Chainable, metaclass=ABCMeta):
         client_secret: ClientSecret,
         callback_url: CallbackUrl,
         scope: list[Scope],
-        rate_limit_manager: Optional[RateLimitManager] = None,
+        rate_limit_manager: RateLimitManager = DEFAULT_RATE_LIMIT_MANAGER,
         event_hooks: Optional[httpx.EventHook] = None,
         limits: httpx.Limits = httpx.DEFAULT_LIMITS,
         mounts: Optional[Mapping[str, httpx.BaseTransport]] = None,
@@ -503,7 +504,7 @@ class TwitterApiClient(Chainable, metaclass=ABCMeta):
         client_secret_env: Env[ClientSecret] = "CLIENT_SECRET",
         callback_url_env: Env[CallbackUrl] = "CALLBACK_URL",
         callback_url: Optional[CallbackUrl] = None,
-        rate_limit_manager: Optional[RateLimitManager] = None,
+        rate_limit_manager: RateLimitManager = DEFAULT_RATE_LIMIT_MANAGER,
         event_hooks: Optional[httpx.EventHook] = None,
         limits: httpx.Limits = httpx.DEFAULT_LIMITS,
         mounts: Optional[Mapping[str, httpx.BaseTransport]] = None,
@@ -548,7 +549,7 @@ class TwitterApiClient(Chainable, metaclass=ABCMeta):
         api_secret: ApiSecret,
         access_token: AccessToken,
         access_secret: AccessSecret,
-        rate_limit_manager: Optional[RateLimitManager] = None,
+        rate_limit_manager: RateLimitManager = DEFAULT_RATE_LIMIT_MANAGER,
         event_hooks: Optional[httpx.EventHook] = None,
         limits: httpx.Limits = httpx.DEFAULT_LIMITS,
         mounts: Optional[Mapping[str, httpx.BaseTransport]] = None,
@@ -584,7 +585,7 @@ class TwitterApiClient(Chainable, metaclass=ABCMeta):
         api_secret_env: Env[ApiSecret] = "API_SECRET",
         access_token_env: Env[AccessToken] = "ACCESS_TOKEN",
         access_secret_env: Env[AccessSecret] = "ACCESS_SECRET",
-        rate_limit_manager: Optional[RateLimitManager] = None,
+        rate_limit_manager: RateLimitManager = DEFAULT_RATE_LIMIT_MANAGER,
         event_hooks: Optional[httpx.EventHook] = None,
         limits: httpx.Limits = httpx.DEFAULT_LIMITS,
         mounts: Optional[Mapping[str, httpx.BaseTransport]] = None,
@@ -617,7 +618,7 @@ class TwitterApiClient(Chainable, metaclass=ABCMeta):
         api_key: ApiKey,
         api_secret: ApiSecret,
         callback_url: CallbackUrl,
-        rate_limit_manager: Optional[RateLimitManager] = None,
+        rate_limit_manager: RateLimitManager = DEFAULT_RATE_LIMIT_MANAGER,
         event_hooks: Optional[httpx.EventHook] = None,
         limits: httpx.Limits = httpx.DEFAULT_LIMITS,
         mounts: Optional[Mapping[str, httpx.BaseTransport]] = None,
@@ -654,7 +655,7 @@ class TwitterApiClient(Chainable, metaclass=ABCMeta):
         api_secret_env: Env[ApiSecret] = "API_SECRET",
         callback_url_env: Env[CallbackUrl] = "CALLBACK_URL",
         callback_url: Optional[CallbackUrl] = None,
-        rate_limit_manager: Optional[RateLimitManager] = None,
+        rate_limit_manager: RateLimitManager = DEFAULT_RATE_LIMIT_MANAGER,
         event_hooks: Optional[httpx.EventHook] = None,
         limits: httpx.Limits = httpx.DEFAULT_LIMITS,
         mounts: Optional[Mapping[str, httpx.BaseTransport]] = None,
