@@ -102,9 +102,7 @@ from .request.request_mock_client import RequestMockClient
 from .twitter_api_client import TwitterApiClient
 
 
-class TwitterApiMockClient(TwitterApiClient):
-    """Twitter API V2 をモックするためのクライアント"""
-
+class _TwitterApiMockClientBase:
     def __init__(
         self,
         *,
@@ -374,6 +372,10 @@ class TwitterApiMockClient(TwitterApiClient):
         self._client.inject_response_body(Endpoint("DELETE", url), response_body)
 
         return self
+
+
+class TwitterApiMockClient(_TwitterApiMockClientBase, TwitterApiClient):
+    """Twitter API V2 をモックするためのクライアント"""
 
     @classmethod
     def from_oauth2_bearer_token(

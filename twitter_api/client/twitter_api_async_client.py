@@ -1,5 +1,5 @@
 import os
-from abc import abstractmethod
+from abc import ABCMeta, abstractmethod
 from typing import Mapping, Optional, Self, Union, overload
 
 from twitter_api.api.resources.oauth2_invalidate_token import (
@@ -68,10 +68,10 @@ from twitter_api.api.resources.v2_user_tweets import (
 from twitter_api.api.resources.v2_users import AsyncV2UsersResources, V2UsersUrl
 from twitter_api.api.types.v2_scope import ALL_SCOPES, Scope
 from twitter_api.client.request.request_async_client import RequestAsyncClient
-from twitter_api.client.twitter_api_client import TwitterApiClient
 from twitter_api.error import NeverError
 from twitter_api.rate_limit.manager.rate_limit_manager import RateLimitManager
 from twitter_api.types import httpx
+from twitter_api.types.chainable import Chainable
 from twitter_api.types.oauth import (
     AccessSecret,
     AccessToken,
@@ -84,7 +84,7 @@ from twitter_api.types.oauth import (
 )
 
 
-class TwitterApiAsyncClient(TwitterApiClient):
+class TwitterApiAsyncClient(Chainable, metaclass=ABCMeta):
     """
     Twitter API を非同期に操作するためのクライアント
     """
