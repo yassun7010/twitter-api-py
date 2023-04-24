@@ -177,8 +177,8 @@ class TestMockGetV2TweetsSearchRecent:
             )
 
         assert [
-            res
-            for res in (
+            response
+            for response in (
                 oauth2_app_mock_client.chain()
                 .resource("https://api.twitter.com/2/tweets/search/recent")
                 .get_paging_response_body_iter(
