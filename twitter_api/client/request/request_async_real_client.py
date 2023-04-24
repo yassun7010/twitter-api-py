@@ -32,7 +32,7 @@ class RequestAsyncRealClient(RequestAsyncClient):
         rate_limit_target: RateLimitTarget,
         rate_limit_manager: Optional[RateLimitManager] = None,
         session: Optional[httpx.AsyncClient] = None,
-        timeout_sec: Optional[float] = None,
+        timeout_seconds: Optional[float] = None,
     ) -> None:
         if session is None:
             session = httpx.AsyncClient()
@@ -41,7 +41,7 @@ class RequestAsyncRealClient(RequestAsyncClient):
         self._rate_limit_target: RateLimitTarget = rate_limit_target
         self._auth = auth
         self._session = session
-        self.timeout_sec = timeout_sec
+        self.timeout_seconds = timeout_seconds
 
         if rate_limit_manager is None:
             rate_limit_manager = NoOperationRateLimitManager()
@@ -78,7 +78,7 @@ class RequestAsyncRealClient(RequestAsyncClient):
             auth=self._auth if auth else None,
             method=endpoint.method,
             params=_remove_none_field(query),
-            timeout=self.timeout_sec,
+            timeout=self.timeout_seconds,
         )
 
         return _parse_response(
@@ -111,7 +111,7 @@ class RequestAsyncRealClient(RequestAsyncClient):
             headers=headers,
             params=_remove_none_field(query),
             json=_remove_none_field(body),
-            timeout=self.timeout_sec,
+            timeout=self.timeout_seconds,
         )
 
         if response_body_type is str:
@@ -145,7 +145,7 @@ class RequestAsyncRealClient(RequestAsyncClient):
             method=endpoint.method,
             headers=headers,
             params=_remove_none_field(query),
-            timeout=self.timeout_sec,
+            timeout=self.timeout_seconds,
         )
 
         if response_body_type is str:
