@@ -29,7 +29,7 @@ class TestPostOauth2Token:
         request: pytest.FixtureRequest,
     ):
         with spawn_real_client(client_fixture_name, request, permit) as real_client:
-            expected_response = PostOauth2TokenResponseBody(
+            expected_response_body = PostOauth2TokenResponseBody(
                 token_type="bearer",
                 access_token=(
                     real_client._real_request_client._auth.token["access_token"]
@@ -49,26 +49,26 @@ class TestPostOauth2Token:
             )
 
             print(real_response.json())
-            print(expected_response.json())
+            print(expected_response_body.json())
 
-            assert real_response.token_type == expected_response.token_type
+            assert real_response.token_type == expected_response_body.token_type
             assert get_extra_fields(real_response) == {}
 
 
 class TestMockPostOauth2Token:
     def test_mock_post_oauth2_token(self, oauth2_app_mock_client: TwitterApiMockClient):
-        response = PostOauth2TokenResponseBody(
+        response_body = PostOauth2TokenResponseBody(
             token_type="bearer",
             access_token="AAAAAAAAAAAAAAAAAAAAA",
         )
 
-        assert get_extra_fields(response) == {}
+        assert get_extra_fields(response_body) == {}
 
         assert (
             oauth2_app_mock_client.chain()
             .inject_post_response_body(
                 "https://api.twitter.com/oauth2/token",
-                response,
+                response_body,
             )
             .resource("https://api.twitter.com/oauth2/token")
             .post(
@@ -76,7 +76,7 @@ class TestMockPostOauth2Token:
                 api_secret="DUMMY_API_SECRET",
                 query={"grant_type": "client_credentials"},
             )
-        ) == response
+        ) == response_body
 
 
 class TestAsyncMockPostOauth2Token:
@@ -84,19 +84,19 @@ class TestAsyncMockPostOauth2Token:
     async def test_async_mock_post_oauth2_token(
         self, oauth2_app_async_mock_client: TwitterApiAsyncMockClient
     ):
-        response = PostOauth2TokenResponseBody(
+        response_body = PostOauth2TokenResponseBody(
             token_type="bearer",
             access_token="AAAAAAAAAAAAAAAAAAAAA",
         )
 
-        assert get_extra_fields(response) == {}
+        assert get_extra_fields(response_body) == {}
 
         assert (
             await (
                 oauth2_app_async_mock_client.chain()
                 .inject_post_response_body(
                     "https://api.twitter.com/oauth2/token",
-                    response,
+                    response_body,
                 )
                 .resource("https://api.twitter.com/oauth2/token")
                 .post(
@@ -105,5 +105,5 @@ class TestAsyncMockPostOauth2Token:
                     query={"grant_type": "client_credentials"},
                 )
             )
-            == response
+            == response_body
         )

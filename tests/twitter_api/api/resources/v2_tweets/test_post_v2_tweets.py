@@ -61,14 +61,16 @@ class TestMockGetV2Tweet:
             edit_history_tweet_ids=["1234567890123456789"],
         )
 
-        response = PostV2TweetsResponseBody(data=tweet)
+        response_body = PostV2TweetsResponseBody(data=tweet)
 
         assert (
             oauth2_app_mock_client.chain()
-            .inject_post_response_body("https://api.twitter.com/2/tweets", response)
+            .inject_post_response_body(
+                "https://api.twitter.com/2/tweets", response_body
+            )
             .resource("https://api.twitter.com/2/tweets")
             .post({"text": tweet.text})
-        ) == response
+        ) == response_body
 
 
 class TestAsyncMockGetV2Tweet:
@@ -82,14 +84,16 @@ class TestAsyncMockGetV2Tweet:
             edit_history_tweet_ids=["1234567890123456789"],
         )
 
-        response = PostV2TweetsResponseBody(data=tweet)
+        response_body = PostV2TweetsResponseBody(data=tweet)
 
         assert (
             await (
                 oauth2_app_async_mock_client.chain()
-                .inject_post_response_body("https://api.twitter.com/2/tweets", response)
+                .inject_post_response_body(
+                    "https://api.twitter.com/2/tweets", response_body
+                )
                 .resource("https://api.twitter.com/2/tweets")
                 .post({"text": tweet.text})
             )
-            == response
+            == response_body
         )

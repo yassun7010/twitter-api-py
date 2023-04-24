@@ -57,34 +57,34 @@ class TestGetV2Tweets:
         request: pytest.FixtureRequest,
     ):
         with spawn_real_client(client_fixture_name, request, permit) as real_client:
-            expected_response = GetV2TweetsResponseBody(data=tweets)
+            expected_response_body = GetV2TweetsResponseBody(data=tweets)
 
-            response = (
+            response_body = (
                 real_client.chain()
                 .resource("https://api.twitter.com/2/tweets")
                 .get({"ids": list(map(lambda tweet: tweet.id, tweets))})
             )
 
-            print(response.json())
-            print(expected_response.json())
+            print(response_body.json())
+            print(expected_response_body.json())
 
-            assert get_extra_fields(response) == {}
-            assert response == expected_response
+            assert get_extra_fields(response_body) == {}
+            assert response_body == expected_response_body
 
     def test_get_v2_tweet_all_fields(
         self,
         oauth2_app_real_client: TwitterApiRealClient,
         all_fields: GetV2TweetsQueryParameters,
     ):
-        response = (
+        response_body = (
             oauth2_app_real_client.chain()
             .resource("https://api.twitter.com/2/tweets")
             .get(all_fields)
         )
 
-        print(response.json())
+        print(response_body.json())
 
-        assert get_extra_fields(response) == {}
+        assert get_extra_fields(response_body) == {}
 
 
 class TestMockGetV2Tweets:
@@ -100,16 +100,16 @@ class TestMockGetV2Tweets:
         all_fields: GetV2TweetsQueryParameters,
         json_filename: str,
     ):
-        response = GetV2TweetsResponseBody.parse_file(
+        response_body = GetV2TweetsResponseBody.parse_file(
             json_test_data(json_filename),
         )
 
         assert (
             oauth2_app_mock_client.chain()
-            .inject_get_response_body("https://api.twitter.com/2/tweets", response)
+            .inject_get_response_body("https://api.twitter.com/2/tweets", response_body)
             .resource("https://api.twitter.com/2/tweets")
             .get(all_fields)
-        ) == response
+        ) == response_body
 
 
 class TestAsyncMockGetV2Tweets:
@@ -119,16 +119,18 @@ class TestAsyncMockGetV2Tweets:
         oauth2_app_async_mock_client: TwitterApiAsyncMockClient,
         all_fields: GetV2TweetsQueryParameters,
     ):
-        response: GetV2TweetsResponseBody = GetV2TweetsResponseBody.parse_file(
+        response_body: GetV2TweetsResponseBody = GetV2TweetsResponseBody.parse_file(
             json_test_data("get_v2_tweets_response_all_fields.json"),
         )
 
         assert (
             await (
                 oauth2_app_async_mock_client.chain()
-                .inject_get_response_body("https://api.twitter.com/2/tweets", response)
+                .inject_get_response_body(
+                    "https://api.twitter.com/2/tweets", response_body
+                )
                 .resource("https://api.twitter.com/2/tweets")
                 .get(all_fields)
             )
-            == response
+            == response_body
         )

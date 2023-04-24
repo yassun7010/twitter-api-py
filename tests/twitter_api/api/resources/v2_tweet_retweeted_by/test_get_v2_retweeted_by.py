@@ -29,13 +29,13 @@ class TestGetV2RetweetedBy:
         request: pytest.FixtureRequest,
     ):
         with spawn_real_client(client_fixture_name, request, permit) as real_client:
-            response = real_client.resource(
+            response_body = real_client.resource(
                 "https://api.twitter.com/2/tweets/:id/retweeted_by"
             ).get("1460323737035677698")
 
-            print(response.json())
+            print(response_body.json())
 
-            assert get_extra_fields(response) == {}
+            assert get_extra_fields(response_body) == {}
 
 
 class TestMockGetV2RetweetedBy:
@@ -43,20 +43,20 @@ class TestMockGetV2RetweetedBy:
         self,
         oauth2_app_mock_client: TwitterApiMockClient,
     ):
-        response = GetV2TweetRetweetedByResponseBody.parse_file(
+        response_body = GetV2TweetRetweetedByResponseBody.parse_file(
             json_test_data("get_v2_retweeted_by_response.json")
         )
 
-        assert get_extra_fields(response) == {}
+        assert get_extra_fields(response_body) == {}
 
         assert (
             oauth2_app_mock_client.chain()
             .inject_get_response_body(
-                "https://api.twitter.com/2/tweets/:id/retweeted_by", response
+                "https://api.twitter.com/2/tweets/:id/retweeted_by", response_body
             )
             .resource("https://api.twitter.com/2/tweets/:id/retweeted_by")
             .get("1234567890123456789")
-        ) == response
+        ) == response_body
 
 
 class TestAsyncMockGetV2RetweetedBy:
@@ -65,20 +65,20 @@ class TestAsyncMockGetV2RetweetedBy:
         self,
         oauth2_app_async_mock_client: TwitterApiAsyncMockClient,
     ):
-        response = GetV2TweetRetweetedByResponseBody.parse_file(
+        response_body = GetV2TweetRetweetedByResponseBody.parse_file(
             json_test_data("get_v2_retweeted_by_response.json")
         )
 
-        assert get_extra_fields(response) == {}
+        assert get_extra_fields(response_body) == {}
 
         assert (
             await (
                 oauth2_app_async_mock_client.chain()
                 .inject_get_response_body(
-                    "https://api.twitter.com/2/tweets/:id/retweeted_by", response
+                    "https://api.twitter.com/2/tweets/:id/retweeted_by", response_body
                 )
                 .resource("https://api.twitter.com/2/tweets/:id/retweeted_by")
                 .get("1234567890123456789")
             )
-            == response
+            == response_body
         )

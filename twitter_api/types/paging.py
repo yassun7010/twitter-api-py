@@ -50,11 +50,11 @@ def get_paging_response_body_iter_sync(
 
     while True:
         _query["next_token"] = next_token  # type: ignore
-        response = get_func(_query)
+        response_body = get_func(_query)
 
-        yield response
+        yield response_body
 
-        next_token = response.meta_next_token
+        next_token = response_body.meta_next_token
 
         if next_token is None:
             return
@@ -96,11 +96,11 @@ async def get_paging_response_body_iter_async(
 
     while True:
         _query["next_token"] = next_token  # type: ignore
-        response = await get_func(_query)
+        response_body = await get_func(_query)
 
-        yield response
+        yield response_body
 
-        next_token = response.meta_next_token
+        next_token = response_body.meta_next_token
 
         if next_token is None:
             return

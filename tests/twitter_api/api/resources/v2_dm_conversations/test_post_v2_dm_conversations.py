@@ -32,7 +32,7 @@ class TestPostV2DmConversationsMessages:
         request: pytest.FixtureRequest,
     ):
         with spawn_real_client(client_fixture_name, request, permit) as real_client:
-            response = (
+            response_body = (
                 real_client.chain()
                 .resource("https://api.twitter.com/2/dm_conversations")
                 .post(
@@ -47,9 +47,9 @@ class TestPostV2DmConversationsMessages:
                 )
             )
 
-            print(response.json())
+            print(response_body.json())
 
-            assert get_extra_fields(response) == {}
+            assert get_extra_fields(response_body) == {}
 
 
 class TestMockPostV2DmConversationsMessages:
@@ -64,17 +64,17 @@ class TestMockPostV2DmConversationsMessages:
         oauth2_app_mock_client: TwitterApiMockClient,
         json_filename: str,
     ):
-        response = PostV2DmConversationsResponseBody.parse_file(
+        response_body = PostV2DmConversationsResponseBody.parse_file(
             json_test_data(json_filename)
         )
 
-        assert get_extra_fields(response) == {}
+        assert get_extra_fields(response_body) == {}
 
         assert (
             oauth2_app_mock_client.chain()
             .inject_post_response_body(
                 "https://api.twitter.com/2/dm_conversations",
-                response,
+                response_body,
             )
             .resource("https://api.twitter.com/2/dm_conversations")
             .post(
@@ -87,7 +87,7 @@ class TestMockPostV2DmConversationsMessages:
                     },
                 },
             )
-        ) == response
+        ) == response_body
 
 
 class TestAsyncMockPostV2DmConversationsMessages:
@@ -96,18 +96,18 @@ class TestAsyncMockPostV2DmConversationsMessages:
         self,
         oauth2_app_async_mock_client: TwitterApiAsyncMockClient,
     ):
-        response = PostV2DmConversationsResponseBody.parse_file(
+        response_body = PostV2DmConversationsResponseBody.parse_file(
             json_test_data("post_v2_dm_conversations.json")
         )
 
-        assert get_extra_fields(response) == {}
+        assert get_extra_fields(response_body) == {}
 
         assert (
             await (
                 oauth2_app_async_mock_client.chain()
                 .inject_post_response_body(
                     "https://api.twitter.com/2/dm_conversations",
-                    response,
+                    response_body,
                 )
                 .resource("https://api.twitter.com/2/dm_conversations")
                 .post(
@@ -121,5 +121,5 @@ class TestAsyncMockPostV2DmConversationsMessages:
                     },
                 )
             )
-            == response
+            == response_body
         )

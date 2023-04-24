@@ -30,15 +30,15 @@ class TestGetV2TweetsSearchStream:
         request: pytest.FixtureRequest,
     ):
         with spawn_real_client(client_fixture_name, request, permit) as real_client:
-            response = (
+            response_body = (
                 real_client.chain()
                 .resource("https://api.twitter.com/2/tweets/search/stream")
                 .get()
             )
 
-            print(response.json())
+            print(response_body.json())
 
-            assert get_extra_fields(response) == {}
+            assert get_extra_fields(response_body) == {}
 
 
 class TestMockGetV2TweetsSearchStream:
@@ -53,16 +53,16 @@ class TestMockGetV2TweetsSearchStream:
         oauth2_app_mock_client: TwitterApiMockClient,
         json_filename: str,
     ):
-        response = GetV2TweetsSearchStreamResponseBody.parse_file(
+        response_body = GetV2TweetsSearchStreamResponseBody.parse_file(
             json_test_data(json_filename)
         )
 
-        assert get_extra_fields(response) == {}
+        assert get_extra_fields(response_body) == {}
 
         assert (
             oauth2_app_mock_client.chain()
             .inject_get_response_body(
-                "https://api.twitter.com/2/tweets/search/stream", response
+                "https://api.twitter.com/2/tweets/search/stream", response_body
             )
             .resource("https://api.twitter.com/2/tweets/search/stream")
             .get(
@@ -71,7 +71,7 @@ class TestMockGetV2TweetsSearchStream:
                     "media.fields": ["preview_image_url"],
                 }
             )
-        ) == response
+        ) == response_body
 
 
 class TestAsyncMockGetV2TweetsSearchStream:
@@ -80,17 +80,17 @@ class TestAsyncMockGetV2TweetsSearchStream:
         self,
         oauth2_app_async_mock_client: TwitterApiAsyncMockClient,
     ):
-        response = GetV2TweetsSearchStreamResponseBody.parse_file(
+        response_body = GetV2TweetsSearchStreamResponseBody.parse_file(
             json_test_data("get_v2_tweets_search_stream_response.json")
         )
 
-        assert get_extra_fields(response) == {}
+        assert get_extra_fields(response_body) == {}
 
         assert (
             await (
                 oauth2_app_async_mock_client.chain()
                 .inject_get_response_body(
-                    "https://api.twitter.com/2/tweets/search/stream", response
+                    "https://api.twitter.com/2/tweets/search/stream", response_body
                 )
                 .resource("https://api.twitter.com/2/tweets/search/stream")
                 .get(
@@ -100,5 +100,5 @@ class TestAsyncMockGetV2TweetsSearchStream:
                     }
                 )
             )
-            == response
+            == response_body
         )

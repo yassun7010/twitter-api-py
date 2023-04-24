@@ -18,7 +18,7 @@ class TestPostOauth2InvalidateToken:
     def test_post_oauth2_invalidate_token(
         self, oauth2_app_real_client: TwitterApiRealClient
     ):
-        expected_response = PostOauth2InvalidateTokenResponseBody(
+        expected_response_body = PostOauth2InvalidateTokenResponseBody(
             access_token=os.environ["BEARER_TOEKN"],
         )
 
@@ -28,32 +28,32 @@ class TestPostOauth2InvalidateToken:
             .post(
                 api_key=os.environ["API_KEY"],
                 api_secret=os.environ["API_SECRET"],
-                query={"access_token": expected_response.access_token},
+                query={"access_token": expected_response_body.access_token},
             )
         )
 
         print(real_response.json())
-        print(expected_response.json())
+        print(expected_response_body.json())
 
-        assert real_response == expected_response
-        assert get_extra_fields(expected_response) == {}
+        assert real_response == expected_response_body
+        assert get_extra_fields(expected_response_body) == {}
 
 
 class TestMockPostOauth2InvalidateToken:
     def test_mock_post_oauth2_invalidate_token(
         self, oauth2_app_mock_client: TwitterApiMockClient
     ):
-        response = PostOauth2InvalidateTokenResponseBody(
+        response_body = PostOauth2InvalidateTokenResponseBody(
             access_token="DUMMY_ACCESS_TOKEN",
         )
 
-        assert get_extra_fields(response) == {}
+        assert get_extra_fields(response_body) == {}
 
         assert (
             oauth2_app_mock_client.chain()
             .inject_post_response_body(
                 "https://api.twitter.com/oauth2/invalidate_token",
-                response,
+                response_body,
             )
             .resource("https://api.twitter.com/oauth2/invalidate_token")
             .post(
@@ -61,7 +61,7 @@ class TestMockPostOauth2InvalidateToken:
                 api_secret="DUMMY_API_SECRET",
                 query={"access_token": "DUMMY_ACCESS_TOKEN"},
             )
-        ) == response
+        ) == response_body
 
 
 class TestAsyncMockPostOauth2InvalidateToken:
@@ -69,18 +69,18 @@ class TestAsyncMockPostOauth2InvalidateToken:
     async def test_async_mock_post_oauth2_invalidate_token(
         self, oauth2_app_async_mock_client: TwitterApiAsyncMockClient
     ):
-        response = PostOauth2InvalidateTokenResponseBody(
+        response_body = PostOauth2InvalidateTokenResponseBody(
             access_token="DUMMY_ACCESS_TOKEN",
         )
 
-        assert get_extra_fields(response) == {}
+        assert get_extra_fields(response_body) == {}
 
         assert (
             await (
                 oauth2_app_async_mock_client.chain()
                 .inject_post_response_body(
                     "https://api.twitter.com/oauth2/invalidate_token",
-                    response,
+                    response_body,
                 )
                 .resource("https://api.twitter.com/oauth2/invalidate_token")
                 .post(
@@ -89,5 +89,5 @@ class TestAsyncMockPostOauth2InvalidateToken:
                     query={"access_token": "DUMMY_ACCESS_TOKEN"},
                 )
             )
-            == response
+            == response_body
         )

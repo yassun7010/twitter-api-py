@@ -31,7 +31,7 @@ class TestPostV2DmConversationsWithMessages:
         request: pytest.FixtureRequest,
     ):
         with spawn_real_client(client_fixture_name, request, permit) as real_client:
-            response = (
+            response_body = (
                 real_client.chain()
                 .resource(
                     "https://api.twitter.com/2/dm_conversations/with/:participant_id/messages"
@@ -39,9 +39,9 @@ class TestPostV2DmConversationsWithMessages:
                 .post(participant_id, {"text": "DM のテスト。"})
             )
 
-            print(response.json())
+            print(response_body.json())
 
-            assert get_extra_fields(response) == {}
+            assert get_extra_fields(response_body) == {}
 
 
 class TestMockPostV2DmConversationsWithMessages:
@@ -56,23 +56,25 @@ class TestMockPostV2DmConversationsWithMessages:
         oauth2_app_mock_client: TwitterApiMockClient,
         json_filename: str,
     ):
-        response = PostV2DmConversationsWithParticipantMessagesResponseBody.parse_file(
-            json_test_data(json_filename)
+        response_body = (
+            PostV2DmConversationsWithParticipantMessagesResponseBody.parse_file(
+                json_test_data(json_filename)
+            )
         )
 
-        assert get_extra_fields(response) == {}
+        assert get_extra_fields(response_body) == {}
 
         assert (
             oauth2_app_mock_client.chain()
             .inject_post_response_body(
                 "https://api.twitter.com/2/dm_conversations/with/:participant_id/messages",
-                response,
+                response_body,
             )
             .resource(
                 "https://api.twitter.com/2/dm_conversations/with/:participant_id/messages"
             )
             .post("2244994945", {"text": "DM のテスト。"})
-        ) == response
+        ) == response_body
 
 
 class TestAsyncMockPostV2DmConversationsWithMessages:
@@ -81,23 +83,27 @@ class TestAsyncMockPostV2DmConversationsWithMessages:
         self,
         oauth2_app_async_mock_client: TwitterApiAsyncMockClient,
     ):
-        response = PostV2DmConversationsWithParticipantMessagesResponseBody.parse_file(
-            json_test_data("post_v2_dm_conversations_with_participant_messages.json")
+        response_body = (
+            PostV2DmConversationsWithParticipantMessagesResponseBody.parse_file(
+                json_test_data(
+                    "post_v2_dm_conversations_with_participant_messages.json"
+                )
+            )
         )
 
-        assert get_extra_fields(response) == {}
+        assert get_extra_fields(response_body) == {}
 
         assert (
             await (
                 oauth2_app_async_mock_client.chain()
                 .inject_post_response_body(
                     "https://api.twitter.com/2/dm_conversations/with/:participant_id/messages",
-                    response,
+                    response_body,
                 )
                 .resource(
                     "https://api.twitter.com/2/dm_conversations/with/:participant_id/messages"
                 )
                 .post("2244994945", {"text": "DM のテスト。"})
             )
-            == response
+            == response_body
         )

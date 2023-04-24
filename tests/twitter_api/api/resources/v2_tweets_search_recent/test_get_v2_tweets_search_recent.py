@@ -46,21 +46,21 @@ class TestGetV2TweetsSearchRecent:
         request: pytest.FixtureRequest,
     ):
         with spawn_real_client(client_fixture_name, request, permit) as real_client:
-            response = (
+            response_body = (
                 real_client.chain()
                 .resource("https://api.twitter.com/2/tweets/search/recent")
                 .get({"query": "ツイート", "max_results": 10})
             )
 
-            print(response.json())
+            print(response_body.json())
 
-            assert get_extra_fields(response) == {}
+            assert get_extra_fields(response_body) == {}
 
     def test_get_v2_search_recent_all_fields(
         self,
         oauth2_app_real_client: TwitterApiRealClient,
     ):
-        for response, _ in zip(
+        for response_body, _ in zip(
             (
                 oauth2_app_real_client.chain()
                 .resource("https://api.twitter.com/2/tweets/search/recent")
@@ -79,7 +79,7 @@ class TestGetV2TweetsSearchRecent:
             ),
             range(3),  # テスト時間が伸びるのも嫌なので、3つまで取り出す。
         ):
-            assert get_extra_fields(response) == {}
+            assert get_extra_fields(response_body) == {}
 
 
 class TestMockGetV2TweetsSearchRecent:
@@ -96,16 +96,16 @@ class TestMockGetV2TweetsSearchRecent:
         oauth2_app_mock_client: TwitterApiMockClient,
         json_filename: str,
     ):
-        response = GetV2TweetsSearchRecentResponseBody.parse_file(
+        response_body = GetV2TweetsSearchRecentResponseBody.parse_file(
             json_test_data(json_filename)
         )
 
-        assert get_extra_fields(response) == {}
+        assert get_extra_fields(response_body) == {}
 
         assert (
             oauth2_app_mock_client.chain()
             .inject_get_response_body(
-                "https://api.twitter.com/2/tweets/search/recent", response
+                "https://api.twitter.com/2/tweets/search/recent", response_body
             )
             .resource("https://api.twitter.com/2/tweets/search/recent")
             .get(
@@ -115,7 +115,7 @@ class TestMockGetV2TweetsSearchRecent:
                     "media.fields": ["preview_image_url"],
                 }
             )
-        ) == response
+        ) == response_body
 
     def test_mock_get_v2_search_recent_recent(
         self,
@@ -133,7 +133,7 @@ class TestMockGetV2TweetsSearchRecent:
         next_token: str | None = None
 
         for _ in itertools.count():
-            response = (
+            response_body = (
                 oauth2_app_mock_client.chain()
                 .resource("https://api.twitter.com/2/tweets/search/recent")
                 .get(
@@ -151,9 +151,9 @@ class TestMockGetV2TweetsSearchRecent:
                 )
             )
 
-            assert get_extra_fields(response) == {}
+            assert get_extra_fields(response_body) == {}
 
-            next_token = response.meta.next_token
+            next_token = response_body.meta.next_token
 
             if next_token is None:
                 break
@@ -163,22 +163,22 @@ class TestMockGetV2TweetsSearchRecent:
         oauth2_app_mock_client: TwitterApiMockClient,
         json_files: list[str],
     ):
-        responses = [
+        response_bodies = [
             GetV2TweetsSearchRecentResponseBody.parse_file(json_test_data(json_file))
             for json_file in json_files
         ]
 
-        for response in responses:
-            assert get_extra_fields(response) == {}
+        for response_body in response_bodies:
+            assert get_extra_fields(response_body) == {}
 
             oauth2_app_mock_client.inject_get_response_body(
                 "https://api.twitter.com/2/tweets/search/recent",
-                response,
+                response_body,
             )
 
         assert [
-            response
-            for response in (
+            response_body
+            for response_body in (
                 oauth2_app_mock_client.chain()
                 .resource("https://api.twitter.com/2/tweets/search/recent")
                 .get_paging_response_body_iter(
@@ -189,20 +189,20 @@ class TestMockGetV2TweetsSearchRecent:
                     }
                 )
             )
-        ] == responses
+        ] == response_bodies
 
     def test_mock_get_collected_paging_response_body_v2_search(
         self,
         oauth2_app_mock_client: TwitterApiMockClient,
         json_files: list[str],
     ):
-        response = GetV2TweetsSearchRecentResponseBody.parse_file(
+        response_body = GetV2TweetsSearchRecentResponseBody.parse_file(
             json_test_data(
                 "get_v2_tweets_search_recent_response/collected_response.json"
             )
         )
 
-        assert get_extra_fields(response) == {}
+        assert get_extra_fields(response_body) == {}
 
         for json_file in json_files:
             oauth2_app_mock_client.inject_get_response_body(
@@ -222,7 +222,7 @@ class TestMockGetV2TweetsSearchRecent:
                     "media.fields": ["preview_image_url"],
                 }
             )
-        ) == response
+        ) == response_body
 
 
 class TestAsyncMockGetV2TweetsSearchRecent:
@@ -231,7 +231,7 @@ class TestAsyncMockGetV2TweetsSearchRecent:
         self,
         oauth2_app_async_mock_client: TwitterApiAsyncMockClient,
     ):
-        response = GetV2TweetsSearchRecentResponseBody.parse_file(
+        response_body = GetV2TweetsSearchRecentResponseBody.parse_file(
             json_test_data("get_v2_tweets_search_recent_response.json")
         )
 
@@ -239,7 +239,7 @@ class TestAsyncMockGetV2TweetsSearchRecent:
             await (
                 oauth2_app_async_mock_client.chain()
                 .inject_get_response_body(
-                    "https://api.twitter.com/2/tweets/search/recent", response
+                    "https://api.twitter.com/2/tweets/search/recent", response_body
                 )
                 .resource("https://api.twitter.com/2/tweets/search/recent")
                 .get(
@@ -250,7 +250,7 @@ class TestAsyncMockGetV2TweetsSearchRecent:
                     }
                 )
             )
-            == response
+            == response_body
         )
 
     @pytest.mark.asyncio
@@ -259,15 +259,15 @@ class TestAsyncMockGetV2TweetsSearchRecent:
         oauth2_app_async_mock_client: TwitterApiAsyncMockClient,
         json_files: list[str],
     ):
-        responses = [
+        response_bodies = [
             GetV2TweetsSearchRecentResponseBody.parse_file(json_test_data(json_file))
             for json_file in json_files
         ]
 
-        for response in responses:
+        for response_body in response_bodies:
             oauth2_app_async_mock_client.inject_get_response_body(
                 "https://api.twitter.com/2/tweets/search/recent",
-                response,
+                response_body,
             )
 
         assert [
@@ -283,7 +283,7 @@ class TestAsyncMockGetV2TweetsSearchRecent:
                     }
                 )
             )
-        ] == responses
+        ] == response_bodies
 
     @pytest.mark.asyncio
     async def test_async_mock_get_collected_paging_response_body_v2_search(
@@ -291,7 +291,7 @@ class TestAsyncMockGetV2TweetsSearchRecent:
         oauth2_app_async_mock_client: TwitterApiAsyncMockClient,
         json_files: list[str],
     ):
-        response = GetV2TweetsSearchRecentResponseBody.parse_file(
+        response_body = GetV2TweetsSearchRecentResponseBody.parse_file(
             json_test_data(
                 "get_v2_tweets_search_recent_response/collected_response.json"
             )
@@ -317,5 +317,5 @@ class TestAsyncMockGetV2TweetsSearchRecent:
                     }
                 )
             )
-            == response
+            == response_body
         )

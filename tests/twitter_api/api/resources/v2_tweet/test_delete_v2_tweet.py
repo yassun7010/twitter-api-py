@@ -53,20 +53,20 @@ class TestDeleteV2Tweet:
 
 class TestMockDeleteV2Tweet:
     def test_mock_delete_v2_tweet(self, oauth2_app_mock_client: TwitterApiMockClient):
-        response = DeleteV2TweetResponseBody(
+        response_body = DeleteV2TweetResponseBody(
             data=DeleteV2TweetResponseBodyData(deleted=True)
         )
 
-        assert get_extra_fields(response) == {}
+        assert get_extra_fields(response_body) == {}
 
         assert (
             oauth2_app_mock_client.chain()
             .inject_delete_response_body(
-                "https://api.twitter.com/2/tweets/:id", response
+                "https://api.twitter.com/2/tweets/:id", response_body
             )
             .resource("https://api.twitter.com/2/tweets/:id")
             .delete("1234567890123456789")
-        ) == response
+        ) == response_body
 
 
 class TestAsyncMockDeleteV2Tweet:
@@ -75,20 +75,20 @@ class TestAsyncMockDeleteV2Tweet:
         self,
         oauth2_app_async_mock_client: TwitterApiAsyncMockClient,
     ):
-        response = DeleteV2TweetResponseBody(
+        response_body = DeleteV2TweetResponseBody(
             data=DeleteV2TweetResponseBodyData(deleted=True)
         )
 
-        assert get_extra_fields(response) == {}
+        assert get_extra_fields(response_body) == {}
 
         assert (
             await (
                 oauth2_app_async_mock_client.chain()
                 .inject_delete_response_body(
-                    "https://api.twitter.com/2/tweets/:id", response
+                    "https://api.twitter.com/2/tweets/:id", response_body
                 )
                 .resource("https://api.twitter.com/2/tweets/:id")
                 .delete("1234567890123456789")
             )
-            == response
+            == response_body
         )

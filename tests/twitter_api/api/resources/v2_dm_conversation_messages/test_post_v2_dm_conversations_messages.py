@@ -48,7 +48,7 @@ class TestGetV2DmConversationsMessages:
                 .data.dm_conversation_id
             )
 
-            response = (
+            response_body = (
                 real_client.chain()
                 .resource(
                     "https://api.twitter.com/2/dm_conversations/:dm_conversation_id/messages"
@@ -56,9 +56,9 @@ class TestGetV2DmConversationsMessages:
                 .post(dm_conversation_id, {"text": "DM のテスト。"})
             )
 
-            print(response.json())
+            print(response_body.json())
 
-            assert get_extra_fields(response) == {}
+            assert get_extra_fields(response_body) == {}
 
 
 class TestMockGetV2DmConversationsMessages:
@@ -73,23 +73,23 @@ class TestMockGetV2DmConversationsMessages:
         oauth2_app_mock_client: TwitterApiMockClient,
         json_filename: str,
     ):
-        response = PostV2DmConversationMessagesResponseBody.parse_file(
+        response_body = PostV2DmConversationMessagesResponseBody.parse_file(
             json_test_data(json_filename)
         )
 
-        assert get_extra_fields(response) == {}
+        assert get_extra_fields(response_body) == {}
 
         assert (
             oauth2_app_mock_client.chain()
             .inject_post_response_body(
                 "https://api.twitter.com/2/dm_conversations/:dm_conversation_id/messages",
-                response,
+                response_body,
             )
             .resource(
                 "https://api.twitter.com/2/dm_conversations/:dm_conversation_id/messages"
             )
             .post("2244994945", {"text": "DM のテスト。"})
-        ) == response
+        ) == response_body
 
 
 class TestAsyncMockGetV2DmConversationsMessages:
@@ -98,23 +98,23 @@ class TestAsyncMockGetV2DmConversationsMessages:
         self,
         oauth2_app_async_mock_client: TwitterApiAsyncMockClient,
     ):
-        response = PostV2DmConversationMessagesResponseBody.parse_file(
+        response_body = PostV2DmConversationMessagesResponseBody.parse_file(
             json_test_data("post_v2_dm_conversations_messages.json")
         )
 
-        assert get_extra_fields(response) == {}
+        assert get_extra_fields(response_body) == {}
 
         assert (
             await (
                 oauth2_app_async_mock_client.chain()
                 .inject_post_response_body(
                     "https://api.twitter.com/2/dm_conversations/:dm_conversation_id/messages",
-                    response,
+                    response_body,
                 )
                 .resource(
                     "https://api.twitter.com/2/dm_conversations/:dm_conversation_id/messages"
                 )
                 .post("2244994945", {"text": "DM のテスト。"})
             )
-            == response
+            == response_body
         )

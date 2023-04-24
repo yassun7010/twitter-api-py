@@ -29,15 +29,15 @@ class TestGetV2UserFollowers:
         request: pytest.FixtureRequest,
     ):
         with spawn_real_client(client_fixture_name, request, permit) as real_client:
-            response = (
+            response_body = (
                 real_client.chain()
                 .resource("https://api.twitter.com/2/users/:id/followers")
                 .get("2244994945")
             )
 
-            print(response.json())
+            print(response_body.json())
 
-            assert get_extra_fields(response) == {}
+            assert get_extra_fields(response_body) == {}
 
 
 class TestMockGetV2UserFollowers:
@@ -52,20 +52,20 @@ class TestMockGetV2UserFollowers:
         oauth2_app_mock_client: TwitterApiMockClient,
         json_filename: str,
     ):
-        response = GetV2UserFollowersResponseBody.parse_file(
+        response_body = GetV2UserFollowersResponseBody.parse_file(
             json_test_data(json_filename)
         )
 
-        assert get_extra_fields(response) == {}
+        assert get_extra_fields(response_body) == {}
 
         assert (
             oauth2_app_mock_client.chain()
             .inject_get_response_body(
-                "https://api.twitter.com/2/users/:id/followers", response
+                "https://api.twitter.com/2/users/:id/followers", response_body
             )
             .resource("https://api.twitter.com/2/users/:id/followers")
             .get("2244994945")
-        ) == response
+        ) == response_body
 
 
 class TestAsyncMockGetV2UserFollowers:
@@ -74,20 +74,20 @@ class TestAsyncMockGetV2UserFollowers:
         self,
         oauth2_app_async_mock_client: TwitterApiAsyncMockClient,
     ):
-        response = GetV2UserFollowersResponseBody.parse_file(
+        response_body = GetV2UserFollowersResponseBody.parse_file(
             json_test_data("get_v2_user_followers_response.json")
         )
 
-        assert get_extra_fields(response) == {}
+        assert get_extra_fields(response_body) == {}
 
         assert (
             await (
                 oauth2_app_async_mock_client.chain()
                 .inject_get_response_body(
-                    "https://api.twitter.com/2/users/:id/followers", response
+                    "https://api.twitter.com/2/users/:id/followers", response_body
                 )
                 .resource("https://api.twitter.com/2/users/:id/followers")
                 .get("2244994945")
             )
-            == response
+            == response_body
         )

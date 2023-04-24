@@ -30,7 +30,7 @@ class TestPostV2TweetsSearchStreamRules:
         request: pytest.FixtureRequest,
     ):
         with spawn_real_client(client_fixture_name, request, permit) as real_client:
-            response = (
+            response_body = (
                 real_client.chain()
                 .resource("https://api.twitter.com/2/tweets/search/stream/rules")
                 .post(
@@ -43,9 +43,9 @@ class TestPostV2TweetsSearchStreamRules:
                 )
             )
 
-            print(response.json())
+            print(response_body.json())
 
-            assert get_extra_fields(response) == {}
+            assert get_extra_fields(response_body) == {}
 
     def test_post_v2_search_stream_rules_when_delete_case(
         self, oauth2_app_real_client: TwitterApiRealClient
@@ -64,7 +64,7 @@ class TestPostV2TweetsSearchStreamRules:
         )
 
         # 終わったら削除もしておく。
-        response = (
+        response_body = (
             oauth2_app_real_client.chain()
             .resource("https://api.twitter.com/2/tweets/search/stream/rules")
             .post(
@@ -72,9 +72,9 @@ class TestPostV2TweetsSearchStreamRules:
             )
         )
 
-        print(response.json())
+        print(response_body.json())
 
-        assert get_extra_fields(response) == {}
+        assert get_extra_fields(response_body) == {}
 
 
 class TestMockPostV2TweetsSearchStreamRules:
@@ -90,17 +90,17 @@ class TestMockPostV2TweetsSearchStreamRules:
         oauth2_app_mock_client: TwitterApiMockClient,
         json_filename: str,
     ):
-        response = PostV2TweetsSearchStreamRulesResponseBody.parse_file(
+        response_body = PostV2TweetsSearchStreamRulesResponseBody.parse_file(
             json_test_data(json_filename)
         )
 
-        assert get_extra_fields(response) == {}
+        assert get_extra_fields(response_body) == {}
 
         assert (
             oauth2_app_mock_client.chain()
             .inject_post_response_body(
                 "https://api.twitter.com/2/tweets/search/stream/rules",
-                response,
+                response_body,
             )
             .resource("https://api.twitter.com/2/tweets/search/stream/rules")
             .post(
@@ -110,7 +110,7 @@ class TestMockPostV2TweetsSearchStreamRules:
                     ]
                 }
             )
-        ) == response
+        ) == response_body
 
 
 class TestAsyncMockPostV2TweetsSearchStreamRules:
@@ -119,18 +119,18 @@ class TestAsyncMockPostV2TweetsSearchStreamRules:
         self,
         oauth2_app_async_mock_client: TwitterApiAsyncMockClient,
     ):
-        response = PostV2TweetsSearchStreamRulesResponseBody.parse_file(
+        response_body = PostV2TweetsSearchStreamRulesResponseBody.parse_file(
             json_test_data("post_v2_search_stream_rules_response_create_rules.json")
         )
 
-        assert get_extra_fields(response) == {}
+        assert get_extra_fields(response_body) == {}
 
         assert (
             await (
                 oauth2_app_async_mock_client.chain()
                 .inject_post_response_body(
                     "https://api.twitter.com/2/tweets/search/stream/rules",
-                    response,
+                    response_body,
                 )
                 .resource("https://api.twitter.com/2/tweets/search/stream/rules")
                 .post(
@@ -141,5 +141,5 @@ class TestAsyncMockPostV2TweetsSearchStreamRules:
                     }
                 )
             )
-            == response
+            == response_body
         )
