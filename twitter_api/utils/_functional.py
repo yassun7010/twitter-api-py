@@ -33,17 +33,3 @@ def _exclude_none_recursive(data: Any):
         return exclude_none(data)
     else:
         return data
-
-
-@overload
-def downcast_dict(typed_dict: TypedDict) -> dict:
-    ...
-
-
-@overload
-def downcast_dict(typed_dict: Optional[TypedDict]) -> Optional[dict]:
-    ...
-
-
-def downcast_dict(typed_dict):
-    return typed_dict  # type: ignore

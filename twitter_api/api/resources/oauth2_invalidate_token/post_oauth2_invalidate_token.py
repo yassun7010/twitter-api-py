@@ -5,8 +5,8 @@ from twitter_api.api.resources.api_resources import ApiResources
 from twitter_api.error import TwitterApiOAuthVersionWrong
 from twitter_api.types.endpoint import Endpoint
 from twitter_api.types.extra_permissive_model import ExtraPermissiveModel
+from twitter_api.types.http import downcast_dict
 from twitter_api.types.oauth import AccessToken, ApiKey, ApiSecret
-from twitter_api.utils._functional import downcast_dict
 
 ENDPOINT: Endpoint = Endpoint("POST", "https://api.twitter.com/oauth2/invalidate_token")
 

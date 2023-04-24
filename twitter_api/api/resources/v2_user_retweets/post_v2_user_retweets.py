@@ -7,7 +7,7 @@ from twitter_api.api.types.v2_user.user_id import UserId
 from twitter_api.rate_limit.rate_limit import rate_limit
 from twitter_api.types.endpoint import Endpoint
 from twitter_api.types.extra_permissive_model import ExtraPermissiveModel
-from twitter_api.utils._functional import downcast_dict
+from twitter_api.types.http import downcast_dict
 
 ENDPOINT = Endpoint("POST", "https://api.twitter.com/2/users/:id/retweets")
 
