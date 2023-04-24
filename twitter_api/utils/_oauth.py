@@ -9,12 +9,12 @@ from time import time
 UNICODE_ASCII_CHARACTER_SET = string.ascii_letters + string.digits
 
 
-def generate_token(length=30, chars=UNICODE_ASCII_CHARACTER_SET):
+def generate_token(length=30, chars=UNICODE_ASCII_CHARACTER_SET) -> str:
     rand = random.SystemRandom()
     return "".join(rand.choice(chars) for _ in range(length))
 
 
-def generate_timestamp():
+def generate_timestamp() -> str:
     return str(int(time()))
 
 
