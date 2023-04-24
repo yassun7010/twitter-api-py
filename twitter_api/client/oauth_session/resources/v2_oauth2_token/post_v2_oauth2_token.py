@@ -4,7 +4,6 @@ from twitter_api.client.oauth_session.resources.session_resources import (
 )
 from twitter_api.client.oauth_session.twitter_oauth2_session import TwitterOAuth2Session
 from twitter_api.types.endpoint import Endpoint
-from twitter_api.types.http import Url
 from twitter_api.types.oauth import CallbackUrl
 
 ENDPOINT = Endpoint("POST", "https://api.twitter.com/2/oauth2/token")
