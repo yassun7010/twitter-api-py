@@ -546,6 +546,9 @@ class TwitterApiAsyncClient(TwitterApiClient):
             ),
         )
 
+    async def aclose(self) -> None:
+        pass
+
     async def __aenter__(self) -> Self:
         return self
 

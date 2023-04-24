@@ -538,6 +538,15 @@ class TwitterApiClient(Chainable, metaclass=ABCMeta):
             ),
         )
 
+    def close(self) -> None:
+        pass
+
+    def __enter__(self) -> Self:
+        return self
+
+    def __exit__(self, exc_type, exc_value, traceback) -> None:
+        pass
+
     @classmethod
     def _get_env(cls, key: Env[str]) -> str:
         """環境変数を取り出す。"""

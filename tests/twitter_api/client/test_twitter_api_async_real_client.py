@@ -28,6 +28,11 @@ class TestTwitterApiAsyncRealClient:
 
     @pytest.mark.asyncio
     @pytest.mark.skipif(**synthetic_monitoring_is_disable())
+    async def test_client_aclose(self):
+        await TwitterApiAsyncRealClient.from_oauth2_app_env().aclose()
+
+    @pytest.mark.asyncio
+    @pytest.mark.skipif(**synthetic_monitoring_is_disable())
     async def test_client_async_with(self):
         async with TwitterApiAsyncRealClient.from_oauth2_app_env() as client:
             assert isinstance(client, TwitterApiAsyncRealClient)

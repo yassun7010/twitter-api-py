@@ -67,24 +67,23 @@ class TwitterApiAsyncRealClient(TwitterApiAsyncClient):
         api_secret: ApiSecret,
         rate_limit_manager: Optional[RateLimitManager] = None,
     ):
-        client = TwitterApiRealClient(
+        with TwitterApiRealClient(
             RequestRealClient(
                 auth=None,
                 oauth_version="2.0",
                 rate_limit_target="app",
                 rate_limit_manager=rate_limit_manager,
             ),
-        )
-
-        access_token = (
-            client.resource("https://api.twitter.com/oauth2/token")
-            .post(
-                api_key=api_key,
-                api_secret=api_secret,
-                query={"grant_type": "client_credentials"},
+        ) as client:
+            access_token = (
+                client.resource("https://api.twitter.com/oauth2/token")
+                .post(
+                    api_key=api_key,
+                    api_secret=api_secret,
+                    query={"grant_type": "client_credentials"},
+                )
+                .access_token
             )
-            .access_token
-        )
 
         return TwitterApiAsyncRealClient.from_oauth2_bearer_token(access_token)
 
@@ -162,6 +161,9 @@ class TwitterApiAsyncRealClient(TwitterApiAsyncClient):
         )
 
         return TwitterOAuth1RequestTokenClient(session)
+
+    async def aclose(self) -> None:
+        await self._real_request_client.aclose()
 
     async def __aenter__(self) -> Self:
         await self._real_request_client.__aenter__()

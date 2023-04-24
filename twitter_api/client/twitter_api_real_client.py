@@ -1,4 +1,4 @@
-from typing import Optional
+from typing import Optional, Self
 
 from authlib.integrations.httpx_client.oauth1_client import OAuth1Auth
 from authlib.integrations.httpx_client.oauth2_client import OAuth2Auth
@@ -68,33 +68,25 @@ class TwitterApiRealClient(TwitterApiClient):
         api_secret: ApiSecret,
         rate_limit_manager: Optional[RateLimitManager] = None,
     ):
-        client = TwitterApiRealClient(
+        with TwitterApiRealClient(
             RequestRealClient(
                 auth=None,
                 oauth_version="2.0",
                 rate_limit_target="app",
                 rate_limit_manager=rate_limit_manager,
             ),
-        )
-
-        access_token = (
-            client.resource("https://api.twitter.com/oauth2/token")
-            .post(
-                api_key=api_key,
-                api_secret=api_secret,
-                query={"grant_type": "client_credentials"},
+        ) as client:
+            access_token = (
+                client.resource("https://api.twitter.com/oauth2/token")
+                .post(
+                    api_key=api_key,
+                    api_secret=api_secret,
+                    query={"grant_type": "client_credentials"},
+                )
+                .access_token
             )
-            .access_token
-        )
 
-        client._real_request_client._auth = OAuth2Auth(
-            token={
-                "access_token": access_token,
-                "token_type": "Bearer",
-            }
-        )
-
-        return client
+        return TwitterApiRealClient.from_oauth2_bearer_token(access_token)
 
     @classmethod
     def from_oauth2_user_flow(
@@ -167,3 +159,14 @@ class TwitterApiRealClient(TwitterApiClient):
         )
 
         return TwitterOAuth1RequestTokenClient(session)
+
+    def close(self) -> None:
+        self._real_request_client.close()
+
+    def __enter__(self) -> Self:
+        self._real_request_client.__enter__()
+
+        return self
+
+    def __exit__(self, exc_type, exc_value, traceback) -> None:
+        self._real_request_client.__exit__(exc_type, exc_value, traceback)

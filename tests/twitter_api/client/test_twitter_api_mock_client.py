@@ -49,3 +49,10 @@ class TestTwitterApiMockClient:
             ),
             TwitterApiMockClient,
         )
+
+    def test_client_close(self):
+        TwitterApiMockClient.from_oauth2_app_env().close()
+
+    def test_client_with(self):
+        with TwitterApiMockClient.from_oauth2_app_env() as client:
+            assert isinstance(client, TwitterApiMockClient)

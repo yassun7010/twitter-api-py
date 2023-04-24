@@ -1,4 +1,4 @@
-from typing import Optional, Type
+from typing import Optional, Self, Type
 
 import httpx
 import pydantic
@@ -168,6 +168,17 @@ class RequestRealClient(RequestClient):
             headers,
             query,
         )
+
+    def close(self) -> None:
+        self._session.close()
+
+    def __enter__(self) -> Self:
+        self._session = self._session.__enter__()
+
+        return self
+
+    def __exit__(self, exc_type, exc_value, traceback) -> None:
+        self._session.__exit__(exc_type, exc_value, traceback)
 
 
 def _parse_response(

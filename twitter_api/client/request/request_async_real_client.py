@@ -160,6 +160,9 @@ class RequestAsyncRealClient(RequestAsyncClient):
             query,
         )
 
+    async def aclose(self) -> None:
+        await self._session.aclose()
+
     async def __aenter__(self) -> Self:
         await self._session.__aenter__()
         return self
