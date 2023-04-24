@@ -8,7 +8,7 @@ YOUR_CALLBACK_URL = os.environ["CALLBACK_URL"]
 
 
 try:
-    client = (
+    with (
         TwitterApiClient.from_oauth1_user_flow_env()
         .resource("https://api.twitter.com/oauth/request_token")
         .post()
@@ -19,18 +19,17 @@ try:
         .resource("https://api.twitter.com/oauth/access_token")
         .post()
         .generate_client()
-    )
-
-    tweets = (
-        client.chain()
-        .resource("https://api.twitter.com/2/tweets")
-        .get(
-            {"ids": ["1460323737035677698"]},
+    ) as client:
+        tweets = (
+            client.chain()
+            .resource("https://api.twitter.com/2/tweets")
+            .get(
+                {"ids": ["1460323737035677698"]},
+            )
+            .data
         )
-        .data
-    )
 
-    print(tweets)
+        print(tweets)
 
 
 except TwitterApiError as error:

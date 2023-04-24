@@ -57,14 +57,13 @@ try:
     )
 
     # Twitter API を呼ぶことができるようになりました。
-    client = TwitterApiClient.from_oauth2_bearer_token(token.access_token)
-
-    tweet = (
-        client.chain()
-        .resource("https://api.twitter.com/2/tweets/:id")
-        .get("1460323737035677698")
-        .data
-    )
+    with TwitterApiClient.from_oauth2_bearer_token(token.access_token) as client:
+        tweet = (
+            client.chain()
+            .resource("https://api.twitter.com/2/tweets/:id")
+            .get("1460323737035677698")
+            .data
+        )
 
 except TwitterApiError as error:
     print(error, file=sys.stderr)

@@ -8,7 +8,7 @@ from twitter_api.error import TwitterApiError
 YOUR_CALLBACK_URL = os.environ["CALLBACK_URL"]
 
 try:
-    client = (
+    with (
         TwitterApiClient.from_oauth2_user_flow_env(
             callback_url=YOUR_CALLBACK_URL,
             scope=[
@@ -23,18 +23,17 @@ try:
         .resource("https://api.twitter.com/2/oauth2/token")
         .post()
         .generate_client()
-    )
-
-    tweets = (
-        client.chain()
-        .resource("https://api.twitter.com/2/tweets")
-        .get(
-            {"ids": ["1460323737035677698"]},
+    ) as client:
+        tweets = (
+            client.chain()
+            .resource("https://api.twitter.com/2/tweets")
+            .get(
+                {"ids": ["1460323737035677698"]},
+            )
+            .data
         )
-        .data
-    )
 
-    print(tweets)
+        print(tweets)
 
 
 except TwitterApiError as error:
