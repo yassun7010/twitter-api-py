@@ -16,10 +16,10 @@ from twitter_api.rate_limit.manager.no_operation_rate_limit_manager import (
 )
 from twitter_api.rate_limit.manager.rate_limit_manager import RateLimitManager
 from twitter_api.rate_limit.rate_limit_target import RateLimitTarget
+from twitter_api.types import httpx
 from twitter_api.types.endpoint import Endpoint
 from twitter_api.types.http import Url
 from twitter_api.types.oauth import OAuthVersion
-from twitter_api.utils import httpx
 
 from .request_client import (
     Headers,

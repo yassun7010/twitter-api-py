@@ -66,6 +66,7 @@ from twitter_api.api.resources.v2_users import V2UsersResources, V2UsersUrl
 from twitter_api.api.types.v2_scope import ALL_SCOPES, Scope
 from twitter_api.error import NeverError
 from twitter_api.rate_limit.manager.rate_limit_manager import RateLimitManager
+from twitter_api.types import httpx
 from twitter_api.types.chainable import Chainable
 from twitter_api.types.oauth import (
     AccessSecret,
@@ -77,7 +78,6 @@ from twitter_api.types.oauth import (
     ClientSecret,
     Env,
 )
-from twitter_api.utils import httpx
 
 from .request.request_client import RequestClient
 

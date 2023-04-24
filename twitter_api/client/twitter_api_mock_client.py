@@ -83,6 +83,7 @@ from twitter_api.api.types.v2_scope import Scope
 from twitter_api.error import TwitterApiError
 from twitter_api.rate_limit.manager.rate_limit_manager import RateLimitManager
 from twitter_api.rate_limit.rate_limit_target import RateLimitTarget
+from twitter_api.types import httpx
 from twitter_api.types.endpoint import Endpoint
 from twitter_api.types.oauth import (
     AccessSecret,
@@ -95,7 +96,6 @@ from twitter_api.types.oauth import (
     Env,
     OAuthVersion,
 )
-from twitter_api.utils import httpx
 
 from .request.request_client import RequestClient
 from .request.request_mock_client import RequestMockClient

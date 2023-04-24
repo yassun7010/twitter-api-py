@@ -71,6 +71,7 @@ from twitter_api.client.request.request_async_client import RequestAsyncClient
 from twitter_api.client.twitter_api_client import TwitterApiClient
 from twitter_api.error import NeverError
 from twitter_api.rate_limit.manager.rate_limit_manager import RateLimitManager
+from twitter_api.types import httpx
 from twitter_api.types.oauth import (
     AccessSecret,
     AccessToken,
@@ -81,7 +82,6 @@ from twitter_api.types.oauth import (
     ClientSecret,
     Env,
 )
-from twitter_api.utils import httpx
 
 
 class TwitterApiAsyncClient(TwitterApiClient):

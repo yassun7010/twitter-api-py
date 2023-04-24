@@ -10,6 +10,7 @@ from twitter_api.client.twitter_api_async_client import TwitterApiAsyncClient
 from twitter_api.client.twitter_api_real_client import TwitterApiRealClient
 from twitter_api.rate_limit.manager.rate_limit_manager import RateLimitManager
 from twitter_api.rate_limit.rate_limit import rate_limit
+from twitter_api.types import httpx
 from twitter_api.types.oauth import (
     AccessSecret,
     AccessToken,
@@ -19,7 +20,6 @@ from twitter_api.types.oauth import (
     ClientId,
     ClientSecret,
 )
-from twitter_api.utils import httpx
 
 from .request.request_client import RequestClient
 

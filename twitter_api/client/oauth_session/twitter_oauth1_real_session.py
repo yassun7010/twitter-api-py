@@ -20,6 +20,7 @@ from twitter_api.client.oauth_session.resources.oauth1_request_token import (
 )
 from twitter_api.client.oauth_session.twitter_oauth1_session import TwitterOAuth1Session
 from twitter_api.rate_limit.manager.rate_limit_manager import RateLimitManager
+from twitter_api.types import httpx
 from twitter_api.types.oauth import (
     AccessSecret,
     AccessToken,
@@ -27,7 +28,6 @@ from twitter_api.types.oauth import (
     ApiSecret,
     CallbackUrl,
 )
-from twitter_api.utils import httpx
 
 
 class TwitterOAuth1RealSession(TwitterOAuth1Session):
@@ -52,13 +52,16 @@ class TwitterOAuth1RealSession(TwitterOAuth1Session):
             client_id=api_key,
             client_secret=api_secret,
             redirect_uri=callback_url,
-            event_hooks=event_hooks,
-            limits=limits,
-            mounts=mounts,
-            proxies=proxies,
-            timeout=timeout,
-            transport=transport,
-            verify=verify,
+            **httpx.update_client_kwargs(
+                event_hooks,
+                limits,
+                mounts,
+                proxies,
+                timeout,
+                transport,
+                verify,
+                kwargs={},
+            ),
         )
         self._rate_limit_manager = rate_limit_manager
         self._event_hooks = event_hooks

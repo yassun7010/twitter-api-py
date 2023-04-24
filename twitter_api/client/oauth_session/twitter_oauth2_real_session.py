@@ -11,8 +11,8 @@ from twitter_api.client.oauth_session.resources.oauth2_authorize import (
 from twitter_api.client.oauth_session.resources.v2_oauth2_token import V2Oauth2TokenUrl
 from twitter_api.client.oauth_session.twitter_oauth2_session import TwitterOAuth2Session
 from twitter_api.rate_limit.manager.rate_limit_manager import RateLimitManager
+from twitter_api.types import httpx
 from twitter_api.types.oauth import CallbackUrl, ClientId, ClientSecret
-from twitter_api.utils import httpx
 from twitter_api.utils.oauth import generate_code_verifier
 
 
@@ -39,13 +39,16 @@ class TwitterOAuth2RealSession(TwitterOAuth2Session):
             redirect_uri=callback_url,
             scope=scope,
             code_challenge_method="S256",
-            event_hooks=event_hooks,
-            limits=limits,
-            mounts=mounts,
-            proxies=proxies,
-            timeout=timeout,
-            transport=transport,
-            verify=verify,
+            **httpx.update_client_kwargs(
+                event_hooks,
+                limits,
+                mounts,
+                proxies,
+                timeout,
+                transport,
+                verify,
+                kwargs={},
+            ),
         )
         self._rate_limit_manager = rate_limit_manager
         self._event_hooks = event_hooks

@@ -1,5 +1,5 @@
 import os
-from typing import Optional
+from typing import Mapping, Optional
 
 from twitter_api.client.oauth_session.resources.oauth1_access_token import (
     Oauth1AccessTokenResources,
@@ -9,6 +9,8 @@ from twitter_api.client.oauth_session.twitter_oauth1_real_session import (
     TwitterOAuth1RealSession,
 )
 from twitter_api.client.oauth_session.twitter_oauth1_session import TwitterOAuth1Session
+from twitter_api.rate_limit.manager.rate_limit_manager import RateLimitManager
+from twitter_api.types import httpx
 from twitter_api.types.chainable import Chainable
 from twitter_api.types.oauth import ApiKey, ApiSecret, CallbackUrl, Env
 
@@ -36,11 +38,27 @@ class TwitterOAuth1AccessTokenClient(Chainable):
         api_secret: ApiSecret,
         callback_url: CallbackUrl,
         authorization_response_url: CallbackUrl,
+        rate_limit_manager: Optional[RateLimitManager] = None,
+        event_hooks: Optional[httpx.EventHook] = None,
+        limits: Optional[httpx.Limits] = None,
+        mounts: Optional[Mapping[str, httpx.BaseTransport]] = None,
+        proxies: Optional[httpx.ProxiesTypes] = None,
+        timeout: Optional[httpx.TimeoutTypes] = None,
+        transport: Optional[httpx.BaseTransport] = None,
+        verify: Optional[httpx.VerifyTypes] = None,
     ):
         session = TwitterOAuth1RealSession(
             api_key=api_key,
             api_secret=api_secret,
             callback_url=callback_url,
+            rate_limit_manager=rate_limit_manager,
+            event_hooks=event_hooks,
+            limits=limits,
+            mounts=mounts,
+            proxies=proxies,
+            timeout=timeout,
+            transport=transport,
+            verify=verify,
         )
 
         return TwitterOAuth1AccessTokenClient(
