@@ -21,8 +21,8 @@ from twitter_api.types.paging import (
     get_paging_response_body_iter_async,
     get_paging_response_body_iter_sync,
 )
-from twitter_api.utils.datetime import rfc3339
-from twitter_api.utils.functional import map_optional
+from twitter_api.utils._datetime import rfc3339
+from twitter_api.utils._functional import map_optional
 
 ENDPOINT = Endpoint("GET", "https://api.twitter.com/2/tweets/search/all")
 

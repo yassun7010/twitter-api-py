@@ -13,7 +13,7 @@ from twitter_api.client.oauth_session.twitter_oauth2_session import TwitterOAuth
 from twitter_api.rate_limit.manager.rate_limit_manager import RateLimitManager
 from twitter_api.types import httpx
 from twitter_api.types.oauth import CallbackUrl, ClientId, ClientSecret
-from twitter_api.utils.oauth import generate_code_verifier
+from twitter_api.utils._oauth import generate_code_verifier
 
 
 class TwitterOAuth2RealSession(TwitterOAuth2Session):
