@@ -45,7 +45,7 @@ class TestMockPostOauth2Token:
     def test_mock_post_oauth2_token(self, oauth2_app_mock_client: TwitterApiMockClient):
         response = PostOauth2TokenResponseBody(
             token_type="bearer",
-            access_token="AAAAAAAAAAAAAAAAAAAAAOeOmQEAAAAAu",
+            access_token="AAAAAAAAAAAAAAAAAAAAA",
         )
 
         assert get_extra_fields(response) == {}
@@ -72,7 +72,7 @@ class TestAsyncMockPostOauth2Token:
     ):
         response = PostOauth2TokenResponseBody(
             token_type="bearer",
-            access_token="AAAAAAAAAAAAAAAAAAAAAOeOmQEAAAAAu",
+            access_token="AAAAAAAAAAAAAAAAAAAAA",
         )
 
         assert get_extra_fields(response) == {}
