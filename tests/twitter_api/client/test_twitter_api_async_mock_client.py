@@ -57,6 +57,47 @@ class TestTwitterApiAsyncMockClient:
         await TwitterApiAsyncMockClient.from_oauth2_app_env().aclose()
 
     @pytest.mark.asyncio
-    async def test_client_async_with(self):
+    async def test_mock_client_from_oauth2_bearer_token_async_with(self):
+        async with TwitterApiAsyncMockClient.from_oauth2_bearer_token_env() as client:
+            assert isinstance(client, TwitterApiAsyncMockClient)
+
+    @pytest.mark.asyncio
+    async def test_mock_client_from_oauth2_app_env_async_with(self):
         async with TwitterApiAsyncMockClient.from_oauth2_app_env() as client:
             assert isinstance(client, TwitterApiAsyncMockClient)
+
+    @pytest.mark.asyncio
+    async def test_mock_client_from_oauth2_user_env_async_with(self):
+        async with (
+            TwitterApiAsyncMockClient.from_oauth2_user_flow_env()
+            .resource("https://twitter.com/i/oauth2/authorize")
+            .generate_authorization_url()
+            .input_response_url("https://localhost:3000")
+            .resource("https://api.twitter.com/2/oauth2/token")
+            .post()
+            .generate_client()  # type: ignore
+        ) as client:
+            assert isinstance(client, TwitterApiAsyncMockClient)
+
+    @pytest.mark.asyncio
+    async def test_mock_client_from_oauth1_app_env_async_with(self):
+        async with TwitterApiAsyncMockClient.from_oauth1_app_env() as client:
+            assert isinstance(client, TwitterApiAsyncMockClient)
+
+    @pytest.mark.asyncio
+    async def test_mock_client_from_oauth1_user_env_async_with(self):
+        async with (
+            TwitterApiAsyncMockClient.from_oauth1_user_flow_env()
+            .resource("https://api.twitter.com/oauth/request_token")
+            .post()
+            .resource("https://api.twitter.com/oauth/authorize")
+            .generate_authorization_url()
+            .input_response_url("https://localhost:3000")
+            .resource("https://api.twitter.com/oauth/access_token")
+            .post()
+            .generate_client() # type: ignore
+        ) as client:
+            assert isinstance(
+                client,
+                TwitterApiAsyncMockClient,
+            )

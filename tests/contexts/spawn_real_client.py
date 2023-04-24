@@ -15,7 +15,7 @@ from twitter_api.error import (
 def spawn_real_client(
     client_fixture_name: str,
     request: pytest.FixtureRequest,
-    permit: bool,
+    permit: bool = True,
 ):
     """
     実際のクライアントを Fixture から作成する。
