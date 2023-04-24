@@ -10,7 +10,7 @@ Response: TypeAlias = httpx.Response
 
 URLTypes: TypeAlias = httpx.URL | str
 ProxiesTypes: TypeAlias = (
-    URLTypes | httpx.Proxy | dict[URLTypes, Optional[URLTypes | httpx.Proxy]]
+    URLTypes | httpx.Proxy | Mapping[URLTypes, Optional[URLTypes | httpx.Proxy]]
 )
 Limits: TypeAlias = httpx.Limits
 VerifyTypes = str | bool | SSLContext
