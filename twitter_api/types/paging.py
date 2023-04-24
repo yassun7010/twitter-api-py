@@ -31,7 +31,7 @@ AnyPageResponseBody = TypeVar(
 )
 
 
-def get_paging_response_iter_sync(
+def get_paging_response_body_iter_sync(
     get_func: Callable[
         [AnyQueryParameters],
         AnyPageResponseBody,
@@ -60,7 +60,7 @@ def get_paging_response_iter_sync(
             return
 
 
-def get_collected_paging_response_sync(
+def get_collected_paging_response_body_sync(
     get_func: Callable[
         [AnyQueryParameters],
         AnyPageResponseBody,
@@ -70,7 +70,7 @@ def get_collected_paging_response_sync(
     """
     ページングされたレスポンスを返す API に対して、最後までデータを読み取り、結合した状態で返す。
     """
-    paging = get_paging_response_iter_sync(get_func, query)
+    paging = get_paging_response_body_iter_sync(get_func, query)
     first = next(paging)
 
     for page in paging:
@@ -78,7 +78,7 @@ def get_collected_paging_response_sync(
     return first
 
 
-async def get_paging_response_iter_async(
+async def get_paging_response_body_iter_async(
     get_func: Callable[
         [AnyQueryParameters],
         Coroutine[Any, Any, AnyPageResponseBody],
@@ -106,7 +106,7 @@ async def get_paging_response_iter_async(
             return
 
 
-async def get_collected_paging_response_async(
+async def get_collected_paging_response_body_async(
     get_func: Callable[
         [AnyQueryParameters],
         Coroutine[Any, Any, AnyPageResponseBody],
@@ -116,7 +116,7 @@ async def get_collected_paging_response_async(
     """
     ページングされたレスポンスを返す API に対して、最後までデータを読み取り、結合した状態で返す。
     """
-    paging = get_paging_response_iter_async(get_func, query)
+    paging = get_paging_response_body_iter_async(get_func, query)
     first = await paging.__anext__()
 
     async for page in paging:

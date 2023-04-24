@@ -33,10 +33,10 @@ from twitter_api.types.endpoint import Endpoint
 from twitter_api.types.extra_permissive_model import ExtraPermissiveModel
 from twitter_api.types.paging import (
     PageResponseBody,
-    get_collected_paging_response_async,
-    get_collected_paging_response_sync,
-    get_paging_response_iter_async,
-    get_paging_response_iter_sync,
+    get_collected_paging_response_body_async,
+    get_collected_paging_response_body_sync,
+    get_paging_response_body_iter_async,
+    get_paging_response_body_iter_sync,
 )
 from twitter_api.utils.datetime import rfc3339
 from twitter_api.utils.functional import map_optional
@@ -157,7 +157,7 @@ class GetV2UserTweetsResources(ApiResources):
             response_type=GetV2UserTweetsResponseBody,
         )
 
-    def get_paging_response_iter(
+    def get_paging_response_body_iter(
         self,
         id: UserId,
         query: Optional[GetV2UserTweetsQueryParameters] = None,
@@ -169,9 +169,9 @@ class GetV2UserTweetsResources(ApiResources):
 
         refer: https://developer.twitter.com/en/docs/twitter-api/tweets/timelines/api-reference/get-users-id-tweets
         """
-        return get_paging_response_iter_sync(partial(self.get, id), query)
+        return get_paging_response_body_iter_sync(partial(self.get, id), query)
 
-    def get_collected_paging_response(
+    def get_collected_paging_response_body(
         self,
         id: UserId,
         query: Optional[GetV2UserTweetsQueryParameters] = None,
@@ -183,7 +183,7 @@ class GetV2UserTweetsResources(ApiResources):
 
         refer: https://developer.twitter.com/en/docs/twitter-api/tweets/timelines/api-reference/get-users-id-tweets
         """
-        return get_collected_paging_response_sync(partial(self.get, id), query)
+        return get_collected_paging_response_body_sync(partial(self.get, id), query)
 
 
 class AsyncGetV2UserTweetsResources(GetV2UserTweetsResources):
@@ -194,16 +194,18 @@ class AsyncGetV2UserTweetsResources(GetV2UserTweetsResources):
     ) -> GetV2UserTweetsResponseBody:
         return super().get(id, query)
 
-    async def get_paging_response_iter(
+    async def get_paging_response_body_iter(
         self,
         id: UserId,
         query: Optional[GetV2UserTweetsQueryParameters] = None,
     ) -> AsyncGenerator[GetV2UserTweetsResponseBody, None]:
-        return get_paging_response_iter_async(partial(self.get, id), query)
+        return get_paging_response_body_iter_async(partial(self.get, id), query)
 
-    async def get_collected_paging_response(
+    async def get_collected_paging_response_body(
         self,
         id: UserId,
         query: Optional[GetV2UserTweetsQueryParameters] = None,
     ) -> GetV2UserTweetsResponseBody:
-        return await get_collected_paging_response_async(partial(self.get, id), query)
+        return await get_collected_paging_response_body_async(
+            partial(self.get, id), query
+        )

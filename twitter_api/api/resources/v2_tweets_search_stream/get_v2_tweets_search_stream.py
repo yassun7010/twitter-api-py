@@ -14,10 +14,10 @@ from twitter_api.rate_limit.rate_limit import rate_limit
 from twitter_api.types.comma_separatable import CommaSeparatable, comma_separated_str
 from twitter_api.types.endpoint import Endpoint
 from twitter_api.types.paging import (
-    get_collected_paging_response_async,
-    get_collected_paging_response_sync,
-    get_paging_response_iter_async,
-    get_paging_response_iter_sync,
+    get_collected_paging_response_body_async,
+    get_collected_paging_response_body_sync,
+    get_paging_response_body_iter_async,
+    get_paging_response_body_iter_sync,
 )
 from twitter_api.utils.datetime import rfc3339
 from twitter_api.utils.functional import map_optional
@@ -78,7 +78,7 @@ class GetV2TweetsSearchStreamResources(ApiResources):
             query=_make_query(query) if query is not None else None,
         )
 
-    def get_paging_response_iter(
+    def get_paging_response_body_iter(
         self, query: Optional[GetV2TweetsSearchStreamQueryParameters] = None
     ) -> Generator[GetV2TweetsSearchStreamResponseBody, None, None]:
         """
@@ -88,9 +88,9 @@ class GetV2TweetsSearchStreamResources(ApiResources):
 
         refer: https://developer.twitter.com/en/docs/twitter-api/tweets/filtered-stream/api-reference/get-tweets-search-stream
         """
-        return get_paging_response_iter_sync(self.get, query)
+        return get_paging_response_body_iter_sync(self.get, query)
 
-    def get_collected_paging_response(
+    def get_collected_paging_response_body(
         self, query: Optional[GetV2TweetsSearchStreamQueryParameters] = None
     ) -> GetV2TweetsSearchStreamResponseBody:
         """
@@ -100,7 +100,7 @@ class GetV2TweetsSearchStreamResources(ApiResources):
 
         refer: https://developer.twitter.com/en/docs/twitter-api/tweets/filtered-stream/api-reference/get-tweets-search-stream
         """
-        return get_collected_paging_response_sync(self.get, query)
+        return get_collected_paging_response_body_sync(self.get, query)
 
 
 class AsyncGetV2TweetsSearchStreamResources(GetV2TweetsSearchStreamResources):
@@ -109,12 +109,12 @@ class AsyncGetV2TweetsSearchStreamResources(GetV2TweetsSearchStreamResources):
     ) -> GetV2TweetsSearchStreamResponseBody:
         return super().get(query)
 
-    async def get_paging_response_iter(
+    async def get_paging_response_body_iter(
         self, query: Optional[GetV2TweetsSearchStreamQueryParameters] = None
     ) -> AsyncGenerator[GetV2TweetsSearchStreamResponseBody, None]:
-        return get_paging_response_iter_async(self.get, query)
+        return get_paging_response_body_iter_async(self.get, query)
 
-    async def get_collected_paging_response(
+    async def get_collected_paging_response_body(
         self, query: Optional[GetV2TweetsSearchStreamQueryParameters] = None
     ) -> GetV2TweetsSearchStreamResponseBody:
-        return await get_collected_paging_response_async(self.get, query)
+        return await get_collected_paging_response_body_async(self.get, query)

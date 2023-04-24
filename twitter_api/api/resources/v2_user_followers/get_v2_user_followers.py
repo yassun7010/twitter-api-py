@@ -17,10 +17,10 @@ from twitter_api.types.endpoint import Endpoint
 from twitter_api.types.extra_permissive_model import ExtraPermissiveModel
 from twitter_api.types.paging import (
     PageResponseBody,
-    get_collected_paging_response_async,
-    get_collected_paging_response_sync,
-    get_paging_response_iter_async,
-    get_paging_response_iter_sync,
+    get_collected_paging_response_body_async,
+    get_collected_paging_response_body_sync,
+    get_paging_response_body_iter_async,
+    get_paging_response_body_iter_sync,
 )
 
 ENDPOINT = Endpoint("GET", "https://api.twitter.com/2/users/:id/followers")
@@ -114,7 +114,7 @@ class GetV2UserFollowersResources(ApiResources):
             response_type=GetV2UserFollowersResponseBody,
         )
 
-    def get_paging_response_iter(
+    def get_paging_response_body_iter(
         self,
         id: UserId,
         query: Optional[GetV2UserFollowersQueryParameters] = None,
@@ -126,9 +126,9 @@ class GetV2UserFollowersResources(ApiResources):
 
         refer: https://developer.twitter.com/en/docs/twitter-api/users/follows/api-reference/get-users-id-followers
         """
-        return get_paging_response_iter_sync(partial(self.get, id), query)
+        return get_paging_response_body_iter_sync(partial(self.get, id), query)
 
-    def get_collected_paging_response(
+    def get_collected_paging_response_body(
         self,
         id: UserId,
         query: Optional[GetV2UserFollowersQueryParameters] = None,
@@ -140,7 +140,7 @@ class GetV2UserFollowersResources(ApiResources):
 
         refer: https://developer.twitter.com/en/docs/twitter-api/users/follows/api-reference/get-users-id-followers
         """
-        return get_collected_paging_response_sync(partial(self.get, id), query)
+        return get_collected_paging_response_body_sync(partial(self.get, id), query)
 
 
 class AsyncGetV2UserFollowersResources(GetV2UserFollowersResources):
@@ -151,16 +151,18 @@ class AsyncGetV2UserFollowersResources(GetV2UserFollowersResources):
     ) -> GetV2UserFollowersResponseBody:
         return super().get(id, query)
 
-    async def get_paging_response_iter(
+    async def get_paging_response_body_iter(
         self,
         id: UserId,
         query: Optional[GetV2UserFollowersQueryParameters] = None,
     ) -> AsyncGenerator[GetV2UserFollowersResponseBody, None]:
-        return get_paging_response_iter_async(partial(self.get, id), query)
+        return get_paging_response_body_iter_async(partial(self.get, id), query)
 
-    async def get_collected_paging_response(
+    async def get_collected_paging_response_body(
         self,
         id: UserId,
         query: Optional[GetV2UserFollowersQueryParameters] = None,
     ) -> GetV2UserFollowersResponseBody:
-        return await get_collected_paging_response_async(partial(self.get, id), query)
+        return await get_collected_paging_response_body_async(
+            partial(self.get, id), query
+        )
