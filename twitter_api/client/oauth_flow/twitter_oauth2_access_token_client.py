@@ -59,6 +59,7 @@ class TwitterOAuth2AccessTokenClient(Chainable):
             client_id=client_id,
             client_secret=client_secret,
             callback_url=callback_url,
+            scope=None,
             rate_limit_manager=rate_limit_manager,
             event_hooks=event_hooks,
             limits=limits,

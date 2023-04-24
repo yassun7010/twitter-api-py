@@ -23,7 +23,7 @@ class TwitterOAuth2RealSession(TwitterOAuth2Session):
         client_id: ClientId,
         client_secret: ClientSecret,
         callback_url: CallbackUrl,
-        scope: Optional[list[Scope]] = None,
+        scope: Optional[list[Scope]],
         rate_limit_manager: Optional[RateLimitManager],
         event_hooks: Optional[httpx.EventHook],
         limits: Optional[httpx.Limits],
