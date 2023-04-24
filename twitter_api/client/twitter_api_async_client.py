@@ -347,10 +347,10 @@ class TwitterApiAsyncClient(Chainable, metaclass=ABCMeta):
         rate_limit_manager: Optional[RateLimitManager] = None,
         event_hooks: Optional[httpx.EventHook] = None,
         limits: Optional[httpx.Limits] = None,
-        mounts: Optional[Mapping[str, httpx.BaseTransport]] = None,
+        mounts: Optional[Mapping[str, httpx.AsyncBaseTransport]] = None,
         proxies: Optional[httpx.ProxiesTypes] = None,
         timeout: Optional[httpx.TimeoutTypes] = None,
-        transport: Optional[httpx.BaseTransport] = None,
+        transport: Optional[httpx.AsyncBaseTransport] = None,
         verify: Optional[httpx.VerifyTypes] = None,
     ) -> Self:
         """OAuth 2.0 の Bearer 認証を用いてクライアントを作成する。"""
@@ -378,10 +378,10 @@ class TwitterApiAsyncClient(Chainable, metaclass=ABCMeta):
         rate_limit_manager: Optional[RateLimitManager] = None,
         event_hooks: Optional[httpx.EventHook] = None,
         limits: Optional[httpx.Limits] = None,
-        mounts: Optional[Mapping[str, httpx.BaseTransport]] = None,
+        mounts: Optional[Mapping[str, httpx.AsyncBaseTransport]] = None,
         proxies: Optional[httpx.ProxiesTypes] = None,
         timeout: Optional[httpx.TimeoutTypes] = None,
-        transport: Optional[httpx.BaseTransport] = None,
+        transport: Optional[httpx.AsyncBaseTransport] = None,
         verify: Optional[httpx.VerifyTypes] = None,
     ) -> Self:
         """環境変数から、 OAuth 2.0 の Bearer 認証を用いてクライアントを作成する。"""
@@ -407,10 +407,10 @@ class TwitterApiAsyncClient(Chainable, metaclass=ABCMeta):
         rate_limit_manager: Optional[RateLimitManager] = None,
         event_hooks: Optional[httpx.EventHook] = None,
         limits: Optional[httpx.Limits] = None,
-        mounts: Optional[Mapping[str, httpx.BaseTransport]] = None,
+        mounts: Optional[Mapping[str, httpx.AsyncBaseTransport]] = None,
         proxies: Optional[httpx.ProxiesTypes] = None,
         timeout: Optional[httpx.TimeoutTypes] = None,
-        transport: Optional[httpx.BaseTransport] = None,
+        transport: Optional[httpx.AsyncBaseTransport] = None,
         verify: Optional[httpx.VerifyTypes] = None,
     ) -> Self:
         """OAuth 2.0 のアプリ認証を用いてクライアントを作成する。"""
@@ -441,10 +441,10 @@ class TwitterApiAsyncClient(Chainable, metaclass=ABCMeta):
         rate_limit_manager: Optional[RateLimitManager] = None,
         event_hooks: Optional[httpx.EventHook] = None,
         limits: Optional[httpx.Limits] = None,
-        mounts: Optional[Mapping[str, httpx.BaseTransport]] = None,
+        mounts: Optional[Mapping[str, httpx.AsyncBaseTransport]] = None,
         proxies: Optional[httpx.ProxiesTypes] = None,
         timeout: Optional[httpx.TimeoutTypes] = None,
-        transport: Optional[httpx.BaseTransport] = None,
+        transport: Optional[httpx.AsyncBaseTransport] = None,
         verify: Optional[httpx.VerifyTypes] = None,
     ) -> Self:
         """環境変数から、OAuth 2.0 のアプリ認証を用いてクライアントを作成する。"""
@@ -472,19 +472,19 @@ class TwitterApiAsyncClient(Chainable, metaclass=ABCMeta):
         scope: list[Scope],
         event_hooks: Optional[httpx.EventHook] = None,
         limits: Optional[httpx.Limits] = None,
-        mounts: Optional[Mapping[str, httpx.BaseTransport]] = None,
+        mounts: Optional[Mapping[str, httpx.AsyncBaseTransport]] = None,
         proxies: Optional[httpx.ProxiesTypes] = None,
         timeout: Optional[httpx.TimeoutTypes] = None,
-        transport: Optional[httpx.BaseTransport] = None,
+        transport: Optional[httpx.AsyncBaseTransport] = None,
         verify: Optional[httpx.VerifyTypes] = None,
     ):
         """
         OAuth 2.0 のユーザ認証を用いてクライアントを作成する。
         """
 
-        from .twitter_api_real_client import TwitterApiRealClient
+        from .twitter_api_async_real_client import TwitterApiAsyncRealClient
 
-        return TwitterApiRealClient.from_oauth2_user_flow(
+        return TwitterApiAsyncRealClient.from_oauth2_user_flow(
             client_id=client_id,
             client_secret=client_secret,
             scope=scope,
@@ -509,10 +509,10 @@ class TwitterApiAsyncClient(Chainable, metaclass=ABCMeta):
         callback_url: Optional[CallbackUrl] = None,
         event_hooks: Optional[httpx.EventHook] = None,
         limits: Optional[httpx.Limits] = None,
-        mounts: Optional[Mapping[str, httpx.BaseTransport]] = None,
+        mounts: Optional[Mapping[str, httpx.AsyncBaseTransport]] = None,
         proxies: Optional[httpx.ProxiesTypes] = None,
         timeout: Optional[httpx.TimeoutTypes] = None,
-        transport: Optional[httpx.BaseTransport] = None,
+        transport: Optional[httpx.AsyncBaseTransport] = None,
         verify: Optional[httpx.VerifyTypes] = None,
     ):
         """
@@ -553,10 +553,10 @@ class TwitterApiAsyncClient(Chainable, metaclass=ABCMeta):
         rate_limit_manager: Optional[RateLimitManager] = None,
         event_hooks: Optional[httpx.EventHook] = None,
         limits: Optional[httpx.Limits] = None,
-        mounts: Optional[Mapping[str, httpx.BaseTransport]] = None,
+        mounts: Optional[Mapping[str, httpx.AsyncBaseTransport]] = None,
         proxies: Optional[httpx.ProxiesTypes] = None,
         timeout: Optional[httpx.TimeoutTypes] = None,
-        transport: Optional[httpx.BaseTransport] = None,
+        transport: Optional[httpx.AsyncBaseTransport] = None,
         verify: Optional[httpx.VerifyTypes] = None,
     ) -> Self:
         """OAuth1.0a のアプリ認証を用いてクライアントを作成する。"""
@@ -591,10 +591,10 @@ class TwitterApiAsyncClient(Chainable, metaclass=ABCMeta):
         rate_limit_manager: Optional[RateLimitManager] = None,
         event_hooks: Optional[httpx.EventHook] = None,
         limits: Optional[httpx.Limits] = None,
-        mounts: Optional[Mapping[str, httpx.BaseTransport]] = None,
+        mounts: Optional[Mapping[str, httpx.AsyncBaseTransport]] = None,
         proxies: Optional[httpx.ProxiesTypes] = None,
         timeout: Optional[httpx.TimeoutTypes] = None,
-        transport: Optional[httpx.BaseTransport] = None,
+        transport: Optional[httpx.AsyncBaseTransport] = None,
         verify: Optional[httpx.VerifyTypes] = None,
     ) -> Self:
         """環境変数から、OAuth1.0a のアプリ認証を用いてクライアントを作成する。"""
@@ -623,19 +623,19 @@ class TwitterApiAsyncClient(Chainable, metaclass=ABCMeta):
         callback_url: CallbackUrl,
         event_hooks: Optional[httpx.EventHook] = None,
         limits: Optional[httpx.Limits] = None,
-        mounts: Optional[Mapping[str, httpx.BaseTransport]] = None,
+        mounts: Optional[Mapping[str, httpx.AsyncBaseTransport]] = None,
         proxies: Optional[httpx.ProxiesTypes] = None,
         timeout: Optional[httpx.TimeoutTypes] = None,
-        transport: Optional[httpx.BaseTransport] = None,
+        transport: Optional[httpx.AsyncBaseTransport] = None,
         verify: Optional[httpx.VerifyTypes] = None,
     ):
         """
         OAuth 1.0a のユーザ認証を用いてクライアントを作成する。
         """
 
-        from .twitter_api_real_client import TwitterApiRealClient
+        from .twitter_api_async_real_client import TwitterApiAsyncRealClient
 
-        return TwitterApiRealClient.from_oauth1_user_flow(
+        return TwitterApiAsyncRealClient.from_oauth1_user_flow(
             api_key=api_key,
             api_secret=api_secret,
             callback_url=callback_url,
@@ -658,10 +658,10 @@ class TwitterApiAsyncClient(Chainable, metaclass=ABCMeta):
         callback_url: Optional[CallbackUrl] = None,
         event_hooks: Optional[httpx.EventHook] = None,
         limits: Optional[httpx.Limits] = None,
-        mounts: Optional[Mapping[str, httpx.BaseTransport]] = None,
+        mounts: Optional[Mapping[str, httpx.AsyncBaseTransport]] = None,
         proxies: Optional[httpx.ProxiesTypes] = None,
         timeout: Optional[httpx.TimeoutTypes] = None,
-        transport: Optional[httpx.BaseTransport] = None,
+        transport: Optional[httpx.AsyncBaseTransport] = None,
         verify: Optional[httpx.VerifyTypes] = None,
     ):
         """
