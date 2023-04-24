@@ -48,7 +48,7 @@ class PostV2UserFollowingResources(ApiResources):
             endpoint=ENDPOINT,
             url=ENDPOINT.url.replace(":id", id),
             body=downcast_dict(request_body),
-            response_type=PostV2UserFollowingResponseBody,
+            response_body_type=PostV2UserFollowingResponseBody,
         )
 
 

@@ -45,7 +45,7 @@ class GetV2TweetsSearchStreamRulesResources(ApiResources):
         """
         return self.request_client.post(
             endpoint=ENDPOINT,
-            response_type=GetV2TweetsSearchStreamRulesResponseBody,
+            response_body_type=GetV2TweetsSearchStreamRulesResponseBody,
             query=downcast_dict(query),
         )
 

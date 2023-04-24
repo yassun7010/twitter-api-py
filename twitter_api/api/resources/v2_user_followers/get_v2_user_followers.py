@@ -111,7 +111,7 @@ class GetV2UserFollowersResources(ApiResources):
             endpoint=ENDPOINT,
             url=ENDPOINT.url.replace(":id", id),
             query=_make_query(query) if query is not None else None,
-            response_type=GetV2UserFollowersResponseBody,
+            response_body_type=GetV2UserFollowersResponseBody,
         )
 
     def get_paging_response_body_iter(

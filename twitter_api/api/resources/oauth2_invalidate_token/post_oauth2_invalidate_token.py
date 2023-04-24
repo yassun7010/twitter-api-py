@@ -47,7 +47,7 @@ class PostOauth2InvalidateTokenResources(ApiResources):
 
         return self.request_client.post(
             endpoint=ENDPOINT,
-            response_type=PostOauth2InvalidateTokenResponseBody,
+            response_body_type=PostOauth2InvalidateTokenResponseBody,
             auth=False,
             headers={
                 "Authorization": f"Basic {bearer_token.decode()}",

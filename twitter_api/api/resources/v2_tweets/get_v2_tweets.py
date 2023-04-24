@@ -62,7 +62,7 @@ class GetV2TweetsResources(ApiResources):
         return self.request_client.get(
             endpoint=ENDPOINT,
             query=_make_query(query),
-            response_type=GetV2TweetsResponseBody,
+            response_body_type=GetV2TweetsResponseBody,
         )
 
 

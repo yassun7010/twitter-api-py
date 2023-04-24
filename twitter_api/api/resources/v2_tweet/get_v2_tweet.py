@@ -68,7 +68,7 @@ class GetV2TweetResources(ApiResources):
         """
         return self.request_client.get(
             endpoint=ENDPOINT,
-            response_type=GetV2TweetResponseBody,
+            response_body_type=GetV2TweetResponseBody,
             url=ENDPOINT.url.replace(":id", id),
             query=_make_query(query),
         )

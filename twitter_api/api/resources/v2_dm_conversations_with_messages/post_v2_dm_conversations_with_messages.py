@@ -46,7 +46,7 @@ class PostV2DmConversationsWithParticipantMessagesResources(ApiResources):
             endpoint=ENDPOINT,
             url=ENDPOINT.url.replace(":participant_id", participant_id),
             body=downcast_dict(request_body),
-            response_type=PostV2DmConversationsWithParticipantMessagesResponseBody,
+            response_body_type=PostV2DmConversationsWithParticipantMessagesResponseBody,
         )
 
 

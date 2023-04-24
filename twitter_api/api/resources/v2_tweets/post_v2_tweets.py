@@ -80,7 +80,7 @@ class PostV2TweetsResources(ApiResources):
         """
         return self.request_client.post(
             endpoint=ENDPOINT,
-            response_type=PostV2TweetsResponseBody,
+            response_body_type=PostV2TweetsResponseBody,
             body=downcast_dict(request_body),
         )
 

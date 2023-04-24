@@ -52,7 +52,7 @@ class PostV2DmConversationsResources(ApiResources):
         return self.request_client.post(
             endpoint=ENDPOINT,
             body=downcast_dict(request_body),
-            response_type=PostV2DmConversationsResponseBody,
+            response_body_type=PostV2DmConversationsResponseBody,
         )
 
 

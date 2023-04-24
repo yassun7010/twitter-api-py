@@ -77,7 +77,7 @@ class PostV2TweetsSearchStreamRulesResources(ApiResources):
         """
         return self.request_client.post(
             endpoint=ENDPOINT,
-            response_type=PostV2TweetsSearchStreamRulesResponseBody,
+            response_body_type=PostV2TweetsSearchStreamRulesResponseBody,
             query=downcast_dict(query),
             body=downcast_dict(request_body),
         )

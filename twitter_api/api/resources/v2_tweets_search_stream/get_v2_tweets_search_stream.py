@@ -74,7 +74,7 @@ class GetV2TweetsSearchStreamResources(ApiResources):
         """
         return self.request_client.get(
             endpoint=ENDPOINT,
-            response_type=GetV2TweetsSearchStreamResponseBody,
+            response_body_type=GetV2TweetsSearchStreamResponseBody,
             query=_make_query(query) if query is not None else None,
         )
 

@@ -34,7 +34,7 @@ class DeleteV2TweetResources(ApiResources):
         """
         return self.request_client.delete(
             endpoint=ENDPOINT,
-            response_type=DeleteV2TweetResponseBody,
+            response_body_type=DeleteV2TweetResponseBody,
             url=ENDPOINT.url.replace(":id", id),
         )
 

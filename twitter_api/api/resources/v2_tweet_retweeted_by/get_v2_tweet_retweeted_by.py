@@ -106,7 +106,7 @@ class GetV2TweetRetweetedByResources(ApiResources):
         """
         return self.request_client.get(
             endpoint=ENDPOINT,
-            response_type=GetV2TweetRetweetedByResponseBody,
+            response_body_type=GetV2TweetRetweetedByResponseBody,
             url=ENDPOINT.url.replace(":id", id),
             query=_make_query(query) if query is not None else None,
         )

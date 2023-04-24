@@ -63,7 +63,7 @@ class GetV2UsersResources(ApiResources):
         return self.request_client.get(
             endpoint=ENDPOINT,
             query=_make_query(query),
-            response_type=GetV2UsersResponseBody,
+            response_body_type=GetV2UsersResponseBody,
         )
 
 

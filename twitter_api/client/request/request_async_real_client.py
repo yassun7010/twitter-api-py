@@ -64,7 +64,7 @@ class RequestAsyncRealClient(RequestAsyncClient):
         self,
         *,
         endpoint: Endpoint,
-        response_type: Type[ResponseModelBody],
+        response_body_type: Type[ResponseModelBody],
         url: Optional[Url] = None,
         auth: bool = True,
         headers: Optional[Headers] = None,
@@ -84,7 +84,7 @@ class RequestAsyncRealClient(RequestAsyncClient):
         return _parse_response(
             endpoint,
             response,
-            response_type,
+            response_body_type,
             url,
             headers,
             query,
@@ -95,7 +95,7 @@ class RequestAsyncRealClient(RequestAsyncClient):
         self,
         *,
         endpoint: Endpoint,
-        response_type: Type[ResponseModelBody],
+        response_body_type: Type[ResponseModelBody],
         url: Optional[Url] = None,
         auth: bool = True,
         headers: Optional[Headers] = None,
@@ -114,13 +114,13 @@ class RequestAsyncRealClient(RequestAsyncClient):
             timeout=self.timeout_sec,
         )
 
-        if response_type is str:
+        if response_body_type is str:
             return response.content.decode("utf-8")  # type: ignore
 
         return _parse_response(
             endpoint,
             response,
-            response_type,
+            response_body_type,
             url,
             headers,
             query,
@@ -131,7 +131,7 @@ class RequestAsyncRealClient(RequestAsyncClient):
         self,
         *,
         endpoint: Endpoint,
-        response_type: Type[ResponseModelBody],
+        response_body_type: Type[ResponseModelBody],
         url: Optional[Url] = None,
         auth: bool = True,
         headers: Optional[Headers] = None,
@@ -148,13 +148,13 @@ class RequestAsyncRealClient(RequestAsyncClient):
             timeout=self.timeout_sec,
         )
 
-        if response_type is str:
+        if response_body_type is str:
             return response.content.decode("utf-8")  # type: ignore
 
         return _parse_response(
             endpoint,
             response,
-            response_type,
+            response_body_type,
             url,
             headers,
             query,

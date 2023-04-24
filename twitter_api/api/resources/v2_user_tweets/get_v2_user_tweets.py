@@ -154,7 +154,7 @@ class GetV2UserTweetsResources(ApiResources):
             endpoint=ENDPOINT,
             url=ENDPOINT.url.replace(":id", id),
             query=_make_query(query) if query is not None else None,
-            response_type=GetV2UserTweetsResponseBody,
+            response_body_type=GetV2UserTweetsResponseBody,
         )
 
     def get_paging_response_body_iter(

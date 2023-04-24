@@ -66,7 +66,7 @@ class GetV2UserResources(ApiResources):
             endpoint=ENDPOINT,
             url=ENDPOINT.url.replace(":id", id),
             query=_make_query(query) if query is not None else None,
-            response_type=GetV2UserResponseBody,
+            response_body_type=GetV2UserResponseBody,
         )
 
 
