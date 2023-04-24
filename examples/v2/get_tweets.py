@@ -10,27 +10,26 @@ from twitter_api.client import TwitterApiClient
 from twitter_api.error import TwitterApiError
 
 try:
-    client = TwitterApiClient.from_oauth2_app_env()
-
-    tweets = (
-        client.chain()
-        .resource("https://api.twitter.com/2/tweets")
-        .get(
-            {
-                "ids": ["1460323737035677698"],
-                "expansions": ALL_EXPANSIONS,
-                "media.fields": ALL_MEDIA_FIELDS,
-                "place.fields": ALL_PLACE_FIELDS,
-                "poll.fields": ALL_POLL_FIELDS,
-                "tweet.fields": ALL_PUBLIC_TWEET_FIELDS,
-                "user.fields": ALL_USER_FIELDS,
-            },
+    with TwitterApiClient.from_oauth2_app_env() as client:
+        tweets = (
+            client.chain()
+            .resource("https://api.twitter.com/2/tweets")
+            .get(
+                {
+                    "ids": ["1460323737035677698"],
+                    "expansions": ALL_EXPANSIONS,
+                    "media.fields": ALL_MEDIA_FIELDS,
+                    "place.fields": ALL_PLACE_FIELDS,
+                    "poll.fields": ALL_POLL_FIELDS,
+                    "tweet.fields": ALL_PUBLIC_TWEET_FIELDS,
+                    "user.fields": ALL_USER_FIELDS,
+                },
+            )
+            .data
         )
-        .data
-    )
 
-    for tweet in tweets:
-        print(tweet.json(indent=2))
+        for tweet in tweets:
+            print(tweet.json(indent=2))
 
 except TwitterApiError as error:
     print(error, file=sys.stderr)
