@@ -147,11 +147,11 @@ class TwitterApiAsyncRealClient(TwitterApiAsyncClient):
         from twitter_api.client.oauth_flow.twitter_oauth2_authorization_client import (
             TwitterOAuth2AuthorizeClient,
         )
-        from twitter_api.client.oauth_session.twitter_oauth2_real_session import (
-            TwitterOAuth2RealSession,
+        from twitter_api.client.oauth_session.twitter_oauth2_async_real_session import (
+            TwitterOAuth2AsyncRealSession,
         )
 
-        session = TwitterOAuth2RealSession(
+        session = TwitterOAuth2AsyncRealSession(
             client_id=client_id,
             client_secret=client_secret,
             callback_url=callback_url,
@@ -159,10 +159,10 @@ class TwitterApiAsyncRealClient(TwitterApiAsyncClient):
             rate_limit_manager=rate_limit_manager,
             event_hooks=event_hooks,
             limits=limits,
-            mounts=None,
+            mounts=mounts,
             proxies=proxies,
             timeout=timeout,
-            transport=None,
+            transport=transport,
             verify=verify,
         )
 
@@ -226,21 +226,21 @@ class TwitterApiAsyncRealClient(TwitterApiAsyncClient):
         from twitter_api.client.oauth_flow.twitter_oauth1_request_token_client import (
             TwitterOAuth1RequestTokenClient,
         )
-        from twitter_api.client.oauth_session.twitter_oauth1_real_session import (
-            TwitterOAuth1RealSession,
+        from twitter_api.client.oauth_session.twitter_oauth1_async_real_session import (
+            TwitterOAuth1AsyncRealSession,
         )
 
-        session = TwitterOAuth1RealSession(
+        session = TwitterOAuth1AsyncRealSession(
             api_key=api_key,
             api_secret=api_secret,
             callback_url=callback_url,
             rate_limit_manager=rate_limit_manager,
             event_hooks=event_hooks,
             limits=limits,
-            mounts=None,
+            mounts=mounts,
             proxies=proxies,
             timeout=timeout,
-            transport=None,
+            transport=transport,
             verify=verify,
         )
 
