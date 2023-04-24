@@ -12,7 +12,7 @@ from twitter_api.types.extra_permissive_model import ExtraPermissiveModel
 from .types.endpoint import Endpoint
 from .types.http import Headers, QuryParameters, RequestJsonBody, ResponseJsonBody
 from .types.oauth import OAuthVersion
-from .utils.json import exclude_none
+from .utils._functional import exclude_none
 
 
 class ErrorMessage(ExtraPermissiveModel):

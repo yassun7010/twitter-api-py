@@ -8,7 +8,7 @@ from twitter_api.api.types.v2_scope import oauth2_scopes
 from twitter_api.rate_limit.rate_limit import rate_limit
 from twitter_api.types.endpoint import Endpoint
 from twitter_api.types.extra_permissive_model import ExtraPermissiveModel
-from twitter_api.types.http import downcast_dict
+from twitter_api.utils._functional import downcast_dict
 
 ENDPOINT = Endpoint(
     "POST", "https://api.twitter.com/2/dm_conversations/:dm_conversation_id/messages"
