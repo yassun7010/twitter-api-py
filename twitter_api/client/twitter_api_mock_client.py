@@ -374,6 +374,16 @@ class _TwitterApiMockClientBase:
 
         return self
 
+    @classmethod
+    def _get_env(cls, key: Env[str]) -> str:
+        """
+        環境変数を取り出す。
+
+        Mock であるためとりあえず値を返す。
+        """
+
+        return ""
+
 
 class TwitterApiMockClient(_TwitterApiMockClientBase, TwitterApiClient):
     """Twitter API V2 をモックするためのクライアント"""
@@ -494,13 +504,3 @@ class TwitterApiMockClient(_TwitterApiMockClientBase, TwitterApiClient):
 
         session = TwitterOAuth1MockSession()
         return TwitterOAuth1RequestTokenClient(session=session)
-
-    @classmethod
-    def _get_env(cls, key: Env[str]) -> str:
-        """
-        環境変数を取り出す。
-
-        Mock であるためとりあえず値を返す。
-        """
-
-        return ""
