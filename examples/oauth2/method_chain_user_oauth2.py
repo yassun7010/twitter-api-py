@@ -1,7 +1,6 @@
 import os
 import sys
 
-from twitter_api.api.types.v2_scope import ALL_SCOPES
 from twitter_api.client import TwitterApiClient
 from twitter_api.error import TwitterApiError
 
