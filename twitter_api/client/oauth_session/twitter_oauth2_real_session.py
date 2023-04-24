@@ -66,6 +66,9 @@ class TwitterOAuth2RealSession(TwitterOAuth2Session):
 
         scope: Any = response.pop("scope", "").split(" ")
 
+        # 認証のプロセスがすべて終了したので、コネクションを閉じておく。
+        self._session.close()
+
         return OAuth2AccessToken(
             scope=scope,
             _session=self,

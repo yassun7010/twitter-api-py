@@ -75,6 +75,9 @@ class TwitterOAuth1RealSession(TwitterOAuth1Session):
 
         data = self._session.fetch_access_token(url=url)
 
+        # 認証のプロセスがすべて終了したので、コネクションを閉じておく。
+        self._session.close()
+
         return OAuth1AccessToken(
             oauth_token=data["oauth_token"],
             oauth_token_secret=data["oauth_token_secret"],
