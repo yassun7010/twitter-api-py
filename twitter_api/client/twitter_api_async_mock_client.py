@@ -1,4 +1,4 @@
-from typing import Optional, Self
+from typing import Mapping, Optional, Self
 
 from twitter_api.api.types.v2_scope import Scope
 from twitter_api.client.twitter_api_async_client import TwitterApiAsyncClient
@@ -13,6 +13,7 @@ from twitter_api.types.oauth import (
     ClientId,
     ClientSecret,
 )
+from twitter_api.utils import httpx
 
 
 class TwitterApiAsyncMockClient(TwitterApiMockClient, TwitterApiAsyncClient):
@@ -22,6 +23,13 @@ class TwitterApiAsyncMockClient(TwitterApiMockClient, TwitterApiAsyncClient):
         bearer_token: str,
         *,
         rate_limit_manager: Optional[RateLimitManager] = None,
+        event_hooks: Optional[httpx.EventHook] = None,
+        limits: Optional[httpx.Limits] = None,
+        mounts: Optional[Mapping[str, httpx.BaseTransport]] = None,
+        proxies: Optional[httpx.ProxiesTypes] = None,
+        timeout: Optional[httpx.TimeoutTypes] = None,
+        transport: Optional[httpx.BaseTransport] = None,
+        verify: Optional[httpx.VerifyTypes] = None,
     ):
         return TwitterApiAsyncMockClient(
             oauth_version="2.0",
@@ -36,6 +44,13 @@ class TwitterApiAsyncMockClient(TwitterApiMockClient, TwitterApiAsyncClient):
         api_key: ApiKey,
         api_secret: ApiSecret,
         rate_limit_manager: Optional[RateLimitManager] = None,
+        event_hooks: Optional[httpx.EventHook] = None,
+        limits: Optional[httpx.Limits] = None,
+        mounts: Optional[Mapping[str, httpx.BaseTransport]] = None,
+        proxies: Optional[httpx.ProxiesTypes] = None,
+        timeout: Optional[httpx.TimeoutTypes] = None,
+        transport: Optional[httpx.BaseTransport] = None,
+        verify: Optional[httpx.VerifyTypes] = None,
     ) -> Self:
         return TwitterApiAsyncMockClient(
             oauth_version="2.0",
@@ -52,6 +67,13 @@ class TwitterApiAsyncMockClient(TwitterApiMockClient, TwitterApiAsyncClient):
         callback_url: CallbackUrl,
         scope: list[Scope],
         rate_limit_manager: Optional[RateLimitManager] = None,
+        event_hooks: Optional[httpx.EventHook] = None,
+        limits: Optional[httpx.Limits] = None,
+        mounts: Optional[Mapping[str, httpx.BaseTransport]] = None,
+        proxies: Optional[httpx.ProxiesTypes] = None,
+        timeout: Optional[httpx.TimeoutTypes] = None,
+        transport: Optional[httpx.BaseTransport] = None,
+        verify: Optional[httpx.VerifyTypes] = None,
     ):
         from twitter_api.client.oauth_flow.twitter_oauth2_authorization_client import (
             TwitterOAuth2AuthorizeClient,
@@ -72,6 +94,13 @@ class TwitterApiAsyncMockClient(TwitterApiMockClient, TwitterApiAsyncClient):
         access_token: AccessToken,
         access_secret: AccessSecret,
         rate_limit_manager: Optional[RateLimitManager] = None,
+        event_hooks: Optional[httpx.EventHook] = None,
+        limits: Optional[httpx.Limits] = None,
+        mounts: Optional[Mapping[str, httpx.BaseTransport]] = None,
+        proxies: Optional[httpx.ProxiesTypes] = None,
+        timeout: Optional[httpx.TimeoutTypes] = None,
+        transport: Optional[httpx.BaseTransport] = None,
+        verify: Optional[httpx.VerifyTypes] = None,
     ):
         return TwitterApiAsyncMockClient(
             oauth_version="1.0a",
@@ -87,6 +116,13 @@ class TwitterApiAsyncMockClient(TwitterApiMockClient, TwitterApiAsyncClient):
         api_secret: ApiSecret,
         callback_url: CallbackUrl,
         rate_limit_manager: Optional[RateLimitManager] = None,
+        event_hooks: Optional[httpx.EventHook] = None,
+        limits: Optional[httpx.Limits] = None,
+        mounts: Optional[Mapping[str, httpx.BaseTransport]] = None,
+        proxies: Optional[httpx.ProxiesTypes] = None,
+        timeout: Optional[httpx.TimeoutTypes] = None,
+        transport: Optional[httpx.BaseTransport] = None,
+        verify: Optional[httpx.VerifyTypes] = None,
     ):
         from twitter_api.client.oauth_flow.twitter_oauth1_request_token_client import (
             TwitterOAuth1RequestTokenClient,

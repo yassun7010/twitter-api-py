@@ -1,6 +1,5 @@
-from typing import Optional, Self, Type
+from typing import Mapping, Optional, Self, Type
 
-import httpx
 from authlib.integrations.httpx_client.oauth1_client import OAuth1Auth
 from authlib.integrations.httpx_client.oauth2_client import OAuth2Auth
 
@@ -17,6 +16,7 @@ from twitter_api.rate_limit.rate_limit_target import RateLimitTarget
 from twitter_api.types.endpoint import Endpoint
 from twitter_api.types.http import Url
 from twitter_api.types.oauth import OAuthVersion
+from twitter_api.utils import httpx
 
 from .request_client import Headers, QuryParameters, RequestJsonBody, ResponseModelBody
 
@@ -30,18 +30,35 @@ class RequestAsyncRealClient(RequestAsyncClient):
         auth: Optional[OAuth],
         oauth_version: OAuthVersion,
         rate_limit_target: RateLimitTarget,
-        rate_limit_manager: Optional[RateLimitManager] = None,
+        rate_limit_manager: Optional[RateLimitManager],
+        event_hooks: Optional[httpx.EventHook],
+        limits: Optional[httpx.Limits],
+        mounts: Optional[Mapping[str, httpx.BaseTransport]],
+        proxies: Optional[httpx.ProxiesTypes],
+        timeout: Optional[httpx.TimeoutTypes],
+        transport: Optional[httpx.BaseTransport],
+        verify: Optional[httpx.VerifyTypes],
         session: Optional[httpx.AsyncClient] = None,
-        timeout_seconds: Optional[float] = None,
+        **httpx_client_kwargs,
     ) -> None:
         if session is None:
-            session = httpx.AsyncClient()
+            session = httpx.AsyncClient(
+                **httpx.update_client_kwargs(
+                    event_hooks,
+                    limits,
+                    mounts,
+                    proxies,
+                    timeout,
+                    transport,
+                    verify,
+                    kwargs=httpx_client_kwargs,
+                )
+            )
 
         self._oauth_version: OAuthVersion = oauth_version
         self._rate_limit_target: RateLimitTarget = rate_limit_target
         self._auth = auth
         self._session = session
-        self.timeout_seconds = timeout_seconds
 
         if rate_limit_manager is None:
             rate_limit_manager = NoOperationRateLimitManager()
@@ -78,7 +95,6 @@ class RequestAsyncRealClient(RequestAsyncClient):
             auth=self._auth if auth else None,
             method=endpoint.method,
             params=_remove_none_field(query),
-            timeout=self.timeout_seconds,
         )
 
         return _parse_response(
@@ -111,7 +127,6 @@ class RequestAsyncRealClient(RequestAsyncClient):
             headers=headers,
             params=_remove_none_field(query),
             json=_remove_none_field(body),
-            timeout=self.timeout_seconds,
         )
 
         if response_body_type is str:
@@ -145,7 +160,6 @@ class RequestAsyncRealClient(RequestAsyncClient):
             method=endpoint.method,
             headers=headers,
             params=_remove_none_field(query),
-            timeout=self.timeout_seconds,
         )
 
         if response_body_type is str:

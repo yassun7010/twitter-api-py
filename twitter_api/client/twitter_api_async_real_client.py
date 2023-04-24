@@ -1,4 +1,4 @@
-from typing import Optional, Self
+from typing import Mapping, Optional, Self
 
 from authlib.integrations.httpx_client.oauth1_client import OAuth1Auth
 from authlib.integrations.httpx_client.oauth2_client import OAuth2Auth
@@ -9,6 +9,7 @@ from twitter_api.client.request.request_real_client import RequestRealClient
 from twitter_api.client.twitter_api_async_client import TwitterApiAsyncClient
 from twitter_api.client.twitter_api_real_client import TwitterApiRealClient
 from twitter_api.rate_limit.manager.rate_limit_manager import RateLimitManager
+from twitter_api.rate_limit.rate_limit import rate_limit
 from twitter_api.types.oauth import (
     AccessSecret,
     AccessToken,
@@ -18,6 +19,7 @@ from twitter_api.types.oauth import (
     ClientId,
     ClientSecret,
 )
+from twitter_api.utils import httpx
 
 from .request.request_client import RequestClient
 
@@ -44,6 +46,13 @@ class TwitterApiAsyncRealClient(TwitterApiAsyncClient):
         cls,
         bearer_token: str,
         rate_limit_manager: Optional[RateLimitManager] = None,
+        event_hooks: Optional[httpx.EventHook] = None,
+        limits: Optional[httpx.Limits] = None,
+        mounts: Optional[Mapping[str, httpx.BaseTransport]] = None,
+        proxies: Optional[httpx.ProxiesTypes] = None,
+        timeout: Optional[httpx.TimeoutTypes] = None,
+        transport: Optional[httpx.BaseTransport] = None,
+        verify: Optional[httpx.VerifyTypes] = None,
     ):
         return TwitterApiAsyncRealClient(
             RequestAsyncRealClient(
@@ -56,6 +65,13 @@ class TwitterApiAsyncRealClient(TwitterApiAsyncClient):
                 oauth_version="2.0",
                 rate_limit_target="app",
                 rate_limit_manager=rate_limit_manager,
+                event_hooks=event_hooks,
+                limits=limits,
+                mounts=mounts,
+                proxies=proxies,
+                timeout=timeout,
+                transport=transport,
+                verify=verify,
             ),
         )
 
@@ -66,6 +82,13 @@ class TwitterApiAsyncRealClient(TwitterApiAsyncClient):
         api_key: ApiKey,
         api_secret: ApiSecret,
         rate_limit_manager: Optional[RateLimitManager] = None,
+        event_hooks: Optional[httpx.EventHook] = None,
+        limits: Optional[httpx.Limits] = None,
+        mounts: Optional[Mapping[str, httpx.BaseTransport]] = None,
+        proxies: Optional[httpx.ProxiesTypes] = None,
+        timeout: Optional[httpx.TimeoutTypes] = None,
+        transport: Optional[httpx.BaseTransport] = None,
+        verify: Optional[httpx.VerifyTypes] = None,
     ):
         with TwitterApiRealClient(
             RequestRealClient(
@@ -73,6 +96,13 @@ class TwitterApiAsyncRealClient(TwitterApiAsyncClient):
                 oauth_version="2.0",
                 rate_limit_target="app",
                 rate_limit_manager=rate_limit_manager,
+                event_hooks=event_hooks,
+                limits=limits,
+                mounts=mounts,
+                proxies=proxies,
+                timeout=timeout,
+                transport=transport,
+                verify=verify,
             ),
         ) as client:
             access_token = (
@@ -95,6 +125,14 @@ class TwitterApiAsyncRealClient(TwitterApiAsyncClient):
         client_secret: ClientSecret,
         callback_url: CallbackUrl,
         scope: list[Scope],
+        rate_limit_manager: Optional[RateLimitManager] = None,
+        event_hooks: Optional[httpx.EventHook] = None,
+        limits: Optional[httpx.Limits] = None,
+        mounts: Optional[Mapping[str, httpx.BaseTransport]] = None,
+        proxies: Optional[httpx.ProxiesTypes] = None,
+        timeout: Optional[httpx.TimeoutTypes] = None,
+        transport: Optional[httpx.BaseTransport] = None,
+        verify: Optional[httpx.VerifyTypes] = None,
     ):
         from twitter_api.client.oauth_flow.twitter_oauth2_authorization_client import (
             TwitterOAuth2AuthorizeClient,
@@ -108,6 +146,14 @@ class TwitterApiAsyncRealClient(TwitterApiAsyncClient):
             client_secret=client_secret,
             callback_url=callback_url,
             scope=scope,
+            rate_limit_manager=rate_limit_manager,
+            event_hooks=event_hooks,
+            limits=limits,
+            mounts=mounts,
+            proxies=proxies,
+            timeout=timeout,
+            transport=transport,
+            verify=verify,
         )
 
         return TwitterOAuth2AuthorizeClient(session)
@@ -121,6 +167,13 @@ class TwitterApiAsyncRealClient(TwitterApiAsyncClient):
         access_token: AccessToken,
         access_secret: AccessSecret,
         rate_limit_manager: Optional[RateLimitManager] = None,
+        event_hooks: Optional[httpx.EventHook] = None,
+        limits: Optional[httpx.Limits] = None,
+        mounts: Optional[Mapping[str, httpx.BaseTransport]] = None,
+        proxies: Optional[httpx.ProxiesTypes] = None,
+        timeout: Optional[httpx.TimeoutTypes] = None,
+        transport: Optional[httpx.BaseTransport] = None,
+        verify: Optional[httpx.VerifyTypes] = None,
     ):
         return TwitterApiAsyncRealClient(
             RequestAsyncRealClient(
@@ -134,6 +187,13 @@ class TwitterApiAsyncRealClient(TwitterApiAsyncClient):
                 oauth_version="1.0a",
                 rate_limit_target="user",
                 rate_limit_manager=rate_limit_manager,
+                event_hooks=event_hooks,
+                limits=limits,
+                mounts=mounts,
+                proxies=proxies,
+                timeout=timeout,
+                transport=transport,
+                verify=verify,
             ),
         )
 
@@ -145,6 +205,13 @@ class TwitterApiAsyncRealClient(TwitterApiAsyncClient):
         api_secret: ApiSecret,
         callback_url: CallbackUrl,
         rate_limit_manager: Optional[RateLimitManager] = None,
+        event_hooks: Optional[httpx.EventHook] = None,
+        limits: Optional[httpx.Limits] = None,
+        mounts: Optional[Mapping[str, httpx.BaseTransport]] = None,
+        proxies: Optional[httpx.ProxiesTypes] = None,
+        timeout: Optional[httpx.TimeoutTypes] = None,
+        transport: Optional[httpx.BaseTransport] = None,
+        verify: Optional[httpx.VerifyTypes] = None,
     ):
         from twitter_api.client.oauth_flow.twitter_oauth1_request_token_client import (
             TwitterOAuth1RequestTokenClient,
@@ -158,6 +225,13 @@ class TwitterApiAsyncRealClient(TwitterApiAsyncClient):
             api_secret=api_secret,
             callback_url=callback_url,
             rate_limit_manager=rate_limit_manager,
+            event_hooks=event_hooks,
+            limits=limits,
+            mounts=mounts,
+            proxies=proxies,
+            timeout=timeout,
+            transport=transport,
+            verify=verify,
         )
 
         return TwitterOAuth1RequestTokenClient(session)

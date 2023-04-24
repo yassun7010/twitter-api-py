@@ -1,4 +1,4 @@
-from typing import Optional
+from typing import Mapping, Optional
 
 from authlib.integrations.httpx_client.oauth1_client import OAuth1Client
 
@@ -27,6 +27,7 @@ from twitter_api.types.oauth import (
     ApiSecret,
     CallbackUrl,
 )
+from twitter_api.utils import httpx
 
 
 class TwitterOAuth1RealSession(TwitterOAuth1Session):
@@ -36,7 +37,14 @@ class TwitterOAuth1RealSession(TwitterOAuth1Session):
         api_key: ApiKey,
         api_secret: ApiSecret,
         callback_url: CallbackUrl,
-        rate_limit_manager: Optional[RateLimitManager] = None,
+        rate_limit_manager: Optional[RateLimitManager],
+        event_hooks: Optional[httpx.EventHook],
+        limits: Optional[httpx.Limits],
+        mounts: Optional[Mapping[str, httpx.BaseTransport]],
+        proxies: Optional[httpx.ProxiesTypes],
+        timeout: Optional[httpx.TimeoutTypes],
+        transport: Optional[httpx.BaseTransport],
+        verify: Optional[httpx.VerifyTypes],
     ) -> None:
         self._api_key = api_key
         self._api_secret = api_secret
@@ -44,8 +52,22 @@ class TwitterOAuth1RealSession(TwitterOAuth1Session):
             client_id=api_key,
             client_secret=api_secret,
             redirect_uri=callback_url,
+            event_hooks=event_hooks,
+            limits=limits,
+            mounts=mounts,
+            proxies=proxies,
+            timeout=timeout,
+            transport=transport,
+            verify=verify,
         )
         self._rate_limit_manager = rate_limit_manager
+        self._event_hooks = event_hooks
+        self._limits = limits
+        self._mounts = mounts
+        self._proxies = proxies
+        self._timeout = timeout
+        self._transport = transport
+        self._verify = verify
 
     def request_token(self) -> TwitterOAuth1AuthorizeClient:
         url: Oauth1RequestTokenUrl = "https://api.twitter.com/oauth/request_token"
@@ -95,4 +117,11 @@ class TwitterOAuth1RealSession(TwitterOAuth1Session):
             access_token=access_token,
             access_secret=access_secret,
             rate_limit_manager=self._rate_limit_manager,
+            event_hooks=self._event_hooks,
+            limits=self._limits,
+            mounts=self._mounts,
+            proxies=self._proxies,
+            timeout=self._timeout,
+            transport=self._transport,
+            verify=self._verify,
         )

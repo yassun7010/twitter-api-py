@@ -1,6 +1,6 @@
 import os
 from abc import abstractmethod
-from typing import Optional, Self, Union, overload
+from typing import Mapping, Optional, Self, Union, overload
 
 from twitter_api.api.resources.oauth2_invalidate_token import (
     AsyncOauth2InvalidateTokenResources,
@@ -81,6 +81,7 @@ from twitter_api.types.oauth import (
     ClientSecret,
     Env,
 )
+from twitter_api.utils import httpx
 
 
 class TwitterApiAsyncClient(TwitterApiClient):
@@ -344,6 +345,13 @@ class TwitterApiAsyncClient(TwitterApiClient):
         bearer_token: str,
         *,
         rate_limit_manager: Optional[RateLimitManager] = None,
+        event_hooks: Optional[httpx.EventHook] = None,
+        limits: Optional[httpx.Limits] = None,
+        mounts: Optional[Mapping[str, httpx.BaseTransport]] = None,
+        proxies: Optional[httpx.ProxiesTypes] = None,
+        timeout: Optional[httpx.TimeoutTypes] = None,
+        transport: Optional[httpx.BaseTransport] = None,
+        verify: Optional[httpx.VerifyTypes] = None,
     ) -> Self:
         """OAuth 2.0 の Bearer 認証を用いてクライアントを作成する。"""
 
@@ -354,6 +362,13 @@ class TwitterApiAsyncClient(TwitterApiClient):
         return TwitterApiAsyncRealClient.from_oauth2_bearer_token(
             bearer_token,
             rate_limit_manager=rate_limit_manager,
+            event_hooks=event_hooks,
+            limits=limits,
+            mounts=mounts,
+            proxies=proxies,
+            timeout=timeout,
+            transport=transport,
+            verify=verify,
         )
 
     @classmethod
@@ -361,12 +376,26 @@ class TwitterApiAsyncClient(TwitterApiClient):
         cls,
         bearer_token_env="BEARER_TOEKN",
         rate_limit_manager: Optional[RateLimitManager] = None,
+        event_hooks: Optional[httpx.EventHook] = None,
+        limits: Optional[httpx.Limits] = None,
+        mounts: Optional[Mapping[str, httpx.BaseTransport]] = None,
+        proxies: Optional[httpx.ProxiesTypes] = None,
+        timeout: Optional[httpx.TimeoutTypes] = None,
+        transport: Optional[httpx.BaseTransport] = None,
+        verify: Optional[httpx.VerifyTypes] = None,
     ) -> Self:
         """環境変数から、 OAuth 2.0 の Bearer 認証を用いてクライアントを作成する。"""
 
         return cls.from_oauth2_bearer_token(
             cls._get_env(bearer_token_env),
             rate_limit_manager=rate_limit_manager,
+            event_hooks=event_hooks,
+            limits=limits,
+            mounts=mounts,
+            proxies=proxies,
+            timeout=timeout,
+            transport=transport,
+            verify=verify,
         )
 
     @classmethod
@@ -376,6 +405,13 @@ class TwitterApiAsyncClient(TwitterApiClient):
         api_key: ApiKey,
         api_secret: ApiSecret,
         rate_limit_manager: Optional[RateLimitManager] = None,
+        event_hooks: Optional[httpx.EventHook] = None,
+        limits: Optional[httpx.Limits] = None,
+        mounts: Optional[Mapping[str, httpx.BaseTransport]] = None,
+        proxies: Optional[httpx.ProxiesTypes] = None,
+        timeout: Optional[httpx.TimeoutTypes] = None,
+        transport: Optional[httpx.BaseTransport] = None,
+        verify: Optional[httpx.VerifyTypes] = None,
     ) -> Self:
         """OAuth 2.0 のアプリ認証を用いてクライアントを作成する。"""
 
@@ -387,6 +423,13 @@ class TwitterApiAsyncClient(TwitterApiClient):
             api_key=api_key,
             api_secret=api_secret,
             rate_limit_manager=rate_limit_manager,
+            event_hooks=event_hooks,
+            limits=limits,
+            mounts=mounts,
+            proxies=proxies,
+            timeout=timeout,
+            transport=transport,
+            verify=verify,
         )
 
     @classmethod
@@ -396,6 +439,13 @@ class TwitterApiAsyncClient(TwitterApiClient):
         api_key_env: Env[ApiKey] = "API_KEY",
         api_secret_env: Env[ApiSecret] = "API_SECRET",
         rate_limit_manager: Optional[RateLimitManager] = None,
+        event_hooks: Optional[httpx.EventHook] = None,
+        limits: Optional[httpx.Limits] = None,
+        mounts: Optional[Mapping[str, httpx.BaseTransport]] = None,
+        proxies: Optional[httpx.ProxiesTypes] = None,
+        timeout: Optional[httpx.TimeoutTypes] = None,
+        transport: Optional[httpx.BaseTransport] = None,
+        verify: Optional[httpx.VerifyTypes] = None,
     ) -> Self:
         """環境変数から、OAuth 2.0 のアプリ認証を用いてクライアントを作成する。"""
 
@@ -403,6 +453,13 @@ class TwitterApiAsyncClient(TwitterApiClient):
             api_key=cls._get_env(api_key_env),
             api_secret=cls._get_env(api_secret_env),
             rate_limit_manager=rate_limit_manager,
+            event_hooks=event_hooks,
+            limits=limits,
+            mounts=mounts,
+            proxies=proxies,
+            timeout=timeout,
+            transport=transport,
+            verify=verify,
         )
 
     @classmethod
@@ -413,6 +470,13 @@ class TwitterApiAsyncClient(TwitterApiClient):
         client_secret: ClientSecret,
         callback_url: CallbackUrl,
         scope: list[Scope],
+        event_hooks: Optional[httpx.EventHook] = None,
+        limits: Optional[httpx.Limits] = None,
+        mounts: Optional[Mapping[str, httpx.BaseTransport]] = None,
+        proxies: Optional[httpx.ProxiesTypes] = None,
+        timeout: Optional[httpx.TimeoutTypes] = None,
+        transport: Optional[httpx.BaseTransport] = None,
+        verify: Optional[httpx.VerifyTypes] = None,
     ):
         """
         OAuth 2.0 のユーザ認証を用いてクライアントを作成する。
@@ -425,6 +489,13 @@ class TwitterApiAsyncClient(TwitterApiClient):
             client_secret=client_secret,
             scope=scope,
             callback_url=callback_url,
+            event_hooks=event_hooks,
+            limits=limits,
+            mounts=mounts,
+            proxies=proxies,
+            timeout=timeout,
+            transport=transport,
+            verify=verify,
         )
 
     @classmethod
@@ -436,6 +507,13 @@ class TwitterApiAsyncClient(TwitterApiClient):
         client_secret_env: Env[ClientSecret] = "CLIENT_SECRET",
         callback_url_env: Env[CallbackUrl] = "CALLBACK_URL",
         callback_url: Optional[CallbackUrl] = None,
+        event_hooks: Optional[httpx.EventHook] = None,
+        limits: Optional[httpx.Limits] = None,
+        mounts: Optional[Mapping[str, httpx.BaseTransport]] = None,
+        proxies: Optional[httpx.ProxiesTypes] = None,
+        timeout: Optional[httpx.TimeoutTypes] = None,
+        transport: Optional[httpx.BaseTransport] = None,
+        verify: Optional[httpx.VerifyTypes] = None,
     ):
         """
         環境変数から、 OAuth 2.0 のユーザ認証を用いてクライアントを作成する。
@@ -455,6 +533,13 @@ class TwitterApiAsyncClient(TwitterApiClient):
                 if callback_url is not None
                 else cls._get_env(callback_url_env)
             ),
+            event_hooks=event_hooks,
+            limits=limits,
+            mounts=mounts,
+            proxies=proxies,
+            timeout=timeout,
+            transport=transport,
+            verify=verify,
         )
 
     @classmethod
@@ -466,6 +551,13 @@ class TwitterApiAsyncClient(TwitterApiClient):
         access_token: AccessToken,
         access_secret: AccessSecret,
         rate_limit_manager: Optional[RateLimitManager] = None,
+        event_hooks: Optional[httpx.EventHook] = None,
+        limits: Optional[httpx.Limits] = None,
+        mounts: Optional[Mapping[str, httpx.BaseTransport]] = None,
+        proxies: Optional[httpx.ProxiesTypes] = None,
+        timeout: Optional[httpx.TimeoutTypes] = None,
+        transport: Optional[httpx.BaseTransport] = None,
+        verify: Optional[httpx.VerifyTypes] = None,
     ) -> Self:
         """OAuth1.0a のアプリ認証を用いてクライアントを作成する。"""
 
@@ -479,6 +571,13 @@ class TwitterApiAsyncClient(TwitterApiClient):
             access_token=access_token,
             access_secret=access_secret,
             rate_limit_manager=rate_limit_manager,
+            event_hooks=event_hooks,
+            limits=limits,
+            mounts=mounts,
+            proxies=proxies,
+            timeout=timeout,
+            transport=transport,
+            verify=verify,
         )
 
     @classmethod
@@ -490,6 +589,13 @@ class TwitterApiAsyncClient(TwitterApiClient):
         access_token_env: Env[AccessToken] = "ACCESS_TOKEN",
         access_secret_env: Env[AccessSecret] = "ACCESS_SECRET",
         rate_limit_manager: Optional[RateLimitManager] = None,
+        event_hooks: Optional[httpx.EventHook] = None,
+        limits: Optional[httpx.Limits] = None,
+        mounts: Optional[Mapping[str, httpx.BaseTransport]] = None,
+        proxies: Optional[httpx.ProxiesTypes] = None,
+        timeout: Optional[httpx.TimeoutTypes] = None,
+        transport: Optional[httpx.BaseTransport] = None,
+        verify: Optional[httpx.VerifyTypes] = None,
     ) -> Self:
         """環境変数から、OAuth1.0a のアプリ認証を用いてクライアントを作成する。"""
 
@@ -499,6 +605,13 @@ class TwitterApiAsyncClient(TwitterApiClient):
             access_token=cls._get_env(access_token_env),
             access_secret=cls._get_env(access_secret_env),
             rate_limit_manager=rate_limit_manager,
+            event_hooks=event_hooks,
+            limits=limits,
+            mounts=mounts,
+            proxies=proxies,
+            timeout=timeout,
+            transport=transport,
+            verify=verify,
         )
 
     @classmethod
@@ -508,6 +621,13 @@ class TwitterApiAsyncClient(TwitterApiClient):
         api_key: ApiKey,
         api_secret: ApiSecret,
         callback_url: CallbackUrl,
+        event_hooks: Optional[httpx.EventHook] = None,
+        limits: Optional[httpx.Limits] = None,
+        mounts: Optional[Mapping[str, httpx.BaseTransport]] = None,
+        proxies: Optional[httpx.ProxiesTypes] = None,
+        timeout: Optional[httpx.TimeoutTypes] = None,
+        transport: Optional[httpx.BaseTransport] = None,
+        verify: Optional[httpx.VerifyTypes] = None,
     ):
         """
         OAuth 1.0a のユーザ認証を用いてクライアントを作成する。
@@ -519,6 +639,13 @@ class TwitterApiAsyncClient(TwitterApiClient):
             api_key=api_key,
             api_secret=api_secret,
             callback_url=callback_url,
+            event_hooks=event_hooks,
+            limits=limits,
+            mounts=mounts,
+            proxies=proxies,
+            timeout=timeout,
+            transport=transport,
+            verify=verify,
         )
 
     @classmethod
@@ -529,6 +656,13 @@ class TwitterApiAsyncClient(TwitterApiClient):
         api_secret_env: Env[ApiSecret] = "API_SECRET",
         callback_url_env: Env[CallbackUrl] = "CALLBACK_URL",
         callback_url: Optional[CallbackUrl] = None,
+        event_hooks: Optional[httpx.EventHook] = None,
+        limits: Optional[httpx.Limits] = None,
+        mounts: Optional[Mapping[str, httpx.BaseTransport]] = None,
+        proxies: Optional[httpx.ProxiesTypes] = None,
+        timeout: Optional[httpx.TimeoutTypes] = None,
+        transport: Optional[httpx.BaseTransport] = None,
+        verify: Optional[httpx.VerifyTypes] = None,
     ):
         """
         環境変数から、 OAuth 1.0a のユーザ認証を用いてクライアントを作成する。
@@ -544,6 +678,13 @@ class TwitterApiAsyncClient(TwitterApiClient):
                 if callback_url is not None
                 else cls._get_env(callback_url_env)
             ),
+            event_hooks=event_hooks,
+            limits=limits,
+            mounts=mounts,
+            proxies=proxies,
+            timeout=timeout,
+            transport=transport,
+            verify=verify,
         )
 
     async def aclose(self) -> None:
