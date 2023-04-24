@@ -344,12 +344,12 @@ class TwitterApiClient(Chainable, metaclass=ABCMeta):
         *,
         rate_limit_manager: Optional[RateLimitManager] = None,
         event_hooks: Optional[httpx.EventHook] = None,
-        limits: Optional[httpx.Limits] = None,
+        limits: httpx.Limits = httpx.DEFAULT_LIMITS,
         mounts: Optional[Mapping[str, httpx.BaseTransport]] = None,
         proxies: Optional[httpx.ProxiesTypes] = None,
-        timeout: Optional[httpx.TimeoutTypes] = None,
+        timeout: httpx.TimeoutTypes = httpx.DEFAULT_TIMEOUT_CONFIG,
         transport: Optional[httpx.BaseTransport] = None,
-        verify: Optional[httpx.VerifyTypes] = None,
+        verify: httpx.VerifyTypes = True,
     ) -> Self:
         """OAuth 2.0 の Bearer 認証を用いてクライアントを作成する。"""
 
@@ -373,12 +373,12 @@ class TwitterApiClient(Chainable, metaclass=ABCMeta):
         bearer_token_env="BEARER_TOEKN",
         rate_limit_manager: Optional[RateLimitManager] = None,
         event_hooks: Optional[httpx.EventHook] = None,
-        limits: Optional[httpx.Limits] = None,
+        limits: httpx.Limits = httpx.DEFAULT_LIMITS,
         mounts: Optional[Mapping[str, httpx.BaseTransport]] = None,
         proxies: Optional[httpx.ProxiesTypes] = None,
-        timeout: Optional[httpx.TimeoutTypes] = None,
+        timeout: httpx.TimeoutTypes = httpx.DEFAULT_TIMEOUT_CONFIG,
         transport: Optional[httpx.BaseTransport] = None,
-        verify: Optional[httpx.VerifyTypes] = None,
+        verify: httpx.VerifyTypes = True,
     ) -> Self:
         """環境変数から、 OAuth 2.0 の Bearer 認証を用いてクライアントを作成する。"""
 
@@ -402,12 +402,12 @@ class TwitterApiClient(Chainable, metaclass=ABCMeta):
         api_secret: ApiSecret,
         rate_limit_manager: Optional[RateLimitManager] = None,
         event_hooks: Optional[httpx.EventHook] = None,
-        limits: Optional[httpx.Limits] = None,
+        limits: httpx.Limits = httpx.DEFAULT_LIMITS,
         mounts: Optional[Mapping[str, httpx.BaseTransport]] = None,
         proxies: Optional[httpx.ProxiesTypes] = None,
-        timeout: Optional[httpx.TimeoutTypes] = None,
+        timeout: httpx.TimeoutTypes = httpx.DEFAULT_TIMEOUT_CONFIG,
         transport: Optional[httpx.BaseTransport] = None,
-        verify: Optional[httpx.VerifyTypes] = None,
+        verify: httpx.VerifyTypes = True,
     ) -> Self:
         """OAuth 2.0 のアプリ認証を用いてクライアントを作成する。"""
 
@@ -434,12 +434,12 @@ class TwitterApiClient(Chainable, metaclass=ABCMeta):
         api_secret_env: Env[ApiSecret] = "API_SECRET",
         rate_limit_manager: Optional[RateLimitManager] = None,
         event_hooks: Optional[httpx.EventHook] = None,
-        limits: Optional[httpx.Limits] = None,
+        limits: httpx.Limits = httpx.DEFAULT_LIMITS,
         mounts: Optional[Mapping[str, httpx.BaseTransport]] = None,
         proxies: Optional[httpx.ProxiesTypes] = None,
-        timeout: Optional[httpx.TimeoutTypes] = None,
+        timeout: httpx.TimeoutTypes = httpx.DEFAULT_TIMEOUT_CONFIG,
         transport: Optional[httpx.BaseTransport] = None,
-        verify: Optional[httpx.VerifyTypes] = None,
+        verify: httpx.VerifyTypes = True,
     ) -> Self:
         """環境変数から、OAuth 2.0 のアプリ認証を用いてクライアントを作成する。"""
 
@@ -466,12 +466,12 @@ class TwitterApiClient(Chainable, metaclass=ABCMeta):
         scope: list[Scope],
         rate_limit_manager: Optional[RateLimitManager] = None,
         event_hooks: Optional[httpx.EventHook] = None,
-        limits: Optional[httpx.Limits] = None,
+        limits: httpx.Limits = httpx.DEFAULT_LIMITS,
         mounts: Optional[Mapping[str, httpx.BaseTransport]] = None,
         proxies: Optional[httpx.ProxiesTypes] = None,
-        timeout: Optional[httpx.TimeoutTypes] = None,
+        timeout: httpx.TimeoutTypes = httpx.DEFAULT_TIMEOUT_CONFIG,
         transport: Optional[httpx.BaseTransport] = None,
-        verify: Optional[httpx.VerifyTypes] = None,
+        verify: httpx.VerifyTypes = True,
     ):
         """
         OAuth 2.0 のユーザ認証を用いてクライアントを作成する。
@@ -505,12 +505,12 @@ class TwitterApiClient(Chainable, metaclass=ABCMeta):
         callback_url: Optional[CallbackUrl] = None,
         rate_limit_manager: Optional[RateLimitManager] = None,
         event_hooks: Optional[httpx.EventHook] = None,
-        limits: Optional[httpx.Limits] = None,
+        limits: httpx.Limits = httpx.DEFAULT_LIMITS,
         mounts: Optional[Mapping[str, httpx.BaseTransport]] = None,
         proxies: Optional[httpx.ProxiesTypes] = None,
-        timeout: Optional[httpx.TimeoutTypes] = None,
+        timeout: httpx.TimeoutTypes = httpx.DEFAULT_TIMEOUT_CONFIG,
         transport: Optional[httpx.BaseTransport] = None,
-        verify: Optional[httpx.VerifyTypes] = None,
+        verify: httpx.VerifyTypes = True,
     ):
         """
         環境変数から、 OAuth 2.0 のユーザ認証を用いてクライアントを作成する。
@@ -550,12 +550,12 @@ class TwitterApiClient(Chainable, metaclass=ABCMeta):
         access_secret: AccessSecret,
         rate_limit_manager: Optional[RateLimitManager] = None,
         event_hooks: Optional[httpx.EventHook] = None,
-        limits: Optional[httpx.Limits] = None,
+        limits: httpx.Limits = httpx.DEFAULT_LIMITS,
         mounts: Optional[Mapping[str, httpx.BaseTransport]] = None,
         proxies: Optional[httpx.ProxiesTypes] = None,
-        timeout: Optional[httpx.TimeoutTypes] = None,
+        timeout: httpx.TimeoutTypes = httpx.DEFAULT_TIMEOUT_CONFIG,
         transport: Optional[httpx.BaseTransport] = None,
-        verify: Optional[httpx.VerifyTypes] = None,
+        verify: httpx.VerifyTypes = True,
     ) -> Self:
         """OAuth1.0a のアプリ認証を用いてクライアントを作成する。"""
 
@@ -586,12 +586,12 @@ class TwitterApiClient(Chainable, metaclass=ABCMeta):
         access_secret_env: Env[AccessSecret] = "ACCESS_SECRET",
         rate_limit_manager: Optional[RateLimitManager] = None,
         event_hooks: Optional[httpx.EventHook] = None,
-        limits: Optional[httpx.Limits] = None,
+        limits: httpx.Limits = httpx.DEFAULT_LIMITS,
         mounts: Optional[Mapping[str, httpx.BaseTransport]] = None,
         proxies: Optional[httpx.ProxiesTypes] = None,
-        timeout: Optional[httpx.TimeoutTypes] = None,
+        timeout: httpx.TimeoutTypes = httpx.DEFAULT_TIMEOUT_CONFIG,
         transport: Optional[httpx.BaseTransport] = None,
-        verify: Optional[httpx.VerifyTypes] = None,
+        verify: httpx.VerifyTypes = True,
     ) -> Self:
         """環境変数から、OAuth1.0a のアプリ認証を用いてクライアントを作成する。"""
 
@@ -619,12 +619,12 @@ class TwitterApiClient(Chainable, metaclass=ABCMeta):
         callback_url: CallbackUrl,
         rate_limit_manager: Optional[RateLimitManager] = None,
         event_hooks: Optional[httpx.EventHook] = None,
-        limits: Optional[httpx.Limits] = None,
+        limits: httpx.Limits = httpx.DEFAULT_LIMITS,
         mounts: Optional[Mapping[str, httpx.BaseTransport]] = None,
         proxies: Optional[httpx.ProxiesTypes] = None,
-        timeout: Optional[httpx.TimeoutTypes] = None,
+        timeout: httpx.TimeoutTypes = httpx.DEFAULT_TIMEOUT_CONFIG,
         transport: Optional[httpx.BaseTransport] = None,
-        verify: Optional[httpx.VerifyTypes] = None,
+        verify: httpx.VerifyTypes = True,
     ):
         """
         OAuth 1.0a のユーザ認証を用いてクライアントを作成する。
@@ -656,12 +656,12 @@ class TwitterApiClient(Chainable, metaclass=ABCMeta):
         callback_url: Optional[CallbackUrl] = None,
         rate_limit_manager: Optional[RateLimitManager] = None,
         event_hooks: Optional[httpx.EventHook] = None,
-        limits: Optional[httpx.Limits] = None,
+        limits: httpx.Limits = httpx.DEFAULT_LIMITS,
         mounts: Optional[Mapping[str, httpx.BaseTransport]] = None,
         proxies: Optional[httpx.ProxiesTypes] = None,
-        timeout: Optional[httpx.TimeoutTypes] = None,
+        timeout: httpx.TimeoutTypes = httpx.DEFAULT_TIMEOUT_CONFIG,
         transport: Optional[httpx.BaseTransport] = None,
-        verify: Optional[httpx.VerifyTypes] = None,
+        verify: httpx.VerifyTypes = True,
     ):
         """
         環境変数から、 OAuth 1.0a のユーザ認証を用いてクライアントを作成する。

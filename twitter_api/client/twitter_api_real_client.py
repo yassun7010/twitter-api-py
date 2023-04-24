@@ -47,12 +47,12 @@ class TwitterApiRealClient(TwitterApiClient):
         bearer_token: str,
         rate_limit_manager: Optional[RateLimitManager] = None,
         event_hooks: Optional[httpx.EventHook] = None,
-        limits: Optional[httpx.Limits] = None,
+        limits: httpx.Limits = httpx.DEFAULT_LIMITS,
         mounts: Optional[Mapping[str, httpx.BaseTransport]] = None,
         proxies: Optional[httpx.ProxiesTypes] = None,
-        timeout: Optional[httpx.TimeoutTypes] = None,
+        timeout: httpx.TimeoutTypes = httpx.DEFAULT_TIMEOUT_CONFIG,
         transport: Optional[httpx.BaseTransport] = None,
-        verify: Optional[httpx.VerifyTypes] = None,
+        verify: httpx.VerifyTypes = True,
     ):
         return TwitterApiRealClient(
             RequestRealClient(
@@ -83,12 +83,12 @@ class TwitterApiRealClient(TwitterApiClient):
         api_secret: ApiSecret,
         rate_limit_manager: Optional[RateLimitManager] = None,
         event_hooks: Optional[httpx.EventHook] = None,
-        limits: Optional[httpx.Limits] = None,
+        limits: httpx.Limits = httpx.DEFAULT_LIMITS,
         mounts: Optional[Mapping[str, httpx.BaseTransport]] = None,
         proxies: Optional[httpx.ProxiesTypes] = None,
-        timeout: Optional[httpx.TimeoutTypes] = None,
+        timeout: httpx.TimeoutTypes = httpx.DEFAULT_TIMEOUT_CONFIG,
         transport: Optional[httpx.BaseTransport] = None,
-        verify: Optional[httpx.VerifyTypes] = None,
+        verify: httpx.VerifyTypes = True,
     ):
         with TwitterApiRealClient(
             RequestRealClient(
@@ -127,12 +127,12 @@ class TwitterApiRealClient(TwitterApiClient):
         scope: list[Scope],
         rate_limit_manager: Optional[RateLimitManager] = None,
         event_hooks: Optional[httpx.EventHook] = None,
-        limits: Optional[httpx.Limits] = None,
+        limits: httpx.Limits = httpx.DEFAULT_LIMITS,
         mounts: Optional[Mapping[str, httpx.BaseTransport]] = None,
         proxies: Optional[httpx.ProxiesTypes] = None,
-        timeout: Optional[httpx.TimeoutTypes] = None,
+        timeout: httpx.TimeoutTypes = httpx.DEFAULT_TIMEOUT_CONFIG,
         transport: Optional[httpx.BaseTransport] = None,
-        verify: Optional[httpx.VerifyTypes] = None,
+        verify: httpx.VerifyTypes = True,
     ):
         from twitter_api.client.oauth_flow.twitter_oauth2_authorization_client import (
             TwitterOAuth2AuthorizeClient,
@@ -168,12 +168,12 @@ class TwitterApiRealClient(TwitterApiClient):
         access_secret: AccessSecret,
         rate_limit_manager: Optional[RateLimitManager] = None,
         event_hooks: Optional[httpx.EventHook] = None,
-        limits: Optional[httpx.Limits] = None,
+        limits: httpx.Limits = httpx.DEFAULT_LIMITS,
         mounts: Optional[Mapping[str, httpx.BaseTransport]] = None,
         proxies: Optional[httpx.ProxiesTypes] = None,
-        timeout: Optional[httpx.TimeoutTypes] = None,
+        timeout: httpx.TimeoutTypes = httpx.DEFAULT_TIMEOUT_CONFIG,
         transport: Optional[httpx.BaseTransport] = None,
-        verify: Optional[httpx.VerifyTypes] = None,
+        verify: httpx.VerifyTypes = True,
     ):
         return TwitterApiRealClient(
             RequestRealClient(
@@ -206,12 +206,12 @@ class TwitterApiRealClient(TwitterApiClient):
         callback_url: CallbackUrl,
         rate_limit_manager: Optional[RateLimitManager] = None,
         event_hooks: Optional[httpx.EventHook] = None,
-        limits: Optional[httpx.Limits] = None,
+        limits: httpx.Limits = httpx.DEFAULT_LIMITS,
         mounts: Optional[Mapping[str, httpx.BaseTransport]] = None,
         proxies: Optional[httpx.ProxiesTypes] = None,
-        timeout: Optional[httpx.TimeoutTypes] = None,
+        timeout: httpx.TimeoutTypes = httpx.DEFAULT_TIMEOUT_CONFIG,
         transport: Optional[httpx.BaseTransport] = None,
-        verify: Optional[httpx.VerifyTypes] = None,
+        verify: httpx.VerifyTypes = True,
     ):
         from twitter_api.client.oauth_session.twitter_oauth1_real_session import (
             TwitterOAuth1RealSession,

@@ -48,12 +48,12 @@ class TwitterOAuth2AccessTokenClient(Chainable):
         code_verifier: str,
         rate_limit_manager: Optional[RateLimitManager] = None,
         event_hooks: Optional[httpx.EventHook] = None,
-        limits: Optional[httpx.Limits] = None,
+        limits: httpx.Limits = httpx.DEFAULT_LIMITS,
         mounts: Optional[Mapping[str, httpx.BaseTransport]] = None,
         proxies: Optional[httpx.ProxiesTypes] = None,
-        timeout: Optional[httpx.TimeoutTypes] = None,
+        timeout: httpx.TimeoutTypes = httpx.DEFAULT_TIMEOUT_CONFIG,
         transport: Optional[httpx.BaseTransport] = None,
-        verify: Optional[httpx.VerifyTypes] = None,
+        verify: httpx.VerifyTypes = True,
     ):
         session = TwitterOAuth2RealSession(
             client_id=client_id,

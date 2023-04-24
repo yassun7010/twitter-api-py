@@ -32,23 +32,25 @@ AsyncBaseTransport: TypeAlias = httpx.AsyncBaseTransport
 
 EventHook = Mapping[str, list[Callable[..., Any]]]
 
+DEFAULT_LIMITS = httpx._config.DEFAULT_LIMITS
+DEFAULT_TIMEOUT_CONFIG = httpx._config.DEFAULT_TIMEOUT_CONFIG
+
 
 def update_client_kwargs(
     event_hooks: Optional[EventHook],
-    limits: Optional[Limits],
+    limits: Limits,
     mounts: Optional[Mapping[str, BaseTransport | AsyncBaseTransport]],
     proxies: Optional[ProxiesTypes],
-    timeout: Optional[TimeoutTypes],
+    timeout: TimeoutTypes,
     transport: Optional[BaseTransport | AsyncBaseTransport],
-    verify: Optional[VerifyTypes],
+    verify: VerifyTypes,
     *,
     kwargs: dict[str, Any],
 ) -> dict:
     if event_hooks is not None:
         kwargs["event_hooks"] = event_hooks
 
-    if limits is not None:
-        kwargs["limits"] = limits
+    kwargs["limits"] = limits
 
     if mounts is not None:
         kwargs["mounts"] = mounts
@@ -56,13 +58,11 @@ def update_client_kwargs(
     if proxies is not None:
         kwargs["proxies"] = proxies
 
-    if timeout is not None:
-        kwargs["timeout"] = timeout
+    kwargs["timeout"] = timeout
 
     if transport is not None:
         kwargs["transport"] = transport
 
-    if verify is not None:
-        kwargs["verify"] = verify
+    kwargs["verify"] = verify
 
     return kwargs

@@ -26,12 +26,12 @@ class TwitterOAuth2RealSession(TwitterOAuth2Session):
         scope: Optional[list[Scope]],
         rate_limit_manager: Optional[RateLimitManager],
         event_hooks: Optional[httpx.EventHook],
-        limits: Optional[httpx.Limits],
+        limits: httpx.Limits,
         mounts: Optional[Mapping[str, httpx.BaseTransport]],
         proxies: Optional[httpx.ProxiesTypes],
-        timeout: Optional[httpx.TimeoutTypes],
+        timeout: httpx.TimeoutTypes,
         transport: Optional[httpx.BaseTransport],
-        verify: Optional[httpx.VerifyTypes],
+        verify: httpx.VerifyTypes,
     ) -> None:
         self._session = OAuth2Client(
             client_id=client_id,
