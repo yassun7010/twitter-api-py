@@ -103,7 +103,7 @@ from .request.request_mock_client import RequestMockClient
 from .twitter_api_client import TwitterApiClient
 
 
-class _TwitterApiMockClientBase:
+class _BaseTwitterApiMockClient:
     def __init__(
         self,
         *,
@@ -385,7 +385,7 @@ class _TwitterApiMockClientBase:
         return ""
 
 
-class TwitterApiMockClient(_TwitterApiMockClientBase, TwitterApiClient):
+class TwitterApiMockClient(_BaseTwitterApiMockClient, TwitterApiClient):
     """Twitter API V2 をモックするためのクライアント"""
 
     @classmethod

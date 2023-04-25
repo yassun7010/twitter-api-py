@@ -35,7 +35,7 @@ class PostV2TweetsReply(TypedDict):
     in_reply_to_tweet_id: list[TweetId]
 
 
-class _PostV2TweetsRequestBodyBase(TypedDict):
+class _BasePostV2TweetsRequestBody(TypedDict):
     direct_message_deep_link: NotRequired[Optional[Url]]
     for_super_followers_only: NotRequired[Optional[bool]]
     geo: NotRequired[Optional[PostV2TweetsGeospatialInformation]]
@@ -45,12 +45,12 @@ class _PostV2TweetsRequestBodyBase(TypedDict):
     reply_settings: NotRequired[Optional[Literal["mentionedUsers", "following"]]]
 
 
-class PostV2TweetsRequestBodyMedia(_PostV2TweetsRequestBodyBase):
+class PostV2TweetsRequestBodyMedia(_BasePostV2TweetsRequestBody):
     text: NotRequired[Optional[str]]
     media: PostV2TweetsMedia
 
 
-class PostV2TweetsRequestBodyText(_PostV2TweetsRequestBodyBase):
+class PostV2TweetsRequestBodyText(_BasePostV2TweetsRequestBody):
     text: str
     media: NotRequired[Optional[PostV2TweetsMedia]]
 

@@ -16,10 +16,10 @@ from twitter_api.types.oauth import (
     ClientSecret,
 )
 
-from .twitter_api_mock_client import _TwitterApiMockClientBase
+from .twitter_api_mock_client import _BaseTwitterApiMockClient
 
 
-class TwitterApiAsyncMockClient(_TwitterApiMockClientBase, TwitterApiAsyncClient):
+class TwitterApiAsyncMockClient(_BaseTwitterApiMockClient, TwitterApiAsyncClient):
     @classmethod
     def from_oauth2_bearer_token(
         cls,
