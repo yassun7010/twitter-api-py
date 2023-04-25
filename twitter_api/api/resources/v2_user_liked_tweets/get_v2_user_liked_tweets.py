@@ -151,7 +151,9 @@ class GetV2UserLikedTweetsResources(ApiResources):
 
         refer: https://developer.twitter.com/en/docs/twitter-api/tweets/likes/api-reference/get-users-id-liked_tweets
         """
-        return get_paging_response_body_iter_sync(partial(self.get, id), query)
+        return get_paging_response_body_iter_sync(
+            partial(self.get, id), query, "pagination_token"
+        )
 
     def get_collected_paging_response_body(
         self,
@@ -165,7 +167,9 @@ class GetV2UserLikedTweetsResources(ApiResources):
 
         refer: https://developer.twitter.com/en/docs/twitter-api/tweets/likes/api-reference/get-users-id-liked_tweets
         """
-        return get_collected_paging_response_body_sync(partial(self.get, id), query)
+        return get_collected_paging_response_body_sync(
+            partial(self.get, id), query, "pagination_token"
+        )
 
 
 class AsyncGetV2UserLikedTweetsResources(GetV2UserLikedTweetsResources):
@@ -181,7 +185,9 @@ class AsyncGetV2UserLikedTweetsResources(GetV2UserLikedTweetsResources):
         id: UserId,
         query: Optional[GetV2UserLikedTweetsQueryParameters] = None,
     ) -> AsyncGenerator[GetV2UserLikedTweetsResponseBody, None]:
-        return get_paging_response_body_iter_async(partial(self.get, id), query)
+        return get_paging_response_body_iter_async(
+            partial(self.get, id), query, "pagination_token"
+        )
 
     async def get_collected_paging_response_body(
         self,
@@ -189,5 +195,5 @@ class AsyncGetV2UserLikedTweetsResources(GetV2UserLikedTweetsResources):
         query: Optional[GetV2UserLikedTweetsQueryParameters] = None,
     ) -> GetV2UserLikedTweetsResponseBody:
         return await get_collected_paging_response_body_async(
-            partial(self.get, id), query
+            partial(self.get, id), query, "pagination_token"
         )

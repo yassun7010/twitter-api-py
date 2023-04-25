@@ -15,6 +15,10 @@ from twitter_api.api.resources.v2_dm_conversations import (
     V2DmConversationsResources,
     V2DmConversationsUrl,
 )
+from twitter_api.api.resources.v2_dm_conversations_with_participant_dm_events import (
+    V2DmConversationsWithParticipantDmEventsResources,
+    V2DmConversationsWithParticipantDmEventsUrl,
+)
 from twitter_api.api.resources.v2_dm_conversations_with_participant_messages import (
     V2DmConversationsWithParticipantMessagesResources,
     V2DmConversationsWithParticipantMessagesUrl,
@@ -208,6 +212,13 @@ class TwitterApiClient(Chainable, metaclass=ABCMeta):
     @overload
     def resource(
         self: Self,
+        url: V2DmConversationsWithParticipantDmEventsUrl,
+    ) -> V2DmConversationsWithParticipantDmEventsResources:
+        ...
+
+    @overload
+    def resource(
+        self: Self,
         url: V2DmConversationsWithParticipantMessagesUrl,
     ) -> V2DmConversationsWithParticipantMessagesResources:
         ...
@@ -245,6 +256,7 @@ class TwitterApiClient(Chainable, metaclass=ABCMeta):
             V2UserTweetsUrl,
             V2UsersUrl,
             V2UserUrl,
+            V2DmConversationsWithParticipantDmEventsUrl,
             V2DmConversationsWithParticipantMessagesUrl,
             V2DmConversationsUrl,
             V2DmConversationsMessagesUrl,
@@ -316,6 +328,13 @@ class TwitterApiClient(Chainable, metaclass=ABCMeta):
             )
         elif url == "https://api.twitter.com/2/users/:id/tweets":
             return V2UserTweetsResources(
+                self._request_client,
+            )
+        elif (
+            url
+            == "https://api.twitter.com/2/dm_conversations/with/:participant_id/dm_events"
+        ):
+            return V2DmConversationsWithParticipantDmEventsResources(
                 self._request_client,
             )
         elif (

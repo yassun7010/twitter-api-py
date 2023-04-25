@@ -126,7 +126,9 @@ class GetV2UserFollowersResources(ApiResources):
 
         refer: https://developer.twitter.com/en/docs/twitter-api/users/follows/api-reference/get-users-id-followers
         """
-        return get_paging_response_body_iter_sync(partial(self.get, id), query)
+        return get_paging_response_body_iter_sync(
+            partial(self.get, id), query, "pagination_token"
+        )
 
     def get_collected_paging_response_body(
         self,
@@ -140,7 +142,9 @@ class GetV2UserFollowersResources(ApiResources):
 
         refer: https://developer.twitter.com/en/docs/twitter-api/users/follows/api-reference/get-users-id-followers
         """
-        return get_collected_paging_response_body_sync(partial(self.get, id), query)
+        return get_collected_paging_response_body_sync(
+            partial(self.get, id), query, "pagination_token"
+        )
 
 
 class AsyncGetV2UserFollowersResources(GetV2UserFollowersResources):
@@ -156,7 +160,9 @@ class AsyncGetV2UserFollowersResources(GetV2UserFollowersResources):
         id: UserId,
         query: Optional[GetV2UserFollowersQueryParameters] = None,
     ) -> AsyncGenerator[GetV2UserFollowersResponseBody, None]:
-        return get_paging_response_body_iter_async(partial(self.get, id), query)
+        return get_paging_response_body_iter_async(
+            partial(self.get, id), query, "pagination_token"
+        )
 
     async def get_collected_paging_response_body(
         self,
@@ -164,5 +170,5 @@ class AsyncGetV2UserFollowersResources(GetV2UserFollowersResources):
         query: Optional[GetV2UserFollowersQueryParameters] = None,
     ) -> GetV2UserFollowersResponseBody:
         return await get_collected_paging_response_body_async(
-            partial(self.get, id), query
+            partial(self.get, id), query, "pagination_token"
         )

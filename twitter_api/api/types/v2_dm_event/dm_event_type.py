@@ -5,3 +5,9 @@ DmEventType = Literal[
     "ParticipantsJoin",
     "ParticipantsLeave",
 ]
+
+ALL_DM_EVENT_TYPES: list[DmEventType] = [
+    "MessageCreate",
+    "ParticipantsJoin",
+    "ParticipantsLeave",
+]

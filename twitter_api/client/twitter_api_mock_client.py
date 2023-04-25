@@ -18,6 +18,12 @@ from twitter_api.api.resources.v2_dm_conversations import V2DmConversationsUrl
 from twitter_api.api.resources.v2_dm_conversations.post_v2_dm_conversations import (
     PostV2DmConversationsResponseBody,
 )
+from twitter_api.api.resources.v2_dm_conversations_with_participant_dm_events import (
+    V2DmConversationsWithParticipantDmEventsUrl,
+)
+from twitter_api.api.resources.v2_dm_conversations_with_participant_dm_events.get_v2_dm_conversations_with_participant_dm_events import (
+    GetV2DmConversationsWithParticipantDmEventsResponseBody,
+)
 from twitter_api.api.resources.v2_dm_conversations_with_participant_messages import (
     V2DmConversationsWithParticipantMessagesUrl,
 )
@@ -248,6 +254,17 @@ class _BaseTwitterApiMockClient:
         url: V2UserTweetsUrl,
         response_body: Union[
             GetV2UserTweetsResponseBody,
+            TwitterApiError,
+        ],
+    ) -> Self:
+        ...
+
+    @overload
+    def inject_get_response_body(
+        self,
+        url: V2DmConversationsWithParticipantDmEventsUrl,
+        response_body: Union[
+            GetV2DmConversationsWithParticipantDmEventsResponseBody,
             TwitterApiError,
         ],
     ) -> Self:

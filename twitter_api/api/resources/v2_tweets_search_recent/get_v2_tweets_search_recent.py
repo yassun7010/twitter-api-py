@@ -100,7 +100,7 @@ class GetV2TweetsSearchRecentResources(ApiResources):
 
         refer: https://developer.twitter.com/en/docs/twitter-api/tweets/search/api-reference/get-tweets-search-recent
         """
-        return get_paging_response_body_iter_sync(self.get, query)
+        return get_paging_response_body_iter_sync(self.get, query, "next_token")
 
     def get_collected_paging_response_body(
         self, query: GetV2TweetsSearchRecentQueryParameters
@@ -112,7 +112,7 @@ class GetV2TweetsSearchRecentResources(ApiResources):
 
         refer: https://developer.twitter.com/en/docs/twitter-api/tweets/search/api-reference/get-tweets-search-recent
         """
-        return get_collected_paging_response_body_sync(self.get, query)
+        return get_collected_paging_response_body_sync(self.get, query, "next_token")
 
 
 class AsyncGetV2TweetsSearchRecentResources(GetV2TweetsSearchRecentResources):
@@ -124,9 +124,11 @@ class AsyncGetV2TweetsSearchRecentResources(GetV2TweetsSearchRecentResources):
     async def get_paging_response_body_iter(
         self, query: GetV2TweetsSearchRecentQueryParameters
     ) -> AsyncGenerator[GetV2TweetsSearchRecentResponseBody, None]:
-        return get_paging_response_body_iter_async(self.get, query)
+        return get_paging_response_body_iter_async(self.get, query, "next_token")
 
     async def get_collected_paging_response_body(
         self, query: GetV2TweetsSearchRecentQueryParameters
     ) -> GetV2TweetsSearchRecentResponseBody:
-        return await get_collected_paging_response_body_async(self.get, query)
+        return await get_collected_paging_response_body_async(
+            self.get, query, "next_token"
+        )

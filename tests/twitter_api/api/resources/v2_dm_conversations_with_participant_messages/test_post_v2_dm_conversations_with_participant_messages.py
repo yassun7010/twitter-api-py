@@ -13,7 +13,7 @@ from twitter_api.types.extra_permissive_model import get_extra_fields
 
 
 @pytest.mark.skipif(**synthetic_monitoring_is_disable())
-class TestPostV2DmConversationsWithMessages:
+class TestPostV2DmConversationsWithParticipantMessages:
     @pytest.mark.parametrize(
         "client_fixture_name,permit",
         [
@@ -44,7 +44,7 @@ class TestPostV2DmConversationsWithMessages:
             assert get_extra_fields(response_body) == {}
 
 
-class TestMockPostV2DmConversationsWithMessages:
+class TestMockPostV2DmConversationsWithParticipantMessages:
     @pytest.mark.parametrize(
         "json_filename",
         [
@@ -77,7 +77,7 @@ class TestMockPostV2DmConversationsWithMessages:
         ) == response_body
 
 
-class TestAsyncMockPostV2DmConversationsWithMessages:
+class TestAsyncMockPostV2DmConversationsWithParticipantMessages:
     @pytest.mark.asyncio
     async def test_async_mock_post_v2_dm_conversations_with_participant_messages(
         self,
