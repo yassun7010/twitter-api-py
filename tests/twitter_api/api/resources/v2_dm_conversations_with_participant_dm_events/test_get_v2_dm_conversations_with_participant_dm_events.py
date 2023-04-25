@@ -25,11 +25,11 @@ from twitter_api.types.extra_permissive_model import get_extra_fields
 @pytest.fixture
 def json_files() -> list[str]:
     return [
-        "v2_dm_conversations_with_participant_dm_events/response_01.json",
-        "v2_dm_conversations_with_participant_dm_events/response_02.json",
-        "v2_dm_conversations_with_participant_dm_events/response_03.json",
-        "v2_dm_conversations_with_participant_dm_events/response_04.json",
-        "v2_dm_conversations_with_participant_dm_events/response_05.json",
+        "get_v2_dm_conversations_with_participant_dm_events_response/response_01.json",
+        "get_v2_dm_conversations_with_participant_dm_events_response/response_02.json",
+        "get_v2_dm_conversations_with_participant_dm_events_response/response_03.json",
+        "get_v2_dm_conversations_with_participant_dm_events_response/response_04.json",
+        "get_v2_dm_conversations_with_participant_dm_events_response/response_05.json",
     ]
 
 
@@ -195,7 +195,7 @@ class TestAsyncMockGetV2DmConversationsWithParticipantDmEvents:
     ):
         response_body = GetV2DmConversationsWithParticipantDmEventsResponseBody.parse_file(
             json_test_data(
-                "v2_dm_conversations_with_participant_dm_events/collected_response.json"
+                "get_v2_dm_conversations_with_participant_dm_events_response/collected_response.json"
             )
         )
 
