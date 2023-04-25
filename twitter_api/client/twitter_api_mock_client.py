@@ -18,10 +18,10 @@ from twitter_api.api.resources.v2_dm_conversations import V2DmConversationsUrl
 from twitter_api.api.resources.v2_dm_conversations.post_v2_dm_conversations import (
     PostV2DmConversationsResponseBody,
 )
-from twitter_api.api.resources.v2_dm_conversations_with_messages import (
+from twitter_api.api.resources.v2_dm_conversations_with_participant_messages import (
     V2DmConversationsWithParticipantMessagesUrl,
 )
-from twitter_api.api.resources.v2_dm_conversations_with_messages.post_v2_dm_conversations_with_messages import (
+from twitter_api.api.resources.v2_dm_conversations_with_participant_messages.post_v2_dm_conversations_with_participant_messages import (
     PostV2DmConversationsWithParticipantMessagesResponseBody,
 )
 from twitter_api.api.resources.v2_tweet import V2TweetUrl

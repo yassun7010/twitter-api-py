@@ -3,7 +3,7 @@ import pytest
 from tests.conftest import synthetic_monitoring_is_disable
 from tests.contexts.spawn_real_client import spawn_real_client
 from tests.data import json_test_data
-from twitter_api.api.resources.v2_dm_conversations_with_messages.post_v2_dm_conversations_with_messages import (
+from twitter_api.api.resources.v2_dm_conversations_with_participant_messages.post_v2_dm_conversations_with_participant_messages import (
     PostV2DmConversationsWithParticipantMessagesResponseBody,
 )
 from twitter_api.api.types.v2_user.user_id import UserId
@@ -23,7 +23,7 @@ class TestPostV2DmConversationsWithMessages:
             ("oauth2_user_real_client", True),
         ],
     )
-    def test_post_v2_dm_conversations_with_messages(
+    def test_post_v2_dm_conversations_with_participant_messages(
         self,
         participant_id: UserId,
         client_fixture_name: str,
@@ -51,7 +51,7 @@ class TestMockPostV2DmConversationsWithMessages:
             "post_v2_dm_conversations_with_participant_messages.json",
         ],
     )
-    def test_mock_post_v2_dm_conversations_with_messages(
+    def test_mock_post_v2_dm_conversations_with_participant_messages(
         self,
         oauth2_app_mock_client: TwitterApiMockClient,
         json_filename: str,
@@ -79,7 +79,7 @@ class TestMockPostV2DmConversationsWithMessages:
 
 class TestAsyncMockPostV2DmConversationsWithMessages:
     @pytest.mark.asyncio
-    async def test_async_mock_post_v2_dm_conversations_with_messages(
+    async def test_async_mock_post_v2_dm_conversations_with_participant_messages(
         self,
         oauth2_app_async_mock_client: TwitterApiAsyncMockClient,
     ):
