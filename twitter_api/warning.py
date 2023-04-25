@@ -1,5 +1,5 @@
 from twitter_api.error import TwitterApiException
-from twitter_api.rate_limit.rate_limit_info import RateLimitInfo
+from twitter_api.rate_limit.types.rate_limit_info import RateLimitInfo
 
 
 class TwitterApiWarning(TwitterApiException):

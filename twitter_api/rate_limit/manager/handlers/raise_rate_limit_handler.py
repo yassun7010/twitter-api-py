@@ -3,7 +3,7 @@ from typing import AsyncGenerator, Generator
 
 from twitter_api.error import RateLimitOverError
 from twitter_api.rate_limit.manager.rate_limit_manager import RateLimitManager
-from twitter_api.rate_limit.rate_limit_info import RateLimitInfo
+from twitter_api.rate_limit.types.rate_limit_info import RateLimitInfo
 
 
 class RaiseRateLimitHandler(RateLimitManager):

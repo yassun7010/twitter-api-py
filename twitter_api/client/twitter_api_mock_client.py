@@ -83,7 +83,7 @@ from twitter_api.api.types.v2_scope import Scope
 from twitter_api.error import TwitterApiError
 from twitter_api.rate_limit.manager import DEFAULT_RATE_LIMIT_MANAGER
 from twitter_api.rate_limit.manager.rate_limit_manager import RateLimitManager
-from twitter_api.rate_limit.rate_limit_target import RateLimitTarget
+from twitter_api.rate_limit.types.rate_limit_target import RateLimitTarget
 from twitter_api.types import httpx
 from twitter_api.types.endpoint import Endpoint
 from twitter_api.types.oauth import (

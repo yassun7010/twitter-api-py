@@ -6,7 +6,7 @@ from twitter_api.rate_limit.manager.dict_rate_limit_manager import (
     DictRateLimitManager,
     RateLimitStatus,
 )
-from twitter_api.rate_limit.rate_limit_info import RateLimitInfo
+from twitter_api.rate_limit.types.rate_limit_info import RateLimitInfo
 from twitter_api.types.endpoint import Endpoint
 
 TOTAL_REQUESTS = 10

@@ -3,7 +3,7 @@ import pytest
 from twitter_api.rate_limit.manager.no_operation_rate_limit_manager import (
     NoOperationRateLimitManager,
 )
-from twitter_api.rate_limit.rate_limit_info import RateLimitInfo
+from twitter_api.rate_limit.types.rate_limit_info import RateLimitInfo
 from twitter_api.types.endpoint import Endpoint
 
 
