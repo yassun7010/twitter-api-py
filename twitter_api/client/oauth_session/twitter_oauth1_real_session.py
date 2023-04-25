@@ -52,16 +52,13 @@ class TwitterOAuth1RealSession(TwitterOAuth1Session):
             client_id=api_key,
             client_secret=api_secret,
             redirect_uri=callback_url,
-            **httpx.update_client_kwargs(
-                event_hooks,
-                limits,
-                mounts,
-                proxies,
-                timeout,
-                transport,
-                verify,
-                kwargs={},
-            ),
+            event_hooks=event_hooks,
+            limits=limits,
+            mounts=mounts,
+            proxies=proxies,
+            timeout=timeout,
+            transport=transport,
+            verify=verify,
         )
         self._rate_limit_manager = rate_limit_manager
         self._event_hooks = event_hooks

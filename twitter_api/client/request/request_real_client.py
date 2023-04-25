@@ -48,20 +48,16 @@ class RequestRealClient(RequestClient):
         transport: Optional[httpx.BaseTransport],
         verify: httpx.VerifyTypes,
         session: Optional[httpx.Client] = None,
-        **httpx_client_kwargs,
     ) -> None:
         if session is None:
             session = httpx.Client(
-                **httpx.update_client_kwargs(
-                    event_hooks,
-                    limits,
-                    mounts,
-                    proxies,
-                    timeout,
-                    transport,
-                    verify,
-                    kwargs=httpx_client_kwargs,
-                )
+                event_hooks=event_hooks,
+                limits=limits,
+                mounts=mounts,
+                proxies=proxies,
+                timeout=timeout,
+                transport=transport,
+                verify=verify,
             )
 
         self._oauth_version: OAuthVersion = oauth_version
