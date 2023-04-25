@@ -7,7 +7,9 @@ AsyncClient: TypeAlias = httpx.AsyncClient
 
 Response: TypeAlias = httpx.Response
 
+URL: TypeAlias = httpx.URL
 URLTypes: TypeAlias = httpx._types.URLTypes
+Proxy: TypeAlias = httpx.Proxy
 ProxiesTypes: TypeAlias = httpx._types.ProxiesTypes
 Limits: TypeAlias = httpx.Limits
 VerifyTypes = httpx._types.VerifyTypes
