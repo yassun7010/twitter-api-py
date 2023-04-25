@@ -32,7 +32,7 @@ class TestGetV2TweetsSearchStream:
         with spawn_real_client(client_fixture_name, request, permit) as real_client:
             response_body = (
                 real_client.chain()
-                .resource("https://api.twitter.com/2/tweets/search/stream")
+                .request("https://api.twitter.com/2/tweets/search/stream")
                 .get()
             )
 
@@ -64,7 +64,7 @@ class TestMockGetV2TweetsSearchStream:
             .inject_get_response_body(
                 "https://api.twitter.com/2/tweets/search/stream", response_body
             )
-            .resource("https://api.twitter.com/2/tweets/search/stream")
+            .request("https://api.twitter.com/2/tweets/search/stream")
             .get(
                 {
                     "expansions": ["attachments.poll_ids"],
@@ -92,7 +92,7 @@ class TestAsyncMockGetV2TweetsSearchStream:
                 .inject_get_response_body(
                     "https://api.twitter.com/2/tweets/search/stream", response_body
                 )
-                .resource("https://api.twitter.com/2/tweets/search/stream")
+                .request("https://api.twitter.com/2/tweets/search/stream")
                 .get(
                     {
                         "expansions": ["attachments.poll_ids"],

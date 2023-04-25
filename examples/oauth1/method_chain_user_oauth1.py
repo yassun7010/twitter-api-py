@@ -10,19 +10,19 @@ YOUR_CALLBACK_URL = os.environ["CALLBACK_URL"]
 try:
     with (
         TwitterApiClient.from_oauth1_user_flow_env()
-        .resource("https://api.twitter.com/oauth/request_token")
+        .request("https://api.twitter.com/oauth/request_token")
         .post()
-        .resource("https://api.twitter.com/oauth/authorize")
+        .request("https://api.twitter.com/oauth/authorize")
         .generate_authorization_url()
         .open_request_url()
         .input_response_url()
-        .resource("https://api.twitter.com/oauth/access_token")
+        .request("https://api.twitter.com/oauth/access_token")
         .post()
         .generate_client()
     ) as client:
         tweets = (
             client.chain()
-            .resource("https://api.twitter.com/2/tweets")
+            .request("https://api.twitter.com/2/tweets")
             .get(
                 {"ids": ["1460323737035677698"]},
             )

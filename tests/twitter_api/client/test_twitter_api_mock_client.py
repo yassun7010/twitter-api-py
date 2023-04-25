@@ -18,10 +18,10 @@ class TestTwitterApiMockClient:
         assert isinstance(
             (
                 TwitterApiMockClient.from_oauth2_user_flow_env()
-                .resource("https://twitter.com/i/oauth2/authorize")
+                .request("https://twitter.com/i/oauth2/authorize")
                 .generate_authorization_url()
                 .input_response_url("https://localhost:3000")
-                .resource("https://api.twitter.com/2/oauth2/token")
+                .request("https://api.twitter.com/2/oauth2/token")
                 .post()
                 .generate_client()
             ),
@@ -38,12 +38,12 @@ class TestTwitterApiMockClient:
         assert isinstance(
             (
                 TwitterApiMockClient.from_oauth1_user_flow_env()
-                .resource("https://api.twitter.com/oauth/request_token")
+                .request("https://api.twitter.com/oauth/request_token")
                 .post()
-                .resource("https://api.twitter.com/oauth/authorize")
+                .request("https://api.twitter.com/oauth/authorize")
                 .generate_authorization_url()
                 .input_response_url("https://localhost:3000")
-                .resource("https://api.twitter.com/oauth/access_token")
+                .request("https://api.twitter.com/oauth/access_token")
                 .post()
                 .generate_client()
             ),
@@ -64,10 +64,10 @@ class TestTwitterApiMockClient:
     def test_mock_client_from_oauth2_user_env_with(self):
         with (
             TwitterApiMockClient.from_oauth2_user_flow_env()
-            .resource("https://twitter.com/i/oauth2/authorize")
+            .request("https://twitter.com/i/oauth2/authorize")
             .generate_authorization_url()
             .input_response_url("https://localhost:3000")
-            .resource("https://api.twitter.com/2/oauth2/token")
+            .request("https://api.twitter.com/2/oauth2/token")
             .post()
             .generate_client()
         ) as client:
@@ -80,12 +80,12 @@ class TestTwitterApiMockClient:
     def test_mock_client_from_oauth1_user_env_with(self):
         with (
             TwitterApiMockClient.from_oauth1_user_flow_env()
-            .resource("https://api.twitter.com/oauth/request_token")
+            .request("https://api.twitter.com/oauth/request_token")
             .post()
-            .resource("https://api.twitter.com/oauth/authorize")
+            .request("https://api.twitter.com/oauth/authorize")
             .generate_authorization_url()
             .input_response_url("https://localhost:3000")
-            .resource("https://api.twitter.com/oauth/access_token")
+            .request("https://api.twitter.com/oauth/access_token")
             .post()
             .generate_client()
         ) as client:

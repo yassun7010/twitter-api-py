@@ -34,7 +34,7 @@ class TestPostV2DmConversationsMessages:
         with spawn_real_client(client_fixture_name, request, permit) as real_client:
             response_body = (
                 real_client.chain()
-                .resource("https://api.twitter.com/2/dm_conversations")
+                .request("https://api.twitter.com/2/dm_conversations")
                 .post(
                     participant_id,
                     {
@@ -76,7 +76,7 @@ class TestMockPostV2DmConversationsMessages:
                 "https://api.twitter.com/2/dm_conversations",
                 response_body,
             )
-            .resource("https://api.twitter.com/2/dm_conversations")
+            .request("https://api.twitter.com/2/dm_conversations")
             .post(
                 "2244994945",
                 {
@@ -109,7 +109,7 @@ class TestAsyncMockPostV2DmConversationsMessages:
                     "https://api.twitter.com/2/dm_conversations",
                     response_body,
                 )
-                .resource("https://api.twitter.com/2/dm_conversations")
+                .request("https://api.twitter.com/2/dm_conversations")
                 .post(
                     "2244994945",
                     {

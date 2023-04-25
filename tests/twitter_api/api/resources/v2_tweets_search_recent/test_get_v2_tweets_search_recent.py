@@ -48,7 +48,7 @@ class TestGetV2TweetsSearchRecent:
         with spawn_real_client(client_fixture_name, request, permit) as real_client:
             response_body = (
                 real_client.chain()
-                .resource("https://api.twitter.com/2/tweets/search/recent")
+                .request("https://api.twitter.com/2/tweets/search/recent")
                 .get({"query": "ツイート", "max_results": 10})
             )
 
@@ -63,7 +63,7 @@ class TestGetV2TweetsSearchRecent:
         for response_body, _ in zip(
             (
                 oauth2_app_real_client.chain()
-                .resource("https://api.twitter.com/2/tweets/search/recent")
+                .request("https://api.twitter.com/2/tweets/search/recent")
                 .get_paging_response_body_iter(
                     {
                         "query": "#japan test",
@@ -107,7 +107,7 @@ class TestMockGetV2TweetsSearchRecent:
             .inject_get_response_body(
                 "https://api.twitter.com/2/tweets/search/recent", response_body
             )
-            .resource("https://api.twitter.com/2/tweets/search/recent")
+            .request("https://api.twitter.com/2/tweets/search/recent")
             .get(
                 {
                     "query": "モックされているので、この検索条件に意味はない",
@@ -135,7 +135,7 @@ class TestMockGetV2TweetsSearchRecent:
         for _ in itertools.count():
             response_body = (
                 oauth2_app_mock_client.chain()
-                .resource("https://api.twitter.com/2/tweets/search/recent")
+                .request("https://api.twitter.com/2/tweets/search/recent")
                 .get(
                     {
                         "query": "#japan test",
@@ -180,7 +180,7 @@ class TestMockGetV2TweetsSearchRecent:
             response_body
             for response_body in (
                 oauth2_app_mock_client.chain()
-                .resource("https://api.twitter.com/2/tweets/search/recent")
+                .request("https://api.twitter.com/2/tweets/search/recent")
                 .get_paging_response_body_iter(
                     {
                         "query": "モックされているので、この検索条件に意味はない",
@@ -212,7 +212,7 @@ class TestMockGetV2TweetsSearchRecent:
 
         assert (
             oauth2_app_mock_client.chain()
-            .resource("https://api.twitter.com/2/tweets/search/recent")
+            .request("https://api.twitter.com/2/tweets/search/recent")
             .get_collected_paging_response_body(
                 {
                     "query": "モックされているので、この検索条件に意味はない",
@@ -239,7 +239,7 @@ class TestAsyncMockGetV2TweetsSearchRecent:
                 .inject_get_response_body(
                     "https://api.twitter.com/2/tweets/search/recent", response_body
                 )
-                .resource("https://api.twitter.com/2/tweets/search/recent")
+                .request("https://api.twitter.com/2/tweets/search/recent")
                 .get(
                     {
                         "query": "モックされているので、この検索条件に意味はない",
@@ -272,7 +272,7 @@ class TestAsyncMockGetV2TweetsSearchRecent:
             res
             async for res in await (
                 oauth2_app_async_mock_client.chain()
-                .resource("https://api.twitter.com/2/tweets/search/recent")
+                .request("https://api.twitter.com/2/tweets/search/recent")
                 .get_paging_response_body_iter(
                     {
                         "query": "モックされているので、この検索条件に意味はない",
@@ -304,7 +304,7 @@ class TestAsyncMockGetV2TweetsSearchRecent:
         assert (
             await (
                 oauth2_app_async_mock_client.chain()
-                .resource("https://api.twitter.com/2/tweets/search/recent")
+                .request("https://api.twitter.com/2/tweets/search/recent")
                 .get_collected_paging_response_body(
                     {
                         "query": "モックされているので、この検索条件に意味はない",

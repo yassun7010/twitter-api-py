@@ -33,7 +33,7 @@ from twitter_api import TwitterApiClient
 
 with TwitterApiClient.from_oauth2_app_env() as twitter_client:
     response_body = (
-        twitter_client.resource("https://api.twitter.com/2/tweets")
+        twitter_client.request("https://api.twitter.com/2/tweets")
         .get({
             "ids": "1460323737035677698",
             "expansions": ["referenced_tweets.id"]

@@ -53,7 +53,7 @@ class TestGetV2Tweet:
         with spawn_real_client(client_fixture_name, request, permit) as real_client:
             expected_response_body = GetV2TweetResponseBody(data=intro_tweet)
 
-            response_body = real_client.resource(
+            response_body = real_client.request(
                 "https://api.twitter.com/2/tweets/:id"
             ).get(intro_tweet.id)
 
@@ -69,7 +69,7 @@ class TestGetV2Tweet:
         intro_tweet: Tweet,
         all_fields: GetV2TweetQueryParameters,
     ):
-        response_body = oauth2_app_real_client.resource(
+        response_body = oauth2_app_real_client.request(
             "https://api.twitter.com/2/tweets/:id"
         ).get(
             intro_tweet.id,
@@ -105,7 +105,7 @@ class TestMockGetV2Tweet:
             .inject_get_response_body(
                 "https://api.twitter.com/2/tweets/:id", response_body
             )
-            .resource("https://api.twitter.com/2/tweets/:id")
+            .request("https://api.twitter.com/2/tweets/:id")
             .get(
                 intro_tweet.id,
                 all_fields,
@@ -132,7 +132,7 @@ class TestAsyncMockGetV2Tweet:
                 .inject_get_response_body(
                     "https://api.twitter.com/2/tweets/:id", response_body
                 )
-                .resource("https://api.twitter.com/2/tweets/:id")
+                .request("https://api.twitter.com/2/tweets/:id")
                 .get(
                     intro_tweet.id,
                     all_fields,

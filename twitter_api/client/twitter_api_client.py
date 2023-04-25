@@ -98,146 +98,146 @@ class TwitterApiClient(Chainable, metaclass=ABCMeta):
         ...
 
     @overload
-    def resource(
+    def request(
         self: Self,
         url: Oauth2TokenUrl,
     ) -> Oauth2TokenResources:
         ...
 
     @overload
-    def resource(
+    def request(
         self: Self,
         url: Oauth2InvalidateTokenUrl,
     ) -> Oauth2InvalidateTokenResources:
         ...
 
     @overload
-    def resource(
+    def request(
         self: Self,
         url: V2TweetUrl,
     ) -> V2TweetResources:
         ...
 
     @overload
-    def resource(
+    def request(
         self: Self,
         url: V2TweetsUrl,
     ) -> V2TweetsResources:
         ...
 
     @overload
-    def resource(
+    def request(
         self: Self,
         url: V2TweetRetweetedByUrl,
     ) -> V2TweetRetweetedByRerources:
         ...
 
     @overload
-    def resource(
+    def request(
         self: Self,
         url: V2TweetsSearchAllUrl,
     ) -> V2TweetsSearchAllResources:
         ...
 
     @overload
-    def resource(
+    def request(
         self: Self,
         url: V2TweetsSearchRecentUrl,
     ) -> V2TweetsSearchRecentResources:
         ...
 
     @overload
-    def resource(
+    def request(
         self: Self,
         url: V2TweetsSearchStreamUrl,
     ) -> V2TweetsSearchStreamResources:
         ...
 
     @overload
-    def resource(
+    def request(
         self: Self,
         url: V2TweetsSearchStreamRulesUrl,
     ) -> V2TweetsSearchStreamRulesResources:
         ...
 
     @overload
-    def resource(
+    def request(
         self: Self,
         url: V2UsersUrl,
     ) -> V2UsersResources:
         ...
 
     @overload
-    def resource(
+    def request(
         self: Self,
         url: V2UserUrl,
     ) -> V2UserResources:
         ...
 
     @overload
-    def resource(
+    def request(
         self: Self,
         url: V2UserLikedTweetsUrl,
     ) -> V2UserLikedTweetsResources:
         ...
 
     @overload
-    def resource(
+    def request(
         self: Self,
         url: V2UserFollowersUrl,
     ) -> V2UserFollowersResources:
         ...
 
     @overload
-    def resource(
+    def request(
         self: Self,
         url: V2UserFollowingUrl,
     ) -> V2UserFollowingResources:
         ...
 
     @overload
-    def resource(
+    def request(
         self: Self,
         url: V2UserRetweetsUrl,
     ) -> V2UserRetweetsResources:
         ...
 
     @overload
-    def resource(
+    def request(
         self: Self,
         url: V2UserTweetsUrl,
     ) -> V2UserTweetsResources:
         ...
 
     @overload
-    def resource(
+    def request(
         self: Self,
         url: V2DmConversationsWithParticipantDmEventsUrl,
     ) -> V2DmConversationsWithParticipantDmEventsResources:
         ...
 
     @overload
-    def resource(
+    def request(
         self: Self,
         url: V2DmConversationsWithParticipantMessagesUrl,
     ) -> V2DmConversationsWithParticipantMessagesResources:
         ...
 
     @overload
-    def resource(
+    def request(
         self: Self,
         url: V2DmConversationsUrl,
     ) -> V2DmConversationsResources:
         ...
 
     @overload
-    def resource(
+    def request(
         self: Self,
         url: V2DmConversationsMessagesUrl,
     ) -> V2DmConversationMessagesResources:
         ...
 
-    def resource(
+    def request(
         self: Self,
         url: Union[
             Oauth2InvalidateTokenUrl,

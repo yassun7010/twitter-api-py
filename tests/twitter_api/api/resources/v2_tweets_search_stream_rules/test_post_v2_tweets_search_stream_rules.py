@@ -32,7 +32,7 @@ class TestPostV2TweetsSearchStreamRules:
         with spawn_real_client(client_fixture_name, request, permit) as real_client:
             response_body = (
                 real_client.chain()
-                .resource("https://api.twitter.com/2/tweets/search/stream/rules")
+                .request("https://api.twitter.com/2/tweets/search/stream/rules")
                 .post(
                     {
                         "add": [
@@ -53,7 +53,7 @@ class TestPostV2TweetsSearchStreamRules:
         value = "dog has:media"
         (
             oauth2_app_real_client.chain()
-            .resource("https://api.twitter.com/2/tweets/search/stream/rules")
+            .request("https://api.twitter.com/2/tweets/search/stream/rules")
             .post(
                 {
                     "add": [
@@ -66,7 +66,7 @@ class TestPostV2TweetsSearchStreamRules:
         # 終わったら削除もしておく。
         response_body = (
             oauth2_app_real_client.chain()
-            .resource("https://api.twitter.com/2/tweets/search/stream/rules")
+            .request("https://api.twitter.com/2/tweets/search/stream/rules")
             .post(
                 {"delete": {"values": [value]}},
             )
@@ -102,7 +102,7 @@ class TestMockPostV2TweetsSearchStreamRules:
                 "https://api.twitter.com/2/tweets/search/stream/rules",
                 response_body,
             )
-            .resource("https://api.twitter.com/2/tweets/search/stream/rules")
+            .request("https://api.twitter.com/2/tweets/search/stream/rules")
             .post(
                 {
                     "add": [
@@ -134,7 +134,7 @@ class TestAsyncMockPostV2TweetsSearchStreamRules:
                     "https://api.twitter.com/2/tweets/search/stream/rules",
                     response_body,
                 )
-                .resource("https://api.twitter.com/2/tweets/search/stream/rules")
+                .request("https://api.twitter.com/2/tweets/search/stream/rules")
                 .post(
                     {
                         "add": [

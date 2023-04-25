@@ -34,7 +34,7 @@ class TestGetV2DmConversationsMessages:
         with spawn_real_client(client_fixture_name, request, permit) as real_client:
             dm_conversation_id = (
                 real_client.chain()
-                .resource("https://api.twitter.com/2/dm_conversations")
+                .request("https://api.twitter.com/2/dm_conversations")
                 .post(
                     participant_id,
                     {
@@ -50,7 +50,7 @@ class TestGetV2DmConversationsMessages:
 
             response_body = (
                 real_client.chain()
-                .resource(
+                .request(
                     "https://api.twitter.com/2/dm_conversations/:dm_conversation_id/messages"
                 )
                 .post(dm_conversation_id, {"text": "DM のテスト。"})
@@ -85,7 +85,7 @@ class TestMockGetV2DmConversationsMessages:
                 "https://api.twitter.com/2/dm_conversations/:dm_conversation_id/messages",
                 response_body,
             )
-            .resource(
+            .request(
                 "https://api.twitter.com/2/dm_conversations/:dm_conversation_id/messages"
             )
             .post("2244994945", {"text": "DM のテスト。"})
@@ -111,7 +111,7 @@ class TestAsyncMockGetV2DmConversationsMessages:
                     "https://api.twitter.com/2/dm_conversations/:dm_conversation_id/messages",
                     response_body,
                 )
-                .resource(
+                .request(
                     "https://api.twitter.com/2/dm_conversations/:dm_conversation_id/messages"
                 )
                 .post("2244994945", {"text": "DM のテスト。"})

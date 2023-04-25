@@ -15,7 +15,7 @@ class TwitterOAuth1AuthorizeClient(Chainable):
     def __init__(self, session: TwitterOAuth1Session) -> None:
         self._session = session
 
-    def resource(
+    def request(
         self, url: OauthAuth1enticateUrl | Oauth1AuthorizeUrl
     ) -> OAuth1AuthenticateSessionResources | OAuth1AuthorizeSessionResources:
         if url == "https://api.twitter.com/oauth/authenticate":

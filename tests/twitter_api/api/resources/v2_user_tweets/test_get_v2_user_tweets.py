@@ -31,7 +31,7 @@ class TestGetV2UserTweets:
         with spawn_real_client(client_fixture_name, request, permit) as real_client:
             response_body = (
                 real_client.chain()
-                .resource("https://api.twitter.com/2/users/:id/tweets")
+                .request("https://api.twitter.com/2/users/:id/tweets")
                 .get("2244994945")
             )
 
@@ -65,7 +65,7 @@ class TestMockGetV2UserTweets:
             .inject_get_response_body(
                 "https://api.twitter.com/2/users/:id/tweets", response_body
             )
-            .resource("https://api.twitter.com/2/users/:id/tweets")
+            .request("https://api.twitter.com/2/users/:id/tweets")
             .get("2244994945")
         ) == response_body
 
@@ -88,7 +88,7 @@ class TestAsyncMockGetV2UserTweets:
                 .inject_get_response_body(
                     "https://api.twitter.com/2/users/:id/tweets", response_body
                 )
-                .resource("https://api.twitter.com/2/users/:id/tweets")
+                .request("https://api.twitter.com/2/users/:id/tweets")
                 .get("2244994945")
             )
             == response_body

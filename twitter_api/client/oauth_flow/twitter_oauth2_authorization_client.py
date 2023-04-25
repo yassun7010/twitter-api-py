@@ -13,7 +13,7 @@ class TwitterOAuth2AuthorizeClient(Chainable):
     def __init__(self, session: TwitterOAuth2Session) -> None:
         self._session = session
 
-    def resource(self, url: Oauth2AuthorizeUrl) -> OAuth2AuthorizeSessionResources:
+    def request(self, url: Oauth2AuthorizeUrl) -> OAuth2AuthorizeSessionResources:
         return OAuth2AuthorizeSessionResources(
             self._session,
         )

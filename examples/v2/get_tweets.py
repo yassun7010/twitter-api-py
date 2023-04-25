@@ -13,7 +13,7 @@ try:
     with TwitterApiClient.from_oauth2_app_env() as client:
         tweets = (
             client.chain()
-            .resource("https://api.twitter.com/2/tweets")
+            .request("https://api.twitter.com/2/tweets")
             .get(
                 {
                     "ids": ["1460323737035677698"],

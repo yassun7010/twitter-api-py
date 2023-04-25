@@ -21,9 +21,9 @@ try:
     # Backend: 認証用の URL を作成します。
     backend = (
         TwitterApiClient.from_oauth1_user_flow_env()
-        .resource("https://api.twitter.com/oauth/request_token")
+        .request("https://api.twitter.com/oauth/request_token")
         .post()
-        .resource("https://api.twitter.com/oauth/authorize")
+        .request("https://api.twitter.com/oauth/authorize")
         .generate_authorization_url()
     )
 
@@ -38,7 +38,7 @@ try:
             callback_url=YOUR_CALLBACK_URL,
             authorization_response_url=user.authorization_response_url,
         )
-        .resource("https://api.twitter.com/oauth/access_token")
+        .request("https://api.twitter.com/oauth/access_token")
         .post()
     )
 
@@ -57,7 +57,7 @@ try:
     with token.generate_client() as client:
         tweets = (
             client.chain()
-            .resource("https://api.twitter.com/2/tweets/:id")
+            .request("https://api.twitter.com/2/tweets/:id")
             .get("1460323737035677698")
             .data
         )

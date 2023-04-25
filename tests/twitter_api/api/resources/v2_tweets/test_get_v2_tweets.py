@@ -61,7 +61,7 @@ class TestGetV2Tweets:
 
             response_body = (
                 real_client.chain()
-                .resource("https://api.twitter.com/2/tweets")
+                .request("https://api.twitter.com/2/tweets")
                 .get({"ids": list(map(lambda tweet: tweet.id, tweets))})
             )
 
@@ -78,7 +78,7 @@ class TestGetV2Tweets:
     ):
         response_body = (
             oauth2_app_real_client.chain()
-            .resource("https://api.twitter.com/2/tweets")
+            .request("https://api.twitter.com/2/tweets")
             .get(all_fields)
         )
 
@@ -107,7 +107,7 @@ class TestMockGetV2Tweets:
         assert (
             oauth2_app_mock_client.chain()
             .inject_get_response_body("https://api.twitter.com/2/tweets", response_body)
-            .resource("https://api.twitter.com/2/tweets")
+            .request("https://api.twitter.com/2/tweets")
             .get(all_fields)
         ) == response_body
 
@@ -129,7 +129,7 @@ class TestAsyncMockGetV2Tweets:
                 .inject_get_response_body(
                     "https://api.twitter.com/2/tweets", response_body
                 )
-                .resource("https://api.twitter.com/2/tweets")
+                .request("https://api.twitter.com/2/tweets")
                 .get(all_fields)
             )
             == response_body

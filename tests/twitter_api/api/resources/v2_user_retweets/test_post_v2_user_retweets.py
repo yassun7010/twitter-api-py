@@ -32,7 +32,7 @@ class TestGetV2UserRetweets:
         with spawn_real_client(client_fixture_name, request, permit) as real_client:
             response_body = (
                 real_client.chain()
-                .resource("https://api.twitter.com/2/users/:id/retweets")
+                .request("https://api.twitter.com/2/users/:id/retweets")
                 .post(user_id, {"tweet_id": "1228393702244134912"})
             )
 
@@ -62,7 +62,7 @@ class TestMockGetV2UserRetweets:
             .inject_post_response_body(
                 "https://api.twitter.com/2/users/:id/retweets", response_body
             )
-            .resource("https://api.twitter.com/2/users/:id/retweets")
+            .request("https://api.twitter.com/2/users/:id/retweets")
             .post("2244994945", {"tweet_id": "1228393702244134912"})
         ) == response_body
 
@@ -85,7 +85,7 @@ class TestAsyncMockGetV2UserRetweets:
                 .inject_post_response_body(
                     "https://api.twitter.com/2/users/:id/retweets", response_body
                 )
-                .resource("https://api.twitter.com/2/users/:id/retweets")
+                .request("https://api.twitter.com/2/users/:id/retweets")
                 .post("2244994945", {"tweet_id": "1228393702244134912"})
             )
             == response_body

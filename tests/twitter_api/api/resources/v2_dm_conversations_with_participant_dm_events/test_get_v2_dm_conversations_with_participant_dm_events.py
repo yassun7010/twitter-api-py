@@ -54,7 +54,7 @@ class TestGetV2DmConversationsWithParticipantDmEvents:
         with spawn_real_client(client_fixture_name, request, permit) as real_client:
             response_body = (
                 real_client.chain()
-                .resource(
+                .request(
                     "https://api.twitter.com/2/dm_conversations/with/:participant_id/dm_events"
                 )
                 .get(participant_id)
@@ -71,7 +71,7 @@ class TestGetV2DmConversationsWithParticipantDmEvents:
     ):
         for response_body, _ in zip(
             oauth1_app_real_client.chain()
-            .resource(
+            .request(
                 "https://api.twitter.com/2/dm_conversations/with/:participant_id/dm_events"
             )
             .get_paging_response_body_iter(
@@ -117,7 +117,7 @@ class TestMockGetV2DmConversationsWithParticipantDmEvents:
                 "https://api.twitter.com/2/dm_conversations/with/:participant_id/dm_events",
                 response_body,
             )
-            .resource(
+            .request(
                 "https://api.twitter.com/2/dm_conversations/with/:participant_id/dm_events"
             )
             .get("2244994945")
@@ -145,7 +145,7 @@ class TestAsyncMockGetV2DmConversationsWithParticipantDmEvents:
                     "https://api.twitter.com/2/dm_conversations/with/:participant_id/dm_events",
                     response_body,
                 )
-                .resource(
+                .request(
                     "https://api.twitter.com/2/dm_conversations/with/:participant_id/dm_events"
                 )
                 .get("2244994945")
@@ -177,7 +177,7 @@ class TestAsyncMockGetV2DmConversationsWithParticipantDmEvents:
             res
             async for res in await (
                 oauth2_app_async_mock_client.chain()
-                .resource(
+                .request(
                     "https://api.twitter.com/2/dm_conversations/with/:participant_id/dm_events"
                 )
                 .get_paging_response_body_iter(participant_id)
@@ -208,7 +208,7 @@ class TestAsyncMockGetV2DmConversationsWithParticipantDmEvents:
         assert (
             await (
                 oauth2_app_async_mock_client.chain()
-                .resource(
+                .request(
                     "https://api.twitter.com/2/dm_conversations/with/:participant_id/dm_events"
                 )
                 .get_collected_paging_response_body(participant_id)

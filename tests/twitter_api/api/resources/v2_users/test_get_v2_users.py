@@ -29,7 +29,7 @@ class TestGetV2Users:
         with spawn_real_client(client_fixture_name, request, permit) as real_client:
             response_body = (
                 real_client.chain()
-                .resource("https://api.twitter.com/2/users")
+                .request("https://api.twitter.com/2/users")
                 .get({"ids": ["2244994945"]})
             )
 
@@ -59,7 +59,7 @@ class TestMockGetV2Users:
         assert (
             oauth2_app_mock_client.chain()
             .inject_get_response_body("https://api.twitter.com/2/users", response_body)
-            .resource("https://api.twitter.com/2/users")
+            .request("https://api.twitter.com/2/users")
             .get({"ids": ["2244994945"]})
         ) == response_body
 
@@ -82,7 +82,7 @@ class TestAsyncMockGetV2Users:
                 .inject_get_response_body(
                     "https://api.twitter.com/2/users", response_body
                 )
-                .resource("https://api.twitter.com/2/users")
+                .request("https://api.twitter.com/2/users")
                 .get({"ids": ["2244994945"]})
             )
             == response_body
