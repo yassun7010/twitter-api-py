@@ -23,8 +23,8 @@ from twitter_api.types.extra_permissive_model import get_extra_fields
 @pytest.fixture
 def json_files() -> list[str]:
     return [
-        "get_v2_tweets_search_recent_response/response_01.json",
-        "get_v2_tweets_search_recent_response/response_02.json",
+        "get_v2_tweets_search_recent/response_body_01.json",
+        "get_v2_tweets_search_recent/response_body_02.json",
     ]
 
 
@@ -86,9 +86,9 @@ class TestMockGetV2TweetsSearchRecent:
     @pytest.mark.parametrize(
         "json_filename",
         [
-            "get_v2_tweets_search_recent_response.json",
-            "get_v2_tweets_search_recent_response_all_fields.json",
-            "get_v2_tweets_search_recent_response_empty_result.json",
+            "get_v2_tweets_search_recent_response_body.json",
+            "get_v2_tweets_search_recent_response_body_all_fields.json",
+            "get_v2_tweets_search_recent_response_body_empty_result.json",
         ],
     )
     def test_mock_get_v2_search_recent(
@@ -197,9 +197,7 @@ class TestMockGetV2TweetsSearchRecent:
         json_files: list[str],
     ):
         response_body = GetV2TweetsSearchRecentResponseBody.parse_file(
-            json_test_data(
-                "get_v2_tweets_search_recent_response/collected_response.json"
-            )
+            json_test_data("get_v2_tweets_search_recent/collected_response_body.json")
         )
 
         assert get_extra_fields(response_body) == {}
@@ -232,7 +230,7 @@ class TestAsyncMockGetV2TweetsSearchRecent:
         oauth2_app_async_mock_client: TwitterApiAsyncMockClient,
     ):
         response_body = GetV2TweetsSearchRecentResponseBody.parse_file(
-            json_test_data("get_v2_tweets_search_recent_response.json")
+            json_test_data("get_v2_tweets_search_recent_response_body.json")
         )
 
         assert (
@@ -292,9 +290,7 @@ class TestAsyncMockGetV2TweetsSearchRecent:
         json_files: list[str],
     ):
         response_body = GetV2TweetsSearchRecentResponseBody.parse_file(
-            json_test_data(
-                "get_v2_tweets_search_recent_response/collected_response.json"
-            )
+            json_test_data("get_v2_tweets_search_recent/collected_response_body.json")
         )
 
         for json_file in json_files:

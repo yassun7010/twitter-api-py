@@ -48,7 +48,7 @@ class TestMockPostV2DmConversationsWithParticipantMessages:
     @pytest.mark.parametrize(
         "json_filename",
         [
-            "post_v2_dm_conversations_with_participant_messages.json",
+            "post_v2_dm_conversations_with_participant_messages_response_body.json",
         ],
     )
     def test_mock_post_v2_dm_conversations_with_participant_messages(
@@ -83,11 +83,9 @@ class TestAsyncMockPostV2DmConversationsWithParticipantMessages:
         self,
         oauth2_app_async_mock_client: TwitterApiAsyncMockClient,
     ):
-        response_body = (
-            PostV2DmConversationsWithParticipantMessagesResponseBody.parse_file(
-                json_test_data(
-                    "post_v2_dm_conversations_with_participant_messages.json"
-                )
+        response_body = PostV2DmConversationsWithParticipantMessagesResponseBody.parse_file(
+            json_test_data(
+                "post_v2_dm_conversations_with_participant_messages_response_body.json"
             )
         )
 

@@ -42,7 +42,7 @@ class TestMockGetV2Users:
     @pytest.mark.parametrize(
         "json_filename",
         [
-            "get_v2_users_response.json",
+            "get_v2_users_response_body.json",
         ],
     )
     def test_mock_get_v2_users(
@@ -71,7 +71,7 @@ class TestAsyncMockGetV2Users:
         oauth2_app_async_mock_client: TwitterApiAsyncMockClient,
     ):
         response_body = GetV2UsersResponseBody.parse_file(
-            json_test_data("get_v2_users_response.json"),
+            json_test_data("get_v2_users_response_body.json"),
         )
 
         assert get_extra_fields(response_body) == {}

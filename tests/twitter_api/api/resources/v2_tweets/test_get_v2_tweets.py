@@ -91,7 +91,7 @@ class TestMockGetV2Tweets:
     @pytest.mark.parametrize(
         "json_filename",
         [
-            "get_v2_tweets_response_all_fields.json",
+            "get_v2_tweets_response_body_all_fields.json",
         ],
     )
     def test_mock_get_v2_tweets(
@@ -120,7 +120,7 @@ class TestAsyncMockGetV2Tweets:
         all_fields: GetV2TweetsQueryParameters,
     ):
         response_body: GetV2TweetsResponseBody = GetV2TweetsResponseBody.parse_file(
-            json_test_data("get_v2_tweets_response_all_fields.json"),
+            json_test_data("get_v2_tweets_response_body_all_fields.json"),
         )
 
         assert (

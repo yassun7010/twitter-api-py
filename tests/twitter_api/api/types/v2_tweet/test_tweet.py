@@ -11,7 +11,7 @@ from twitter_api.api.types.v2_tweet.tweet import Tweet
 def tweet() -> Tweet:
     return Tweet.parse_obj(
         GetV2TweetResponseBody.parse_file(
-            json_test_data("get_v2_tweet_response_all_fields.json"),
+            json_test_data("get_v2_tweet_response_body_all_fields.json"),
         ).data
     )
 

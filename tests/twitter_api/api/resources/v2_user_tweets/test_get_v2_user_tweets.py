@@ -44,9 +44,9 @@ class TestMockGetV2UserTweets:
     @pytest.mark.parametrize(
         "json_filename",
         [
-            "get_v2_user_tweets_response_default_fields.json",
-            "get_v2_user_tweets_response_optional_fields.json",
-            "get_v2_user_tweets_response_all_fields.json",
+            "get_v2_user_tweets_response_body_default_fields.json",
+            "get_v2_user_tweets_response_body_optional_fields.json",
+            "get_v2_user_tweets_response_body_all_fields.json",
         ],
     )
     def test_mock_get_v2_user_tweets(
@@ -77,7 +77,7 @@ class TestAsyncMockGetV2UserTweets:
         oauth2_app_async_mock_client: TwitterApiAsyncMockClient,
     ):
         response_body = GetV2UserTweetsResponseBody.parse_file(
-            json_test_data("get_v2_user_tweets_response_default_fields.json"),
+            json_test_data("get_v2_user_tweets_response_body_default_fields.json"),
         )
 
         assert get_extra_fields(response_body) == {}

@@ -46,7 +46,7 @@ class TestMockGetV2TweetsSearchAll:
         oauth2_app_mock_client: TwitterApiMockClient,
     ):
         response_body = GetV2TweetsSearchAllResponseBody.parse_file(
-            json_test_data("get_v2_tweets_search_all_response.json")
+            json_test_data("get_v2_tweets_search_all_response_body.json")
         )
 
         assert (
@@ -66,7 +66,7 @@ class TestAsyncMockGetV2TweetsSearchAll:
         oauth2_app_async_mock_client: TwitterApiAsyncMockClient,
     ):
         response_body = GetV2TweetsSearchAllResponseBody.parse_file(
-            json_test_data("get_v2_tweets_search_all_response.json")
+            json_test_data("get_v2_tweets_search_all_response_body.json")
         )
 
         assert (

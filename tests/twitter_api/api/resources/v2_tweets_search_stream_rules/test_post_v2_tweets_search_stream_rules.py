@@ -81,8 +81,8 @@ class TestMockPostV2TweetsSearchStreamRules:
     @pytest.mark.parametrize(
         "json_filename",
         [
-            "post_v2_search_stream_rules_response_create_rules.json",
-            "post_v2_search_stream_rules_response_success.json",
+            "post_v2_search_stream_rules_response_body_create_rules.json",
+            "post_v2_search_stream_rules_response_body_success.json",
         ],
     )
     def test_mock_post_v2_search_stream_rules(
@@ -120,7 +120,9 @@ class TestAsyncMockPostV2TweetsSearchStreamRules:
         oauth2_app_async_mock_client: TwitterApiAsyncMockClient,
     ):
         response_body = PostV2TweetsSearchStreamRulesResponseBody.parse_file(
-            json_test_data("post_v2_search_stream_rules_response_create_rules.json")
+            json_test_data(
+                "post_v2_search_stream_rules_response_body_create_rules.json"
+            )
         )
 
         assert get_extra_fields(response_body) == {}

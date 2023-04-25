@@ -65,7 +65,7 @@ class TestMockGetV2DmConversationsMessages:
     @pytest.mark.parametrize(
         "json_filename",
         [
-            "post_v2_dm_conversations_messages.json",
+            "post_v2_dm_conversation_messages_response_body.json",
         ],
     )
     def test_mock_get_v2_dm_conversations_messages(
@@ -99,7 +99,7 @@ class TestAsyncMockGetV2DmConversationsMessages:
         oauth2_app_async_mock_client: TwitterApiAsyncMockClient,
     ):
         response_body = PostV2DmConversationMessagesResponseBody.parse_file(
-            json_test_data("post_v2_dm_conversations_messages.json")
+            json_test_data("post_v2_dm_conversation_messages_response_body.json")
         )
 
         assert get_extra_fields(response_body) == {}

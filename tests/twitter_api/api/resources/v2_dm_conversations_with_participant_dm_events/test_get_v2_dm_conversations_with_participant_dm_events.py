@@ -25,11 +25,11 @@ from twitter_api.types.extra_permissive_model import get_extra_fields
 @pytest.fixture
 def json_files() -> list[str]:
     return [
-        "get_v2_dm_conversations_with_participant_dm_events_response/response_01.json",
-        "get_v2_dm_conversations_with_participant_dm_events_response/response_02.json",
-        "get_v2_dm_conversations_with_participant_dm_events_response/response_03.json",
-        "get_v2_dm_conversations_with_participant_dm_events_response/response_04.json",
-        "get_v2_dm_conversations_with_participant_dm_events_response/response_05.json",
+        "get_v2_dm_conversations_with_participant_dm_events/response_body_01.json",
+        "get_v2_dm_conversations_with_participant_dm_events/response_body_02.json",
+        "get_v2_dm_conversations_with_participant_dm_events/response_body_03.json",
+        "get_v2_dm_conversations_with_participant_dm_events/response_body_04.json",
+        "get_v2_dm_conversations_with_participant_dm_events/response_body_05.json",
     ]
 
 
@@ -95,7 +95,7 @@ class TestMockGetV2DmConversationsWithParticipantDmEvents:
     @pytest.mark.parametrize(
         "json_filename",
         [
-            "get_v2_dm_conversations_with_participant_dm_events.json",
+            "get_v2_dm_conversations_with_participant_dm_events_response_body.json",
         ],
     )
     def test_mock_get_v2_dm_conversations_with_participant_dm_events(
@@ -130,11 +130,9 @@ class TestAsyncMockGetV2DmConversationsWithParticipantDmEvents:
         self,
         oauth2_app_async_mock_client: TwitterApiAsyncMockClient,
     ):
-        response_body = (
-            GetV2DmConversationsWithParticipantDmEventsResponseBody.parse_file(
-                json_test_data(
-                    "get_v2_dm_conversations_with_participant_dm_events.json"
-                )
+        response_body = GetV2DmConversationsWithParticipantDmEventsResponseBody.parse_file(
+            json_test_data(
+                "get_v2_dm_conversations_with_participant_dm_events_response_body.json"
             )
         )
 
@@ -195,7 +193,7 @@ class TestAsyncMockGetV2DmConversationsWithParticipantDmEvents:
     ):
         response_body = GetV2DmConversationsWithParticipantDmEventsResponseBody.parse_file(
             json_test_data(
-                "get_v2_dm_conversations_with_participant_dm_events_response/collected_response.json"
+                "get_v2_dm_conversations_with_participant_dm_events/collected_response_body.json"
             )
         )
 
