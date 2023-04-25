@@ -10,7 +10,6 @@ from twitter_api.api.types.v2_dm_event.dm_event_expansion import DmEventExpansio
 from twitter_api.api.types.v2_dm_event.dm_event_field import DmEventField
 from twitter_api.api.types.v2_dm_event.dm_event_id import DmEventId
 from twitter_api.api.types.v2_dm_event.dm_event_type import DmEventType
-from twitter_api.api.types.v2_expansion import Expansion
 from twitter_api.api.types.v2_media.media_key import MediaKey
 from twitter_api.api.types.v2_scope import oauth2_scopes
 from twitter_api.api.types.v2_tweet.tweet_field import TweetField
