@@ -1,6 +1,7 @@
 from typing import Optional, TypeAlias, TypeVar, Union
 
 T = TypeVar("T", bound=str)
+
 CommaSeparatedStr: TypeAlias = str
 """
 要素がカンマ区切りで結合された文字列。
