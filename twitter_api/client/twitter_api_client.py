@@ -15,7 +15,7 @@ from twitter_api.api.resources.v2_dm_conversations import (
     V2DmConversationsResources,
     V2DmConversationsUrl,
 )
-from twitter_api.api.resources.v2_dm_conversations_with_messages import (
+from twitter_api.api.resources.v2_dm_conversations_with_participant_messages import (
     V2DmConversationsWithParticipantMessagesResources,
     V2DmConversationsWithParticipantMessagesUrl,
 )
