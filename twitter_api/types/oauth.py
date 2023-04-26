@@ -71,30 +71,6 @@ AccessSecret: TypeAlias = str
 - resulting oauth_token_secret
 """
 
-OAuthToken: TypeAlias = str
-"""
-OAuth 認証をするときに、一時的に発行されるトークン。
-
-同じことを指す用語として下記が存在する。
-- Request Token
-- oauth_token
-"""
-
-OAuthTokenSecret: TypeAlias = str
-"""
-OAuth 認証をするときに、一時的に発行されるトークンの秘密キー。
-
-同じことを指す用語として下記が存在する。
-- Request Token Secret
-- oauth_token_secret
-"""
-
-OauthVerifier: TypeAlias = str
-"""
-OAuth 認証をするときに、一時的に発行されるトークンを検証するキー。
-"""
-
-
 ClientId: TypeAlias = str
 """
 OAuth2.0 で認証をするときに必要なID。
