@@ -68,6 +68,10 @@ from twitter_api.api.resources.v2_user_tweets import (
 )
 from twitter_api.api.resources.v2_users import V2UsersResources, V2UsersUrl
 from twitter_api.api.resources.v2_users_by import V2UsersByResources, V2UsersByUrl
+from twitter_api.api.resources.v2_users_by_username import (
+    V2UsersByUsernameResources,
+    V2UsersByUsernameUrl,
+)
 from twitter_api.api.types.v2_scope import ALL_SCOPES, Scope
 from twitter_api.error import NeverError
 from twitter_api.rate_limit.manager import DEFAULT_RATE_LIMIT_MANAGER
@@ -178,6 +182,13 @@ class TwitterApiClient(Chainable, metaclass=ABCMeta):
     @overload
     def request(
         self: Self,
+        url: V2UsersByUsernameUrl,
+    ) -> V2UsersByUsernameResources:
+        ...
+
+    @overload
+    def request(
+        self: Self,
         url: V2UserUrl,
     ) -> V2UserResources:
         ...
@@ -265,6 +276,7 @@ class TwitterApiClient(Chainable, metaclass=ABCMeta):
             V2UserUrl,
             V2UsersUrl,
             V2UsersByUrl,
+            V2UsersByUsernameUrl,
             V2DmConversationsWithParticipantDmEventsUrl,
             V2DmConversationsWithParticipantMessagesUrl,
             V2DmConversationsUrl,
@@ -317,6 +329,10 @@ class TwitterApiClient(Chainable, metaclass=ABCMeta):
             )
         elif url == "https://api.twitter.com/2/users/by":
             return V2UsersByResources(
+                self._request_client,
+            )
+        elif url == "https://api.twitter.com/2/users/by/username/:username":
+            return V2UsersByUsernameResources(
                 self._request_client,
             )
         elif url == "https://api.twitter.com/2/users/:id":
