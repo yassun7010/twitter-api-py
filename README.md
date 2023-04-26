@@ -59,9 +59,9 @@ def your_logic(twitter_client: TwitterApiClient):
 def test_your_logic():
     twitter_client = (
         TwitterApiMockClient.from_oauth2_app_env()
-        .inject_post_response_body("https://api.twitter.com/2/tweets", post_response)
-        .inject_get_response_body("https://api.twitter.com/2/tweets/:id", get_response)
-        .inject_delete_response_body("https://api.twitter.com/2/tweets", delete_response)
+        .inject_post_response_body("https://api.twitter.com/2/tweets", post_response_body)
+        .inject_get_response_body("https://api.twitter.com/2/tweets/:id", get_response_body)
+        .inject_delete_response_body("https://api.twitter.com/2/tweets", delete_response_body)
     )
 
     assert your_logic(twitter_client) is True
