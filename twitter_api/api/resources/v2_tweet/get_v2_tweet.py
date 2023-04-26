@@ -1,11 +1,11 @@
 from typing import NotRequired, Optional, TypedDict
 
 from twitter_api.api.resources.api_resources import ApiResources
-from twitter_api.api.types.v2_expansion import Expansion
 from twitter_api.api.types.v2_media.media_field import MediaField
 from twitter_api.api.types.v2_place.place_field import PlaceField
 from twitter_api.api.types.v2_poll.poll_field import PollField
 from twitter_api.api.types.v2_scope import oauth2_scopes
+from twitter_api.api.types.v2_tweet.tweet_expansion import TweetExpansion
 from twitter_api.api.types.v2_tweet.tweet_field import TweetField
 from twitter_api.api.types.v2_tweet.tweet_id import TweetId
 from twitter_api.api.types.v2_tweet.tweet_response_body import TweetResponseBody
@@ -19,7 +19,7 @@ ENDPOINT = Endpoint("GET", "https://api.twitter.com/2/tweets/:id")
 GetV2TweetQueryParameters = TypedDict(
     "GetV2TweetQueryParameters",
     {
-        "expansions": NotRequired[Optional[CommaSeparatable[Expansion]]],
+        "expansions": NotRequired[Optional[CommaSeparatable[TweetExpansion]]],
         "media.fields": NotRequired[Optional[CommaSeparatable[MediaField]]],
         "place.fields": NotRequired[Optional[CommaSeparatable[PlaceField]]],
         "poll.fields": NotRequired[Optional[CommaSeparatable[PollField]]],

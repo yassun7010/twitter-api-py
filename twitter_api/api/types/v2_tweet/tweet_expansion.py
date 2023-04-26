@@ -1,6 +1,6 @@
 from typing import Literal, TypeAlias
 
-Expansion: TypeAlias = Literal[
+TweetExpansion: TypeAlias = Literal[
     "attachments.poll_ids",
     "attachments.media_keys",
     "author_id",
@@ -12,7 +12,7 @@ Expansion: TypeAlias = Literal[
     "referenced_tweets.id.author_id",
 ]
 
-ALL_EXPANSIONS: list[Expansion] = [
+ALL_TWEET_EXPANSIONS: list[TweetExpansion] = [
     "attachments.poll_ids",
     "attachments.media_keys",
     "author_id",

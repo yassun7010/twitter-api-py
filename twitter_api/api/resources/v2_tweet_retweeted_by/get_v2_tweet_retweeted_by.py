@@ -5,10 +5,10 @@ from pydantic import Field
 
 from twitter_api.api.resources.api_resources import ApiResources
 from twitter_api.api.types.pagination_token import PaginationToken
-from twitter_api.api.types.v2_expansion import Expansion
 from twitter_api.api.types.v2_retweet.retweet import Retweet
 from twitter_api.api.types.v2_scope import oauth2_scopes
 from twitter_api.api.types.v2_tweet.tweet import Tweet
+from twitter_api.api.types.v2_tweet.tweet_expansion import TweetExpansion
 from twitter_api.api.types.v2_tweet.tweet_field import TweetField
 from twitter_api.api.types.v2_tweet.tweet_id import TweetId
 from twitter_api.api.types.v2_user.user_field import UserField
@@ -29,7 +29,7 @@ ENDPOINT = Endpoint("GET", "https://api.twitter.com/2/tweets/:id/retweeted_by")
 GetV2TweetRetweetedByQueryParameters = TypedDict(
     "GetV2TweetRetweetedByQueryParameters",
     {
-        "expansions": NotRequired[Optional[CommaSeparatable[Expansion]]],
+        "expansions": NotRequired[Optional[CommaSeparatable[TweetExpansion]]],
         "max_results": NotRequired[Optional[int]],
         "pagination_token": NotRequired[Optional[str]],
         "tweet.fields": NotRequired[Optional[CommaSeparatable[TweetField]]],

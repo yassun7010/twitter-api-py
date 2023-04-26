@@ -14,7 +14,6 @@ from pydantic import Field
 
 from twitter_api.api.resources.api_resources import ApiResources
 from twitter_api.api.types.pagination_token import PaginationToken
-from twitter_api.api.types.v2_expansion import Expansion
 from twitter_api.api.types.v2_media.media import Media
 from twitter_api.api.types.v2_media.media_field import MediaField
 from twitter_api.api.types.v2_place.place import Place
@@ -26,6 +25,7 @@ from twitter_api.api.types.v2_tweet.tweet import Tweet
 from twitter_api.api.types.v2_tweet.tweet_field import TweetField
 from twitter_api.api.types.v2_tweet.tweet_id import TweetId
 from twitter_api.api.types.v2_user.user import User
+from twitter_api.api.types.v2_user.user_expantion import UserExpansion
 from twitter_api.api.types.v2_user.user_field import UserField
 from twitter_api.api.types.v2_user.user_id import UserId
 from twitter_api.rate_limit.rate_limit import rate_limit
@@ -52,7 +52,7 @@ GetV2UserTweetsQueryParameters = TypedDict(
         "since_id": NotRequired[Optional[TweetId]],
         "until_id": NotRequired[Optional[TweetId]],
         "exclude": NotRequired[Optional[Literal["retweets", "replies"]]],
-        "expansions": NotRequired[Optional[CommaSeparatable[Expansion]]],
+        "expansions": NotRequired[Optional[CommaSeparatable[UserExpansion]]],
         "pagination_token": NotRequired[Optional[str]],
         "max_results": NotRequired[Optional[int]],
         "media.fields": NotRequired[Optional[CommaSeparatable[MediaField]]],

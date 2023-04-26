@@ -2,11 +2,11 @@ from datetime import datetime
 from typing import NotRequired, Optional, TypedDict
 
 from twitter_api.api.resources.api_resources import ApiResources
-from twitter_api.api.types.v2_expansion import Expansion
 from twitter_api.api.types.v2_media.media_field import MediaField
 from twitter_api.api.types.v2_place.place_field import PlaceField
 from twitter_api.api.types.v2_poll.poll_field import PollField
 from twitter_api.api.types.v2_scope import oauth2_scopes
+from twitter_api.api.types.v2_tweet.tweet_expansion import TweetExpansion
 from twitter_api.api.types.v2_tweet.tweet_field import TweetField
 from twitter_api.api.types.v2_tweet.tweet_response_body import TweetsSearchResponseBody
 from twitter_api.api.types.v2_user.user_field import UserField
@@ -24,7 +24,7 @@ GetV2TweetsSearchStreamQueryParameters = TypedDict(
         "backfill_minutes": NotRequired[Optional[int]],
         "start_time": NotRequired[Optional[datetime]],
         "end_time": NotRequired[Optional[datetime]],
-        "expansions": NotRequired[Optional[CommaSeparatable[Expansion]]],
+        "expansions": NotRequired[Optional[CommaSeparatable[TweetExpansion]]],
         "place.fields": NotRequired[Optional[CommaSeparatable[PlaceField]]],
         "media.fields": NotRequired[Optional[CommaSeparatable[MediaField]]],
         "poll.fields": NotRequired[Optional[CommaSeparatable[PollField]]],

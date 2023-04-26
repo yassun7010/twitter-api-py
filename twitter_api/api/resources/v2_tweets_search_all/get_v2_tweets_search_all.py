@@ -4,11 +4,11 @@ from urllib import parse
 
 from twitter_api.api.resources.api_resources import ApiResources
 from twitter_api.api.types.pagination_token import PaginationToken
-from twitter_api.api.types.v2_expansion import Expansion
 from twitter_api.api.types.v2_media.media_field import MediaField
 from twitter_api.api.types.v2_place.place_field import PlaceField
 from twitter_api.api.types.v2_poll.poll_field import PollField
 from twitter_api.api.types.v2_scope import oauth2_scopes
+from twitter_api.api.types.v2_tweet.tweet_expansion import TweetExpansion
 from twitter_api.api.types.v2_tweet.tweet_field import TweetField
 from twitter_api.api.types.v2_tweet.tweet_id import TweetId
 from twitter_api.api.types.v2_tweet.tweet_response_body import TweetsSearchResponseBody
@@ -38,7 +38,7 @@ GetV2TweetsSearchAllQueryParameters = TypedDict(
         "sort_order": NotRequired[Optional[Literal["recency", "relevancy"]]],
         "next_token": NotRequired[Optional[PaginationToken]],
         "max_results": NotRequired[Optional[int]],
-        "expansions": NotRequired[Optional[CommaSeparatable[Expansion]]],
+        "expansions": NotRequired[Optional[CommaSeparatable[TweetExpansion]]],
         "place.fields": NotRequired[Optional[CommaSeparatable[PlaceField]]],
         "media.fields": NotRequired[Optional[CommaSeparatable[MediaField]]],
         "poll.fields": NotRequired[Optional[CommaSeparatable[PollField]]],
