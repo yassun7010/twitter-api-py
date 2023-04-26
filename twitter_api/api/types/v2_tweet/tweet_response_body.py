@@ -3,6 +3,7 @@ from typing import Optional, Self
 
 from pydantic import Field
 
+from twitter_api.api.types.pagination_token import PaginationToken
 from twitter_api.api.types.v2_media.media import Media
 from twitter_api.api.types.v2_place.place import Place
 from twitter_api.api.types.v2_poll.poll import Poll
@@ -175,8 +176,8 @@ class TweetsResponseBodyMeta(ExtraPermissiveModel):
     result_count: int
     newest_id: Optional[TweetId] = None
     oldest_id: Optional[TweetId] = None
-    next_token: Optional[str] = None
-    previous_token: Optional[str] = None
+    next_token: Optional[PaginationToken] = None
+    previous_token: Optional[PaginationToken] = None
 
     def extend(self, other: Self) -> None:
         self.result_count += other.result_count
@@ -205,7 +206,7 @@ class TweetsSearchResponseBody(
     TweetsResponseBody, _TweetsSearchResponseBody, PageResponseBody
 ):
     @property
-    def meta_next_token(self) -> str | None:
+    def meta_next_token(self) -> PaginationToken | None:
         return self.meta.next_token
 
     def extend(self, other: Self) -> None:

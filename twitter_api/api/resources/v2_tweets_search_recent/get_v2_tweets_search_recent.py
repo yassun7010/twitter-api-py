@@ -2,6 +2,7 @@ from datetime import datetime
 from typing import AsyncGenerator, Generator, Literal, NotRequired, Optional, TypedDict
 
 from twitter_api.api.resources.api_resources import ApiResources
+from twitter_api.api.types.pagination_token import PaginationToken
 from twitter_api.api.types.v2_expansion import Expansion
 from twitter_api.api.types.v2_media.media_field import MediaField
 from twitter_api.api.types.v2_place.place_field import PlaceField
@@ -34,7 +35,7 @@ GetV2TweetsSearchRecentQueryParameters = TypedDict(
         "since_id": NotRequired[Optional[TweetId]],
         "until_id": NotRequired[Optional[TweetId]],
         "sort_order": NotRequired[Optional[Literal["recency", "relevancy"]]],
-        "next_token": NotRequired[Optional[str]],
+        "next_token": NotRequired[Optional[PaginationToken]],
         "max_results": NotRequired[Optional[int]],
         "expansions": NotRequired[Optional[CommaSeparatable[Expansion]]],
         "place.fields": NotRequired[Optional[CommaSeparatable[PlaceField]]],

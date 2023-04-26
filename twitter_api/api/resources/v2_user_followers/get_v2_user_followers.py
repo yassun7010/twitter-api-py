@@ -4,6 +4,7 @@ from typing import AsyncGenerator, Generator, NotRequired, Optional, Self, Typed
 from pydantic import Field
 
 from twitter_api.api.resources.api_resources import ApiResources
+from twitter_api.api.types.pagination_token import PaginationToken
 from twitter_api.api.types.v2_expansion import Expansion
 from twitter_api.api.types.v2_scope import oauth2_scopes
 from twitter_api.api.types.v2_tweet.tweet import Tweet
@@ -49,8 +50,8 @@ def _make_query(query: GetV2UserFollowersQueryParameters) -> dict:
 
 class GetV2UserFollowersResponseBodyMeta(ExtraPermissiveModel):
     result_count: int
-    next_token: Optional[str] = None
-    previous_token: Optional[str] = None
+    next_token: Optional[PaginationToken] = None
+    previous_token: Optional[PaginationToken] = None
 
     def extend(self, other: Self) -> None:
         self.result_count += other.result_count
@@ -74,7 +75,7 @@ class GetV2UserFollowersResponseBody(ExtraPermissiveModel, PageResponseBody):
     errors: Optional[list[dict]] = None
 
     @property
-    def meta_next_token(self) -> str | None:
+    def meta_next_token(self) -> PaginationToken | None:
         return self.meta.next_token
 
     def extend(self, other: Self) -> None:

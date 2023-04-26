@@ -5,6 +5,7 @@ from typing import AsyncGenerator, Generator, NotRequired, Optional, Self, Typed
 from pydantic import Field
 
 from twitter_api.api.resources.api_resources import ApiResources
+from twitter_api.api.types.pagination_token import PaginationToken
 from twitter_api.api.types.v2_dm_conversation.dm_conversation_id import DmConversationId
 from twitter_api.api.types.v2_dm_event.dm_event_expansion import DmEventExpansion
 from twitter_api.api.types.v2_dm_event.dm_event_field import DmEventField
@@ -41,7 +42,7 @@ GetV2DmConversationsWithParticipantDmEventsQueryParameters = TypedDict(
         "event_types": NotRequired[Optional[CommaSeparatable[DmEventType]]],
         "expansions": NotRequired[Optional[CommaSeparatable[DmEventExpansion]]],
         "max_results": NotRequired[Optional[int]],
-        "pagination_token": NotRequired[Optional[str]],
+        "pagination_token": NotRequired[Optional[PaginationToken]],
         "tweet.fields": NotRequired[Optional[CommaSeparatable[TweetField]]],
         "user.fields": NotRequired[Optional[CommaSeparatable[UserField]]],
     },
@@ -82,8 +83,8 @@ class GetV2DmConversationsWithParticipantDmEventsResponseBodyData(ExtraPermissiv
 
 class GetV2DmConversationsWithParticipantDmEventsResponseBodyMeta(ExtraPermissiveModel):
     result_count: int
-    next_token: Optional[str] = None
-    previous_token: Optional[str] = None
+    next_token: Optional[PaginationToken] = None
+    previous_token: Optional[PaginationToken] = None
 
     def extend(self, other: Self) -> None:
         self.result_count += other.result_count
@@ -114,7 +115,7 @@ class GetV2DmConversationsWithParticipantDmEventsResponseBody(
     errors: Optional[list[dict]] = None
 
     @property
-    def meta_next_token(self) -> str | None:
+    def meta_next_token(self) -> PaginationToken | None:
         if self.meta is None:
             return None
 

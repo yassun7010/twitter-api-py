@@ -11,11 +11,13 @@ from typing import (
     TypeVar,
 )
 
+from twitter_api.api.types.pagination_token import PaginationToken
+
 
 class PageResponseBody(metaclass=ABCMeta):
     @property
     @abstractmethod
-    def meta_next_token(self) -> Optional[str]:
+    def meta_next_token(self) -> Optional[PaginationToken]:
         ...
 
     @abstractmethod

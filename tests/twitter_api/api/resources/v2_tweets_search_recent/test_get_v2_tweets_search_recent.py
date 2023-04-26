@@ -8,6 +8,7 @@ from tests.data import json_test_data
 from twitter_api.api.resources.v2_tweets_search_recent.get_v2_tweets_search_recent import (
     GetV2TweetsSearchRecentResponseBody,
 )
+from twitter_api.api.types.pagination_token import PaginationToken
 from twitter_api.api.types.v2_expansion import ALL_EXPANSIONS
 from twitter_api.api.types.v2_media.media_field import ALL_MEDIA_FIELDS
 from twitter_api.api.types.v2_place.place_field import ALL_PLACE_FIELDS
@@ -130,7 +131,7 @@ class TestMockGetV2TweetsSearchRecent:
                 ),
             )
 
-        next_token: str | None = None
+        next_token: PaginationToken | None = None
 
         for _ in itertools.count():
             response_body = (
