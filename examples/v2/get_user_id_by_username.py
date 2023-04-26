@@ -9,7 +9,7 @@ if len(sys.argv) == 1:
 elif len(sys.argv) == 2:
     username = sys.argv[1]
 else:
-    print("Usage: python get_user_id_by_username.py [USER_ID]", file=sys.stderr)
+    print("Usage: python get_user_id_by_username.py [USERNAME]", file=sys.stderr)
     sys.exit(1)
 
 try:
