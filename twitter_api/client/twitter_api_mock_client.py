@@ -85,6 +85,10 @@ from twitter_api.api.resources.v2_user_tweets.get_v2_user_tweets import (
 )
 from twitter_api.api.resources.v2_users import V2UsersUrl
 from twitter_api.api.resources.v2_users.get_v2_users import GetV2UsersResponseBody
+from twitter_api.api.resources.v2_users_by import V2UsersByUrl
+from twitter_api.api.resources.v2_users_by.get_v2_users_by import (
+    GetV2UsersByResponseBody,
+)
 from twitter_api.api.types.v2_scope import Scope
 from twitter_api.error import TwitterApiError
 from twitter_api.rate_limit.manager import DEFAULT_RATE_LIMIT_MANAGER
@@ -210,6 +214,17 @@ class _BaseTwitterApiMockClient:
         url: V2UsersUrl,
         response_body: Union[
             GetV2UsersResponseBody,
+            TwitterApiError,
+        ],
+    ) -> Self:
+        ...
+
+    @overload
+    def inject_get_response_body(
+        self,
+        url: V2UsersByUrl,
+        response_body: Union[
+            GetV2UsersByResponseBody,
             TwitterApiError,
         ],
     ) -> Self:

@@ -1,8 +1,8 @@
-from typing import Optional
+from typing import Optional, TypeAlias
 
 from twitter_api.types.extra_permissive_model import ExtraPermissiveModel
 
-EntityId = str
+EntityId: TypeAlias = str
 
 
 class Entity(ExtraPermissiveModel):

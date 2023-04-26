@@ -70,6 +70,7 @@ from twitter_api.api.resources.v2_user_tweets import (
     V2UserTweetsUrl,
 )
 from twitter_api.api.resources.v2_users import AsyncV2UsersResources, V2UsersUrl
+from twitter_api.api.resources.v2_users_by import AsyncV2UsersByResources, V2UsersByUrl
 from twitter_api.api.types.v2_scope import ALL_SCOPES, Scope
 from twitter_api.client.request.request_async_client import RequestAsyncClient
 from twitter_api.error import NeverError
@@ -172,6 +173,13 @@ class TwitterApiAsyncClient(Chainable, metaclass=ABCMeta):
     @overload
     def request(
         self: Self,
+        url: V2UsersByUrl,
+    ) -> AsyncV2UsersByResources:
+        ...
+
+    @overload
+    def request(
+        self: Self,
         url: V2UserUrl,
     ) -> AsyncV2UserResources:
         ...
@@ -251,12 +259,13 @@ class TwitterApiAsyncClient(Chainable, metaclass=ABCMeta):
             V2TweetsSearchStreamRulesUrl,
             V2TweetsUrl,
             V2TweetUrl,
+            V2UsersUrl,
+            V2UsersByUrl,
             V2UserFollowersUrl,
             V2UserFollowingUrl,
             V2UserRetweetsUrl,
             V2UserLikedTweetsUrl,
             V2UserTweetsUrl,
-            V2UsersUrl,
             V2UserUrl,
             V2DmConversationsWithParticipantDmEventsUrl,
             V2DmConversationsWithParticipantMessagesUrl,
@@ -306,6 +315,10 @@ class TwitterApiAsyncClient(Chainable, metaclass=ABCMeta):
             )
         elif url == "https://api.twitter.com/2/users":
             return AsyncV2UsersResources(
+                self._request_client,
+            )
+        elif url == "https://api.twitter.com/2/users/by":
+            return AsyncV2UsersByResources(
                 self._request_client,
             )
         elif url == "https://api.twitter.com/2/users/:id":
