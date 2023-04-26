@@ -22,6 +22,5 @@ try:
 
         print(user.username)
 
-
 except TwitterApiError as error:
     print(error, file=sys.stderr)
