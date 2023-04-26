@@ -1,4 +1,4 @@
-from typing import Any, Mapping, Optional
+from typing import Any, Callable, Generic, Mapping, Optional, Type, TypeVar
 
 from authlib.integrations.httpx_client.oauth2_client import OAuth2Client
 
@@ -10,21 +10,27 @@ from twitter_api.client.oauth_session.resources.oauth2_authorize import (
 )
 from twitter_api.client.oauth_session.resources.v2_oauth2_token import V2Oauth2TokenUrl
 from twitter_api.client.oauth_session.twitter_oauth2_session import TwitterOAuth2Session
+from twitter_api.client.twitter_api_async_client import TwitterApiAsyncClient
+from twitter_api.client.twitter_api_async_real_client import TwitterApiAsyncRealClient
+from twitter_api.client.twitter_api_client import TwitterApiClient
+from twitter_api.client.twitter_api_real_client import TwitterApiRealClient
 from twitter_api.rate_limit.manager.rate_limit_manager import RateLimitManager
 from twitter_api.types import httpx
 from twitter_api.types.oauth import CallbackUrl, ClientId, ClientSecret
 from twitter_api.utils._oauth import generate_code_verifier
 
+Client = TypeVar("Client", TwitterApiRealClient, TwitterApiAsyncRealClient)
 
-class TwitterOAuth2RealSession(TwitterOAuth2Session):
+
+class TwitterOAuth2RealSession(TwitterOAuth2Session, Generic[Client]):
     def __init__(
         self,
+        client_generator: Callable[[str], Client],
         *,
         client_id: ClientId,
         client_secret: ClientSecret,
         callback_url: CallbackUrl,
         scope: Optional[list[Scope]],
-        rate_limit_manager: RateLimitManager,
         event_hooks: Optional[httpx.EventHook],
         limits: httpx.Limits,
         mounts: Optional[Mapping[str, httpx.BaseTransport]],
@@ -33,6 +39,7 @@ class TwitterOAuth2RealSession(TwitterOAuth2Session):
         transport: Optional[httpx.BaseTransport],
         verify: httpx.VerifyTypes,
     ) -> None:
+        self._client_generator = client_generator
         self._session = OAuth2Client(
             client_id=client_id,
             client_secret=client_secret,
@@ -47,14 +54,6 @@ class TwitterOAuth2RealSession(TwitterOAuth2Session):
             transport=transport,
             verify=verify,
         )
-        self._rate_limit_manager = rate_limit_manager
-        self._event_hooks = event_hooks
-        self._limits = limits
-        self._mounts = mounts
-        self._proxies = proxies
-        self._timeout = timeout
-        self._transport = transport
-        self._verify = verify
 
     def generate_authorization_url(self) -> OAuth2Authorization:
         url: Oauth2AuthorizeUrl = "https://twitter.com/i/oauth2/authorize"
@@ -97,17 +96,5 @@ class TwitterOAuth2RealSession(TwitterOAuth2Session):
             **response,
         )
 
-    def generate_client(self, access_token: str):
-        from twitter_api.client.twitter_api_real_client import TwitterApiRealClient
-
-        return TwitterApiRealClient.from_oauth2_bearer_token(
-            bearer_token=access_token,
-            rate_limit_manager=self._rate_limit_manager,
-            event_hooks=self._event_hooks,
-            limits=self._limits,
-            mounts=self._mounts,
-            proxies=self._proxies,
-            timeout=self._timeout,
-            transport=self._transport,
-            verify=self._verify,
-        )
+    def generate_client(self, access_token: str) -> Client:
+        return self._client_generator(access_token)

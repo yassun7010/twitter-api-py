@@ -147,22 +147,32 @@ class TwitterApiAsyncRealClient(TwitterApiAsyncClient):
         from twitter_api.client.oauth_flow.twitter_oauth2_authorization_client import (
             TwitterOAuth2AuthorizeClient,
         )
-        from twitter_api.client.oauth_session.twitter_oauth2_async_real_session import (
-            TwitterOAuth2AsyncRealSession,
+        from twitter_api.client.oauth_session.twitter_oauth2_real_session import (
+            TwitterOAuth2RealSession,
         )
 
-        session = TwitterOAuth2AsyncRealSession(
+        session = TwitterOAuth2RealSession(
+            client_generator=lambda access_token: TwitterApiAsyncRealClient.from_oauth2_bearer_token(
+                access_token,
+                rate_limit_manager=rate_limit_manager,
+                event_hooks=event_hooks,
+                limits=limits,
+                mounts=mounts,
+                proxies=proxies,
+                timeout=timeout,
+                transport=transport,
+                verify=verify,
+            ),
             client_id=client_id,
             client_secret=client_secret,
             callback_url=callback_url,
             scope=scope,
-            rate_limit_manager=rate_limit_manager,
             event_hooks=event_hooks,
             limits=limits,
-            mounts=mounts,
+            mounts=None,
             proxies=proxies,
             timeout=timeout,
-            transport=transport,
+            transport=None,
             verify=verify,
         )
 

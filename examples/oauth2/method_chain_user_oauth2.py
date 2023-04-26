@@ -2,13 +2,14 @@ import os
 import sys
 
 from twitter_api.client import TwitterApiClient
+from twitter_api.client.twitter_api_async_client import TwitterApiAsyncClient
 from twitter_api.error import TwitterApiError
 
 YOUR_CALLBACK_URL = os.environ["CALLBACK_URL"]
 
 try:
     with (
-        TwitterApiClient.from_oauth2_user_flow_env(
+        TwitterApiAsyncClient.from_oauth2_user_flow_env(
             callback_url=YOUR_CALLBACK_URL,
             scope=[
                 "tweet.read",
