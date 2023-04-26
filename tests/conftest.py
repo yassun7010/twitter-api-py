@@ -1,4 +1,5 @@
 import os
+import sys
 from textwrap import dedent
 
 import pytest
@@ -10,6 +11,35 @@ from twitter_api.client.twitter_api_async_mock_client import TwitterApiAsyncMock
 from twitter_api.client.twitter_api_async_real_client import TwitterApiAsyncRealClient
 from twitter_api.client.twitter_api_mock_client import TwitterApiMockClient
 from twitter_api.client.twitter_api_real_client import TwitterApiRealClient
+from twitter_api.error import TwitterApiException
+
+
+class PytestTwitterApiException(TwitterApiException):
+    """
+    Pytest で発生した TwitterAPI の例外は詳細な情報としてログに出したい。
+    そのため、ログのフォーマットを詳細に変換するエラークラスを用意。
+    """
+
+    def __init__(self, error: TwitterApiException):
+        self._error = error
+
+    def __str__(self) -> str:
+        return str(self._error.info.json(indent=2))
+
+
+def print_detail_twitter_api_exception_message(func):
+    def wrapper(*args, **kwargs):
+        try:
+            func(*args, **kwargs)
+        except TwitterApiException as error:
+            raise PytestTwitterApiException(error)
+
+    return wrapper
+
+
+def pytest_collection_modifyitems(items):
+    for item in items:
+        item.obj = print_detail_twitter_api_exception_message(item.obj)
 
 
 def synthetic_monitoring_is_disable() -> dict:
