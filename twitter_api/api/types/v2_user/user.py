@@ -1,6 +1,7 @@
 from datetime import datetime
 from typing import Any, Optional
 
+from twitter_api.api.types.v2_user.user_verified_type import UserVerifiedType
 from twitter_api.api.types.v2_user.username import Username
 from twitter_api.types.extra_permissive_model import ExtraPermissiveModel
 from twitter_api.types.http import Url
@@ -23,4 +24,5 @@ class User(ExtraPermissiveModel):
     public_metrics: Optional[dict[str, Any]] = None
     url: Optional[Url] = None
     verified: Optional[bool] = None
+    verified_type: Optional[UserVerifiedType] = None
     withheld: Optional[dict[str, Any]] = None
