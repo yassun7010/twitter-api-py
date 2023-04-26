@@ -1,5 +1,3 @@
-from datetime import datetime
-
 import pytest
 
 from twitter_api.rate_limit.manager.handlers.sleep_rate_limit_handler import (

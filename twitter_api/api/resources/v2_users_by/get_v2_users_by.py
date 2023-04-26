@@ -9,7 +9,6 @@ from twitter_api.api.types.v2_tweet.tweet_field import TweetField
 from twitter_api.api.types.v2_user.user import User
 from twitter_api.api.types.v2_user.user_expantion import UserExpansion
 from twitter_api.api.types.v2_user.user_field import UserField
-from twitter_api.api.types.v2_user.user_id import UserId
 from twitter_api.api.types.v2_user.username import Username
 from twitter_api.rate_limit.rate_limit import rate_limit
 from twitter_api.types.comma_separatable import CommaSeparatable, comma_separated_str

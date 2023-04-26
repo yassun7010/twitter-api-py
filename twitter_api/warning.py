@@ -1,4 +1,4 @@
-from twitter_api.error import TwitterApiException, TwitterApiExceptionInfo
+from twitter_api.error import TwitterApiException
 from twitter_api.rate_limit.types.rate_limit_info import RateLimitInfo
 
 

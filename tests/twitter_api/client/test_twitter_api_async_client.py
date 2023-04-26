@@ -3,7 +3,6 @@ import pytest
 from tests.conftest import synthetic_monitoring_is_disable
 from twitter_api.client.twitter_api_async_client import TwitterApiAsyncClient
 from twitter_api.client.twitter_api_async_real_client import TwitterApiAsyncRealClient
-from twitter_api.client.twitter_api_real_client import TwitterApiRealClient
 
 
 class TestTwitterApiAsyncClient:

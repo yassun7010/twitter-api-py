@@ -6,7 +6,6 @@ from typing import Optional
 from twitter_api.rate_limit.manager.handlers.raise_rate_limit_handler import (
     RaiseRateLimitHandler,
 )
-from twitter_api.rate_limit.manager.rate_limit_manager import RateLimitManager
 from twitter_api.rate_limit.types.rate_limit_info import RateLimitInfo
 
 

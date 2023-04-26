@@ -9,7 +9,6 @@ from twitter_api.api.resources.oauth2_token.post_oauth2_token import (
 )
 from twitter_api.client.twitter_api_async_mock_client import TwitterApiAsyncMockClient
 from twitter_api.client.twitter_api_mock_client import TwitterApiMockClient
-from twitter_api.client.twitter_api_real_client import TwitterApiRealClient
 from twitter_api.types.extra_permissive_model import get_extra_fields
 
 

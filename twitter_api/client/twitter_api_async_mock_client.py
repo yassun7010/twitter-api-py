@@ -2,7 +2,6 @@ from typing import Mapping, Optional, Self
 
 from twitter_api.api.types.v2_scope import Scope
 from twitter_api.client.twitter_api_async_client import TwitterApiAsyncClient
-from twitter_api.client.twitter_api_mock_client import TwitterApiMockClient
 from twitter_api.rate_limit.manager import DEFAULT_RATE_LIMIT_MANAGER
 from twitter_api.rate_limit.manager.rate_limit_manager import RateLimitManager
 from twitter_api.types import httpx

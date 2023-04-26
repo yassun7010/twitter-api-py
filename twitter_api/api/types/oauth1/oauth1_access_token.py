@@ -1,6 +1,3 @@
-from typing_extensions import Literal
-
-from twitter_api.api.types.v2_scope import Scope
 from twitter_api.api.types.v2_user.user_id import UserId
 from twitter_api.client.oauth_session.twitter_oauth1_session import TwitterOAuth1Session
 from twitter_api.types.chainable import Chainable

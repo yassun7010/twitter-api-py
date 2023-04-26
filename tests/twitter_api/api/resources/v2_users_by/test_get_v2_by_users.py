@@ -9,7 +9,6 @@ from twitter_api.api.resources.v2_users_by.get_v2_users_by import (
 from twitter_api.api.types.v2_user.user import User
 from twitter_api.client.twitter_api_async_mock_client import TwitterApiAsyncMockClient
 from twitter_api.client.twitter_api_mock_client import TwitterApiMockClient
-from twitter_api.error import UnsupportedAuthenticationError
 from twitter_api.types.extra_permissive_model import get_extra_fields
 
 

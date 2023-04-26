@@ -11,7 +11,6 @@ from twitter_api.api.types.v2_user.user import User
 from twitter_api.api.types.v2_user.user_expantion import ALL_USER_EXPANSIONS
 from twitter_api.api.types.v2_user.user_field import ALL_USER_FIELDS
 from twitter_api.client.twitter_api_async_mock_client import TwitterApiAsyncMockClient
-from twitter_api.client.twitter_api_client import TwitterApiClient
 from twitter_api.client.twitter_api_mock_client import TwitterApiMockClient
 from twitter_api.client.twitter_api_real_client import TwitterApiRealClient
 from twitter_api.types.extra_permissive_model import get_extra_fields
