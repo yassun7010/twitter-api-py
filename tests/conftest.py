@@ -1,5 +1,4 @@
 import os
-import sys
 from textwrap import dedent
 
 import pytest
@@ -27,19 +26,11 @@ class PytestTwitterApiException(TwitterApiException):
         return str(self._error.info.json(indent=2))
 
 
-def print_detail_twitter_api_exception_message(func):
-    def wrapper(*args, **kwargs):
-        try:
-            func(*args, **kwargs)
-        except TwitterApiException as error:
-            raise PytestTwitterApiException(error)
-
-    return wrapper
-
-
-def pytest_collection_modifyitems(items):
-    for item in items:
-        item.obj = print_detail_twitter_api_exception_message(item.obj)
+def pytest_runtest_call(item: pytest.Item):
+    try:
+        item.runtest()
+    except TwitterApiException as error:
+        raise PytestTwitterApiException(error) from error
 
 
 def synthetic_monitoring_is_disable() -> dict:
