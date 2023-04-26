@@ -4,6 +4,7 @@ from textwrap import dedent
 import pytest
 
 from twitter_api.api.types.v2_tweet.tweet import Tweet
+from twitter_api.api.types.v2_user.user import User
 from twitter_api.api.types.v2_user.user_id import UserId
 from twitter_api.client.twitter_api_async_mock_client import TwitterApiAsyncMockClient
 from twitter_api.client.twitter_api_async_real_client import TwitterApiAsyncRealClient
@@ -224,4 +225,13 @@ def intro_tweet() -> Tweet:
             """
         ).strip(),
         edit_history_tweet_ids=["1460323737035677698"],
+    )
+
+
+@pytest.fixture
+def twitter_dev_user() -> User:
+    return User(
+        id="2244994945",
+        name="Twitter Dev",
+        username="TwitterDev",
     )

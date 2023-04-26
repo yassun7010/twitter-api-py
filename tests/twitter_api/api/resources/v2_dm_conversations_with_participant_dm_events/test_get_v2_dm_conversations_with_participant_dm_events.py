@@ -9,11 +9,8 @@ from twitter_api.api.resources.v2_dm_conversations_with_participant_dm_events.ge
 from twitter_api.api.types.v2_dm_event.dm_event_expansion import ALL_DM_EVENT_EXPANSIONS
 from twitter_api.api.types.v2_dm_event.dm_event_field import ALL_DM_EVENT_FIELDS
 from twitter_api.api.types.v2_dm_event.dm_event_type import ALL_DM_EVENT_TYPES
-from twitter_api.api.types.v2_expansion import ALL_EXPANSIONS
-from twitter_api.api.types.v2_tweet.tweet_field import (
-    ALL_PUBLIC_TWEET_FIELDS,
-    ALL_TWEET_FIELDS,
-)
+from twitter_api.api.types.v2_tweet.tweet_field import ALL_PUBLIC_TWEET_FIELDS
+from twitter_api.api.types.v2_user.user import User
 from twitter_api.api.types.v2_user.user_field import ALL_USER_FIELDS
 from twitter_api.api.types.v2_user.user_id import UserId
 from twitter_api.client.twitter_api_async_mock_client import TwitterApiAsyncMockClient
@@ -102,6 +99,7 @@ class TestMockGetV2DmConversationsWithParticipantDmEvents:
         self,
         oauth2_app_mock_client: TwitterApiMockClient,
         json_filename: str,
+        twitter_dev_user: User,
     ):
         response_body = (
             GetV2DmConversationsWithParticipantDmEventsResponseBody.parse_file(
@@ -120,7 +118,7 @@ class TestMockGetV2DmConversationsWithParticipantDmEvents:
             .request(
                 "https://api.twitter.com/2/dm_conversations/with/:participant_id/dm_events"
             )
-            .get("2244994945")
+            .get(twitter_dev_user.id)
         ) == response_body
 
 
@@ -129,6 +127,7 @@ class TestAsyncMockGetV2DmConversationsWithParticipantDmEvents:
     async def test_async_mock_get_v2_dm_conversations_with_participant_dm_events(
         self,
         oauth2_app_async_mock_client: TwitterApiAsyncMockClient,
+        twitter_dev_user: User,
     ):
         response_body = GetV2DmConversationsWithParticipantDmEventsResponseBody.parse_file(
             json_test_data(
@@ -148,7 +147,7 @@ class TestAsyncMockGetV2DmConversationsWithParticipantDmEvents:
                 .request(
                     "https://api.twitter.com/2/dm_conversations/with/:participant_id/dm_events"
                 )
-                .get("2244994945")
+                .get(twitter_dev_user.id)
             )
             == response_body
         )
@@ -156,9 +155,9 @@ class TestAsyncMockGetV2DmConversationsWithParticipantDmEvents:
     @pytest.mark.asyncio
     async def test_async_mock_get_paging_response_body_iter_v2_dm_conversations_with_participant_dm_events(
         self,
-        participant_id: UserId,
         oauth2_app_async_mock_client: TwitterApiAsyncMockClient,
         json_files: list[str],
+        twitter_dev_user: User,
     ):
         response_bodies = [
             GetV2DmConversationsWithParticipantDmEventsResponseBody.parse_file(
@@ -180,16 +179,16 @@ class TestAsyncMockGetV2DmConversationsWithParticipantDmEvents:
                 .request(
                     "https://api.twitter.com/2/dm_conversations/with/:participant_id/dm_events"
                 )
-                .get_paging_response_body_iter(participant_id)
+                .get_paging_response_body_iter(twitter_dev_user.id)
             )
         ] == response_bodies
 
     @pytest.mark.asyncio
     async def test_async_mock_get_collected_paging_response_body_v2_search(
         self,
-        participant_id: UserId,
         oauth2_app_async_mock_client: TwitterApiAsyncMockClient,
         json_files: list[str],
+        twitter_dev_user: User,
     ):
         response_body = GetV2DmConversationsWithParticipantDmEventsResponseBody.parse_file(
             json_test_data(
@@ -211,7 +210,7 @@ class TestAsyncMockGetV2DmConversationsWithParticipantDmEvents:
                 .request(
                     "https://api.twitter.com/2/dm_conversations/with/:participant_id/dm_events"
                 )
-                .get_collected_paging_response_body(participant_id)
+                .get_collected_paging_response_body(twitter_dev_user.id)
             )
             == response_body
         )
