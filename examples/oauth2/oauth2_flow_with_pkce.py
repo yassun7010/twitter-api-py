@@ -66,4 +66,4 @@ try:
         )
 
 except TwitterApiError as error:
-    print(error, file=sys.stderr)
+    print(error.info.json(indent=2), file=sys.stderr)

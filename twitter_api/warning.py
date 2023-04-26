@@ -11,17 +11,11 @@ class RateLimitOverWarning(TwitterApiWarning):
         self._rate_limit = rate_limit
 
     @property
-    def info(self) -> ExceptionInfo:
-        return ExceptionInfo(
-            type=self.__class__.__name__,
-            message=f"レートリミットを超えています。{self._rate_limit}",
-        )
+    def message(self) -> str:
+        return f"レートリミットを超えています。{self._rate_limit}"
 
 
 class UnmanagedRateLimitOverWarning(TwitterApiWarning):
     @property
-    def info(self) -> ExceptionInfo:
-        return ExceptionInfo(
-            type=self.__class__.__name__,
-            message=f"管理していないレートリミットに遭遇しました。",
-        )
+    def message(self) -> str:
+        return f"管理していないレートリミットに遭遇しました。"

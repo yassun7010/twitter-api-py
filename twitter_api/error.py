@@ -27,11 +27,18 @@ class TwitterApiException(Exception):
 
     @property
     @abstractmethod
-    def info(self) -> ExceptionInfo:
+    def message(self) -> str:
         ...
 
+    @property
+    def info(self) -> ExceptionInfo:
+        return ExceptionInfo(
+            type=self.__class__.__name__,
+            message=self.message,
+        )
+
     def __str__(self) -> str:
-        return self.info.message
+        return self.message
 
 
 class TwitterApiError(TwitterApiException):
@@ -62,66 +69,24 @@ class TwitterApiErrorCode(Enum):
     GatewayTimeout = 504
 
 
-def code2message(error_code: int):
-    match error_code:
-        case TwitterApiErrorCode.OK.value:
-            return "API が成功しています。"
-        case TwitterApiErrorCode.NotModified.value:
-            return "返却する新しいデータがありません。"
-        case TwitterApiErrorCode.BadRequest.value:
-            return "リクエストの形式が間違っています。"
-        case TwitterApiErrorCode.Unauthorized.value:
-            return "このリクエストは証認されていません。"
-        case TwitterApiErrorCode.Forbidden.value:
-            return "このリクエストは許可されていません。"
-        case TwitterApiErrorCode.NotFound.value:
-            return "データが見つかりません。"
-        case TwitterApiErrorCode.NotAcceptable.value:
-            return "アクセスできません。"
-        case TwitterApiErrorCode.ConnectionException.value:
-            return "接続に失敗しました。"
-        case TwitterApiErrorCode.Gone.value:
-            return "このリソースは利用できなくなりました。"
-        case TwitterApiErrorCode.UnprocessableEntity.value:
-            return "処理できないエンティティです。"
-        case TwitterApiErrorCode.TooManyRequests.value:
-            return "レートリミットか Tweet Cap が制限を超えました。"
-        case TwitterApiErrorCode.InternalServerError.value:
-            return "Twitter API の内部でエラーが発生しました。"
-        case TwitterApiErrorCode.BadGateway.value:
-            return "Twitter API がダウンしているか、アップグレード中です。"
-        case TwitterApiErrorCode.ServiceUnavailable.value:
-            return "リクエスト数が多く処理できません。後でもう一度お試しください。"
-        case TwitterApiErrorCode.GatewayTimeout.value:
-            return "Twitter API が内部的にダウンしています。後でもう一度お試しください。"
-        case _:
-            return "Twitter API の応答が 200 ではありません。"
-
-
 class NeverError(TwitterApiError):
     def __init__(self, never: Never):
         self._never = never
 
     @property
-    def info(self) -> ExceptionInfo:
-        return ExceptionInfo(
-            type=self.__class__.__name__,
-            message=f'到達できない入力 "{self._never}" が与えられました。',
-        )
+    def message(self) -> str:
+        return f'到達できない入力 "{self._never}" が与えられました。'
 
 
 class MockResponseNotFound(TwitterApiError):
     @property
-    def info(self) -> ExceptionInfo:
-        return ExceptionInfo(
-            type=self.__class__.__name__,
-            message=dedent(
-                """
-                モックとして出力したいデータが入力されていません。
-                `client.inject_*(response)` で定義されているメソッドを用い、
-                レスポンスデータを定義した後で、API を呼んでください。
-                """
-            ),
+    def message(self) -> str:
+        return dedent(
+            """
+            モックとして出力したいデータが入力されていません。
+            `client.inject_*(response)` で定義されているメソッドを用い、
+            レスポンスデータを定義した後で、API を呼んでください。
+            """
         )
 
 
@@ -131,10 +96,14 @@ class MockInjectionResponseWrong(TwitterApiError):
         self._expected_endpoint = expected_endpoint
 
     @property
+    def message(self) -> str:
+        return "出力したいレスポンスのエンドポイントが異なっています。"
+
+    @property
     def info(self) -> ExceptionInfo:
         return ExceptionInfo(
             type=self.__class__.__name__,
-            message=("出力したいレスポンスのエンドポイントが異なっています。"),
+            message=self.message,
             **dict(
                 expected_endpoint=self._expected_endpoint,
                 endpoint=self._endpoint,
@@ -149,10 +118,14 @@ class TwitterApiResponseModelBodyDecodeError(TwitterApiError):
         self._extra = extra
 
     @property
+    def message(self) -> str:
+        return "Twitter API の応答のボディを JSON でパースできませんでした。"
+
+    @property
     def info(self) -> ExceptionInfo:
         return ExceptionInfo(
             type=self.__class__.__name__,
-            message="Twitter API の応答のボディを JSON でパースできませんでした。",
+            message=self.message,
             **dict(endpoint=self._endpoint, content=self._content),
             **exclude_none(self._extra),
         )
@@ -178,10 +151,46 @@ class TwitterApiResponseFailed(TwitterApiError):
         self._response_body = response_body
 
     @property
+    def message(self) -> str:
+        match self.status_code:
+            case TwitterApiErrorCode.OK.value:
+                return "API が成功しています。"
+            case TwitterApiErrorCode.NotModified.value:
+                return "返却する新しいデータがありません。"
+            case TwitterApiErrorCode.BadRequest.value:
+                return "リクエストの形式が間違っています。"
+            case TwitterApiErrorCode.Unauthorized.value:
+                return "このリクエストは証認されていません。"
+            case TwitterApiErrorCode.Forbidden.value:
+                return "このリクエストは許可されていません。"
+            case TwitterApiErrorCode.NotFound.value:
+                return "データが見つかりません。"
+            case TwitterApiErrorCode.NotAcceptable.value:
+                return "アクセスできません。"
+            case TwitterApiErrorCode.ConnectionException.value:
+                return "接続に失敗しました。"
+            case TwitterApiErrorCode.Gone.value:
+                return "このリソースは利用できなくなりました。"
+            case TwitterApiErrorCode.UnprocessableEntity.value:
+                return "処理できないエンティティです。"
+            case TwitterApiErrorCode.TooManyRequests.value:
+                return "レートリミットか Tweet Cap が制限を超えました。"
+            case TwitterApiErrorCode.InternalServerError.value:
+                return "Twitter API の内部でエラーが発生しました。"
+            case TwitterApiErrorCode.BadGateway.value:
+                return "Twitter API がダウンしているか、アップグレード中です。"
+            case TwitterApiErrorCode.ServiceUnavailable.value:
+                return "リクエスト数が多く処理できません。後でもう一度お試しください。"
+            case TwitterApiErrorCode.GatewayTimeout.value:
+                return "Twitter API が内部的にダウンしています。後でもう一度お試しください。"
+            case _:
+                return "Twitter API の応答が 200 ではありません。"
+
+    @property
     def info(self) -> ExceptionInfo:
         return ExceptionInfo(
             type=self.__class__.__name__,
-            message=code2message(self.status_code),
+            message=self.message,
             **OrderedDict(
                 endpoint=self._endpoint,
                 url=self._url,
@@ -200,11 +209,8 @@ class TwitterApiResponseFailed(TwitterApiError):
 
 class OAuth2UserAccessTokenExpired(TwitterApiError):
     @property
-    def info(self) -> ExceptionInfo:
-        return ExceptionInfo(
-            type=self.__class__.__name__,
-            message="OAuth2.0 のユーザ認証の ACCESS_TOKEN が失効しました。再度発行してください。",
-        )
+    def message(self) -> str:
+        return "OAuth2.0 のユーザ認証の ACCESS_TOKEN が失効しました。再度発行してください。"
 
 
 class TwitterApiResponseError(TwitterApiError):
@@ -214,10 +220,14 @@ class TwitterApiResponseError(TwitterApiError):
         self._extra = extra
 
     @property
+    def message(self) -> str:
+        return "Twitter API の応答でエラーが返りました。"
+
+    @property
     def info(self) -> ExceptionInfo:
         return ExceptionInfo(
             type=self.__class__.__name__,
-            message="Twitter API の応答でエラーが返りました。",
+            message=self.message,
             **dict(
                 endpoint=self._endpoint,
                 data=exclude_none(self._data),
@@ -235,6 +245,10 @@ class TwitterApiResponseValidationError(TwitterApiError):
         self._error = error
 
     @property
+    def message(self) -> str:
+        return "Twitter API の応答の型が想定とは一致していません。"
+
+    @property
     def info(self) -> ExceptionInfo:
         response_body = exclude_none(self._response_body)
 
@@ -246,7 +260,7 @@ class TwitterApiResponseValidationError(TwitterApiError):
 
         return ExceptionInfo(
             type=self.__class__.__name__,
-            message="Twitter API の応答の型が想定とは一致していません。",
+            message=self.message,
             **dict(
                 endpoint=self._endpoint,
                 response_body=response_body,
@@ -262,10 +276,14 @@ class TwitterApiOAuthTokenV1NotFound(TwitterApiError):
         self._extra = extra
 
     @property
+    def message(self) -> str:
+        return "OAuth V1 のトークンが見つかりませんでした。"
+
+    @property
     def info(self) -> ExceptionInfo:
         return ExceptionInfo(
             type=self.__class__.__name__,
-            message="OAuth V1 のトークンが見つかりませんでした。",
+            message=self.message,
             **dict(
                 endpoint=self._endpoint,
                 data=exclude_none(self._data),
@@ -280,14 +298,8 @@ class TwitterApiOAuthVersionWrong(TwitterApiError):
         self._expected_version = expected_version
 
     @property
-    def info(self) -> ExceptionInfo:
-        return ExceptionInfo(
-            type=self.__class__.__name__,
-            message=(
-                f'OAuth のバージョンは "{self._version}" ではなく'
-                f' "{self._expected_version}" である必要があります。'
-            ),
-        )
+    def message(self) -> str:
+        return f'OAuth のバージョンは "{self._version}" ではなく "{self._expected_version}" である必要があります。'
 
 
 class RateLimitOverError(TwitterApiError):
@@ -295,17 +307,11 @@ class RateLimitOverError(TwitterApiError):
         self._rate_limit = rate_limit
 
     @property
-    def info(self) -> ExceptionInfo:
-        return ExceptionInfo(
-            type=self.__class__.__name__,
-            message=f"レートリミットを超えています。{self._rate_limit}",
-        )
+    def message(self) -> str:
+        return f"レートリミットを超えています。{self._rate_limit}"
 
 
 class UnsupportedAuthenticationError(TwitterApiError):
     @property
-    def info(self) -> ExceptionInfo:
-        return ExceptionInfo(
-            type=self.__class__.__name__,
-            message="この認証方法でのアクセスは許可されていません。",
-        )
+    def message(self) -> str:
+        return "この認証方法でのアクセスは許可されていません。"

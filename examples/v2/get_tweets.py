@@ -32,4 +32,4 @@ try:
             print(tweet.json(indent=2))
 
 except TwitterApiError as error:
-    print(error, file=sys.stderr)
+    print(error.info.json(indent=2), file=sys.stderr)
