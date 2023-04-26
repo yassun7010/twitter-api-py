@@ -1,4 +1,5 @@
 import json
+from abc import abstractmethod
 from collections import OrderedDict
 from enum import Enum
 from textwrap import dedent
@@ -15,17 +16,22 @@ from .types.oauth import OAuthVersion
 from .utils._functional import exclude_none
 
 
-class ErrorMessage(ExtraPermissiveModel):
+class ExceptionInfo(ExtraPermissiveModel):
     type: str
     message: str
     erros: Optional[list[str]] = None
 
-    def to_message(self) -> str:
-        return self.json()
-
 
 class TwitterApiException(Exception):
     ...
+
+    @property
+    @abstractmethod
+    def info(self) -> ExceptionInfo:
+        ...
+
+    def __str__(self) -> str:
+        return self.info.message
 
 
 class TwitterApiError(TwitterApiException):
@@ -96,16 +102,18 @@ class NeverError(TwitterApiError):
     def __init__(self, never: Never):
         self._never = never
 
-    def __str__(self) -> str:
-        return ErrorMessage(
+    @property
+    def info(self) -> ExceptionInfo:
+        return ExceptionInfo(
             type=self.__class__.__name__,
             message=f'到達できない入力 "{self._never}" が与えられました。',
-        ).to_message()
+        )
 
 
 class MockResponseNotFound(TwitterApiError):
-    def __str__(self) -> str:
-        return ErrorMessage(
+    @property
+    def info(self) -> ExceptionInfo:
+        return ExceptionInfo(
             type=self.__class__.__name__,
             message=dedent(
                 """
@@ -114,7 +122,7 @@ class MockResponseNotFound(TwitterApiError):
                 レスポンスデータを定義した後で、API を呼んでください。
                 """
             ),
-        ).to_message()
+        )
 
 
 class MockInjectionResponseWrong(TwitterApiError):
@@ -122,15 +130,16 @@ class MockInjectionResponseWrong(TwitterApiError):
         self._endpoint = endpoint
         self._expected_endpoint = expected_endpoint
 
-    def __str__(self) -> str:
-        return ErrorMessage(
+    @property
+    def info(self) -> ExceptionInfo:
+        return ExceptionInfo(
             type=self.__class__.__name__,
             message=("出力したいレスポンスのエンドポイントが異なっています。"),
             **dict(
                 expected_endpoint=self._expected_endpoint,
                 endpoint=self._endpoint,
             ),
-        ).to_message()
+        )
 
 
 class TwitterApiResponseModelBodyDecodeError(TwitterApiError):
@@ -139,13 +148,14 @@ class TwitterApiResponseModelBodyDecodeError(TwitterApiError):
         self._content = content
         self._extra = extra
 
-    def __str__(self) -> str:
-        return ErrorMessage(
+    @property
+    def info(self) -> ExceptionInfo:
+        return ExceptionInfo(
             type=self.__class__.__name__,
             message="Twitter API の応答のボディを JSON でパースできませんでした。",
             **dict(endpoint=self._endpoint, content=self._content),
             **exclude_none(self._extra),
-        ).to_message()
+        )
 
 
 class TwitterApiResponseFailed(TwitterApiError):
@@ -167,8 +177,9 @@ class TwitterApiResponseFailed(TwitterApiError):
         self.status_code = response_status_code
         self._response_body = response_body
 
-    def __str__(self) -> str:
-        return ErrorMessage(
+    @property
+    def info(self) -> ExceptionInfo:
+        return ExceptionInfo(
             type=self.__class__.__name__,
             message=code2message(self.status_code),
             **OrderedDict(
@@ -184,15 +195,16 @@ class TwitterApiResponseFailed(TwitterApiError):
                     else self._response_body
                 ),
             ),
-        ).to_message()
+        )
 
 
 class OAuth2UserAccessTokenExpired(TwitterApiError):
-    def __str__(self) -> str:
-        return ErrorMessage(
+    @property
+    def info(self) -> ExceptionInfo:
+        return ExceptionInfo(
             type=self.__class__.__name__,
             message="OAuth2.0 のユーザ認証の ACCESS_TOKEN が失効しました。再度発行してください。",
-        ).to_message()
+        )
 
 
 class TwitterApiResponseError(TwitterApiError):
@@ -201,8 +213,9 @@ class TwitterApiResponseError(TwitterApiError):
         self._data = data
         self._extra = extra
 
-    def __str__(self) -> str:
-        return ErrorMessage(
+    @property
+    def info(self) -> ExceptionInfo:
+        return ExceptionInfo(
             type=self.__class__.__name__,
             message="Twitter API の応答でエラーが返りました。",
             **dict(
@@ -210,7 +223,7 @@ class TwitterApiResponseError(TwitterApiError):
                 data=exclude_none(self._data),
             ),
             **exclude_none(self._extra),
-        ).to_message()
+        )
 
 
 class TwitterApiResponseValidationError(TwitterApiError):
@@ -221,7 +234,8 @@ class TwitterApiResponseValidationError(TwitterApiError):
         self._response_body = response_body
         self._error = error
 
-    def __str__(self) -> str:
+    @property
+    def info(self) -> ExceptionInfo:
         response_body = exclude_none(self._response_body)
 
         # 文字が長すぎる場合、切り取る。
@@ -230,7 +244,7 @@ class TwitterApiResponseValidationError(TwitterApiError):
         if len(response_body_str) > max_length:
             response_body = response_body_str[: max_length - 3] + "..."
 
-        return ErrorMessage(
+        return ExceptionInfo(
             type=self.__class__.__name__,
             message="Twitter API の応答の型が想定とは一致していません。",
             **dict(
@@ -238,7 +252,7 @@ class TwitterApiResponseValidationError(TwitterApiError):
                 response_body=response_body,
                 error=self._error.errors(),
             ),
-        ).to_message()
+        )
 
 
 class TwitterApiOAuthTokenV1NotFound(TwitterApiError):
@@ -247,8 +261,9 @@ class TwitterApiOAuthTokenV1NotFound(TwitterApiError):
         self._data = data
         self._extra = extra
 
-    def __str__(self) -> str:
-        return ErrorMessage(
+    @property
+    def info(self) -> ExceptionInfo:
+        return ExceptionInfo(
             type=self.__class__.__name__,
             message="OAuth V1 のトークンが見つかりませんでした。",
             **dict(
@@ -256,7 +271,7 @@ class TwitterApiOAuthTokenV1NotFound(TwitterApiError):
                 data=exclude_none(self._data),
             ),
             **exclude_none(self._extra),
-        ).to_message()
+        )
 
 
 class TwitterApiOAuthVersionWrong(TwitterApiError):
@@ -264,24 +279,33 @@ class TwitterApiOAuthVersionWrong(TwitterApiError):
         self._version = version
         self._expected_version = expected_version
 
-    def __str__(self) -> str:
-        return ErrorMessage(
+    @property
+    def info(self) -> ExceptionInfo:
+        return ExceptionInfo(
             type=self.__class__.__name__,
             message=(
                 f'OAuth のバージョンは "{self._version}" ではなく'
                 f' "{self._expected_version}" である必要があります。'
             ),
-        ).to_message()
+        )
 
 
 class RateLimitOverError(TwitterApiError):
     def __init__(self, rate_limit: RateLimitInfo) -> None:
         self._rate_limit = rate_limit
 
-    def __str__(self) -> str:
-        return f"レートリミットを超えています。{self._rate_limit}"
+    @property
+    def info(self) -> ExceptionInfo:
+        return ExceptionInfo(
+            type=self.__class__.__name__,
+            message=f"レートリミットを超えています。{self._rate_limit}",
+        )
 
 
 class UnsupportedAuthenticationError(TwitterApiError):
-    def __str__(self) -> str:
-        return "この認証方法でのアクセスは許可されていません。"
+    @property
+    def info(self) -> ExceptionInfo:
+        return ExceptionInfo(
+            type=self.__class__.__name__,
+            message="この認証方法でのアクセスは許可されていません。",
+        )
