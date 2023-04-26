@@ -16,7 +16,7 @@ from .types.oauth import OAuthVersion
 from .utils._functional import exclude_none
 
 
-class ExceptionInfo(ExtraPermissiveModel):
+class TwitterApiExceptionInfo(ExtraPermissiveModel):
     type: str
     message: str
     erros: Optional[list[str]] = None
@@ -31,8 +31,8 @@ class TwitterApiException(Exception):
         ...
 
     @property
-    def info(self) -> ExceptionInfo:
-        return ExceptionInfo(
+    def info(self) -> TwitterApiExceptionInfo:
+        return TwitterApiExceptionInfo(
             type=self.__class__.__name__,
             message=self.message,
         )
@@ -100,8 +100,8 @@ class MockInjectionResponseWrong(TwitterApiError):
         return "出力したいレスポンスのエンドポイントが異なっています。"
 
     @property
-    def info(self) -> ExceptionInfo:
-        return ExceptionInfo(
+    def info(self) -> TwitterApiExceptionInfo:
+        return TwitterApiExceptionInfo(
             type=self.__class__.__name__,
             message=self.message,
             **dict(
@@ -122,8 +122,8 @@ class TwitterApiResponseModelBodyDecodeError(TwitterApiError):
         return "Twitter API の応答のボディを JSON でパースできませんでした。"
 
     @property
-    def info(self) -> ExceptionInfo:
-        return ExceptionInfo(
+    def info(self) -> TwitterApiExceptionInfo:
+        return TwitterApiExceptionInfo(
             type=self.__class__.__name__,
             message=self.message,
             **dict(endpoint=self._endpoint, content=self._content),
@@ -187,8 +187,8 @@ class TwitterApiResponseFailed(TwitterApiError):
                 return "Twitter API の応答が 200 ではありません。"
 
     @property
-    def info(self) -> ExceptionInfo:
-        return ExceptionInfo(
+    def info(self) -> TwitterApiExceptionInfo:
+        return TwitterApiExceptionInfo(
             type=self.__class__.__name__,
             message=self.message,
             **OrderedDict(
@@ -224,8 +224,8 @@ class TwitterApiResponseError(TwitterApiError):
         return "Twitter API の応答でエラーが返りました。"
 
     @property
-    def info(self) -> ExceptionInfo:
-        return ExceptionInfo(
+    def info(self) -> TwitterApiExceptionInfo:
+        return TwitterApiExceptionInfo(
             type=self.__class__.__name__,
             message=self.message,
             **dict(
@@ -249,7 +249,7 @@ class TwitterApiResponseValidationError(TwitterApiError):
         return "Twitter API の応答の型が想定とは一致していません。"
 
     @property
-    def info(self) -> ExceptionInfo:
+    def info(self) -> TwitterApiExceptionInfo:
         response_body = exclude_none(self._response_body)
 
         # 文字が長すぎる場合、切り取る。
@@ -258,7 +258,7 @@ class TwitterApiResponseValidationError(TwitterApiError):
         if len(response_body_str) > max_length:
             response_body = response_body_str[: max_length - 3] + "..."
 
-        return ExceptionInfo(
+        return TwitterApiExceptionInfo(
             type=self.__class__.__name__,
             message=self.message,
             **dict(
@@ -280,8 +280,8 @@ class TwitterApiOAuthTokenV1NotFound(TwitterApiError):
         return "OAuth V1 のトークンが見つかりませんでした。"
 
     @property
-    def info(self) -> ExceptionInfo:
-        return ExceptionInfo(
+    def info(self) -> TwitterApiExceptionInfo:
+        return TwitterApiExceptionInfo(
             type=self.__class__.__name__,
             message=self.message,
             **dict(
