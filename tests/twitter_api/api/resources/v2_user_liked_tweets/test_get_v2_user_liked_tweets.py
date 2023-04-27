@@ -6,8 +6,10 @@ from tests.data import json_test_data
 from twitter_api.api.resources.v2_user_liked_tweets.get_v2_user_liked_tweets import (
     GetV2UserLikedTweetsResponseBody,
 )
+from twitter_api.api.types.v2_user.user import User
 from twitter_api.client.twitter_api_async_mock_client import TwitterApiAsyncMockClient
 from twitter_api.client.twitter_api_mock_client import TwitterApiMockClient
+from twitter_api.client.twitter_api_real_client import TwitterApiRealClient
 from twitter_api.types.extra_permissive_model import get_extra_fields
 
 
@@ -38,6 +40,21 @@ class TestGetV2UserLikedTweets:
             print(response_body.json())
 
             assert get_extra_fields(response_body) == {}
+
+    def test_get_v2_user_liked_tweets_all_fields(
+        self,
+        oauth2_app_real_client: TwitterApiRealClient,
+        twitter_dev_user: User,
+    ):
+        response_body = (
+            oauth2_app_real_client.chain()
+            .request("https://api.twitter.com/2/users/:id/liked_tweets")
+            .get(twitter_dev_user.id)
+        )
+
+        print(response_body.json())
+
+        assert get_extra_fields(response_body) == {}
 
 
 class TestMockGetV2UserLikedTweets:

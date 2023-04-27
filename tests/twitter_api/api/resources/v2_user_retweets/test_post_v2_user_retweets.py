@@ -6,8 +6,10 @@ from tests.data import json_test_data
 from twitter_api.api.resources.v2_user_retweets.post_v2_user_retweets import (
     PostV2UserRetweetsResponseBody,
 )
+from twitter_api.api.types.v2_user.user import User
 from twitter_api.client.twitter_api_async_mock_client import TwitterApiAsyncMockClient
 from twitter_api.client.twitter_api_mock_client import TwitterApiMockClient
+from twitter_api.client.twitter_api_real_client import TwitterApiRealClient
 from twitter_api.types.extra_permissive_model import get_extra_fields
 
 
@@ -38,6 +40,19 @@ class TestGetV2UserRetweets:
 
             assert get_extra_fields(response_body) == {}
 
+    def test_get_v2_user_following_all_fields(
+        self,
+        user_id,
+        oauth1_app_real_client: TwitterApiRealClient,
+    ):
+        response_body = (
+            oauth1_app_real_client.chain()
+            .request("https://api.twitter.com/2/users/:id/retweets")
+            .post(user_id, {"tweet_id": "1228393702244134912"})
+        )
+
+        assert get_extra_fields(response_body) == {}
+
 
 class TestMockGetV2UserRetweets:
     @pytest.mark.parametrize(
@@ -50,6 +65,7 @@ class TestMockGetV2UserRetweets:
         self,
         oauth2_app_mock_client: TwitterApiMockClient,
         json_filename: str,
+        twitter_dev_user: User,
     ):
         response_body = PostV2UserRetweetsResponseBody.parse_file(
             json_test_data(json_filename)
@@ -63,7 +79,7 @@ class TestMockGetV2UserRetweets:
                 "https://api.twitter.com/2/users/:id/retweets", response_body
             )
             .request("https://api.twitter.com/2/users/:id/retweets")
-            .post("2244994945", {"tweet_id": "1228393702244134912"})
+            .post(twitter_dev_user.id, {"tweet_id": "1228393702244134912"})
         ) == response_body
 
 
@@ -72,6 +88,7 @@ class TestAsyncMockGetV2UserRetweets:
     async def test_async_mock_get_v2_user_following(
         self,
         oauth2_app_async_mock_client: TwitterApiAsyncMockClient,
+        twitter_dev_user: User,
     ):
         response_body = PostV2UserRetweetsResponseBody.parse_file(
             json_test_data("get_v2_user_retweets_response_body.json")
@@ -86,7 +103,7 @@ class TestAsyncMockGetV2UserRetweets:
                     "https://api.twitter.com/2/users/:id/retweets", response_body
                 )
                 .request("https://api.twitter.com/2/users/:id/retweets")
-                .post("2244994945", {"tweet_id": "1228393702244134912"})
+                .post(twitter_dev_user.id, {"tweet_id": "1228393702244134912"})
             )
             == response_body
         )
