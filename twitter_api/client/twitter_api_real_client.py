@@ -28,8 +28,6 @@ from .twitter_api_client import TwitterApiClient
 class TwitterApiRealClient(TwitterApiClient):
     """
     Twitter API V2 を操作するためのクライアント
-
-    TwitterApiClient から生成されるクラスは、このクラスを継承する。
     """
 
     def __init__(
