@@ -9,7 +9,6 @@ from twitter_api.api.resources.v2_user_following.post_v2_user_following import (
 from twitter_api.api.types.v2_user.user import User
 from twitter_api.client.twitter_api_async_mock_client import TwitterApiAsyncMockClient
 from twitter_api.client.twitter_api_mock_client import TwitterApiMockClient
-from twitter_api.client.twitter_api_real_client import TwitterApiRealClient
 from twitter_api.types.extra_permissive_model import get_extra_fields
 
 
@@ -40,20 +39,6 @@ class TestGetV2UserFollowing:
             )
 
             assert get_extra_fields(response_body) == {}
-
-    def test_get_v2_user_following_all_fields(
-        self,
-        user_id,
-        oauth1_app_real_client: TwitterApiRealClient,
-        twitter_dev_user: User,
-    ):
-        response_body = (
-            oauth1_app_real_client.chain()
-            .request("https://api.twitter.com/2/users/:id/following")
-            .post(user_id, {"target_user_id": twitter_dev_user.id})
-        )
-
-        assert get_extra_fields(response_body) == {}
 
 
 class TestMockGetV2UserFollowing:
