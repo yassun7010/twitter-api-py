@@ -1,3 +1,4 @@
+from .twitter_api_async_client import TwitterApiAsyncClient
 from .twitter_api_client import TwitterApiClient
 
-__all__ = ["TwitterApiClient"]
+__all__ = ["TwitterApiClient", "TwitterApiAsyncClient"]
