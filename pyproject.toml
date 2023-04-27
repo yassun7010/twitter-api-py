@@ -18,7 +18,7 @@ classifiers = [
 ]
 
 [tool.taskipy.tasks]
-test = "pytest -n=auto"
+test = "pytest"
 format = "black --target-version py310 ."
 lint = "pyright twitter_api/** tests/** examples/**"
 
