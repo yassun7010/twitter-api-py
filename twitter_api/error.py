@@ -75,7 +75,7 @@ class NeverError(TwitterApiError):
 
     @property
     def message(self) -> str:
-        return f'到達できない入力 "{self._never}" が与えられました。'
+        return f'到達できないはずの入力 "{self._never}" が与えられました。'
 
 
 class MockResponseNotFound(TwitterApiError):
