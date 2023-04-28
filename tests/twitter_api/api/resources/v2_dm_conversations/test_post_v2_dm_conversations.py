@@ -25,7 +25,6 @@ class TestPostV2DmConversationsMessages:
     )
     def test_post_v2_dm_conversations_messages(
         self,
-        participant_id: UserId,
         participant_ids: list[UserId],
         client_fixture_name: str,
         permit: bool,
@@ -36,7 +35,6 @@ class TestPostV2DmConversationsMessages:
                 real_client.chain()
                 .request("https://api.twitter.com/2/dm_conversations")
                 .post(
-                    participant_id,
                     {
                         "conversation_type": "Group",
                         "participant_ids": participant_ids,
@@ -78,7 +76,6 @@ class TestMockPostV2DmConversationsMessages:
             )
             .request("https://api.twitter.com/2/dm_conversations")
             .post(
-                "2244994945",
                 {
                     "conversation_type": "Group",
                     "participant_ids": ["944480690", "906948460078698496"],
@@ -111,7 +108,6 @@ class TestAsyncMockPostV2DmConversationsMessages:
                 )
                 .request("https://api.twitter.com/2/dm_conversations")
                 .post(
-                    "2244994945",
                     {
                         "conversation_type": "Group",
                         "participant_ids": ["944480690", "906948460078698496"],

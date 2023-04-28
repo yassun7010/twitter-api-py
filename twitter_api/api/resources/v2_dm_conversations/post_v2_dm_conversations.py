@@ -41,7 +41,6 @@ class PostV2DmConversationsResources(ApiResources):
     @rate_limit(ENDPOINT, "app", requests=15000, hours=24)
     def post(
         self,
-        participant_id: UserId,
         request_body: PostV2DmConversationsRequestBody,
     ) -> PostV2DmConversationsResponseBody:
         """
@@ -59,10 +58,8 @@ class PostV2DmConversationsResources(ApiResources):
 class AsyncPostV2DmConversationsResources(PostV2DmConversationsResources):
     async def post(
         self,
-        participant_id: UserId,
         request_body: PostV2DmConversationsRequestBody,
     ) -> PostV2DmConversationsResponseBody:
         return super().post(
-            participant_id,
             request_body,
         )
