@@ -551,7 +551,7 @@ class TwitterApiAsyncClient(Chainable, metaclass=ABCMeta):
     def from_oauth2_user_flow_env(
         cls,
         *,
-        scope: Optional[list[Scope]] = None,
+        scope: list[Scope] = ALL_SCOPES,
         client_id_env: Env[ClientId] = "CLIENT_ID",
         client_secret_env: Env[ClientSecret] = "CLIENT_SECRET",
         callback_url_env: Env[CallbackUrl] = "CALLBACK_URL",
@@ -569,9 +569,6 @@ class TwitterApiAsyncClient(Chainable, metaclass=ABCMeta):
 
         refer: https://developer.twitter.com/en/docs/authentication/oauth-2-0/authorization-code
         """
-
-        if scope is None:
-            scope = ALL_SCOPES
 
         return cls.from_oauth2_user_flow(
             client_id=cls._get_env(client_id_env),
