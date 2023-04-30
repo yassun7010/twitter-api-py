@@ -1,4 +1,4 @@
-from typing import Generic
+from typing import Generic, Union
 
 from twitter_api.client.oauth_session.resources.oauth1_authenticate import (
     OAuth1AuthenticateSessionResources,
@@ -20,7 +20,10 @@ class TwitterOAuth1AuthorizeClient(Chainable, Generic[TwitterApiGenericClient]):
 
     def request(
         self, url: OauthAuth1enticateUrl | Oauth1AuthorizeUrl
-    ) -> OAuth1AuthenticateSessionResources[TwitterApiGenericClient] | OAuth1AuthorizeSessionResources[TwitterApiGenericClient]:
+    ) -> Union[
+        OAuth1AuthenticateSessionResources[TwitterApiGenericClient],
+        OAuth1AuthorizeSessionResources[TwitterApiGenericClient],
+    ]:
         if url == "https://api.twitter.com/oauth/authenticate":
             return OAuth1AuthenticateSessionResources(
                 self._session,

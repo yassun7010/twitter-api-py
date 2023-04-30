@@ -28,13 +28,12 @@ class TestPostOauth2Token:
         request: pytest.FixtureRequest,
     ):
         with spawn_real_client(client_fixture_name, request, permit) as real_client:
+            auth = real_client._real_request_client._auth
+            assert auth is not None and auth.token is not None
+
             expected_response_body = PostOauth2TokenResponseBody(
                 token_type="bearer",
-                access_token=(
-                    real_client._real_request_client._auth.token["access_token"]
-                    # pyright: reportOptionalSubscript=false
-                    # pyright: reportOptionalMemberAccess=false
-                ),
+                access_token=(auth.token["access_token"]),
             )
 
             real_response = (
