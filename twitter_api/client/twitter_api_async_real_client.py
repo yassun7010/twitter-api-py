@@ -4,9 +4,6 @@ from authlib.integrations.httpx_client.oauth1_client import OAuth1Auth
 from authlib.integrations.httpx_client.oauth2_client import OAuth2Auth
 
 from twitter_api.api.types.v2_scope import Scope
-from twitter_api.client.oauth_flow.twitter_oauth1_access_token_client import (
-    TwitterOAuth1AccessTokenClient,
-)
 from twitter_api.client.request.request_async_real_client import RequestAsyncRealClient
 from twitter_api.client.request.request_real_client import RequestRealClient
 from twitter_api.client.twitter_api_async_client import TwitterApiAsyncClient
@@ -154,7 +151,9 @@ class TwitterApiAsyncRealClient(TwitterApiAsyncClient):
             TwitterOAuth2RealSession,
         )
 
-        session: TwitterOAuth2RealSession[Self] = TwitterOAuth2RealSession(
+        session: TwitterOAuth2RealSession[
+            TwitterApiAsyncRealClient
+        ] = TwitterOAuth2RealSession(
             client_generator=lambda access_token: TwitterApiAsyncRealClient.from_oauth2_bearer_token(
                 access_token,
                 rate_limit_manager=rate_limit_manager,
@@ -179,9 +178,9 @@ class TwitterApiAsyncRealClient(TwitterApiAsyncClient):
             verify=verify,
         )
 
-        client: TwitterOAuth2AuthorizeClient[Self] = TwitterOAuth2AuthorizeClient(
-            session
-        )
+        client: TwitterOAuth2AuthorizeClient[
+            TwitterApiAsyncRealClient
+        ] = TwitterOAuth2AuthorizeClient(session)
 
         return client
 
@@ -364,7 +363,10 @@ class TwitterApiAsyncRealClient(TwitterApiAsyncClient):
         timeout: httpx.TimeoutTypes = httpx.DEFAULT_TIMEOUT_CONFIG,
         transport: Optional[httpx.AsyncBaseTransport] = None,
         verify: httpx.VerifyTypes = True,
-    ) -> TwitterOAuth1AccessTokenClient[Self]:
+    ):
+        from twitter_api.client.oauth_flow.twitter_oauth1_access_token_client import (
+            TwitterOAuth1AccessTokenClient,
+        )
         from twitter_api.client.oauth_session.twitter_oauth1_real_session import (
             TwitterOAuth1RealSession,
         )

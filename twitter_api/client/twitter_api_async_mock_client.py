@@ -133,7 +133,9 @@ class TwitterApiAsyncMockClient(_BaseTwitterApiMockClient, TwitterApiAsyncClient
             scope=[],
         )
 
-        client: TwitterOAuth2AccessTokenClient[Self] = TwitterOAuth2AccessTokenClient(
+        client: TwitterOAuth2AccessTokenClient[
+            TwitterApiAsyncMockClient
+        ] = TwitterOAuth2AccessTokenClient(
             authorization_response_url=authorization_response_url,
             state=state,
             code_verifier=code_verifier,
@@ -188,7 +190,9 @@ class TwitterApiAsyncMockClient(_BaseTwitterApiMockClient, TwitterApiAsyncClient
             TwitterOAuth1MockSession,
         )
 
-        session: TwitterOAuth1MockSession[Self] = TwitterOAuth1MockSession(
+        session: TwitterOAuth1MockSession[
+            TwitterApiAsyncMockClient
+        ] = TwitterOAuth1MockSession(
             lambda access_token, access_secret: TwitterApiAsyncMockClient.from_oauth1_app(
                 api_key=api_key,
                 api_secret=api_secret,
@@ -196,6 +200,7 @@ class TwitterApiAsyncMockClient(_BaseTwitterApiMockClient, TwitterApiAsyncClient
                 access_secret=access_secret,
             ),
         )
+
         return TwitterOAuth1RequestTokenClient(session=session)
 
     @classmethod
@@ -222,7 +227,9 @@ class TwitterApiAsyncMockClient(_BaseTwitterApiMockClient, TwitterApiAsyncClient
             TwitterOAuth1MockSession,
         )
 
-        session: TwitterOAuth1MockSession[Self] = TwitterOAuth1MockSession(
+        session: TwitterOAuth1MockSession[
+            TwitterApiAsyncMockClient
+        ] = TwitterOAuth1MockSession(
             lambda access_token, access_secret: TwitterApiAsyncMockClient.from_oauth1_app(
                 api_key=api_key,
                 api_secret=api_secret,
@@ -231,7 +238,9 @@ class TwitterApiAsyncMockClient(_BaseTwitterApiMockClient, TwitterApiAsyncClient
             ),
         )
 
-        client: TwitterOAuth1AccessTokenClient[Self] = TwitterOAuth1AccessTokenClient(
+        client: TwitterOAuth1AccessTokenClient[
+            TwitterApiAsyncMockClient
+        ] = TwitterOAuth1AccessTokenClient(
             authorization_response_url=authorization_response_url,
             session=session,
         )

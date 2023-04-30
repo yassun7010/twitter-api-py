@@ -531,15 +531,9 @@ class TwitterApiAsyncClient(Chainable, metaclass=ABCMeta):
         OAuth 2.0 のユーザ認証を用いてクライアントを作成する。
         """
 
-        from twitter_api.client.oauth_flow.twitter_oauth2_authorization_client import (
-            TwitterOAuth2AuthorizeClient,
-        )
-
         from .twitter_api_async_real_client import TwitterApiAsyncRealClient
 
-        client: TwitterOAuth2AuthorizeClient[
-            Self
-        ] = TwitterApiAsyncRealClient.from_oauth2_user_flow(
+        return TwitterApiAsyncRealClient.from_oauth2_user_flow(
             client_id=client_id,
             client_secret=client_secret,
             scope=scope,
@@ -552,8 +546,6 @@ class TwitterApiAsyncClient(Chainable, metaclass=ABCMeta):
             transport=transport,
             verify=verify,
         )
-
-        return client
 
     @classmethod
     def from_oauth2_user_flow_env(
@@ -578,11 +570,7 @@ class TwitterApiAsyncClient(Chainable, metaclass=ABCMeta):
         refer: https://developer.twitter.com/en/docs/authentication/oauth-2-0/authorization-code
         """
 
-        from twitter_api.client.oauth_flow.twitter_oauth2_authorization_client import (
-            TwitterOAuth2AuthorizeClient,
-        )
-
-        client: TwitterOAuth2AuthorizeClient[Self] = cls.from_oauth2_user_flow(
+        return cls.from_oauth2_user_flow(
             client_id=cls._get_env(client_id_env),
             client_secret=cls._get_env(client_secret_env),
             scope=scope,
@@ -599,8 +587,6 @@ class TwitterApiAsyncClient(Chainable, metaclass=ABCMeta):
             transport=transport,
             verify=verify,
         )
-
-        return client
 
     @classmethod
     def from_oauth2_user_authorization_response_url(
@@ -621,15 +607,9 @@ class TwitterApiAsyncClient(Chainable, metaclass=ABCMeta):
         transport: Optional[httpx.AsyncBaseTransport] = None,
         verify: httpx.VerifyTypes = True,
     ):
-        from twitter_api.client.oauth_flow.twitter_oauth2_access_token_client import (
-            TwitterOAuth2AccessTokenClient,
-        )
-
         from .twitter_api_async_real_client import TwitterApiAsyncRealClient
 
-        client: TwitterOAuth2AccessTokenClient[
-            Self
-        ] = TwitterApiAsyncRealClient.from_oauth2_user_authorization_response_url(
+        return TwitterApiAsyncRealClient.from_oauth2_user_authorization_response_url(
             authorization_response_url=authorization_response_url,
             client_id=client_id,
             client_secret=client_secret,
@@ -645,8 +625,6 @@ class TwitterApiAsyncClient(Chainable, metaclass=ABCMeta):
             transport=transport,
             verify=verify,
         )
-
-        return client
 
     @classmethod
     def from_oauth2_user_authorization_response_url_env(
