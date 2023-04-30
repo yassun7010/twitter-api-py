@@ -1,7 +1,7 @@
 import os
 import sys
 
-from twitter_api.client import TwitterApiClient
+from twitter_api import TwitterApiClient
 from twitter_api.error import TwitterApiError
 
 YOUR_CALLBACK_URL = os.environ["CALLBACK_URL"]

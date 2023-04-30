@@ -8,9 +8,8 @@ import os
 import sys
 from textwrap import dedent
 
+from twitter_api import TwitterApiClient
 from twitter_api.api.types.v2_scope import ALL_SCOPES
-from twitter_api.client import TwitterApiClient
-from twitter_api.client.twitter_api_real_client import TwitterApiRealClient
 from twitter_api.error import TwitterApiError
 
 YOUR_CALLBACK_URL = os.environ["CALLBACK_URL"]
@@ -34,7 +33,7 @@ try:
 
     # Backend: アクセストークンを取得し、 Twitter API のクライアントを作成します。
     token = (
-        TwitterApiRealClient.from_oauth2_user_authorization_response_url_env(
+        TwitterApiClient.from_oauth2_user_authorization_response_url_env(
             callback_url=YOUR_CALLBACK_URL,
             authorization_response_url=user.authorization_response_url,
             code_verifier=backend.code_verifier,
