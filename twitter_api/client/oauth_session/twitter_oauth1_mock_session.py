@@ -1,3 +1,5 @@
+from typing import Callable
+
 from twitter_api.client.oauth_flow.twitter_oauth1_authorization_client import (
     TwitterOAuth1AuthorizeClient,
 )
@@ -8,10 +10,19 @@ from twitter_api.client.oauth_session.resources.oauth1_authorize import (
     Oauth1AuthorizeUrl,
 )
 from twitter_api.client.oauth_session.twitter_oauth1_session import TwitterOAuth1Session
+from twitter_api.types.generic_client import TwitterApiGenericMockClient
 from twitter_api.types.oauth import AccessSecret, AccessToken, CallbackUrl
 
 
-class TwitterOAuth1MockSession(TwitterOAuth1Session):
+class TwitterOAuth1MockSession(TwitterOAuth1Session[TwitterApiGenericMockClient]):
+    def __init__(
+        self,
+        client_generator: Callable[
+            [AccessToken, AccessSecret], TwitterApiGenericMockClient
+        ],
+    ) -> None:
+        self._client_generator = client_generator
+
     def request_token(self) -> TwitterOAuth1AuthorizeClient:
         return TwitterOAuth1AuthorizeClient(session=self)
 
@@ -43,11 +54,4 @@ class TwitterOAuth1MockSession(TwitterOAuth1Session):
         )
 
     def generate_client(self, access_token: AccessToken, access_secret: AccessSecret):
-        from twitter_api.client.twitter_api_mock_client import TwitterApiMockClient
-
-        return TwitterApiMockClient.from_oauth1_app(
-            api_key="api_key",
-            api_secret="api_secret",
-            access_token=access_token,
-            access_secret=access_secret,
-        )
+        return self._client_generator(access_token, access_secret)

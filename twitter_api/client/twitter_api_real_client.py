@@ -290,11 +290,26 @@ class TwitterApiRealClient(TwitterApiClient):
             TwitterOAuth1RealSession,
         )
 
-        session = TwitterOAuth1RealSession(
+        session: TwitterOAuth1RealSession[
+            TwitterApiRealClient
+        ] = TwitterOAuth1RealSession(
+            lambda access_token, access_secret: TwitterApiRealClient.from_oauth1_app(
+                api_key=api_key,
+                api_secret=api_secret,
+                access_token=access_token,
+                access_secret=access_secret,
+                rate_limit_manager=rate_limit_manager,
+                event_hooks=event_hooks,
+                limits=limits,
+                mounts=mounts,
+                proxies=proxies,
+                timeout=timeout,
+                transport=transport,
+                verify=verify,
+            ),
             api_key=api_key,
             api_secret=api_secret,
             callback_url=callback_url,
-            rate_limit_manager=rate_limit_manager,
             event_hooks=event_hooks,
             limits=limits,
             mounts=mounts,
@@ -304,7 +319,75 @@ class TwitterApiRealClient(TwitterApiClient):
             verify=verify,
         )
 
-        return TwitterOAuth1RequestTokenClient(session)
+        client: TwitterOAuth1RequestTokenClient[
+            TwitterApiRealClient
+        ] = TwitterOAuth1RequestTokenClient(session)
+
+        return client
+
+    @classmethod
+    def from_oauth1_user_authorization_response_url(
+        cls,
+        *,
+        authorization_response_url: CallbackUrl,
+        api_key: ApiKey,
+        api_secret: ApiSecret,
+        callback_url: CallbackUrl,
+        rate_limit_manager: RateLimitManager = DEFAULT_RATE_LIMIT_MANAGER,
+        event_hooks: Optional[Mapping[str, list[httpx.EventHook]]] = None,
+        limits: httpx.Limits = httpx.DEFAULT_LIMITS,
+        mounts: Optional[Mapping[str, httpx.BaseTransport]] = None,
+        proxies: Optional[httpx.ProxiesTypes] = None,
+        timeout: httpx.TimeoutTypes = httpx.DEFAULT_TIMEOUT_CONFIG,
+        transport: Optional[httpx.BaseTransport] = None,
+        verify: httpx.VerifyTypes = True,
+    ):
+        from twitter_api.client.oauth_flow.twitter_oauth1_access_token_client import (
+            TwitterOAuth1AccessTokenClient,
+        )
+        from twitter_api.client.oauth_session.twitter_oauth1_real_session import (
+            TwitterOAuth1RealSession,
+        )
+
+        from .twitter_api_real_client import TwitterApiRealClient
+
+        session: TwitterOAuth1RealSession[
+            TwitterApiRealClient
+        ] = TwitterOAuth1RealSession(
+            lambda access_token, access_secret: TwitterApiRealClient.from_oauth1_app(
+                api_key=api_key,
+                api_secret=api_secret,
+                access_token=access_token,
+                access_secret=access_secret,
+                rate_limit_manager=rate_limit_manager,
+                event_hooks=event_hooks,
+                limits=limits,
+                mounts=mounts,
+                proxies=proxies,
+                timeout=timeout,
+                transport=transport,
+                verify=verify,
+            ),
+            api_key=api_key,
+            api_secret=api_secret,
+            callback_url=callback_url,
+            event_hooks=event_hooks,
+            limits=limits,
+            mounts=mounts,
+            proxies=proxies,
+            timeout=timeout,
+            transport=transport,
+            verify=verify,
+        )
+
+        client: TwitterOAuth1AccessTokenClient[
+            TwitterApiRealClient
+        ] = TwitterOAuth1AccessTokenClient(
+            authorization_response_url=authorization_response_url,
+            session=session,
+        )
+
+        return client
 
     def close(self) -> None:
         self._real_request_client.close()

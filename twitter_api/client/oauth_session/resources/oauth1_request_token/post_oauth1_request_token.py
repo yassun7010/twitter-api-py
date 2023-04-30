@@ -4,10 +4,13 @@ from twitter_api.client.oauth_flow.twitter_oauth1_authorization_client import (
 from twitter_api.client.oauth_session.resources.session_resources import (
     OAuth1SessionResources,
 )
+from twitter_api.types.generic_client import TwitterApiGenericClient
 
 
-class PostOAuth1RequestTokenSessionResources(OAuth1SessionResources):
-    def post(self) -> TwitterOAuth1AuthorizeClient:
+class PostOAuth1RequestTokenSessionResources(
+    OAuth1SessionResources[TwitterApiGenericClient]
+):
+    def post(self) -> TwitterOAuth1AuthorizeClient[TwitterApiGenericClient]:
         """
         OAuth 1.0a の最初のステップ。
         ユーザーアクセストークンのセットを生成するためにリクエストを送信する。

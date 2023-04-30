@@ -5,8 +5,8 @@ from twitter_api.client.oauth_session.twitter_oauth2_session import TwitterOAuth
 from twitter_api.types.generic_client import TwitterApiGenericClient
 
 
-class OAuth1SessionResources:
-    def __init__(self, session: TwitterOAuth1Session) -> None:
+class OAuth1SessionResources(Generic[TwitterApiGenericClient]):
+    def __init__(self, session: TwitterOAuth1Session[TwitterApiGenericClient]) -> None:
         self._session = session
 
 

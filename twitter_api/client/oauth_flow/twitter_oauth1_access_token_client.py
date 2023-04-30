@@ -1,92 +1,28 @@
-import os
-from typing import Mapping, Optional
+from typing import Generic
 
 from twitter_api.client.oauth_session.resources.oauth1_access_token import (
     Oauth1AccessTokenResources,
     Oauth1AccessTokenUrl,
 )
-from twitter_api.client.oauth_session.twitter_oauth1_real_session import (
-    TwitterOAuth1RealSession,
-)
 from twitter_api.client.oauth_session.twitter_oauth1_session import TwitterOAuth1Session
-from twitter_api.rate_limit.manager import DEFAULT_RATE_LIMIT_MANAGER
-from twitter_api.rate_limit.manager.rate_limit_manager import RateLimitManager
-from twitter_api.types import httpx
 from twitter_api.types.chainable import Chainable
-from twitter_api.types.oauth import ApiKey, ApiSecret, CallbackUrl, Env
+from twitter_api.types.generic_client import TwitterApiGenericClient
+from twitter_api.types.oauth import CallbackUrl
 
 
-class TwitterOAuth1AccessTokenClient(Chainable):
+class TwitterOAuth1AccessTokenClient(Chainable, Generic[TwitterApiGenericClient]):
     def __init__(
         self,
         authorization_response_url: CallbackUrl,
-        session: TwitterOAuth1Session,
+        session: TwitterOAuth1Session[TwitterApiGenericClient],
     ):
         self.authorization_response_url = authorization_response_url
         self._session = session
 
-    def request(self, url: Oauth1AccessTokenUrl):
+    def request(
+        self, url: Oauth1AccessTokenUrl
+    ) -> Oauth1AccessTokenResources[TwitterApiGenericClient]:
         return Oauth1AccessTokenResources(
             session=self._session,
             authorization_response_url=self.authorization_response_url,
         )
-
-    @classmethod
-    def from_authorization_response_url(
-        cls,
-        *,
-        api_key: ApiKey,
-        api_secret: ApiSecret,
-        callback_url: CallbackUrl,
-        authorization_response_url: CallbackUrl,
-        rate_limit_manager: RateLimitManager = DEFAULT_RATE_LIMIT_MANAGER,
-        event_hooks: Optional[Mapping[str, list[httpx.EventHook]]] = None,
-        limits: httpx.Limits = httpx.DEFAULT_LIMITS,
-        mounts: Optional[Mapping[str, httpx.BaseTransport]] = None,
-        proxies: Optional[httpx.ProxiesTypes] = None,
-        timeout: httpx.TimeoutTypes = httpx.DEFAULT_TIMEOUT_CONFIG,
-        transport: Optional[httpx.BaseTransport] = None,
-        verify: httpx.VerifyTypes = True,
-    ):
-        session = TwitterOAuth1RealSession(
-            api_key=api_key,
-            api_secret=api_secret,
-            callback_url=callback_url,
-            rate_limit_manager=rate_limit_manager,
-            event_hooks=event_hooks,
-            limits=limits,
-            mounts=mounts,
-            proxies=proxies,
-            timeout=timeout,
-            transport=transport,
-            verify=verify,
-        )
-
-        return TwitterOAuth1AccessTokenClient(
-            authorization_response_url=authorization_response_url,
-            session=session,
-        )
-
-    @classmethod
-    def from_authorization_response_url_env(
-        cls,
-        *,
-        api_key_env: Env[ApiKey] = "API_KEY",
-        api_secret_env: Env[ApiSecret] = "API_SECRET",
-        callback_url_env: Env[CallbackUrl] = "CALLBACK_URL",
-        authorization_response_url: CallbackUrl,
-        callback_url: Optional[CallbackUrl] = None,
-    ):
-        return cls.from_authorization_response_url(
-            api_key=cls._get_env(api_key_env),
-            api_secret=cls._get_env(api_secret_env),
-            callback_url=(
-                cls._get_env(callback_url_env) if callback_url is None else callback_url
-            ),
-            authorization_response_url=authorization_response_url,
-        )
-
-    @classmethod
-    def _get_env(cls, key: Env[str]) -> str:
-        """環境変数を取り出す。"""
-        return os.environ[key]

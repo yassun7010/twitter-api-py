@@ -14,9 +14,9 @@ class TwitterOAuth2Session(Generic[TwitterApiGenericClient], metaclass=ABCMeta):
             OAuth2Authorization,
         )
 
-        result: OAuth2Authorization[TwitterApiGenericClient] = ...  # type: ignore
+        _: OAuth2Authorization[TwitterApiGenericClient] = ...  # type: ignore
 
-        return result
+        return _
 
     @abstractmethod
     def fetch_token(
@@ -27,9 +27,9 @@ class TwitterOAuth2Session(Generic[TwitterApiGenericClient], metaclass=ABCMeta):
     ):
         from twitter_api.api.types.oauth2.oauth2_access_token import OAuth2AccessToken
 
-        result: OAuth2AccessToken[TwitterApiGenericClient] = ...  # type: ignore
+        _: OAuth2AccessToken[TwitterApiGenericClient] = ...  # type: ignore
 
-        return result
+        return _
 
     @abstractmethod
     def generate_client(self, access_token: AccessToken) -> TwitterApiGenericClient:

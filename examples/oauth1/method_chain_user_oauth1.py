@@ -14,7 +14,7 @@ try:
         .post()
         .request("https://api.twitter.com/oauth/authorize")
         .generate_authorization_url()
-        .open_request_url()
+        .print_request_url()
         .input_response_url()
         .request("https://api.twitter.com/oauth/access_token")
         .post()

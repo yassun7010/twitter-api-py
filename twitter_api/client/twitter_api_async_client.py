@@ -531,9 +531,15 @@ class TwitterApiAsyncClient(Chainable, metaclass=ABCMeta):
         OAuth 2.0 のユーザ認証を用いてクライアントを作成する。
         """
 
+        from twitter_api.client.oauth_flow.twitter_oauth2_authorization_client import (
+            TwitterOAuth2AuthorizeClient,
+        )
+
         from .twitter_api_async_real_client import TwitterApiAsyncRealClient
 
-        return TwitterApiAsyncRealClient.from_oauth2_user_flow(
+        client: TwitterOAuth2AuthorizeClient[
+            Self
+        ] = TwitterApiAsyncRealClient.from_oauth2_user_flow(
             client_id=client_id,
             client_secret=client_secret,
             scope=scope,
@@ -546,6 +552,8 @@ class TwitterApiAsyncClient(Chainable, metaclass=ABCMeta):
             transport=transport,
             verify=verify,
         )
+
+        return client
 
     @classmethod
     def from_oauth2_user_flow_env(
@@ -570,7 +578,11 @@ class TwitterApiAsyncClient(Chainable, metaclass=ABCMeta):
         refer: https://developer.twitter.com/en/docs/authentication/oauth-2-0/authorization-code
         """
 
-        return cls.from_oauth2_user_flow(
+        from twitter_api.client.oauth_flow.twitter_oauth2_authorization_client import (
+            TwitterOAuth2AuthorizeClient,
+        )
+
+        client: TwitterOAuth2AuthorizeClient[Self] = cls.from_oauth2_user_flow(
             client_id=cls._get_env(client_id_env),
             client_secret=cls._get_env(client_secret_env),
             scope=scope,
@@ -587,6 +599,8 @@ class TwitterApiAsyncClient(Chainable, metaclass=ABCMeta):
             transport=transport,
             verify=verify,
         )
+
+        return client
 
     @classmethod
     def from_oauth2_user_authorization_response_url(
@@ -607,9 +621,15 @@ class TwitterApiAsyncClient(Chainable, metaclass=ABCMeta):
         transport: Optional[httpx.AsyncBaseTransport] = None,
         verify: httpx.VerifyTypes = True,
     ):
+        from twitter_api.client.oauth_flow.twitter_oauth2_access_token_client import (
+            TwitterOAuth2AccessTokenClient,
+        )
+
         from .twitter_api_async_real_client import TwitterApiAsyncRealClient
 
-        return TwitterApiAsyncRealClient.from_oauth2_user_authorization_response_url(
+        client: TwitterOAuth2AccessTokenClient[
+            Self
+        ] = TwitterApiAsyncRealClient.from_oauth2_user_authorization_response_url(
             authorization_response_url=authorization_response_url,
             client_id=client_id,
             client_secret=client_secret,
@@ -625,6 +645,8 @@ class TwitterApiAsyncClient(Chainable, metaclass=ABCMeta):
             transport=transport,
             verify=verify,
         )
+
+        return client
 
     @classmethod
     def from_oauth2_user_authorization_response_url_env(
@@ -803,6 +825,77 @@ class TwitterApiAsyncClient(Chainable, metaclass=ABCMeta):
                 if callback_url is not None
                 else cls._get_env(callback_url_env)
             ),
+            event_hooks=event_hooks,
+            limits=limits,
+            mounts=mounts,
+            proxies=proxies,
+            timeout=timeout,
+            transport=transport,
+            verify=verify,
+        )
+
+    @classmethod
+    def from_oauth1_user_authorization_response_url(
+        cls,
+        *,
+        authorization_response_url: CallbackUrl,
+        api_key: ApiKey,
+        api_secret: ApiSecret,
+        callback_url: CallbackUrl,
+        rate_limit_manager: RateLimitManager = DEFAULT_RATE_LIMIT_MANAGER,
+        event_hooks: Optional[Mapping[str, list[httpx.EventHook]]] = None,
+        limits: httpx.Limits = httpx.DEFAULT_LIMITS,
+        mounts: Optional[Mapping[str, httpx.AsyncBaseTransport]] = None,
+        proxies: Optional[httpx.ProxiesTypes] = None,
+        timeout: httpx.TimeoutTypes = httpx.DEFAULT_TIMEOUT_CONFIG,
+        transport: Optional[httpx.AsyncBaseTransport] = None,
+        verify: httpx.VerifyTypes = True,
+    ):
+        from .twitter_api_async_real_client import TwitterApiAsyncRealClient
+
+        return TwitterApiAsyncRealClient.from_oauth1_user_authorization_response_url(
+            authorization_response_url=authorization_response_url,
+            api_key=api_key,
+            api_secret=api_secret,
+            callback_url=callback_url,
+            rate_limit_manager=rate_limit_manager,
+            event_hooks=event_hooks,
+            limits=limits,
+            mounts=mounts,
+            proxies=proxies,
+            timeout=timeout,
+            transport=transport,
+            verify=verify,
+        )
+
+    @classmethod
+    def from_oauth1_user_authorization_response_url_env(
+        cls,
+        *,
+        authorization_response_url: CallbackUrl,
+        api_key_env: Env[ApiKey] = "API_KEY",
+        api_secret_env: Env[ApiSecret] = "API_SECRET",
+        callback_url_env: Env[CallbackUrl] = "CALLBACK_URL",
+        callback_url: Optional[CallbackUrl] = None,
+        rate_limit_manager: RateLimitManager = DEFAULT_RATE_LIMIT_MANAGER,
+        event_hooks: Optional[Mapping[str, list[httpx.EventHook]]] = None,
+        limits: httpx.Limits = httpx.DEFAULT_LIMITS,
+        mounts: Optional[Mapping[str, httpx.AsyncBaseTransport]] = None,
+        proxies: Optional[httpx.ProxiesTypes] = None,
+        timeout: httpx.TimeoutTypes = httpx.DEFAULT_TIMEOUT_CONFIG,
+        transport: Optional[httpx.AsyncBaseTransport] = None,
+        verify: httpx.VerifyTypes = True,
+    ):
+        return cls.from_oauth1_user_authorization_response_url(
+            authorization_response_url=authorization_response_url,
+            api_key=cls._get_env(api_key_env),
+            api_secret=cls._get_env(api_secret_env),
+            callback_url=(
+                callback_url
+                if callback_url is not None
+                else cls._get_env(callback_url_env)
+            ),
+            rate_limit_manager=rate_limit_manager,
             event_hooks=event_hooks,
             limits=limits,
             mounts=mounts,

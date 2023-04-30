@@ -541,8 +541,6 @@ class TwitterApiMockClient(_BaseTwitterApiMockClient, TwitterApiClient):
             TwitterOAuth2MockSession,
         )
 
-        from .twitter_api_real_client import TwitterApiRealClient
-
         session: TwitterOAuth2MockSession[
             TwitterApiMockClient
         ] = TwitterOAuth2MockSession(
@@ -553,7 +551,7 @@ class TwitterApiMockClient(_BaseTwitterApiMockClient, TwitterApiClient):
         )
 
         client: TwitterOAuth2AccessTokenClient[
-            TwitterApiRealClient
+            TwitterApiMockClient
         ] = TwitterOAuth2AccessTokenClient(
             authorization_response_url=authorization_response_url,
             state=state,
@@ -609,5 +607,56 @@ class TwitterApiMockClient(_BaseTwitterApiMockClient, TwitterApiClient):
             TwitterOAuth1MockSession,
         )
 
-        session = TwitterOAuth1MockSession()
+        session = TwitterOAuth1MockSession(
+            lambda access_token, access_secret: TwitterApiMockClient.from_oauth1_app(
+                api_key=api_key,
+                api_secret=api_secret,
+                access_token=access_token,
+                access_secret=access_secret,
+            ),
+        )
         return TwitterOAuth1RequestTokenClient(session=session)
+
+    @classmethod
+    def from_oauth1_user_authorization_response_url(
+        cls,
+        *,
+        authorization_response_url: CallbackUrl,
+        api_key: ApiKey,
+        api_secret: ApiSecret,
+        callback_url: CallbackUrl,
+        rate_limit_manager: RateLimitManager = DEFAULT_RATE_LIMIT_MANAGER,
+        event_hooks: Optional[Mapping[str, list[httpx.EventHook]]] = None,
+        limits: httpx.Limits = httpx.DEFAULT_LIMITS,
+        mounts: Optional[Mapping[str, httpx.BaseTransport]] = None,
+        proxies: Optional[httpx.ProxiesTypes] = None,
+        timeout: httpx.TimeoutTypes = httpx.DEFAULT_TIMEOUT_CONFIG,
+        transport: Optional[httpx.BaseTransport] = None,
+        verify: httpx.VerifyTypes = True,
+    ):
+        from twitter_api.client.oauth_flow.twitter_oauth1_access_token_client import (
+            TwitterOAuth1AccessTokenClient,
+        )
+        from twitter_api.client.oauth_session.twitter_oauth1_mock_session import (
+            TwitterOAuth1MockSession,
+        )
+
+        session: TwitterOAuth1MockSession[
+            TwitterApiMockClient
+        ] = TwitterOAuth1MockSession(
+            lambda access_token, access_secret: TwitterApiMockClient.from_oauth1_app(
+                api_key=api_key,
+                api_secret=api_secret,
+                access_token=access_token,
+                access_secret=access_secret,
+            ),
+        )
+
+        client: TwitterOAuth1AccessTokenClient[
+            TwitterApiMockClient
+        ] = TwitterOAuth1AccessTokenClient(
+            authorization_response_url=authorization_response_url,
+            session=session,
+        )
+
+        return client

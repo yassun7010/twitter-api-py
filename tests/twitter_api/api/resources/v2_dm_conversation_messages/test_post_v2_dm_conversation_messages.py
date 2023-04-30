@@ -36,7 +36,6 @@ class TestGetV2DmConversationsMessages:
                 real_client.chain()
                 .request("https://api.twitter.com/2/dm_conversations")
                 .post(
-                    participant_id,
                     {
                         "conversation_type": "Group",
                         "participant_ids": participant_ids,

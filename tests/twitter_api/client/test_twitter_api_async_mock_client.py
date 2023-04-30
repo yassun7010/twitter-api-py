@@ -75,7 +75,7 @@ class TestTwitterApiAsyncMockClient:
             .input_response_url("https://localhost:3000")
             .request("https://api.twitter.com/2/oauth2/token")
             .post()
-            .generate_client()  # type: ignore
+            .generate_client()
         ) as client:
             assert isinstance(client, TwitterApiAsyncMockClient)
 
@@ -95,7 +95,7 @@ class TestTwitterApiAsyncMockClient:
             .input_response_url("https://localhost:3000")
             .request("https://api.twitter.com/oauth/access_token")
             .post()
-            .generate_client()  # type: ignore
+            .generate_client()
         ) as client:
             assert isinstance(
                 client,

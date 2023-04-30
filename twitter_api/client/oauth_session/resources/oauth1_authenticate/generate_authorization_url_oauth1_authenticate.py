@@ -1,10 +1,11 @@
 from twitter_api.client.oauth_session.resources.session_resources import (
     OAuth1SessionResources,
 )
+from twitter_api.types.generic_client import TwitterApiGenericClient
 
 
 class GenerateAuthorizationUrlOAuth1AuthenticateSessionResources(
-    OAuth1SessionResources
+    OAuth1SessionResources[TwitterApiGenericClient]
 ):
     def generate_authorization_url(self):
         """

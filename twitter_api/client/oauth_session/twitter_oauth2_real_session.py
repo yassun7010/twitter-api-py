@@ -49,7 +49,9 @@ class TwitterOAuth2RealSession(TwitterOAuth2Session, Generic[TwitterApiGenericCl
             verify=verify,
         )
 
-    def generate_authorization_url(self) -> OAuth2Authorization:
+    def generate_authorization_url(
+        self,
+    ) -> OAuth2Authorization[TwitterApiGenericClient]:
         url: Oauth2AuthorizeUrl = "https://twitter.com/i/oauth2/authorize"
         code_verifier = generate_code_verifier()
 
@@ -69,7 +71,7 @@ class TwitterOAuth2RealSession(TwitterOAuth2Session, Generic[TwitterApiGenericCl
         authorization_response_url: CallbackUrl,
         state: str,
         code_verifier: str,
-    ) -> OAuth2AccessToken:
+    ) -> OAuth2AccessToken[TwitterApiGenericClient]:
         url: V2Oauth2TokenUrl = "https://api.twitter.com/2/oauth2/token"
 
         response = self._session.fetch_token(

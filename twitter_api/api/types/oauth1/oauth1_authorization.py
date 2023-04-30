@@ -1,17 +1,18 @@
 import sys
 from textwrap import dedent
-from typing import Callable, Optional, Self, TextIO
+from typing import Callable, Generic, Optional, Self, TextIO
 
 from twitter_api.client.oauth_session.twitter_oauth1_session import TwitterOAuth1Session
 from twitter_api.types.chainable import Chainable
+from twitter_api.types.generic_client import TwitterApiGenericClient
 from twitter_api.types.http import Url
 
 
-class OAuth1Authorization(Chainable):
+class OAuth1Authorization(Chainable, Generic[TwitterApiGenericClient]):
     def __init__(
         self,
         authorization_url: Url,
-        session: TwitterOAuth1Session,
+        session: TwitterOAuth1Session[TwitterApiGenericClient],
     ) -> None:
         self.authorization_url = authorization_url
         self._session = session
