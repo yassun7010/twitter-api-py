@@ -607,6 +607,11 @@ class TwitterApiAsyncClient(Chainable, metaclass=ABCMeta):
         transport: Optional[httpx.AsyncBaseTransport] = None,
         verify: httpx.VerifyTypes = True,
     ):
+        """
+        OAuth 2.0 のユーザ認証で、ユーザが認証した後にリダイレクトされる CallbackUrl からクライアントを作成する。
+
+        refer: https://developer.twitter.com/en/docs/authentication/oauth-2-0/authorization-code
+        """
         from .twitter_api_async_real_client import TwitterApiAsyncRealClient
 
         return TwitterApiAsyncRealClient.from_oauth2_user_authorization_response_url(
@@ -646,6 +651,12 @@ class TwitterApiAsyncClient(Chainable, metaclass=ABCMeta):
         transport: Optional[httpx.AsyncBaseTransport] = None,
         verify: httpx.VerifyTypes = True,
     ):
+        """
+        環境変数から、OAuth 2.0 のユーザ認証で、ユーザが認証した後にリダイレクトされる CallbackUrl からクライアントを作成する。
+
+        refer: https://developer.twitter.com/en/docs/authentication/oauth-2-0/authorization-code
+        """
+
         return cls.from_oauth2_user_authorization_response_url(
             authorization_response_url=authorization_response_url,
             state=state,
@@ -829,6 +840,12 @@ class TwitterApiAsyncClient(Chainable, metaclass=ABCMeta):
         transport: Optional[httpx.AsyncBaseTransport] = None,
         verify: httpx.VerifyTypes = True,
     ):
+        """
+        OAuth 1.0 のユーザ認証で、ユーザが認証した後にリダイレクトされる CallbackUrl からクライアントを作成する。
+
+        refer: https://developer.twitter.com/en/docs/authentication/oauth-1-0a/obtaining-user-access-tokens
+        """
+
         from .twitter_api_async_real_client import TwitterApiAsyncRealClient
 
         return TwitterApiAsyncRealClient.from_oauth1_user_authorization_response_url(
@@ -864,6 +881,12 @@ class TwitterApiAsyncClient(Chainable, metaclass=ABCMeta):
         transport: Optional[httpx.AsyncBaseTransport] = None,
         verify: httpx.VerifyTypes = True,
     ):
+        """
+        環境変数から、OAuth 1.0 のユーザ認証で、ユーザが認証した後にリダイレクトされる CallbackUrl からクライアントを作成する。
+
+        refer: https://developer.twitter.com/en/docs/authentication/oauth-1-0a/obtaining-user-access-tokens
+        """
+
         return cls.from_oauth1_user_authorization_response_url(
             authorization_response_url=authorization_response_url,
             api_key=cls._get_env(api_key_env),
