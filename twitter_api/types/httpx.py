@@ -1,4 +1,4 @@
-from typing import Any, Callable, Mapping, TypeAlias
+from typing import TypeAlias
 
 import httpx
 
@@ -19,7 +19,7 @@ TimeoutTypes: TypeAlias = httpx._types.TimeoutTypes
 BaseTransport: TypeAlias = httpx.BaseTransport
 AsyncBaseTransport: TypeAlias = httpx.AsyncBaseTransport
 
-EventHook = Mapping[str, list[Callable[..., Any]]]
+EventHook: TypeAlias = httpx._client.EventHook
 
 DEFAULT_LIMITS = httpx._config.DEFAULT_LIMITS
 DEFAULT_TIMEOUT_CONFIG = httpx._config.DEFAULT_TIMEOUT_CONFIG

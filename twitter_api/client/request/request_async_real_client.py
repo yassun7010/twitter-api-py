@@ -31,7 +31,7 @@ class RequestAsyncRealClient(RequestAsyncClient):
         oauth_version: OAuthVersion,
         rate_limit_target: RateLimitTarget,
         rate_limit_manager: RateLimitManager,
-        event_hooks: Optional[httpx.EventHook],
+        event_hooks: Optional[Mapping[str, list[httpx.EventHook]]],
         limits: httpx.Limits,
         mounts: Optional[Mapping[str, httpx.AsyncBaseTransport]],
         proxies: Optional[httpx.ProxiesTypes],

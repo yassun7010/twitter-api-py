@@ -45,7 +45,7 @@ class TwitterApiRealClient(TwitterApiClient):
         cls,
         bearer_token: str,
         rate_limit_manager: RateLimitManager = DEFAULT_RATE_LIMIT_MANAGER,
-        event_hooks: Optional[httpx.EventHook] = None,
+        event_hooks: Optional[Mapping[str, list[httpx.EventHook]]] = None,
         limits: httpx.Limits = httpx.DEFAULT_LIMITS,
         mounts: Optional[Mapping[str, httpx.BaseTransport]] = None,
         proxies: Optional[httpx.ProxiesTypes] = None,
@@ -81,7 +81,7 @@ class TwitterApiRealClient(TwitterApiClient):
         api_key: ApiKey,
         api_secret: ApiSecret,
         rate_limit_manager: RateLimitManager = DEFAULT_RATE_LIMIT_MANAGER,
-        event_hooks: Optional[httpx.EventHook] = None,
+        event_hooks: Optional[Mapping[str, list[httpx.EventHook]]] = None,
         limits: httpx.Limits = httpx.DEFAULT_LIMITS,
         mounts: Optional[Mapping[str, httpx.BaseTransport]] = None,
         proxies: Optional[httpx.ProxiesTypes] = None,
@@ -125,7 +125,7 @@ class TwitterApiRealClient(TwitterApiClient):
         callback_url: CallbackUrl,
         scope: list[Scope],
         rate_limit_manager: RateLimitManager = DEFAULT_RATE_LIMIT_MANAGER,
-        event_hooks: Optional[httpx.EventHook] = None,
+        event_hooks: Optional[Mapping[str, list[httpx.EventHook]]] = None,
         limits: httpx.Limits = httpx.DEFAULT_LIMITS,
         mounts: Optional[Mapping[str, httpx.BaseTransport]] = None,
         proxies: Optional[httpx.ProxiesTypes] = None,
@@ -140,12 +140,16 @@ class TwitterApiRealClient(TwitterApiClient):
             TwitterOAuth2RealSession,
         )
 
-        session = TwitterOAuth2RealSession(
+        session: TwitterOAuth2RealSession[
+            TwitterApiRealClient
+        ] = TwitterOAuth2RealSession(
+            lambda access_token: TwitterApiRealClient.from_oauth2_bearer_token(
+                access_token
+            ),
             client_id=client_id,
             client_secret=client_secret,
             callback_url=callback_url,
             scope=scope,
-            rate_limit_manager=rate_limit_manager,
             event_hooks=event_hooks,
             limits=limits,
             mounts=mounts,
@@ -155,7 +159,77 @@ class TwitterApiRealClient(TwitterApiClient):
             verify=verify,
         )
 
-        return TwitterOAuth2AuthorizeClient(session)
+        client: TwitterOAuth2AuthorizeClient[
+            TwitterApiRealClient
+        ] = TwitterOAuth2AuthorizeClient(session)
+
+        return client
+
+    @classmethod
+    def from_oauth2_user_authorization_response_url(
+        cls,
+        *,
+        authorization_response_url: CallbackUrl,
+        state: str,
+        code_verifier: str,
+        client_id: ClientId,
+        client_secret: ClientSecret,
+        callback_url: CallbackUrl,
+        rate_limit_manager: RateLimitManager = DEFAULT_RATE_LIMIT_MANAGER,
+        event_hooks: Optional[Mapping[str, list[httpx.EventHook]]] = None,
+        limits: httpx.Limits = httpx.DEFAULT_LIMITS,
+        mounts: Optional[Mapping[str, httpx.BaseTransport]] = None,
+        proxies: Optional[httpx.ProxiesTypes] = None,
+        timeout: httpx.TimeoutTypes = httpx.DEFAULT_TIMEOUT_CONFIG,
+        transport: Optional[httpx.BaseTransport] = None,
+        verify: httpx.VerifyTypes = True,
+    ):
+        from twitter_api.client.oauth_flow.twitter_oauth2_access_token_client import (
+            TwitterOAuth2AccessTokenClient,
+        )
+        from twitter_api.client.oauth_session.twitter_oauth2_real_session import (
+            TwitterOAuth2RealSession,
+        )
+
+        from .twitter_api_real_client import TwitterApiRealClient
+
+        session: TwitterOAuth2RealSession[
+            TwitterApiRealClient
+        ] = TwitterOAuth2RealSession(
+            lambda access_token: TwitterApiRealClient.from_oauth2_bearer_token(
+                access_token,
+                rate_limit_manager=rate_limit_manager,
+                event_hooks=event_hooks,
+                limits=limits,
+                mounts=mounts,
+                proxies=proxies,
+                timeout=timeout,
+                transport=transport,
+                verify=verify,
+            ),
+            client_id=client_id,
+            client_secret=client_secret,
+            callback_url=callback_url,
+            scope=None,
+            event_hooks=event_hooks,
+            limits=limits,
+            mounts=mounts,
+            proxies=proxies,
+            timeout=timeout,
+            transport=transport,
+            verify=verify,
+        )
+
+        client: TwitterOAuth2AccessTokenClient[
+            TwitterApiRealClient
+        ] = TwitterOAuth2AccessTokenClient(
+            authorization_response_url=authorization_response_url,
+            state=state,
+            code_verifier=code_verifier,
+            session=session,
+        )
+
+        return client
 
     @classmethod
     def from_oauth1_app(
@@ -166,7 +240,7 @@ class TwitterApiRealClient(TwitterApiClient):
         access_token: AccessToken,
         access_secret: AccessSecret,
         rate_limit_manager: RateLimitManager = DEFAULT_RATE_LIMIT_MANAGER,
-        event_hooks: Optional[httpx.EventHook] = None,
+        event_hooks: Optional[Mapping[str, list[httpx.EventHook]]] = None,
         limits: httpx.Limits = httpx.DEFAULT_LIMITS,
         mounts: Optional[Mapping[str, httpx.BaseTransport]] = None,
         proxies: Optional[httpx.ProxiesTypes] = None,
@@ -204,7 +278,7 @@ class TwitterApiRealClient(TwitterApiClient):
         api_secret: ApiSecret,
         callback_url: CallbackUrl,
         rate_limit_manager: RateLimitManager = DEFAULT_RATE_LIMIT_MANAGER,
-        event_hooks: Optional[httpx.EventHook] = None,
+        event_hooks: Optional[Mapping[str, list[httpx.EventHook]]] = None,
         limits: httpx.Limits = httpx.DEFAULT_LIMITS,
         mounts: Optional[Mapping[str, httpx.BaseTransport]] = None,
         proxies: Optional[httpx.ProxiesTypes] = None,

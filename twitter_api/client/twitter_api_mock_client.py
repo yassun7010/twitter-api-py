@@ -441,7 +441,7 @@ class TwitterApiMockClient(_BaseTwitterApiMockClient, TwitterApiClient):
         bearer_token: str,
         *,
         rate_limit_manager: RateLimitManager = DEFAULT_RATE_LIMIT_MANAGER,
-        event_hooks: Optional[httpx.EventHook] = None,
+        event_hooks: Optional[Mapping[str, list[httpx.EventHook]]] = None,
         limits: httpx.Limits = httpx.DEFAULT_LIMITS,
         mounts: Optional[Mapping[str, httpx.BaseTransport]] = None,
         proxies: Optional[httpx.ProxiesTypes] = None,
@@ -462,7 +462,7 @@ class TwitterApiMockClient(_BaseTwitterApiMockClient, TwitterApiClient):
         api_key: ApiKey,
         api_secret: ApiSecret,
         rate_limit_manager: RateLimitManager = DEFAULT_RATE_LIMIT_MANAGER,
-        event_hooks: Optional[httpx.EventHook] = None,
+        event_hooks: Optional[Mapping[str, list[httpx.EventHook]]] = None,
         limits: httpx.Limits = httpx.DEFAULT_LIMITS,
         mounts: Optional[Mapping[str, httpx.BaseTransport]] = None,
         proxies: Optional[httpx.ProxiesTypes] = None,
@@ -485,7 +485,7 @@ class TwitterApiMockClient(_BaseTwitterApiMockClient, TwitterApiClient):
         callback_url: CallbackUrl,
         scope: list[Scope],
         rate_limit_manager: RateLimitManager = DEFAULT_RATE_LIMIT_MANAGER,
-        event_hooks: Optional[httpx.EventHook] = None,
+        event_hooks: Optional[Mapping[str, list[httpx.EventHook]]] = None,
         limits: httpx.Limits = httpx.DEFAULT_LIMITS,
         mounts: Optional[Mapping[str, httpx.BaseTransport]] = None,
         proxies: Optional[httpx.ProxiesTypes] = None,
@@ -500,8 +500,68 @@ class TwitterApiMockClient(_BaseTwitterApiMockClient, TwitterApiClient):
             TwitterOAuth2MockSession,
         )
 
-        session = TwitterOAuth2MockSession(scope=scope)
-        return TwitterOAuth2AuthorizeClient(session=session)
+        session: TwitterOAuth2MockSession[
+            TwitterApiMockClient
+        ] = TwitterOAuth2MockSession(
+            lambda access_token: TwitterApiMockClient.from_oauth2_bearer_token(
+                access_token
+            ),
+            scope=scope,
+        )
+
+        client: TwitterOAuth2AuthorizeClient[
+            TwitterApiMockClient
+        ] = TwitterOAuth2AuthorizeClient(session=session)
+
+        return client
+
+    @classmethod
+    def from_oauth2_user_authorization_response_url(
+        cls,
+        *,
+        authorization_response_url: CallbackUrl,
+        state: str,
+        code_verifier: str,
+        client_id: ClientId,
+        client_secret: ClientSecret,
+        callback_url: CallbackUrl,
+        rate_limit_manager: RateLimitManager = DEFAULT_RATE_LIMIT_MANAGER,
+        event_hooks: Optional[Mapping[str, list[httpx.EventHook]]] = None,
+        limits: httpx.Limits = httpx.DEFAULT_LIMITS,
+        mounts: Optional[Mapping[str, httpx.BaseTransport]] = None,
+        proxies: Optional[httpx.ProxiesTypes] = None,
+        timeout: httpx.TimeoutTypes = httpx.DEFAULT_TIMEOUT_CONFIG,
+        transport: Optional[httpx.BaseTransport] = None,
+        verify: httpx.VerifyTypes = True,
+    ):
+        from twitter_api.client.oauth_flow.twitter_oauth2_access_token_client import (
+            TwitterOAuth2AccessTokenClient,
+        )
+        from twitter_api.client.oauth_session.twitter_oauth2_mock_session import (
+            TwitterOAuth2MockSession,
+        )
+
+        from .twitter_api_real_client import TwitterApiRealClient
+
+        session: TwitterOAuth2MockSession[
+            TwitterApiMockClient
+        ] = TwitterOAuth2MockSession(
+            lambda access_token: TwitterApiMockClient.from_oauth2_bearer_token(
+                access_token,
+            ),
+            scope=[],
+        )
+
+        client: TwitterOAuth2AccessTokenClient[
+            TwitterApiRealClient
+        ] = TwitterOAuth2AccessTokenClient(
+            authorization_response_url=authorization_response_url,
+            state=state,
+            code_verifier=code_verifier,
+            session=session,
+        )
+
+        return client
 
     @classmethod
     def from_oauth1_app(
@@ -512,7 +572,7 @@ class TwitterApiMockClient(_BaseTwitterApiMockClient, TwitterApiClient):
         access_token: AccessToken,
         access_secret: AccessSecret,
         rate_limit_manager: RateLimitManager = DEFAULT_RATE_LIMIT_MANAGER,
-        event_hooks: Optional[httpx.EventHook] = None,
+        event_hooks: Optional[Mapping[str, list[httpx.EventHook]]] = None,
         limits: httpx.Limits = httpx.DEFAULT_LIMITS,
         mounts: Optional[Mapping[str, httpx.BaseTransport]] = None,
         proxies: Optional[httpx.ProxiesTypes] = None,
@@ -534,7 +594,7 @@ class TwitterApiMockClient(_BaseTwitterApiMockClient, TwitterApiClient):
         api_secret: ApiSecret,
         callback_url: CallbackUrl,
         rate_limit_manager: RateLimitManager = DEFAULT_RATE_LIMIT_MANAGER,
-        event_hooks: Optional[httpx.EventHook] = None,
+        event_hooks: Optional[Mapping[str, list[httpx.EventHook]]] = None,
         limits: httpx.Limits = httpx.DEFAULT_LIMITS,
         mounts: Optional[Mapping[str, httpx.BaseTransport]] = None,
         proxies: Optional[httpx.ProxiesTypes] = None,

@@ -1,4 +1,4 @@
-from typing import Any, Callable, Generic, Mapping, Optional, Type, TypeVar
+from typing import Any, Callable, Generic, Mapping, Optional
 
 from authlib.integrations.httpx_client.oauth2_client import OAuth2Client
 
@@ -10,28 +10,22 @@ from twitter_api.client.oauth_session.resources.oauth2_authorize import (
 )
 from twitter_api.client.oauth_session.resources.v2_oauth2_token import V2Oauth2TokenUrl
 from twitter_api.client.oauth_session.twitter_oauth2_session import TwitterOAuth2Session
-from twitter_api.client.twitter_api_async_client import TwitterApiAsyncClient
-from twitter_api.client.twitter_api_async_real_client import TwitterApiAsyncRealClient
-from twitter_api.client.twitter_api_client import TwitterApiClient
-from twitter_api.client.twitter_api_real_client import TwitterApiRealClient
-from twitter_api.rate_limit.manager.rate_limit_manager import RateLimitManager
 from twitter_api.types import httpx
-from twitter_api.types.oauth import CallbackUrl, ClientId, ClientSecret
+from twitter_api.types.generic_client import TwitterApiGenericClient
+from twitter_api.types.oauth import AccessToken, CallbackUrl, ClientId, ClientSecret
 from twitter_api.utils._oauth import generate_code_verifier
 
-Client = TypeVar("Client", TwitterApiRealClient, TwitterApiAsyncRealClient)
 
-
-class TwitterOAuth2RealSession(TwitterOAuth2Session, Generic[Client]):
+class TwitterOAuth2RealSession(TwitterOAuth2Session, Generic[TwitterApiGenericClient]):
     def __init__(
         self,
-        client_generator: Callable[[str], Client],
+        client_generator: Callable[[AccessToken], TwitterApiGenericClient],
         *,
         client_id: ClientId,
         client_secret: ClientSecret,
         callback_url: CallbackUrl,
         scope: Optional[list[Scope]],
-        event_hooks: Optional[httpx.EventHook],
+        event_hooks: Optional[Mapping[str, list[httpx.EventHook]]],
         limits: httpx.Limits,
         mounts: Optional[Mapping[str, httpx.BaseTransport]],
         proxies: Optional[httpx.ProxiesTypes],
@@ -96,5 +90,5 @@ class TwitterOAuth2RealSession(TwitterOAuth2Session, Generic[Client]):
             **response,
         )
 
-    def generate_client(self, access_token: str) -> Client:
+    def generate_client(self, access_token: AccessToken) -> TwitterApiGenericClient:
         return self._client_generator(access_token)

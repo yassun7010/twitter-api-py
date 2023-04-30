@@ -38,7 +38,7 @@ class TwitterOAuth1AsyncRealSession(TwitterOAuth1Session):
         api_secret: ApiSecret,
         callback_url: CallbackUrl,
         rate_limit_manager: RateLimitManager,
-        event_hooks: Optional[httpx.EventHook],
+        event_hooks: Optional[Mapping[str, list[httpx.EventHook]]],
         limits: httpx.Limits,
         mounts: Optional[Mapping[str, httpx.AsyncBaseTransport]],
         proxies: Optional[httpx.ProxiesTypes],

@@ -1,13 +1,23 @@
 from datetime import datetime
+from typing import Callable, Generic
 
 from twitter_api.api.types.oauth2.oauth2_access_token import OAuth2AccessToken
 from twitter_api.api.types.v2_scope import Scope
 from twitter_api.client.oauth_session.twitter_oauth2_session import TwitterOAuth2Session
-from twitter_api.types.oauth import CallbackUrl
+from twitter_api.types.generic_client import TwitterApiGenericMockClient
+from twitter_api.types.oauth import AccessToken, CallbackUrl
 
 
-class TwitterOAuth2MockSession(TwitterOAuth2Session):
-    def __init__(self, *, scope: list[Scope]) -> None:
+class TwitterOAuth2MockSession(
+    TwitterOAuth2Session, Generic[TwitterApiGenericMockClient]
+):
+    def __init__(
+        self,
+        client_generator: Callable[[AccessToken], TwitterApiGenericMockClient],
+        *,
+        scope: list[Scope],
+    ) -> None:
+        self._client_generator = client_generator
         self._scope = scope
 
     def generate_authorization_url(self):
@@ -38,7 +48,5 @@ class TwitterOAuth2MockSession(TwitterOAuth2Session):
             _session=self,
         )
 
-    def generate_client(self, access_token: str):
-        from twitter_api.client.twitter_api_mock_client import TwitterApiMockClient
-
-        return TwitterApiMockClient.from_oauth2_bearer_token(bearer_token=access_token)
+    def generate_client(self, access_token: AccessToken):
+        return self._client_generator(access_token)

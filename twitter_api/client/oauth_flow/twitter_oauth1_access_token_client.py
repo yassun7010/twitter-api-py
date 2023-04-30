@@ -40,7 +40,7 @@ class TwitterOAuth1AccessTokenClient(Chainable):
         callback_url: CallbackUrl,
         authorization_response_url: CallbackUrl,
         rate_limit_manager: RateLimitManager = DEFAULT_RATE_LIMIT_MANAGER,
-        event_hooks: Optional[httpx.EventHook] = None,
+        event_hooks: Optional[Mapping[str, list[httpx.EventHook]]] = None,
         limits: httpx.Limits = httpx.DEFAULT_LIMITS,
         mounts: Optional[Mapping[str, httpx.BaseTransport]] = None,
         proxies: Optional[httpx.ProxiesTypes] = None,

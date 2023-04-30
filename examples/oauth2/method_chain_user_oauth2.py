@@ -1,15 +1,14 @@
 import os
 import sys
 
-from twitter_api.client import TwitterApiClient
-from twitter_api.client.twitter_api_async_client import TwitterApiAsyncClient
+from twitter_api.client.twitter_api_client import TwitterApiClient
 from twitter_api.error import TwitterApiError
 
 YOUR_CALLBACK_URL = os.environ["CALLBACK_URL"]
 
 try:
     with (
-        TwitterApiAsyncClient.from_oauth2_user_flow_env(
+        TwitterApiClient.from_oauth2_user_flow_env(
             callback_url=YOUR_CALLBACK_URL,
             scope=[
                 "tweet.read",
@@ -18,7 +17,7 @@ try:
         )
         .request("https://twitter.com/i/oauth2/authorize")
         .generate_authorization_url()
-        .open_request_url()
+        .print_request_url()
         .input_response_url()
         .request("https://api.twitter.com/2/oauth2/token")
         .post()

@@ -1,18 +1,22 @@
 from abc import ABCMeta, abstractmethod
+from typing import Generic
 
-from twitter_api.types.oauth import CallbackUrl
+from twitter_api.types.generic_client import TwitterApiGenericClient
+from twitter_api.types.oauth import AccessToken, CallbackUrl
 
 
-class TwitterOAuth2Session(metaclass=ABCMeta):
+class TwitterOAuth2Session(Generic[TwitterApiGenericClient], metaclass=ABCMeta):
     @abstractmethod
-    def generate_authorization_url(self):
-        # NOTE: 本来実装は不要だが、モジュールの循環読み込みを防ぐため、
-        #       偽のデータを作っている。
+    def generate_authorization_url(
+        self,
+    ):
         from twitter_api.api.types.oauth2.oauth2_authorization import (
             OAuth2Authorization,
         )
 
-        return OAuth2Authorization(**{})
+        result: OAuth2Authorization[TwitterApiGenericClient] = ...  # type: ignore
+
+        return result
 
     @abstractmethod
     def fetch_token(
@@ -21,16 +25,12 @@ class TwitterOAuth2Session(metaclass=ABCMeta):
         state: str,
         code_verifier: str,
     ):
-        # NOTE: 本来実装は不要だが、モジュールの循環読み込みを防ぐため、
-        #       偽のデータを作っている。
         from twitter_api.api.types.oauth2.oauth2_access_token import OAuth2AccessToken
 
-        return OAuth2AccessToken(**{})
+        result: OAuth2AccessToken[TwitterApiGenericClient] = ...  # type: ignore
+
+        return result
 
     @abstractmethod
-    def generate_client(self, access_token: str):
-        # NOTE: 本来実装は不要だが、モジュールの循環読み込みを防ぐため、
-        #       偽のデータを作っている。
-        from twitter_api.client.twitter_api_client import TwitterApiClient
-
-        return TwitterApiClient.from_oauth2_bearer_token(**{})
+    def generate_client(self, access_token: AccessToken) -> TwitterApiGenericClient:
+        ...
