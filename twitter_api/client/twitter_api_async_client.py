@@ -528,7 +528,7 @@ class TwitterApiAsyncClient(Chainable, metaclass=ABCMeta):
         verify: httpx.VerifyTypes = True,
     ):
         """
-        OAuth 2.0 のユーザ認証を用いてクライアントを作成する。
+        OAuth 2.0 のユーザ認証フローに従ってクライアントを作成する。
         """
 
         from .twitter_api_async_real_client import TwitterApiAsyncRealClient
@@ -565,7 +565,7 @@ class TwitterApiAsyncClient(Chainable, metaclass=ABCMeta):
         verify: httpx.VerifyTypes = True,
     ):
         """
-        環境変数から、 OAuth 2.0 のユーザ認証を用いてクライアントを作成する。
+        環境変数から、 OAuth 2.0 のユーザ認証フローに従ってクライアントを作成する。
 
         refer: https://developer.twitter.com/en/docs/authentication/oauth-2-0/authorization-code
         """
@@ -608,7 +608,7 @@ class TwitterApiAsyncClient(Chainable, metaclass=ABCMeta):
         verify: httpx.VerifyTypes = True,
     ):
         """
-        OAuth 2.0 のユーザ認証で、ユーザが認証した後にリダイレクトされる CallbackUrl からクライアントを作成する。
+        OAuth 2.0 のユーザ認証フローの途中、ユーザが認証した後にリダイレクトされる CallbackUrl の段階からクライアントを作成する。
 
         refer: https://developer.twitter.com/en/docs/authentication/oauth-2-0/authorization-code
         """
@@ -652,7 +652,7 @@ class TwitterApiAsyncClient(Chainable, metaclass=ABCMeta):
         verify: httpx.VerifyTypes = True,
     ):
         """
-        環境変数から、OAuth 2.0 のユーザ認証で、ユーザが認証した後にリダイレクトされる CallbackUrl からクライアントを作成する。
+        環境変数から、OAuth 2.0 のユーザ認証フローの途中、ユーザが認証した後にリダイレクトされる CallbackUrl の段階からクライアントを作成する。
 
         refer: https://developer.twitter.com/en/docs/authentication/oauth-2-0/authorization-code
         """
@@ -766,7 +766,7 @@ class TwitterApiAsyncClient(Chainable, metaclass=ABCMeta):
         verify: httpx.VerifyTypes = True,
     ):
         """
-        OAuth 1.0a のユーザ認証を用いてクライアントを作成する。
+        OAuth 1.0a のユーザ認証フローに従ってクライアントを作成する。
         """
 
         from .twitter_api_async_real_client import TwitterApiAsyncRealClient
@@ -801,7 +801,7 @@ class TwitterApiAsyncClient(Chainable, metaclass=ABCMeta):
         verify: httpx.VerifyTypes = True,
     ):
         """
-        環境変数から、 OAuth 1.0a のユーザ認証を用いてクライアントを作成する。
+        環境変数から、 OAuth 1.0a のユーザ認証フローに従ってクライアントを作成する。
 
         refer: https://developer.twitter.com/en/docs/authentication/oauth-1-0a/obtaining-user-access-tokens
         """
@@ -841,7 +841,7 @@ class TwitterApiAsyncClient(Chainable, metaclass=ABCMeta):
         verify: httpx.VerifyTypes = True,
     ):
         """
-        OAuth 1.0 のユーザ認証で、ユーザが認証した後にリダイレクトされる CallbackUrl からクライアントを作成する。
+        OAuth 1.0 のユーザ認証フローの途中、ユーザが認証した後にリダイレクトされる CallbackUrl の段階からクライアントを作成する。
 
         refer: https://developer.twitter.com/en/docs/authentication/oauth-1-0a/obtaining-user-access-tokens
         """
@@ -882,7 +882,7 @@ class TwitterApiAsyncClient(Chainable, metaclass=ABCMeta):
         verify: httpx.VerifyTypes = True,
     ):
         """
-        環境変数から、OAuth 1.0 のユーザ認証で、ユーザが認証した後にリダイレクトされる CallbackUrl からクライアントを作成する。
+        環境変数から、OAuth 1.0 のユーザ認証フローの途中、ユーザが認証した後にリダイレクトされる CallbackUrl の段階からクライアントを作成する。
 
         refer: https://developer.twitter.com/en/docs/authentication/oauth-1-0a/obtaining-user-access-tokens
         """
