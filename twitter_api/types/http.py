@@ -21,4 +21,4 @@ def downcast_dict(typed_dict: Optional[TypedDict]) -> Optional[dict]:
 
 
 def downcast_dict(typed_dict):
-    return typed_dict  # type: ignore
+    return typed_dict

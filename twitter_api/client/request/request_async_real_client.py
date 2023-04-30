@@ -125,9 +125,6 @@ class RequestAsyncRealClient(RequestAsyncClient):
             json=_remove_none_field(body),
         )
 
-        if response_body_type is str:
-            return response.content.decode("utf-8")  # type: ignore
-
         return _parse_response(
             endpoint,
             response,
@@ -157,9 +154,6 @@ class RequestAsyncRealClient(RequestAsyncClient):
             headers=headers,
             params=_remove_none_field(query),
         )
-
-        if response_body_type is str:
-            return response.content.decode("utf-8")  # type: ignore
 
         return _parse_response(
             endpoint,
