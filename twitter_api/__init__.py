@@ -1,4 +1,11 @@
 from .client.twitter_api_async_client import TwitterApiAsyncClient
+from .client.twitter_api_async_mock_client import TwitterApiAsyncMockClient
 from .client.twitter_api_client import TwitterApiClient
+from .client.twitter_api_mock_client import TwitterApiMockClient
 
-__all__ = ["TwitterApiClient", "TwitterApiAsyncClient"]
+__all__ = [
+    "TwitterApiAsyncClient",
+    "TwitterApiAsyncMockClient",
+    "TwitterApiClient",
+    "TwitterApiMockClient",
+]
