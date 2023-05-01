@@ -13,6 +13,7 @@ from twitter_api.types.oauth import (
     CallbackUrl,
     ClientId,
     ClientSecret,
+    Env,
 )
 
 from .twitter_api_mock_client import _BaseTwitterApiMockClient
@@ -94,6 +95,41 @@ class TwitterApiAsyncMockClient(_BaseTwitterApiMockClient, TwitterApiAsyncClient
         return TwitterOAuth2AuthorizeMockClient(session=session)
 
     @classmethod
+    def from_oauth2_user_flow_env(
+        cls,
+        *,
+        scope: list[Scope],
+        client_id_env: Env[ClientId] = "CLIENT_ID",
+        client_secret_env: Env[ClientSecret] = "CLIENT_SECRET",
+        callback_url_env: Env[CallbackUrl] = "CALLBACK_URL",
+        callback_url: Optional[CallbackUrl] = None,
+        event_hooks: Optional[Mapping[str, list[httpx.EventHook]]] = None,
+        limits: httpx.Limits = httpx.DEFAULT_LIMITS,
+        mounts: Optional[Mapping[str, httpx.AsyncBaseTransport]] = None,
+        proxies: Optional[httpx.ProxiesTypes] = None,
+        timeout: httpx.TimeoutTypes = httpx.DEFAULT_TIMEOUT_CONFIG,
+        transport: Optional[httpx.AsyncBaseTransport] = None,
+        verify: httpx.VerifyTypes = True,
+    ):
+        return cls.from_oauth2_user_flow(
+            client_id=cls._get_env(client_id_env),
+            client_secret=cls._get_env(client_secret_env),
+            scope=scope,
+            callback_url=(
+                callback_url
+                if callback_url is not None
+                else cls._get_env(callback_url_env)
+            ),
+            event_hooks=event_hooks,
+            limits=limits,
+            mounts=mounts,
+            proxies=proxies,
+            timeout=timeout,
+            transport=transport,
+            verify=verify,
+        )
+
+    @classmethod
     def from_oauth2_user_authorization_response_url(
         cls,
         *,
@@ -106,10 +142,10 @@ class TwitterApiAsyncMockClient(_BaseTwitterApiMockClient, TwitterApiAsyncClient
         rate_limit_manager: RateLimitManager = DEFAULT_RATE_LIMIT_MANAGER,
         event_hooks: Optional[Mapping[str, list[httpx.EventHook]]] = None,
         limits: httpx.Limits = httpx.DEFAULT_LIMITS,
-        mounts: Optional[Mapping[str, httpx.BaseTransport]] = None,
+        mounts: Optional[Mapping[str, httpx.AsyncBaseTransport]] = None,
         proxies: Optional[httpx.ProxiesTypes] = None,
         timeout: httpx.TimeoutTypes = httpx.DEFAULT_TIMEOUT_CONFIG,
-        transport: Optional[httpx.BaseTransport] = None,
+        transport: Optional[httpx.AsyncBaseTransport] = None,
         verify: httpx.VerifyTypes = True,
     ):
         from twitter_api.client.oauth_flow.twitter_oauth2_access_token_mock_client import (
@@ -131,6 +167,47 @@ class TwitterApiAsyncMockClient(_BaseTwitterApiMockClient, TwitterApiAsyncClient
             state=state,
             code_verifier=code_verifier,
             session=session,
+        )
+
+    @classmethod
+    def from_oauth2_user_authorization_response_url_env(
+        cls,
+        *,
+        authorization_response_url: CallbackUrl,
+        state: str,
+        code_verifier: str,
+        client_id_env: Env[ClientId],
+        client_secret_env: Env[ClientSecret],
+        callback_url_env: Env[CallbackUrl],
+        callback_url: Optional[CallbackUrl] = None,
+        rate_limit_manager: RateLimitManager = DEFAULT_RATE_LIMIT_MANAGER,
+        event_hooks: Optional[Mapping[str, list[httpx.EventHook]]] = None,
+        limits: httpx.Limits = httpx.DEFAULT_LIMITS,
+        mounts: Optional[Mapping[str, httpx.AsyncBaseTransport]] = None,
+        proxies: Optional[httpx.ProxiesTypes] = None,
+        timeout: httpx.TimeoutTypes = httpx.DEFAULT_TIMEOUT_CONFIG,
+        transport: Optional[httpx.AsyncBaseTransport] = None,
+        verify: httpx.VerifyTypes = True,
+    ):
+        return cls.from_oauth2_user_authorization_response_url(
+            authorization_response_url=authorization_response_url,
+            state=state,
+            code_verifier=code_verifier,
+            client_id=cls._get_env(client_id_env),
+            client_secret=cls._get_env(client_secret_env),
+            callback_url=(
+                callback_url
+                if callback_url is not None
+                else cls._get_env(callback_url_env)
+            ),
+            rate_limit_manager=rate_limit_manager,
+            event_hooks=event_hooks,
+            limits=limits,
+            mounts=mounts,
+            proxies=proxies,
+            timeout=timeout,
+            transport=transport,
+            verify=verify,
         )
 
     @classmethod
@@ -191,6 +268,39 @@ class TwitterApiAsyncMockClient(_BaseTwitterApiMockClient, TwitterApiAsyncClient
         return TwitterOAuth1RequestTokenMockClient(session=session)
 
     @classmethod
+    def from_oauth1_user_flow_env(
+        cls,
+        *,
+        api_key_env: Env[ApiKey] = "API_KEY",
+        api_secret_env: Env[ApiSecret] = "API_SECRET",
+        callback_url_env: Env[CallbackUrl] = "CALLBACK_URL",
+        callback_url: Optional[CallbackUrl] = None,
+        event_hooks: Optional[Mapping[str, list[httpx.EventHook]]] = None,
+        limits: httpx.Limits = httpx.DEFAULT_LIMITS,
+        mounts: Optional[Mapping[str, httpx.AsyncBaseTransport]] = None,
+        proxies: Optional[httpx.ProxiesTypes] = None,
+        timeout: httpx.TimeoutTypes = httpx.DEFAULT_TIMEOUT_CONFIG,
+        transport: Optional[httpx.AsyncBaseTransport] = None,
+        verify: httpx.VerifyTypes = True,
+    ):
+        return cls.from_oauth1_user_flow(
+            api_key=cls._get_env(api_key_env),
+            api_secret=cls._get_env(api_secret_env),
+            callback_url=(
+                callback_url
+                if callback_url is not None
+                else cls._get_env(callback_url_env)
+            ),
+            event_hooks=event_hooks,
+            limits=limits,
+            mounts=mounts,
+            proxies=proxies,
+            timeout=timeout,
+            transport=transport,
+            verify=verify,
+        )
+
+    @classmethod
     def from_oauth1_user_authorization_response_url(
         cls,
         *,
@@ -201,10 +311,10 @@ class TwitterApiAsyncMockClient(_BaseTwitterApiMockClient, TwitterApiAsyncClient
         rate_limit_manager: RateLimitManager = DEFAULT_RATE_LIMIT_MANAGER,
         event_hooks: Optional[Mapping[str, list[httpx.EventHook]]] = None,
         limits: httpx.Limits = httpx.DEFAULT_LIMITS,
-        mounts: Optional[Mapping[str, httpx.BaseTransport]] = None,
+        mounts: Optional[Mapping[str, httpx.AsyncBaseTransport]] = None,
         proxies: Optional[httpx.ProxiesTypes] = None,
         timeout: httpx.TimeoutTypes = httpx.DEFAULT_TIMEOUT_CONFIG,
-        transport: Optional[httpx.BaseTransport] = None,
+        transport: Optional[httpx.AsyncBaseTransport] = None,
         verify: httpx.VerifyTypes = True,
     ):
         from twitter_api.client.oauth_flow.twitter_oauth1_access_token_mock_client import (
@@ -226,4 +336,41 @@ class TwitterApiAsyncMockClient(_BaseTwitterApiMockClient, TwitterApiAsyncClient
         return TwitterOAuth1AccessTokenMockClient(
             authorization_response_url=authorization_response_url,
             session=session,
+        )
+
+    @classmethod
+    def from_oauth1_user_authorization_response_url_env(
+        cls,
+        *,
+        authorization_response_url: CallbackUrl,
+        api_key_env: Env[ApiKey] = "API_KEY",
+        api_secret_env: Env[ApiSecret] = "API_SECRET",
+        callback_url_env: Env[CallbackUrl] = "CALLBACK_URL",
+        callback_url: Optional[CallbackUrl] = None,
+        rate_limit_manager: RateLimitManager = DEFAULT_RATE_LIMIT_MANAGER,
+        event_hooks: Optional[Mapping[str, list[httpx.EventHook]]] = None,
+        limits: httpx.Limits = httpx.DEFAULT_LIMITS,
+        mounts: Optional[Mapping[str, httpx.AsyncBaseTransport]] = None,
+        proxies: Optional[httpx.ProxiesTypes] = None,
+        timeout: httpx.TimeoutTypes = httpx.DEFAULT_TIMEOUT_CONFIG,
+        transport: Optional[httpx.AsyncBaseTransport] = None,
+        verify: httpx.VerifyTypes = True,
+    ):
+        return cls.from_oauth1_user_authorization_response_url(
+            authorization_response_url=authorization_response_url,
+            api_key=cls._get_env(api_key_env),
+            api_secret=cls._get_env(api_secret_env),
+            callback_url=(
+                callback_url
+                if callback_url is not None
+                else cls._get_env(callback_url_env)
+            ),
+            rate_limit_manager=rate_limit_manager,
+            event_hooks=event_hooks,
+            limits=limits,
+            mounts=mounts,
+            proxies=proxies,
+            timeout=timeout,
+            transport=transport,
+            verify=verify,
         )
