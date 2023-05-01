@@ -12,6 +12,10 @@ else:
     print("Usage: python get_user_id_by_username.py [USERNAME]", file=sys.stderr)
     sys.exit(1)
 
+# Remove mention mark.
+if username.startswith("@"):
+    username = username[1:]
+
 try:
     with TwitterApiClient.from_oauth2_app_env() as client:
         user = (
