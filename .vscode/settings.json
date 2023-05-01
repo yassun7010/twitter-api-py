@@ -1,13 +1,27 @@
 {
-  "editor.formatOnSave": true,
+  "editor.comments.insertSpace": true,
   "editor.formatOnPaste": true,
+  "editor.formatOnSave": true,
   "editor.formatOnType": true,
+  "editor.insertSpaces": true,
+  "editor.trimAutoWhitespace": true,
+  "editor.useTabStops": true,
+  "files.insertFinalNewline": true,
+  "files.trimFinalNewlines": true,
+  "files.trimTrailingWhitespace": true,
   "python.analysis.addImport.exactMatchOnly": true,
   "python.analysis.autoImportCompletions": true,
   "python.analysis.completeFunctionParens": false,
+  "python.analysis.extraPaths": [],
   "python.analysis.importFormat": "absolute",
   "python.analysis.indexing": true,
   "python.analysis.typeCheckingMode": "basic",
+  "python.formatting.blackArgs": [
+    "--target-version",
+    "py310",
+    "--line-length",
+    "88"
+  ],
   "python.formatting.provider": "black",
   "python.globalModuleInstallation": true,
   "python.linting.enabled": true,
@@ -16,12 +30,6 @@
   "python.linting.mypyEnabled": false,
   "python.linting.pylintEnabled": false,
   "python.testing.pytestEnabled": true,
-  "python.formatting.blackArgs": [
-    "--target-version",
-    "py310",
-    "--line-length",
-    "88"
-  ],
   "[python]": {
     "editor.codeActionsOnSave": {
       "source.organizeImports": true
@@ -29,5 +37,7 @@
     "editor.tabSize": 4,
     "editor.rulers": [88]
   },
-  "python.analysis.extraPaths": []
+  "[markdown]": {
+    "files.trimTrailingWhitespace": false
+  }
 }
