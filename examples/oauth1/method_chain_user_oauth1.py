@@ -9,7 +9,7 @@ YOUR_CALLBACK_URL = os.environ["CALLBACK_URL"]
 
 try:
     with (
-        TwitterApiClient.from_oauth1_user_flow_env()
+        TwitterApiClient.from_oauth1_user_flow_env(callback_url=YOUR_CALLBACK_URL)
         .request("https://api.twitter.com/oauth/request_token")
         .post()
         .request("https://api.twitter.com/oauth/authorize")
