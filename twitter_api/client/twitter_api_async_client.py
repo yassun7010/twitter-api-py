@@ -75,7 +75,7 @@ from twitter_api.api.resources.v2_users_by_username import (
     AsyncV2UsersByUsernameResources,
     V2UsersByUsernameUrl,
 )
-from twitter_api.api.types.v2_scope import ALL_SCOPES, Scope
+from twitter_api.api.types.v2_scope import Scope
 from twitter_api.client.request.request_async_client import RequestAsyncClient
 from twitter_api.error import NeverError
 from twitter_api.rate_limit.manager import DEFAULT_RATE_LIMIT_MANAGER
@@ -551,7 +551,7 @@ class TwitterApiAsyncClient(Chainable, metaclass=ABCMeta):
     def from_oauth2_user_flow_env(
         cls,
         *,
-        scope: list[Scope] = ALL_SCOPES,
+        scope: list[Scope],
         client_id_env: Env[ClientId] = "CLIENT_ID",
         client_secret_env: Env[ClientSecret] = "CLIENT_SECRET",
         callback_url_env: Env[CallbackUrl] = "CALLBACK_URL",

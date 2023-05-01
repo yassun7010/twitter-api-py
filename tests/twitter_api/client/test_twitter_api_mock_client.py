@@ -1,3 +1,4 @@
+from twitter_api.api.types.v2_scope import ALL_SCOPES
 from twitter_api.client.twitter_api_mock_client import TwitterApiMockClient
 
 
@@ -17,7 +18,7 @@ class TestTwitterApiMockClient:
     def test_mock_client_from_oauth2_user_env(self):
         assert isinstance(
             (
-                TwitterApiMockClient.from_oauth2_user_flow_env()
+                TwitterApiMockClient.from_oauth2_user_flow_env(scope=ALL_SCOPES)
                 .request("https://twitter.com/i/oauth2/authorize")
                 .generate_authorization_url()
                 .input_response_url("https://localhost:3000")
@@ -63,7 +64,7 @@ class TestTwitterApiMockClient:
 
     def test_mock_client_from_oauth2_user_env_with(self):
         with (
-            TwitterApiMockClient.from_oauth2_user_flow_env()
+            TwitterApiMockClient.from_oauth2_user_flow_env(scope=ALL_SCOPES)
             .request("https://twitter.com/i/oauth2/authorize")
             .generate_authorization_url()
             .input_response_url("https://localhost:3000")
