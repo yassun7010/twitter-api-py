@@ -11,7 +11,7 @@ class NoOperationRateLimitManager(RaiseRateLimitHandler):
     """
     レートリミットに関して、クライアント側で何も制御しないマネージャ。
 
-    Twitter API がレートリミットエラーを返却ことを想定している。
+    Twitter API が返すレートリミットエラーをそのまま例外として投げることを想定している。
     """
 
     def check_limit_over(
