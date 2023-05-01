@@ -1,5 +1,5 @@
 from datetime import datetime
-from typing import Callable, Generic
+from typing import Callable
 
 from twitter_api.api.types.oauth2.oauth2_access_token import OAuth2AccessToken
 from twitter_api.api.types.v2_scope import Scope
@@ -8,9 +8,7 @@ from twitter_api.types.generic_client import TwitterApiGenericMockClient
 from twitter_api.types.oauth import AccessToken, CallbackUrl
 
 
-class TwitterOAuth2MockSession(
-    TwitterOAuth2Session, Generic[TwitterApiGenericMockClient]
-):
+class TwitterOAuth2MockSession(TwitterOAuth2Session[TwitterApiGenericMockClient]):
     def __init__(
         self,
         client_generator: Callable[[AccessToken], TwitterApiGenericMockClient],

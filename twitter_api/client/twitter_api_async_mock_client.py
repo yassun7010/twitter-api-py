@@ -77,26 +77,21 @@ class TwitterApiAsyncMockClient(_BaseTwitterApiMockClient, TwitterApiAsyncClient
         transport: Optional[httpx.AsyncBaseTransport] = None,
         verify: httpx.VerifyTypes = True,
     ):
-        from twitter_api.client.oauth_flow.twitter_oauth2_authorization_client import (
-            TwitterOAuth2AuthorizeClient,
+        from twitter_api.client.oauth_flow.twitter_oauth2_authorization_mock_client import (
+            TwitterOAuth2AuthorizeMockClient,
         )
         from twitter_api.client.oauth_session.twitter_oauth2_mock_session import (
             TwitterOAuth2MockSession,
         )
 
-        session: TwitterOAuth2MockSession[
-            TwitterApiAsyncMockClient
-        ] = TwitterOAuth2MockSession(
+        session = TwitterOAuth2MockSession(
             lambda access_token: TwitterApiAsyncMockClient.from_oauth2_bearer_token(
                 access_token
             ),
             scope=scope,
         )
-        client: TwitterOAuth2AuthorizeClient[
-            TwitterApiAsyncMockClient
-        ] = TwitterOAuth2AuthorizeClient(session=session)
 
-        return client
+        return TwitterOAuth2AuthorizeMockClient(session=session)
 
     @classmethod
     def from_oauth2_user_authorization_response_url(
@@ -117,32 +112,26 @@ class TwitterApiAsyncMockClient(_BaseTwitterApiMockClient, TwitterApiAsyncClient
         transport: Optional[httpx.BaseTransport] = None,
         verify: httpx.VerifyTypes = True,
     ):
-        from twitter_api.client.oauth_flow.twitter_oauth2_access_token_client import (
-            TwitterOAuth2AccessTokenClient,
+        from twitter_api.client.oauth_flow.twitter_oauth2_access_token_mock_client import (
+            TwitterOAuth2AccessTokenMockClient,
         )
         from twitter_api.client.oauth_session.twitter_oauth2_mock_session import (
             TwitterOAuth2MockSession,
         )
 
-        session: TwitterOAuth2MockSession[
-            TwitterApiAsyncMockClient
-        ] = TwitterOAuth2MockSession(
+        session = TwitterOAuth2MockSession(
             lambda access_token: TwitterApiAsyncMockClient.from_oauth2_bearer_token(
                 access_token,
             ),
             scope=[],
         )
 
-        client: TwitterOAuth2AccessTokenClient[
-            TwitterApiAsyncMockClient
-        ] = TwitterOAuth2AccessTokenClient(
+        return TwitterOAuth2AccessTokenMockClient(
             authorization_response_url=authorization_response_url,
             state=state,
             code_verifier=code_verifier,
             session=session,
         )
-
-        return client
 
     @classmethod
     def from_oauth1_app(
@@ -183,16 +172,14 @@ class TwitterApiAsyncMockClient(_BaseTwitterApiMockClient, TwitterApiAsyncClient
         transport: Optional[httpx.AsyncBaseTransport] = None,
         verify: httpx.VerifyTypes = True,
     ):
-        from twitter_api.client.oauth_flow.twitter_oauth1_request_token_client import (
-            TwitterOAuth1RequestTokenClient,
+        from twitter_api.client.oauth_flow.twitter_oauth1_request_token_mock_client import (
+            TwitterOAuth1RequestTokenMockClient,
         )
         from twitter_api.client.oauth_session.twitter_oauth1_mock_session import (
             TwitterOAuth1MockSession,
         )
 
-        session: TwitterOAuth1MockSession[
-            TwitterApiAsyncMockClient
-        ] = TwitterOAuth1MockSession(
+        session = TwitterOAuth1MockSession(
             lambda access_token, access_secret: TwitterApiAsyncMockClient.from_oauth1_app(
                 api_key=api_key,
                 api_secret=api_secret,
@@ -201,7 +188,7 @@ class TwitterApiAsyncMockClient(_BaseTwitterApiMockClient, TwitterApiAsyncClient
             ),
         )
 
-        return TwitterOAuth1RequestTokenClient(session=session)
+        return TwitterOAuth1RequestTokenMockClient(session=session)
 
     @classmethod
     def from_oauth1_user_authorization_response_url(
@@ -220,16 +207,14 @@ class TwitterApiAsyncMockClient(_BaseTwitterApiMockClient, TwitterApiAsyncClient
         transport: Optional[httpx.BaseTransport] = None,
         verify: httpx.VerifyTypes = True,
     ):
-        from twitter_api.client.oauth_flow.twitter_oauth1_access_token_client import (
-            TwitterOAuth1AccessTokenClient,
+        from twitter_api.client.oauth_flow.twitter_oauth1_access_token_mock_client import (
+            TwitterOAuth1AccessTokenMockClient,
         )
         from twitter_api.client.oauth_session.twitter_oauth1_mock_session import (
             TwitterOAuth1MockSession,
         )
 
-        session: TwitterOAuth1MockSession[
-            TwitterApiAsyncMockClient
-        ] = TwitterOAuth1MockSession(
+        session = TwitterOAuth1MockSession(
             lambda access_token, access_secret: TwitterApiAsyncMockClient.from_oauth1_app(
                 api_key=api_key,
                 api_secret=api_secret,
@@ -238,11 +223,7 @@ class TwitterApiAsyncMockClient(_BaseTwitterApiMockClient, TwitterApiAsyncClient
             ),
         )
 
-        client: TwitterOAuth1AccessTokenClient[
-            TwitterApiAsyncMockClient
-        ] = TwitterOAuth1AccessTokenClient(
+        return TwitterOAuth1AccessTokenMockClient(
             authorization_response_url=authorization_response_url,
             session=session,
         )
-
-        return client

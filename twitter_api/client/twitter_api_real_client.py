@@ -140,9 +140,7 @@ class TwitterApiRealClient(TwitterApiClient):
             TwitterOAuth2RealSession,
         )
 
-        session: TwitterOAuth2RealSession[
-            TwitterApiRealClient
-        ] = TwitterOAuth2RealSession(
+        session = TwitterOAuth2RealSession(
             lambda access_token: TwitterApiRealClient.from_oauth2_bearer_token(
                 access_token
             ),
@@ -193,9 +191,7 @@ class TwitterApiRealClient(TwitterApiClient):
 
         from .twitter_api_real_client import TwitterApiRealClient
 
-        session: TwitterOAuth2RealSession[
-            TwitterApiRealClient
-        ] = TwitterOAuth2RealSession(
+        session = TwitterOAuth2RealSession(
             lambda access_token: TwitterApiRealClient.from_oauth2_bearer_token(
                 access_token,
                 rate_limit_manager=rate_limit_manager,
@@ -290,9 +286,7 @@ class TwitterApiRealClient(TwitterApiClient):
             TwitterOAuth1RealSession,
         )
 
-        session: TwitterOAuth1RealSession[
-            TwitterApiRealClient
-        ] = TwitterOAuth1RealSession(
+        session = TwitterOAuth1RealSession(
             lambda access_token, access_secret: TwitterApiRealClient.from_oauth1_app(
                 api_key=api_key,
                 api_secret=api_secret,
@@ -319,11 +313,7 @@ class TwitterApiRealClient(TwitterApiClient):
             verify=verify,
         )
 
-        client: TwitterOAuth1RequestTokenClient[
-            TwitterApiRealClient
-        ] = TwitterOAuth1RequestTokenClient(session)
-
-        return client
+        return TwitterOAuth1RequestTokenClient(session)
 
     @classmethod
     def from_oauth1_user_authorization_response_url(
@@ -351,9 +341,7 @@ class TwitterApiRealClient(TwitterApiClient):
 
         from .twitter_api_real_client import TwitterApiRealClient
 
-        session: TwitterOAuth1RealSession[
-            TwitterApiRealClient
-        ] = TwitterOAuth1RealSession(
+        session = TwitterOAuth1RealSession(
             lambda access_token, access_secret: TwitterApiRealClient.from_oauth1_app(
                 api_key=api_key,
                 api_secret=api_secret,
@@ -380,14 +368,10 @@ class TwitterApiRealClient(TwitterApiClient):
             verify=verify,
         )
 
-        client: TwitterOAuth1AccessTokenClient[
-            TwitterApiRealClient
-        ] = TwitterOAuth1AccessTokenClient(
+        return TwitterOAuth1AccessTokenClient(
             authorization_response_url=authorization_response_url,
             session=session,
         )
-
-        return client
 
     def close(self) -> None:
         self._real_request_client.close()
