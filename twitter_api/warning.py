@@ -18,4 +18,4 @@ class RateLimitOverWarning(TwitterApiWarning):
 class UnmanagedRateLimitOverWarning(TwitterApiWarning):
     @property
     def message(self) -> str:
-        return f"管理していないレートリミットに遭遇しました。"
+        return "管理していないレートリミットに遭遇しました。"
