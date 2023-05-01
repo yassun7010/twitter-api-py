@@ -1,4 +1,4 @@
-from typing import Callable, Mapping, Optional
+from typing import Callable, Mapping, Optional, Union
 
 from authlib.integrations.httpx_client.oauth1_client import OAuth1Client
 
@@ -81,7 +81,7 @@ class TwitterOAuth1RealSession(TwitterOAuth1Session[TwitterApiGenericClient]):
 
     def generate_authorization_url(
         self,
-        url: OauthAuth1enticateUrl | Oauth1AuthorizeUrl,
+        url: Union[OauthAuth1enticateUrl, Oauth1AuthorizeUrl],
     ) -> OAuth1Authorization[TwitterApiGenericClient]:
         return OAuth1Authorization(
             authorization_url=self._session.create_authorization_url(url),

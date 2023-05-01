@@ -7,11 +7,16 @@ Twitter の OAuth 認証に必要な情報をまとめた型。
 refer: https://developer.twitter.com/en/docs/authentication/oauth-1-0a/obtaining-user-access-tokens
 """
 
-from typing import Annotated, Literal, TypeAlias, TypeVar
+from typing import Annotated, Literal, TypeAlias, TypeVar, Union
+
+from authlib.integrations.httpx_client.oauth1_client import OAuth1Auth
+from authlib.integrations.httpx_client.oauth2_client import OAuth2Auth
 
 T = TypeVar("T", bound=str)
 
 OAuthVersion = Literal["1.0a", "2.0"]
+OAuth: TypeAlias = Union[OAuth2Auth, OAuth1Auth]
+
 
 Env = Annotated[T, ...]
 """

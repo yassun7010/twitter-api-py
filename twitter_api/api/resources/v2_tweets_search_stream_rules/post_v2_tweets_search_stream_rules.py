@@ -1,5 +1,5 @@
 from datetime import datetime
-from typing import NotRequired, Optional, TypedDict
+from typing import NotRequired, Optional, TypedDict, Union
 
 from pydantic import Field
 
@@ -35,7 +35,7 @@ class DeleteDataByValues(TypedDict):
     values: list[str]
 
 
-DeleteData = DeleteDataByIds | DeleteDataByValues
+DeleteData = Union[DeleteDataByIds, DeleteDataByValues]
 
 
 class PostV2TweetsSearchStreamRulesRequestBody(TypedDict):

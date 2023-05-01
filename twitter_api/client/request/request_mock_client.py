@@ -1,4 +1,4 @@
-from typing import Generic, Optional, Type
+from typing import Generic, Optional, Type, Union
 
 from twitter_api.error import (
     MockInjectionResponseWrong,
@@ -31,7 +31,9 @@ class RequestMockClient(RequestClient, Generic[ResponseModelBody]):
         rate_limit_target: RateLimitTarget,
         rate_limit_manager: RateLimitManager,
     ):
-        self._store: list[tuple[Endpoint, ResponseModelBody | TwitterApiError]] = []
+        self._store: list[
+            tuple[Endpoint, Union[ResponseModelBody, TwitterApiError]]
+        ] = []
         self._oauth_version: OAuthVersion = oauth_version
         self._rate_limit_target: RateLimitTarget = rate_limit_target
 
@@ -53,7 +55,9 @@ class RequestMockClient(RequestClient, Generic[ResponseModelBody]):
         return self._rate_limit_manager
 
     def inject_response_body(
-        self, endpoint: Endpoint, response_body: ResponseModelBody | TwitterApiError
+        self,
+        endpoint: Endpoint,
+        response_body: Union[ResponseModelBody, TwitterApiError],
     ):
         self._store.append((endpoint, response_body))
 

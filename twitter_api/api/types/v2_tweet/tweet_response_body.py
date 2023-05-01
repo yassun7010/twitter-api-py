@@ -1,5 +1,5 @@
 from abc import ABCMeta, abstractmethod
-from typing import Optional, Self
+from typing import Optional, Self, Union
 
 from pydantic import Field
 
@@ -36,7 +36,7 @@ class FindTweets(ExtraPermissiveModel, metaclass=ABCMeta):
     errors: Optional[list[dict]] = None
 
     @abstractmethod
-    def find_tweet_by(self, id: TweetId | Tweet) -> Optional[Tweet]:
+    def find_tweet_by(self, id: Union[TweetId, Tweet]) -> Optional[Tweet]:
         """
         TweetId からツイートを検索する。
 
@@ -44,7 +44,9 @@ class FindTweets(ExtraPermissiveModel, metaclass=ABCMeta):
         """
         ...
 
-    def find_retweeted_tweet_by(self, retweet: TweetId | Tweet) -> Optional[Tweet]:
+    def find_retweeted_tweet_by(
+        self, retweet: Union[TweetId, Tweet]
+    ) -> Optional[Tweet]:
         """
         リツイート元のツイートを検索する。
         """
@@ -65,7 +67,9 @@ class FindTweets(ExtraPermissiveModel, metaclass=ABCMeta):
 
         return None
 
-    def find_quoted_tweet_by(self, quote_tweet: TweetId | Tweet) -> Optional[Tweet]:
+    def find_quoted_tweet_by(
+        self, quote_tweet: Union[TweetId, Tweet]
+    ) -> Optional[Tweet]:
         """
         引用元のツイートを検索する。
         """
@@ -86,7 +90,9 @@ class FindTweets(ExtraPermissiveModel, metaclass=ABCMeta):
 
         return None
 
-    def find_replied_tweet_by(self, reply_tweet: TweetId | Tweet) -> Optional[Tweet]:
+    def find_replied_tweet_by(
+        self, reply_tweet: Union[TweetId, Tweet]
+    ) -> Optional[Tweet]:
         """
         返信元のツイートを検索する。
         """
@@ -107,7 +113,7 @@ class FindTweets(ExtraPermissiveModel, metaclass=ABCMeta):
 
         return None
 
-    def find_mentioned_users_by(self, tweet: TweetId | Tweet) -> list[User]:
+    def find_mentioned_users_by(self, tweet: Union[TweetId, Tweet]) -> list[User]:
         """
         メンションしているユーザのリストを検索する。
         """
@@ -132,7 +138,7 @@ class TweetResponseBodyData(ExtraPermissiveModel):
 
 
 class TweetResponseBody(FindTweets, TweetResponseBodyData):
-    def find_tweet_by(self, id: TweetId | Tweet) -> Optional[Tweet]:
+    def find_tweet_by(self, id: Union[TweetId, Tweet]) -> Optional[Tweet]:
         if isinstance(id, Tweet):
             id = id.id
 
@@ -154,7 +160,7 @@ class _TweetsResponseBodyData(ExtraPermissiveModel):
 
 
 class TweetsResponseBody(FindTweets, _TweetsResponseBodyData):
-    def find_tweet_by(self, id: TweetId | Tweet) -> Optional[Tweet]:
+    def find_tweet_by(self, id: Union[TweetId, Tweet]) -> Optional[Tweet]:
         if isinstance(id, Tweet):
             id = id.id
 
@@ -206,7 +212,7 @@ class TweetsSearchResponseBody(
     TweetsResponseBody, _TweetsSearchResponseBody, PageResponseBody
 ):
     @property
-    def meta_next_token(self) -> PaginationToken | None:
+    def meta_next_token(self) -> Optional[PaginationToken]:
         return self.meta.next_token
 
     def extend(self, other: Self) -> None:

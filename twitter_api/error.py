@@ -3,7 +3,7 @@ from abc import abstractmethod
 from collections import OrderedDict
 from enum import Enum
 from textwrap import dedent
-from typing import Any, Never, Optional
+from typing import Any, Never, Optional, Union
 
 import pydantic
 
@@ -140,7 +140,7 @@ class TwitterApiResponseFailed(TwitterApiError):
         query: Optional[QuryParameters],
         request_body: Optional[RequestJsonBody],
         response_status_code: int,
-        response_body: Optional[ResponseJsonBody | bytes],
+        response_body: Optional[Union[ResponseJsonBody, bytes]],
     ):
         self._endpoint = endpoint
         self._url = url

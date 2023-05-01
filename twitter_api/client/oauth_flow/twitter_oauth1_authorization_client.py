@@ -19,7 +19,7 @@ class TwitterOAuth1AuthorizeClient(Chainable, Generic[TwitterApiGenericClient]):
         self._session = session
 
     def request(
-        self, url: OauthAuth1enticateUrl | Oauth1AuthorizeUrl
+        self, url: Union[OauthAuth1enticateUrl, Oauth1AuthorizeUrl]
     ) -> Union[
         OAuth1AuthenticateSessionResources[TwitterApiGenericClient],
         OAuth1AuthorizeSessionResources[TwitterApiGenericClient],

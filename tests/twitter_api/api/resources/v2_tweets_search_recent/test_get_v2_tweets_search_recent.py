@@ -1,4 +1,5 @@
 import itertools
+from typing import Optional
 
 import pytest
 
@@ -131,7 +132,7 @@ class TestMockGetV2TweetsSearchRecent:
                 ),
             )
 
-        next_token: PaginationToken | None = None
+        next_token: Optional[PaginationToken] = None
 
         for _ in itertools.count():
             response_body = (

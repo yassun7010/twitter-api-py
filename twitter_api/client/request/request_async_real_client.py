@@ -1,8 +1,5 @@
 from typing import Mapping, Optional, Self, Type
 
-from authlib.integrations.httpx_client.oauth1_client import OAuth1Auth
-from authlib.integrations.httpx_client.oauth2_client import OAuth2Auth
-
 from twitter_api.client.request.request_async_client import RequestAsyncClient
 from twitter_api.client.request.request_real_client import (
     _parse_response,
@@ -16,11 +13,9 @@ from twitter_api.rate_limit.types.rate_limit_target import RateLimitTarget
 from twitter_api.types import httpx
 from twitter_api.types.endpoint import Endpoint
 from twitter_api.types.http import Url
-from twitter_api.types.oauth import OAuthVersion
+from twitter_api.types.oauth import OAuth, OAuthVersion
 
 from .request_client import Headers, QuryParameters, RequestJsonBody, ResponseModelBody
-
-OAuth = OAuth2Auth | OAuth1Auth
 
 
 class RequestAsyncRealClient(RequestAsyncClient):

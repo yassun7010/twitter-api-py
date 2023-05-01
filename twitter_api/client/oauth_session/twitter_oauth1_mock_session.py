@@ -1,4 +1,4 @@
-from typing import Callable
+from typing import Callable, Union
 
 from twitter_api.client.oauth_flow.twitter_oauth1_authorization_client import (
     TwitterOAuth1AuthorizeClient,
@@ -28,7 +28,7 @@ class TwitterOAuth1MockSession(TwitterOAuth1Session[TwitterApiGenericMockClient]
 
     def generate_authorization_url(
         self,
-        url: OauthAuth1enticateUrl | Oauth1AuthorizeUrl,
+        url: Union[OauthAuth1enticateUrl, Oauth1AuthorizeUrl],
     ):
         from twitter_api.api.types.oauth1.oauth1_authorization import (
             OAuth1Authorization,

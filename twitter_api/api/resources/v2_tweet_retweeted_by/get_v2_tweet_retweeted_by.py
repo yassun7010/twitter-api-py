@@ -75,7 +75,7 @@ class GetV2TweetRetweetedByResponseBody(ExtraPermissiveModel, PageResponseBody):
     errors: Optional[list[dict]] = None
 
     @property
-    def meta_next_token(self) -> PaginationToken | None:
+    def meta_next_token(self) -> Optional[PaginationToken]:
         return self.meta.next_token
 
     def extend(self, other: Self) -> None:
