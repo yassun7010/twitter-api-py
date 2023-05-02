@@ -11,6 +11,9 @@ from twitter_api.warning import RateLimitOverWarning, UnmanagedRateLimitOverWarn
 
 logger = getLogger(__file__)
 
+DEFAULT_MIN_RANDOM_SLEEP_SECONDS = 5 * 60
+DEFAULT_MAX_RANDOM_SLEEP_SECONDS = 15 * 60
+
 
 class SleepRateLimitHandler(RateLimitManager):
     """
@@ -20,8 +23,8 @@ class SleepRateLimitHandler(RateLimitManager):
     def __init__(
         self,
         *,
-        min_random_sleep_seconds: int,
-        max_random_sleep_seconds: int,
+        min_random_sleep_seconds: int = DEFAULT_MIN_RANDOM_SLEEP_SECONDS,
+        max_random_sleep_seconds: int = DEFAULT_MAX_RANDOM_SLEEP_SECONDS,
     ):
         self._min_random_sleep_seconds = min_random_sleep_seconds
         self._max_random_sleep_seconds = max_random_sleep_seconds
