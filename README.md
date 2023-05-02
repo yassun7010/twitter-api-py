@@ -51,8 +51,7 @@ A mock client is provided by the library to simplify the writing of test code.
 This client has the same interface as `TwitterApiClient`/`TwitterApiAsyncClient`, and also provides methods (`inject_*_response_body`) for injecting test data.
 
 ```python
-from twitter_api import TwitterApiClient
-from twitter_api.client.twitter_api_mock_client import TwitterApiMockClient
+from twitter_api import TwitterApiClient, TwitterApiMockClient
 
 def your_logic(twitter_client: TwitterApiClient):
     ...
