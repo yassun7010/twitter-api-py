@@ -106,5 +106,5 @@ class TwitterOAuth1RealSession(TwitterOAuth1Session[TwitterApiGenericClient]):
             oauth_token_secret=data["oauth_token_secret"],
             user_id=data["user_id"],
             screen_name=data["screen_name"],
-            __client_generator=self._client_generator,
+            _client_generator=self._client_generator,
         )
