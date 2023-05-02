@@ -88,9 +88,6 @@ class TwitterOAuth2RealSession(TwitterOAuth2Session, Generic[TwitterApiGenericCl
 
         return OAuth2AccessToken(
             scope=scope,
-            _session=self,
+            _client_generator=self._client_generator,
             **response,
         )
-
-    def generate_client(self, access_token: AccessToken) -> TwitterApiGenericClient:
-        return self._client_generator(access_token)

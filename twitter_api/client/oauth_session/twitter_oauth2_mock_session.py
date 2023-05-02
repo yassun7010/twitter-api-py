@@ -41,8 +41,5 @@ class TwitterOAuth2MockSession(TwitterOAuth2Session[TwitterApiGenericMockClient]
             expires_at=int(datetime.now().timestamp()) + expires_in,
             access_token="access_token",
             scope=self._scope,
-            _session=self,
+            _client_generator=self._client_generator,
         )
-
-    def generate_client(self, access_token: AccessToken):
-        return self._client_generator(access_token)

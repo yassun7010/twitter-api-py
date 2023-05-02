@@ -48,8 +48,5 @@ class TwitterOAuth1MockSession(TwitterOAuth1Session[TwitterApiGenericMockClient]
             oauth_token_secret="oauth_token_secret",
             user_id="user_id",
             screen_name="screen_name",
-            _session=self,
+            _client_generator=self._client_generator,
         )
-
-    def generate_client(self, access_token: AccessToken, access_secret: AccessSecret):
-        return self._client_generator(access_token, access_secret)
