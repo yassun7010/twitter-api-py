@@ -28,7 +28,7 @@ class RateLimitManager(metaclass=ABCMeta):
         同期的な TwitterApiClient を用いている場合のレートリミットの対応方法。
         """
 
-        yield
+        ...
 
     @abstractmethod
     @asynccontextmanager
@@ -39,4 +39,4 @@ class RateLimitManager(metaclass=ABCMeta):
         非同期的な TwitterApiAsyncClient を用いている場合のレートリミットの対応方法。
         """
 
-        yield
+        ...
