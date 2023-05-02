@@ -7,7 +7,7 @@ from typing import Any, Never, Optional, Union
 
 import pydantic
 
-from twitter_api.rate_limit.types.rate_limit_info import RateLimitInfo
+from twitter_api.rate_limit.rate_limit_info import RateLimitInfo
 from twitter_api.types.extra_permissive_model import ExtraPermissiveModel
 
 from .types.endpoint import Endpoint

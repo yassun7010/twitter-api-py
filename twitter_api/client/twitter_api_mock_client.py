@@ -3,7 +3,7 @@ from typing import Mapping, Optional, Self, Union, overload
 from twitter_api.error import TwitterApiError
 from twitter_api.rate_limit.manager import DEFAULT_RATE_LIMIT_MANAGER
 from twitter_api.rate_limit.manager.rate_limit_manager import RateLimitManager
-from twitter_api.rate_limit.types.rate_limit_target import RateLimitTarget
+from twitter_api.rate_limit.rate_limit_target import RateLimitTarget
 from twitter_api.resources.oauth2_invalidate_token import Oauth2InvalidateTokenUrl
 from twitter_api.resources.oauth2_invalidate_token.post_oauth2_invalidate_token import (
     PostOauth2InvalidateTokenResponseBody,

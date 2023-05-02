@@ -3,7 +3,7 @@ from contextlib import asynccontextmanager, contextmanager
 from datetime import datetime
 from typing import AsyncGenerator, Generator, Optional
 
-from twitter_api.rate_limit.types.rate_limit_info import RateLimitInfo
+from twitter_api.rate_limit.rate_limit_info import RateLimitInfo
 
 
 class RateLimitManager(metaclass=ABCMeta):
