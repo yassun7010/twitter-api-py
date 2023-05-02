@@ -13,7 +13,11 @@ from twitter_api.types.endpoint import Endpoint
 class NoOperationSleepRateLimitHandler(
     NoOperationRateLimitManager, SleepRateLimitHandler
 ):
-    pass
+    def random_sleep_seconds(self) -> float:
+        """
+        テストのため、常にスリープしないようにする
+        """
+        return 0
 
 
 @pytest.fixture
@@ -32,10 +36,7 @@ class TestSleepRateLimitHandler:
         rate_limit_info: RateLimitInfo,
     ):
         assert (
-            NoOperationSleepRateLimitHandler(
-                min_random_sleep_seconds=0,
-                max_random_sleep_seconds=0,
-            ).check_limit_over(
+            NoOperationSleepRateLimitHandler().check_limit_over(
                 rate_limit_info=rate_limit_info,
             )
             is None
