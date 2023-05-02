@@ -25,7 +25,7 @@ class _OAuth1Authorization(Generic[TwitterApiGenericClient]):
         file: TextIO = sys.stderr,
     ):
         """
-        認証画面で承認した後にリダイレクトされるコールバックURL を入力する。
+        Twitter 認証画面で承認した後にリダイレクトされるコールバックURL を入力する。
 
         引数の input_url に値を入れると、プロンプトで問い合わせを行わない。
         """
@@ -68,7 +68,7 @@ class OAuth1Authorization(_OAuth1Authorization[TwitterApiGenericClient]):
 
     def open_request_url(self) -> _OAuth1Authorization[TwitterApiGenericClient]:
         """
-        ブラウザで認証画面を開く。
+        Twitter 認証画面の URL をブラウザで認証画面を開く。
         """
         import webbrowser
 
@@ -85,7 +85,7 @@ class OAuth1Authorization(_OAuth1Authorization[TwitterApiGenericClient]):
         file: TextIO = sys.stderr,
     ) -> _OAuth1Authorization[TwitterApiGenericClient]:
         """
-        コンソール上に認証画面の URL を出力する。
+        Twitter 認証画面の URL をコンソール上に出力する。
         """
         if message_function is None:
 

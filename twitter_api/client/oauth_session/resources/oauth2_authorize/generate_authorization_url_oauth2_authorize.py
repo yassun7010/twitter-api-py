@@ -12,7 +12,7 @@ class GenerateAuthorizationUrlOAuth2AuthorizeSessionResources(
         OAuth 2.0 のユーザ認証（PKCE）の最初のステップ。
 
         ユーザーアクセストークンのセットを生成するために、
-        Twitter 認証用のページへのアクセス用 URL を生成する。
+        Twitter 認証画面へのアクセス用 URL を生成する。
 
         refer: https://developer.twitter.com/en/docs/authentication/oauth-2-0/authorization-code
         """

@@ -29,7 +29,7 @@ class _OAuth2Authorization(Generic[TwitterApiGenericClient]):
         file: TextIO = sys.stderr,
     ):
         """
-        認証画面で承認した後にリダイレクトされるコールバックURL を入力する。
+        Twitter 認証画面で承認した後にリダイレクトされるコールバックURL を入力する。
 
         引数の input_url に値を入れると、プロンプトで問い合わせを行わない。
         """
@@ -65,6 +65,9 @@ class _OAuth2Authorization(Generic[TwitterApiGenericClient]):
 
 class OAuth2Authorization(_OAuth2Authorization[TwitterApiGenericClient]):
     def open_request_url(self) -> _OAuth2Authorization[TwitterApiGenericClient]:
+        """
+        Twitter 認証画面の URL をブラウザで認証画面を開く。
+        """
         import webbrowser
 
         webbrowser.open(self.authorization_url)
@@ -81,6 +84,9 @@ class OAuth2Authorization(_OAuth2Authorization[TwitterApiGenericClient]):
         message_function: Optional[Callable[[Url], str]] = None,
         file: TextIO = sys.stderr,
     ) -> _OAuth2Authorization[TwitterApiGenericClient]:
+        """
+        Twitter 認証画面の URL をコンソール上に出力する。
+        """
         if message_function is None:
 
             def default_message_function(url: Url):

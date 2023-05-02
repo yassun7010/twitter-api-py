@@ -11,7 +11,7 @@ class GenerateAuthorizationUrlOAuth1AuthenticateSessionResources(
         """
         OAuth 1.0a の 2 番目のステップ。
         ユーザーアクセストークンのセットを生成するために、
-        Twitter 認証用のページへのアクセス用 URL を生成する。
+        Twitter 認証画面へのアクセス用 URL を生成する。
 
         refer: https://developer.twitter.com/en/docs/authentication/api-reference/authenticate
         """
