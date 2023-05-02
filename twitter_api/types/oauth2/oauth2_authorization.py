@@ -23,7 +23,7 @@ class _OAuth2Authorization(Generic[TwitterApiGenericClient]):
 
     def input_response_url(
         self,
-        input_url: Optional[Url] = None,
+        response_url: Optional[Url] = None,
         *,
         message_function: Optional[Callable[[], str]] = None,
         file: TextIO = sys.stderr,
@@ -31,15 +31,15 @@ class _OAuth2Authorization(Generic[TwitterApiGenericClient]):
         """
         Twitter 認証画面で承認した後にリダイレクトされるコールバックURL を入力する。
 
-        引数の input_url に値がない場合、プロンプトで問い合わせを行う。
+        引数の response_url に値がない場合、プロンプトで問い合わせを行う。
         """
 
         from twitter_api.client.oauth_flow.twitter_oauth2_access_token_client import (
             TwitterOAuth2AccessTokenClient,
         )
 
-        if input_url is None:
-            input_url = ""
+        if response_url is None:
+            response_url = ""
 
         if message_function is None:
 
@@ -49,14 +49,14 @@ class _OAuth2Authorization(Generic[TwitterApiGenericClient]):
             message_function = default_message_function
 
         while True:
-            if input_url != "":
+            if response_url != "":
                 break
 
             file.write(message_function())
-            input_url = input()
+            response_url = input()
 
         return TwitterOAuth2AccessTokenClient(
-            authorization_response_url=input_url,
+            authorization_response_url=response_url,
             state=self.state,
             code_verifier=self.code_verifier,
             session=self._session,
