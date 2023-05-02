@@ -31,7 +31,7 @@ class _OAuth2Authorization(Generic[TwitterApiGenericClient]):
         """
         Twitter 認証画面で承認した後にリダイレクトされるコールバックURL を入力する。
 
-        引数の input_url に値を入れると、プロンプトで問い合わせを行わない。
+        引数の input_url に値がない場合、プロンプトで問い合わせを行う。
         """
 
         from twitter_api.client.oauth_flow.twitter_oauth2_access_token_client import (
