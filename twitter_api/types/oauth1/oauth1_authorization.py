@@ -1,58 +1,21 @@
 import sys
 from textwrap import dedent
-from typing import Callable, Generic, Optional, Self, TextIO
+from typing import Callable, Generic, Optional, TextIO
 
 from twitter_api.client.oauth_session.twitter_oauth1_session import TwitterOAuth1Session
-from twitter_api.types.chainable import Chainable
 from twitter_api.types.generic_client import TwitterApiGenericClient
 from twitter_api.types.http import Url
 
 
-class OAuth1Authorization(Chainable, Generic[TwitterApiGenericClient]):
+class _OAuth1Authorization(Generic[TwitterApiGenericClient]):
     def __init__(
         self,
+        *,
         authorization_url: Url,
         session: TwitterOAuth1Session[TwitterApiGenericClient],
     ) -> None:
         self.authorization_url = authorization_url
         self._session = session
-
-    def open_request_url(self) -> Self:
-        """
-        ブラウザで認証画面を開く。
-        """
-        import webbrowser
-
-        webbrowser.open(self.authorization_url)
-        return self
-
-    def print_request_url(
-        self,
-        message_function: Optional[Callable[[Url], str]] = None,
-        file: TextIO = sys.stderr,
-    ) -> Self:
-        """
-        コンソール上に認証画面の URL を出力する。
-        """
-        if message_function is None:
-
-            def default_message_function(url: Url):
-                return dedent(
-                    f"""
-                    =====================================================
-                      Please open Authorization URL using your browser.
-                    =====================================================
-
-                    {url}
-
-                    """
-                )
-
-            message_function = default_message_function
-
-        print(message_function(self.authorization_url), file=file)
-
-        return self
 
     def input_response_url(
         self,
@@ -90,5 +53,59 @@ class OAuth1Authorization(Chainable, Generic[TwitterApiGenericClient]):
 
         return TwitterOAuth1AccessTokenClient(
             authorization_response_url=input_url,
+            session=self._session,
+        )
+
+
+class OAuth1Authorization(_OAuth1Authorization[TwitterApiGenericClient]):
+    def __init__(
+        self,
+        authorization_url: Url,
+        session: TwitterOAuth1Session[TwitterApiGenericClient],
+    ) -> None:
+        self.authorization_url = authorization_url
+        self._session = session
+
+    def open_request_url(self) -> _OAuth1Authorization[TwitterApiGenericClient]:
+        """
+        ブラウザで認証画面を開く。
+        """
+        import webbrowser
+
+        webbrowser.open(self.authorization_url)
+
+        return _OAuth1Authorization(
+            authorization_url=self.authorization_url,
+            session=self._session,
+        )
+
+    def print_request_url(
+        self,
+        message_function: Optional[Callable[[Url], str]] = None,
+        file: TextIO = sys.stderr,
+    ) -> _OAuth1Authorization[TwitterApiGenericClient]:
+        """
+        コンソール上に認証画面の URL を出力する。
+        """
+        if message_function is None:
+
+            def default_message_function(url: Url):
+                return dedent(
+                    f"""
+                    =====================================================
+                      Please open Authorization URL using your browser.
+                    =====================================================
+
+                    {url}
+
+                    """
+                )
+
+            message_function = default_message_function
+
+        print(message_function(self.authorization_url), file=file)
+
+        return _OAuth1Authorization(
+            authorization_url=self.authorization_url,
             session=self._session,
         )
