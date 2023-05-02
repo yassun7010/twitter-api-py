@@ -49,6 +49,8 @@ class SleepRateLimitHandler(RateLimitManager):
 
             try:
                 yield
+                return
+
             except TwitterApiResponseFailed as error:
                 # レートリミット以外のエラーなら上流に投げる。
                 if error.status_code != TwitterApiErrorCode.TooManyRequests.value:
@@ -57,8 +59,6 @@ class SleepRateLimitHandler(RateLimitManager):
                 # 予期しないレートリミットに遭遇した場合、投機的な待機を行う
                 logger.warning(UnmanagedRateLimitOverWarning())
                 time.sleep(self.random_sleep_seconds())
-            else:
-                return
 
     @asynccontextmanager
     async def handle_rate_limit_async(self, rate_limit_info: RateLimitInfo):
@@ -71,6 +71,8 @@ class SleepRateLimitHandler(RateLimitManager):
 
             try:
                 yield
+                return
+
             except TwitterApiResponseFailed as error:
                 # レートリミットのエラーでないなら上流に投げる。
                 if error.status_code != TwitterApiErrorCode.TooManyRequests.value:
@@ -79,5 +81,3 @@ class SleepRateLimitHandler(RateLimitManager):
                 # 予期しないレートリミットに遭遇した場合、投機的な待機を行う
                 logger.warning(UnmanagedRateLimitOverWarning())
                 await asyncio.sleep(self.random_sleep_seconds())
-            else:
-                return
