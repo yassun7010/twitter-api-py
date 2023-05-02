@@ -1,6 +1,6 @@
 import sys
 
-from twitter_api.client.twitter_api_client import TwitterApiClient
+from twitter_api import TwitterApiClient
 from twitter_api.error import TwitterApiError
 
 if len(sys.argv) == 1:
