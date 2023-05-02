@@ -66,6 +66,7 @@ class GetV2TweetsSearchStreamResources(ApiResources):
 
         refer: https://developer.twitter.com/en/docs/twitter-api/tweets/filtered-stream/api-reference/get-tweets-search-stream
         """
+        # TODO: stream で実装する必要があるが、開発用アカウントが凍結されたので検証できない。
         return self.request_client.get(
             endpoint=ENDPOINT,
             response_body_type=GetV2TweetsSearchStreamResponseBody,
