@@ -207,12 +207,6 @@ class TwitterApiResponseFailed(TwitterApiError):
         )
 
 
-class OAuth2UserAccessTokenExpired(TwitterApiError):
-    @property
-    def message(self) -> str:
-        return "OAuth2.0 のユーザ認証の ACCESS_TOKEN が失効しました。再度発行してください。"
-
-
 class TwitterApiResponseError(TwitterApiError):
     def __init__(self, endpoint: Endpoint, data: Any, **extra):
         self._endpoint = endpoint

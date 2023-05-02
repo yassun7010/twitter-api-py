@@ -1,10 +1,16 @@
 from contextlib import contextmanager
 
 from twitter_api.error import (
-    OAuth2UserAccessTokenExpired,
+    TwitterApiError,
     TwitterApiErrorCode,
     TwitterApiResponseFailed,
 )
+
+
+class OAuth2UserAccessTokenExpired(TwitterApiError):
+    @property
+    def message(self) -> str:
+        return "OAuth2.0 のユーザ認証の ACCESS_TOKEN が失効しました。再度発行してください。"
 
 
 @contextmanager
