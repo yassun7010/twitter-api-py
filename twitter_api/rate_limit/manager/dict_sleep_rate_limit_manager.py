@@ -8,7 +8,7 @@ class DictSleepRateLimitManager(DictRateLimitManager, SleepRateLimitHandler):
     """
     単純なハッシュマップによるレートリミットの管理を行うマネージャ。
 
-    DictSleepRateLimitManager と異なり、レートリミットオーバーになったとき、スリープする。
+    レートリミットオーバーになったとき、スリープする。
     """
 
     pass
