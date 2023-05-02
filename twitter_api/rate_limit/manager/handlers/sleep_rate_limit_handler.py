@@ -17,13 +17,23 @@ class SleepRateLimitHandler(RateLimitManager):
     レートリミットに遭遇した場合、スリープする handler。
     """
 
-    def random_sleep_seconds(self) -> float:
+    def __init__(
+        self,
+        *,
+        min_random_sleep_seconds: int,
+        max_random_sleep_seconds: int,
+    ):
+        self._min_random_sleep_seconds = min_random_sleep_seconds
+        self._max_random_sleep_seconds = max_random_sleep_seconds
+
+    def random_sleep_seconds(self) -> int:
         """
         予期しないレートリミットに遭遇した場合にランダムに休む時間[秒]。
         """
 
-        # デフォルトは 5 ~ 15 分。
-        return random.randint(5 * 60, 15 * 60)
+        return random.randint(
+            self._min_random_sleep_seconds, self._max_random_sleep_seconds
+        )
 
     @contextmanager
     def handle_rate_limit_sync(self, rate_limit_info: RateLimitInfo):

@@ -11,4 +11,14 @@ class DictSleepRateLimitManager(DictRateLimitManager, SleepRateLimitHandler):
     レートリミットオーバーになったとき、スリープする。
     """
 
-    pass
+    def __init__(
+        self,
+        min_random_sleep_seconds: int = 5 * 60,
+        max_random_sleep_seconds: int = 15 * 60,
+    ):
+        SleepRateLimitHandler.__init__(
+            self,
+            min_random_sleep_seconds=min_random_sleep_seconds,
+            max_random_sleep_seconds=max_random_sleep_seconds,
+        )
+        DictRateLimitManager.__init__(self)
