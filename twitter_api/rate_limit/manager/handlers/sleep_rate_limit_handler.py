@@ -42,8 +42,7 @@ class SleepRateLimitHandler(RateLimitManager):
     def handle_rate_limit_sync(self, rate_limit_info: RateLimitInfo):
         while True:
             # レートリミットを超えてしまっていたら、必要な待ち時間分だけ待つ。
-            wait_time_seconds = self.check_limit_over(rate_limit_info)
-            if wait_time_seconds is not None:
+            if wait_time_seconds := self.check_limit_over(rate_limit_info):
                 logger.warning(RateLimitOverWarning(rate_limit_info))
                 time.sleep(wait_time_seconds)
                 continue
@@ -65,8 +64,7 @@ class SleepRateLimitHandler(RateLimitManager):
     async def handle_rate_limit_async(self, rate_limit_info: RateLimitInfo):
         while True:
             # レートリミットを超えてしまっていたら、必要な待ち時間分だけ待つ。
-            wait_time_seconds = self.check_limit_over(rate_limit_info)
-            if wait_time_seconds is not None:
+            if wait_time_seconds := self.check_limit_over(rate_limit_info):
                 logger.warning(RateLimitOverWarning(rate_limit_info))
                 await asyncio.sleep(wait_time_seconds)
                 continue
