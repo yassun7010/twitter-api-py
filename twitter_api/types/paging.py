@@ -79,6 +79,7 @@ def get_collected_paging_response_body_sync(
 
     for page in paging:
         first.extend(page)
+
     return first
 
 
@@ -127,4 +128,5 @@ async def get_collected_paging_response_body_async(
 
     async for page in paging:
         first.extend(page)
+
     return first
