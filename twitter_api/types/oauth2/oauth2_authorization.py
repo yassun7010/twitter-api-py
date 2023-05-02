@@ -82,7 +82,7 @@ class OAuth2Authorization(_OAuth2Authorization[TwitterApiGenericClient]):
     def print_request_url(
         self,
         message_function: Optional[Callable[[Url], str]] = None,
-        file: TextIO = sys.stderr,
+        message_io: TextIO = sys.stderr,
     ) -> _OAuth2Authorization[TwitterApiGenericClient]:
         """
         Twitter 認証画面の URL をコンソール上に出力する。
@@ -103,7 +103,7 @@ class OAuth2Authorization(_OAuth2Authorization[TwitterApiGenericClient]):
 
             message_function = default_message_function
 
-        print(message_function(self.authorization_url), file=file)
+        print(message_function(self.authorization_url), file=message_io)
 
         return _OAuth2Authorization(
             authorization_url=self.authorization_url,
