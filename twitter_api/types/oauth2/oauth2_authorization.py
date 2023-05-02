@@ -26,7 +26,7 @@ class _OAuth2Authorization(Generic[TwitterApiGenericClient]):
         response_url: Optional[Url] = None,
         *,
         message_function: Optional[Callable[[], str]] = None,
-        file: TextIO = sys.stderr,
+        message_io: TextIO = sys.stderr,
     ):
         """
         Twitter 認証画面で承認した後にリダイレクトされるコールバックURL を入力する。
@@ -52,7 +52,7 @@ class _OAuth2Authorization(Generic[TwitterApiGenericClient]):
             if response_url != "":
                 break
 
-            file.write(message_function())
+            message_io.write(message_function())
             response_url = input()
 
         return TwitterOAuth2AccessTokenClient(
