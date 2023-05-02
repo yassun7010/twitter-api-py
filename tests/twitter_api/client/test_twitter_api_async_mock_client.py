@@ -1,7 +1,7 @@
 import pytest
 
-from twitter_api.api.types.v2_scope import ALL_SCOPES
 from twitter_api.client.twitter_api_async_mock_client import TwitterApiAsyncMockClient
+from twitter_api.types.v2_scope import ALL_SCOPES
 
 
 class TestTwitterApiAsyncMockClient:

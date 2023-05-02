@@ -3,7 +3,6 @@ from typing import Mapping, Optional, Self
 from authlib.integrations.httpx_client.oauth1_client import OAuth1Auth
 from authlib.integrations.httpx_client.oauth2_client import OAuth2Auth
 
-from twitter_api.api.types.v2_scope import Scope
 from twitter_api.client.request.request_async_real_client import RequestAsyncRealClient
 from twitter_api.client.request.request_real_client import RequestRealClient
 from twitter_api.client.twitter_api_async_client import TwitterApiAsyncClient
@@ -20,6 +19,7 @@ from twitter_api.types.oauth import (
     ClientId,
     ClientSecret,
 )
+from twitter_api.types.v2_scope import Scope
 
 from .request.request_client import RequestClient
 

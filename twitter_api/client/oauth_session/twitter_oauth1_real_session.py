@@ -2,8 +2,6 @@ from typing import Callable, Mapping, Optional, Union
 
 from authlib.integrations.httpx_client.oauth1_client import OAuth1Client
 
-from twitter_api.api.types.oauth1.oauth1_access_token import OAuth1AccessToken
-from twitter_api.api.types.oauth1.oauth1_authorization import OAuth1Authorization
 from twitter_api.client.oauth_flow.twitter_oauth1_authorization_client import (
     TwitterOAuth1AuthorizeClient,
 )
@@ -29,6 +27,8 @@ from twitter_api.types.oauth import (
     ApiSecret,
     CallbackUrl,
 )
+from twitter_api.types.oauth1.oauth1_access_token import OAuth1AccessToken
+from twitter_api.types.oauth1.oauth1_authorization import OAuth1Authorization
 
 
 class TwitterOAuth1RealSession(TwitterOAuth1Session[TwitterApiGenericClient]):

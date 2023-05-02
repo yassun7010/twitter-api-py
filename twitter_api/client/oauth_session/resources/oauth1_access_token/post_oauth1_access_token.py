@@ -1,10 +1,10 @@
-from twitter_api.api.types.oauth1.oauth1_access_token import OAuth1AccessToken
 from twitter_api.client.oauth_session.resources.session_resources import (
     OAuth1SessionResources,
 )
 from twitter_api.client.oauth_session.twitter_oauth1_session import TwitterOAuth1Session
 from twitter_api.types.generic_client import TwitterApiGenericClient
 from twitter_api.types.oauth import CallbackUrl
+from twitter_api.types.oauth1.oauth1_access_token import OAuth1AccessToken
 
 
 class PostOauth1AccessTokenResources(OAuth1SessionResources[TwitterApiGenericClient]):

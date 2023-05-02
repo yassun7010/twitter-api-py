@@ -1,5 +1,5 @@
-from twitter_api.api.types.v2_scope import ALL_SCOPES
 from twitter_api.client.twitter_api_mock_client import TwitterApiMockClient
+from twitter_api.types.v2_scope import ALL_SCOPES
 
 
 class TestTwitterApiMockClient:

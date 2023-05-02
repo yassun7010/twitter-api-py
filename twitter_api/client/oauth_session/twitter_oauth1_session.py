@@ -22,9 +22,7 @@ class TwitterOAuth1Session(Generic[TwitterApiGenericClient], metaclass=ABCMeta):
         self,
         url: Url,
     ):
-        from twitter_api.api.types.oauth1.oauth1_authorization import (
-            OAuth1Authorization,
-        )
+        from twitter_api.types.oauth1.oauth1_authorization import OAuth1Authorization
 
         _: OAuth1Authorization[TwitterApiGenericClient] = ...  # type: ignore
 
@@ -37,7 +35,7 @@ class TwitterOAuth1Session(Generic[TwitterApiGenericClient], metaclass=ABCMeta):
     ):
         # NOTE: 本来実装は不要だが、モジュールの循環読み込みを防ぐため、
         #       偽のデータを作っている。
-        from twitter_api.api.types.oauth1.oauth1_access_token import OAuth1AccessToken
+        from twitter_api.types.oauth1.oauth1_access_token import OAuth1AccessToken
 
         _: OAuth1AccessToken[TwitterApiGenericClient] = ...  # type: ignore
 

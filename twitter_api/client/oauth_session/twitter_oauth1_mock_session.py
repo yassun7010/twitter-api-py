@@ -30,9 +30,7 @@ class TwitterOAuth1MockSession(TwitterOAuth1Session[TwitterApiGenericMockClient]
         self,
         url: Union[OauthAuth1enticateUrl, Oauth1AuthorizeUrl],
     ):
-        from twitter_api.api.types.oauth1.oauth1_authorization import (
-            OAuth1Authorization,
-        )
+        from twitter_api.types.oauth1.oauth1_authorization import OAuth1Authorization
 
         return OAuth1Authorization(
             authorization_url="https://authorization.url.com",
@@ -43,7 +41,7 @@ class TwitterOAuth1MockSession(TwitterOAuth1Session[TwitterApiGenericMockClient]
         self,
         authorization_response_url: CallbackUrl,
     ):
-        from twitter_api.api.types.oauth1.oauth1_access_token import OAuth1AccessToken
+        from twitter_api.types.oauth1.oauth1_access_token import OAuth1AccessToken
 
         return OAuth1AccessToken(
             oauth_token="oauth_token",

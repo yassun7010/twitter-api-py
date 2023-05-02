@@ -11,7 +11,7 @@ from typing import (
     TypeVar,
 )
 
-from twitter_api.api.types.pagination_token import PaginationToken
+from twitter_api.types.pagination_token import PaginationToken
 
 
 class PageResponseBody(metaclass=ABCMeta):

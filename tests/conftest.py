@@ -3,14 +3,14 @@ from textwrap import dedent
 
 import pytest
 
-from twitter_api.api.types.v2_tweet.tweet import Tweet
-from twitter_api.api.types.v2_user.user import User
-from twitter_api.api.types.v2_user.user_id import UserId
 from twitter_api.client.twitter_api_async_mock_client import TwitterApiAsyncMockClient
 from twitter_api.client.twitter_api_async_real_client import TwitterApiAsyncRealClient
 from twitter_api.client.twitter_api_mock_client import TwitterApiMockClient
 from twitter_api.client.twitter_api_real_client import TwitterApiRealClient
 from twitter_api.error import TwitterApiException
+from twitter_api.types.v2_tweet.tweet import Tweet
+from twitter_api.types.v2_user.user import User
+from twitter_api.types.v2_user.user_id import UserId
 
 
 class PytestTwitterApiException(TwitterApiException):

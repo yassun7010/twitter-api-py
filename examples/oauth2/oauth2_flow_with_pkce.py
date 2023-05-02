@@ -9,8 +9,8 @@ import sys
 from textwrap import dedent
 
 from twitter_api import TwitterApiClient
-from twitter_api.api.types.v2_scope import ALL_SCOPES
 from twitter_api.error import TwitterApiError
+from twitter_api.types.v2_scope import ALL_SCOPES
 
 YOUR_CALLBACK_URL = os.environ["CALLBACK_URL"]
 

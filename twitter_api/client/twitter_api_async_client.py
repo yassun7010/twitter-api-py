@@ -2,84 +2,80 @@ import os
 from abc import ABCMeta, abstractmethod
 from typing import Mapping, Optional, Self, Union, overload
 
-from twitter_api.api.resources.oauth2_invalidate_token import (
-    AsyncOauth2InvalidateTokenResources,
-    Oauth2InvalidateTokenUrl,
-)
-from twitter_api.api.resources.oauth2_token import (
-    AsyncOauth2TokenResources,
-    Oauth2TokenUrl,
-)
-from twitter_api.api.resources.v2_dm_conversation_messages import (
-    AsyncV2DmConversationMessagesResources,
-    V2DmConversationsMessagesUrl,
-)
-from twitter_api.api.resources.v2_dm_conversations import (
-    AsyncV2DmConversationsResources,
-    V2DmConversationsUrl,
-)
-from twitter_api.api.resources.v2_dm_conversations_with_participant_dm_events import (
-    AsyncV2DmConversationsWithParticipantDmEventsResources,
-    V2DmConversationsWithParticipantDmEventsUrl,
-)
-from twitter_api.api.resources.v2_dm_conversations_with_participant_messages import (
-    AsyncV2DmConversationsWithParticipantMessagesResources,
-    V2DmConversationsWithParticipantMessagesUrl,
-)
-from twitter_api.api.resources.v2_tweet import AsyncV2TweetResources, V2TweetUrl
-from twitter_api.api.resources.v2_tweet_retweeted_by import (
-    AsyncV2TweetRetweetedByRerources,
-    V2TweetRetweetedByUrl,
-)
-from twitter_api.api.resources.v2_tweets import AsyncV2TweetsResources, V2TweetsUrl
-from twitter_api.api.resources.v2_tweets_search_all import (
-    AsyncV2TweetsSearchAllResources,
-    V2TweetsSearchAllUrl,
-)
-from twitter_api.api.resources.v2_tweets_search_recent import (
-    AsyncV2TweetsSearchRecentResources,
-    V2TweetsSearchRecentUrl,
-)
-from twitter_api.api.resources.v2_tweets_search_stream import (
-    AsyncV2TweetsSearchStreamResources,
-    V2TweetsSearchStreamUrl,
-)
-from twitter_api.api.resources.v2_tweets_search_stream_rules import (
-    AsyncV2TweetsSearchStreamRulesResources,
-    V2TweetsSearchStreamRulesUrl,
-)
-from twitter_api.api.resources.v2_user import AsyncV2UserResources, V2UserUrl
-from twitter_api.api.resources.v2_user_followers import (
-    AsyncV2UserFollowersResources,
-    V2UserFollowersUrl,
-)
-from twitter_api.api.resources.v2_user_following import (
-    AsyncV2UserFollowingResources,
-    V2UserFollowingUrl,
-)
-from twitter_api.api.resources.v2_user_liked_tweets import (
-    AsyncV2UserLikedTweetsResources,
-    V2UserLikedTweetsUrl,
-)
-from twitter_api.api.resources.v2_user_retweets import (
-    AsyncV2UserRetweetsResources,
-    V2UserRetweetsUrl,
-)
-from twitter_api.api.resources.v2_user_tweets import (
-    AsyncV2UserTweetsResources,
-    V2UserTweetsUrl,
-)
-from twitter_api.api.resources.v2_users import AsyncV2UsersResources, V2UsersUrl
-from twitter_api.api.resources.v2_users_by import AsyncV2UsersByResources, V2UsersByUrl
-from twitter_api.api.resources.v2_users_by_username import (
-    AsyncV2UsersByUsernameResources,
-    V2UsersByUsernameUrl,
-)
-from twitter_api.api.types.v2_scope import Scope
 from twitter_api.client.request.request_async_client import RequestAsyncClient
 from twitter_api.error import NeverError
 from twitter_api.rate_limit.manager import DEFAULT_RATE_LIMIT_MANAGER
 from twitter_api.rate_limit.manager.rate_limit_manager import RateLimitManager
+from twitter_api.resources.oauth2_invalidate_token import (
+    AsyncOauth2InvalidateTokenResources,
+    Oauth2InvalidateTokenUrl,
+)
+from twitter_api.resources.oauth2_token import AsyncOauth2TokenResources, Oauth2TokenUrl
+from twitter_api.resources.v2_dm_conversation_messages import (
+    AsyncV2DmConversationMessagesResources,
+    V2DmConversationsMessagesUrl,
+)
+from twitter_api.resources.v2_dm_conversations import (
+    AsyncV2DmConversationsResources,
+    V2DmConversationsUrl,
+)
+from twitter_api.resources.v2_dm_conversations_with_participant_dm_events import (
+    AsyncV2DmConversationsWithParticipantDmEventsResources,
+    V2DmConversationsWithParticipantDmEventsUrl,
+)
+from twitter_api.resources.v2_dm_conversations_with_participant_messages import (
+    AsyncV2DmConversationsWithParticipantMessagesResources,
+    V2DmConversationsWithParticipantMessagesUrl,
+)
+from twitter_api.resources.v2_tweet import AsyncV2TweetResources, V2TweetUrl
+from twitter_api.resources.v2_tweet_retweeted_by import (
+    AsyncV2TweetRetweetedByRerources,
+    V2TweetRetweetedByUrl,
+)
+from twitter_api.resources.v2_tweets import AsyncV2TweetsResources, V2TweetsUrl
+from twitter_api.resources.v2_tweets_search_all import (
+    AsyncV2TweetsSearchAllResources,
+    V2TweetsSearchAllUrl,
+)
+from twitter_api.resources.v2_tweets_search_recent import (
+    AsyncV2TweetsSearchRecentResources,
+    V2TweetsSearchRecentUrl,
+)
+from twitter_api.resources.v2_tweets_search_stream import (
+    AsyncV2TweetsSearchStreamResources,
+    V2TweetsSearchStreamUrl,
+)
+from twitter_api.resources.v2_tweets_search_stream_rules import (
+    AsyncV2TweetsSearchStreamRulesResources,
+    V2TweetsSearchStreamRulesUrl,
+)
+from twitter_api.resources.v2_user import AsyncV2UserResources, V2UserUrl
+from twitter_api.resources.v2_user_followers import (
+    AsyncV2UserFollowersResources,
+    V2UserFollowersUrl,
+)
+from twitter_api.resources.v2_user_following import (
+    AsyncV2UserFollowingResources,
+    V2UserFollowingUrl,
+)
+from twitter_api.resources.v2_user_liked_tweets import (
+    AsyncV2UserLikedTweetsResources,
+    V2UserLikedTweetsUrl,
+)
+from twitter_api.resources.v2_user_retweets import (
+    AsyncV2UserRetweetsResources,
+    V2UserRetweetsUrl,
+)
+from twitter_api.resources.v2_user_tweets import (
+    AsyncV2UserTweetsResources,
+    V2UserTweetsUrl,
+)
+from twitter_api.resources.v2_users import AsyncV2UsersResources, V2UsersUrl
+from twitter_api.resources.v2_users_by import AsyncV2UsersByResources, V2UsersByUrl
+from twitter_api.resources.v2_users_by_username import (
+    AsyncV2UsersByUsernameResources,
+    V2UsersByUsernameUrl,
+)
 from twitter_api.types import httpx
 from twitter_api.types.chainable import Chainable
 from twitter_api.types.oauth import (
@@ -92,6 +88,7 @@ from twitter_api.types.oauth import (
     ClientSecret,
     Env,
 )
+from twitter_api.types.v2_scope import Scope
 
 
 class TwitterApiAsyncClient(Chainable, metaclass=ABCMeta):

@@ -1,9 +1,9 @@
 from typing import Callable, Literal, Optional, overload
 
-from twitter_api.api.resources.api_resources import ApiResources
 from twitter_api.client.request.request_async_client import RequestAsyncClient
 from twitter_api.rate_limit.types.rate_limit_info import RateLimitInfo
 from twitter_api.rate_limit.types.rate_limit_target import RateLimitTarget
+from twitter_api.resources.api_resources import ApiResources
 from twitter_api.types.endpoint import Endpoint
 
 

@@ -2,9 +2,6 @@ from typing import Any, Callable, Generic, Mapping, Optional
 
 from authlib.integrations.httpx_client.oauth2_client import OAuth2Client
 
-from twitter_api.api.types.oauth2.oauth2_access_token import OAuth2AccessToken
-from twitter_api.api.types.oauth2.oauth2_authorization import OAuth2Authorization
-from twitter_api.api.types.v2_scope import Scope
 from twitter_api.client.oauth_session.resources.oauth2_authorize import (
     Oauth2AuthorizeUrl,
 )
@@ -13,6 +10,9 @@ from twitter_api.client.oauth_session.twitter_oauth2_session import TwitterOAuth
 from twitter_api.types import httpx
 from twitter_api.types.generic_client import TwitterApiGenericClient
 from twitter_api.types.oauth import AccessToken, CallbackUrl, ClientId, ClientSecret
+from twitter_api.types.oauth2.oauth2_access_token import OAuth2AccessToken
+from twitter_api.types.oauth2.oauth2_authorization import OAuth2Authorization
+from twitter_api.types.v2_scope import Scope
 from twitter_api.utils._oauth import generate_code_verifier
 
 

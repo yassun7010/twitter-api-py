@@ -1,6 +1,5 @@
 from typing import Generic
 
-from twitter_api.api.types.oauth2.oauth2_access_token import OAuth2AccessToken
 from twitter_api.client.oauth_session.resources.session_resources import (
     OAuth2SessionResources,
 )
@@ -8,6 +7,7 @@ from twitter_api.client.oauth_session.twitter_oauth2_session import TwitterOAuth
 from twitter_api.types.endpoint import Endpoint
 from twitter_api.types.generic_client import TwitterApiGenericClient
 from twitter_api.types.oauth import CallbackUrl
+from twitter_api.types.oauth2.oauth2_access_token import OAuth2AccessToken
 
 ENDPOINT = Endpoint("POST", "https://api.twitter.com/2/oauth2/token")
 
