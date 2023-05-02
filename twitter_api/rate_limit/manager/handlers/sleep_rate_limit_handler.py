@@ -1,7 +1,6 @@
 import asyncio
 import random
 import time
-from abc import ABCMeta
 from contextlib import asynccontextmanager, contextmanager
 from logging import getLogger
 
@@ -13,7 +12,7 @@ from twitter_api.warning import RateLimitOverWarning, UnmanagedRateLimitOverWarn
 logger = getLogger(__file__)
 
 
-class SleepRateLimitHandler(RateLimitManager, metaclass=ABCMeta):
+class SleepRateLimitHandler(RateLimitManager):
     """
     レートリミットに遭遇した場合、スリープする handler。
     """
