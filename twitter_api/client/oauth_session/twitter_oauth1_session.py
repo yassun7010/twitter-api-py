@@ -29,8 +29,6 @@ class TwitterOAuth1Session(Generic[TwitterApiGenericClient], metaclass=ABCMeta):
         self,
         authorization_response_url: CallbackUrl,
     ):
-        # NOTE: 本来実装は不要だが、モジュールの循環読み込みを防ぐため、
-        #       偽のデータを作っている。
         from twitter_api.types.oauth1.oauth1_access_token import OAuth1AccessToken
 
         return cast(OAuth1AccessToken[TwitterApiGenericClient], ...)
