@@ -43,6 +43,19 @@ class SearchQuery:
     ):
         """
         クエリを作成するビルダーを呼び出す。
+
+        >>> from twitter_api.types.v2_search_query.search_query import SearchQuery
+        >>> query = SearchQuery.build(
+        ...     lambda q: (
+        ...         q.group(
+        ...             q.hashtag("#Twitter") | q.hashtag("Xcorp"),
+        ...         )
+        ...         & q.mention("@elonmusk")
+        ...         & ~q.mention("SpaceX")
+        ...     )
+        ... )
+        >>> str(query)
+        '(#Twitter OR #Xcorp) @elonmusk -@SpaceX'
         """
 
         query = building(_SearchQueryBuilder)

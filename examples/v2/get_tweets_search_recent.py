@@ -26,7 +26,7 @@ try:
                             & q.mention("@elonmusk")
                             & ~q.mention("SpaceX")
                         )
-                    ),  # == "(#Twitter OR #Xcorp) @elonmusk -@SpaceX"
+                    ),
                     "start_time": datetime.now() - timedelta(hours=2),
                     "end_time": datetime.now(),
                     "expansions": ALL_TWEET_EXPANSIONS,
