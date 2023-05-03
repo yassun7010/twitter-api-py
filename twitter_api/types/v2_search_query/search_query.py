@@ -1,7 +1,10 @@
 from abc import abstractmethod
-from typing import Callable, Type, Union
+from typing import Any, Callable, Literal, Optional, Type, Union, overload
 
+from twitter_api.types.v2_domain import DomainId
+from twitter_api.types.v2_entity.entity_id import EntityId
 from twitter_api.types.v2_search_query.cashtag import Cashtag
+from twitter_api.types.v2_search_query.context import Context
 from twitter_api.types.v2_search_query.from_user import FromUser
 from twitter_api.types.v2_search_query.group import Group, grouping
 from twitter_api.types.v2_search_query.hashtag import Hashtag
@@ -118,3 +121,35 @@ class _SearchQueryBuilder:
     @classmethod
     def quotes_of_tweet_id(cls, id: TweetId) -> QuotesOfTweetId:
         return QuotesOfTweetId(id)
+
+    @overload
+    @classmethod
+    def context(
+        cls,
+        context: str,
+        *,
+        domain_id: Literal[None] = None,
+        entity_id: Literal[None] = None,
+    ):
+        ...
+
+    @overload
+    @classmethod
+    def context(
+        cls, context: Optional[str] = None, *, domain_id: DomainId, entity_id: EntityId
+    ):
+        ...
+
+    @classmethod
+    def context(
+        cls,
+        context: Any = None,
+        *,
+        domain_id: Any = None,
+        entity_id: Any = None,
+    ):
+        return Context(
+            context,
+            domain_id=domain_id,
+            entity_id=entity_id,
+        )
