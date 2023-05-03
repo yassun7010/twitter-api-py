@@ -1,5 +1,5 @@
 from abc import abstractmethod
-from typing import Any, Callable, Literal, Optional, Type, Union, overload
+from typing import Any, Callable, Literal, Type, Union, overload
 
 from twitter_api.types.v2_dm_conversation.dm_conversation_id import DmConversationId
 from twitter_api.types.v2_domain import DomainId
@@ -143,7 +143,11 @@ class _SearchQueryBuilder:
     @overload
     @classmethod
     def context(
-        cls, context: Optional[str] = None, *, domain_id: DomainId, entity_id: EntityId
+        cls,
+        context: Literal[None] = None,
+        *,
+        domain_id: DomainId,
+        entity_id: EntityId,
     ) -> ContextOperator:
         ...
 
