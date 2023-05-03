@@ -1,11 +1,17 @@
 from abc import abstractmethod
 from typing import Any, Callable, Type, Union
 
+from twitter_api.types.v2_search_query.cashtag import Cashtag
+from twitter_api.types.v2_search_query.from_user import FromUser
 from twitter_api.types.v2_search_query.group import Group, grouping
 from twitter_api.types.v2_search_query.hashtag import Hashtag
 from twitter_api.types.v2_search_query.keyword import Keyword
 from twitter_api.types.v2_search_query.mention import Mention
 from twitter_api.types.v2_search_query.operator import Operator
+from twitter_api.types.v2_search_query.retweet_of import RetweetOf
+from twitter_api.types.v2_search_query.to_user import ToUser
+from twitter_api.types.v2_search_query.url import Url
+from twitter_api.types.v2_user.user_id import UserId
 from twitter_api.types.v2_user.username import Username
 
 
@@ -49,5 +55,25 @@ class _SearchQueryBuilder:
         return Hashtag(hashtag)
 
     @classmethod
+    def cashtag(cls, cashtag: str) -> Cashtag:
+        return Cashtag(cashtag)
+
+    @classmethod
     def group(cls, *operators: Operator[Any]) -> Group:
         return Group(*operators)
+
+    @classmethod
+    def from_user(cls, user: Union[UserId, Username]) -> FromUser:
+        return FromUser(user)
+
+    @classmethod
+    def to_user(cls, user: Union[UserId, Username]) -> ToUser:
+        return ToUser(user)
+
+    @classmethod
+    def url(cls, url: str) -> Url:
+        return Url(url)
+
+    @classmethod
+    def retweet_of(cls, user: Union[UserId, Username]) -> RetweetOf:
+        return RetweetOf(user)

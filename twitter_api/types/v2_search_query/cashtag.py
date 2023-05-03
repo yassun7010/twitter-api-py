@@ -1,9 +1,7 @@
-from twitter_api.types.v2_search_query.operator import Operator
+from ._specific_keyword import SpecificKeyword
+from .operator import Operator
 
 
-class Cashtag(Operator):
+class Cashtag(SpecificKeyword, Operator):
     def __init__(self, cashtag: str):
-        self._cashtag = cashtag[1:] if cashtag.startswith("$") else cashtag
-
-    def __str__(self) -> str:
-        return f"${self._cashtag}"
+        super().__init__(cashtag, "$")
