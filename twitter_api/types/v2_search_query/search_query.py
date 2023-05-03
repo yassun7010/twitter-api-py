@@ -9,6 +9,7 @@ from twitter_api.types.v2_search_query.in_reply_to_tweet_id import InReplyToTwee
 from twitter_api.types.v2_search_query.keyword import Keyword
 from twitter_api.types.v2_search_query.mention import Mention
 from twitter_api.types.v2_search_query.operator import Operator
+from twitter_api.types.v2_search_query.quotes_of_tweet_id import QuotesOfTweetId
 from twitter_api.types.v2_search_query.retweet_of import RetweetOf
 from twitter_api.types.v2_search_query.retweets_of_tweet_id import RetweetsOfTweetId
 from twitter_api.types.v2_search_query.to_user import ToUser
@@ -42,7 +43,7 @@ class SearchQuery:
         ],
     ):
         """
-        クエリを作成するビルダーを呼び出す。
+        クエリを組み立てる。
 
         >>> from twitter_api.types.v2_search_query.search_query import SearchQuery
         >>> query = SearchQuery.build(
@@ -113,3 +114,7 @@ class _SearchQueryBuilder:
     @classmethod
     def retweets_of_tweet_id(cls, id: TweetId) -> RetweetsOfTweetId:
         return RetweetsOfTweetId(id)
+
+    @classmethod
+    def quotes_of_tweet_id(cls, id: TweetId) -> QuotesOfTweetId:
+        return QuotesOfTweetId(id)
