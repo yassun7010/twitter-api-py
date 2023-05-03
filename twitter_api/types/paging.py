@@ -9,6 +9,7 @@ from typing import (
     Self,
     TypedDict,
     TypeVar,
+    cast,
 )
 
 from twitter_api.types.pagination_token import PaginationToken
@@ -44,16 +45,13 @@ def get_paging_response_body_iter_sync(
     """
     ページングされたレスポンスを返す API に対して、ページングをイテレータで返す。
     """
-    if query is None:
-        _query: AnyQueryParameters = {pagination_token_key: None}  # type: ignore
-    else:
-        _query = query
+    _query = cast(dict, query if query is not None else {pagination_token_key: None})
 
     next_token = _query.get(pagination_token_key)
 
     while True:
-        _query[pagination_token_key] = next_token  # type: ignore
-        response_body = get_func(_query)
+        _query[pagination_token_key] = next_token
+        response_body = get_func(cast(AnyQueryParameters, _query))
 
         yield response_body
 
@@ -94,15 +92,13 @@ async def get_paging_response_body_iter_async(
     """
     ページングされたレスポンスを返す API に対して、ページングをイテレータで返す。
     """
-    if query is None:
-        _query: AnyQueryParameters = {pagination_token_key: None}  # type: ignore
-    else:
-        _query = query
+    _query = cast(dict, query if query is not None else {pagination_token_key: None})
+
     next_token = _query.get(pagination_token_key)
 
     while True:
-        _query[pagination_token_key] = next_token  # type: ignore
-        response_body = await get_func(_query)
+        _query[pagination_token_key] = next_token
+        response_body = await get_func(cast(AnyQueryParameters, _query))
 
         yield response_body
 

@@ -1,5 +1,5 @@
 from abc import ABCMeta, abstractmethod
-from typing import Generic
+from typing import Generic, cast
 
 from twitter_api.types.generic_client import TwitterApiGenericClient
 from twitter_api.types.oauth import CallbackUrl
@@ -12,9 +12,7 @@ class TwitterOAuth2Session(Generic[TwitterApiGenericClient], metaclass=ABCMeta):
     ):
         from twitter_api.types.oauth2.oauth2_authorization import OAuth2Authorization
 
-        _: OAuth2Authorization[TwitterApiGenericClient] = ...  # type: ignore
-
-        return _
+        return cast(OAuth2Authorization[TwitterApiGenericClient], ...)
 
     @abstractmethod
     def fetch_token(
@@ -25,6 +23,4 @@ class TwitterOAuth2Session(Generic[TwitterApiGenericClient], metaclass=ABCMeta):
     ):
         from twitter_api.types.oauth2.oauth2_access_token import OAuth2AccessToken
 
-        _: OAuth2AccessToken[TwitterApiGenericClient] = ...  # type: ignore
-
-        return _
+        return cast(OAuth2AccessToken[TwitterApiGenericClient], ...)

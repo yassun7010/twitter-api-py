@@ -1,5 +1,5 @@
 from abc import ABCMeta, abstractmethod
-from typing import Generic
+from typing import Generic, cast
 
 from twitter_api.types.generic_client import TwitterApiGenericClient
 from twitter_api.types.http import Url
@@ -13,9 +13,7 @@ class TwitterOAuth1Session(Generic[TwitterApiGenericClient], metaclass=ABCMeta):
             TwitterOAuth1AuthorizeClient,
         )
 
-        _: TwitterOAuth1AuthorizeClient[TwitterApiGenericClient] = ...  # type: ignore
-
-        return _
+        return cast(TwitterOAuth1AuthorizeClient[TwitterApiGenericClient], ...)
 
     @abstractmethod
     def generate_authorization_url(
@@ -24,9 +22,7 @@ class TwitterOAuth1Session(Generic[TwitterApiGenericClient], metaclass=ABCMeta):
     ):
         from twitter_api.types.oauth1.oauth1_authorization import OAuth1Authorization
 
-        _: OAuth1Authorization[TwitterApiGenericClient] = ...  # type: ignore
-
-        return _
+        return cast(OAuth1Authorization[TwitterApiGenericClient], ...)
 
     @abstractmethod
     def fetch_token(
@@ -37,6 +33,4 @@ class TwitterOAuth1Session(Generic[TwitterApiGenericClient], metaclass=ABCMeta):
         #       偽のデータを作っている。
         from twitter_api.types.oauth1.oauth1_access_token import OAuth1AccessToken
 
-        _: OAuth1AccessToken[TwitterApiGenericClient] = ...  # type: ignore
-
-        return _
+        return cast(OAuth1AccessToken[TwitterApiGenericClient], ...)
