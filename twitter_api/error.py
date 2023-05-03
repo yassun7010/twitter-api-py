@@ -288,12 +288,12 @@ class TwitterApiOAuthTokenV1NotFound(TwitterApiError):
 
 class TwitterApiOAuthVersionWrong(TwitterApiError):
     def __init__(self, *, version: OAuthVersion, expected_version: OAuthVersion):
-        self._version = version
-        self._expected_version = expected_version
+        self.version = version
+        self.expected_version = expected_version
 
     @property
     def message(self) -> str:
-        return f'OAuth のバージョンは "{self._version}" ではなく "{self._expected_version}" である必要があります。'
+        return f'OAuth のバージョンは "{self.version}" ではなく "{self.expected_version}" である必要があります。'
 
 
 class RateLimitOverError(TwitterApiError):
