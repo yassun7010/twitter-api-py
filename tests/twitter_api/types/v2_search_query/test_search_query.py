@@ -19,3 +19,12 @@ class TestSearchQuery:
         )
 
         assert str(query) == "twitter @elonmusk -@SpaceX"
+
+    def test_search_query_building(self):
+        query = SearchQuery.build(
+            lambda q: (
+                q.keyword("twitter") & q.mention("elonmusk") & ~q.mention("SpaceX"),
+            )
+        )
+
+        assert str(query) == "twitter @elonmusk -@SpaceX"
