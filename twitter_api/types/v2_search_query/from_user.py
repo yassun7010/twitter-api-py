@@ -7,6 +7,6 @@ from ._specific_keyword import SpecificKeyword
 from .operator import Operator
 
 
-class FromUser(SpecificKeyword, Operator):
+class FromUser(SpecificKeyword, Operator[Operator]):
     def __init__(self, user: Union[UserId, Username]):
         super().__init__(user, "from:")

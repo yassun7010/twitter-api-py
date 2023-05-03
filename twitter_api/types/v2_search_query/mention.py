@@ -4,6 +4,6 @@ from ._specific_keyword import SpecificKeyword
 from .operator import Operator
 
 
-class Mention(SpecificKeyword, Operator):
+class Mention(SpecificKeyword, Operator[Operator]):
     def __init__(self, username: Username):
         super().__init__(username, "@")

@@ -1,7 +1,7 @@
 from .operator import Operator
 
 
-class Url(Operator):
+class Url(Operator[Operator]):
     def __init__(self, url: str):
         self._value = url
 

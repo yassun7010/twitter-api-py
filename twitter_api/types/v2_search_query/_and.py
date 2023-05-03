@@ -2,7 +2,7 @@ from twitter_api.types.v2_search_query.group import grouping
 from twitter_api.types.v2_search_query.operator import Operator
 
 
-class And(Operator):
+class And(Operator[Operator]):
     def __init__(self, left: Operator, right: Operator) -> None:
         self._left = left
         self._right = right

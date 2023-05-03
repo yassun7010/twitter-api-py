@@ -38,7 +38,7 @@ class SearchQuery:
         cls,
         building: Callable[
             [Type["_SearchQueryBuilder"]],
-            Union[Operator[Any], tuple[Operator[Any], ...]],
+            Union[Operator, tuple[Operator, ...]],
         ],
     ):
         """

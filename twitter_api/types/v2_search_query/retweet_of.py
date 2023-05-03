@@ -7,6 +7,6 @@ from ._specific_keyword import SpecificKeyword
 from .operator import Operator
 
 
-class RetweetOf(SpecificKeyword, Operator):
+class RetweetOf(SpecificKeyword, Operator[Operator]):
     def __init__(self, user: Union[UserId, Username]):
         super().__init__(user, "retweets_of:")

@@ -1,7 +1,7 @@
 from .operator import Operator
 
 
-class Keyword(Operator):
+class Keyword(Operator[Operator]):
     def __init__(self, keyword: str) -> None:
         self._keyword = keyword
 

@@ -1,7 +1,7 @@
 from twitter_api.types.v2_search_query.operator import Operator
 
 
-class Group(Operator):
+class Group(Operator[Operator]):
     def __init__(self, *operators: Operator):
         if len(operators) == 1 and isinstance(operators[0], Group):
             self._operators = operators[0]._operators
