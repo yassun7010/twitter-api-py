@@ -3,11 +3,10 @@ from typing import Literal, Optional, overload
 from twitter_api.types.v2_domain import DomainId
 from twitter_api.types.v2_entity.entity_id import EntityId
 
-from ._specific_keyword import SpecificKeyword
 from .operator import Operator
 
 
-class Context(SpecificKeyword, Operator[Operator]):
+class Context(Operator[Operator]):
     @overload
     def __init__(
         self,
@@ -40,4 +39,7 @@ class Context(SpecificKeyword, Operator[Operator]):
         elif context is None:
             raise ValueError(context)
 
-        super().__init__(context, "context:")
+        self._value = context
+
+    def __str__(self) -> str:
+        return f"context:{self._value}"

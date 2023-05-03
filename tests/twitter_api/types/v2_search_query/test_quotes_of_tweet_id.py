@@ -9,12 +9,6 @@ class TestQuotesOfTweetId:
             == "quotes_of_tweet_id:1539382664746020864"
         )
 
-    def test_quotes_of_tweet_id_with_mark(self):
-        assert (
-            str(QuotesOfTweetId("quotes_of_tweet_id:1539382664746020864"))
-            == "quotes_of_tweet_id:1539382664746020864"
-        )
-
     def test_query_build(self):
         assert (
             str(

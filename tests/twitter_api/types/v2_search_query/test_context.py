@@ -6,12 +6,6 @@ class TestContext:
     def test_context(self):
         assert str(Context("10.799022225751871488")) == "context:10.799022225751871488"
 
-    def test_context_with_mark(self):
-        assert (
-            str(Context("context:10.799022225751871488"))
-            == "context:10.799022225751871488"
-        )
-
     def test_context_by_ids(self):
         assert (
             str(Context(domain_id="10", entity_id="799022225751871488"))

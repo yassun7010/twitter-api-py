@@ -3,8 +3,10 @@ from typing import Any, Callable, Literal, Optional, Type, Union, overload
 
 from twitter_api.types.v2_domain import DomainId
 from twitter_api.types.v2_entity.entity_id import EntityId
+from twitter_api.types.v2_entity.entity_name import EntityName
 from twitter_api.types.v2_search_query.cashtag import Cashtag
 from twitter_api.types.v2_search_query.context import Context
+from twitter_api.types.v2_search_query.entity import Entity
 from twitter_api.types.v2_search_query.from_user import FromUser
 from twitter_api.types.v2_search_query.group import Group, grouping
 from twitter_api.types.v2_search_query.hashtag import Hashtag
@@ -130,14 +132,14 @@ class _SearchQueryBuilder:
         *,
         domain_id: Literal[None] = None,
         entity_id: Literal[None] = None,
-    ):
+    ) -> Context:
         ...
 
     @overload
     @classmethod
     def context(
         cls, context: Optional[str] = None, *, domain_id: DomainId, entity_id: EntityId
-    ):
+    ) -> Context:
         ...
 
     @classmethod
@@ -147,9 +149,13 @@ class _SearchQueryBuilder:
         *,
         domain_id: Any = None,
         entity_id: Any = None,
-    ):
+    ) -> Context:
         return Context(
             context,
             domain_id=domain_id,
             entity_id=entity_id,
         )
+
+    @classmethod
+    def entity(cls, name: EntityName) -> Entity:
+        return Entity(name)

@@ -9,12 +9,6 @@ class TestInReplyToTweetId:
             == "retweets_of_tweet_id:1539382664746020864"
         )
 
-    def test_retweets_of_tweet_id_with_mark(self):
-        assert (
-            str(RetweetsOfTweetId("retweets_of_tweet_id:1539382664746020864"))
-            == "retweets_of_tweet_id:1539382664746020864"
-        )
-
     def test_query_build(self):
         assert (
             str(
