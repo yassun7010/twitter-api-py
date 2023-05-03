@@ -2,6 +2,7 @@ from typing import Literal, Optional, overload
 
 from twitter_api.types.v2_domain import DomainId
 from twitter_api.types.v2_entity.entity_id import EntityId
+from twitter_api.types.v2_tweet.tweet_context_annotation import TweetContextAnnotation
 
 from .operator import Operator
 
@@ -10,7 +11,7 @@ class ContextOperator(Operator[Operator]):
     @overload
     def __init__(
         self,
-        context: str,
+        context: TweetContextAnnotation,
         *,
         domain_id: Literal[None] = None,
         entity_id: Literal[None] = None,
@@ -29,17 +30,19 @@ class ContextOperator(Operator[Operator]):
 
     def __init__(
         self,
-        context: Optional[str] = None,
+        context: Optional[TweetContextAnnotation] = None,
         *,
         domain_id: Optional[DomainId] = None,
         entity_id: Optional[EntityId] = None,
     ):
         if context is None and domain_id is not None and entity_id is not None:
-            context = f"{domain_id}.{entity_id}"
-        elif context is None:
+            value = f"{domain_id}.{entity_id}"
+        elif context is not None:
+            value = f"{context.domain.id}.{context.entity.id}"
+        else:
             raise ValueError(context)
 
-        self._value = context
+        self._value = value
 
     def __str__(self) -> str:
         return f"context:{self._value}"

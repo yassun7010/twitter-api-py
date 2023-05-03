@@ -6,6 +6,7 @@ from twitter_api.types.v2_domain import DomainId
 from twitter_api.types.v2_entity.entity_id import EntityId
 from twitter_api.types.v2_entity.entity_name import EntityName
 from twitter_api.types.v2_list.list_id import ListId
+from twitter_api.types.v2_tweet.tweet_context_annotation import TweetContextAnnotation
 from twitter_api.types.v2_tweet.tweet_id import TweetId
 from twitter_api.types.v2_user.user_id import UserId
 from twitter_api.types.v2_user.username import Username
@@ -133,7 +134,7 @@ class _SearchQueryBuilder:
     @classmethod
     def context(
         cls,
-        context: str,
+        context: TweetContextAnnotation,
         *,
         domain_id: Literal[None] = None,
         entity_id: Literal[None] = None,
