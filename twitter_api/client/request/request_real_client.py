@@ -203,7 +203,7 @@ def _parse_response(
                     request_headers=headers,
                     query=query,
                     request_body=body if body is not None else None,
-                    response_status_code=response.status_code,
+                    status_code=response.status_code,
                     response_body=response.content,
                 )
             else:
@@ -219,7 +219,7 @@ def _parse_response(
             request_headers=headers,
             query=query,
             request_body=body if body is not None else None,
-            response_status_code=response.status_code,
+            status_code=response.status_code,
             response_body=data,
         )
 

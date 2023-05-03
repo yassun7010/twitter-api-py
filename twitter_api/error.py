@@ -139,7 +139,7 @@ class TwitterApiResponseFailed(TwitterApiError):
         request_headers: Optional[Headers],
         query: Optional[QuryParameters],
         request_body: Optional[RequestJsonBody],
-        response_status_code: int,
+        status_code: int,
         response_body: Optional[Union[ResponseJsonBody, bytes]],
     ):
         self._endpoint = endpoint
@@ -147,7 +147,7 @@ class TwitterApiResponseFailed(TwitterApiError):
         self._request_headers = request_headers
         self._query = query
         self._request_body = request_body
-        self.status_code = response_status_code
+        self.status_code = status_code
         self._response_body = response_body
 
     @property
@@ -197,7 +197,7 @@ class TwitterApiResponseFailed(TwitterApiError):
                 reqeust_headers=exclude_none(self._request_headers),
                 query=exclude_none(self._query),
                 request_body=exclude_none(self._request_body),
-                response_status_code=self.status_code,
+                status_code=self.status_code,
                 response_body=(
                     exclude_none(self._response_body)
                     if not isinstance(self._response_body, bytes)
