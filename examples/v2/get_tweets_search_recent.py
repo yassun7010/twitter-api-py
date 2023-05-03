@@ -13,7 +13,7 @@ from twitter_api.types.v2_user.user_field import ALL_USER_FIELDS
 
 try:
     with TwitterApiClient.from_oauth2_app_env() as client:
-        tweets = (
+        response_body = (
             client.chain()
             .request("https://api.twitter.com/2/tweets/search/recent")
             .get(
@@ -37,11 +37,14 @@ try:
                     "user.fields": ALL_USER_FIELDS,
                 },
             )
-            .data
         )
 
-        for tweet in tweets:
-            print(tweet.json(indent=2))
+        if len(response_body.data) == 0:
+            exit(0)
+
+        # Find Mentioned Users
+        for user in response_body.find_mentioned_users_by(response_body.data[-1]):
+            print(user.json(indent=2))
 
 except TwitterApiError as error:
     print(error.info.json(indent=2), file=sys.stderr)
