@@ -5,6 +5,7 @@ from twitter_api.types.v2_dm_conversation.dm_conversation_id import DmConversati
 from twitter_api.types.v2_domain import DomainId
 from twitter_api.types.v2_entity.entity_id import EntityId
 from twitter_api.types.v2_entity.entity_name import EntityName
+from twitter_api.types.v2_list.list_id import ListId
 from twitter_api.types.v2_search_query.cashtag import Cashtag
 from twitter_api.types.v2_search_query.context import Context
 from twitter_api.types.v2_search_query.conversation_id import ConversationId
@@ -14,6 +15,7 @@ from twitter_api.types.v2_search_query.group import Group, grouping
 from twitter_api.types.v2_search_query.hashtag import Hashtag
 from twitter_api.types.v2_search_query.in_reply_to_tweet_id import InReplyToTweetId
 from twitter_api.types.v2_search_query.keyword import Keyword
+from twitter_api.types.v2_search_query.list import List
 from twitter_api.types.v2_search_query.mention import Mention
 from twitter_api.types.v2_search_query.operator import Operator
 from twitter_api.types.v2_search_query.quotes_of_tweet_id import QuotesOfTweetId
@@ -165,3 +167,7 @@ class _SearchQueryBuilder:
     @classmethod
     def conversation_id(cls, id: DmConversationId) -> ConversationId:
         return ConversationId(id)
+
+    @classmethod
+    def list(cls, id: ListId) -> List:
+        return List(id)
