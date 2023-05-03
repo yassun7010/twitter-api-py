@@ -1,4 +1,4 @@
-from twitter_api.types.v2_search_query.keyword_operator import KeywordOperator
+from twitter_api.types.v2_search_query.operators.keyword_operator import KeywordOperator
 from twitter_api.types.v2_search_query.search_query import SearchQuery
 
 

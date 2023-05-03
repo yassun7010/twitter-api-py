@@ -1,4 +1,4 @@
-from twitter_api.types.v2_search_query.context_operator import ContextOperator
+from twitter_api.types.v2_search_query.operators.context_operator import ContextOperator
 from twitter_api.types.v2_search_query.search_query import SearchQuery
 
 

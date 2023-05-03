@@ -1,4 +1,6 @@
-from twitter_api.types.v2_search_query.retweet_of_operator import RetweetOfOperator
+from twitter_api.types.v2_search_query.operators.retweet_of_operator import (
+    RetweetOfOperator,
+)
 from twitter_api.types.v2_search_query.search_query import SearchQuery
 
 

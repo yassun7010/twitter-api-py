@@ -1,4 +1,4 @@
-from twitter_api.types.v2_search_query.conversation_id_operator import (
+from twitter_api.types.v2_search_query.operators.conversation_id_operator import (
     ConversationIdOperator,
 )
 from twitter_api.types.v2_search_query.search_query import SearchQuery

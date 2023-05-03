@@ -1,4 +1,4 @@
-from twitter_api.types.v2_search_query.hashtag_operator import HashtagOperator
+from twitter_api.types.v2_search_query.operators.hashtag_operator import HashtagOperator
 from twitter_api.types.v2_search_query.search_query import SearchQuery
 
 

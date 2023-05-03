@@ -1,4 +1,4 @@
-from twitter_api.types.v2_search_query.in_reply_to_tweet_id_operator import (
+from twitter_api.types.v2_search_query.operators.in_reply_to_tweet_id_operator import (
     InReplyToTweetIdOperator,
 )
 from twitter_api.types.v2_search_query.search_query import SearchQuery

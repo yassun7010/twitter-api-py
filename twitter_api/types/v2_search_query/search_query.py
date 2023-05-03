@@ -6,34 +6,27 @@ from twitter_api.types.v2_domain import DomainId
 from twitter_api.types.v2_entity.entity_id import EntityId
 from twitter_api.types.v2_entity.entity_name import EntityName
 from twitter_api.types.v2_list.list_id import ListId
-from twitter_api.types.v2_search_query.cashtag_operator import CashtagOperator
-from twitter_api.types.v2_search_query.context_operator import ContextOperator
-from twitter_api.types.v2_search_query.conversation_id_operator import (
-    ConversationIdOperator,
-)
-from twitter_api.types.v2_search_query.entity_operator import EntityOperator
-from twitter_api.types.v2_search_query.from_user_operator import FromUserOperator
-from twitter_api.types.v2_search_query.group_operator import GroupOperator, grouping
-from twitter_api.types.v2_search_query.hashtag_operator import HashtagOperator
-from twitter_api.types.v2_search_query.in_reply_to_tweet_id_operator import (
-    InReplyToTweetIdOperator,
-)
-from twitter_api.types.v2_search_query.keyword_operator import KeywordOperator
-from twitter_api.types.v2_search_query.list_operator import ListOperator
-from twitter_api.types.v2_search_query.mention_operator import MentionOperator
-from twitter_api.types.v2_search_query.operator import Operator
-from twitter_api.types.v2_search_query.quotes_of_tweet_id_operator import (
-    QuotesOfTweetIdOperator,
-)
-from twitter_api.types.v2_search_query.retweet_of_operator import RetweetOfOperator
-from twitter_api.types.v2_search_query.retweets_of_tweet_id_operator import (
-    RetweetsOfTweetIdOperator,
-)
-from twitter_api.types.v2_search_query.to_user_operator import ToUserOperator
-from twitter_api.types.v2_search_query.url_operator import UrlOperator
 from twitter_api.types.v2_tweet.tweet_id import TweetId
 from twitter_api.types.v2_user.user_id import UserId
 from twitter_api.types.v2_user.username import Username
+
+from .operators.cashtag_operator import CashtagOperator
+from .operators.context_operator import ContextOperator
+from .operators.conversation_id_operator import ConversationIdOperator
+from .operators.entity_operator import EntityOperator
+from .operators.from_user_operator import FromUserOperator
+from .operators.group_operator import GroupOperator, grouping
+from .operators.hashtag_operator import HashtagOperator
+from .operators.in_reply_to_tweet_id_operator import InReplyToTweetIdOperator
+from .operators.keyword_operator import KeywordOperator
+from .operators.list_operator import ListOperator
+from .operators.mention_operator import MentionOperator
+from .operators.operator import Operator
+from .operators.quotes_of_tweet_id_operator import QuotesOfTweetIdOperator
+from .operators.retweet_of_operator import RetweetOfOperator
+from .operators.retweets_of_tweet_id_operator import RetweetsOfTweetIdOperator
+from .operators.to_user_operator import ToUserOperator
+from .operators.url_operator import UrlOperator
 
 
 class SearchQuery:
@@ -62,7 +55,7 @@ class SearchQuery:
         """
         クエリを組み立てる。
 
-        >>> from twitter_api.types.v2_search_query.search_query import SearchQuery
+        >>> from .search_query import SearchQuery
         >>> query = SearchQuery.build(
         ...     lambda q: (
         ...         q.group(

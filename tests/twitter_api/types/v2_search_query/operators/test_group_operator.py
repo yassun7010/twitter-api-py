@@ -1,6 +1,6 @@
-from twitter_api.types.v2_search_query.group_operator import GroupOperator
-from twitter_api.types.v2_search_query.keyword_operator import KeywordOperator
-from twitter_api.types.v2_search_query.mention_operator import MentionOperator
+from twitter_api.types.v2_search_query.operators.group_operator import GroupOperator
+from twitter_api.types.v2_search_query.operators.keyword_operator import KeywordOperator
+from twitter_api.types.v2_search_query.operators.mention_operator import MentionOperator
 from twitter_api.types.v2_search_query.search_query import SearchQuery
 
 

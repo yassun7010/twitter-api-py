@@ -1,4 +1,4 @@
-from twitter_api.types.v2_search_query.entity_operator import EntityOperator
+from twitter_api.types.v2_search_query.operators.entity_operator import EntityOperator
 from twitter_api.types.v2_search_query.search_query import SearchQuery
 
 

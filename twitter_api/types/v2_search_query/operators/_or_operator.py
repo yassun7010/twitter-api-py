@@ -1,5 +1,5 @@
-from twitter_api.types.v2_search_query.group_operator import grouping
-from twitter_api.types.v2_search_query.operator import Operator
+from .group_operator import grouping
+from .operator import Operator
 
 
 class OrOperator(Operator[Operator]):

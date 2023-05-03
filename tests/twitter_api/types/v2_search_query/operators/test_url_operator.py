@@ -1,5 +1,5 @@
+from twitter_api.types.v2_search_query.operators.url_operator import UrlOperator
 from twitter_api.types.v2_search_query.search_query import SearchQuery
-from twitter_api.types.v2_search_query.url_operator import UrlOperator
 
 
 class TestUrl:

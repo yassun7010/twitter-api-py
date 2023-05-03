@@ -1,4 +1,6 @@
-from twitter_api.types.v2_search_query.from_user_operator import FromUserOperator
+from twitter_api.types.v2_search_query.operators.from_user_operator import (
+    FromUserOperator,
+)
 from twitter_api.types.v2_search_query.search_query import SearchQuery
 
 

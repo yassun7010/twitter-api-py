@@ -1,4 +1,4 @@
-from twitter_api.types.v2_search_query.cashtag_operator import CashtagOperator
+from twitter_api.types.v2_search_query.operators.cashtag_operator import CashtagOperator
 from twitter_api.types.v2_search_query.search_query import SearchQuery
 
 

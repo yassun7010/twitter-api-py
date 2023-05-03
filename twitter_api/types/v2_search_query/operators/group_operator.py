@@ -1,4 +1,4 @@
-from twitter_api.types.v2_search_query.operator import Operator
+from .operator import Operator
 
 
 class GroupOperator(Operator[Operator]):

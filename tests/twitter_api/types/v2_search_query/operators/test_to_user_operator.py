@@ -1,5 +1,5 @@
+from twitter_api.types.v2_search_query.operators.to_user_operator import ToUserOperator
 from twitter_api.types.v2_search_query.search_query import SearchQuery
-from twitter_api.types.v2_search_query.to_user_operator import ToUserOperator
 
 
 class TestToUser:

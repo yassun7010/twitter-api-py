@@ -1,4 +1,4 @@
-from twitter_api.types.v2_search_query.mention_operator import MentionOperator
+from twitter_api.types.v2_search_query.operators.mention_operator import MentionOperator
 from twitter_api.types.v2_search_query.search_query import SearchQuery
 
 
