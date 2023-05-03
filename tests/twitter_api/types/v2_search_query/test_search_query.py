@@ -35,10 +35,11 @@ class TestSearchQueryBuilder:
         query = SearchQuery.build(
             lambda q: (
                 q.group(
-                    q.keyword("twitter") & q.mention("elonmusk"),
+                    q.hashtag("#Twitter") | q.hashtag("Xcorp"),
                 )
+                & q.mention("elonmusk")
                 & ~q.mention("SpaceX")
             )
         )
 
-        assert str(query) == "(twitter @elonmusk) -@SpaceX"
+        assert str(query) == "(#Twitter OR #Xcorp) @elonmusk -@SpaceX"
