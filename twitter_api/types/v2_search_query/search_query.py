@@ -6,23 +6,31 @@ from twitter_api.types.v2_domain import DomainId
 from twitter_api.types.v2_entity.entity_id import EntityId
 from twitter_api.types.v2_entity.entity_name import EntityName
 from twitter_api.types.v2_list.list_id import ListId
-from twitter_api.types.v2_search_query.cashtag import Cashtag
-from twitter_api.types.v2_search_query.context import Context
-from twitter_api.types.v2_search_query.conversation_id import ConversationId
-from twitter_api.types.v2_search_query.entity import Entity
-from twitter_api.types.v2_search_query.from_user import FromUser
-from twitter_api.types.v2_search_query.group import Group, grouping
-from twitter_api.types.v2_search_query.hashtag import Hashtag
-from twitter_api.types.v2_search_query.in_reply_to_tweet_id import InReplyToTweetId
-from twitter_api.types.v2_search_query.keyword import Keyword
-from twitter_api.types.v2_search_query.list import List
-from twitter_api.types.v2_search_query.mention import Mention
+from twitter_api.types.v2_search_query.cashtag_operator import CashtagOperator
+from twitter_api.types.v2_search_query.context_operator import ContextOperator
+from twitter_api.types.v2_search_query.conversation_id_operator import (
+    ConversationIdOperator,
+)
+from twitter_api.types.v2_search_query.entity_operator import EntityOperator
+from twitter_api.types.v2_search_query.from_user_operator import FromUserOperator
+from twitter_api.types.v2_search_query.group_operator import GroupOperator, grouping
+from twitter_api.types.v2_search_query.hashtag_operator import HashtagOperator
+from twitter_api.types.v2_search_query.in_reply_to_tweet_id_operator import (
+    InReplyToTweetIdOperator,
+)
+from twitter_api.types.v2_search_query.keyword_operator import KeywordOperator
+from twitter_api.types.v2_search_query.list_operator import ListOperator
+from twitter_api.types.v2_search_query.mention_operator import MentionOperator
 from twitter_api.types.v2_search_query.operator import Operator
-from twitter_api.types.v2_search_query.quotes_of_tweet_id import QuotesOfTweetId
-from twitter_api.types.v2_search_query.retweet_of import RetweetOf
-from twitter_api.types.v2_search_query.retweets_of_tweet_id import RetweetsOfTweetId
-from twitter_api.types.v2_search_query.to_user import ToUser
-from twitter_api.types.v2_search_query.url import Url
+from twitter_api.types.v2_search_query.quotes_of_tweet_id_operator import (
+    QuotesOfTweetIdOperator,
+)
+from twitter_api.types.v2_search_query.retweet_of_operator import RetweetOfOperator
+from twitter_api.types.v2_search_query.retweets_of_tweet_id_operator import (
+    RetweetsOfTweetIdOperator,
+)
+from twitter_api.types.v2_search_query.to_user_operator import ToUserOperator
+from twitter_api.types.v2_search_query.url_operator import UrlOperator
 from twitter_api.types.v2_tweet.tweet_id import TweetId
 from twitter_api.types.v2_user.user_id import UserId
 from twitter_api.types.v2_user.username import Username
@@ -81,52 +89,52 @@ class _SearchQueryBuilder:
         pass
 
     @classmethod
-    def keyword(cls, keyword: str) -> Keyword:
-        return Keyword(keyword)
+    def keyword(cls, keyword: str) -> KeywordOperator:
+        return KeywordOperator(keyword)
 
     @classmethod
-    def mention(cls, username: Username) -> Mention:
-        return Mention(username)
+    def mention(cls, username: Username) -> MentionOperator:
+        return MentionOperator(username)
 
     @classmethod
-    def hashtag(cls, hashtag: str) -> Hashtag:
-        return Hashtag(hashtag)
+    def hashtag(cls, hashtag: str) -> HashtagOperator:
+        return HashtagOperator(hashtag)
 
     @classmethod
-    def cashtag(cls, cashtag: str) -> Cashtag:
-        return Cashtag(cashtag)
+    def cashtag(cls, cashtag: str) -> CashtagOperator:
+        return CashtagOperator(cashtag)
 
     @classmethod
-    def group(cls, *operators: Operator) -> Group:
-        return Group(*operators)
+    def group(cls, *operators: Operator) -> GroupOperator:
+        return GroupOperator(*operators)
 
     @classmethod
-    def from_user(cls, user: Union[UserId, Username]) -> FromUser:
-        return FromUser(user)
+    def from_user(cls, user: Union[UserId, Username]) -> FromUserOperator:
+        return FromUserOperator(user)
 
     @classmethod
-    def to_user(cls, user: Union[UserId, Username]) -> ToUser:
-        return ToUser(user)
+    def to_user(cls, user: Union[UserId, Username]) -> ToUserOperator:
+        return ToUserOperator(user)
 
     @classmethod
-    def url(cls, url: str) -> Url:
-        return Url(url)
+    def url(cls, url: str) -> UrlOperator:
+        return UrlOperator(url)
 
     @classmethod
-    def retweet_of(cls, user: Union[UserId, Username]) -> RetweetOf:
-        return RetweetOf(user)
+    def retweet_of(cls, user: Union[UserId, Username]) -> RetweetOfOperator:
+        return RetweetOfOperator(user)
 
     @classmethod
-    def in_reply_to_tweet_id(cls, id: TweetId) -> InReplyToTweetId:
-        return InReplyToTweetId(id)
+    def in_reply_to_tweet_id(cls, id: TweetId) -> InReplyToTweetIdOperator:
+        return InReplyToTweetIdOperator(id)
 
     @classmethod
-    def retweets_of_tweet_id(cls, id: TweetId) -> RetweetsOfTweetId:
-        return RetweetsOfTweetId(id)
+    def retweets_of_tweet_id(cls, id: TweetId) -> RetweetsOfTweetIdOperator:
+        return RetweetsOfTweetIdOperator(id)
 
     @classmethod
-    def quotes_of_tweet_id(cls, id: TweetId) -> QuotesOfTweetId:
-        return QuotesOfTweetId(id)
+    def quotes_of_tweet_id(cls, id: TweetId) -> QuotesOfTweetIdOperator:
+        return QuotesOfTweetIdOperator(id)
 
     @overload
     @classmethod
@@ -136,14 +144,14 @@ class _SearchQueryBuilder:
         *,
         domain_id: Literal[None] = None,
         entity_id: Literal[None] = None,
-    ) -> Context:
+    ) -> ContextOperator:
         ...
 
     @overload
     @classmethod
     def context(
         cls, context: Optional[str] = None, *, domain_id: DomainId, entity_id: EntityId
-    ) -> Context:
+    ) -> ContextOperator:
         ...
 
     @classmethod
@@ -153,21 +161,21 @@ class _SearchQueryBuilder:
         *,
         domain_id: Any = None,
         entity_id: Any = None,
-    ) -> Context:
-        return Context(
+    ) -> ContextOperator:
+        return ContextOperator(
             context,
             domain_id=domain_id,
             entity_id=entity_id,
         )
 
     @classmethod
-    def entity(cls, name: EntityName) -> Entity:
-        return Entity(name)
+    def entity(cls, name: EntityName) -> EntityOperator:
+        return EntityOperator(name)
 
     @classmethod
-    def conversation_id(cls, id: DmConversationId) -> ConversationId:
-        return ConversationId(id)
+    def conversation_id(cls, id: DmConversationId) -> ConversationIdOperator:
+        return ConversationIdOperator(id)
 
     @classmethod
-    def list(cls, id: ListId) -> List:
-        return List(id)
+    def list(cls, id: ListId) -> ListOperator:
+        return ListOperator(id)

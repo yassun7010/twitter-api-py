@@ -5,16 +5,16 @@ TOperator = TypeVar("TOperator", bound="Operator")
 
 class Operator(Generic[TOperator]):
     def __and__(self, other: TOperator):
-        from ._and import And
+        from ._and_operator import AndOperator
 
-        return And(self, other)
+        return AndOperator(self, other)
 
     def __or__(self, other: TOperator):
-        from ._or import Or
+        from ._or_operator import OrOperator
 
-        return Or(self, other)
+        return OrOperator(self, other)
 
     def __invert__(self):
-        from ._not import Not
+        from ._not_operator import NotOperator
 
-        return Not(self)
+        return NotOperator(self)
