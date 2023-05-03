@@ -23,7 +23,7 @@ try:
                             q.group(
                                 q.hashtag("#Twitter") | q.hashtag("Xcorp"),
                             )
-                            & q.mention("elonmusk")
+                            & q.mention("@elonmusk")
                             & ~q.mention("SpaceX")
                         )
                     ),  # == "(#Twitter OR #Xcorp) @elonmusk -@SpaceX"
