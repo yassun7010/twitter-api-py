@@ -3,15 +3,15 @@ from typing import AsyncGenerator, Generator, Literal, NotRequired, Optional, Ty
 
 from twitter_api.rate_limit.rate_limit import rate_limit
 from twitter_api.resources.api_resources import ApiResources
-from twitter_api.types.comma_separatable import CommaSeparatable, comma_separated_str
-from twitter_api.types.endpoint import Endpoint
-from twitter_api.types.pagination_token import PaginationToken
-from twitter_api.types.paging import (
+from twitter_api.types._paging import (
     get_collected_paging_response_body_async,
     get_collected_paging_response_body_sync,
     get_paging_response_body_iter_async,
     get_paging_response_body_iter_sync,
 )
+from twitter_api.types.comma_separatable import CommaSeparatable, comma_separated_str
+from twitter_api.types.endpoint import Endpoint
+from twitter_api.types.pagination_token import PaginationToken
 from twitter_api.types.v2_media.media_field import MediaField
 from twitter_api.types.v2_place.place_field import PlaceField
 from twitter_api.types.v2_poll.poll_field import PollField

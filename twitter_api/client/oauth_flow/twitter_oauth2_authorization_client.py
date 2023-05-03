@@ -6,8 +6,8 @@ from twitter_api.client.oauth_session.resources.oauth2_authorize import (
     Oauth2AuthorizeUrl,
 )
 from twitter_api.client.oauth_session.twitter_oauth2_session import TwitterOAuth2Session
-from twitter_api.types.chainable import Chainable
-from twitter_api.types.generic_client import TwitterApiGenericClient
+from twitter_api.types._chainable import Chainable
+from twitter_api.types._generic_client import TwitterApiGenericClient
 
 
 @dataclass

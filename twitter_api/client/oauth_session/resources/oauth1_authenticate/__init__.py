@@ -1,6 +1,6 @@
 from typing import Literal
 
-from twitter_api.types.generic_client import TwitterApiGenericClient
+from twitter_api.types._generic_client import TwitterApiGenericClient
 
 from .generate_authorization_url_oauth1_authenticate import (
     GenerateAuthorizationUrlOAuth1AuthenticateSessionResources,

@@ -5,8 +5,8 @@ from twitter_api.client.oauth_session.resources.v2_oauth2_token import (
     V2Oauth2TokenUrl,
 )
 from twitter_api.client.oauth_session.twitter_oauth2_session import TwitterOAuth2Session
-from twitter_api.types.chainable import Chainable
-from twitter_api.types.generic_client import TwitterApiGenericClient
+from twitter_api.types._chainable import Chainable
+from twitter_api.types._generic_client import TwitterApiGenericClient
 from twitter_api.types.oauth import CallbackUrl
 
 

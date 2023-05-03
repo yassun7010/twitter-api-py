@@ -10,8 +10,8 @@ from twitter_api.client.oauth_session.resources.oauth1_authorize import (
 )
 from twitter_api.client.oauth_session.twitter_oauth1_session import TwitterOAuth1Session
 from twitter_api.error import NeverError
-from twitter_api.types.chainable import Chainable
-from twitter_api.types.generic_client import TwitterApiGenericClient
+from twitter_api.types._chainable import Chainable
+from twitter_api.types._generic_client import TwitterApiGenericClient
 
 
 class TwitterOAuth1AuthorizeClient(Chainable, Generic[TwitterApiGenericClient]):

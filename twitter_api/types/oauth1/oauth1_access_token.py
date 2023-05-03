@@ -9,8 +9,8 @@ from typing import (
     Union,
 )
 
+from twitter_api.types._generic_client import TwitterApiGenericClient
 from twitter_api.types.extra_permissive_model import ExtraPermissiveModel
-from twitter_api.types.generic_client import TwitterApiGenericClient
 from twitter_api.types.oauth import AccessSecret, AccessToken
 from twitter_api.types.v2_user.user_id import UserId
 from twitter_api.types.v2_user.username import Username

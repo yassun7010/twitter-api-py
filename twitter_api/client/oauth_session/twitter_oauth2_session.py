@@ -1,7 +1,7 @@
 from abc import ABCMeta, abstractmethod
 from typing import Generic, cast
 
-from twitter_api.types.generic_client import TwitterApiGenericClient
+from twitter_api.types._generic_client import TwitterApiGenericClient
 from twitter_api.types.oauth import CallbackUrl
 
 

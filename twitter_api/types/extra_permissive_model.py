@@ -2,7 +2,7 @@ from typing import Any
 
 from pydantic import Extra
 
-from .model import Model
+from ._model import Model
 
 
 class ExtraPermissiveModel(Model):

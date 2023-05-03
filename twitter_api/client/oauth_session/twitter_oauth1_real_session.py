@@ -19,7 +19,7 @@ from twitter_api.client.oauth_session.resources.oauth1_request_token import (
 )
 from twitter_api.client.oauth_session.twitter_oauth1_session import TwitterOAuth1Session
 from twitter_api.types import httpx
-from twitter_api.types.generic_client import TwitterApiGenericClient
+from twitter_api.types._generic_client import TwitterApiGenericClient
 from twitter_api.types.oauth import (
     AccessSecret,
     AccessToken,

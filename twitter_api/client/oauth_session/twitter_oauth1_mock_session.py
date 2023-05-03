@@ -10,7 +10,7 @@ from twitter_api.client.oauth_session.resources.oauth1_authorize import (
     Oauth1AuthorizeUrl,
 )
 from twitter_api.client.oauth_session.twitter_oauth1_session import TwitterOAuth1Session
-from twitter_api.types.generic_client import TwitterApiGenericMockClient
+from twitter_api.types._generic_client import TwitterApiGenericMockClient
 from twitter_api.types.oauth import AccessSecret, AccessToken, CallbackUrl
 
 

@@ -6,17 +6,17 @@ from pydantic import Field
 
 from twitter_api.rate_limit.rate_limit import rate_limit
 from twitter_api.resources.api_resources import ApiResources
-from twitter_api.types.comma_separatable import CommaSeparatable, comma_separated_str
-from twitter_api.types.endpoint import Endpoint
-from twitter_api.types.extra_permissive_model import ExtraPermissiveModel
-from twitter_api.types.pagination_token import PaginationToken
-from twitter_api.types.paging import (
+from twitter_api.types._paging import (
     PageResponseBody,
     get_collected_paging_response_body_async,
     get_collected_paging_response_body_sync,
     get_paging_response_body_iter_async,
     get_paging_response_body_iter_sync,
 )
+from twitter_api.types.comma_separatable import CommaSeparatable, comma_separated_str
+from twitter_api.types.endpoint import Endpoint
+from twitter_api.types.extra_permissive_model import ExtraPermissiveModel
+from twitter_api.types.pagination_token import PaginationToken
 from twitter_api.types.v2_dm_conversation.dm_conversation_id import DmConversationId
 from twitter_api.types.v2_dm_event.dm_event_expansion import DmEventExpansion
 from twitter_api.types.v2_dm_event.dm_event_field import DmEventField

@@ -2,7 +2,7 @@ from datetime import datetime
 from typing import Callable
 
 from twitter_api.client.oauth_session.twitter_oauth2_session import TwitterOAuth2Session
-from twitter_api.types.generic_client import TwitterApiGenericMockClient
+from twitter_api.types._generic_client import TwitterApiGenericMockClient
 from twitter_api.types.oauth import AccessToken, CallbackUrl
 from twitter_api.types.oauth2.oauth2_access_token import OAuth2AccessToken
 from twitter_api.types.v2_scope import Scope

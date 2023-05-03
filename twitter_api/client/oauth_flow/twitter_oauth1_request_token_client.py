@@ -5,8 +5,8 @@ from twitter_api.client.oauth_session.resources.oauth1_request_token import (
     Oauth1RequestTokenUrl,
 )
 from twitter_api.client.oauth_session.twitter_oauth1_session import TwitterOAuth1Session
-from twitter_api.types.chainable import Chainable
-from twitter_api.types.generic_client import TwitterApiGenericClient
+from twitter_api.types._chainable import Chainable
+from twitter_api.types._generic_client import TwitterApiGenericClient
 
 
 class TwitterOAuth1RequestTokenClient(Chainable, Generic[TwitterApiGenericClient]):

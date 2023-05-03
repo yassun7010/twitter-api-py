@@ -73,7 +73,7 @@ from twitter_api.resources.v2_users_by_username import (
     V2UsersByUsernameUrl,
 )
 from twitter_api.types import httpx
-from twitter_api.types.chainable import Chainable
+from twitter_api.types._chainable import Chainable
 from twitter_api.types.oauth import (
     AccessSecret,
     AccessToken,

@@ -8,7 +8,7 @@ from twitter_api.client.oauth_session.resources.oauth2_authorize import (
 from twitter_api.client.oauth_session.resources.v2_oauth2_token import V2Oauth2TokenUrl
 from twitter_api.client.oauth_session.twitter_oauth2_session import TwitterOAuth2Session
 from twitter_api.types import httpx
-from twitter_api.types.generic_client import TwitterApiGenericClient
+from twitter_api.types._generic_client import TwitterApiGenericClient
 from twitter_api.types.oauth import AccessToken, CallbackUrl, ClientId, ClientSecret
 from twitter_api.types.oauth2.oauth2_access_token import OAuth2AccessToken
 from twitter_api.types.oauth2.oauth2_authorization import OAuth2Authorization

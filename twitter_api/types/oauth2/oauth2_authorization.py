@@ -3,7 +3,7 @@ from textwrap import dedent
 from typing import Callable, Generic, Optional, TextIO
 
 from twitter_api.client.oauth_session.twitter_oauth2_session import TwitterOAuth2Session
-from twitter_api.types.generic_client import TwitterApiGenericClient
+from twitter_api.types._generic_client import TwitterApiGenericClient
 from twitter_api.types.http import Url
 
 

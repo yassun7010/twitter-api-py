@@ -3,9 +3,9 @@ from typing import Optional, Self, Union
 
 from pydantic import Field
 
+from twitter_api.types._paging import PageResponseBody
 from twitter_api.types.extra_permissive_model import ExtraPermissiveModel
 from twitter_api.types.pagination_token import PaginationToken
-from twitter_api.types.paging import PageResponseBody
 from twitter_api.types.v2_media.media import Media
 from twitter_api.types.v2_place.place import Place
 from twitter_api.types.v2_poll.poll import Poll

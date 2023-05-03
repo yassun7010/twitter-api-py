@@ -4,8 +4,8 @@ from twitter_api.client.oauth_session.resources.session_resources import (
     OAuth2SessionResources,
 )
 from twitter_api.client.oauth_session.twitter_oauth2_session import TwitterOAuth2Session
+from twitter_api.types._generic_client import TwitterApiGenericClient
 from twitter_api.types.endpoint import Endpoint
-from twitter_api.types.generic_client import TwitterApiGenericClient
 from twitter_api.types.oauth import CallbackUrl
 from twitter_api.types.oauth2.oauth2_access_token import OAuth2AccessToken
 

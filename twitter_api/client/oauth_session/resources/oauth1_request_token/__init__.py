@@ -1,6 +1,6 @@
 from typing_extensions import Literal
 
-from twitter_api.types.generic_client import TwitterApiGenericClient
+from twitter_api.types._generic_client import TwitterApiGenericClient
 
 from .post_oauth1_request_token import PostOAuth1RequestTokenSessionResources
 

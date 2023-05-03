@@ -293,7 +293,9 @@ class TwitterApiOAuthVersionWrong(TwitterApiError):
 
     @property
     def message(self) -> str:
-        return f'OAuth のバージョンは "{self.version}" ではなく "{self.expected_version}" である必要があります。'
+        return (
+            f'OAuth のバージョンは "{self.version}" ではなく "{self.expected_version}" である必要があります。'
+        )
 
 
 class RateLimitOverError(TwitterApiError):
