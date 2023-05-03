@@ -20,11 +20,12 @@ try:
                 {
                     "query": SearchQuery.build(
                         lambda q: (
-                            q.keyword("twitter")
-                            & q.mention("elonmusk")
+                            q.group(
+                                q.keyword("twitter") & q.mention("elonmusk"),
+                            )
                             & ~q.mention("SpaceX")
                         )
-                    ),
+                    ),  # == "(twitter @elonmusk) -@SpaceX"
                     "start_time": datetime.now() - timedelta(hours=2),
                     "end_time": datetime.now(),
                     "expansions": ALL_TWEET_EXPANSIONS,

@@ -1,5 +1,5 @@
 from abc import abstractmethod
-from typing import Any, Callable, Self, Type, Union
+from typing import Any, Callable, Type, Union
 
 from twitter_api.types.v2_search_query.group import Group, grouping
 from twitter_api.types.v2_search_query.hashtag import Hashtag
@@ -21,7 +21,7 @@ class SearchQuery:
         cls,
         building: Callable[
             [Type["_SearchQueryBuilder"]],
-            Union[tuple[Operator[Any], ...], Operator[Any]],
+            Union[Operator[Any], tuple[Operator[Any], ...]],
         ],
     ):
         query = building(_SearchQueryBuilder)
@@ -49,14 +49,5 @@ class _SearchQueryBuilder:
         return Hashtag(hashtag)
 
     @classmethod
-    def group(
-        cls,
-        operation: Callable[
-            [Type[Self]], Union[tuple[Operator[Any], ...], Operator[Any]]
-        ],
-    ) -> Group:
-        operators = operation(cls)
-        if isinstance(operators, tuple):
-            return Group(*operators)
-        else:
-            return Group(operators)
+    def group(cls, *operators: Operator[Any]) -> Group:
+        return Group(*operators)
