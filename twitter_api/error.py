@@ -92,8 +92,8 @@ class MockResponseNotFound(TwitterApiError):
 
 class MockInjectionResponseWrong(TwitterApiError):
     def __init__(self, endpoint: Endpoint, expected_endpoint: Endpoint):
-        self._endpoint = endpoint
-        self._expected_endpoint = expected_endpoint
+        self.endpoint = endpoint
+        self.expected_endpoint = expected_endpoint
 
     @property
     def message(self) -> str:
@@ -105,16 +105,16 @@ class MockInjectionResponseWrong(TwitterApiError):
             type=self.__class__.__name__,
             message=self.message,
             **dict(
-                expected_endpoint=self._expected_endpoint,
-                endpoint=self._endpoint,
+                expected_endpoint=self.expected_endpoint,
+                endpoint=self.endpoint,
             ),
         )
 
 
 class TwitterApiResponseModelBodyDecodeError(TwitterApiError):
     def __init__(self, endpoint: Endpoint, content: bytes, **extra):
-        self._endpoint = endpoint
-        self._content = content
+        self.endpoint = endpoint
+        self.content = content
         self._extra = extra
 
     @property
@@ -126,7 +126,7 @@ class TwitterApiResponseModelBodyDecodeError(TwitterApiError):
         return TwitterApiExceptionInfo(
             type=self.__class__.__name__,
             message=self.message,
-            **dict(endpoint=self._endpoint, content=self._content),
+            **dict(endpoint=self.endpoint, content=self.content),
             **exclude_none(self._extra),
         )
 
@@ -142,13 +142,13 @@ class TwitterApiResponseFailed(TwitterApiError):
         status_code: int,
         response_body: Optional[Union[ResponseJsonBody, bytes]],
     ):
-        self._endpoint = endpoint
-        self._url = url
-        self._request_headers = request_headers
-        self._query = query
-        self._request_body = request_body
+        self.endpoint = endpoint
+        self.url = url
+        self.request_headers = request_headers
+        self.query = query
+        self.request_body = request_body
         self.status_code = status_code
-        self._response_body = response_body
+        self.response_body = response_body
 
     @property
     def message(self) -> str:
@@ -192,25 +192,25 @@ class TwitterApiResponseFailed(TwitterApiError):
             type=self.__class__.__name__,
             message=self.message,
             **OrderedDict(
-                endpoint=self._endpoint,
-                url=self._url,
-                reqeust_headers=exclude_none(self._request_headers),
-                query=exclude_none(self._query),
-                request_body=exclude_none(self._request_body),
+                endpoint=self.endpoint,
+                url=self.url,
+                reqeust_headers=exclude_none(self.request_headers),
+                query=exclude_none(self.query),
+                request_body=exclude_none(self.request_body),
                 status_code=self.status_code,
                 response_body=(
-                    exclude_none(self._response_body)
-                    if not isinstance(self._response_body, bytes)
-                    else self._response_body
+                    exclude_none(self.response_body)
+                    if not isinstance(self.response_body, bytes)
+                    else self.response_body
                 ),
             ),
         )
 
 
 class TwitterApiResponseError(TwitterApiError):
-    def __init__(self, endpoint: Endpoint, data: Any, **extra):
-        self._endpoint = endpoint
-        self._data = data
+    def __init__(self, endpoint: Endpoint, response_body: Any, **extra):
+        self.endpoint = endpoint
+        self.response_body = response_body
         self._extra = extra
 
     @property
@@ -223,8 +223,8 @@ class TwitterApiResponseError(TwitterApiError):
             type=self.__class__.__name__,
             message=self.message,
             **dict(
-                endpoint=self._endpoint,
-                data=exclude_none(self._data),
+                endpoint=self.endpoint,
+                response_body=exclude_none(self.response_body),
             ),
             **exclude_none(self._extra),
         )
@@ -234,9 +234,9 @@ class TwitterApiResponseValidationError(TwitterApiError):
     def __init__(
         self, endpoint: Endpoint, response_body: Any, error: pydantic.ValidationError
     ):
-        self._endpoint = endpoint
-        self._response_body = response_body
-        self._error = error
+        self.endpoint = endpoint
+        self.response_body = response_body
+        self.error = error
 
     @property
     def message(self) -> str:
@@ -244,7 +244,7 @@ class TwitterApiResponseValidationError(TwitterApiError):
 
     @property
     def info(self) -> TwitterApiExceptionInfo:
-        response_body = exclude_none(self._response_body)
+        response_body = exclude_none(self.response_body)
 
         # 文字が長すぎる場合、切り取る。
         response_body_str = json.dumps(response_body, ensure_ascii=False)
@@ -256,17 +256,17 @@ class TwitterApiResponseValidationError(TwitterApiError):
             type=self.__class__.__name__,
             message=self.message,
             **dict(
-                endpoint=self._endpoint,
+                endpoint=self.endpoint,
                 response_body=response_body,
-                error=self._error.errors(),
+                errors=self.error.errors(),
             ),
         )
 
 
 class TwitterApiOAuthTokenV1NotFound(TwitterApiError):
-    def __init__(self, endpoint, data: Any, **extra):
-        self._endpoint = endpoint
-        self._data = data
+    def __init__(self, endpoint, response_body: Any, **extra):
+        self.endpoint = endpoint
+        self.response_body = response_body
         self._extra = extra
 
     @property
@@ -279,8 +279,8 @@ class TwitterApiOAuthTokenV1NotFound(TwitterApiError):
             type=self.__class__.__name__,
             message=self.message,
             **dict(
-                endpoint=self._endpoint,
-                data=exclude_none(self._data),
+                endpoint=self.endpoint,
+                response_body=exclude_none(self.response_body),
             ),
             **exclude_none(self._extra),
         )
