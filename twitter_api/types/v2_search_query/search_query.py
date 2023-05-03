@@ -1,5 +1,5 @@
 from abc import abstractmethod
-from typing import Any, Callable, Type, Union
+from typing import Callable, Type, Union
 
 from twitter_api.types.v2_search_query.cashtag import Cashtag
 from twitter_api.types.v2_search_query.from_user import FromUser
@@ -27,7 +27,7 @@ class SearchQuery:
     refer: https://developer.twitter.com/en/docs/twitter-api/tweets/search/integrate/build-a-query
     """
 
-    def __init__(self, *query: Operator[Any]) -> None:
+    def __init__(self, *query: Operator) -> None:
         self._query = query
 
     def __str__(self) -> str:
@@ -87,7 +87,7 @@ class _SearchQueryBuilder:
         return Cashtag(cashtag)
 
     @classmethod
-    def group(cls, *operators: Operator[Any]) -> Group:
+    def group(cls, *operators: Operator) -> Group:
         return Group(*operators)
 
     @classmethod
