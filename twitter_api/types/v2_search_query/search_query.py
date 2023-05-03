@@ -5,17 +5,28 @@ from twitter_api.types.v2_search_query.cashtag import Cashtag
 from twitter_api.types.v2_search_query.from_user import FromUser
 from twitter_api.types.v2_search_query.group import Group, grouping
 from twitter_api.types.v2_search_query.hashtag import Hashtag
+from twitter_api.types.v2_search_query.in_reply_to_tweet_id import InReplyToTweetId
 from twitter_api.types.v2_search_query.keyword import Keyword
 from twitter_api.types.v2_search_query.mention import Mention
 from twitter_api.types.v2_search_query.operator import Operator
 from twitter_api.types.v2_search_query.retweet_of import RetweetOf
+from twitter_api.types.v2_search_query.retweets_of_tweet_id import RetweetsOfTweetId
 from twitter_api.types.v2_search_query.to_user import ToUser
 from twitter_api.types.v2_search_query.url import Url
+from twitter_api.types.v2_tweet.tweet_id import TweetId
 from twitter_api.types.v2_user.user_id import UserId
 from twitter_api.types.v2_user.username import Username
 
 
 class SearchQuery:
+    """
+    検索クエリの作成をエディタの支援を受けながら行うためのクラス。
+
+    SearchQuery.build を用いて作成する。
+
+    refer: https://developer.twitter.com/en/docs/twitter-api/tweets/search/integrate/build-a-query
+    """
+
     def __init__(self, *query: Operator[Any]) -> None:
         self._query = query
 
@@ -30,6 +41,10 @@ class SearchQuery:
             Union[Operator[Any], tuple[Operator[Any], ...]],
         ],
     ):
+        """
+        クエリを作成するビルダーを呼び出す。
+        """
+
         query = building(_SearchQueryBuilder)
         if isinstance(query, tuple):
             return SearchQuery(*query)
@@ -77,3 +92,11 @@ class _SearchQueryBuilder:
     @classmethod
     def retweet_of(cls, user: Union[UserId, Username]) -> RetweetOf:
         return RetweetOf(user)
+
+    @classmethod
+    def in_reply_to_tweet_id(cls, id: TweetId) -> InReplyToTweetId:
+        return InReplyToTweetId(id)
+
+    @classmethod
+    def retweets_of_tweet_id(cls, id: TweetId) -> RetweetsOfTweetId:
+        return RetweetsOfTweetId(id)
