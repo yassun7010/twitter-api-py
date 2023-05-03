@@ -38,7 +38,7 @@ ENDPOINT = Endpoint("GET", "https://api.twitter.com/2/tweets/search/recent")
 GetV2TweetsSearchRecentQueryParameters = TypedDict(
     "GetV2TweetsSearchRecentQueryParameters",
     {
-        "query": Union[str, SearchQuery],
+        "query": Union[SearchQuery, str],
         "start_time": NotRequired[Optional[datetime]],
         "end_time": NotRequired[Optional[datetime]],
         "since_id": NotRequired[Optional[TweetId]],
