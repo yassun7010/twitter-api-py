@@ -1,5 +1,13 @@
 from datetime import datetime
-from typing import AsyncGenerator, Generator, Literal, NotRequired, Optional, TypedDict
+from typing import (
+    AsyncGenerator,
+    Generator,
+    Literal,
+    NotRequired,
+    Optional,
+    TypedDict,
+    Union,
+)
 
 from twitter_api.rate_limit.rate_limit import rate_limit
 from twitter_api.resources.api_resources import ApiResources
@@ -16,6 +24,7 @@ from twitter_api.types.v2_media.media_field import MediaField
 from twitter_api.types.v2_place.place_field import PlaceField
 from twitter_api.types.v2_poll.poll_field import PollField
 from twitter_api.types.v2_scope import oauth2_scopes
+from twitter_api.types.v2_search_query.search_query import SearchQuery
 from twitter_api.types.v2_tweet.tweet_expansion import TweetExpansion
 from twitter_api.types.v2_tweet.tweet_field import TweetField
 from twitter_api.types.v2_tweet.tweet_id import TweetId
@@ -29,7 +38,7 @@ ENDPOINT = Endpoint("GET", "https://api.twitter.com/2/tweets/search/recent")
 GetV2TweetsSearchRecentQueryParameters = TypedDict(
     "GetV2TweetsSearchRecentQueryParameters",
     {
-        "query": str,
+        "query": Union[str, SearchQuery],
         "start_time": NotRequired[Optional[datetime]],
         "end_time": NotRequired[Optional[datetime]],
         "since_id": NotRequired[Optional[TweetId]],
