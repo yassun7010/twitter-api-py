@@ -11,7 +11,12 @@ class TestGroup:
     def test_group_multiple_len(self):
         assert len(Group(Keyword("twitter"), Mention("elonmusk"))) == 2
 
-    def test_group_and_operated(self):
+    def test_group_not_operator(self):
+        query = SearchQuery(Group(~Mention("SpaceX")))
+
+        assert str(query) == "(-@SpaceX)"
+
+    def test_group_and_operator(self):
         query = SearchQuery(
             Group(Keyword("twitter") & Mention("elonmusk")) & ~Mention("SpaceX"),
         )
