@@ -1,11 +1,13 @@
 from abc import abstractmethod
 from typing import Any, Callable, Literal, Optional, Type, Union, overload
 
+from twitter_api.types.v2_dm_conversation.dm_conversation_id import DmConversationId
 from twitter_api.types.v2_domain import DomainId
 from twitter_api.types.v2_entity.entity_id import EntityId
 from twitter_api.types.v2_entity.entity_name import EntityName
 from twitter_api.types.v2_search_query.cashtag import Cashtag
 from twitter_api.types.v2_search_query.context import Context
+from twitter_api.types.v2_search_query.conversation_id import ConversationId
 from twitter_api.types.v2_search_query.entity import Entity
 from twitter_api.types.v2_search_query.from_user import FromUser
 from twitter_api.types.v2_search_query.group import Group, grouping
@@ -159,3 +161,7 @@ class _SearchQueryBuilder:
     @classmethod
     def entity(cls, name: EntityName) -> Entity:
         return Entity(name)
+
+    @classmethod
+    def conversation_id(cls, id: DmConversationId) -> ConversationId:
+        return ConversationId(id)
