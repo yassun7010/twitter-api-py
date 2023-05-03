@@ -13,9 +13,10 @@ class Group(Operator[Operator]):
 
     def __str__(self) -> str:
         from ._and import And
+        from ._not import Not
         from ._or import Or
 
-        if len(self._operators) == 1 and isinstance(self._operators[0], (And, Or)):
+        if len(self._operators) == 1 and isinstance(self._operators[0], (And, Or, Not)):
             return f"({self._operators[0]})"
 
         return " ".join(map(grouping, self._operators))
