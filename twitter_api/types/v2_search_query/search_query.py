@@ -141,50 +141,96 @@ class _SearchQueryBuilder(metaclass=ABCMeta):
 
     @classmethod
     def keyword(cls, keyword: str) -> KeywordOperator:
+        """
+        キーワードによる絞り込み。
+
+        空白が含まれる場合、ダブルクォーテーションで囲まれる。
+        """
         return KeywordOperator(keyword)
 
     @classmethod
     def mention(cls, username: Username) -> MentionOperator:
+        """
+        メンションによる絞り込み。
+
+        先頭に @ がない場合、 @ をつけて処理される。
+        """
         return MentionOperator(username)
 
     @classmethod
     def hashtag(cls, hashtag: Hashtag) -> HashtagOperator:
+        """
+        ハッシュタグによる絞り込み。
+
+        先頭に # がない場合、 # をつけて処理される。
+        """
         return HashtagOperator(hashtag)
 
     @classmethod
     def cashtag(cls, cashtag: Cashtag) -> CashtagOperator:
+        """
+        キャッシュタグによる絞り込み。
+
+        先頭に $ がない場合、 $ をつけて処理される。
+        """
         return CashtagOperator(cashtag)
 
     @classmethod
     def group(cls, operator: CorrectOperator, *operators: Operator) -> GroupOperator:
+        """
+        括弧で囲みたい対象を指定する。
+
+        要素数が 1 つの場合は括弧をつけない。
+        """
         return GroupOperator(operator, *operators)
 
     @classmethod
     def from_user(cls, user: Union[UserId, Username]) -> FromUserOperator:
+        """
+        どのユーザからツイートされたかで絞り込む。
+        """
         return FromUserOperator(user)
 
     @classmethod
     def to_user(cls, user: Union[UserId, Username]) -> ToUserOperator:
+        """
+        どのユーザへツイートしたかで絞り込む。
+        """
         return ToUserOperator(user)
 
     @classmethod
     def url(cls, url: str) -> UrlOperator:
+        """
+        ツイートに含まれる URL で絞り込む。
+        """
         return UrlOperator(url)
 
     @classmethod
     def retweet_of(cls, user: Union[UserId, Username]) -> RetweetOfOperator:
+        """
+        どのユーザへのリツイートかで絞り込む。
+        """
         return RetweetOfOperator(user)
 
     @classmethod
     def in_reply_to_tweet_id(cls, id: TweetId) -> InReplyToTweetIdOperator:
+        """
+        どのツイートへのリプライかで絞り込む。
+        """
         return InReplyToTweetIdOperator(id)
 
     @classmethod
     def retweets_of_tweet_id(cls, id: TweetId) -> RetweetsOfTweetIdOperator:
+        """
+        どのツイートへのリツイートかで絞り込む。
+        """
         return RetweetsOfTweetIdOperator(id)
 
     @classmethod
     def quotes_of_tweet_id(cls, id: TweetId) -> QuotesOfTweetIdOperator:
+        """
+        どのツイートへの引用ツイートかで絞り込む。
+        """
         return QuotesOfTweetIdOperator(id)
 
     @overload
@@ -229,6 +275,9 @@ class _SearchQueryBuilder(metaclass=ABCMeta):
 
     @classmethod
     def conversation_id(cls, id: DmConversationId) -> ConversationIdOperator:
+        """
+        どの DM 会話でのツイートかで絞り込む。
+        """
         return ConversationIdOperator(id)
 
     @classmethod
@@ -237,10 +286,16 @@ class _SearchQueryBuilder(metaclass=ABCMeta):
 
     @classmethod
     def place(cls, place: Union[PlaceId, PlaceName]) -> PlaceOperator:
+        """
+        どの場所でのツイートかで絞り込む。
+        """
         return PlaceOperator(place)
 
     @classmethod
     def place_country(cls, code: PlaceCountryCode) -> PlaceCountryOperator:
+        """
+        どの国からのツイートかで絞り込む。
+        """
         return PlaceCountryOperator(code)
 
     @overload
@@ -276,6 +331,9 @@ class _SearchQueryBuilder(metaclass=ABCMeta):
         radius_km: Any = None,
         radius_mi: Any = None,
     ) -> PointRadiusOperator:
+        """
+        どの座標範囲からのツイートかで絞り込む。
+        """
         return PointRadiusOperator(
             longitude=longitude,
             latitude=latitude,
@@ -292,6 +350,9 @@ class _SearchQueryBuilder(metaclass=ABCMeta):
         east_longitude: float,
         north_latitude: float,
     ) -> BoundingBoxOperator:
+        """
+        どの座標範囲からのツイートかで絞り込む。
+        """
         return BoundingBoxOperator(
             west_longitude=west_longitude,
             south_latitude=south_latitude,
