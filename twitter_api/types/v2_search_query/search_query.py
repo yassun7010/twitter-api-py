@@ -1,5 +1,5 @@
 from abc import ABCMeta, abstractmethod
-from typing import Any, Callable, Literal, Type, Union, overload
+from typing import Any, Callable, Literal, Type, TypeAlias, Union, overload
 
 from twitter_api.types.v2_cashtag import Cashtag
 from twitter_api.types.v2_dm_conversation.dm_conversation_id import DmConversationId
@@ -103,7 +103,7 @@ class SearchQuery:
     def build(
         cls,
         building: Callable[
-            [Type["_SearchQueryBuilder"]],
+            ["SearchQueryBuilder"],
             CorrectOperator,
         ],
     ):
@@ -490,3 +490,6 @@ class _SearchQueryBuilder(metaclass=ABCMeta):
         単体では成立しないため、成立するクエリを左側において AND 結合する必要がある。
         """
         return LangOperator(lang)
+
+
+SearchQueryBuilder: TypeAlias = Type[_SearchQueryBuilder]
