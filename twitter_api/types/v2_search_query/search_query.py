@@ -13,6 +13,9 @@ from twitter_api.types.v2_search_query.operators.place_country_operator import (
     PlaceCountryOperator,
 )
 from twitter_api.types.v2_search_query.operators.place_operator import PlaceOperator
+from twitter_api.types.v2_search_query.operators.point_radius_operator import (
+    PointRadiusOperator,
+)
 from twitter_api.types.v2_tweet.tweet_context_annotation import TweetContextAnnotation
 from twitter_api.types.v2_tweet.tweet_id import TweetId
 from twitter_api.types.v2_user.user_id import UserId
@@ -192,3 +195,43 @@ class _SearchQueryBuilder:
     @classmethod
     def place_country(cls, code: PlaceCountryCode) -> PlaceCountryOperator:
         return PlaceCountryOperator(code)
+
+    @overload
+    @classmethod
+    def point_radius(
+        cls,
+        *,
+        longitude: float,
+        latitude: float,
+        radius_km: int,
+        radius_mi: Literal[None] = None,
+    ) -> PointRadiusOperator:
+        ...
+
+    @overload
+    @classmethod
+    def point_radius(
+        cls,
+        *,
+        longitude: float,
+        latitude: float,
+        radius_km: Literal[None] = None,
+        radius_mi: int,
+    ) -> PointRadiusOperator:
+        ...
+
+    @classmethod
+    def point_radius(
+        cls,
+        *,
+        longitude: float,
+        latitude: float,
+        radius_km: Any = None,
+        radius_mi: Any = None,
+    ) -> PointRadiusOperator:
+        return PointRadiusOperator(
+            longitude=longitude,
+            latitude=latitude,
+            radius_km=radius_km,
+            radius_mi=radius_mi,
+        )
