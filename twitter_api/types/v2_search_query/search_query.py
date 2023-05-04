@@ -301,6 +301,11 @@ class _SearchQueryBuilder(metaclass=ABCMeta):
 
     @classmethod
     def is_nullcast(cls) -> IsNullcastOperator:
+        """
+        Nullcast であるかどうか。
+
+        否定形としてしか使えないことに注意。
+        """
         return IsNullcastOperator()
 
     @classmethod
