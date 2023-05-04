@@ -1,6 +1,6 @@
-from .operator import Operator
+from .operator import InvertableOperator, Operator
 
 
-class HasVideoLinkOperator(Operator[Operator]):
+class HasVideoLinkOperator(InvertableOperator[Operator]):
     def __str__(self) -> str:
         return f"has:video_link"

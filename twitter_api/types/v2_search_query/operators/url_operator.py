@@ -1,7 +1,7 @@
-from .operator import Operator
+from .operator import InvertableOperator, Operator
 
 
-class UrlOperator(Operator[Operator]):
+class UrlOperator(InvertableOperator[Operator]):
     def __init__(self, url: str):
         self._value = url
 

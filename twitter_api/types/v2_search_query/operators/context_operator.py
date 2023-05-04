@@ -4,10 +4,10 @@ from twitter_api.types.v2_domain import DomainId
 from twitter_api.types.v2_entity.entity_id import EntityId
 from twitter_api.types.v2_tweet.tweet_context_annotation import TweetContextAnnotation
 
-from .operator import Operator
+from .operator import InvertableOperator, Operator
 
 
-class ContextOperator(Operator[Operator]):
+class ContextOperator(InvertableOperator[Operator]):
     @overload
     def __init__(
         self,

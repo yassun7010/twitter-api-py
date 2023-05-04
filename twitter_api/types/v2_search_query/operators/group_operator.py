@@ -1,7 +1,7 @@
-from .operator import Operator
+from .operator import InvertableOperator, Operator
 
 
-class GroupOperator(Operator[Operator]):
+class GroupOperator(InvertableOperator[Operator]):
     def __init__(self, *operators: Operator):
         if len(operators) == 1 and isinstance(operators[0], GroupOperator):
             # GroupOperator の重ね掛けはまとめる。

@@ -1,9 +1,9 @@
 from twitter_api.types.v2_tweet.tweet_id import TweetId
 
-from .operator import Operator
+from .operator import InvertableOperator, Operator
 
 
-class QuotesOfTweetIdOperator(Operator[Operator]):
+class QuotesOfTweetIdOperator(InvertableOperator[Operator]):
     def __init__(self, id: TweetId) -> None:
         self._value = id
 

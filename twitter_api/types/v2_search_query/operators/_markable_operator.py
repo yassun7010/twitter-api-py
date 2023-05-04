@@ -1,7 +1,7 @@
-from .operator import Operator, TOperator
+from .operator import InvertableOperator, TOperator
 
 
-class MarkableOperator(Operator[TOperator]):
+class MarkableOperator(InvertableOperator[TOperator]):
     def __init__(self, value: str, prefix: str):
         self._value = value[len(prefix) :] if value.startswith(prefix) else value
         self._prefix = prefix

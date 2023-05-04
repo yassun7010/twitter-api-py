@@ -14,6 +14,8 @@ class Operator(Generic[TOperator]):
 
         return OrOperator(self, other)
 
+
+class InvertableOperator(Operator[TOperator]):
     def __invert__(self):
         from ._not_operator import NotOperator
 

@@ -1,9 +1,9 @@
 from twitter_api.types.v2_dm_conversation.dm_conversation_id import DmConversationId
 
-from .operator import Operator
+from .operator import InvertableOperator, Operator
 
 
-class ConversationIdOperator(Operator[Operator]):
+class ConversationIdOperator(InvertableOperator[Operator]):
     def __init__(self, id: DmConversationId):
         self._value = id
 

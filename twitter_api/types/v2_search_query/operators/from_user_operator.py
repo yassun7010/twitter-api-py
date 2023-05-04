@@ -3,10 +3,10 @@ from typing import Union
 from twitter_api.types.v2_user.user_id import UserId
 from twitter_api.types.v2_user.username import Username
 
-from .operator import Operator
+from .operator import InvertableOperator, Operator
 
 
-class FromUserOperator(Operator[Operator]):
+class FromUserOperator(InvertableOperator[Operator]):
     def __init__(self, user: Union[UserId, Username]):
         self._value = user
 

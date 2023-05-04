@@ -1,6 +1,6 @@
-from .operator import Operator
+from .operator import InvertableOperator, Operator
 
 
-class HasCashtagsOperator(Operator[Operator]):
+class HasCashtagsOperator(InvertableOperator[Operator]):
     def __str__(self) -> str:
         return f"has:cashtags"

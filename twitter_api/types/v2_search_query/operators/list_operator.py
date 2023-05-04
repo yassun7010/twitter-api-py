@@ -1,9 +1,9 @@
 from twitter_api.types.v2_list.list_id import ListId
 
-from .operator import Operator
+from .operator import InvertableOperator, Operator
 
 
-class ListOperator(Operator[Operator]):
+class ListOperator(InvertableOperator[Operator]):
     def __init__(self, id: ListId):
         self._value = id
 
