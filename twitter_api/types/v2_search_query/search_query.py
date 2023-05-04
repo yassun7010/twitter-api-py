@@ -6,6 +6,9 @@ from twitter_api.types.v2_domain import DomainId
 from twitter_api.types.v2_entity.entity_id import EntityId
 from twitter_api.types.v2_entity.entity_name import EntityName
 from twitter_api.types.v2_list.list_id import ListId
+from twitter_api.types.v2_place.place_full_name import PlaceFullName
+from twitter_api.types.v2_place.place_id import PlaceId
+from twitter_api.types.v2_search_query.operators.place_operator import PlaceOperator
 from twitter_api.types.v2_tweet.tweet_context_annotation import TweetContextAnnotation
 from twitter_api.types.v2_tweet.tweet_id import TweetId
 from twitter_api.types.v2_user.user_id import UserId
@@ -177,3 +180,7 @@ class _SearchQueryBuilder:
     @classmethod
     def list(cls, id: ListId) -> ListOperator:
         return ListOperator(id)
+
+    @classmethod
+    def place(cls, place: PlaceId | PlaceFullName) -> PlaceOperator:
+        return PlaceOperator(place)

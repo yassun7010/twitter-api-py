@@ -2,7 +2,9 @@ from typing import Any, Optional
 
 from twitter_api.types.extra_permissive_model import ExtraPermissiveModel
 from twitter_api.types.v2_geo.geo import Geo
-from twitter_api.types.v2_place.place_id import PlaceId
+
+from .place_full_name import PlaceFullName
+from .place_id import PlaceId
 
 
 class Place(ExtraPermissiveModel):
@@ -13,7 +15,7 @@ class Place(ExtraPermissiveModel):
     """
 
     id: PlaceId
-    full_name: str
+    full_name: PlaceFullName
     name: Optional[str] = None
     contained_within: Optional[list[Any]] = None
     country: Optional[str] = None
