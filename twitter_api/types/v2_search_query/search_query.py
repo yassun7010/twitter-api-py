@@ -1,4 +1,4 @@
-from abc import abstractmethod
+from abc import ABCMeta, abstractmethod
 from typing import Any, Callable, Literal, Type, Union, overload
 
 from twitter_api.types.v2_dm_conversation.dm_conversation_id import DmConversationId
@@ -83,7 +83,7 @@ class SearchQuery:
         return SearchQuery(building(_SearchQueryBuilder))
 
 
-class _SearchQueryBuilder:
+class _SearchQueryBuilder(metaclass=ABCMeta):
     @abstractmethod
     def __init__(self) -> None:
         pass

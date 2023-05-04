@@ -1,6 +1,11 @@
+import pytest
+
 from twitter_api.types.v2_search_query.operators.keyword_operator import KeywordOperator
 from twitter_api.types.v2_search_query.operators.mention_operator import MentionOperator
-from twitter_api.types.v2_search_query.search_query import SearchQuery
+from twitter_api.types.v2_search_query.search_query import (
+    SearchQuery,
+    _SearchQueryBuilder,
+)
 
 
 class TestSearchQuery:
@@ -24,6 +29,10 @@ class TestSearchQuery:
 
 
 class TestSearchQueryBuilder:
+    def test_constructor(self):
+        with pytest.raises(TypeError):
+            _SearchQueryBuilder()  # type: ignore
+
     def test_search_query_builder(self):
         query = SearchQuery.build(
             lambda q: (
