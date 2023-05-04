@@ -21,6 +21,9 @@ from twitter_api.types.v2_search_query.operators.has_hashtags_operator import (
 from twitter_api.types.v2_search_query.operators.has_links_operator import (
     HasLinksOperator,
 )
+from twitter_api.types.v2_search_query.operators.has_media_operator import (
+    HasMediaOperator,
+)
 from twitter_api.types.v2_search_query.operators.has_mentions_operator import (
     HasMentionsOperator,
 )
@@ -306,3 +309,7 @@ class _SearchQueryBuilder(metaclass=ABCMeta):
     @classmethod
     def has_mentions(cls) -> HasMentionsOperator:
         return HasMentionsOperator()
+
+    @classmethod
+    def has_media(cls) -> HasMediaOperator:
+        return HasMediaOperator()
