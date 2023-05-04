@@ -18,6 +18,9 @@ from twitter_api.types.v2_search_query.operators.has_cashtags_operator import (
 from twitter_api.types.v2_search_query.operators.has_hashtags_operator import (
     HasHashtagsOperator,
 )
+from twitter_api.types.v2_search_query.operators.has_links_operator import (
+    HasLinksOperator,
+)
 from twitter_api.types.v2_search_query.operators.is_nullcast_operator import (
     IsNullcastOperator,
 )
@@ -292,3 +295,7 @@ class _SearchQueryBuilder(metaclass=ABCMeta):
     @classmethod
     def has_cashtags(cls) -> HasCashtagsOperator:
         return HasCashtagsOperator()
+
+    @classmethod
+    def has_links(cls) -> HasLinksOperator:
+        return HasLinksOperator()
