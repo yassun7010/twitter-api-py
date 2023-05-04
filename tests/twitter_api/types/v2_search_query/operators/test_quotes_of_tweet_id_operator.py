@@ -4,8 +4,8 @@ from twitter_api.types.v2_search_query.operators.quotes_of_tweet_id_operator imp
 from twitter_api.types.v2_search_query.search_query import SearchQuery
 
 
-class TestQuotesOfTweetId:
-    def test_quotes_of_tweet_id(self):
+class TestQuotesOfTweetIdOperator:
+    def test_quotes_of_tweet_id_operator(self):
         assert (
             str(QuotesOfTweetIdOperator("1539382664746020864"))
             == "quotes_of_tweet_id:1539382664746020864"

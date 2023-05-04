@@ -4,8 +4,8 @@ from twitter_api.types.v2_search_query.operators.retweets_of_tweet_id_operator i
 from twitter_api.types.v2_search_query.search_query import SearchQuery
 
 
-class TestInReplyToTweetId:
-    def test_retweets_of_tweet_id(self):
+class TestInReplyToTweetIdOperator:
+    def test_retweets_of_tweet_id_operator(self):
         assert (
             str(RetweetsOfTweetIdOperator("1539382664746020864"))
             == "retweets_of_tweet_id:1539382664746020864"

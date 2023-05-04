@@ -2,11 +2,11 @@ from twitter_api.types.v2_search_query.operators.hashtag_operator import Hashtag
 from twitter_api.types.v2_search_query.search_query import SearchQuery
 
 
-class TestHashtag:
-    def test_hashtag(self):
+class TestHashtagOperator:
+    def test_hashtag_operator(self):
         assert str(HashtagOperator("Twitter")) == "#Twitter"
 
-    def test_hashtag_with_mark(self):
+    def test_hashtag_operator_with_mark(self):
         assert str(HashtagOperator("#Twitter")) == "#Twitter"
 
     def test_query_build(self):

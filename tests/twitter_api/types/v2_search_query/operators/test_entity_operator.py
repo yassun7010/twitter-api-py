@@ -2,8 +2,8 @@ from twitter_api.types.v2_search_query.operators.entity_operator import EntityOp
 from twitter_api.types.v2_search_query.search_query import SearchQuery
 
 
-class TestEntity:
-    def test_entity(self):
+class TestEntityOperator:
+    def test_entity_operator(self):
         assert str(EntityOperator("Michael Jordan")) == 'entity:"Michael Jordan"'
 
     def test_query_build(self):

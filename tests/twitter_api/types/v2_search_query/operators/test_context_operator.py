@@ -19,11 +19,11 @@ def context():
     )
 
 
-class TestContext:
-    def test_context(self, context):
+class TestContextOperator:
+    def test_context_operator(self, context):
         assert str(ContextOperator(context)) == "context:119.1186637514896920576"
 
-    def test_context_from_ids(self):
+    def test_context_operator_from_ids(self):
         assert (
             str(ContextOperator(domain_id="10", entity_id="799022225751871488"))
             == "context:10.799022225751871488"

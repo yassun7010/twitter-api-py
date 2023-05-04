@@ -4,8 +4,8 @@ from twitter_api.types.v2_search_query.operators.conversation_id_operator import
 from twitter_api.types.v2_search_query.search_query import SearchQuery
 
 
-class TestConversationId:
-    def test_conversation_id(self):
+class TestConversationIdOperator:
+    def test_conversation_id_operator(self):
         assert (
             str(ConversationIdOperator("1334987486343299072"))
             == "conversation_id:1334987486343299072"

@@ -4,8 +4,8 @@ from twitter_api.types.v2_search_query.operators.from_user_operator import (
 from twitter_api.types.v2_search_query.search_query import SearchQuery
 
 
-class TestFromUser:
-    def test_from_user(self):
+class TestFromUserOperator:
+    def test_from_user_operator(self):
         assert str(FromUserOperator("twitterdev")) == "from:twitterdev"
 
     def test_query_build(self):
