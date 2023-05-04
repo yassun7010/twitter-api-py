@@ -7,9 +7,9 @@ from .client.twitter_api_mock_client import TwitterApiMockClient
 
 __version__ = importlib.metadata.version("twitter_api_py")
 
-__all__ = [
+__all__ = (
     "TwitterApiAsyncClient",
     "TwitterApiAsyncMockClient",
     "TwitterApiClient",
     "TwitterApiMockClient",
-]
+)

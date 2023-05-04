@@ -16,4 +16,8 @@ false = False
 """Json のデータをそのままコードにコピーして利用できるように、 false を定義しておく。"""
 
 
-__all__ = ["null", "true", "false"]
+__all__ = (
+    "null",
+    "true",
+    "false",
+)
