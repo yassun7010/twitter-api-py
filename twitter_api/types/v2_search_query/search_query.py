@@ -493,3 +493,6 @@ class _SearchQueryBuilder(metaclass=ABCMeta):
 
 
 SearchQueryBuilder: TypeAlias = Type[_SearchQueryBuilder]
+"""
+クエリの生成関数をユーザが定義したい場合のための型定義。
+"""
