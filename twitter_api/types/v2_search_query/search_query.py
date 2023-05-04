@@ -182,5 +182,5 @@ class _SearchQueryBuilder:
         return ListOperator(id)
 
     @classmethod
-    def place(cls, place: PlaceId | PlaceFullName) -> PlaceOperator:
+    def place(cls, place: Union[PlaceId, PlaceFullName]) -> PlaceOperator:
         return PlaceOperator(place)

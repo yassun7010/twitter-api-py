@@ -12,8 +12,11 @@ class TestPlace:
     def test_place_from_multi_word_full_name(self):
         assert str(PlaceOperator("new york city")) == 'place:"new york city"'
 
-    def test_query_build(self):
+    def test_query_build_from_id(self):
         assert (
             str(SearchQuery.build(lambda q: q.place("fd70c22040963ac7")))
             == "place:fd70c22040963ac7"
         )
+
+    def test_query_build_from_full_name(self):
+        assert str(SearchQuery.build(lambda q: q.place("seattle"))) == "place:seattle"
