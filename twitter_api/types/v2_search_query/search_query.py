@@ -12,6 +12,9 @@ from twitter_api.types.v2_place.place_name import PlaceName
 from twitter_api.types.v2_search_query.operators.bounding_box_operator import (
     BoundingBoxOperator,
 )
+from twitter_api.types.v2_search_query.operators.is_reply_operator import (
+    IsReplyOperator,
+)
 from twitter_api.types.v2_search_query.operators.is_retweet_operator import (
     IsRetweetOperator,
 )
@@ -70,7 +73,7 @@ class SearchQuery:
         ],
     ):
         """
-        クエリを組み立てる。
+        検索クエリを組み立てる。
 
         >>> from .search_query import SearchQuery
         >>> query = SearchQuery.build(
@@ -255,7 +258,9 @@ class _SearchQueryBuilder(metaclass=ABCMeta):
         )
 
     @classmethod
-    def is_retweet(
-        cls,
-    ) -> IsRetweetOperator:
+    def is_retweet(cls) -> IsRetweetOperator:
         return IsRetweetOperator()
+
+    @classmethod
+    def is_reply(cls) -> IsReplyOperator:
+        return IsReplyOperator()
