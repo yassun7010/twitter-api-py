@@ -30,6 +30,9 @@ from twitter_api.types.v2_search_query.operators.has_media_operator import (
 from twitter_api.types.v2_search_query.operators.has_mentions_operator import (
     HasMentionsOperator,
 )
+from twitter_api.types.v2_search_query.operators.has_video_link_operator import (
+    HasVideoLinkOperator,
+)
 from twitter_api.types.v2_search_query.operators.is_nullcast_operator import (
     IsNullcastOperator,
 )
@@ -320,3 +323,7 @@ class _SearchQueryBuilder(metaclass=ABCMeta):
     @classmethod
     def has_images(cls) -> HasImagesOperator:
         return HasImagesOperator()
+
+    @classmethod
+    def has_video_link(cls) -> HasVideoLinkOperator:
+        return HasVideoLinkOperator()
