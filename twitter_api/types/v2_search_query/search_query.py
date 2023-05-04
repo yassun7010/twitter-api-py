@@ -18,6 +18,9 @@ from twitter_api.types.v2_search_query.operators.is_reply_operator import (
 from twitter_api.types.v2_search_query.operators.is_retweet_operator import (
     IsRetweetOperator,
 )
+from twitter_api.types.v2_search_query.operators.is_verified_operator import (
+    IsVerifiedOperator,
+)
 from twitter_api.types.v2_search_query.operators.place_country_operator import (
     PlaceCountryOperator,
 )
@@ -264,3 +267,7 @@ class _SearchQueryBuilder(metaclass=ABCMeta):
     @classmethod
     def is_reply(cls) -> IsReplyOperator:
         return IsReplyOperator()
+
+    @classmethod
+    def is_verified(cls) -> IsVerifiedOperator:
+        return IsVerifiedOperator()
