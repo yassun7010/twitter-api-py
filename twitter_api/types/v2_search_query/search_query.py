@@ -5,6 +5,7 @@ from twitter_api.types.v2_dm_conversation.dm_conversation_id import DmConversati
 from twitter_api.types.v2_domain import DomainId
 from twitter_api.types.v2_entity.entity_id import EntityId
 from twitter_api.types.v2_entity.entity_name import EntityName
+from twitter_api.types.v2_hashtag import Hashtag
 from twitter_api.types.v2_language import Language
 from twitter_api.types.v2_list.list_id import ListId
 from twitter_api.types.v2_place.place_country_code import PlaceCountryCode
@@ -136,7 +137,7 @@ class _SearchQueryBuilder(metaclass=ABCMeta):
         return MentionOperator(username)
 
     @classmethod
-    def hashtag(cls, hashtag: str) -> HashtagOperator:
+    def hashtag(cls, hashtag: Hashtag) -> HashtagOperator:
         return HashtagOperator(hashtag)
 
     @classmethod
