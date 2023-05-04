@@ -1,6 +1,7 @@
 from abc import ABCMeta, abstractmethod
 from typing import Any, Callable, Literal, Type, Union, overload
 
+from twitter_api.types.v2_cashtag import Cashtag
 from twitter_api.types.v2_dm_conversation.dm_conversation_id import DmConversationId
 from twitter_api.types.v2_domain import DomainId
 from twitter_api.types.v2_entity.entity_id import EntityId
@@ -141,7 +142,7 @@ class _SearchQueryBuilder(metaclass=ABCMeta):
         return HashtagOperator(hashtag)
 
     @classmethod
-    def cashtag(cls, cashtag: str) -> CashtagOperator:
+    def cashtag(cls, cashtag: Cashtag) -> CashtagOperator:
         return CashtagOperator(cashtag)
 
     @classmethod
