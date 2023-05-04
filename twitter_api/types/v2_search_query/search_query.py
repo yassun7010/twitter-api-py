@@ -40,6 +40,9 @@ from twitter_api.types.v2_search_query.operators.has_video_link_operator import 
 from twitter_api.types.v2_search_query.operators.is_nullcast_operator import (
     IsNullcastOperator,
 )
+from twitter_api.types.v2_search_query.operators.is_quote_operator import (
+    IsQuoteOperator,
+)
 from twitter_api.types.v2_search_query.operators.is_reply_operator import (
     IsReplyOperator,
 )
@@ -377,6 +380,15 @@ class _SearchQueryBuilder(metaclass=ABCMeta):
         単体では成立しないため、成立するクエリの右側に AND 結合する必要がある。
         """
         return IsReplyOperator()
+
+    @classmethod
+    def is_quote(cls) -> IsQuoteOperator:
+        """
+        引用ツイートであるかどうかの絞り込み。
+
+        単体では成立しないため、成立するクエリの右側に AND 結合する必要がある。
+        """
+        return IsQuoteOperator()
 
     @classmethod
     def is_verified(cls) -> IsVerifiedOperator:

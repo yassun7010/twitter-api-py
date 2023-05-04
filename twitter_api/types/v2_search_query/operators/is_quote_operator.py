@@ -1,9 +1,9 @@
 from .operator import ConjunctionRequiredOperator, InvertableOperator, Operator
 
 
-class HasMediaOperator(
+class IsQuoteOperator(
     InvertableOperator[Operator],
     ConjunctionRequiredOperator,
 ):
     def __str__(self) -> str:
-        return f"has:media"
+        return f"is:quote"

@@ -1,4 +1,4 @@
-from .operator import Operator
+from .operator import ConjunctionRequiredOperator
 
 
 class IsNullcastOperator:
@@ -15,6 +15,6 @@ class IsNullcastOperator:
         return f"is:nullcast"
 
 
-class IsNotNullcastOperator(Operator):
+class IsNotNullcastOperator(ConjunctionRequiredOperator):
     def __str__(self) -> str:
         return f"-is:nullcast"

@@ -34,6 +34,14 @@ class InvertableOperator(Operator, Generic[TOperator]):
         return NotOperator(self)
 
 
+class ConjunctionRequiredOperator(Operator):
+    """
+    自身だけではクエリとして成立しない Operator。
+    """
+
+    pass
+
+
 class StandaloneOperator(CorrectOperator[TOperator]):
     """
     それ自身がクエリとして成立する Operator。
