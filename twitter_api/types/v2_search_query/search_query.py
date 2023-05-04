@@ -60,7 +60,7 @@ class SearchQuery:
         cls,
         building: Callable[
             [Type["_SearchQueryBuilder"]],
-            Union[Operator, tuple[Operator, ...]],
+            Operator,
         ],
     ):
         """
@@ -80,12 +80,7 @@ class SearchQuery:
         '(#Twitter OR #Xcorp) @elonmusk -@SpaceX'
         """
 
-        query = building(_SearchQueryBuilder)
-
-        if isinstance(query, tuple):
-            return SearchQuery(*query)
-        else:
-            return SearchQuery(query)
+        return SearchQuery(building(_SearchQueryBuilder))
 
 
 class _SearchQueryBuilder:

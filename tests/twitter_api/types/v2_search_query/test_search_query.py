@@ -27,7 +27,7 @@ class TestSearchQueryBuilder:
     def test_search_query_builder(self):
         query = SearchQuery.build(
             lambda q: (
-                q.keyword("twitter") & q.mention("elonmusk") & ~q.mention("SpaceX"),
+                q.keyword("twitter") & q.mention("elonmusk") & ~q.mention("SpaceX")
             )
         )
 
