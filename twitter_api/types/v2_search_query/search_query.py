@@ -9,6 +9,9 @@ from twitter_api.types.v2_list.list_id import ListId
 from twitter_api.types.v2_place.place_country_code import PlaceCountryCode
 from twitter_api.types.v2_place.place_id import PlaceId
 from twitter_api.types.v2_place.place_name import PlaceName
+from twitter_api.types.v2_search_query.operators.bounding_box_operator import (
+    BoundingBoxOperator,
+)
 from twitter_api.types.v2_search_query.operators.place_country_operator import (
     PlaceCountryOperator,
 )
@@ -230,4 +233,20 @@ class _SearchQueryBuilder(metaclass=ABCMeta):
             latitude=latitude,
             radius_km=radius_km,
             radius_mi=radius_mi,
+        )
+
+    @classmethod
+    def bounding_box(
+        cls,
+        *,
+        west_longitude: float,
+        south_latitude: float,
+        east_longitude: float,
+        north_latitude: float,
+    ) -> BoundingBoxOperator:
+        return BoundingBoxOperator(
+            west_longitude=west_longitude,
+            south_latitude=south_latitude,
+            east_longitude=east_longitude,
+            north_latitude=north_latitude,
         )
