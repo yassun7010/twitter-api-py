@@ -39,12 +39,15 @@ class PointRadiusOperator(
     ):
         self.longitude = longitude
         self.latitude = latitude
+
         if radius_km is not None:
             self.radius = radius_km
             self.radius_unit = "km"
+
         elif radius_mi is not None:
             self.radius = radius_mi
             self.radius_unit = "mi"
+
         else:
             self.radius = 1
             self.radius_unit = "km"
