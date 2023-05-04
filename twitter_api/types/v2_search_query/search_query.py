@@ -12,6 +12,9 @@ from twitter_api.types.v2_place.place_name import PlaceName
 from twitter_api.types.v2_search_query.operators.bounding_box_operator import (
     BoundingBoxOperator,
 )
+from twitter_api.types.v2_search_query.operators.is_retweet_operator import (
+    IsRetweetOperator,
+)
 from twitter_api.types.v2_search_query.operators.place_country_operator import (
     PlaceCountryOperator,
 )
@@ -250,3 +253,9 @@ class _SearchQueryBuilder(metaclass=ABCMeta):
             east_longitude=east_longitude,
             north_latitude=north_latitude,
         )
+
+    @classmethod
+    def is_retweet(
+        cls,
+    ) -> IsRetweetOperator:
+        return IsRetweetOperator()
