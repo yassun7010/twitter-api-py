@@ -107,6 +107,14 @@ class SearchQuery:
         """
         検索クエリを組み立てる。
 
+        静的解析でエラーを出さずにクエリを組み立てるには、下記のルールに従う。
+
+        - クエリの先頭、またはグループの先頭は Standalone Operator を置く必要がある。
+        - AND 演算（ & 結合）は、左側はクエリとして成立するものである必要がある。
+        - 単体では成立しないもの（ q.is_retweet() ）は成立するクエリの右側に & 結合する。
+        - OR 演算（ | 結合） はその左右がクエリとして成立するものである必要がある。
+        - NOT 演算（ ~ ）はクエリの先頭、またはグループの先頭に設置できない。
+
         >>> from .search_query import SearchQuery
         >>> query = SearchQuery.build(
         ...     lambda q: (
@@ -291,57 +299,118 @@ class _SearchQueryBuilder(metaclass=ABCMeta):
 
     @classmethod
     def is_retweet(cls) -> IsRetweetOperator:
+        """
+        リツイートであるかどうかの絞り込み。
+
+        単体では成立しないため、成立するクエリの右側に AND 結合する必要がある。
+        """
         return IsRetweetOperator()
 
     @classmethod
     def is_reply(cls) -> IsReplyOperator:
+        """
+        返信ツイートであるかどうかの絞り込み。
+
+        単体では成立しないため、成立するクエリの右側に AND 結合する必要がある。
+        """
         return IsReplyOperator()
 
     @classmethod
     def is_verified(cls) -> IsVerifiedOperator:
+        """
+        認証ユーザのツイートであるかどうかの絞り込み。
+
+        単体では成立しないため、成立するクエリの右側に AND 結合する必要がある。
+        """
         return IsVerifiedOperator()
 
     @classmethod
     def is_nullcast(cls) -> IsNullcastOperator:
         """
-        Nullcast であるかどうか。
+        Nullcast であるかどうかの絞り込み。
 
         否定形としてしか使えないことに注意。
+        単体では成立しないため、成立するクエリの右側に AND 結合する必要がある。
         """
         return IsNullcastOperator()
 
     @classmethod
     def has_hashtags(cls) -> HasHashtagsOperator:
+        """
+        ハッシュタグのついたツイートであるかどうかの絞り込み。
+
+        単体では成立しないため、成立するクエリの右側に AND 結合する必要がある。
+        """
         return HasHashtagsOperator()
 
     @classmethod
     def has_cashtags(cls) -> HasCashtagsOperator:
+        """
+        キャッシュタグのついたツイートであるかどうかの絞り込み。
+
+        単体では成立しないため、成立するクエリの右側に AND 結合する必要がある。
+        """
         return HasCashtagsOperator()
 
     @classmethod
     def has_links(cls) -> HasLinksOperator:
+        """
+        リンクのついたツイートであるかどうかの絞り込み。
+
+        単体では成立しないため、成立するクエリの右側に AND 結合する必要がある。
+        """
         return HasLinksOperator()
 
     @classmethod
     def has_mentions(cls) -> HasMentionsOperator:
+        """
+        メンションのついたツイートであるかどうかの絞り込み。
+
+        単体では成立しないため、成立するクエリの右側に AND 結合する必要がある。
+        """
         return HasMentionsOperator()
 
     @classmethod
     def has_media(cls) -> HasMediaOperator:
+        """
+        メディアのついたツイートであるかどうかの絞り込み。
+
+        単体では成立しないため、成立するクエリの右側に AND 結合する必要がある。
+        """
         return HasMediaOperator()
 
     @classmethod
     def has_images(cls) -> HasImagesOperator:
+        """
+        画像のついたツイートであるかどうかの絞り込み。
+
+        単体では成立しないため、成立するクエリの右側に AND 結合する必要がある。
+        """
         return HasImagesOperator()
 
     @classmethod
     def has_video_link(cls) -> HasVideoLinkOperator:
+        """
+        ビデオのついたツイートであるかどうかの絞り込み。
+
+        単体では成立しないため、成立するクエリの右側に AND 結合する必要がある。
+        """
         return HasVideoLinkOperator()
 
     @classmethod
     def has_geo(cls) -> HasGeoOperator:
+        """
+        位置情報のついたツイートであるかどうかの絞り込み。
+
+        単体では成立しないため、成立するクエリの右側に AND 結合する必要がある。
+        """
         return HasGeoOperator()
 
     @classmethod
     def lang(cls, lang: Language) -> LangOperator:
+        """
+        言語による絞り込み。
+
+        単体では成立しないため、成立するクエリの右側に AND 結合する必要がある。
+        """
         return LangOperator(lang)
