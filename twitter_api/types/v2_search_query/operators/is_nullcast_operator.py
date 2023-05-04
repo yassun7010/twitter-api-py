@@ -15,6 +15,6 @@ class IsNullcastOperator:
         return f"is:nullcast"
 
 
-class IsNotNullcastOperator(Operator[Operator]):
+class IsNotNullcastOperator(Operator):
     def __str__(self) -> str:
         return f"-is:nullcast"

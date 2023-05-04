@@ -9,4 +9,7 @@ class TestHasCashtagsOperator:
         assert str(HasCashtagsOperator()) == "has:cashtags"
 
     def test_query_build(self):
-        assert str(SearchQuery.build(lambda q: q.has_cashtags())) == "has:cashtags"
+        assert (
+            str(SearchQuery.build(lambda q: q.mention("twitterdev") & q.has_cashtags()))
+            == "@twitterdev has:cashtags"
+        )

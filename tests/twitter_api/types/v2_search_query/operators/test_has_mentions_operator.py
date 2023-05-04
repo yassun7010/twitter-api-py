@@ -9,4 +9,7 @@ class TestHasMentionsOperator:
         assert str(HasMentionsOperator()) == "has:mentions"
 
     def test_query_build(self):
-        assert str(SearchQuery.build(lambda q: q.has_mentions())) == "has:mentions"
+        assert (
+            str(SearchQuery.build(lambda q: q.mention("twitterdev") & q.has_mentions()))
+            == "@twitterdev has:mentions"
+        )

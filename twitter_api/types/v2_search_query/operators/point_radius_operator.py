@@ -1,9 +1,12 @@
 from typing import Literal, Optional, overload
 
-from .operator import InvertableOperator, Operator
+from .operator import InvertableOperator, Operator, StandaloneOperator
 
 
-class PointRadiusOperator(InvertableOperator[Operator]):
+class PointRadiusOperator(
+    InvertableOperator[Operator],
+    StandaloneOperator[Operator],
+):
     @overload
     def __init__(
         self,

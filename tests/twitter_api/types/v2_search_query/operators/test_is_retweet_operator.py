@@ -9,4 +9,7 @@ class TestIsRetweetOperator:
         assert str(IsRetweetOperator()) == "is:retweet"
 
     def test_query_build(self):
-        assert str(SearchQuery.build(lambda q: q.is_retweet())) == "is:retweet"
+        assert (
+            str(SearchQuery.build(lambda q: q.mention("twitterdev") & q.is_retweet()))
+            == "@twitterdev is:retweet"
+        )

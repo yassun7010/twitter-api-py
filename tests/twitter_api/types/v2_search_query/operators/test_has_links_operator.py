@@ -9,4 +9,7 @@ class TestHasLinksOperator:
         assert str(HasLinksOperator()) == "has:links"
 
     def test_query_build(self):
-        assert str(SearchQuery.build(lambda q: q.has_links())) == "has:links"
+        assert (
+            str(SearchQuery.build(lambda q: q.mention("twitterdev") & q.has_links()))
+            == "@twitterdev has:links"
+        )

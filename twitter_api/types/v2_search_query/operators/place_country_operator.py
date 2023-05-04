@@ -1,9 +1,12 @@
 from twitter_api.types.v2_place.place_country_code import PlaceCountryCode
 
-from .operator import InvertableOperator, Operator
+from .operator import InvertableOperator, Operator, StandaloneOperator
 
 
-class PlaceCountryOperator(InvertableOperator[Operator]):
+class PlaceCountryOperator(
+    InvertableOperator[Operator],
+    StandaloneOperator[Operator],
+):
     def __init__(self, code: PlaceCountryCode):
         self._value = code
 

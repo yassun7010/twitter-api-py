@@ -1,7 +1,10 @@
-from .operator import InvertableOperator, Operator
+from .operator import InvertableOperator, Operator, StandaloneOperator
 
 
-class UrlOperator(InvertableOperator[Operator]):
+class UrlOperator(
+    InvertableOperator[Operator],
+    StandaloneOperator[Operator],
+):
     def __init__(self, url: str):
         self._value = url
 

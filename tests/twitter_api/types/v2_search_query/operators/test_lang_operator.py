@@ -7,4 +7,7 @@ class TestLangOperator:
         assert str(LangOperator("ja")) == "lang:ja"
 
     def test_query_build(self):
-        assert str(SearchQuery.build(lambda q: q.lang("ja"))) == "lang:ja"
+        assert (
+            str(SearchQuery.build(lambda q: q.mention("twitterdev") & q.lang("ja")))
+            == "@twitterdev lang:ja"
+        )

@@ -9,4 +9,11 @@ class TestHasVideoLinkOperator:
         assert str(HasVideoLinkOperator()) == "has:video_link"
 
     def test_query_build(self):
-        assert str(SearchQuery.build(lambda q: q.has_video_link())) == "has:video_link"
+        assert (
+            str(
+                SearchQuery.build(
+                    lambda q: q.mention("twitterdev") & q.has_video_link()
+                )
+            )
+            == "@twitterdev has:video_link"
+        )

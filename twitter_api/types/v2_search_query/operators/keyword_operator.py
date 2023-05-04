@@ -1,7 +1,10 @@
-from .operator import InvertableOperator, Operator
+from .operator import InvertableOperator, Operator, StandaloneOperator
 
 
-class KeywordOperator(InvertableOperator[Operator]):
+class KeywordOperator(
+    InvertableOperator[Operator],
+    StandaloneOperator[Operator],
+):
     def __init__(self, keyword: str) -> None:
         self._keyword = keyword
 

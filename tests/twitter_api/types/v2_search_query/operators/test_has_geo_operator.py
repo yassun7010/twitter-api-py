@@ -7,4 +7,7 @@ class TestHasGeoOperator:
         assert str(HasGeoOperator()) == "has:geo"
 
     def test_query_build(self):
-        assert str(SearchQuery.build(lambda q: q.has_geo())) == "has:geo"
+        assert (
+            str(SearchQuery.build(lambda q: q.mention("twitterdev") & q.has_geo()))
+            == "@twitterdev has:geo"
+        )

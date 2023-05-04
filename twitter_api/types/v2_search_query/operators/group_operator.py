@@ -1,7 +1,17 @@
-from .operator import InvertableOperator, Operator
+from .operator import CorrectOperator, Operator
 
 
-class GroupOperator(InvertableOperator[Operator]):
+class GroupOperator(
+    # NOTE: 公式ドキュメントでは否定をグループに対して行わないように書かれており、
+    #       "skiing -(snow OR day OR noschool)" よりも
+    #       "skiing -snow -day -noschool" の方が推奨されている。
+    #       そのため、本ツールではグループへの否定演算子は対応しない。
+    #
+    # refer: https://developer.twitter.com/en/docs/twitter-api/tweets/search/integrate/build-a-query
+    #
+    # InvertableOperator[Operator],
+    CorrectOperator[Operator],
+):
     def __init__(self, *operators: Operator):
         if len(operators) == 1 and isinstance(operators[0], GroupOperator):
             # GroupOperator の重ね掛けはまとめる。

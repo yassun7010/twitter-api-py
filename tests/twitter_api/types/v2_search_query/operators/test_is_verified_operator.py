@@ -9,4 +9,7 @@ class TestIsVerifiedOperator:
         assert str(IsVerifiedOperator()) == "is:verified"
 
     def test_query_build(self):
-        assert str(SearchQuery.build(lambda q: q.is_verified())) == "is:verified"
+        assert (
+            str(SearchQuery.build(lambda q: q.mention("twitterdev") & q.is_verified()))
+            == "@twitterdev is:verified"
+        )

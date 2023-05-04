@@ -9,4 +9,7 @@ class TestHasImagesOperator:
         assert str(HasImagesOperator()) == "has:images"
 
     def test_query_build(self):
-        assert str(SearchQuery.build(lambda q: q.has_images())) == "has:images"
+        assert (
+            str(SearchQuery.build(lambda q: q.mention("twitterdev") & q.has_images()))
+            == "@twitterdev has:images"
+        )

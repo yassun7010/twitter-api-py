@@ -1,7 +1,10 @@
-from .operator import InvertableOperator, Operator
+from .operator import InvertableOperator, Operator, StandaloneOperator
 
 
-class BoundingBoxOperator(InvertableOperator[Operator]):
+class BoundingBoxOperator(
+    InvertableOperator[Operator],
+    StandaloneOperator[Operator],
+):
     def __init__(
         self,
         west_longitude: float,

@@ -1,9 +1,9 @@
 from .group_operator import grouping
-from .operator import Operator
+from .operator import CorrectOperator, Operator
 
 
-class AndOperator(Operator[Operator]):
-    def __init__(self, left: Operator, right: Operator) -> None:
+class AndOperator(CorrectOperator[Operator]):
+    def __init__(self, left: CorrectOperator, right: Operator) -> None:
         self._left = left
         self._right = right
 

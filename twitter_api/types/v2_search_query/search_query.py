@@ -73,7 +73,7 @@ from .operators.in_reply_to_tweet_id_operator import InReplyToTweetIdOperator
 from .operators.keyword_operator import KeywordOperator
 from .operators.list_operator import ListOperator
 from .operators.mention_operator import MentionOperator
-from .operators.operator import Operator
+from .operators.operator import CorrectOperator, Operator
 from .operators.quotes_of_tweet_id_operator import QuotesOfTweetIdOperator
 from .operators.retweet_of_operator import RetweetOfOperator
 from .operators.retweets_of_tweet_id_operator import RetweetsOfTweetIdOperator
@@ -101,7 +101,7 @@ class SearchQuery:
         cls,
         building: Callable[
             [Type["_SearchQueryBuilder"]],
-            Operator,
+            CorrectOperator,
         ],
     ):
         """

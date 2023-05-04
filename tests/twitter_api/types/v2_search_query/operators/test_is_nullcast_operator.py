@@ -16,4 +16,7 @@ class TestIsNullcastOperator:
         assert str(IsNotNullcastOperator()) == "-is:nullcast"
 
     def test_query_build(self):
-        assert str(SearchQuery.build(lambda q: ~q.is_nullcast())) == "-is:nullcast"
+        assert (
+            str(SearchQuery.build(lambda q: q.mention("twitterdev") & ~q.is_nullcast()))
+            == "@twitterdev -is:nullcast"
+        )
