@@ -12,6 +12,9 @@ from twitter_api.types.v2_place.place_name import PlaceName
 from twitter_api.types.v2_search_query.operators.bounding_box_operator import (
     BoundingBoxOperator,
 )
+from twitter_api.types.v2_search_query.operators.is_nullcast_operator import (
+    IsNullcastOperator,
+)
 from twitter_api.types.v2_search_query.operators.is_reply_operator import (
     IsReplyOperator,
 )
@@ -271,3 +274,7 @@ class _SearchQueryBuilder(metaclass=ABCMeta):
     @classmethod
     def is_verified(cls) -> IsVerifiedOperator:
         return IsVerifiedOperator()
+
+    @classmethod
+    def is_nullcast(cls) -> IsNullcastOperator:
+        return IsNullcastOperator()
