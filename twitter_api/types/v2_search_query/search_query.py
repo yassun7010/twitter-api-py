@@ -124,10 +124,11 @@ class SearchQuery:
         ...         )
         ...         & q.mention("@elonmusk")
         ...         & ~q.mention("SpaceX")
+        ...         & q.is_retweet()
         ...     )
         ... )
         >>> str(query)
-        '(#Twitter OR #Xcorp) @elonmusk -@SpaceX'
+        '(#Twitter OR #Xcorp) @elonmusk -@SpaceX is:retweet'
         """
 
         return SearchQuery(building(_SearchQueryBuilder))

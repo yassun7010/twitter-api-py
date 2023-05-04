@@ -25,6 +25,7 @@ try:
                             )
                             & q.mention("@elonmusk")
                             & ~q.mention("SpaceX")
+                            & q.is_retweet()
                         )
                     ),
                     "start_time": datetime.now() - timedelta(hours=2),
