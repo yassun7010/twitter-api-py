@@ -9,7 +9,10 @@ class TestKeywordOperator:
     def test_keyword_operator_with_phrase(self):
         assert str(KeywordOperator("test twitter")) == '"test twitter"'
 
-    def test_keyword_operator_with_phrase_double_quotes(self):
+    def test_keyword_operator_with_emoji(self):
+        assert str(KeywordOperator("😃")) == "😃"
+
+    def test_keyword_operator_with_exact_phrase_match(self):
         assert str(KeywordOperator('"test" twitter')) == r'"\"test\" twitter"'
 
     def test_query_build(self):
