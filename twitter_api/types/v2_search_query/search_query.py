@@ -81,6 +81,7 @@ class SearchQuery:
         """
 
         query = building(_SearchQueryBuilder)
+
         if isinstance(query, tuple):
             return SearchQuery(*query)
         else:
