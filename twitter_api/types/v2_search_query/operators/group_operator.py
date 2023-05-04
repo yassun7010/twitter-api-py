@@ -1,3 +1,5 @@
+from itertools import chain
+
 from .operator import CorrectOperator, Operator
 
 
@@ -12,12 +14,12 @@ class GroupOperator(
     # InvertableOperator[Operator],
     CorrectOperator[Operator],
 ):
-    def __init__(self, *operators: Operator):
-        if len(operators) == 1 and isinstance(operators[0], GroupOperator):
+    def __init__(self, operator: CorrectOperator, *operators: Operator):
+        if len(operators) == 0 and isinstance(operator, GroupOperator):
             # GroupOperator の重ね掛けはまとめる。
-            self._operators = operators[0]._operators
+            self._operators = operator._operators
         else:
-            self._operators = operators
+            self._operators = tuple(chain((operator,), operators))
 
     def __len__(self) -> int:
         return len(self._operators)

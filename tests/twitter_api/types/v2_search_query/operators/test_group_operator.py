@@ -17,10 +17,10 @@ class TestGroupOperator:
             == 2
         )
 
-    def test_group_operator_not_operator(self):
-        query = SearchQuery(GroupOperator(~MentionOperator("SpaceX")))
+    def test_group_operator_single_operator(self):
+        query = SearchQuery(GroupOperator(MentionOperator("SpaceX")))
 
-        assert str(query) == "(-@SpaceX)"
+        assert str(query) == "@SpaceX"
 
     def test_group_operator_and_operator(self):
         query = SearchQuery(

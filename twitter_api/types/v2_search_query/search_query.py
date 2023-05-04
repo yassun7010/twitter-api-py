@@ -155,8 +155,8 @@ class _SearchQueryBuilder(metaclass=ABCMeta):
         return CashtagOperator(cashtag)
 
     @classmethod
-    def group(cls, *operators: Operator) -> GroupOperator:
-        return GroupOperator(*operators)
+    def group(cls, operator: CorrectOperator, *operators: Operator) -> GroupOperator:
+        return GroupOperator(operator, *operators)
 
     @classmethod
     def from_user(cls, user: Union[UserId, Username]) -> FromUserOperator:
