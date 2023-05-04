@@ -182,7 +182,7 @@ class _SearchQueryBuilder(metaclass=ABCMeta):
     @classmethod
     def group(cls, operator: CorrectOperator, *operators: Operator) -> GroupOperator:
         """
-        括弧で囲みたい対象を指定する。
+        括弧で囲みたい対象を指定する。括弧で囲まれた対象は優先的に計算される。
 
         要素数が 1 つの場合は括弧をつけない。
         """
