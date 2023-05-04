@@ -12,6 +12,9 @@ from twitter_api.types.v2_place.place_name import PlaceName
 from twitter_api.types.v2_search_query.operators.bounding_box_operator import (
     BoundingBoxOperator,
 )
+from twitter_api.types.v2_search_query.operators.has_cashtags_operator import (
+    HasCashtagsOperator,
+)
 from twitter_api.types.v2_search_query.operators.has_hashtags_operator import (
     HasHashtagsOperator,
 )
@@ -285,3 +288,7 @@ class _SearchQueryBuilder(metaclass=ABCMeta):
     @classmethod
     def has_hashtags(cls) -> HasHashtagsOperator:
         return HasHashtagsOperator()
+
+    @classmethod
+    def has_cashtags(cls) -> HasCashtagsOperator:
+        return HasCashtagsOperator()
