@@ -20,7 +20,8 @@ try:
                 {
                     "query": SearchQuery.build(
                         lambda q: (
-                            q.group(
+                            q.keyword("day")
+                            & q.group(
                                 q.hashtag("#Twitter") | q.hashtag("Xcorp"),
                             )
                             & q.mention("@elonmusk")

@@ -122,7 +122,8 @@ class SearchQuery:
         >>> from .search_query import SearchQuery
         >>> query = SearchQuery.build(
         ...     lambda q: (
-        ...         q.group(
+        ...         q.keyword("day")
+        ...         & q.group(
         ...             q.hashtag("#Twitter") | q.hashtag("Xcorp"),
         ...         )
         ...         & q.mention("@elonmusk")
@@ -131,7 +132,7 @@ class SearchQuery:
         ...     )
         ... )
         >>> str(query)
-        '(#Twitter OR #Xcorp) @elonmusk -@SpaceX is:retweet'
+        'day (#Twitter OR #Xcorp) @elonmusk -@SpaceX is:retweet'
         """
 
         return SearchQuery(building(_SearchQueryBuilder))
