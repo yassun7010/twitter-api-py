@@ -8,6 +8,10 @@ class Operator:
 
 
 class CorrectOperator(Operator, Generic[TOperator]):
+    """
+    検索クエリとして成り立つことのできる Operator。
+    """
+
     def __and__(self, other: TOperator):
         from ._and_operator import AndOperator
 
@@ -20,6 +24,10 @@ class CorrectOperator(Operator, Generic[TOperator]):
 
 
 class InvertableOperator(Operator, Generic[TOperator]):
+    """
+    否定（ ~ 演算子を追加）することのできる Operator。
+    """
+
     def __invert__(self):
         from ._not_operator import NotOperator
 
@@ -27,4 +35,8 @@ class InvertableOperator(Operator, Generic[TOperator]):
 
 
 class StandaloneOperator(CorrectOperator[TOperator]):
+    """
+    それ自身がクエリとして成立する Operator。
+    """
+
     pass
