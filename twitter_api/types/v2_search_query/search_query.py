@@ -5,6 +5,7 @@ from twitter_api.types.v2_dm_conversation.dm_conversation_id import DmConversati
 from twitter_api.types.v2_domain import DomainId
 from twitter_api.types.v2_entity.entity_id import EntityId
 from twitter_api.types.v2_entity.entity_name import EntityName
+from twitter_api.types.v2_language import Language
 from twitter_api.types.v2_list.list_id import ListId
 from twitter_api.types.v2_place.place_country_code import PlaceCountryCode
 from twitter_api.types.v2_place.place_id import PlaceId
@@ -46,6 +47,7 @@ from twitter_api.types.v2_search_query.operators.is_retweet_operator import (
 from twitter_api.types.v2_search_query.operators.is_verified_operator import (
     IsVerifiedOperator,
 )
+from twitter_api.types.v2_search_query.operators.lang_operator import LangOperator
 from twitter_api.types.v2_search_query.operators.place_country_operator import (
     PlaceCountryOperator,
 )
@@ -332,3 +334,7 @@ class _SearchQueryBuilder(metaclass=ABCMeta):
     @classmethod
     def has_geo(cls) -> HasGeoOperator:
         return HasGeoOperator()
+
+    @classmethod
+    def lang(cls, lang: Language) -> LangOperator:
+        return LangOperator(lang)
