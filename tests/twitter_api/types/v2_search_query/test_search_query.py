@@ -54,3 +54,23 @@ class TestSearchQueryBuilder:
         )
 
         assert str(query) == "(#Twitter OR #Xcorp) @elonmusk -@SpaceX"
+
+    def test_search_query_builder_complex(self):
+        query = SearchQuery.build(
+            lambda q: (
+                q.group(
+                    q.group(
+                        q.hashtag("#Twitter") | q.hashtag("Xcorp"),
+                    )
+                    & q.mention("@elonmusk")
+                    & ~q.mention("SpaceX")
+                )
+                & q.is_retweet()
+                & ~q.is_nullcast()
+            )
+        )
+
+        assert (
+            str(query)
+            == "((#Twitter OR #Xcorp) @elonmusk -@SpaceX) is:retweet -is:nullcast"
+        )
