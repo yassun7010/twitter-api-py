@@ -15,6 +15,7 @@ from twitter_api.types.v2_search_query.operators.bounding_box_operator import (
 from twitter_api.types.v2_search_query.operators.has_cashtags_operator import (
     HasCashtagsOperator,
 )
+from twitter_api.types.v2_search_query.operators.has_geo_operator import HasGeoOperator
 from twitter_api.types.v2_search_query.operators.has_hashtags_operator import (
     HasHashtagsOperator,
 )
@@ -327,3 +328,7 @@ class _SearchQueryBuilder(metaclass=ABCMeta):
     @classmethod
     def has_video_link(cls) -> HasVideoLinkOperator:
         return HasVideoLinkOperator()
+
+    @classmethod
+    def has_geo(cls) -> HasGeoOperator:
+        return HasGeoOperator()
