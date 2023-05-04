@@ -6,4 +6,4 @@ class HasImagesOperator(
     ConjunctionRequiredOperator,
 ):
     def __str__(self) -> str:
-        return f"has:images"
+        return "has:images"

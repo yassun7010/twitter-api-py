@@ -6,4 +6,4 @@ class IsRetweetOperator(
     ConjunctionRequiredOperator,
 ):
     def __str__(self) -> str:
-        return f"is:retweet"
+        return "is:retweet"

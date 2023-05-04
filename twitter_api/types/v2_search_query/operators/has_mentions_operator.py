@@ -6,4 +6,4 @@ class HasMentionsOperator(
     ConjunctionRequiredOperator,
 ):
     def __str__(self) -> str:
-        return f"has:mentions"
+        return "has:mentions"

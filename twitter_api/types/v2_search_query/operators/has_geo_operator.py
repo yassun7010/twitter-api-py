@@ -6,4 +6,4 @@ class HasGeoOperator(
     ConjunctionRequiredOperator,
 ):
     def __str__(self) -> str:
-        return f"has:geo"
+        return "has:geo"

@@ -6,4 +6,4 @@ class HasVideoLinkOperator(
     ConjunctionRequiredOperator,
 ):
     def __str__(self) -> str:
-        return f"has:video_link"
+        return "has:video_link"

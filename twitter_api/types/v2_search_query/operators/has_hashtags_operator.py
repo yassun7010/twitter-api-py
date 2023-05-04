@@ -6,4 +6,4 @@ class HasHashtagsOperator(
     ConjunctionRequiredOperator,
 ):
     def __str__(self) -> str:
-        return f"has:hashtags"
+        return "has:hashtags"

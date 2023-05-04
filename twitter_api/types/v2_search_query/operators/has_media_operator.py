@@ -6,4 +6,4 @@ class HasMediaOperator(
     ConjunctionRequiredOperator,
 ):
     def __str__(self) -> str:
-        return f"has:media"
+        return "has:media"

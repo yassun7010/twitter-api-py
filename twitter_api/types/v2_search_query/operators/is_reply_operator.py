@@ -6,4 +6,4 @@ class IsReplyOperator(
     ConjunctionRequiredOperator,
 ):
     def __str__(self) -> str:
-        return f"is:reply"
+        return "is:reply"

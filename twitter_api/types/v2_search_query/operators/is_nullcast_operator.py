@@ -12,9 +12,9 @@ class IsNullcastOperator:
         return IsNotNullcastOperator()
 
     def __str__(self) -> str:
-        return f"is:nullcast"
+        return "is:nullcast"
 
 
 class IsNotNullcastOperator(ConjunctionRequiredOperator):
     def __str__(self) -> str:
-        return f"-is:nullcast"
+        return "-is:nullcast"

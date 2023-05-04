@@ -6,4 +6,4 @@ class HasCashtagsOperator(
     ConjunctionRequiredOperator,
 ):
     def __str__(self) -> str:
-        return f"has:cashtags"
+        return "has:cashtags"

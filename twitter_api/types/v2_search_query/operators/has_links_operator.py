@@ -6,4 +6,4 @@ class HasLinksOperator(
     ConjunctionRequiredOperator,
 ):
     def __str__(self) -> str:
-        return f"has:links"
+        return "has:links"
