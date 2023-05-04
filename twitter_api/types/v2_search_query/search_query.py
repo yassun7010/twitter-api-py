@@ -114,7 +114,7 @@ class SearchQuery:
         - AND 演算（ & 結合）は、左側はクエリとして成立するものである必要がある。
         - OR 演算（ | 結合） はその左右がクエリとして成立するものである必要がある。
         - NOT 演算（ ~ ）はクエリの先頭、またはグループの先頭に設置できない。
-        - 二重否定はできない。
+        - グループへの否定、二重否定はできない。
 
         >>> from .search_query import SearchQuery
         >>> query = SearchQuery.build(
