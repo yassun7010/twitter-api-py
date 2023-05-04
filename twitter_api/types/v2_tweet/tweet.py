@@ -3,6 +3,8 @@ from datetime import datetime
 from typing import Optional
 
 from twitter_api.types.extra_permissive_model import ExtraPermissiveModel
+from twitter_api.types.v2_tweet.tweet_entities_cashtag import TweetEntitiesCashtag
+from twitter_api.types.v2_tweet.tweet_entities_hashtag import TweetEntitiesHashtag
 from twitter_api.types.v2_tweet.tweet_entities_mention import TweetEntitiesMention
 from twitter_api.types.v2_tweet.tweet_entities_url import TweetEntitiesUrl
 
@@ -199,3 +201,47 @@ class Tweet(ExtraPermissiveModel):
                 return True
 
         return False
+
+    @property
+    def entities_hashtags(self) -> Optional[list[TweetEntitiesHashtag]]:
+        """
+        ハッシュタグ情報。
+        """
+        if self.entities is None or self.entities.hashtags is None:
+            return None
+
+        return self.entities.hashtags
+
+    @property
+    def has_hashtags(self) -> Optional[bool]:
+        """
+        ハッシュタグがついているかどうか。
+
+        None の場合、判断できる情報がない。
+        """
+        if self.entities is None or self.entities.hashtags is None:
+            return None
+
+        return len(self.entities.hashtags) != 0
+
+    @property
+    def entities_cashtags(self) -> Optional[list[TweetEntitiesCashtag]]:
+        """
+        キャッシュタグ情報。
+        """
+        if self.entities is None or self.entities.cashtags is None:
+            return None
+
+        return self.entities.cashtags
+
+    @property
+    def has_cashtags(self) -> Optional[bool]:
+        """
+        キャッシュタグがついているかどうか。
+
+        None の場合、判断できる情報がない。
+        """
+        if self.entities is None or self.entities.cashtags is None:
+            return None
+
+        return len(self.entities.cashtags) != 0
