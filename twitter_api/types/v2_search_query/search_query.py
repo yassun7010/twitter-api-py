@@ -86,7 +86,7 @@ class SearchQuery:
 class _SearchQueryBuilder(metaclass=ABCMeta):
     @abstractmethod
     def __init__(self) -> None:
-        pass
+        ...
 
     @classmethod
     def keyword(cls, keyword: str) -> KeywordOperator:
