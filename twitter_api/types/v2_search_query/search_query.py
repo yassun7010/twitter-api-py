@@ -99,6 +99,9 @@ class SearchQuery:
     def __str__(self) -> str:
         return " ".join(map(grouping, self._query))
 
+    def __repr__(self):
+        return f"{self.__class__.__name__}({', '.join(map(repr, self._query))})"
+
     @classmethod
     def build(
         cls,

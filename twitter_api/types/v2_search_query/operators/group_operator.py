@@ -36,6 +36,9 @@ class GroupOperator(
 
         return " ".join(map(grouping, self._operators))
 
+    def __repr__(self):
+        return f"{self.__class__.__name__}({', '.join(map(repr, self._operators))})"
+
 
 def grouping(operator: Operator):
     if isinstance(operator, GroupOperator) and len(operator) > 1:

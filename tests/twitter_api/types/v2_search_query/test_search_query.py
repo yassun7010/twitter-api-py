@@ -75,6 +75,21 @@ class TestSearchQueryBuilder:
             == "((#Twitter OR #Xcorp) @elonmusk -@SpaceX) is:retweet -is:nullcast"
         )
 
+    def test_query_builder_repr(self):
+        assert (
+            repr(
+                SearchQuery.build(
+                    lambda q: (
+                        q.group(
+                            q.keyword("Twitter API") | q.hashtag("v2"),
+                        )
+                        & ~q.keyword("recent search")
+                    )
+                )
+            )
+            == "SearchQuery(AndOperator(GroupOperator(OrOperator(KeywordOperator('\"Twitter API\"'), HashtagOperator('#v2'))), NotOperator(KeywordOperator('\"recent search\"'))))"
+        )
+
     def test_query_builder_emoji_keyword(self):
         assert (
             str(
