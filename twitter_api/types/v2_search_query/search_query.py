@@ -122,6 +122,8 @@ class SearchQuery:
         - NOT 演算（ ~ ）はクエリの先頭に設置できない。
         - 二重否定、グループへの否定はできない。
 
+        簡単にまとめると、常に左側にクエリとして成立するものを配置し、右側に付加条件を足していけば良い。
+
         >>> from .search_query import SearchQuery
         >>> query = SearchQuery.build(
         ...     lambda q: (
