@@ -141,7 +141,7 @@ class TestSearchQueryBuilder:
         assert isinstance(
             _SearchQueryBuilder.is_retweet()
             & _SearchQueryBuilder.mention("twitterdev"),
-            WeakOperator,
+            CorrectOperator,
         )
 
     def test_query_builder_weak_and_weak(self):

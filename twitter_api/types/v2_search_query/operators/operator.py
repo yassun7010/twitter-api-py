@@ -13,10 +13,21 @@ class WeakOperator(Operator):
     まだ検索クエリとして成り立たっていない Operator。
     """
 
-    def __and__(self, other: Operator):
-        from ._and_operator import WeakAndOperator
+    @overload
+    def __and__(self, other: "CorrectOperator") -> "CorrectOperator":
+        ...
 
-        return WeakAndOperator(self, other)
+    @overload
+    def __and__(self, other: Operator) -> "WeakOperator":
+        ...
+
+    def __and__(self, other: Union["CorrectOperator", Operator]):
+        from ._and_operator import CorrectAndOperator, WeakAndOperator
+
+        if isinstance(other, CorrectOperator):
+            return cast(CorrectOperator, CorrectAndOperator(self, other))
+        else:
+            return cast(WeakOperator, WeakAndOperator(self, other))
 
     def __or__(self, other: Operator):
         from ._or_operator import WeakOrOperator
