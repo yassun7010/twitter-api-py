@@ -113,7 +113,7 @@ class SearchQuery:
     @classmethod
     def build(
         cls,
-        building: Callable[["SearchQueryBuilder"], CorrectOperator[Operator]],
+        building: Callable[["SearchQueryBuilder"], CorrectOperator],
     ):
         """
         検索クエリを組み立てる。
