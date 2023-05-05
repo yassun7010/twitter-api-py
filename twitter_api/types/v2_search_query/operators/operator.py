@@ -1,4 +1,4 @@
-from typing import Generic, TypeVar
+from typing import Generic, TypeVar, Union, cast, overload
 
 TOperator = TypeVar("TOperator", bound="Operator")
 
@@ -6,6 +6,17 @@ TOperator = TypeVar("TOperator", bound="Operator")
 class Operator:
     def __repr__(self) -> str:
         return f"{self.__class__.__name__}({repr(str(self))})"
+
+
+class WeakOperator(Operator):
+    """
+    まだ検索クエリとして成り立たっていない Operator。
+    """
+
+    def __or__(self, other: Operator):
+        from ._or_operator import WeakOrOperator
+
+        return WeakOrOperator(self, other)
 
 
 class CorrectOperator(Operator, Generic[TOperator]):
@@ -18,21 +29,21 @@ class CorrectOperator(Operator, Generic[TOperator]):
 
         return AndOperator(self, other)
 
-    def __or__(self, other: "CorrectOperator"):
-        from ._or_operator import CorrectOrOperator
+    @overload
+    def __or__(self, other: "CorrectOperator") -> "CorrectOperator":
+        ...
 
-        return CorrectOrOperator(self, other)
+    @overload
+    def __or__(self, other: Operator) -> WeakOperator:
+        ...
 
+    def __or__(self, other: Union["CorrectOperator", Operator]):
+        from ._or_operator import CorrectOrOperator, WeakOrOperator
 
-class WeakOperator(Operator):
-    """
-    まだ検索クエリとして成り立たっていない Operator。
-    """
-
-    def __or__(self, other: Operator):
-        from ._or_operator import WeakOrOperator
-
-        return WeakOrOperator(self, other)
+        if isinstance(other, CorrectOperator):
+            return cast(CorrectOperator, CorrectOrOperator(self, other))
+        else:
+            return cast(WeakOperator, WeakOrOperator(self, other))
 
 
 class InvertibleOperator(Operator, Generic[TOperator]):
