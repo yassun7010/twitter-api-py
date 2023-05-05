@@ -24,7 +24,7 @@ class CorrectOperator(Operator, Generic[TOperator]):
         return OrOperator(self, other)
 
 
-class InvertableOperator(Operator, Generic[TOperator]):
+class InvertibleOperator(Operator, Generic[TOperator]):
     """
     否定（ ~ 演算子を追加）することのできる Operator。
     """

@@ -1,8 +1,8 @@
-from .operator import ConjunctionRequiredOperator, InvertableOperator, Operator
+from .operator import ConjunctionRequiredOperator, InvertibleOperator, Operator
 
 
 class HasImagesOperator(
-    InvertableOperator[Operator],
+    InvertibleOperator[Operator],
     ConjunctionRequiredOperator,
 ):
     def __str__(self) -> str:

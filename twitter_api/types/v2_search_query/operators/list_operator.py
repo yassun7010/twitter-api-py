@@ -1,10 +1,10 @@
 from twitter_api.types.v2_list.list_id import ListId
 
-from .operator import InvertableOperator, Operator, StandaloneOperator
+from .operator import InvertibleOperator, Operator, StandaloneOperator
 
 
 class ListOperator(
-    InvertableOperator[Operator],
+    InvertibleOperator[Operator],
     StandaloneOperator[Operator],
 ):
     def __init__(self, id: ListId):

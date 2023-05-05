@@ -3,11 +3,11 @@ from typing import Union
 from twitter_api.types.v2_place.place_id import PlaceId
 from twitter_api.types.v2_place.place_name import PlaceName
 
-from .operator import InvertableOperator, Operator, StandaloneOperator
+from .operator import InvertibleOperator, Operator, StandaloneOperator
 
 
 class PlaceOperator(
-    InvertableOperator[Operator],
+    InvertibleOperator[Operator],
     StandaloneOperator[Operator],
 ):
     def __init__(self, place: Union[PlaceId, PlaceName]):

@@ -1,8 +1,8 @@
-from .operator import InvertableOperator, Operator, StandaloneOperator
+from .operator import InvertibleOperator, Operator, StandaloneOperator
 
 
 class UrlOperator(
-    InvertableOperator[Operator],
+    InvertibleOperator[Operator],
     StandaloneOperator[Operator],
 ):
     def __init__(self, url: str):

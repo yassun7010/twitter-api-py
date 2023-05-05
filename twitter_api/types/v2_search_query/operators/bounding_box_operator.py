@@ -1,8 +1,8 @@
-from .operator import InvertableOperator, Operator, StandaloneOperator
+from .operator import InvertibleOperator, Operator, StandaloneOperator
 
 
 class BoundingBoxOperator(
-    InvertableOperator[Operator],
+    InvertibleOperator[Operator],
     StandaloneOperator[Operator],
 ):
     def __init__(

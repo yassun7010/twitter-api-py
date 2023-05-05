@@ -1,10 +1,10 @@
 from twitter_api.types.v2_dm_conversation.dm_conversation_id import DmConversationId
 
-from .operator import InvertableOperator, Operator, StandaloneOperator
+from .operator import InvertibleOperator, Operator, StandaloneOperator
 
 
 class ConversationIdOperator(
-    InvertableOperator[Operator],
+    InvertibleOperator[Operator],
     StandaloneOperator[Operator],
 ):
     def __init__(self, id: DmConversationId):

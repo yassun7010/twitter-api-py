@@ -1,10 +1,10 @@
 from twitter_api.types.v2_entity.entity_name import EntityName
 
-from .operator import InvertableOperator, Operator, StandaloneOperator
+from .operator import InvertibleOperator, Operator, StandaloneOperator
 
 
 class EntityOperator(
-    InvertableOperator[Operator],
+    InvertibleOperator[Operator],
     StandaloneOperator[Operator],
 ):
     def __init__(self, name: EntityName):

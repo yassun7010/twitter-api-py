@@ -1,10 +1,10 @@
 from twitter_api.types.v2_language import Language
 
-from .operator import ConjunctionRequiredOperator, InvertableOperator, Operator
+from .operator import ConjunctionRequiredOperator, InvertibleOperator, Operator
 
 
 class LangOperator(
-    InvertableOperator[Operator],
+    InvertibleOperator[Operator],
     ConjunctionRequiredOperator,
 ):
     def __init__(self, lang: Language):

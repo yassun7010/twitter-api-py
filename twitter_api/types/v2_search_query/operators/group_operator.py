@@ -11,7 +11,7 @@ class GroupOperator(
     #
     # refer: https://developer.twitter.com/en/docs/twitter-api/tweets/search/integrate/build-a-query
     #
-    # InvertableOperator[Operator],
+    # InvertibleOperator[Operator],
     CorrectOperator[Operator],
 ):
     def __init__(self, operator: CorrectOperator, *operators: Operator):
