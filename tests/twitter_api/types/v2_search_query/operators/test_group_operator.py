@@ -22,6 +22,33 @@ class TestGroupOperator:
         )
         assert str(query) == "(twitter @twitterdev) -@SpaceX"
 
+    def test_group_operator_nested(self):
+        query = SearchQuery.build(
+            lambda q: (
+                q.group(
+                    q.group(
+                        q.keyword("twitter") & q.mention("twitterdev"),
+                    )
+                    & q.is_quote()
+                )
+                & ~q.mention("SpaceX")
+            )
+        )
+        assert str(query) == "((twitter @twitterdev) is:quote) -@SpaceX"
+
+    def test_group_operator_duplicated(self):
+        query = SearchQuery.build(
+            lambda q: (
+                q.group(
+                    q.group(
+                        q.keyword("twitter") & q.mention("twitterdev"),
+                    )
+                )
+                & ~q.mention("SpaceX")
+            )
+        )
+        assert str(query) == "(twitter @twitterdev) -@SpaceX"
+
     def test_group_operator_root_group(self):
         query = SearchQuery.build(
             lambda q: q.group(q.keyword("twitter") & q.mention("twitterdev"))
