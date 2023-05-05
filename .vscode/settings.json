@@ -22,7 +22,6 @@
     "--line-length",
     "88"
   ],
-  "python.formatting.provider": "black",
   "python.globalModuleInstallation": true,
   "python.linting.enabled": true,
   "python.linting.flake8Args": ["--max-line-length", "200"],
@@ -35,7 +34,8 @@
       "source.organizeImports": true
     },
     "editor.tabSize": 4,
-    "editor.rulers": [88]
+    "editor.rulers": [88],
+    "editor.defaultFormatter": "ms-python.black-formatter"
   },
   "[markdown]": {
     "files.trimTrailingWhitespace": false
