@@ -70,7 +70,12 @@ from .operators.context_operator import ContextOperator
 from .operators.conversation_id_operator import ConversationIdOperator
 from .operators.entity_operator import EntityOperator
 from .operators.from_user_operator import FromUserOperator
-from .operators.group_operator import CorrectGroupOperator, WeakGroupOperator, grouping
+from .operators.group_operator import (
+    CorrectGroupOperator,
+    GroupOperator,
+    WeakGroupOperator,
+    grouping,
+)
 from .operators.hashtag_operator import HashtagOperator
 from .operators.in_reply_to_tweet_id_operator import InReplyToTweetIdOperator
 from .operators.keyword_operator import KeywordOperator
@@ -93,22 +98,23 @@ class SearchQuery:
     refer: https://developer.twitter.com/en/docs/twitter-api/tweets/search/integrate/build-a-query
     """
 
-    def __init__(self, *query: Operator) -> None:
+    def __init__(self, query: Operator) -> None:
         self._query = query
 
     def __str__(self) -> str:
-        return " ".join(map(grouping, self._query))
+        # ルートが Group の場合は括弧で囲まない。
+        if isinstance(self._query, GroupOperator):
+            return " ".join(map(grouping, self._query._operators))
+        else:
+            return str(self._query)
 
     def __repr__(self):
-        return f"{self.__class__.__name__}({', '.join(map(repr, self._query))})"
+        return f"{self.__class__.__name__}({repr(self._query)})"
 
     @classmethod
     def build(
         cls,
-        building: Callable[
-            ["SearchQueryBuilder"],
-            CorrectOperator,
-        ],
+        building: Callable[["SearchQueryBuilder"], CorrectOperator[Operator]],
     ):
         """
         検索クエリを組み立てる。
@@ -137,7 +143,7 @@ class SearchQuery:
         'day (#Twitter OR #Xcorp) @elonmusk -@SpaceX is:retweet'
         """
 
-        return SearchQuery(building(_SearchQueryBuilder))
+        return SearchQuery(build(building))
 
 
 class _SearchQueryBuilder(metaclass=ABCMeta):
@@ -513,3 +519,7 @@ SearchQueryBuilder: TypeAlias = Type[_SearchQueryBuilder]
 """
 クエリの生成関数をユーザが定義したい場合のための型定義。
 """
+
+
+def build(building: Callable[[SearchQueryBuilder], Operator]) -> Operator:
+    return building(_SearchQueryBuilder)
