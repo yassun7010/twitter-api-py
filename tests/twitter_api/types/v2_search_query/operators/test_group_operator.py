@@ -40,7 +40,14 @@ class TestGroupOperator:
         )
         assert str(query) == "(twitter @twitterdev) -@SpaceX"
 
-    def test_group_operator_comma_separated(self):
+    def test_group_operator_root_group(self):
+        query = SearchQuery.build(
+            lambda q: q.group(q.keyword("twitter") & q.mention("twitterdev"))
+        )
+
+        assert str(query) == "twitter @twitterdev"
+
+    def test_group_operator_root_group_comma_separated(self):
         query = SearchQuery.build(
             lambda q: q.group(q.keyword("twitter"), q.mention("twitterdev"))
         )
