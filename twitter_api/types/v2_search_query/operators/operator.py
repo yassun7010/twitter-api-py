@@ -76,6 +76,8 @@ class InvertibleOperator(Operator, Generic[TOperator]):
 class ConjunctionRequiredOperator(WeakOperator):
     """
     自身だけではクエリとして成立しない Operator。
+
+    refer: https://developer.twitter.com/en/docs/twitter-api/tweets/search/integrate/build-a-query#list
     """
 
     pass
@@ -84,6 +86,8 @@ class ConjunctionRequiredOperator(WeakOperator):
 class StandaloneOperator(CorrectOperator[TOperator]):
     """
     それ自身がクエリとして成立する Operator。
+
+    refer: https://developer.twitter.com/en/docs/twitter-api/tweets/search/integrate/build-a-query#list
     """
 
     pass
