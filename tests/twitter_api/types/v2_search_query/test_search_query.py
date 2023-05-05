@@ -124,6 +124,32 @@ class TestSearchQueryBuilder:
             == '("Twitter API" OR #v2) -"recent search"'
         )
 
+    def test_query_builder_correct_and_correct(self):
+        assert isinstance(
+            _SearchQueryBuilder.mention("twitterdev")
+            & _SearchQueryBuilder.hashtag("Twitter"),
+            CorrectOperator,
+        )
+
+    def test_query_builder_correct_and_weak(self):
+        assert isinstance(
+            _SearchQueryBuilder.mention("twitterdev") & _SearchQueryBuilder.is_quote(),
+            CorrectOperator,
+        )
+
+    def test_query_builder_weak_and_correct(self):
+        assert isinstance(
+            _SearchQueryBuilder.is_retweet()
+            & _SearchQueryBuilder.mention("twitterdev"),
+            WeakOperator,
+        )
+
+    def test_query_builder_weak_and_weak(self):
+        assert isinstance(
+            _SearchQueryBuilder.is_retweet() & _SearchQueryBuilder.is_quote(),
+            WeakOperator,
+        )
+
     def test_query_builder_correct_or_correct(self):
         assert isinstance(
             _SearchQueryBuilder.mention("twitterdev")
