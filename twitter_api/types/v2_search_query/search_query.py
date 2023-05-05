@@ -386,7 +386,7 @@ class _SearchQueryBuilder(metaclass=ABCMeta):
         """
         リツイートであるかどうかの絞り込み。
 
-        単体では成立しないため、成立するクエリを左側において AND 結合する必要がある。
+        単体では成立しないため、成立するクエリと AND 結合する必要がある。
         """
         return IsRetweetOperator()
 
@@ -395,7 +395,7 @@ class _SearchQueryBuilder(metaclass=ABCMeta):
         """
         返信ツイートであるかどうかの絞り込み。
 
-        単体では成立しないため、成立するクエリを左側において AND 結合する必要がある。
+        単体では成立しないため、成立するクエリと AND 結合する必要がある。
         """
         return IsReplyOperator()
 
@@ -404,7 +404,7 @@ class _SearchQueryBuilder(metaclass=ABCMeta):
         """
         引用ツイートであるかどうかの絞り込み。
 
-        単体では成立しないため、成立するクエリを左側において AND 結合する必要がある。
+        単体では成立しないため、成立するクエリと AND 結合する必要がある。
         """
         return IsQuoteOperator()
 
@@ -413,7 +413,7 @@ class _SearchQueryBuilder(metaclass=ABCMeta):
         """
         認証ユーザのツイートであるかどうかの絞り込み。
 
-        単体では成立しないため、成立するクエリを左側において AND 結合する必要がある。
+        単体では成立しないため、成立するクエリと AND 結合する必要がある。
         """
         return IsVerifiedOperator()
 
@@ -423,7 +423,7 @@ class _SearchQueryBuilder(metaclass=ABCMeta):
         Nullcast であるかどうかの絞り込み。
 
         否定形としてしか使えないことに注意。
-        単体では成立しないため、成立するクエリを左側において AND 結合する必要がある。
+        単体では成立しないため、成立するクエリと AND 結合する必要がある。
         """
         return IsNullcastOperator()
 
@@ -432,7 +432,7 @@ class _SearchQueryBuilder(metaclass=ABCMeta):
         """
         ハッシュタグのついたツイートであるかどうかの絞り込み。
 
-        単体では成立しないため、成立するクエリを左側において AND 結合する必要がある。
+        単体では成立しないため、成立するクエリと AND 結合する必要がある。
         """
         return HasHashtagsOperator()
 
@@ -441,7 +441,7 @@ class _SearchQueryBuilder(metaclass=ABCMeta):
         """
         キャッシュタグのついたツイートであるかどうかの絞り込み。
 
-        単体では成立しないため、成立するクエリを左側において AND 結合する必要がある。
+        単体では成立しないため、成立するクエリと AND 結合する必要がある。
         """
         return HasCashtagsOperator()
 
@@ -450,7 +450,7 @@ class _SearchQueryBuilder(metaclass=ABCMeta):
         """
         リンクのついたツイートであるかどうかの絞り込み。
 
-        単体では成立しないため、成立するクエリを左側において AND 結合する必要がある。
+        単体では成立しないため、成立するクエリと AND 結合する必要がある。
         """
         return HasLinksOperator()
 
@@ -459,7 +459,7 @@ class _SearchQueryBuilder(metaclass=ABCMeta):
         """
         メンションのついたツイートであるかどうかの絞り込み。
 
-        単体では成立しないため、成立するクエリを左側において AND 結合する必要がある。
+        単体では成立しないため、成立するクエリと AND 結合する必要がある。
         """
         return HasMentionsOperator()
 
@@ -468,7 +468,7 @@ class _SearchQueryBuilder(metaclass=ABCMeta):
         """
         メディアのついたツイートであるかどうかの絞り込み。
 
-        単体では成立しないため、成立するクエリを左側において AND 結合する必要がある。
+        単体では成立しないため、成立するクエリと AND 結合する必要がある。
         """
         return HasMediaOperator()
 
@@ -477,7 +477,7 @@ class _SearchQueryBuilder(metaclass=ABCMeta):
         """
         画像のついたツイートであるかどうかの絞り込み。
 
-        単体では成立しないため、成立するクエリを左側において AND 結合する必要がある。
+        単体では成立しないため、成立するクエリと AND 結合する必要がある。
         """
         return HasImagesOperator()
 
@@ -486,7 +486,7 @@ class _SearchQueryBuilder(metaclass=ABCMeta):
         """
         ビデオのついたツイートであるかどうかの絞り込み。
 
-        単体では成立しないため、成立するクエリを左側において AND 結合する必要がある。
+        単体では成立しないため、成立するクエリと AND 結合する必要がある。
         """
         return HasVideoLinkOperator()
 
@@ -495,7 +495,7 @@ class _SearchQueryBuilder(metaclass=ABCMeta):
         """
         位置情報のついたツイートであるかどうかの絞り込み。
 
-        単体では成立しないため、成立するクエリを左側において AND 結合する必要がある。
+        単体では成立しないため、成立するクエリと AND 結合する必要がある。
         """
         return HasGeoOperator()
 
@@ -504,7 +504,7 @@ class _SearchQueryBuilder(metaclass=ABCMeta):
         """
         言語による絞り込み。
 
-        単体では成立しないため、成立するクエリを左側において AND 結合する必要がある。
+        単体では成立しないため、成立するクエリと AND 結合する必要がある。
         """
         return LangOperator(lang)
 
