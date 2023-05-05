@@ -13,6 +13,11 @@ class WeakOperator(Operator):
     まだ検索クエリとして成り立たっていない Operator。
     """
 
+    def __and__(self, other: Operator):
+        from ._and_operator import WeakAndOperator
+
+        return WeakAndOperator(self, other)
+
     def __or__(self, other: Operator):
         from ._or_operator import WeakOrOperator
 
@@ -25,9 +30,9 @@ class CorrectOperator(Operator, Generic[TOperator]):
     """
 
     def __and__(self, other: TOperator):
-        from ._and_operator import AndOperator
+        from ._and_operator import CorrectAndOperator
 
-        return AndOperator(self, other)
+        return CorrectAndOperator(self, other)
 
     @overload
     def __or__(self, other: "CorrectOperator") -> "CorrectOperator":

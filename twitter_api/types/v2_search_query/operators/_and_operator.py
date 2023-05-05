@@ -1,9 +1,9 @@
 from .group_operator import grouping
-from .operator import CorrectOperator, Operator
+from .operator import CorrectOperator, Operator, WeakOperator
 
 
-class AndOperator(CorrectOperator[Operator]):
-    def __init__(self, left: CorrectOperator, right: Operator) -> None:
+class AndOperator(Operator):
+    def __init__(self, left: Operator, right: Operator) -> None:
         self._left = left
         self._right = right
 
@@ -12,3 +12,13 @@ class AndOperator(CorrectOperator[Operator]):
 
     def __repr__(self) -> str:
         return f"{self.__class__.__name__}({repr(self._left)}, {repr(self._right)})"
+
+
+class WeakAndOperator(AndOperator, WeakOperator):
+    pass
+
+
+class CorrectAndOperator(AndOperator, CorrectOperator[Operator]):
+    def __init__(self, left: CorrectOperator, right: Operator) -> None:
+        self._left = left
+        self._right = right

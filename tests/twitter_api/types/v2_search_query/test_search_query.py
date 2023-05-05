@@ -91,7 +91,7 @@ class TestSearchQueryBuilder:
                     )
                 )
             )
-            == "SearchQuery(AndOperator(CorrectGroupOperator(CorrectOrOperator(KeywordOperator('\"Twitter API\"'), HashtagOperator('#v2'))), NotOperator(IsRetweetOperator('is:retweet'))))"
+            == "SearchQuery(CorrectAndOperator(CorrectGroupOperator(CorrectOrOperator(KeywordOperator('\"Twitter API\"'), HashtagOperator('#v2'))), NotOperator(IsRetweetOperator('is:retweet'))))"
         )
 
     def test_query_builder_emoji_keyword(self):
