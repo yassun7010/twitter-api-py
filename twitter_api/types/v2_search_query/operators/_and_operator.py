@@ -19,7 +19,7 @@ class WeakAndOperator(AndOperator, WeakOperator):
     pass
 
 
-class CorrectAndOperator(AndOperator, CorrectOperator[Operator]):
+class CorrectAndOperator(AndOperator, CorrectOperator):
     @overload
     def __init__(self, left: CorrectOperator, right: Operator) -> None:
         ...

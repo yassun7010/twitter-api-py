@@ -17,6 +17,6 @@ class WeakOrOperator(OrOperator, WeakOperator):
     pass
 
 
-class CorrectOrOperator(OrOperator, CorrectOperator[Operator]):
+class CorrectOrOperator(OrOperator, CorrectOperator):
     def __init__(self, left: CorrectOperator, right: CorrectOperator) -> None:
         super().__init__(left, right)

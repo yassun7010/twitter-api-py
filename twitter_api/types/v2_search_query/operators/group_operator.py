@@ -38,6 +38,6 @@ class WeakGroupOperator(GroupOperator, WeakOperator):
     pass
 
 
-class CorrectGroupOperator(GroupOperator, CorrectOperator[Operator]):
+class CorrectGroupOperator(GroupOperator, CorrectOperator):
     def __init__(self, operator: CorrectOperator):
         super().__init__(operator)

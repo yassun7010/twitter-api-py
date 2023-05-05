@@ -1,6 +1,4 @@
-from typing import Generic, TypeVar, Union, cast, overload
-
-TOperator = TypeVar("TOperator", bound="Operator")
+from typing import Union, cast, overload
 
 
 class Operator:
@@ -35,12 +33,12 @@ class WeakOperator(Operator):
         return WeakOrOperator(self, other)
 
 
-class CorrectOperator(Operator, Generic[TOperator]):
+class CorrectOperator(Operator):
     """
     検索クエリとして成り立つことのできる Operator。
     """
 
-    def __and__(self, other: TOperator):
+    def __and__(self, other: Operator):
         from ._and_operator import CorrectAndOperator
 
         return CorrectAndOperator(self, other)
@@ -83,7 +81,7 @@ class ConjunctionRequiredOperator(WeakOperator):
     pass
 
 
-class StandaloneOperator(CorrectOperator[Operator]):
+class StandaloneOperator(CorrectOperator):
     """
     それ自身がクエリとして成立する Operator。
 
