@@ -3,12 +3,12 @@ from typing import Union
 from twitter_api.types.v2_user.user_id import UserId
 from twitter_api.types.v2_user.username import Username
 
-from .operator import InvertibleOperator, Operator, StandaloneOperator
+from .operator import InvertibleOperator, StandaloneOperator
 
 
 class FromUserOperator(
     InvertibleOperator,
-    StandaloneOperator[Operator],
+    StandaloneOperator,
 ):
     def __init__(self, user: Union[UserId, Username]):
         self._value = user

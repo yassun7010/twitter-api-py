@@ -1,9 +1,9 @@
-from .operator import InvertibleOperator, Operator, StandaloneOperator
+from .operator import InvertibleOperator, StandaloneOperator
 
 
 class BoundingBoxOperator(
     InvertibleOperator,
-    StandaloneOperator[Operator],
+    StandaloneOperator,
 ):
     def __init__(
         self,

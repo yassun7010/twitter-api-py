@@ -83,7 +83,7 @@ class ConjunctionRequiredOperator(WeakOperator):
     pass
 
 
-class StandaloneOperator(CorrectOperator[TOperator]):
+class StandaloneOperator(CorrectOperator[Operator]):
     """
     それ自身がクエリとして成立する Operator。
 

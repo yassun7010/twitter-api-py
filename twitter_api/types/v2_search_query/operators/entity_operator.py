@@ -1,11 +1,11 @@
 from twitter_api.types.v2_entity.entity_name import EntityName
 
-from .operator import InvertibleOperator, Operator, StandaloneOperator
+from .operator import InvertibleOperator, StandaloneOperator
 
 
 class EntityOperator(
     InvertibleOperator,
-    StandaloneOperator[Operator],
+    StandaloneOperator,
 ):
     def __init__(self, name: EntityName):
         self._value = name

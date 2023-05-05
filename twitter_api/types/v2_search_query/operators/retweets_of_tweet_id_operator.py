@@ -1,11 +1,11 @@
 from twitter_api.types.v2_tweet.tweet_id import TweetId
 
-from .operator import InvertibleOperator, Operator, StandaloneOperator
+from .operator import InvertibleOperator, StandaloneOperator
 
 
 class RetweetsOfTweetIdOperator(
     InvertibleOperator,
-    StandaloneOperator[Operator],
+    StandaloneOperator,
 ):
     def __init__(self, id: TweetId):
         self._value = id

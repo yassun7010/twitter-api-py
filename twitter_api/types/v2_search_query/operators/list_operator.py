@@ -1,11 +1,11 @@
 from twitter_api.types.v2_list.list_id import ListId
 
-from .operator import InvertibleOperator, Operator, StandaloneOperator
+from .operator import InvertibleOperator, StandaloneOperator
 
 
 class ListOperator(
     InvertibleOperator,
-    StandaloneOperator[Operator],
+    StandaloneOperator,
 ):
     def __init__(self, id: ListId):
         self._value = id

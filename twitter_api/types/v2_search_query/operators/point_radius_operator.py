@@ -1,11 +1,11 @@
 from typing import Literal, Optional, overload
 
-from .operator import InvertibleOperator, Operator, StandaloneOperator
+from .operator import InvertibleOperator, StandaloneOperator
 
 
 class PointRadiusOperator(
     InvertibleOperator,
-    StandaloneOperator[Operator],
+    StandaloneOperator,
 ):
     @overload
     def __init__(
