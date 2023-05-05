@@ -10,7 +10,7 @@ class KeywordOperator(
 
     def __str__(self) -> str:
         if " " in self._keyword:
-            keyword = self._keyword.replace('"', '\\"')
+            keyword = self._keyword.replace('"', r"\"")
             return f'"{keyword}"'
         else:
             return self._keyword
