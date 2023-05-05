@@ -8,7 +8,7 @@ from .operator import InvertibleOperator, Operator, StandaloneOperator
 
 
 class ContextOperator(
-    InvertibleOperator[Operator],
+    InvertibleOperator,
     StandaloneOperator[Operator],
 ):
     @overload

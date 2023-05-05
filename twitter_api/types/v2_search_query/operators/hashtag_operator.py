@@ -6,7 +6,7 @@ from .operator import InvertibleOperator, Operator, StandaloneOperator
 
 class HashtagOperator(
     MarkableOperator,
-    InvertibleOperator[Operator],
+    InvertibleOperator,
     StandaloneOperator[Operator],
 ):
     def __init__(self, hashtag: Hashtag):

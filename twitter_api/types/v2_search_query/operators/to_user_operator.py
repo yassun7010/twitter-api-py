@@ -7,7 +7,7 @@ from .operator import InvertibleOperator, Operator, StandaloneOperator
 
 
 class ToUserOperator(
-    InvertibleOperator[Operator],
+    InvertibleOperator,
     StandaloneOperator[Operator],
 ):
     def __init__(self, user: Union[UserId, Username]):

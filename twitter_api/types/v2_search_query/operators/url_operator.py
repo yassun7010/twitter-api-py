@@ -2,7 +2,7 @@ from .operator import InvertibleOperator, Operator, StandaloneOperator
 
 
 class UrlOperator(
-    InvertibleOperator[Operator],
+    InvertibleOperator,
     StandaloneOperator[Operator],
 ):
     def __init__(self, url: str):

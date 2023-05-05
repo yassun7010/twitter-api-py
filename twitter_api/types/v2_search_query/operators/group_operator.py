@@ -9,7 +9,7 @@ class GroupOperator(
     #
     # refer: https://developer.twitter.com/en/docs/twitter-api/tweets/search/integrate/build-a-query
     #
-    # InvertibleOperator[Operator],
+    # InvertibleOperator,
     Operator,
 ):
     def __init__(self, operator: Operator):

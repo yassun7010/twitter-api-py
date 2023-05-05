@@ -62,7 +62,7 @@ class CorrectOperator(Operator, Generic[TOperator]):
             return cast(WeakOperator, WeakOrOperator(self, other))
 
 
-class InvertibleOperator(Operator, Generic[TOperator]):
+class InvertibleOperator(Operator):
     """
     否定（ ~ 演算子を追加）することのできる Operator。
     """

@@ -2,7 +2,7 @@ from .operator import InvertibleOperator, Operator, StandaloneOperator
 
 
 class BoundingBoxOperator(
-    InvertibleOperator[Operator],
+    InvertibleOperator,
     StandaloneOperator[Operator],
 ):
     def __init__(

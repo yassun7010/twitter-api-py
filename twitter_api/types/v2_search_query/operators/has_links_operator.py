@@ -1,8 +1,8 @@
-from .operator import ConjunctionRequiredOperator, InvertibleOperator, Operator
+from .operator import ConjunctionRequiredOperator, InvertibleOperator
 
 
 class HasLinksOperator(
-    InvertibleOperator[Operator],
+    InvertibleOperator,
     ConjunctionRequiredOperator,
 ):
     def __str__(self) -> str:

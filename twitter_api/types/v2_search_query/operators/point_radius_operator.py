@@ -4,7 +4,7 @@ from .operator import InvertibleOperator, Operator, StandaloneOperator
 
 
 class PointRadiusOperator(
-    InvertibleOperator[Operator],
+    InvertibleOperator,
     StandaloneOperator[Operator],
 ):
     @overload

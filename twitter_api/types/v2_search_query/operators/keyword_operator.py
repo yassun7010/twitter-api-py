@@ -2,7 +2,7 @@ from .operator import InvertibleOperator, Operator, StandaloneOperator
 
 
 class KeywordOperator(
-    InvertibleOperator[Operator],
+    InvertibleOperator,
     StandaloneOperator[Operator],
 ):
     def __init__(self, keyword: str) -> None:

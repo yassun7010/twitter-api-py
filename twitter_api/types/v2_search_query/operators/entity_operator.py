@@ -4,7 +4,7 @@ from .operator import InvertibleOperator, Operator, StandaloneOperator
 
 
 class EntityOperator(
-    InvertibleOperator[Operator],
+    InvertibleOperator,
     StandaloneOperator[Operator],
 ):
     def __init__(self, name: EntityName):

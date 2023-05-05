@@ -7,7 +7,7 @@ from .operator import InvertibleOperator, Operator, StandaloneOperator
 
 
 class PlaceOperator(
-    InvertibleOperator[Operator],
+    InvertibleOperator,
     StandaloneOperator[Operator],
 ):
     def __init__(self, place: Union[PlaceId, PlaceName]):

@@ -4,7 +4,7 @@ from .operator import InvertibleOperator, Operator, StandaloneOperator
 
 
 class PlaceCountryOperator(
-    InvertibleOperator[Operator],
+    InvertibleOperator,
     StandaloneOperator[Operator],
 ):
     def __init__(self, code: PlaceCountryCode):
