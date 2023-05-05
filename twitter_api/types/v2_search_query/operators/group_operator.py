@@ -26,7 +26,9 @@ class GroupOperator(
 
         if isinstance(self._operator, (AndOperator, OrOperator, NotOperator)):
             return f"({self._operator})"
-        return str(self._operator)
+
+        else:
+            return str(self._operator)
 
     def __repr__(self) -> str:
         return f"{self.__class__.__name__}({repr(self._operator)})"
