@@ -115,8 +115,8 @@ class SearchQuery:
 
         静的解析でエラーを出さずにクエリを組み立てるには、下記のルールに従う。
 
-        - クエリの先頭、またはグループの先頭は Standalone Operator を置く必要がある。
-        - Conjunction Required Operator は成立するクエリの右側に & 結合していく。
+        - クエリの先頭、またはグループの先頭は StandaloneOperator を置く必要がある。
+        - ConjunctionRequiredOperator は成立するクエリの右側に & 結合していく。
         - AND 演算（ & 結合）は、左側はクエリとして成立するものである必要がある。
         - OR 演算（ | 結合） はその左右がクエリとして成立するものである必要がある。
         - NOT 演算（ ~ ）はクエリの先頭、またはグループの先頭に設置できない。
