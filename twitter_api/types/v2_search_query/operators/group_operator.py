@@ -1,6 +1,6 @@
 from itertools import chain
 
-from .operator import CorrectOperator, Operator
+from .operator import CorrectOperator, Operator, WeakOperator
 
 
 class GroupOperator(
@@ -12,9 +12,9 @@ class GroupOperator(
     # refer: https://developer.twitter.com/en/docs/twitter-api/tweets/search/integrate/build-a-query
     #
     # InvertibleOperator[Operator],
-    CorrectOperator[Operator],
+    Operator,
 ):
-    def __init__(self, operator: CorrectOperator, *operators: Operator):
+    def __init__(self, operator: Operator, *operators: Operator):
         if len(operators) == 0 and isinstance(operator, GroupOperator):
             # GroupOperator の重ね掛けはまとめる。
             self._operators = operator._operators
@@ -38,6 +38,15 @@ class GroupOperator(
 
     def __repr__(self) -> str:
         return f"{self.__class__.__name__}({', '.join(map(repr, self._operators))})"
+
+
+class WeakGroupOperator(GroupOperator, WeakOperator):
+    pass
+
+
+class CorrectGroupOperator(GroupOperator, CorrectOperator[Operator]):
+    def __init__(self, operator: CorrectOperator, *operators: Operator):
+        super().__init__(operator, *operators)
 
 
 def grouping(operator: Operator) -> str:

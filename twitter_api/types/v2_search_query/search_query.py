@@ -70,7 +70,7 @@ from .operators.context_operator import ContextOperator
 from .operators.conversation_id_operator import ConversationIdOperator
 from .operators.entity_operator import EntityOperator
 from .operators.from_user_operator import FromUserOperator
-from .operators.group_operator import GroupOperator, grouping
+from .operators.group_operator import CorrectGroupOperator, WeakGroupOperator, grouping
 from .operators.hashtag_operator import HashtagOperator
 from .operators.in_reply_to_tweet_id_operator import InReplyToTweetIdOperator
 from .operators.keyword_operator import KeywordOperator
@@ -115,12 +115,12 @@ class SearchQuery:
 
         静的解析でエラーを出さずにクエリを組み立てるには、下記のルールに従う。
 
-        - クエリの先頭、またはグループの先頭は StandaloneOperator を置く必要がある。
+        - クエリの先頭は StandaloneOperator を置く必要がある。
         - ConjunctionRequiredOperator は成立するクエリの右側に & 結合していく。
         - AND 演算（ & 結合）は、左側はクエリとして成立するものである必要がある。
         - OR 演算（ | 結合） はその左右がクエリとして成立するものである必要がある。
-        - NOT 演算（ ~ ）はクエリの先頭、またはグループの先頭に設置できない。
-        - グループへの否定、二重否定はできない。
+        - NOT 演算（ ~ ）はクエリの先頭に設置できない。
+        - 二重否定、グループへの否定はできない。
 
         >>> from .search_query import SearchQuery
         >>> query = SearchQuery.build(
@@ -182,14 +182,29 @@ class _SearchQueryBuilder(metaclass=ABCMeta):
         """
         return CashtagOperator(cashtag)
 
+    @overload
     @classmethod
-    def group(cls, operator: CorrectOperator, *operators: Operator) -> GroupOperator:
+    def group(
+        cls, operator: CorrectOperator, *operators: Operator
+    ) -> CorrectGroupOperator:
+        ...
+
+    @overload
+    @classmethod
+    def group(cls, operator: Operator, *operators: Operator) -> WeakGroupOperator:
+        ...
+
+    @classmethod
+    def group(cls, operator: Union[CorrectOperator, Operator], *operators: Operator):
         """
         括弧で囲みたい対象を指定する。括弧で囲まれた対象は優先的に計算される。
 
         要素数が 1 つの場合は括弧をつけない。
         """
-        return GroupOperator(operator, *operators)
+        if isinstance(operator, CorrectOperator):
+            return CorrectGroupOperator(operator, *operators)
+        else:
+            return WeakGroupOperator(operator, *operators)
 
     @classmethod
     def from_user(cls, user: Union[UserId, Username]) -> FromUserOperator:

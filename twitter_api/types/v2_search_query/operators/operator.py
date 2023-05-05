@@ -19,9 +19,20 @@ class CorrectOperator(Operator, Generic[TOperator]):
         return AndOperator(self, other)
 
     def __or__(self, other: "CorrectOperator"):
-        from ._or_operator import OrOperator
+        from ._or_operator import CorrectOrOperator
 
-        return OrOperator(self, other)
+        return CorrectOrOperator(self, other)
+
+
+class WeakOperator(Operator):
+    """
+    まだ検索クエリとして成り立たっていない Operator。
+    """
+
+    def __or__(self, other: Operator):
+        from ._or_operator import WeakOrOperator
+
+        return WeakOrOperator(self, other)
 
 
 class InvertibleOperator(Operator, Generic[TOperator]):
@@ -35,7 +46,7 @@ class InvertibleOperator(Operator, Generic[TOperator]):
         return NotOperator(self)
 
 
-class ConjunctionRequiredOperator(Operator):
+class ConjunctionRequiredOperator(WeakOperator):
     """
     自身だけではクエリとして成立しない Operator。
     """

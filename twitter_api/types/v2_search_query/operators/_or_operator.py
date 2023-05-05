@@ -1,9 +1,9 @@
 from .group_operator import grouping
-from .operator import CorrectOperator, Operator
+from .operator import CorrectOperator, Operator, WeakOperator
 
 
-class OrOperator(CorrectOperator[Operator]):
-    def __init__(self, left: CorrectOperator, right: CorrectOperator) -> None:
+class OrOperator(Operator):
+    def __init__(self, left: Operator, right: Operator) -> None:
         self._left = left
         self._right = right
 
@@ -12,3 +12,12 @@ class OrOperator(CorrectOperator[Operator]):
 
     def __repr__(self) -> str:
         return f"{self.__class__.__name__}({repr(self._left)}, {repr(self._right)})"
+
+
+class WeakOrOperator(OrOperator, WeakOperator):
+    pass
+
+
+class CorrectOrOperator(OrOperator, CorrectOperator[Operator]):
+    def __init__(self, left: CorrectOperator, right: CorrectOperator) -> None:
+        super().__init__(left, right)
