@@ -83,11 +83,11 @@ class TestSearchQueryBuilder:
                         q.group(
                             q.keyword("Twitter API") | q.hashtag("v2"),
                         )
-                        & ~q.keyword("recent search")
+                        & ~q.is_retweet()
                     )
                 )
             )
-            == "SearchQuery(AndOperator(GroupOperator(OrOperator(KeywordOperator('\"Twitter API\"'), HashtagOperator('#v2'))), NotOperator(KeywordOperator('\"recent search\"'))))"
+            == "SearchQuery(AndOperator(GroupOperator(OrOperator(KeywordOperator('\"Twitter API\"'), HashtagOperator('#v2'))), NotOperator(IsRetweetOperator('is:retweet'))))"
         )
 
     def test_query_builder_emoji_keyword(self):
