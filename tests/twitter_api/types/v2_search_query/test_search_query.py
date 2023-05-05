@@ -2,6 +2,10 @@ import pytest
 
 from twitter_api.types.v2_search_query.operators.keyword_operator import KeywordOperator
 from twitter_api.types.v2_search_query.operators.mention_operator import MentionOperator
+from twitter_api.types.v2_search_query.operators.operator import (
+    CorrectOperator,
+    WeakOperator,
+)
 from twitter_api.types.v2_search_query.search_query import (
     SearchQuery,
     _SearchQueryBuilder,
@@ -118,4 +122,30 @@ class TestSearchQueryBuilder:
                 )
             )
             == '("Twitter API" OR #v2) -"recent search"'
+        )
+
+    def test_query_builder_correct_or_correct(self):
+        assert isinstance(
+            _SearchQueryBuilder.mention("twitterdev")
+            | _SearchQueryBuilder.hashtag("Twitter"),
+            CorrectOperator,
+        )
+
+    def test_query_builder_correct_or_weak(self):
+        assert isinstance(
+            _SearchQueryBuilder.mention("twitterdev") | _SearchQueryBuilder.is_quote(),
+            WeakOperator,
+        )
+
+    def test_query_builder_weak_or_correct(self):
+        assert isinstance(
+            _SearchQueryBuilder.is_retweet()
+            | _SearchQueryBuilder.mention("twitterdev"),
+            WeakOperator,
+        )
+
+    def test_query_builder_weak_or_weak(self):
+        assert isinstance(
+            _SearchQueryBuilder.is_retweet() | _SearchQueryBuilder.is_quote(),
+            WeakOperator,
         )
