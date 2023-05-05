@@ -1,4 +1,3 @@
-from .group_operator import grouping
 from .operator import CorrectOperator, Operator, WeakOperator
 
 
@@ -8,7 +7,7 @@ class OrOperator(Operator):
         self._right = right
 
     def __str__(self) -> str:
-        return f"{grouping(self._left)} OR {grouping(self._right)}"
+        return f"{self._left} OR {self._right}"
 
     def __repr__(self) -> str:
         return f"{self.__class__.__name__}({repr(self._left)}, {repr(self._right)})"

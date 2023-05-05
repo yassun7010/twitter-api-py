@@ -74,7 +74,6 @@ from .operators.group_operator import (
     CorrectGroupOperator,
     GroupOperator,
     WeakGroupOperator,
-    grouping,
 )
 from .operators.hashtag_operator import HashtagOperator
 from .operators.in_reply_to_tweet_id_operator import InReplyToTweetIdOperator
@@ -104,7 +103,7 @@ class SearchQuery:
     def __str__(self) -> str:
         # ルートが Group の場合は括弧で囲まない。
         if isinstance(self._query, GroupOperator):
-            return " ".join(map(grouping, self._query._operators))
+            return str(self._query._operator)
         else:
             return str(self._query)
 
@@ -189,27 +188,25 @@ class _SearchQueryBuilder(metaclass=ABCMeta):
 
     @overload
     @classmethod
-    def group(
-        cls, operator: CorrectOperator, *operators: Operator
-    ) -> CorrectGroupOperator:
+    def group(cls, operator: CorrectOperator) -> CorrectGroupOperator:
         ...
 
     @overload
     @classmethod
-    def group(cls, operator: Operator, *operators: Operator) -> WeakGroupOperator:
+    def group(cls, operator: Operator) -> WeakGroupOperator:
         ...
 
     @classmethod
-    def group(cls, operator: Union[CorrectOperator, Operator], *operators: Operator):
+    def group(cls, operator: Union[CorrectOperator, Operator]):
         """
         括弧で囲みたい対象を指定する。括弧で囲まれた対象は優先的に計算される。
 
         要素数が 1 つの場合は括弧をつけない。
         """
         if isinstance(operator, CorrectOperator):
-            return CorrectGroupOperator(operator, *operators)
+            return CorrectGroupOperator(operator)
         else:
-            return WeakGroupOperator(operator, *operators)
+            return WeakGroupOperator(operator)
 
     @classmethod
     def from_user(cls, user: Union[UserId, Username]) -> FromUserOperator:

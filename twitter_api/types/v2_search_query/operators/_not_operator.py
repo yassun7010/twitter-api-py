@@ -1,4 +1,3 @@
-from .group_operator import grouping
 from .operator import Operator, WeakOperator
 
 
@@ -13,7 +12,7 @@ class NotOperator(
         self._op = op
 
     def __str__(self) -> str:
-        return f"-{grouping(self._op)}"
+        return f"-{self._op}"
 
     def __repr__(self) -> str:
         return f"{self.__class__.__name__}({repr(self._op)})"

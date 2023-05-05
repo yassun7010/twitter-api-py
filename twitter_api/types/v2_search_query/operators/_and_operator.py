@@ -1,6 +1,5 @@
 from typing import overload
 
-from .group_operator import grouping
 from .operator import CorrectOperator, Operator, WeakOperator
 
 
@@ -10,7 +9,7 @@ class AndOperator(Operator):
         self._right = right
 
     def __str__(self) -> str:
-        return f"{grouping(self._left)} {grouping(self._right)}"
+        return f"{self._left} {self._right}"
 
     def __repr__(self) -> str:
         return f"{self.__class__.__name__}({repr(self._left)}, {repr(self._right)})"
