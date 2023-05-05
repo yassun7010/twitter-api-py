@@ -3,7 +3,7 @@ from .operator import Operator, WeakOperator
 
 class NotOperator(
     # NOTE: 否定は CorrectOperator ではなく、 WeakOperator である。
-    #       言い換えれば、クエリの最初、またはグループの最初は否定以外から開始しなければならない。
+    #       言い換えれば、否定だけの条件による検索を禁止している。
     #       そうでないクエリを作成することはできるだろうが、検索効率の悪いクエリになる。
     #       本ツールでは、意図的に否定から開始するクエリを禁止する。
     WeakOperator,
