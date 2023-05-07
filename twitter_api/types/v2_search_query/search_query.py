@@ -1,5 +1,4 @@
-from abc import ABCMeta, abstractmethod
-from typing import Any, Callable, Literal, Type, TypeAlias, Union, overload
+from typing import Any, Callable, Literal, Union, overload
 
 from twitter_api.types.v2_cashtag import Cashtag
 from twitter_api.types.v2_dm_conversation.dm_conversation_id import DmConversationId
@@ -145,13 +144,8 @@ class SearchQuery:
         return SearchQuery(build(building))
 
 
-class _SearchQueryBuilder(metaclass=ABCMeta):
-    @abstractmethod
-    def __init__(self) -> None:
-        ...
-
-    @classmethod
-    def keyword(cls, keyword: str) -> KeywordOperator:
+class SearchQueryBuilder:
+    def keyword(self, keyword: str) -> KeywordOperator:
         """
         キーワードによる絞り込み。
 
@@ -159,8 +153,7 @@ class _SearchQueryBuilder(metaclass=ABCMeta):
         """
         return KeywordOperator(keyword)
 
-    @classmethod
-    def mention(cls, username: Username) -> MentionOperator:
+    def mention(self, username: Username) -> MentionOperator:
         """
         メンションによる絞り込み。
 
@@ -168,8 +161,7 @@ class _SearchQueryBuilder(metaclass=ABCMeta):
         """
         return MentionOperator(username)
 
-    @classmethod
-    def hashtag(cls, hashtag: Hashtag) -> HashtagOperator:
+    def hashtag(self, hashtag: Hashtag) -> HashtagOperator:
         """
         ハッシュタグによる絞り込み。
 
@@ -177,8 +169,7 @@ class _SearchQueryBuilder(metaclass=ABCMeta):
         """
         return HashtagOperator(hashtag)
 
-    @classmethod
-    def cashtag(cls, cashtag: Cashtag) -> CashtagOperator:
+    def cashtag(self, cashtag: Cashtag) -> CashtagOperator:
         """
         キャッシュタグによる絞り込み。
 
@@ -187,17 +178,14 @@ class _SearchQueryBuilder(metaclass=ABCMeta):
         return CashtagOperator(cashtag)
 
     @overload
-    @classmethod
-    def group(cls, operator: CorrectOperator) -> CorrectGroupOperator:
+    def group(self, operator: CorrectOperator) -> CorrectGroupOperator:
         ...
 
     @overload
-    @classmethod
-    def group(cls, operator: WeakOperator) -> WeakGroupOperator:
+    def group(self, operator: WeakOperator) -> WeakGroupOperator:
         ...
 
-    @classmethod
-    def group(cls, operator: Union[CorrectOperator, WeakOperator]):
+    def group(self, operator: Union[CorrectOperator, WeakOperator]):
         """
         括弧で囲みたい対象を指定する。括弧で囲まれた対象は優先的に計算される。
 
@@ -208,59 +196,51 @@ class _SearchQueryBuilder(metaclass=ABCMeta):
         else:
             return WeakGroupOperator(operator)
 
-    @classmethod
-    def from_user(cls, user: Union[UserId, Username]) -> FromUserOperator:
+    def from_user(self, user: Union[UserId, Username]) -> FromUserOperator:
         """
         どのユーザからツイートされたかで絞り込む。
         """
         return FromUserOperator(user)
 
-    @classmethod
-    def to_user(cls, user: Union[UserId, Username]) -> ToUserOperator:
+    def to_user(self, user: Union[UserId, Username]) -> ToUserOperator:
         """
         どのユーザへツイートしたかで絞り込む。
         """
         return ToUserOperator(user)
 
-    @classmethod
-    def url(cls, url: str) -> UrlOperator:
+    def url(self, url: str) -> UrlOperator:
         """
         ツイートに含まれる URL で絞り込む。
         """
         return UrlOperator(url)
 
-    @classmethod
-    def retweet_of(cls, user: Union[UserId, Username]) -> RetweetOfOperator:
+    def retweet_of(self, user: Union[UserId, Username]) -> RetweetOfOperator:
         """
         どのユーザへのリツイートかで絞り込む。
         """
         return RetweetOfOperator(user)
 
-    @classmethod
-    def in_reply_to_tweet_id(cls, id: TweetId) -> InReplyToTweetIdOperator:
+    def in_reply_to_tweet_id(self, id: TweetId) -> InReplyToTweetIdOperator:
         """
         どのツイートへのリプライかで絞り込む。
         """
         return InReplyToTweetIdOperator(id)
 
-    @classmethod
-    def retweets_of_tweet_id(cls, id: TweetId) -> RetweetsOfTweetIdOperator:
+    def retweets_of_tweet_id(self, id: TweetId) -> RetweetsOfTweetIdOperator:
         """
         どのツイートへのリツイートかで絞り込む。
         """
         return RetweetsOfTweetIdOperator(id)
 
-    @classmethod
-    def quotes_of_tweet_id(cls, id: TweetId) -> QuotesOfTweetIdOperator:
+    def quotes_of_tweet_id(self, id: TweetId) -> QuotesOfTweetIdOperator:
         """
         どのツイートへの引用ツイートかで絞り込む。
         """
         return QuotesOfTweetIdOperator(id)
 
     @overload
-    @classmethod
     def context(
-        cls,
+        self,
         context: TweetContextAnnotation,
         *,
         domain_id: Literal[None] = None,
@@ -269,9 +249,8 @@ class _SearchQueryBuilder(metaclass=ABCMeta):
         ...
 
     @overload
-    @classmethod
     def context(
-        cls,
+        self,
         context: Literal[None] = None,
         *,
         domain_id: DomainId,
@@ -279,9 +258,8 @@ class _SearchQueryBuilder(metaclass=ABCMeta):
     ) -> ContextOperator:
         ...
 
-    @classmethod
     def context(
-        cls,
+        self,
         context: Any = None,
         *,
         domain_id: Any = None,
@@ -298,8 +276,7 @@ class _SearchQueryBuilder(metaclass=ABCMeta):
             entity_id=entity_id,
         )
 
-    @classmethod
-    def entity(cls, name: EntityName) -> EntityOperator:
+    def entity(self, name: EntityName) -> EntityOperator:
         """
         エンティティによる絞り込み。
 
@@ -307,15 +284,13 @@ class _SearchQueryBuilder(metaclass=ABCMeta):
         """
         return EntityOperator(name)
 
-    @classmethod
-    def conversation_id(cls, id: DmConversationId) -> ConversationIdOperator:
+    def conversation_id(self, id: DmConversationId) -> ConversationIdOperator:
         """
         どの DM 会話でのツイートかで絞り込む。
         """
         return ConversationIdOperator(id)
 
-    @classmethod
-    def list(cls, id: ListId) -> ListOperator:
+    def list(self, id: ListId) -> ListOperator:
         """
         指定したリストに入っているユーザのツイートかで絞り込む。
 
@@ -326,24 +301,21 @@ class _SearchQueryBuilder(metaclass=ABCMeta):
         """
         return ListOperator(id)
 
-    @classmethod
-    def place(cls, place: Union[PlaceId, PlaceName]) -> PlaceOperator:
+    def place(self, place: Union[PlaceId, PlaceName]) -> PlaceOperator:
         """
         どの場所でのツイートかで絞り込む。
         """
         return PlaceOperator(place)
 
-    @classmethod
-    def place_country(cls, code: PlaceCountryCode) -> PlaceCountryOperator:
+    def place_country(self, code: PlaceCountryCode) -> PlaceCountryOperator:
         """
         どの国からのツイートかで絞り込む。
         """
         return PlaceCountryOperator(code)
 
     @overload
-    @classmethod
     def point_radius(
-        cls,
+        self,
         *,
         longitude: float,
         latitude: float,
@@ -353,9 +325,8 @@ class _SearchQueryBuilder(metaclass=ABCMeta):
         ...
 
     @overload
-    @classmethod
     def point_radius(
-        cls,
+        self,
         *,
         longitude: float,
         latitude: float,
@@ -364,9 +335,8 @@ class _SearchQueryBuilder(metaclass=ABCMeta):
     ) -> PointRadiusOperator:
         ...
 
-    @classmethod
     def point_radius(
-        cls,
+        self,
         *,
         longitude: float,
         latitude: float,
@@ -383,9 +353,8 @@ class _SearchQueryBuilder(metaclass=ABCMeta):
             radius_mi=radius_mi,
         )
 
-    @classmethod
     def bounding_box(
-        cls,
+        self,
         *,
         west_longitude: float,
         south_latitude: float,
@@ -402,8 +371,7 @@ class _SearchQueryBuilder(metaclass=ABCMeta):
             north_latitude=north_latitude,
         )
 
-    @classmethod
-    def is_retweet(cls) -> IsRetweetOperator:
+    def is_retweet(self) -> IsRetweetOperator:
         """
         リツイートであるかどうかの絞り込み。
 
@@ -411,8 +379,7 @@ class _SearchQueryBuilder(metaclass=ABCMeta):
         """
         return IsRetweetOperator()
 
-    @classmethod
-    def is_reply(cls) -> IsReplyOperator:
+    def is_reply(self) -> IsReplyOperator:
         """
         返信ツイートであるかどうかの絞り込み。
 
@@ -420,8 +387,7 @@ class _SearchQueryBuilder(metaclass=ABCMeta):
         """
         return IsReplyOperator()
 
-    @classmethod
-    def is_quote(cls) -> IsQuoteOperator:
+    def is_quote(self) -> IsQuoteOperator:
         """
         引用ツイートであるかどうかの絞り込み。
 
@@ -429,8 +395,7 @@ class _SearchQueryBuilder(metaclass=ABCMeta):
         """
         return IsQuoteOperator()
 
-    @classmethod
-    def is_verified(cls) -> IsVerifiedOperator:
+    def is_verified(self) -> IsVerifiedOperator:
         """
         認証ユーザのツイートであるかどうかの絞り込み。
 
@@ -438,8 +403,7 @@ class _SearchQueryBuilder(metaclass=ABCMeta):
         """
         return IsVerifiedOperator()
 
-    @classmethod
-    def is_nullcast(cls) -> IsNullcastOperator:
+    def is_nullcast(self) -> IsNullcastOperator:
         """
         Nullcast であるかどうかの絞り込み。
 
@@ -448,8 +412,7 @@ class _SearchQueryBuilder(metaclass=ABCMeta):
         """
         return IsNullcastOperator()
 
-    @classmethod
-    def has_hashtags(cls) -> HasHashtagsOperator:
+    def has_hashtags(self) -> HasHashtagsOperator:
         """
         ハッシュタグのついたツイートであるかどうかの絞り込み。
 
@@ -457,8 +420,7 @@ class _SearchQueryBuilder(metaclass=ABCMeta):
         """
         return HasHashtagsOperator()
 
-    @classmethod
-    def has_cashtags(cls) -> HasCashtagsOperator:
+    def has_cashtags(self) -> HasCashtagsOperator:
         """
         キャッシュタグのついたツイートであるかどうかの絞り込み。
 
@@ -466,8 +428,7 @@ class _SearchQueryBuilder(metaclass=ABCMeta):
         """
         return HasCashtagsOperator()
 
-    @classmethod
-    def has_links(cls) -> HasLinksOperator:
+    def has_links(self) -> HasLinksOperator:
         """
         リンクのついたツイートであるかどうかの絞り込み。
 
@@ -475,8 +436,7 @@ class _SearchQueryBuilder(metaclass=ABCMeta):
         """
         return HasLinksOperator()
 
-    @classmethod
-    def has_mentions(cls) -> HasMentionsOperator:
+    def has_mentions(self) -> HasMentionsOperator:
         """
         メンションのついたツイートであるかどうかの絞り込み。
 
@@ -484,8 +444,7 @@ class _SearchQueryBuilder(metaclass=ABCMeta):
         """
         return HasMentionsOperator()
 
-    @classmethod
-    def has_media(cls) -> HasMediaOperator:
+    def has_media(self) -> HasMediaOperator:
         """
         メディアのついたツイートであるかどうかの絞り込み。
 
@@ -493,8 +452,7 @@ class _SearchQueryBuilder(metaclass=ABCMeta):
         """
         return HasMediaOperator()
 
-    @classmethod
-    def has_images(cls) -> HasImagesOperator:
+    def has_images(self) -> HasImagesOperator:
         """
         画像のついたツイートであるかどうかの絞り込み。
 
@@ -502,8 +460,7 @@ class _SearchQueryBuilder(metaclass=ABCMeta):
         """
         return HasImagesOperator()
 
-    @classmethod
-    def has_video_link(cls) -> HasVideoLinkOperator:
+    def has_video_link(self) -> HasVideoLinkOperator:
         """
         ビデオのついたツイートであるかどうかの絞り込み。
 
@@ -511,8 +468,7 @@ class _SearchQueryBuilder(metaclass=ABCMeta):
         """
         return HasVideoLinkOperator()
 
-    @classmethod
-    def has_geo(cls) -> HasGeoOperator:
+    def has_geo(self) -> HasGeoOperator:
         """
         位置情報のついたツイートであるかどうかの絞り込み。
 
@@ -520,8 +476,7 @@ class _SearchQueryBuilder(metaclass=ABCMeta):
         """
         return HasGeoOperator()
 
-    @classmethod
-    def lang(cls, lang: Language) -> LangOperator:
+    def lang(self, lang: Language) -> LangOperator:
         """
         言語による絞り込み。
 
@@ -530,11 +485,5 @@ class _SearchQueryBuilder(metaclass=ABCMeta):
         return LangOperator(lang)
 
 
-SearchQueryBuilder: TypeAlias = Type[_SearchQueryBuilder]
-"""
-クエリの生成関数をユーザが定義したい場合のための型定義。
-"""
-
-
 def build(building: Callable[[SearchQueryBuilder], Operator]) -> Operator:
-    return building(_SearchQueryBuilder)
+    return building(SearchQueryBuilder())
