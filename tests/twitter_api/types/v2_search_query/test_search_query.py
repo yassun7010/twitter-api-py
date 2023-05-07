@@ -165,17 +165,15 @@ class TestSearchQueryBuilder:
         )
 
     def test_query_builder_and_or_priority(self):
-        assert isinstance(
-            build(lambda q: (q.mention("twitterdev") & q.is_reply() | q.is_quote())),
-            WeakOperator,
-        )
+        query = build(lambda q: (q.mention("twitterdev") & q.is_reply() | q.is_quote()))
+
+        assert isinstance(query, WeakOperator)
+        assert str(query) == "@twitterdev is:reply OR is:quote"
 
     def test_query_builder_and_or_priority2(self):
-        assert isinstance(
-            build(
-                lambda q: (
-                    q.mention("twitterdev") & q.group(q.is_reply() | q.is_quote())
-                )
-            ),
-            CorrectOperator,
+        query = build(
+            lambda q: (q.mention("twitterdev") & q.group(q.is_reply() | q.is_quote()))
         )
+
+        assert isinstance(query, CorrectOperator)
+        assert str(query) == "@twitterdev (is:reply OR is:quote)"
