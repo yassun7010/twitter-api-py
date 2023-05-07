@@ -35,7 +35,7 @@ class WeakOperator(Operator):
 
 class CorrectOperator(Operator):
     """
-    検索クエリとして成り立つことのできる Operator。
+    検索クエリとして成り立っている Operator。
     """
 
     def __and__(self, other: Operator):
