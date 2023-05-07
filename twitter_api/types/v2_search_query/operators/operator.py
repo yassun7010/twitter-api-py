@@ -16,10 +16,10 @@ class WeakOperator(Operator):
         ...
 
     @overload
-    def __and__(self, other: Operator) -> "WeakOperator":
+    def __and__(self, other: "WeakOperator") -> "WeakOperator":
         ...
 
-    def __and__(self, other: Union["CorrectOperator", Operator]):
+    def __and__(self, other: Union["CorrectOperator", "WeakOperator"]):
         from ._and_operator import CorrectAndOperator, WeakAndOperator
 
         if isinstance(other, CorrectOperator):
@@ -27,7 +27,7 @@ class WeakOperator(Operator):
         else:
             return cast(WeakOperator, WeakAndOperator(self, other))
 
-    def __or__(self, other: Operator):
+    def __or__(self, other: Operator) -> "WeakOperator":
         from ._or_operator import WeakOrOperator
 
         return WeakOrOperator(self, other)
@@ -48,10 +48,10 @@ class CorrectOperator(Operator):
         ...
 
     @overload
-    def __or__(self, other: Operator) -> WeakOperator:
+    def __or__(self, other: "WeakOperator") -> "WeakOperator":
         ...
 
-    def __or__(self, other: Union["CorrectOperator", Operator]):
+    def __or__(self, other: Union["CorrectOperator", "WeakOperator"]):
         from ._or_operator import CorrectOrOperator, WeakOrOperator
 
         if isinstance(other, CorrectOperator):
