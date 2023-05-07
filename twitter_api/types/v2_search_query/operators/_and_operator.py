@@ -1,6 +1,6 @@
 from typing import overload
 
-from .operator import CorrectOperator, Operator, WeakOperator
+from .operator import CompleteOperator, IncompleteOperator, Operator
 
 
 class AndOperator(Operator):
@@ -15,19 +15,19 @@ class AndOperator(Operator):
         return f"{self.__class__.__name__}({repr(self._left)}, {repr(self._right)})"
 
 
-class WeakAndOperator(AndOperator, WeakOperator):
-    pass
-
-
-class CorrectAndOperator(AndOperator, CorrectOperator):
+class CompleteAndOperator(AndOperator, CompleteOperator):
     @overload
-    def __init__(self, left: CorrectOperator, right: Operator) -> None:
+    def __init__(self, left: CompleteOperator, right: Operator) -> None:
         ...
 
     @overload
-    def __init__(self, left: Operator, right: CorrectOperator) -> None:
+    def __init__(self, left: Operator, right: CompleteOperator) -> None:
         ...
 
     def __init__(self, left, right) -> None:
         self._left = left
         self._right = right
+
+
+class IncompleteAndOperator(AndOperator, IncompleteOperator):
+    pass

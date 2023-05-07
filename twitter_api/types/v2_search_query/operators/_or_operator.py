@@ -1,4 +1,4 @@
-from .operator import CorrectOperator, Operator, WeakOperator
+from .operator import CompleteOperator, IncompleteOperator, Operator
 
 
 class OrOperator(Operator):
@@ -13,10 +13,10 @@ class OrOperator(Operator):
         return f"{self.__class__.__name__}({repr(self._left)}, {repr(self._right)})"
 
 
-class WeakOrOperator(OrOperator, WeakOperator):
-    pass
-
-
-class CorrectOrOperator(OrOperator, CorrectOperator):
-    def __init__(self, left: CorrectOperator, right: CorrectOperator) -> None:
+class CompleteOrOperator(OrOperator, CompleteOperator):
+    def __init__(self, left: CompleteOperator, right: CompleteOperator) -> None:
         super().__init__(left, right)
+
+
+class IncompleteOrOperator(OrOperator, IncompleteOperator):
+    pass

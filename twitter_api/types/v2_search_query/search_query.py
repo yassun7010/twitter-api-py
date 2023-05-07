@@ -70,16 +70,16 @@ from .operators.conversation_id_operator import ConversationIdOperator
 from .operators.entity_operator import EntityOperator
 from .operators.from_user_operator import FromUserOperator
 from .operators.group_operator import (
-    CorrectGroupOperator,
+    CompleteGroupOperator,
     GroupOperator,
-    WeakGroupOperator,
+    IncompleteGroupOperator,
 )
 from .operators.hashtag_operator import HashtagOperator
 from .operators.in_reply_to_tweet_id_operator import InReplyToTweetIdOperator
 from .operators.keyword_operator import KeywordOperator
 from .operators.list_operator import ListOperator
 from .operators.mention_operator import MentionOperator
-from .operators.operator import CorrectOperator, Operator, WeakOperator
+from .operators.operator import CompleteOperator, IncompleteOperator, Operator
 from .operators.quotes_of_tweet_id_operator import QuotesOfTweetIdOperator
 from .operators.retweet_of_operator import RetweetOfOperator
 from .operators.retweets_of_tweet_id_operator import RetweetsOfTweetIdOperator
@@ -112,7 +112,7 @@ class SearchQuery:
     @classmethod
     def build(
         cls,
-        building: Callable[["SearchQueryBuilder"], CorrectOperator],
+        building: Callable[["SearchQueryBuilder"], CompleteOperator],
     ):
         """
         検索クエリを組み立てる。
@@ -178,23 +178,23 @@ class SearchQueryBuilder:
         return CashtagOperator(cashtag)
 
     @overload
-    def group(self, operator: CorrectOperator) -> CorrectGroupOperator:
+    def group(self, operator: CompleteOperator) -> CompleteGroupOperator:
         ...
 
     @overload
-    def group(self, operator: WeakOperator) -> WeakGroupOperator:
+    def group(self, operator: IncompleteOperator) -> IncompleteGroupOperator:
         ...
 
-    def group(self, operator: Union[CorrectOperator, WeakOperator]):
+    def group(self, operator: Union[CompleteOperator, IncompleteOperator]):
         """
         括弧で囲みたい対象を指定する。括弧で囲まれた対象は優先的に計算される。
 
         要素数が 1 つの場合は括弧をつけない。
         """
-        if isinstance(operator, CorrectOperator):
-            return CorrectGroupOperator(operator)
+        if isinstance(operator, CompleteOperator):
+            return CompleteGroupOperator(operator)
         else:
-            return WeakGroupOperator(operator)
+            return IncompleteGroupOperator(operator)
 
     def from_user(self, user: Union[UserId, Username]) -> FromUserOperator:
         """

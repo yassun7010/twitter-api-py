@@ -1,4 +1,4 @@
-from .operator import CorrectOperator, Operator, WeakOperator
+from .operator import CompleteOperator, IncompleteOperator, Operator
 
 
 class GroupOperator(
@@ -33,10 +33,10 @@ class GroupOperator(
         return f"{self.__class__.__name__}({repr(self._operator)})"
 
 
-class WeakGroupOperator(GroupOperator, WeakOperator):
+class IncompleteGroupOperator(GroupOperator, IncompleteOperator):
     pass
 
 
-class CorrectGroupOperator(GroupOperator, CorrectOperator):
-    def __init__(self, operator: CorrectOperator):
+class CompleteGroupOperator(GroupOperator, CompleteOperator):
+    def __init__(self, operator: CompleteOperator):
         super().__init__(operator)

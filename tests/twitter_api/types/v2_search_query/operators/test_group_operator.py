@@ -1,6 +1,6 @@
 from twitter_api.types.v2_search_query.operators.group_operator import (
-    CorrectGroupOperator,
-    WeakGroupOperator,
+    CompleteGroupOperator,
+    IncompleteGroupOperator,
 )
 from twitter_api.types.v2_search_query.search_query import SearchQuery, build
 
@@ -66,7 +66,7 @@ class TestGroupOperator:
         )
 
         assert str(query) == "(twitter @twitterdev)"
-        assert isinstance(query, CorrectGroupOperator)
+        assert isinstance(query, CompleteGroupOperator)
 
     def test_search_query_builder_weak_group(self):
         query = build(
@@ -78,4 +78,4 @@ class TestGroupOperator:
         )
 
         assert str(query) == "(is:quote OR is:reply OR is:retweet)"
-        assert isinstance(query, WeakGroupOperator)
+        assert isinstance(query, IncompleteGroupOperator)

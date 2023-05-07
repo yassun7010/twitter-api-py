@@ -1,8 +1,8 @@
 from twitter_api.types.v2_search_query.operators.keyword_operator import KeywordOperator
 from twitter_api.types.v2_search_query.operators.mention_operator import MentionOperator
 from twitter_api.types.v2_search_query.operators.operator import (
-    CorrectOperator,
-    WeakOperator,
+    CompleteOperator,
+    IncompleteOperator,
 )
 from twitter_api.types.v2_search_query.search_query import SearchQuery, build
 
@@ -73,7 +73,7 @@ class TestSearchQueryBuilder:
                     )
                 )
             )
-            == "SearchQuery(CorrectAndOperator(CorrectGroupOperator(CorrectOrOperator(KeywordOperator('\"Twitter API\"'), HashtagOperator('#v2'))), NotOperator(IsRetweetOperator('is:retweet'))))"
+            == "SearchQuery(CompleteAndOperator(CompleteGroupOperator(CompleteOrOperator(KeywordOperator('\"Twitter API\"'), HashtagOperator('#v2'))), NotOperator(IsRetweetOperator('is:retweet'))))"
         )
 
     def test_query_builder_emoji_keyword(self):
@@ -109,55 +109,55 @@ class TestSearchQueryBuilder:
     def test_query_builder_correct_and_correct(self):
         assert isinstance(
             build(lambda q: (q.mention("twitterdev") & q.hashtag("Twitter"))),
-            CorrectOperator,
+            CompleteOperator,
         )
 
     def test_query_builder_correct_and_weak(self):
         assert isinstance(
             build(lambda q: (q.mention("twitterdev") & q.is_quote())),
-            CorrectOperator,
+            CompleteOperator,
         )
 
     def test_query_builder_weak_and_correct(self):
         assert isinstance(
             build(lambda q: (q.is_retweet() & q.mention("twitterdev"))),
-            CorrectOperator,
+            CompleteOperator,
         )
 
     def test_query_builder_weak_and_weak(self):
         assert isinstance(
             build(lambda q: (q.is_retweet() & q.is_quote())),
-            WeakOperator,
+            IncompleteOperator,
         )
 
     def test_query_builder_correct_or_correct(self):
         assert isinstance(
             build(lambda q: (q.mention("twitterdev") | q.hashtag("Twitter"))),
-            CorrectOperator,
+            CompleteOperator,
         )
 
     def test_query_builder_correct_or_weak(self):
         assert isinstance(
             build(lambda q: (q.mention("twitterdev") | q.is_quote())),
-            WeakOperator,
+            IncompleteOperator,
         )
 
     def test_query_builder_weak_or_correct(self):
         assert isinstance(
             build(lambda q: (q.is_retweet() | q.mention("twitterdev"))),
-            WeakOperator,
+            IncompleteOperator,
         )
 
     def test_query_builder_weak_or_weak(self):
         assert isinstance(
             build(lambda q: (q.is_retweet() | q.is_quote())),
-            WeakOperator,
+            IncompleteOperator,
         )
 
     def test_query_builder_and_or_priority(self):
         query = build(lambda q: (q.mention("twitterdev") & q.is_reply() | q.is_quote()))
 
-        assert isinstance(query, WeakOperator)
+        assert isinstance(query, IncompleteOperator)
         assert str(query) == "@twitterdev is:reply OR is:quote"
 
     def test_query_builder_and_or_priority2(self):
@@ -165,5 +165,5 @@ class TestSearchQueryBuilder:
             lambda q: (q.mention("twitterdev") & q.group(q.is_reply() | q.is_quote()))
         )
 
-        assert isinstance(query, CorrectOperator)
+        assert isinstance(query, CompleteOperator)
         assert str(query) == "@twitterdev (is:reply OR is:quote)"

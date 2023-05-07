@@ -1,10 +1,10 @@
-from .operator import Operator, WeakOperator
+from .operator import IncompleteOperator, Operator
 
 
 class NotOperator(
-    # NOTE: 否定は CorrectOperator ではなく、 WeakOperator である。
+    # NOTE: 否定は CompleteOperator ではなく、 IncompleteOperator である。
     #       公式ドキュメント上でも、否定だけの条件による検索を禁止されている。
-    WeakOperator,
+    IncompleteOperator,
 ):
     def __init__(self, op: Operator) -> None:
         self._op = op
