@@ -287,6 +287,11 @@ class _SearchQueryBuilder(metaclass=ABCMeta):
         domain_id: Any = None,
         entity_id: Any = None,
     ) -> ContextOperator:
+        """
+        ツイートの持つコンテキスト情報による絞り込み。
+
+        refer: https://developer.twitter.com/en/docs/twitter-api/annotations/overview
+        """
         return ContextOperator(
             context,
             domain_id=domain_id,
@@ -295,6 +300,11 @@ class _SearchQueryBuilder(metaclass=ABCMeta):
 
     @classmethod
     def entity(cls, name: EntityName) -> EntityOperator:
+        """
+        エンティティによる絞り込み。
+
+        refer: https://developer.twitter.com/en/docs/twitter-api/annotations/overview
+        """
         return EntityOperator(name)
 
     @classmethod
@@ -306,6 +316,14 @@ class _SearchQueryBuilder(metaclass=ABCMeta):
 
     @classmethod
     def list(cls, id: ListId) -> ListOperator:
+        """
+        指定したリストに入っているユーザのツイートかで絞り込む。
+
+        リストに関しては、下記のリンクを参照。
+
+        refer: https://developer.twitter.com/en/docs/twitter-api/lists/list-lookup/api-reference
+        refer: https://developer.twitter.com/en/docs/twitter-api/lists/manage-lists/api-reference
+        """
         return ListOperator(id)
 
     @classmethod
@@ -356,7 +374,7 @@ class _SearchQueryBuilder(metaclass=ABCMeta):
         radius_mi: Any = None,
     ) -> PointRadiusOperator:
         """
-        どの座標範囲からのツイートかで絞り込む。
+        どの位置座標からのツイートかで絞り込む。
         """
         return PointRadiusOperator(
             longitude=longitude,
@@ -375,7 +393,7 @@ class _SearchQueryBuilder(metaclass=ABCMeta):
         north_latitude: float,
     ) -> BoundingBoxOperator:
         """
-        どの座標範囲からのツイートかで絞り込む。
+        どの地図範囲からのツイートかで絞り込む。
         """
         return BoundingBoxOperator(
             west_longitude=west_longitude,
