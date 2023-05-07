@@ -145,6 +145,25 @@ class SearchQuery:
 
 
 class SearchQueryBuilder:
+    @overload
+    def group(self, operator: CompleteOperator) -> CompleteGroupOperator:
+        ...
+
+    @overload
+    def group(self, operator: IncompleteOperator) -> IncompleteGroupOperator:
+        ...
+
+    def group(self, operator: Union[CompleteOperator, IncompleteOperator]):
+        """
+        括弧で囲みたい対象を指定する。括弧で囲まれた対象は優先的に計算される。
+
+        要素数が 1 つの場合は括弧をつけない。
+        """
+        if isinstance(operator, CompleteOperator):
+            return CompleteGroupOperator(operator)
+        else:
+            return IncompleteGroupOperator(operator)
+
     def keyword(self, keyword: str) -> KeywordOperator:
         """
         キーワードによる絞り込み。
@@ -176,25 +195,6 @@ class SearchQueryBuilder:
         先頭に $ がない場合、 $ をつけて処理される。
         """
         return CashtagOperator(cashtag)
-
-    @overload
-    def group(self, operator: CompleteOperator) -> CompleteGroupOperator:
-        ...
-
-    @overload
-    def group(self, operator: IncompleteOperator) -> IncompleteGroupOperator:
-        ...
-
-    def group(self, operator: Union[CompleteOperator, IncompleteOperator]):
-        """
-        括弧で囲みたい対象を指定する。括弧で囲まれた対象は優先的に計算される。
-
-        要素数が 1 つの場合は括弧をつけない。
-        """
-        if isinstance(operator, CompleteOperator):
-            return CompleteGroupOperator(operator)
-        else:
-            return IncompleteGroupOperator(operator)
 
     def from_user(self, user: Union[UserId, Username]) -> FromUserOperator:
         """
