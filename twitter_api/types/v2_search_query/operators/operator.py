@@ -73,7 +73,7 @@ class InvertibleOperator(Operator):
 
 class ConjunctionRequiredOperator(WeakOperator):
     """
-    自身だけではクエリとして成立しない Operator。
+    Twitter が定義した、それ自身だけではクエリとして成立しない Operator。
 
     refer: https://developer.twitter.com/en/docs/twitter-api/tweets/search/integrate/build-a-query#list
     """
@@ -83,7 +83,7 @@ class ConjunctionRequiredOperator(WeakOperator):
 
 class StandaloneOperator(CorrectOperator):
     """
-    それ自身がクエリとして成立する Operator。
+    Twitter が定義した、それ自身がクエリとして成立する Operator。
 
     refer: https://developer.twitter.com/en/docs/twitter-api/tweets/search/integrate/build-a-query#list
     """
