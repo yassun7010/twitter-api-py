@@ -9,8 +9,8 @@ class TestPointRadiusOperator:
         assert (
             str(
                 PointRadiusOperator(
-                    longitude=2.355128,
-                    latitude=48.861118,
+                    longitude_deg=2.355128,
+                    latitude_deg=48.861118,
                     radius_km=5,
                 )
             )
@@ -21,8 +21,8 @@ class TestPointRadiusOperator:
         assert (
             str(
                 PointRadiusOperator(
-                    longitude=2.355128,
-                    latitude=48.861118,
+                    longitude_deg=2.355128,
+                    latitude_deg=48.861118,
                     radius_mi=5,
                 )
             )
@@ -34,8 +34,8 @@ class TestPointRadiusOperator:
             str(
                 SearchQuery.build(
                     lambda q: q.point_radius(
-                        longitude=2.355128,
-                        latitude=48.861118,
+                        longitude_deg=2.355128,
+                        latitude_deg=48.861118,
                         radius_km=5,
                     )
                 )
@@ -48,8 +48,8 @@ class TestPointRadiusOperator:
             str(
                 SearchQuery.build(
                     lambda q: q.point_radius(
-                        longitude=2.355128,
-                        latitude=48.861118,
+                        longitude_deg=2.355128,
+                        latitude_deg=48.861118,
                         radius_mi=5,
                     )
                 )

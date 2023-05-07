@@ -11,8 +11,8 @@ class PointRadiusOperator(
     def __init__(
         self,
         *,
-        longitude: float,
-        latitude: float,
+        longitude_deg: float,
+        latitude_deg: float,
         radius_km: int,
         radius_mi: Literal[None] = None,
     ):
@@ -22,8 +22,8 @@ class PointRadiusOperator(
     def __init__(
         self,
         *,
-        longitude: float,
-        latitude: float,
+        longitude_deg: float,
+        latitude_deg: float,
         radius_km: Literal[None] = None,
         radius_mi: int,
     ):
@@ -32,13 +32,13 @@ class PointRadiusOperator(
     def __init__(
         self,
         *,
-        longitude: float,
-        latitude: float,
+        longitude_deg: float,
+        latitude_deg: float,
         radius_km: Optional[int] = None,
         radius_mi: Optional[int] = None,
     ):
-        self.longitude = longitude
-        self.latitude = latitude
+        self.longitude_deg = longitude_deg
+        self.latitude_deg = latitude_deg
 
         if radius_km is not None:
             self.radius = radius_km
@@ -53,4 +53,4 @@ class PointRadiusOperator(
             self.radius_unit = "km"
 
     def __str__(self) -> str:
-        return f"point_radius:[{self.longitude} {self.latitude} {self.radius}{self.radius_unit}]"
+        return f"point_radius:[{self.longitude_deg} {self.latitude_deg} {self.radius}{self.radius_unit}]"

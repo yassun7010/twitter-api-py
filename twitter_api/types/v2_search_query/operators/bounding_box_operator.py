@@ -7,15 +7,15 @@ class BoundingBoxOperator(
 ):
     def __init__(
         self,
-        west_longitude: float,
-        south_latitude: float,
-        east_longitude: float,
-        north_latitude: float,
+        west_longitude_deg: float,
+        south_latitude_deg: float,
+        east_longitude_deg: float,
+        north_latitude_deg: float,
     ):
-        self.west_longitude = west_longitude
-        self.south_latitude = south_latitude
-        self.east_longitude = east_longitude
-        self.north_latitude = north_latitude
+        self.west_longitude_deg = west_longitude_deg
+        self.south_latitude_deg = south_latitude_deg
+        self.east_longitude_deg = east_longitude_deg
+        self.north_latitude_deg = north_latitude_deg
 
     def __str__(self) -> str:
-        return f"bounding_box:[{self.west_longitude} {self.south_latitude} {self.east_longitude} {self.north_latitude}]"
+        return f"bounding_box:[{self.west_longitude_deg} {self.south_latitude_deg} {self.east_longitude_deg} {self.north_latitude_deg}]"

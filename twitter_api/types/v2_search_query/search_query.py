@@ -317,8 +317,8 @@ class SearchQueryBuilder:
     def point_radius(
         self,
         *,
-        longitude: float,
-        latitude: float,
+        longitude_deg: float,
+        latitude_deg: float,
         radius_km: int,
         radius_mi: Literal[None] = None,
     ) -> PointRadiusOperator:
@@ -328,8 +328,8 @@ class SearchQueryBuilder:
     def point_radius(
         self,
         *,
-        longitude: float,
-        latitude: float,
+        longitude_deg: float,
+        latitude_deg: float,
         radius_km: Literal[None] = None,
         radius_mi: int,
     ) -> PointRadiusOperator:
@@ -338,8 +338,8 @@ class SearchQueryBuilder:
     def point_radius(
         self,
         *,
-        longitude: float,
-        latitude: float,
+        longitude_deg: float,
+        latitude_deg: float,
         radius_km: Any = None,
         radius_mi: Any = None,
     ) -> PointRadiusOperator:
@@ -347,8 +347,8 @@ class SearchQueryBuilder:
         どの位置座標からのツイートかで絞り込む。
         """
         return PointRadiusOperator(
-            longitude=longitude,
-            latitude=latitude,
+            longitude_deg=longitude_deg,
+            latitude_deg=latitude_deg,
             radius_km=radius_km,
             radius_mi=radius_mi,
         )
@@ -356,19 +356,19 @@ class SearchQueryBuilder:
     def bounding_box(
         self,
         *,
-        west_longitude: float,
-        south_latitude: float,
-        east_longitude: float,
-        north_latitude: float,
+        west_longitude_deg: float,
+        south_latitude_deg: float,
+        east_longitude_deg: float,
+        north_latitude_deg: float,
     ) -> BoundingBoxOperator:
         """
         どの地図範囲からのツイートかで絞り込む。
         """
         return BoundingBoxOperator(
-            west_longitude=west_longitude,
-            south_latitude=south_latitude,
-            east_longitude=east_longitude,
-            north_latitude=north_latitude,
+            west_longitude_deg=west_longitude_deg,
+            south_latitude_deg=south_latitude_deg,
+            east_longitude_deg=east_longitude_deg,
+            north_latitude_deg=north_latitude_deg,
         )
 
     def is_retweet(self) -> IsRetweetOperator:

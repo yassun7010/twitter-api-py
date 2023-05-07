@@ -9,10 +9,10 @@ class TestBoundingBoxOperator:
         assert (
             str(
                 BoundingBoxOperator(
-                    west_longitude=-105.301758,
-                    south_latitude=39.964069,
-                    east_longitude=-105.178505,
-                    north_latitude=40.09455,
+                    west_longitude_deg=-105.301758,
+                    south_latitude_deg=39.964069,
+                    east_longitude_deg=-105.178505,
+                    north_latitude_deg=40.09455,
                 )
             )
             == "bounding_box:[-105.301758 39.964069 -105.178505 40.09455]"
@@ -23,10 +23,10 @@ class TestBoundingBoxOperator:
             str(
                 SearchQuery.build(
                     lambda q: q.bounding_box(
-                        west_longitude=-105.301758,
-                        south_latitude=39.964069,
-                        east_longitude=-105.178505,
-                        north_latitude=40.09455,
+                        west_longitude_deg=-105.301758,
+                        south_latitude_deg=39.964069,
+                        east_longitude_deg=-105.178505,
+                        north_latitude_deg=40.09455,
                     )
                 )
             )
