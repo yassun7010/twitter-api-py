@@ -348,7 +348,7 @@ class SearchQueryBuilder:
 
         - `longitude` の範囲： ±180[deg]
         - `latitude` の範囲： ±90[deg]
-        - `radius` の最大値： 25[mi] ≒ 40[km]
+        - `radius` の最大値： 40[km] ≒ 25[mi]
         """
         return PointRadiusOperator(
             longitude_deg=longitude_deg,
