@@ -62,7 +62,7 @@ class CorrectOperator(Operator):
 
 class InvertibleOperator(Operator):
     """
-    否定（ ~ 演算子を追加）することのできる Operator。
+    否定（ ~ 演算子を適用）することのできる Operator。
     """
 
     def __invert__(self):
