@@ -80,7 +80,7 @@ from .operators.in_reply_to_tweet_id_operator import InReplyToTweetIdOperator
 from .operators.keyword_operator import KeywordOperator
 from .operators.list_operator import ListOperator
 from .operators.mention_operator import MentionOperator
-from .operators.operator import CorrectOperator, Operator
+from .operators.operator import CorrectOperator, Operator, WeakOperator
 from .operators.quotes_of_tweet_id_operator import QuotesOfTweetIdOperator
 from .operators.retweet_of_operator import RetweetOfOperator
 from .operators.retweets_of_tweet_id_operator import RetweetsOfTweetIdOperator
@@ -193,11 +193,11 @@ class _SearchQueryBuilder(metaclass=ABCMeta):
 
     @overload
     @classmethod
-    def group(cls, operator: Operator) -> WeakGroupOperator:
+    def group(cls, operator: WeakOperator) -> WeakGroupOperator:
         ...
 
     @classmethod
-    def group(cls, operator: Union[CorrectOperator, Operator]):
+    def group(cls, operator: Union[CorrectOperator, WeakOperator]):
         """
         括弧で囲みたい対象を指定する。括弧で囲まれた対象は優先的に計算される。
 
