@@ -345,6 +345,9 @@ class SearchQueryBuilder:
     ) -> PointRadiusOperator:
         """
         どの位置座標からのツイートかで絞り込む。
+
+        - `longitude` の範囲： ±180[deg]
+        - `latitude` の範囲： ±90[deg]
         """
         return PointRadiusOperator(
             longitude_deg=longitude_deg,
@@ -363,6 +366,9 @@ class SearchQueryBuilder:
     ) -> BoundingBoxOperator:
         """
         どの地図範囲からのツイートかで絞り込む。
+
+        - `longitude` の範囲： ±180[deg]
+        - `latitude` の範囲： ±90[deg]
         """
         return BoundingBoxOperator(
             west_longitude_deg=west_longitude_deg,
