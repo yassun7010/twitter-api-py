@@ -3,9 +3,7 @@ from .operator import Operator, WeakOperator
 
 class NotOperator(
     # NOTE: 否定は CorrectOperator ではなく、 WeakOperator である。
-    #       言い換えれば、否定だけの条件による検索を禁止している。
-    #       そうでないクエリを作成することはできるだろうが、検索効率の悪いクエリになる。
-    #       本ツールでは、意図的に否定から開始するクエリを禁止する。
+    #       公式ドキュメント上でも、否定だけの条件による検索を禁止されている。
     WeakOperator,
 ):
     def __init__(self, op: Operator) -> None:
