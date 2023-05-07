@@ -21,10 +21,9 @@ class GroupOperator(
 
     def __str__(self) -> str:
         from ._and_operator import AndOperator
-        from ._not_operator import NotOperator
         from ._or_operator import OrOperator
 
-        if isinstance(self._operator, (AndOperator, OrOperator, NotOperator)):
+        if isinstance(self._operator, (AndOperator, OrOperator)):
             return f"({self._operator})"
 
         else:
