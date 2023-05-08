@@ -106,49 +106,49 @@ class TestSearchQueryBuilder:
             == '("Twitter API" OR #v2) -"recent search"'
         )
 
-    def test_query_builder_correct_and_correct(self):
+    def test_query_builder_complete_and_complete(self):
         assert isinstance(
             build(lambda q: (q.mention("twitterdev") & q.hashtag("Twitter"))),
             CompleteOperator,
         )
 
-    def test_query_builder_correct_and_weak(self):
+    def test_query_builder_complete_and_incomplete(self):
         assert isinstance(
             build(lambda q: (q.mention("twitterdev") & q.is_quote())),
             CompleteOperator,
         )
 
-    def test_query_builder_weak_and_correct(self):
+    def test_query_builder_incomplete_and_complete(self):
         assert isinstance(
             build(lambda q: (q.is_retweet() & q.mention("twitterdev"))),
             CompleteOperator,
         )
 
-    def test_query_builder_weak_and_weak(self):
+    def test_query_builder_incomplete_and_incomplete(self):
         assert isinstance(
             build(lambda q: (q.is_retweet() & q.is_quote())),
             IncompleteOperator,
         )
 
-    def test_query_builder_correct_or_correct(self):
+    def test_query_builder_complete_or_complete(self):
         assert isinstance(
             build(lambda q: (q.mention("twitterdev") | q.hashtag("Twitter"))),
             CompleteOperator,
         )
 
-    def test_query_builder_correct_or_weak(self):
+    def test_query_builder_complete_or_incomplete(self):
         assert isinstance(
             build(lambda q: (q.mention("twitterdev") | q.is_quote())),
             IncompleteOperator,
         )
 
-    def test_query_builder_weak_or_correct(self):
+    def test_query_builder_incomplete_or_complete(self):
         assert isinstance(
             build(lambda q: (q.is_retweet() | q.mention("twitterdev"))),
             IncompleteOperator,
         )
 
-    def test_query_builder_weak_or_weak(self):
+    def test_query_builder_incomplete_or_incomplete(self):
         assert isinstance(
             build(lambda q: (q.is_retweet() | q.is_quote())),
             IncompleteOperator,

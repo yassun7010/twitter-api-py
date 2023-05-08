@@ -56,7 +56,7 @@ class TestGroupOperator:
 
         assert str(query) == "twitter @twitterdev"
 
-    def test_search_query_builder_correct_group(self):
+    def test_search_query_builder_complete_group(self):
         query = build(
             lambda q: (
                 q.group(
@@ -68,7 +68,7 @@ class TestGroupOperator:
         assert str(query) == "(twitter @twitterdev)"
         assert isinstance(query, CompleteGroupOperator)
 
-    def test_search_query_builder_weak_group(self):
+    def test_search_query_builder_incomplete_group(self):
         query = build(
             lambda q: (
                 q.group(
