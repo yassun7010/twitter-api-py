@@ -33,10 +33,10 @@ class GroupOperator(
         return f"{self.__class__.__name__}({repr(self._operator)})"
 
 
-class IncompleteGroupOperator(GroupOperator, IncompleteOperator):
-    pass
-
-
 class CompleteGroupOperator(GroupOperator, CompleteOperator):
     def __init__(self, operator: CompleteOperator):
         super().__init__(operator)
+
+
+class IncompleteGroupOperator(GroupOperator, IncompleteOperator):
+    pass
