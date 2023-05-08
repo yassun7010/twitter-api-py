@@ -11,71 +11,41 @@ from twitter_api.types.v2_list.list_id import ListId
 from twitter_api.types.v2_place.place_country_code import PlaceCountryCode
 from twitter_api.types.v2_place.place_id import PlaceId
 from twitter_api.types.v2_place.place_name import PlaceName
-from twitter_api.types.v2_search_query.operators.bounding_box_operator import (
-    BoundingBoxOperator,
-)
-from twitter_api.types.v2_search_query.operators.has_cashtags_operator import (
-    HasCashtagsOperator,
-)
-from twitter_api.types.v2_search_query.operators.has_geo_operator import HasGeoOperator
-from twitter_api.types.v2_search_query.operators.has_hashtags_operator import (
-    HasHashtagsOperator,
-)
-from twitter_api.types.v2_search_query.operators.has_images_operator import (
-    HasImagesOperator,
-)
-from twitter_api.types.v2_search_query.operators.has_links_operator import (
-    HasLinksOperator,
-)
-from twitter_api.types.v2_search_query.operators.has_media_operator import (
-    HasMediaOperator,
-)
-from twitter_api.types.v2_search_query.operators.has_mentions_operator import (
-    HasMentionsOperator,
-)
-from twitter_api.types.v2_search_query.operators.has_video_link_operator import (
-    HasVideoLinkOperator,
-)
-from twitter_api.types.v2_search_query.operators.is_nullcast_operator import (
-    IsNullcastOperator,
-)
-from twitter_api.types.v2_search_query.operators.is_quote_operator import (
-    IsQuoteOperator,
-)
-from twitter_api.types.v2_search_query.operators.is_reply_operator import (
-    IsReplyOperator,
-)
-from twitter_api.types.v2_search_query.operators.is_retweet_operator import (
-    IsRetweetOperator,
-)
-from twitter_api.types.v2_search_query.operators.is_verified_operator import (
-    IsVerifiedOperator,
-)
-from twitter_api.types.v2_search_query.operators.lang_operator import LangOperator
-from twitter_api.types.v2_search_query.operators.place_country_operator import (
-    PlaceCountryOperator,
-)
-from twitter_api.types.v2_search_query.operators.place_operator import PlaceOperator
-from twitter_api.types.v2_search_query.operators.point_radius_operator import (
-    PointRadiusOperator,
-)
 from twitter_api.types.v2_tweet.tweet_context_annotation import TweetContextAnnotation
 from twitter_api.types.v2_tweet.tweet_id import TweetId
 from twitter_api.types.v2_user.user_id import UserId
 from twitter_api.types.v2_user.username import Username
 
+from .operators.bounding_box_operator import BoundingBoxOperator
 from .operators.cashtag_operator import CashtagOperator
 from .operators.context_operator import ContextOperator
 from .operators.conversation_id_operator import ConversationIdOperator
 from .operators.entity_operator import EntityOperator
 from .operators.from_user_operator import FromUserOperator
 from .operators.group_operator import CompleteGroupOperator, IncompleteGroupOperator
+from .operators.has_cashtags_operator import HasCashtagsOperator
+from .operators.has_geo_operator import HasGeoOperator
+from .operators.has_hashtags_operator import HasHashtagsOperator
+from .operators.has_images_operator import HasImagesOperator
+from .operators.has_links_operator import HasLinksOperator
+from .operators.has_media_operator import HasMediaOperator
+from .operators.has_mentions_operator import HasMentionsOperator
+from .operators.has_video_link_operator import HasVideoLinkOperator
 from .operators.hashtag_operator import HashtagOperator
 from .operators.in_reply_to_tweet_id_operator import InReplyToTweetIdOperator
+from .operators.is_nullcast_operator import IsNullcastOperator
+from .operators.is_quote_operator import IsQuoteOperator
+from .operators.is_reply_operator import IsReplyOperator
+from .operators.is_retweet_operator import IsRetweetOperator
+from .operators.is_verified_operator import IsVerifiedOperator
 from .operators.keyword_operator import KeywordOperator
+from .operators.lang_operator import LangOperator
 from .operators.list_operator import ListOperator
 from .operators.mention_operator import MentionOperator
 from .operators.operator import CompleteOperator, IncompleteOperator
+from .operators.place_country_operator import PlaceCountryOperator
+from .operators.place_operator import PlaceOperator
+from .operators.point_radius_operator import PointRadiusOperator
 from .operators.quotes_of_tweet_id_operator import QuotesOfTweetIdOperator
 from .operators.retweets_of_operator import RetweetsOfOperator
 from .operators.retweets_of_tweet_id_operator import RetweetsOfTweetIdOperator
