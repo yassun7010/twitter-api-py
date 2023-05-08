@@ -39,4 +39,5 @@ class CompleteGroupOperator(GroupOperator, CompleteOperator):
 
 
 class IncompleteGroupOperator(GroupOperator, IncompleteOperator):
-    pass
+    def __init__(self, operator: IncompleteOperator):
+        super().__init__(operator)
