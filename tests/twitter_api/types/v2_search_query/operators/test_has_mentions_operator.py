@@ -10,7 +10,10 @@ class TestHasMentionsOperator:
         assert str(HasMentionsOperator()) == "has:mentions"
 
     def test_query_incomplete(self):
-        assert isinstance(build(lambda q: q.has_mentions()), IncompleteOperator)
+        assert isinstance(
+            build(lambda q: q.has_mentions()),
+            IncompleteOperator,
+        )
 
     def test_query_build(self):
         assert (

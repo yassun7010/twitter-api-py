@@ -10,7 +10,10 @@ class TestHasLinksOperator:
         assert str(HasLinksOperator()) == "has:links"
 
     def test_query_incomplete(self):
-        assert isinstance(build(lambda q: q.has_links()), IncompleteOperator)
+        assert isinstance(
+            build(lambda q: q.has_links()),
+            IncompleteOperator,
+        )
 
     def test_query_build(self):
         assert (

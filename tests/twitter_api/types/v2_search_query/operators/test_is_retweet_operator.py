@@ -10,7 +10,10 @@ class TestIsRetweetOperator:
         assert str(IsRetweetOperator()) == "is:retweet"
 
     def test_query_incomplete(self):
-        assert isinstance(build(lambda q: q.is_retweet()), IncompleteOperator)
+        assert isinstance(
+            build(lambda q: q.is_retweet()),
+            IncompleteOperator,
+        )
 
     def test_query_build(self):
         assert (

@@ -10,7 +10,10 @@ class TestHasMediaOperator:
         assert str(HasMediaOperator()) == "has:media"
 
     def test_query_incomplete(self):
-        assert isinstance(build(lambda q: q.has_media()), IncompleteOperator)
+        assert isinstance(
+            build(lambda q: q.has_media()),
+            IncompleteOperator,
+        )
 
     def test_query_build(self):
         assert (

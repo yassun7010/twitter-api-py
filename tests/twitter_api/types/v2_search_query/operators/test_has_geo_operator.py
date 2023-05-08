@@ -8,7 +8,10 @@ class TestHasGeoOperator:
         assert str(HasGeoOperator()) == "has:geo"
 
     def test_query_incomplete(self):
-        assert isinstance(build(lambda q: q.has_geo()), IncompleteOperator)
+        assert isinstance(
+            build(lambda q: q.has_geo()),
+            IncompleteOperator,
+        )
 
     def test_query_build(self):
         assert (

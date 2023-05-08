@@ -10,7 +10,10 @@ class TestIsQuoteOperator:
         assert str(IsQuoteOperator()) == "is:quote"
 
     def test_query_incomplete(self):
-        assert isinstance(build(lambda q: q.is_quote()), IncompleteOperator)
+        assert isinstance(
+            build(lambda q: q.is_quote()),
+            IncompleteOperator,
+        )
 
     def test_query_build(self):
         assert (

@@ -10,7 +10,10 @@ class TestHasCashtagsOperator:
         assert str(HasCashtagsOperator()) == "has:cashtags"
 
     def test_query_incomplete(self):
-        assert isinstance(build(lambda q: q.has_cashtags()), IncompleteOperator)
+        assert isinstance(
+            build(lambda q: q.has_cashtags()),
+            IncompleteOperator,
+        )
 
     def test_query_build(self):
         assert (

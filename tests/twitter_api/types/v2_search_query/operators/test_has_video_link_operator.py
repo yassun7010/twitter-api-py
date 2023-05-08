@@ -10,7 +10,10 @@ class TestHasVideoLinkOperator:
         assert str(HasVideoLinkOperator()) == "has:video_link"
 
     def test_query_incomplete(self):
-        assert isinstance(build(lambda q: q.has_video_link()), IncompleteOperator)
+        assert isinstance(
+            build(lambda q: q.has_video_link()),
+            IncompleteOperator,
+        )
 
     def test_query_build(self):
         assert (

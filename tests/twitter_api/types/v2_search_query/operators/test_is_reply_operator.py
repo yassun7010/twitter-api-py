@@ -10,7 +10,10 @@ class TestIsReplyOperator:
         assert str(IsReplyOperator()) == "is:reply"
 
     def test_query_incomplete(self):
-        assert isinstance(build(lambda q: q.is_reply()), IncompleteOperator)
+        assert isinstance(
+            build(lambda q: q.is_reply()),
+            IncompleteOperator,
+        )
 
     def test_query_build(self):
         assert (

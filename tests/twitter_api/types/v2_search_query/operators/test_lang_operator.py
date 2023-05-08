@@ -8,7 +8,10 @@ class TestLangOperator:
         assert str(LangOperator("ja")) == "lang:ja"
 
     def test_query_incomplete(self):
-        assert isinstance(build(lambda q: q.lang("ja")), IncompleteOperator)
+        assert isinstance(
+            build(lambda q: q.lang("ja")),
+            IncompleteOperator,
+        )
 
     def test_query_build(self):
         assert (

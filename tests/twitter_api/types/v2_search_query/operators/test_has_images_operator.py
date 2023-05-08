@@ -10,7 +10,10 @@ class TestHasImagesOperator:
         assert str(HasImagesOperator()) == "has:images"
 
     def test_query_incomplete(self):
-        assert isinstance(build(lambda q: q.has_images()), IncompleteOperator)
+        assert isinstance(
+            build(lambda q: q.has_images()),
+            IncompleteOperator,
+        )
 
     def test_query_build(self):
         assert (

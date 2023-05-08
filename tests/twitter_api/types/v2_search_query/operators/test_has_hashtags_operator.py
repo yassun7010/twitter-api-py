@@ -10,7 +10,10 @@ class TestHasHashtagsOperator:
         assert str(HasHashtagsOperator()) == "has:hashtags"
 
     def test_query_incomplete(self):
-        assert isinstance(build(lambda q: q.has_hashtags()), IncompleteOperator)
+        assert isinstance(
+            build(lambda q: q.has_hashtags()),
+            IncompleteOperator,
+        )
 
     def test_query_build(self):
         assert (

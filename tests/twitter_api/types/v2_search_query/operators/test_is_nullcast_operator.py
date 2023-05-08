@@ -11,13 +11,19 @@ class TestIsNullcastOperator:
         assert str(IsNullcastOperator()) == "is:nullcast"
 
     def test_is_nullcast_operator_invert(self):
-        assert isinstance(~IsNullcastOperator(), IsNotNullcastOperator)
+        assert isinstance(
+            ~IsNullcastOperator(),
+            IsNotNullcastOperator,
+        )
 
     def test_is_not_nullcast_operator(self):
         assert str(IsNotNullcastOperator()) == "-is:nullcast"
 
     def test_query_incomplete(self):
-        assert isinstance(build(lambda q: ~q.is_nullcast()), IncompleteOperator)
+        assert isinstance(
+            build(lambda q: ~q.is_nullcast()),
+            IncompleteOperator,
+        )
 
     def test_query_build(self):
         assert (

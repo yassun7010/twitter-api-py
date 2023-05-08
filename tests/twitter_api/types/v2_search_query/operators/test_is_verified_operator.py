@@ -10,7 +10,10 @@ class TestIsVerifiedOperator:
         assert str(IsVerifiedOperator()) == "is:verified"
 
     def test_query_incomplete(self):
-        assert isinstance(build(lambda q: q.is_verified()), IncompleteOperator)
+        assert isinstance(
+            build(lambda q: q.is_verified()),
+            IncompleteOperator,
+        )
 
     def test_query_build(self):
         assert (
