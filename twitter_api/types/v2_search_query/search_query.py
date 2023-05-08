@@ -81,7 +81,7 @@ from .operators.list_operator import ListOperator
 from .operators.mention_operator import MentionOperator
 from .operators.operator import CompleteOperator, IncompleteOperator, Operator
 from .operators.quotes_of_tweet_id_operator import QuotesOfTweetIdOperator
-from .operators.retweet_of_operator import RetweetOfOperator
+from .operators.retweets_of_operator import RetweetsOfOperator
 from .operators.retweets_of_tweet_id_operator import RetweetsOfTweetIdOperator
 from .operators.to_user_operator import ToUserOperator
 from .operators.url_operator import UrlOperator
@@ -214,11 +214,11 @@ class SearchQueryBuilder:
         """
         return UrlOperator(url)
 
-    def retweet_of(self, user: Union[UserId, Username]) -> RetweetOfOperator:
+    def retweets_of(self, user: Union[UserId, Username]) -> RetweetsOfOperator:
         """
         どのユーザへのリツイートかで絞り込む。
         """
-        return RetweetOfOperator(user)
+        return RetweetsOfOperator(user)
 
     def in_reply_to_tweet_id(self, id: TweetId) -> InReplyToTweetIdOperator:
         """

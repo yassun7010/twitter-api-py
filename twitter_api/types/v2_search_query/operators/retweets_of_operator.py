@@ -6,7 +6,7 @@ from twitter_api.types.v2_user.username import Username
 from .operator import InvertibleOperator, StandaloneOperator
 
 
-class RetweetOfOperator(
+class RetweetsOfOperator(
     InvertibleOperator,
     StandaloneOperator,
 ):
