@@ -6,6 +6,7 @@ from typing import Optional
 from twitter_api.rate_limit.manager.handlers.raise_rate_limit_handler import (
     RaiseRateLimitHandler,
 )
+from twitter_api.rate_limit.manager.rate_limit_manager import RateLimitManager
 from twitter_api.rate_limit.rate_limit_info import RateLimitInfo
 
 
@@ -15,14 +16,7 @@ class RateLimitStatus:
     request_datetimes: list[datetime]
 
 
-class DictRateLimitManager(RaiseRateLimitHandler):
-    """
-    単純なハッシュマップによるレートリミットの管理を行うマネージャ。
-
-    Redis, RDS などで管理したい場合は、
-    このクラスを参考に RateLimitManager を実装すればよい。
-    """
-
+class _DictRateLimitManager(RateLimitManager):
     def __init__(self) -> None:
         self._store: dict[RateLimitInfo, RateLimitStatus] = {}
 
@@ -61,3 +55,14 @@ class DictRateLimitManager(RaiseRateLimitHandler):
             return max(wait_time_seconds, 0)
         else:
             return None
+
+
+class DictRateLimitManager(_DictRateLimitManager, RaiseRateLimitHandler):
+    """
+    単純なハッシュマップによるレートリミットの管理を行うマネージャ。
+
+    Redis, RDS などで管理したい場合は、
+    このクラスを参考に RateLimitManager を実装すればよい。
+    """
+
+    pass
