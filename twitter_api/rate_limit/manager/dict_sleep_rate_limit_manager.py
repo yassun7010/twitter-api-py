@@ -6,7 +6,7 @@ from twitter_api.rate_limit.manager.handlers.sleep_rate_limit_handler import (
 )
 
 
-class DictSleepRateLimitManager(DictRateLimitManager, SleepRateLimitHandler):
+class DictSleepRateLimitManager(SleepRateLimitHandler, DictRateLimitManager):
     """
     単純なハッシュマップによるレートリミットの管理を行うマネージャ。
 
