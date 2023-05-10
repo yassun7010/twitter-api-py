@@ -12,3 +12,5 @@ class NoOperationRateLimitManager(NoOperationRateLimitChecker, RaiseRateLimitHan
 
     Twitter API が返すレートリミットエラーをそのまま例外として投げることを想定している。
     """
+
+    pass
