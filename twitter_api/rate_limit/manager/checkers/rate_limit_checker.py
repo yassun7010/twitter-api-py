@@ -6,6 +6,12 @@ from twitter_api.rate_limit.rate_limit_info import RateLimitInfo
 
 
 class RateLimitChecker(metaclass=ABCMeta):
+    """
+    レートリミットの管理をするうえで、レートリミットを超過したかを基準に判断をすることが考えられる。
+
+    そのため、レートリミットを超過したかを確認するためのインターフェースを用意した。
+    """
+
     @abstractmethod
     def check_limit_over(
         self,
