@@ -18,13 +18,21 @@ def rate_limit_info() -> RateLimitInfo:
 
 
 class TestNoOperationRateLimitManager:
-    def test_check_limit_over(
+    def test_handle_rate_limit_sync(
         self,
         rate_limit_info: RateLimitInfo,
     ):
-        assert (
-            NoOperationRateLimitManager().check_limit_over(
-                rate_limit_info=rate_limit_info,
-            )
-            is None
-        )
+        with NoOperationRateLimitManager().handle_rate_limit_sync(
+            rate_limit_info=rate_limit_info,
+        ) as result:
+            assert result is None
+
+    @pytest.mark.asyncio
+    async def test_handle_rate_limit_async(
+        self,
+        rate_limit_info: RateLimitInfo,
+    ):
+        async with NoOperationRateLimitManager().handle_rate_limit_async(
+            rate_limit_info=rate_limit_info,
+        ) as result:
+            assert result is None

@@ -1,19 +1,25 @@
-from twitter_api.rate_limit.manager.checkers.no_operation_rate_limit_checker import (
-    NoOperationRateLimitChecker,
-)
-from twitter_api.rate_limit.manager.handlers.raise_rate_limit_handler import (
-    RaiseRateLimitHandler,
-)
+from contextlib import asynccontextmanager, contextmanager
+from typing import AsyncGenerator, Generator
+
 from twitter_api.rate_limit.manager.rate_limit_manager import RateLimitManager
+from twitter_api.rate_limit.rate_limit_info import RateLimitInfo
 
 
-class NoOperationRateLimitManager(
-    NoOperationRateLimitChecker, RaiseRateLimitHandler, RateLimitManager
-):
+class NoOperationRateLimitManager(RateLimitManager):
     """
     レートリミットに関して、クライアント側で何も制御しないマネージャ。
 
     Twitter API が返すレートリミットエラーをそのまま例外として投げることを想定している。
     """
 
-    pass
+    @contextmanager
+    def handle_rate_limit_sync(
+        self, rate_limit_info: RateLimitInfo
+    ) -> Generator[None, None, None]:
+        yield
+
+    @asynccontextmanager
+    async def handle_rate_limit_async(
+        self, rate_limit_info: RateLimitInfo
+    ) -> AsyncGenerator[None, None]:
+        yield
