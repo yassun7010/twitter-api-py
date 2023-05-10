@@ -1,13 +1,12 @@
 import asyncio
-import random
 import time
-from abc import ABCMeta
+from abc import ABCMeta, abstractmethod
 from contextlib import asynccontextmanager, contextmanager
 from logging import getLogger
 
 from twitter_api.error import TwitterApiErrorCode, TwitterApiResponseFailed
 from twitter_api.rate_limit.manager.checkers.rate_limit_checker import RateLimitChecker
-from twitter_api.rate_limit.manager.handlers.rate_limit_handler import RateLimitHandler
+from twitter_api.rate_limit.manager.rate_limit_manager import RateLimitManager
 from twitter_api.rate_limit.rate_limit_info import RateLimitInfo
 from twitter_api.warning import RateLimitOverWarning, UnmanagedRateLimitOverWarning
 
@@ -17,28 +16,18 @@ DEFAULT_MIN_RANDOM_SLEEP_SECONDS = 5 * 60
 DEFAULT_MAX_RANDOM_SLEEP_SECONDS = 15 * 60
 
 
-class SleepRateLimitHandler(RateLimitChecker, RateLimitHandler, metaclass=ABCMeta):
+class SleepRateLimitMixin(RateLimitChecker, RateLimitManager, metaclass=ABCMeta):
     """
     レートリミットに遭遇した場合、スリープする handler。
     """
 
-    def __init__(
-        self,
-        *,
-        min_random_sleep_seconds: int = DEFAULT_MIN_RANDOM_SLEEP_SECONDS,
-        max_random_sleep_seconds: int = DEFAULT_MAX_RANDOM_SLEEP_SECONDS,
-    ):
-        self._min_random_sleep_seconds = min_random_sleep_seconds
-        self._max_random_sleep_seconds = max_random_sleep_seconds
-
+    @abstractmethod
     def random_sleep_seconds(self) -> int:
         """
         予期しないレートリミットに遭遇した場合にランダムに休む時間[秒]。
         """
 
-        return random.randint(
-            self._min_random_sleep_seconds, self._max_random_sleep_seconds
-        )
+        ...
 
     @contextmanager
     def handle_rate_limit_sync(self, rate_limit_info: RateLimitInfo):

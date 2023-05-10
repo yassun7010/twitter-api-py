@@ -1,15 +1,13 @@
 from twitter_api.rate_limit.manager.checkers.dict_rate_limit_checker import (
     DictRateLimitChecker,
 )
-from twitter_api.rate_limit.manager.handlers.raise_rate_limit_handler import (
-    RaiseRateLimitHandler,
+from twitter_api.rate_limit.manager.mixins.raise_rate_limit_mixin import (
+    RaiseRateLimitMixin,
 )
 from twitter_api.rate_limit.manager.rate_limit_manager import RateLimitManager
 
 
-class DictRateLimitManager(
-    DictRateLimitChecker, RaiseRateLimitHandler, RateLimitManager
-):
+class DictRateLimitManager(DictRateLimitChecker, RaiseRateLimitMixin, RateLimitManager):
     """
     単純なハッシュマップによるレートリミットの管理を行うマネージャ。
 

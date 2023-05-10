@@ -1,14 +1,13 @@
-from abc import ABCMeta
 from contextlib import asynccontextmanager, contextmanager
 from typing import AsyncGenerator, Generator
 
 from twitter_api.error import RateLimitOverError
 from twitter_api.rate_limit.manager.checkers.rate_limit_checker import RateLimitChecker
-from twitter_api.rate_limit.manager.handlers.rate_limit_handler import RateLimitHandler
+from twitter_api.rate_limit.manager.rate_limit_manager import RateLimitManager
 from twitter_api.rate_limit.rate_limit_info import RateLimitInfo
 
 
-class RaiseRateLimitHandler(RateLimitChecker, RateLimitHandler, metaclass=ABCMeta):
+class RaiseRateLimitMixin(RateLimitChecker, RateLimitManager):
     """
     レートリミットオーバーが発生した場合、例外を投げるもっとも単純な handler。
     """
