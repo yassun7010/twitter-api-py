@@ -9,7 +9,7 @@ from twitter_api.rate_limit.rate_limit_info import RateLimitInfo
 
 class RaiseRateLimitManagerMixin(RateLimitChecker, RateLimitManager):
     """
-    レートリミットオーバーが発生した場合、例外を投げるもっとも単純な handler。
+    レートリミットオーバーが発生した場合、例外を投げる単純な操作を行う。
     """
 
     @contextmanager

@@ -18,7 +18,7 @@ DEFAULT_MAX_RANDOM_SLEEP_SECONDS = 15 * 60
 
 class SleepRateLimitManagerMixin(RateLimitChecker, RateLimitManager, metaclass=ABCMeta):
     """
-    レートリミットに遭遇した場合、スリープする handler。
+    レートリミットに遭遇した場合、レートリミットが解除されるまでスリープする。
     """
 
     @abstractmethod
