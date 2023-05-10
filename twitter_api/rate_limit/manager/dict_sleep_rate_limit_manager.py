@@ -1,3 +1,5 @@
+from twitter_api.rate_limit.manager.rate_limit_manager import RateLimitManager
+
 from .checkers.dict_rate_limit_checker import DictRateLimitChecker
 from .handlers.sleep_rate_limit_handler import (
     DEFAULT_MAX_RANDOM_SLEEP_SECONDS,
@@ -6,7 +8,9 @@ from .handlers.sleep_rate_limit_handler import (
 )
 
 
-class DictSleepRateLimitManager(DictRateLimitChecker, SleepRateLimitHandler):
+class DictSleepRateLimitManager(
+    DictRateLimitChecker, SleepRateLimitHandler, RateLimitManager
+):
     """
     単純なハッシュマップによるレートリミットの管理を行うマネージャ。
 

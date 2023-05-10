@@ -1,11 +1,13 @@
 import asyncio
 import random
 import time
+from abc import ABCMeta
 from contextlib import asynccontextmanager, contextmanager
 from logging import getLogger
 
 from twitter_api.error import TwitterApiErrorCode, TwitterApiResponseFailed
-from twitter_api.rate_limit.manager.rate_limit_manager import RateLimitManager
+from twitter_api.rate_limit.manager.checkers.rate_limit_checker import RateLimitChecker
+from twitter_api.rate_limit.manager.handlers.rate_limit_handler import RateLimitHandler
 from twitter_api.rate_limit.rate_limit_info import RateLimitInfo
 from twitter_api.warning import RateLimitOverWarning, UnmanagedRateLimitOverWarning
 
@@ -15,7 +17,7 @@ DEFAULT_MIN_RANDOM_SLEEP_SECONDS = 5 * 60
 DEFAULT_MAX_RANDOM_SLEEP_SECONDS = 15 * 60
 
 
-class SleepRateLimitHandler(RateLimitManager):
+class SleepRateLimitHandler(RateLimitChecker, RateLimitHandler, metaclass=ABCMeta):
     """
     レートリミットに遭遇した場合、スリープする handler。
     """
