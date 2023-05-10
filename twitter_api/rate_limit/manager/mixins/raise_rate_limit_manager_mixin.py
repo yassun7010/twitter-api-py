@@ -7,7 +7,7 @@ from twitter_api.rate_limit.manager.rate_limit_manager import RateLimitManager
 from twitter_api.rate_limit.rate_limit_info import RateLimitInfo
 
 
-class RaiseRateLimitMixin(RateLimitChecker, RateLimitManager):
+class RaiseRateLimitManagerMixin(RateLimitChecker, RateLimitManager):
     """
     レートリミットオーバーが発生した場合、例外を投げるもっとも単純な handler。
     """

@@ -3,15 +3,15 @@ from random import randint
 from twitter_api.rate_limit.manager.rate_limit_manager import RateLimitManager
 
 from .checkers.dict_rate_limit_checker import DictRateLimitChecker
-from .mixins.sleep_rate_limit_mixin import (
+from .mixins.sleep_rate_limit_manager_mixin import (
     DEFAULT_MAX_RANDOM_SLEEP_SECONDS,
     DEFAULT_MIN_RANDOM_SLEEP_SECONDS,
-    SleepRateLimitMixin,
+    SleepRateLimitManagerMixin,
 )
 
 
 class DictSleepRateLimitManager(
-    DictRateLimitChecker, SleepRateLimitMixin, RateLimitManager
+    DictRateLimitChecker, SleepRateLimitManagerMixin, RateLimitManager
 ):
     """
     単純なハッシュマップによるレートリミットの管理を行うマネージャ。
