@@ -1,3 +1,5 @@
+import pytest
+
 from twitter_api.client.request.request_mock_client import RequestMockClient
 from twitter_api.rate_limit.manager import DEFAULT_RATE_LIMIT_MANAGER
 from twitter_api.rate_limit.manager.rate_limit_manager import RateLimitManager
@@ -20,13 +22,16 @@ def api_resource(rate_limit_manager: RateLimitManager):
 
 class TestRateLimit:
     def test_rate_limit(self):
-        @rate_limit(
-            TEST_ENDPOINT,
-            "app",
-            requests=500,
-            mins=15,
-        )
+        @rate_limit(TEST_ENDPOINT, "app", requests=500, mins=15)
         def handle(self: ApiResources):
             return 1
 
         assert handle(api_resource(DEFAULT_RATE_LIMIT_MANAGER)) == 1
+
+    def test_rate_limit_when_error(self):
+        @rate_limit(TEST_ENDPOINT, "app", requests=500, mins=15)
+        def handle(self: ApiResources):
+            raise ValueError()
+
+        with pytest.raises(ValueError):
+            handle(api_resource(DEFAULT_RATE_LIMIT_MANAGER))
