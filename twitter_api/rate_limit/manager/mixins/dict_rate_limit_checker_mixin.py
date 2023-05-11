@@ -3,7 +3,7 @@ from dataclasses import dataclass
 from datetime import datetime, timedelta
 from typing import Optional
 
-from twitter_api.rate_limit.manager.checkers.rate_limit_checker import RateLimitChecker
+from twitter_api.rate_limit.manager.rate_limit_manager import RateLimitManager
 from twitter_api.rate_limit.rate_limit_info import RateLimitInfo
 
 
@@ -13,7 +13,7 @@ class RateLimitStatus:
     request_datetimes: list[datetime]
 
 
-class DictRateLimitChecker(RateLimitChecker):
+class DictRateLimitCheckerMixin(RateLimitManager):
     """
     単純なハッシュマップによるレートリミットの確認を行うクラス。
 

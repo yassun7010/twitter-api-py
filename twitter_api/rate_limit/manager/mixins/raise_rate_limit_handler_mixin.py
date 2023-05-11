@@ -1,18 +1,15 @@
-from contextlib import asynccontextmanager, contextmanager
 from typing import AsyncGenerator, Generator
 
 from twitter_api.error import RateLimitOverError
-from twitter_api.rate_limit.manager.checkers.rate_limit_checker import RateLimitChecker
 from twitter_api.rate_limit.manager.rate_limit_manager import RateLimitManager
 from twitter_api.rate_limit.rate_limit_info import RateLimitInfo
 
 
-class RaiseRateLimitManagerMixin(RateLimitChecker, RateLimitManager):
+class RaiseRateLimitHandlerMixin(RateLimitManager):
     """
     レートリミットオーバーが発生した場合、例外を投げる単純な操作を行う。
     """
 
-    @contextmanager
     def handle_rate_limit_sync(
         self, rate_limit_info: RateLimitInfo
     ) -> Generator[None, None, None]:
@@ -21,7 +18,6 @@ class RaiseRateLimitManagerMixin(RateLimitChecker, RateLimitManager):
 
         yield
 
-    @asynccontextmanager
     async def handle_rate_limit_async(
         self, rate_limit_info: RateLimitInfo
     ) -> AsyncGenerator[None, None]:

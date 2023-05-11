@@ -1,17 +1,17 @@
-from random import randint
-
+from twitter_api.rate_limit.manager.mixins.dict_rate_limit_checker_mixin import (
+    DictRateLimitCheckerMixin,
+)
 from twitter_api.rate_limit.manager.rate_limit_manager import RateLimitManager
 
-from .checkers.dict_rate_limit_checker import DictRateLimitChecker
-from .mixins.sleep_rate_limit_manager_mixin import (
+from .mixins.sleep_rate_limit_handler_mixin import (
     DEFAULT_MAX_RANDOM_SLEEP_SECONDS,
     DEFAULT_MIN_RANDOM_SLEEP_SECONDS,
-    SleepRateLimitManagerMixin,
+    SleepRateLimitHandlerMixin,
 )
 
 
 class DictSleepRateLimitManager(
-    DictRateLimitChecker, SleepRateLimitManagerMixin, RateLimitManager
+    DictRateLimitCheckerMixin, SleepRateLimitHandlerMixin, RateLimitManager
 ):
     """
     単純なハッシュマップによるレートリミットの管理を行うマネージャ。
@@ -28,5 +28,10 @@ class DictSleepRateLimitManager(
         self._max_random_sleep_seconds = max_random_sleep_seconds
         super().__init__()
 
-    def random_sleep_seconds(self) -> int:
-        return randint(self._min_random_sleep_seconds, self._max_random_sleep_seconds)
+    @property
+    def max_random_sleep_seconds(self) -> int:
+        return self._max_random_sleep_seconds
+
+    @property
+    def min_random_sleep_seconds(self) -> int:
+        return self._min_random_sleep_seconds

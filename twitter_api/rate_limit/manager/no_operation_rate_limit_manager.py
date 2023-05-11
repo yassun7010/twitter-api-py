@@ -1,5 +1,6 @@
 from contextlib import asynccontextmanager, contextmanager
-from typing import AsyncGenerator, Generator
+from datetime import datetime
+from typing import AsyncGenerator, Generator, Optional
 
 from twitter_api.rate_limit.manager.rate_limit_manager import RateLimitManager
 from twitter_api.rate_limit.rate_limit_info import RateLimitInfo
@@ -11,6 +12,13 @@ class NoOperationRateLimitManager(RateLimitManager):
 
     Twitter API が返すレートリミットエラーをそのまま例外として投げることを想定している。
     """
+
+    def check_limit_over(
+        self,
+        rate_limit_info: RateLimitInfo,
+        now: Optional[datetime] = None,
+    ) -> Optional[float]:
+        return None
 
     @contextmanager
     def handle_rate_limit_sync(

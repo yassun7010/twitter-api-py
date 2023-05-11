@@ -1,11 +1,11 @@
 import asyncio
 import time
-from abc import ABCMeta, abstractmethod
-from contextlib import asynccontextmanager, contextmanager
+from abc import abstractmethod
 from logging import getLogger
+from random import randint
+from typing import AsyncGenerator, Generator
 
 from twitter_api.error import TwitterApiErrorCode, TwitterApiResponseFailed
-from twitter_api.rate_limit.manager.checkers.rate_limit_checker import RateLimitChecker
 from twitter_api.rate_limit.manager.rate_limit_manager import RateLimitManager
 from twitter_api.rate_limit.rate_limit_info import RateLimitInfo
 from twitter_api.warning import RateLimitOverWarning, UnmanagedRateLimitOverWarning
@@ -16,21 +16,31 @@ DEFAULT_MIN_RANDOM_SLEEP_SECONDS = 5 * 60
 DEFAULT_MAX_RANDOM_SLEEP_SECONDS = 15 * 60
 
 
-class SleepRateLimitManagerMixin(RateLimitChecker, RateLimitManager, metaclass=ABCMeta):
+class SleepRateLimitHandlerMixin(RateLimitManager):
     """
     レートリミットに遭遇した場合、レートリミットが解除されるまでスリープする。
     """
 
+    @property
     @abstractmethod
+    def max_random_sleep_seconds(self) -> int:
+        ...
+
+    @property
+    @abstractmethod
+    def min_random_sleep_seconds(self) -> int:
+        ...
+
     def random_sleep_seconds(self) -> int:
         """
         予期しないレートリミットに遭遇した場合にランダムに休む時間[秒]。
         """
 
-        ...
+        return randint(self.min_random_sleep_seconds, self.max_random_sleep_seconds)
 
-    @contextmanager
-    def handle_rate_limit_sync(self, rate_limit_info: RateLimitInfo):
+    def handle_rate_limit_sync(
+        self, rate_limit_info: RateLimitInfo
+    ) -> Generator[None, None, None]:
         while True:
             # レートリミットを超えてしまっていたら、必要な待ち時間分だけ待つ。
             if wait_time_seconds := self.check_limit_over(rate_limit_info):
@@ -51,8 +61,9 @@ class SleepRateLimitManagerMixin(RateLimitChecker, RateLimitManager, metaclass=A
                 logger.warning(UnmanagedRateLimitOverWarning())
                 time.sleep(self.random_sleep_seconds())
 
-    @asynccontextmanager
-    async def handle_rate_limit_async(self, rate_limit_info: RateLimitInfo):
+    async def handle_rate_limit_async(
+        self, rate_limit_info: RateLimitInfo
+    ) -> AsyncGenerator[None, None]:
         while True:
             # レートリミットを超えてしまっていたら、必要な待ち時間分だけ待つ。
             if wait_time_seconds := self.check_limit_over(rate_limit_info):

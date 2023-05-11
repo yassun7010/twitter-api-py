@@ -2,11 +2,11 @@ from datetime import datetime, timedelta
 
 import pytest
 
-from twitter_api.rate_limit.manager.checkers.dict_rate_limit_checker import (
-    RateLimitStatus,
-)
 from twitter_api.rate_limit.manager.dict_sleep_rate_limit_manager import (
     DictSleepRateLimitManager,
+)
+from twitter_api.rate_limit.manager.mixins.dict_rate_limit_checker_mixin import (
+    RateLimitStatus,
 )
 from twitter_api.rate_limit.rate_limit_info import RateLimitInfo
 from twitter_api.types.endpoint import Endpoint
