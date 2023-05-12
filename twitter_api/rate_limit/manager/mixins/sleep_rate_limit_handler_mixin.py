@@ -1,6 +1,5 @@
 import asyncio
 import time
-from abc import abstractmethod
 from logging import getLogger
 from random import randint
 from typing import AsyncGenerator, Generator
@@ -25,14 +24,12 @@ class SleepRateLimitHandlerMixin(RateLimitManager):
     """
 
     @property
-    @abstractmethod
     def max_random_sleep_seconds(self) -> int:
-        ...
+        return DEFAULT_MAX_RANDOM_SLEEP_SECONDS
 
     @property
-    @abstractmethod
     def min_random_sleep_seconds(self) -> int:
-        ...
+        return DEFAULT_MIN_RANDOM_SLEEP_SECONDS
 
     def generate_random_sleep_seconds(self) -> int:
         """
