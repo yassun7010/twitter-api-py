@@ -73,7 +73,9 @@ def rate_limit(
                 result = None
 
                 try:
-                    with rate_limit_manager.handle_rate_limit_sync(rate_limit_info):
+                    with rate_limit_manager.handle_rate_limit_sync(
+                        rate_limit_info,
+                    ):
                         result = func(self, *args, **kwargs)
                 except ContinueRateLimitHandling:
                     continue
@@ -89,7 +91,7 @@ def rate_limit(
 
                 try:
                     async with rate_limit_manager.handle_rate_limit_async(
-                        rate_limit_info
+                        rate_limit_info,
                     ):
                         result = await func(self, *args, **kwargs)
                 except ContinueRateLimitHandling:
