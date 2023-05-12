@@ -34,7 +34,7 @@ class SleepRateLimitHandlerMixin(RateLimitManager):
     def min_random_sleep_seconds(self) -> int:
         ...
 
-    def random_sleep_seconds(self) -> int:
+    def generate_random_sleep_seconds(self) -> int:
         """
         予期しないレートリミットに遭遇した場合にランダムに休む時間[秒]。
         """
@@ -61,7 +61,7 @@ class SleepRateLimitHandlerMixin(RateLimitManager):
 
             # 予期しないレートリミットに遭遇した場合、投機的な待機を行う
             logger.warning(UnmanagedRateLimitOverWarning())
-            time.sleep(self.random_sleep_seconds())
+            time.sleep(self.generate_random_sleep_seconds())
 
             raise LoopRateLimitHandling()
 
@@ -85,6 +85,6 @@ class SleepRateLimitHandlerMixin(RateLimitManager):
 
             # 予期しないレートリミットに遭遇した場合、投機的な待機を行う
             logger.warning(UnmanagedRateLimitOverWarning())
-            await asyncio.sleep(self.random_sleep_seconds())
+            await asyncio.sleep(self.generate_random_sleep_seconds())
 
             raise LoopRateLimitHandling()
