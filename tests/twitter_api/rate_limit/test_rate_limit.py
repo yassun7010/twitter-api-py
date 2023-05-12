@@ -64,7 +64,7 @@ class IgnoreValueErrorRateLimitManager(RateLimitManager):
             pass
 
 
-class ContinueValueErrorRateLimitManager(RateLimitManager):
+class LoopValueErrorRateLimitManager(RateLimitManager):
     def check_limit_over(
         self, rate_limit_info: RateLimitInfo, now: Optional[datetime] = None
     ) -> Optional[float]:
@@ -76,7 +76,6 @@ class ContinueValueErrorRateLimitManager(RateLimitManager):
     ) -> Generator[None, None, None]:
         try:
             yield
-            return
         except ValueError:
             raise LoopRateLimitHandling()
 
@@ -86,7 +85,6 @@ class ContinueValueErrorRateLimitManager(RateLimitManager):
     ) -> AsyncGenerator[None, None]:
         try:
             yield
-            return
         except ValueError:
             raise LoopRateLimitHandling()
 
@@ -152,7 +150,7 @@ class TestRateLimit:
             else:
                 return result
 
-        assert handle(api_resource_sync(ContinueValueErrorRateLimitManager())) == 1
+        assert handle(api_resource_sync(LoopValueErrorRateLimitManager())) == 1
 
     @pytest.mark.asyncio
     async def test_rate_limit_when_sometimes_error_handle_async(self):
@@ -166,6 +164,4 @@ class TestRateLimit:
             else:
                 return result
 
-        assert (
-            await handle(api_resource_async(ContinueValueErrorRateLimitManager())) == 1
-        )
+        assert await handle(api_resource_async(LoopValueErrorRateLimitManager())) == 1
