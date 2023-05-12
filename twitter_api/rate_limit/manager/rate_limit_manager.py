@@ -30,7 +30,6 @@ class RateLimitManager(metaclass=ABCMeta):
 
         ...
 
-    @abstractmethod
     @asynccontextmanager
     async def handle_rate_limit_async(
         self, rate_limit_info: RateLimitInfo
@@ -39,7 +38,8 @@ class RateLimitManager(metaclass=ABCMeta):
         非同期的な TwitterApiAsyncClient を用いている場合のレートリミットの対応方法。
         """
 
-        ...
+        with self.handle_rate_limit_sync(rate_limit_info):
+            yield
 
 
 class LoopRateLimitHandling(Exception):

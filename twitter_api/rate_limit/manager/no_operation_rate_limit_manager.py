@@ -1,6 +1,6 @@
-from contextlib import asynccontextmanager, contextmanager
+from contextlib import contextmanager
 from datetime import datetime
-from typing import AsyncGenerator, Generator, Optional
+from typing import Generator, Optional
 
 from twitter_api.rate_limit.manager.rate_limit_manager import RateLimitManager
 from twitter_api.rate_limit.rate_limit_info import RateLimitInfo
@@ -24,10 +24,4 @@ class NoOperationRateLimitManager(RateLimitManager):
     def handle_rate_limit_sync(
         self, rate_limit_info: RateLimitInfo
     ) -> Generator[None, None, None]:
-        yield
-
-    @asynccontextmanager
-    async def handle_rate_limit_async(
-        self, rate_limit_info: RateLimitInfo
-    ) -> AsyncGenerator[None, None]:
         yield

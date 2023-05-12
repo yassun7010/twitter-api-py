@@ -1,4 +1,4 @@
-from typing import AsyncGenerator, Generator
+from typing import Generator
 
 from twitter_api.error import RateLimitOverError
 from twitter_api.rate_limit.manager.rate_limit_manager import RateLimitManager
@@ -13,14 +13,6 @@ class RaiseRateLimitHandlerMixin(RateLimitManager):
     def handle_rate_limit_sync(
         self, rate_limit_info: RateLimitInfo
     ) -> Generator[None, None, None]:
-        if self.check_limit_over(rate_limit_info) is not None:
-            raise RateLimitOverError(rate_limit_info)
-
-        yield
-
-    async def handle_rate_limit_async(
-        self, rate_limit_info: RateLimitInfo
-    ) -> AsyncGenerator[None, None]:
         if self.check_limit_over(rate_limit_info) is not None:
             raise RateLimitOverError(rate_limit_info)
 
