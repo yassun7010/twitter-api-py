@@ -59,7 +59,7 @@ class SleepRateLimitHandlerMixin(RateLimitManager):
             if error.status_code != TwitterApiErrorCode.TooManyRequests.value:
                 raise error
 
-            # 予期しないレートリミットに遭遇した場合、投機的な待機を行う
+            # 予期しないレートリミットに遭遇した場合、投機的な待機を行う。
             logger.warning(UnmanagedRateLimitOverWarning())
             time.sleep(self.generate_random_sleep_seconds())
 
@@ -83,7 +83,7 @@ class SleepRateLimitHandlerMixin(RateLimitManager):
             if error.status_code != TwitterApiErrorCode.TooManyRequests.value:
                 raise error
 
-            # 予期しないレートリミットに遭遇した場合、投機的な待機を行う
+            # 予期しないレートリミットに遭遇した場合、投機的な待機を行う。
             logger.warning(UnmanagedRateLimitOverWarning())
             await asyncio.sleep(self.generate_random_sleep_seconds())
 
