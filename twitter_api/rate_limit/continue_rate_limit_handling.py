@@ -1,0 +1,2 @@
+class ContinueRateLimitHandling(Exception):
+    pass

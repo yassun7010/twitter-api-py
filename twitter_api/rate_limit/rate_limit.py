@@ -1,6 +1,9 @@
 from typing import Callable, Literal, Optional, overload
 
 from twitter_api.client.request.request_async_client import RequestAsyncClient
+from twitter_api.rate_limit.continue_rate_limit_handling import (
+    ContinueRateLimitHandling,
+)
 from twitter_api.rate_limit.rate_limit_info import RateLimitInfo
 from twitter_api.rate_limit.rate_limit_target import RateLimitTarget
 from twitter_api.resources.api_resources import ApiResources
@@ -63,25 +66,38 @@ def rate_limit(
     """
 
     def _rate_limit(func):
-        async def handle_async(
-            rate_limit_info: RateLimitInfo, self: ApiResources, *args, **kwargs
-        ):
-            rate_limit_manager = self.request_client.rate_limit_manager
-
-            async with rate_limit_manager.handle_rate_limit_async(
-                rate_limit_info,
-            ):
-                return await func(self, *args, **kwargs)
-
         def handle_sync(
             rate_limit_info: RateLimitInfo, self: ApiResources, *args, **kwargs
         ):
             rate_limit_manager = self.request_client.rate_limit_manager
 
-            with rate_limit_manager.handle_rate_limit_sync(
-                rate_limit_info,
-            ):
-                return func(self, *args, **kwargs)
+            while True:
+                result = None
+
+                try:
+                    with rate_limit_manager.handle_rate_limit_sync(rate_limit_info):
+                        result = func(self, *args, **kwargs)
+                except ContinueRateLimitHandling:
+                    continue
+
+                return result
+
+        async def handle_async(
+            rate_limit_info: RateLimitInfo, self: ApiResources, *args, **kwargs
+        ):
+            rate_limit_manager = self.request_client.rate_limit_manager
+            while True:
+                result = None
+
+                try:
+                    async with rate_limit_manager.handle_rate_limit_async(
+                        rate_limit_info
+                    ):
+                        result = await func(self, *args, **kwargs)
+                except ContinueRateLimitHandling:
+                    continue
+
+                return result
 
         def _wrapper(self: ApiResources, *args, **kwargs):
             if self.request_client.rate_limit_target != target:
@@ -103,10 +119,10 @@ def rate_limit(
                 total_seconds=total_seconds,
             )
 
-            if isinstance(self.request_client, RequestAsyncClient):
-                return handle_async(rate_limit_info, self, *args, **kwargs)
-            else:
+            if not isinstance(self.request_client, RequestAsyncClient):
                 return handle_sync(rate_limit_info, self, *args, **kwargs)
+            else:
+                return handle_async(rate_limit_info, self, *args, **kwargs)
 
         return _wrapper
 
