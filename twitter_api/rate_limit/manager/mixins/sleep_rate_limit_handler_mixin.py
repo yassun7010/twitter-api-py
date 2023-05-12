@@ -6,8 +6,8 @@ from typing import AsyncGenerator, Generator
 
 from twitter_api.error import TwitterApiErrorCode, TwitterApiResponseFailed
 from twitter_api.rate_limit.manager.rate_limit_manager import (
-    LoopRateLimitHandling,
     RateLimitManager,
+    RetryRateLimitHandling,
 )
 from twitter_api.rate_limit.rate_limit_info import RateLimitInfo
 from twitter_api.warning import RateLimitOverWarning, UnmanagedRateLimitOverWarning
@@ -44,7 +44,7 @@ class SleepRateLimitHandlerMixin(RateLimitManager):
             logger.warning(RateLimitOverWarning(rate_limit_info))
             time.sleep(wait_time_seconds)
 
-            raise LoopRateLimitHandling()
+            raise RetryRateLimitHandling()
 
         try:
             yield
@@ -58,7 +58,7 @@ class SleepRateLimitHandlerMixin(RateLimitManager):
             logger.warning(UnmanagedRateLimitOverWarning())
             time.sleep(self.generate_random_sleep_seconds())
 
-            raise LoopRateLimitHandling()
+            raise RetryRateLimitHandling()
 
     async def ahandle(
         self, rate_limit_info: RateLimitInfo
@@ -68,7 +68,7 @@ class SleepRateLimitHandlerMixin(RateLimitManager):
             logger.warning(RateLimitOverWarning(rate_limit_info))
             await asyncio.sleep(wait_time_seconds)
 
-            raise LoopRateLimitHandling()
+            raise RetryRateLimitHandling()
 
         try:
             yield
@@ -82,4 +82,4 @@ class SleepRateLimitHandlerMixin(RateLimitManager):
             logger.warning(UnmanagedRateLimitOverWarning())
             await asyncio.sleep(self.generate_random_sleep_seconds())
 
-            raise LoopRateLimitHandling()
+            raise RetryRateLimitHandling()

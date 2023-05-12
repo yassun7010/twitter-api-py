@@ -40,7 +40,7 @@ class RateLimitManager(metaclass=ABCMeta):
             yield
 
 
-class LoopRateLimitHandling(Exception):
+class RetryRateLimitHandling(Exception):
     """
     レートリミットの制御処理を繰り返すことを指示。
     """

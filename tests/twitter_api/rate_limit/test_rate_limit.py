@@ -8,8 +8,8 @@ from twitter_api.client.request.request_async_mock_client import RequestAsyncMoc
 from twitter_api.client.request.request_mock_client import RequestMockClient
 from twitter_api.rate_limit.manager import DEFAULT_RATE_LIMIT_MANAGER
 from twitter_api.rate_limit.manager.rate_limit_manager import (
-    LoopRateLimitHandling,
     RateLimitManager,
+    RetryRateLimitHandling,
 )
 from twitter_api.rate_limit.rate_limit import rate_limit
 from twitter_api.rate_limit.rate_limit_info import RateLimitInfo
@@ -64,7 +64,7 @@ class LoopWhenErrorRateLimitManager(RateLimitManager):
         try:
             yield
         except Exception:
-            raise LoopRateLimitHandling()
+            raise RetryRateLimitHandling()
 
 
 class TestRateLimit:
