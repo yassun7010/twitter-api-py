@@ -39,7 +39,7 @@ def api_resource_async(rate_limit_manager: RateLimitManager):
     )
 
 
-class IgnoreValueErrorRateLimitManager(RateLimitManager):
+class IgnoreWhenErrorRateLimitManager(RateLimitManager):
     def check_limit_over(
         self, rate_limit_info: RateLimitInfo, now: Optional[datetime] = None
     ) -> Optional[float]:
@@ -51,7 +51,7 @@ class IgnoreValueErrorRateLimitManager(RateLimitManager):
     ) -> Generator[None, None, None]:
         try:
             yield
-        except ValueError:
+        except Exception:
             pass
 
     @asynccontextmanager
@@ -60,11 +60,11 @@ class IgnoreValueErrorRateLimitManager(RateLimitManager):
     ) -> AsyncGenerator[None, None]:
         try:
             yield
-        except ValueError:
+        except Exception:
             pass
 
 
-class LoopValueErrorRateLimitManager(RateLimitManager):
+class LoopWhenErrorRateLimitManager(RateLimitManager):
     def check_limit_over(
         self, rate_limit_info: RateLimitInfo, now: Optional[datetime] = None
     ) -> Optional[float]:
@@ -76,7 +76,7 @@ class LoopValueErrorRateLimitManager(RateLimitManager):
     ) -> Generator[None, None, None]:
         try:
             yield
-        except ValueError:
+        except Exception:
             raise LoopRateLimitHandling()
 
     @asynccontextmanager
@@ -85,7 +85,7 @@ class LoopValueErrorRateLimitManager(RateLimitManager):
     ) -> AsyncGenerator[None, None]:
         try:
             yield
-        except ValueError:
+        except Exception:
             raise LoopRateLimitHandling()
 
 
@@ -127,7 +127,7 @@ class TestRateLimit:
         def handle(self: ApiResources):
             raise ValueError()
 
-        assert handle(api_resource_sync(IgnoreValueErrorRateLimitManager())) is None
+        assert handle(api_resource_sync(IgnoreWhenErrorRateLimitManager())) is None
 
     @pytest.mark.asyncio
     async def test_rate_limit_when_error_handle_async(self):
@@ -136,7 +136,7 @@ class TestRateLimit:
             raise ValueError()
 
         assert (
-            await handle(api_resource_async(IgnoreValueErrorRateLimitManager())) is None
+            await handle(api_resource_async(IgnoreWhenErrorRateLimitManager())) is None
         )
 
     def test_rate_limit_when_sometimes_error_handle_sync(self):
@@ -150,7 +150,7 @@ class TestRateLimit:
             else:
                 return result
 
-        assert handle(api_resource_sync(LoopValueErrorRateLimitManager())) == 1
+        assert handle(api_resource_sync(LoopWhenErrorRateLimitManager())) == 1
 
     @pytest.mark.asyncio
     async def test_rate_limit_when_sometimes_error_handle_async(self):
@@ -164,4 +164,4 @@ class TestRateLimit:
             else:
                 return result
 
-        assert await handle(api_resource_async(LoopValueErrorRateLimitManager())) == 1
+        assert await handle(api_resource_async(LoopWhenErrorRateLimitManager())) == 1
