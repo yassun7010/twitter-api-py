@@ -40,3 +40,11 @@ class RateLimitManager(metaclass=ABCMeta):
         """
 
         ...
+
+
+class ContinueRateLimitHandling(Exception):
+    """
+    レートリミットの制御処理を繰り返すことを指示。
+    """
+
+    pass

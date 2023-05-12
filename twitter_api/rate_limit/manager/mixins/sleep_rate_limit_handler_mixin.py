@@ -6,10 +6,10 @@ from random import randint
 from typing import AsyncGenerator, Generator
 
 from twitter_api.error import TwitterApiErrorCode, TwitterApiResponseFailed
-from twitter_api.rate_limit.continue_rate_limit_handling import (
+from twitter_api.rate_limit.manager.rate_limit_manager import (
     ContinueRateLimitHandling,
+    RateLimitManager,
 )
-from twitter_api.rate_limit.manager.rate_limit_manager import RateLimitManager
 from twitter_api.rate_limit.rate_limit_info import RateLimitInfo
 from twitter_api.warning import RateLimitOverWarning, UnmanagedRateLimitOverWarning
 

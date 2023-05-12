@@ -6,11 +6,11 @@ import pytest
 
 from twitter_api.client.request.request_async_mock_client import RequestAsyncMockClient
 from twitter_api.client.request.request_mock_client import RequestMockClient
-from twitter_api.rate_limit.continue_rate_limit_handling import (
-    ContinueRateLimitHandling,
-)
 from twitter_api.rate_limit.manager import DEFAULT_RATE_LIMIT_MANAGER
-from twitter_api.rate_limit.manager.rate_limit_manager import RateLimitManager
+from twitter_api.rate_limit.manager.rate_limit_manager import (
+    ContinueRateLimitHandling,
+    RateLimitManager,
+)
 from twitter_api.rate_limit.rate_limit import rate_limit
 from twitter_api.rate_limit.rate_limit_info import RateLimitInfo
 from twitter_api.resources.api_resources import ApiResources
@@ -51,6 +51,31 @@ class IgnoreValueErrorRateLimitManager(RateLimitManager):
     ) -> Generator[None, None, None]:
         try:
             yield
+        except ValueError:
+            pass
+
+    @asynccontextmanager
+    async def handle_rate_limit_async(
+        self, rate_limit_info: RateLimitInfo
+    ) -> AsyncGenerator[None, None]:
+        try:
+            yield
+        except ValueError:
+            pass
+
+
+class ContinueValueErrorRateLimitManager(RateLimitManager):
+    def check_limit_over(
+        self, rate_limit_info: RateLimitInfo, now: Optional[datetime] = None
+    ) -> Optional[float]:
+        return None
+
+    @contextmanager
+    def handle_rate_limit_sync(
+        self, rate_limit_info: RateLimitInfo
+    ) -> Generator[None, None, None]:
+        try:
+            yield
             return
         except ValueError:
             raise ContinueRateLimitHandling()
@@ -74,7 +99,15 @@ class TestRateLimit:
 
         assert handle(api_resource_sync(DEFAULT_RATE_LIMIT_MANAGER)) == 1
 
-    def test_rate_limit_when_error(self):
+    @pytest.mark.asyncio
+    async def test_rate_limit_async(self):
+        @rate_limit(TEST_ENDPOINT, "app", requests=500, mins=15)
+        async def handle(self: ApiResources):
+            return 1
+
+        assert await handle(api_resource_async(DEFAULT_RATE_LIMIT_MANAGER)) == 1
+
+    def test_rate_limit_raise_error_sync(self):
         @rate_limit(TEST_ENDPOINT, "app", requests=500, mins=15)
         def handle(self: ApiResources):
             raise ValueError()
@@ -82,36 +115,31 @@ class TestRateLimit:
         with pytest.raises(ValueError):
             handle(api_resource_sync(DEFAULT_RATE_LIMIT_MANAGER))
 
-    def test_rate_limit_when_error_handle(self):
+    @pytest.mark.asyncio
+    async def test_rate_limit_raise_error_async(self):
+        @rate_limit(TEST_ENDPOINT, "app", requests=500, mins=15)
+        async def handle(self: ApiResources):
+            raise ValueError()
+
+        with pytest.raises(ValueError):
+            await handle(api_resource_async(DEFAULT_RATE_LIMIT_MANAGER))
+
+    def test_rate_limit_when_error_handle_sync(self):
         @rate_limit(TEST_ENDPOINT, "app", requests=500, mins=15)
         def handle(self: ApiResources):
             raise ValueError()
 
-        class IgnoreValueErrorRateLimitManager(RateLimitManager):
-            def check_limit_over(
-                self, rate_limit_info: RateLimitInfo, now: Optional[datetime] = None
-            ) -> Optional[float]:
-                return None
-
-            @contextmanager
-            def handle_rate_limit_sync(
-                self, rate_limit_info: RateLimitInfo
-            ) -> Generator[None, None, None]:
-                try:
-                    yield
-                except ValueError:
-                    pass
-
-            @asynccontextmanager
-            async def handle_rate_limit_async(
-                self, rate_limit_info: RateLimitInfo
-            ) -> AsyncGenerator[None, None]:
-                try:
-                    yield
-                except ValueError:
-                    pass
-
         assert handle(api_resource_sync(IgnoreValueErrorRateLimitManager())) is None
+
+    @pytest.mark.asyncio
+    async def test_rate_limit_when_error_handle_async(self):
+        @rate_limit(TEST_ENDPOINT, "app", requests=500, mins=15)
+        async def handle(self: ApiResources):
+            raise ValueError()
+
+        assert (
+            await handle(api_resource_async(IgnoreValueErrorRateLimitManager())) is None
+        )
 
     def test_rate_limit_when_sometimes_error_handle_sync(self):
         result_iter = iter([ValueError(), ValueError(), 1])
@@ -124,7 +152,7 @@ class TestRateLimit:
             else:
                 return result
 
-        assert handle(api_resource_sync(IgnoreValueErrorRateLimitManager())) == 1
+        assert handle(api_resource_sync(ContinueValueErrorRateLimitManager())) == 1
 
     @pytest.mark.asyncio
     async def test_rate_limit_when_sometimes_error_handle_async(self):
@@ -138,4 +166,6 @@ class TestRateLimit:
             else:
                 return result
 
-        assert await handle(api_resource_async(IgnoreValueErrorRateLimitManager())) == 1
+        assert (
+            await handle(api_resource_async(ContinueValueErrorRateLimitManager())) == 1
+        )

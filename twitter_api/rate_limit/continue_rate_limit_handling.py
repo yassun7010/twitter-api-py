@@ -1,2 +1,0 @@
-class ContinueRateLimitHandling(Exception):
-    pass
