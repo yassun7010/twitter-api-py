@@ -1,7 +1,7 @@
 from typing import Callable, Literal, Optional, overload
 
 from twitter_api.client.request.request_async_client import RequestAsyncClient
-from twitter_api.rate_limit.manager.rate_limit_manager import ContinueRateLimitHandling
+from twitter_api.rate_limit.manager.rate_limit_manager import LoopRateLimitHandling
 from twitter_api.rate_limit.rate_limit_info import RateLimitInfo
 from twitter_api.rate_limit.rate_limit_target import RateLimitTarget
 from twitter_api.resources.api_resources import ApiResources
@@ -77,7 +77,7 @@ def rate_limit(
                         rate_limit_info,
                     ):
                         result = func(self, *args, **kwargs)
-                except ContinueRateLimitHandling:
+                except LoopRateLimitHandling:
                     continue
 
                 return result
@@ -94,7 +94,7 @@ def rate_limit(
                         rate_limit_info,
                     ):
                         result = await func(self, *args, **kwargs)
-                except ContinueRateLimitHandling:
+                except LoopRateLimitHandling:
                     continue
 
                 return result

@@ -7,7 +7,7 @@ from typing import AsyncGenerator, Generator
 
 from twitter_api.error import TwitterApiErrorCode, TwitterApiResponseFailed
 from twitter_api.rate_limit.manager.rate_limit_manager import (
-    ContinueRateLimitHandling,
+    LoopRateLimitHandling,
     RateLimitManager,
 )
 from twitter_api.rate_limit.rate_limit_info import RateLimitInfo
@@ -49,7 +49,7 @@ class SleepRateLimitHandlerMixin(RateLimitManager):
             logger.warning(RateLimitOverWarning(rate_limit_info))
             time.sleep(wait_time_seconds)
 
-            raise ContinueRateLimitHandling()
+            raise LoopRateLimitHandling()
 
         try:
             yield
@@ -63,7 +63,7 @@ class SleepRateLimitHandlerMixin(RateLimitManager):
             logger.warning(UnmanagedRateLimitOverWarning())
             time.sleep(self.random_sleep_seconds())
 
-            raise ContinueRateLimitHandling()
+            raise LoopRateLimitHandling()
 
     async def handle_rate_limit_async(
         self, rate_limit_info: RateLimitInfo
@@ -73,7 +73,7 @@ class SleepRateLimitHandlerMixin(RateLimitManager):
             logger.warning(RateLimitOverWarning(rate_limit_info))
             await asyncio.sleep(wait_time_seconds)
 
-            raise ContinueRateLimitHandling()
+            raise LoopRateLimitHandling()
 
         try:
             yield
@@ -87,4 +87,4 @@ class SleepRateLimitHandlerMixin(RateLimitManager):
             logger.warning(UnmanagedRateLimitOverWarning())
             await asyncio.sleep(self.random_sleep_seconds())
 
-            raise ContinueRateLimitHandling()
+            raise LoopRateLimitHandling()
