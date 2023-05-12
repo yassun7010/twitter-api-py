@@ -24,12 +24,12 @@ class SleepRateLimitHandlerMixin(RateLimitManager):
     """
 
     @property
-    def max_random_sleep_seconds(self) -> int:
-        return DEFAULT_MAX_RANDOM_SLEEP_SECONDS
-
-    @property
     def min_random_sleep_seconds(self) -> int:
         return DEFAULT_MIN_RANDOM_SLEEP_SECONDS
+
+    @property
+    def max_random_sleep_seconds(self) -> int:
+        return DEFAULT_MAX_RANDOM_SLEEP_SECONDS
 
     def generate_random_sleep_seconds(self) -> int:
         """

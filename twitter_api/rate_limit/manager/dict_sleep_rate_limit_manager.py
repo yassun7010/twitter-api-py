@@ -29,9 +29,9 @@ class DictSleepRateLimitManager(
         super().__init__()
 
     @property
-    def max_random_sleep_seconds(self) -> int:
-        return self._max_random_sleep_seconds
-
-    @property
     def min_random_sleep_seconds(self) -> int:
         return self._min_random_sleep_seconds
+
+    @property
+    def max_random_sleep_seconds(self) -> int:
+        return self._max_random_sleep_seconds
