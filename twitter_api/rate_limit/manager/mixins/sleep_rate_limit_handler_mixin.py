@@ -54,8 +54,6 @@ class SleepRateLimitHandlerMixin(RateLimitManager):
         try:
             yield
 
-            return
-
         except TwitterApiResponseFailed as error:
             # レートリミット以外のエラーなら上流に投げる。
             if error.status_code != TwitterApiErrorCode.TooManyRequests.value:
@@ -79,8 +77,6 @@ class SleepRateLimitHandlerMixin(RateLimitManager):
 
         try:
             yield
-
-            return
 
         except TwitterApiResponseFailed as error:
             # レートリミットのエラーでないなら上流に投げる。
