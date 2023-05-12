@@ -41,9 +41,7 @@ class SleepRateLimitHandlerMixin(RateLimitManager):
 
         return randint(self.min_random_sleep_seconds, self.max_random_sleep_seconds)
 
-    def handle_rate_limit_sync(
-        self, rate_limit_info: RateLimitInfo
-    ) -> Generator[None, None, None]:
+    def handle(self, rate_limit_info: RateLimitInfo) -> Generator[None, None, None]:
         # レートリミットを超えてしまっていたら、必要な待ち時間分だけ待つ。
         if wait_time_seconds := self.check_limit_over(rate_limit_info):
             logger.warning(RateLimitOverWarning(rate_limit_info))
@@ -65,7 +63,7 @@ class SleepRateLimitHandlerMixin(RateLimitManager):
 
             raise LoopRateLimitHandling()
 
-    async def handle_rate_limit_async(
+    async def ahandle(
         self, rate_limit_info: RateLimitInfo
     ) -> AsyncGenerator[None, None]:
         # レートリミットを超えてしまっていたら、必要な待ち時間分だけ待つ。

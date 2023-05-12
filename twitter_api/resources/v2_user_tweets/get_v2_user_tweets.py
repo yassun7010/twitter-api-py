@@ -16,10 +16,10 @@ from twitter_api.rate_limit.rate_limit import rate_limit
 from twitter_api.resources.api_resources import ApiResources
 from twitter_api.types._paging import (
     PageResponseBody,
-    get_collected_paging_response_body_async,
-    get_collected_paging_response_body_sync,
-    get_paging_response_body_iter_async,
-    get_paging_response_body_iter_sync,
+    aget_collected_paging_response_body,
+    aget_paging_response_body_iter,
+    get_collected_paging_response_body,
+    get_paging_response_body_iter,
 )
 from twitter_api.types.comma_separatable import CommaSeparatable, comma_separated_str
 from twitter_api.types.endpoint import Endpoint
@@ -170,7 +170,7 @@ class GetV2UserTweetsResources(ApiResources):
 
         refer: https://developer.twitter.com/en/docs/twitter-api/tweets/timelines/api-reference/get-users-id-tweets
         """
-        return get_paging_response_body_iter_sync(
+        return get_paging_response_body_iter(
             partial(self.get, id), query, "pagination_token"
         )
 
@@ -186,7 +186,7 @@ class GetV2UserTweetsResources(ApiResources):
 
         refer: https://developer.twitter.com/en/docs/twitter-api/tweets/timelines/api-reference/get-users-id-tweets
         """
-        return get_collected_paging_response_body_sync(
+        return get_collected_paging_response_body(
             partial(self.get, id), query, "pagination_token"
         )
 
@@ -204,7 +204,7 @@ class AsyncGetV2UserTweetsResources(GetV2UserTweetsResources):
         id: UserId,
         query: Optional[GetV2UserTweetsQueryParameters] = None,
     ) -> AsyncGenerator[GetV2UserTweetsResponseBody, None]:
-        return get_paging_response_body_iter_async(
+        return aget_paging_response_body_iter(
             partial(self.get, id), query, "pagination_token"
         )
 
@@ -213,6 +213,6 @@ class AsyncGetV2UserTweetsResources(GetV2UserTweetsResources):
         id: UserId,
         query: Optional[GetV2UserTweetsQueryParameters] = None,
     ) -> GetV2UserTweetsResponseBody:
-        return await get_collected_paging_response_body_async(
+        return await aget_collected_paging_response_body(
             partial(self.get, id), query, "pagination_token"
         )

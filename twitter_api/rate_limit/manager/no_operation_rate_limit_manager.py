@@ -21,7 +21,5 @@ class NoOperationRateLimitManager(RateLimitManager):
         return None
 
     @contextmanager
-    def handle_rate_limit_sync(
-        self, rate_limit_info: RateLimitInfo
-    ) -> Generator[None, None, None]:
+    def handle(self, rate_limit_info: RateLimitInfo) -> Generator[None, None, None]:
         yield

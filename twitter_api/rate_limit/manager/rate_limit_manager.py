@@ -21,9 +21,7 @@ class RateLimitManager(metaclass=ABCMeta):
 
     @abstractmethod
     @contextmanager
-    def handle_rate_limit_sync(
-        self, rate_limit_info: RateLimitInfo
-    ) -> Generator[None, None, None]:
+    def handle(self, rate_limit_info: RateLimitInfo) -> Generator[None, None, None]:
         """
         同期的な TwitterApiClient を用いている場合のレートリミットの対応方法。
         """
@@ -31,14 +29,14 @@ class RateLimitManager(metaclass=ABCMeta):
         ...
 
     @asynccontextmanager
-    async def handle_rate_limit_async(
+    async def ahandle(
         self, rate_limit_info: RateLimitInfo
     ) -> AsyncGenerator[None, None]:
         """
         非同期的な TwitterApiAsyncClient を用いている場合のレートリミットの対応方法。
         """
 
-        with self.handle_rate_limit_sync(rate_limit_info):
+        with self.handle(rate_limit_info):
             yield
 
 

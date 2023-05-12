@@ -10,9 +10,7 @@ class RaiseRateLimitHandlerMixin(RateLimitManager):
     レートリミットオーバーが発生した場合、例外を投げる単純な操作を行う。
     """
 
-    def handle_rate_limit_sync(
-        self, rate_limit_info: RateLimitInfo
-    ) -> Generator[None, None, None]:
+    def handle(self, rate_limit_info: RateLimitInfo) -> Generator[None, None, None]:
         if self.check_limit_over(rate_limit_info) is not None:
             raise RateLimitOverError(rate_limit_info)
 

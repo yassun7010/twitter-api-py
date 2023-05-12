@@ -64,16 +64,14 @@ def rate_limit(
     """
 
     def _rate_limit(func):
-        def handle_sync(
-            rate_limit_info: RateLimitInfo, self: ApiResources, *args, **kwargs
-        ):
+        def handle(rate_limit_info: RateLimitInfo, self: ApiResources, *args, **kwargs):
             rate_limit_manager = self.request_client.rate_limit_manager
 
             while True:
                 result = None
 
                 try:
-                    with rate_limit_manager.handle_rate_limit_sync(
+                    with rate_limit_manager.handle(
                         rate_limit_info,
                     ):
                         result = func(self, *args, **kwargs)
@@ -82,7 +80,7 @@ def rate_limit(
 
                 return result
 
-        async def handle_async(
+        async def ahandle(
             rate_limit_info: RateLimitInfo, self: ApiResources, *args, **kwargs
         ):
             rate_limit_manager = self.request_client.rate_limit_manager
@@ -90,7 +88,7 @@ def rate_limit(
                 result = None
 
                 try:
-                    async with rate_limit_manager.handle_rate_limit_async(
+                    async with rate_limit_manager.ahandle(
                         rate_limit_info,
                     ):
                         result = await func(self, *args, **kwargs)
@@ -120,9 +118,9 @@ def rate_limit(
             )
 
             if not isinstance(self.request_client, RequestAsyncClient):
-                return handle_sync(rate_limit_info, self, *args, **kwargs)
+                return handle(rate_limit_info, self, *args, **kwargs)
             else:
-                return handle_async(rate_limit_info, self, *args, **kwargs)
+                return ahandle(rate_limit_info, self, *args, **kwargs)
 
         return _wrapper
 

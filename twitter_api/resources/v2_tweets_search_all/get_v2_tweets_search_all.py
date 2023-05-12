@@ -13,10 +13,10 @@ from urllib import parse
 from twitter_api.rate_limit.rate_limit import rate_limit
 from twitter_api.resources.api_resources import ApiResources
 from twitter_api.types._paging import (
-    get_collected_paging_response_body_async,
-    get_collected_paging_response_body_sync,
-    get_paging_response_body_iter_async,
-    get_paging_response_body_iter_sync,
+    aget_collected_paging_response_body,
+    aget_paging_response_body_iter,
+    get_collected_paging_response_body,
+    get_paging_response_body_iter,
 )
 from twitter_api.types.comma_separatable import CommaSeparatable, comma_separated_str
 from twitter_api.types.endpoint import Endpoint
@@ -111,7 +111,7 @@ class GetV2TweetsSearchAllResources(ApiResources):
 
         refer: https://developer.twitter.com/en/docs/twitter-api/tweets/search/api-reference/get-tweets-search-all
         """
-        return get_paging_response_body_iter_sync(self.get, query, "next_token")
+        return get_paging_response_body_iter(self.get, query, "next_token")
 
     def get_collected_paging_response_body(
         self, query: GetV2TweetsSearchAllQueryParameters
@@ -123,7 +123,7 @@ class GetV2TweetsSearchAllResources(ApiResources):
 
         refer: https://developer.twitter.com/en/docs/twitter-api/tweets/search/api-reference/get-tweets-search-all
         """
-        return get_collected_paging_response_body_sync(self.get, query, "next_token")
+        return get_collected_paging_response_body(self.get, query, "next_token")
 
 
 class AsyncGetV2TweetsSearchAllResources(GetV2TweetsSearchAllResources):
@@ -135,11 +135,9 @@ class AsyncGetV2TweetsSearchAllResources(GetV2TweetsSearchAllResources):
     async def get_paging_response_body_iter(
         self, query: GetV2TweetsSearchAllQueryParameters
     ) -> AsyncGenerator[GetV2TweetsSearchAllResponseBody, None]:
-        return get_paging_response_body_iter_async(self.get, query, "next_token")
+        return aget_paging_response_body_iter(self.get, query, "next_token")
 
     async def get_collected_paging_response_body(
         self, query: GetV2TweetsSearchAllQueryParameters
     ) -> GetV2TweetsSearchAllResponseBody:
-        return await get_collected_paging_response_body_async(
-            self.get, query, "next_token"
-        )
+        return await aget_collected_paging_response_body(self.get, query, "next_token")
