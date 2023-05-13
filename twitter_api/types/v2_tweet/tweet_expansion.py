@@ -1,4 +1,4 @@
-from typing import Literal, TypeAlias
+from typing_extensions import Literal, TypeAlias
 
 TweetExpansion: TypeAlias = Literal[
     "attachments.poll_ids",

@@ -1,4 +1,4 @@
-from typing import TypeAlias
+from typing_extensions import TypeAlias
 
 Username: TypeAlias = str
 """

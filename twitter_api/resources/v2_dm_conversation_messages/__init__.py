@@ -1,6 +1,4 @@
-from typing import TypeAlias
-
-from typing_extensions import Literal
+from typing_extensions import Literal, TypeAlias
 
 from .post_v2_dm_conversations_messages import (
     AsyncPostV2DmConversationMessagesResources,

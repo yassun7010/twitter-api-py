@@ -1,6 +1,4 @@
-from typing import TypeAlias
-
-from typing_extensions import Literal
+from typing_extensions import Literal, TypeAlias
 
 from .get_v2_dm_conversations_with_participant_dm_events import (
     AsyncGetV2DmConversationsWithParticipantDmEventsResources,

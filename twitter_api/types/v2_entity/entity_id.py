@@ -1,3 +1,3 @@
-from typing import TypeAlias
+from typing_extensions import TypeAlias
 
 EntityId: TypeAlias = str

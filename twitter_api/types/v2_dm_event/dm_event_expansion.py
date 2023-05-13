@@ -1,4 +1,4 @@
-from typing import Literal, TypeAlias
+from typing_extensions import Literal, TypeAlias
 
 DmEventExpansion: TypeAlias = Literal[
     "attachments.media_keys",

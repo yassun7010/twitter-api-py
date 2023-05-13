@@ -1,6 +1,5 @@
-from typing import TypeAlias
-
 import httpx
+from typing_extensions import TypeAlias
 
 Client: TypeAlias = httpx.Client
 AsyncClient: TypeAlias = httpx.AsyncClient

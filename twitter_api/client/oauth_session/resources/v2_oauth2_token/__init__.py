@@ -1,6 +1,4 @@
-from typing import TypeAlias
-
-from typing_extensions import Literal
+from typing_extensions import Literal, TypeAlias
 
 from twitter_api.types._generic_client import TwitterApiGenericClient
 

@@ -1,6 +1,7 @@
-from typing import Optional, TypeAlias, TypedDict, TypeVar, overload
+from typing import Optional
 
 from pydantic import BaseModel
+from typing_extensions import TypeAlias, TypedDict, TypeVar, overload
 
 Url: TypeAlias = str
 Headers = TypeVar("Headers", bound=dict)

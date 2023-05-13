@@ -1,6 +1,4 @@
-from typing import TypeAlias
-
-from typing_extensions import Literal
+from typing_extensions import Literal, TypeAlias
 
 from .get_v2_tweet_retweeted_by import (
     AsyncGetV2TweetRetweetedByResources,

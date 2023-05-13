@@ -1,4 +1,6 @@
-from typing import Optional, TypeAlias, TypeVar, Union
+from typing import Optional, Union
+
+from typing_extensions import TypeAlias, TypeVar
 
 T = TypeVar("T", bound=str)
 

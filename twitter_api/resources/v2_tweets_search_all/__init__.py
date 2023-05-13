@@ -1,6 +1,4 @@
-from typing import TypeAlias
-
-from typing_extensions import Literal
+from typing_extensions import Literal, TypeAlias
 
 from .get_v2_tweets_search_all import (
     AsyncGetV2TweetsSearchAllResources,

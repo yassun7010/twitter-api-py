@@ -1,4 +1,6 @@
-from typing import Optional, TypeAlias
+from typing import Optional
+
+from typing_extensions import TypeAlias
 
 from twitter_api.types.extra_permissive_model import ExtraPermissiveModel
 from twitter_api.types.v2_entity.entity import Entity
