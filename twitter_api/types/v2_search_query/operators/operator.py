@@ -71,9 +71,9 @@ class InvertibleOperator(Operator):
         return NotOperator(self)
 
 
-class ConjunctionRequiredOperator(IncompleteOperator):
+class StandaloneOperator(CompleteOperator):
     """
-    Twitter が定義した、それ自身だけではクエリとして成立しない Operator。
+    Twitter が定義した、それ自身がクエリとして成立する Operator。
 
     refer: https://developer.twitter.com/en/docs/twitter-api/tweets/search/integrate/build-a-query#list
     """
@@ -81,9 +81,9 @@ class ConjunctionRequiredOperator(IncompleteOperator):
     pass
 
 
-class StandaloneOperator(CompleteOperator):
+class ConjunctionRequiredOperator(IncompleteOperator):
     """
-    Twitter が定義した、それ自身がクエリとして成立する Operator。
+    Twitter が定義した、それ自身だけではクエリとして成立しない Operator。
 
     refer: https://developer.twitter.com/en/docs/twitter-api/tweets/search/integrate/build-a-query#list
     """
