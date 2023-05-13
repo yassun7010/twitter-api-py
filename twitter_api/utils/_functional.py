@@ -1,4 +1,6 @@
-from typing import Any, Callable, Optional, TypeVar, overload
+from typing import Callable, Optional
+
+from typing_extensions import Any, TypeVar, overload
 
 T = TypeVar("T")
 S = TypeVar("S")

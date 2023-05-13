@@ -1,5 +1,7 @@
 from datetime import datetime
-from typing import Any, Optional
+from typing import Optional
+
+from typing_extensions import Any
 
 from twitter_api.types.extra_permissive_model import ExtraPermissiveModel
 from twitter_api.types.http import Url

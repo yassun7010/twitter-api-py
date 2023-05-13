@@ -1,4 +1,6 @@
-from typing import Callable, Literal
+from typing import Callable
+
+from typing_extensions import Literal
 
 Scope = Literal[
     "block.read",

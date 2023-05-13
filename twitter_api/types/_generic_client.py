@@ -1,4 +1,4 @@
-from typing import TypeVar
+from typing_extensions import TypeVar
 
 from twitter_api.client.twitter_api_async_client import TwitterApiAsyncClient
 from twitter_api.client.twitter_api_async_mock_client import TwitterApiAsyncMockClient

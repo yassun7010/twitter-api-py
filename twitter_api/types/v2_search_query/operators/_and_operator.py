@@ -1,4 +1,4 @@
-from typing import overload
+from typing_extensions import overload
 
 from .operator import CompleteOperator, IncompleteOperator, Operator
 

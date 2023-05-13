@@ -1,6 +1,7 @@
-from typing import TYPE_CHECKING, AbstractSet, Any, Callable, Mapping, Optional, Union
+from typing import AbstractSet, Callable, Mapping, Optional, Union
 
 from pydantic import BaseModel
+from typing_extensions import TYPE_CHECKING, Any
 
 if TYPE_CHECKING:
     IntStr = Union[int, str]

@@ -1,4 +1,6 @@
-from typing import Callable, Literal, Optional, overload
+from typing import Callable, Optional
+
+from typing_extensions import Literal, overload
 
 from twitter_api.client.request.request_async_client import RequestAsyncClient
 from twitter_api.rate_limit.manager.rate_limit_manager import RetryRateLimitHandling

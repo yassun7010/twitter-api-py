@@ -1,4 +1,6 @@
-from typing import Any, Optional, Union
+from typing import Optional, Union
+
+from typing_extensions import Any
 
 from twitter_api.types.extra_permissive_model import ExtraPermissiveModel
 from twitter_api.types.v2_geo.geo import Geo

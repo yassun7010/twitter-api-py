@@ -1,5 +1,7 @@
 from abc import ABCMeta, abstractmethod
-from typing import Optional, Type
+from typing import Optional
+
+from typing_extensions import Type
 
 from twitter_api.rate_limit.manager.rate_limit_manager import RateLimitManager
 from twitter_api.rate_limit.rate_limit_target import RateLimitTarget
