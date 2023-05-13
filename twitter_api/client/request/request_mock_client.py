@@ -1,6 +1,6 @@
-from typing import Generic, Optional, Self, Type, Union
+from typing import Generic, Optional, Union
 
-from typing_extensions import override
+from typing_extensions import Self, Type, override
 
 from twitter_api.error import (
     MockInjectionResponseWrong,

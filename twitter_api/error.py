@@ -3,9 +3,10 @@ from abc import abstractmethod
 from collections import OrderedDict
 from enum import Enum
 from textwrap import dedent
-from typing import Any, Never, Optional, Union
+from typing import Optional, Union
 
 import pydantic
+from typing_extensions import Any, Never
 
 from twitter_api.rate_limit.rate_limit_info import RateLimitInfo
 from twitter_api.types.extra_permissive_model import ExtraPermissiveModel

@@ -1,4 +1,4 @@
-from typing import Self
+from typing_extensions import Self
 
 from twitter_api.client.request.request_async_client import RequestAsyncClient
 from twitter_api.client.request.request_mock_client import RequestMockClient

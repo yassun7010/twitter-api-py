@@ -1,6 +1,6 @@
-from typing import Mapping, Optional, Self, Union, overload
+from typing import Mapping, Optional, Union
 
-from typing_extensions import override
+from typing_extensions import Self, overload, override
 
 from twitter_api.error import TwitterApiError
 from twitter_api.rate_limit.manager import DEFAULT_RATE_LIMIT_MANAGER

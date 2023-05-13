@@ -1,7 +1,8 @@
 from abc import ABCMeta, abstractmethod
-from typing import Optional, Self, Union
+from typing import Optional, Union
 
 from pydantic import Field
+from typing_extensions import Self
 
 from twitter_api.types._paging import PageResponseBody
 from twitter_api.types.extra_permissive_model import ExtraPermissiveModel

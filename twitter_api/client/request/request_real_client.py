@@ -1,7 +1,7 @@
-from typing import Mapping, Optional, Self, Type
+from typing import Mapping, Optional
 
 import pydantic
-from typing_extensions import override
+from typing_extensions import Self, Type, override
 
 from twitter_api.error import (
     TwitterApiOAuthTokenV1NotFound,
