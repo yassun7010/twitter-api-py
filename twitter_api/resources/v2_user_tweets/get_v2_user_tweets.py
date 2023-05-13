@@ -11,6 +11,7 @@ from typing import (
 )
 
 from pydantic import Field
+from typing_extensions import override
 
 from twitter_api.rate_limit.rate_limit import rate_limit
 from twitter_api.resources.api_resources import ApiResources
@@ -192,6 +193,7 @@ class GetV2UserTweetsResources(ApiResources):
 
 
 class AsyncGetV2UserTweetsResources(GetV2UserTweetsResources):
+    @override
     async def get(
         self,
         id: UserId,
@@ -199,6 +201,7 @@ class AsyncGetV2UserTweetsResources(GetV2UserTweetsResources):
     ) -> GetV2UserTweetsResponseBody:
         return super().get(id, query)
 
+    @override
     async def get_paging_response_body_iter(
         self,
         id: UserId,
@@ -208,6 +211,7 @@ class AsyncGetV2UserTweetsResources(GetV2UserTweetsResources):
             partial(self.get, id), query, "pagination_token"
         )
 
+    @override
     async def get_collected_paging_response_body(
         self,
         id: UserId,

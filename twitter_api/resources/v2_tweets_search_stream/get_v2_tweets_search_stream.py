@@ -1,6 +1,8 @@
 from datetime import datetime
 from typing import NotRequired, Optional, TypedDict
 
+from typing_extensions import override
+
 from twitter_api.rate_limit.rate_limit import rate_limit
 from twitter_api.resources.api_resources import ApiResources
 from twitter_api.types.comma_separatable import CommaSeparatable, comma_separated_str
@@ -75,6 +77,7 @@ class GetV2TweetsSearchStreamResources(ApiResources):
 
 
 class AsyncGetV2TweetsSearchStreamResources(GetV2TweetsSearchStreamResources):
+    @override
     async def get(
         self, query: Optional[GetV2TweetsSearchStreamQueryParameters] = None
     ) -> GetV2TweetsSearchStreamResponseBody:

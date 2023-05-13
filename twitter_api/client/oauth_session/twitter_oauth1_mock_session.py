@@ -1,5 +1,7 @@
 from typing import Callable, Union
 
+from typing_extensions import override
+
 from twitter_api.client.oauth_flow.twitter_oauth1_authorization_client import (
     TwitterOAuth1AuthorizeClient,
 )
@@ -23,9 +25,11 @@ class TwitterOAuth1MockSession(TwitterOAuth1Session[TwitterApiGenericMockClient]
     ) -> None:
         self._client_generator = client_generator
 
+    @override
     def request_token(self) -> TwitterOAuth1AuthorizeClient:
         return TwitterOAuth1AuthorizeClient(session=self)
 
+    @override
     def generate_authorization_url(
         self,
         url: Union[OauthAuth1enticateUrl, Oauth1AuthorizeUrl],
@@ -37,6 +41,7 @@ class TwitterOAuth1MockSession(TwitterOAuth1Session[TwitterApiGenericMockClient]
             session=self,
         )
 
+    @override
     def fetch_token(
         self,
         authorization_response_url: CallbackUrl,

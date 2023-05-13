@@ -1,6 +1,7 @@
 from typing import Callable, Mapping, Optional, Union
 
 from authlib.integrations.httpx_client.oauth1_client import OAuth1Client
+from typing_extensions import override
 
 from twitter_api.client.oauth_flow.twitter_oauth1_authorization_client import (
     TwitterOAuth1AuthorizeClient,
@@ -72,6 +73,7 @@ class TwitterOAuth1RealSession(TwitterOAuth1Session[TwitterApiGenericClient]):
         self._transport = transport
         self._verify = verify
 
+    @override
     def request_token(self) -> TwitterOAuth1AuthorizeClient[TwitterApiGenericClient]:
         url: Oauth1RequestTokenUrl = "https://api.twitter.com/oauth/request_token"
 
@@ -79,6 +81,7 @@ class TwitterOAuth1RealSession(TwitterOAuth1Session[TwitterApiGenericClient]):
 
         return TwitterOAuth1AuthorizeClient(session=self)
 
+    @override
     def generate_authorization_url(
         self,
         url: Union[OauthAuth1enticateUrl, Oauth1AuthorizeUrl],
@@ -88,6 +91,7 @@ class TwitterOAuth1RealSession(TwitterOAuth1Session[TwitterApiGenericClient]):
             session=self,
         )
 
+    @override
     def fetch_token(
         self,
         authorization_response_url: CallbackUrl,

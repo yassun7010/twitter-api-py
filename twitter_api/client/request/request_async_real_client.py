@@ -1,5 +1,7 @@
 from typing import Mapping, Optional, Self, Type
 
+from typing_extensions import override
+
 from twitter_api.client.request.request_async_client import RequestAsyncClient
 from twitter_api.client.request.request_real_client import (
     _parse_response,
@@ -57,17 +59,21 @@ class RequestAsyncRealClient(RequestAsyncClient):
         self._rate_limit_manager = rate_limit_manager
 
     @property
+    @override
     def oauth_version(self) -> OAuthVersion:
         return self._oauth_version
 
     @property
+    @override
     def rate_limit_target(self) -> RateLimitTarget:
         return self._rate_limit_target
 
     @property
+    @override
     def rate_limit_manager(self) -> RateLimitManager:
         return self._rate_limit_manager
 
+    @override
     async def get(
         self,
         *,
@@ -98,6 +104,7 @@ class RequestAsyncRealClient(RequestAsyncClient):
             body,
         )
 
+    @override
     async def post(
         self,
         *,
@@ -130,6 +137,7 @@ class RequestAsyncRealClient(RequestAsyncClient):
             body,
         )
 
+    @override
     async def delete(
         self,
         *,

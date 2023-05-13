@@ -1,5 +1,7 @@
 from typing import TypedDict
 
+from typing_extensions import override
+
 from twitter_api.rate_limit.rate_limit import rate_limit
 from twitter_api.resources.api_resources import ApiResources
 from twitter_api.types.endpoint import Endpoint
@@ -53,6 +55,7 @@ class PostV2UserRetweetsResources(ApiResources):
 
 
 class AsyncPostV2UserRetweetsResources(PostV2UserRetweetsResources):
+    @override
     async def post(
         self,
         id: UserId,

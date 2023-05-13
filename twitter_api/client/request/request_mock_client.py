@@ -1,4 +1,6 @@
-from typing import Generic, Optional, Type, Union
+from typing import Generic, Optional, Self, Type, Union
+
+from typing_extensions import override
 
 from twitter_api.error import (
     MockInjectionResponseWrong,
@@ -43,14 +45,17 @@ class RequestMockClient(RequestClient, Generic[ResponseModelBody]):
         self._rate_limit_manager = rate_limit_manager
 
     @property
+    @override
     def oauth_version(self) -> OAuthVersion:
         return self._oauth_version
 
     @property
+    @override
     def rate_limit_target(self) -> RateLimitTarget:
         return self._rate_limit_target
 
     @property
+    @override
     def rate_limit_manager(self) -> RateLimitManager:
         return self._rate_limit_manager
 
@@ -75,6 +80,7 @@ class RequestMockClient(RequestClient, Generic[ResponseModelBody]):
 
         return response_body
 
+    @override
     def get(
         self,
         *,
@@ -86,6 +92,7 @@ class RequestMockClient(RequestClient, Generic[ResponseModelBody]):
     ) -> ResponseModelBody:
         return self._extract_response_body(endpoint)
 
+    @override
     def post(
         self,
         *,
@@ -99,6 +106,7 @@ class RequestMockClient(RequestClient, Generic[ResponseModelBody]):
     ) -> ResponseModelBody:
         return self._extract_response_body(endpoint)
 
+    @override
     def delete(
         self,
         *,
@@ -110,3 +118,12 @@ class RequestMockClient(RequestClient, Generic[ResponseModelBody]):
         query: Optional[QuryParameters] = None,
     ) -> ResponseModelBody:
         return self._extract_response_body(endpoint)
+
+    def close(self) -> None:
+        pass
+
+    def __enter__(self) -> Self:
+        return self
+
+    def __exit__(self, exc_type, exc_value, traceback) -> None:
+        pass

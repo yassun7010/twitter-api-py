@@ -10,6 +10,8 @@ from typing import (
 )
 from urllib import parse
 
+from typing_extensions import override
+
 from twitter_api.rate_limit.rate_limit import rate_limit
 from twitter_api.resources.api_resources import ApiResources
 from twitter_api.types._paging import (
@@ -127,16 +129,19 @@ class GetV2TweetsSearchAllResources(ApiResources):
 
 
 class AsyncGetV2TweetsSearchAllResources(GetV2TweetsSearchAllResources):
+    @override
     async def get(
         self, query: GetV2TweetsSearchAllQueryParameters
     ) -> GetV2TweetsSearchAllResponseBody:
         return super().get(query)
 
+    @override
     async def get_paging_response_body_iter(
         self, query: GetV2TweetsSearchAllQueryParameters
     ) -> AsyncGenerator[GetV2TweetsSearchAllResponseBody, None]:
         return aget_paging_response_body_iter(self.get, query, "next_token")
 
+    @override
     async def get_collected_paging_response_body(
         self, query: GetV2TweetsSearchAllQueryParameters
     ) -> GetV2TweetsSearchAllResponseBody:

@@ -1,3 +1,5 @@
+from typing_extensions import override
+
 from twitter_api.rate_limit.rate_limit import rate_limit
 from twitter_api.resources.api_resources import ApiResources
 from twitter_api.types.endpoint import Endpoint
@@ -40,6 +42,7 @@ class DeleteV2TweetResources(ApiResources):
 
 
 class AsyncDeleteV2TweetResources(DeleteV2TweetResources):
+    @override
     async def delete(
         self,
         id: TweetId,

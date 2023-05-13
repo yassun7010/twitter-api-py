@@ -2,6 +2,7 @@ from datetime import datetime
 from typing import NotRequired, Optional, TypedDict
 
 from pydantic import Field
+from typing_extensions import override
 
 from twitter_api.rate_limit.rate_limit import rate_limit
 from twitter_api.resources.api_resources import ApiResources
@@ -51,6 +52,7 @@ class GetV2TweetsSearchStreamRulesResources(ApiResources):
 
 
 class AsyncGetV2TweetsSearchStreamRulesResources(GetV2TweetsSearchStreamRulesResources):
+    @override
     async def get(
         self,
         query: Optional[GetV2TweetsSearchStreamRulesQueryParameters] = None,

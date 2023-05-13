@@ -1,6 +1,7 @@
 from typing import Any, Callable, Generic, Mapping, Optional
 
 from authlib.integrations.httpx_client.oauth2_client import OAuth2Client
+from typing_extensions import override
 
 from twitter_api.client.oauth_session.resources.oauth2_authorize import (
     Oauth2AuthorizeUrl,
@@ -49,6 +50,7 @@ class TwitterOAuth2RealSession(TwitterOAuth2Session, Generic[TwitterApiGenericCl
             verify=verify,
         )
 
+    @override
     def generate_authorization_url(
         self,
     ) -> OAuth2Authorization[TwitterApiGenericClient]:
@@ -66,6 +68,7 @@ class TwitterOAuth2RealSession(TwitterOAuth2Session, Generic[TwitterApiGenericCl
             session=self,
         )
 
+    @override
     def fetch_token(
         self,
         authorization_response_url: CallbackUrl,

@@ -1,6 +1,8 @@
 from datetime import datetime
 from typing import Callable
 
+from typing_extensions import override
+
 from twitter_api.client.oauth_session.twitter_oauth2_session import TwitterOAuth2Session
 from twitter_api.types._generic_client import TwitterApiGenericMockClient
 from twitter_api.types.oauth import AccessToken, CallbackUrl
@@ -18,6 +20,7 @@ class TwitterOAuth2MockSession(TwitterOAuth2Session[TwitterApiGenericMockClient]
         self._client_generator = client_generator
         self._scope = scope
 
+    @override
     def generate_authorization_url(self):
         from twitter_api.types.oauth2.oauth2_authorization import OAuth2Authorization
 
@@ -28,6 +31,7 @@ class TwitterOAuth2MockSession(TwitterOAuth2Session[TwitterApiGenericMockClient]
             session=self,
         )
 
+    @override
     def fetch_token(
         self,
         authorization_response_url: CallbackUrl,

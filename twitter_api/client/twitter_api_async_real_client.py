@@ -2,7 +2,9 @@ from typing import Mapping, Optional, Self
 
 from authlib.integrations.httpx_client.oauth1_client import OAuth1Auth
 from authlib.integrations.httpx_client.oauth2_client import OAuth2Auth
+from typing_extensions import override
 
+from twitter_api.client.request.request_async_client import RequestAsyncClient
 from twitter_api.client.request.request_async_real_client import RequestAsyncRealClient
 from twitter_api.client.request.request_real_client import RequestRealClient
 from twitter_api.client.twitter_api_async_client import TwitterApiAsyncClient
@@ -21,8 +23,6 @@ from twitter_api.types.oauth import (
 )
 from twitter_api.types.v2_scope import Scope
 
-from .request.request_client import RequestClient
-
 
 class TwitterApiAsyncRealClient(TwitterApiAsyncClient):
     """
@@ -38,10 +38,12 @@ class TwitterApiAsyncRealClient(TwitterApiAsyncClient):
         self._real_request_client = request_client
 
     @property
-    def _request_client(self) -> RequestClient:
+    @override
+    def _request_client(self) -> RequestAsyncClient:
         return self._real_request_client
 
     @classmethod
+    @override
     def from_oauth2_bearer_token(
         cls,
         bearer_token: str,
@@ -76,6 +78,7 @@ class TwitterApiAsyncRealClient(TwitterApiAsyncClient):
         )
 
     @classmethod
+    @override
     def from_oauth2_app(
         cls,
         *,
@@ -128,6 +131,7 @@ class TwitterApiAsyncRealClient(TwitterApiAsyncClient):
         )
 
     @classmethod
+    @override
     def from_oauth2_user_flow(
         cls,
         *,
@@ -185,6 +189,7 @@ class TwitterApiAsyncRealClient(TwitterApiAsyncClient):
         return client
 
     @classmethod
+    @override
     def from_oauth2_user_authorization_response_url(
         cls,
         *,
@@ -251,6 +256,7 @@ class TwitterApiAsyncRealClient(TwitterApiAsyncClient):
         return client
 
     @classmethod
+    @override
     def from_oauth1_app(
         cls,
         *,
@@ -290,6 +296,7 @@ class TwitterApiAsyncRealClient(TwitterApiAsyncClient):
         )
 
     @classmethod
+    @override
     def from_oauth1_user_flow(
         cls,
         *,
@@ -342,6 +349,7 @@ class TwitterApiAsyncRealClient(TwitterApiAsyncClient):
         return TwitterOAuth1RequestTokenClient(session)
 
     @classmethod
+    @override
     def from_oauth1_user_authorization_response_url(
         cls,
         *,

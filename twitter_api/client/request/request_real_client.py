@@ -1,6 +1,7 @@
 from typing import Mapping, Optional, Self, Type
 
 import pydantic
+from typing_extensions import override
 
 from twitter_api.error import (
     TwitterApiOAuthTokenV1NotFound,
@@ -67,17 +68,21 @@ class RequestRealClient(RequestClient):
         self._rate_limit_manager = rate_limit_manager
 
     @property
+    @override
     def oauth_version(self) -> OAuthVersion:
         return self._oauth_version
 
     @property
+    @override
     def rate_limit_target(self) -> RateLimitTarget:
         return self._rate_limit_target
 
     @property
+    @override
     def rate_limit_manager(self) -> RateLimitManager:
         return self._rate_limit_manager
 
+    @override
     def get(
         self,
         *,
@@ -108,6 +113,7 @@ class RequestRealClient(RequestClient):
             body,
         )
 
+    @override
     def post(
         self,
         *,
@@ -140,6 +146,7 @@ class RequestRealClient(RequestClient):
             body,
         )
 
+    @override
     def delete(
         self,
         *,

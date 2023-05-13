@@ -3,6 +3,7 @@ from functools import partial
 from typing import AsyncGenerator, Generator, NotRequired, Optional, Self, TypedDict
 
 from pydantic import Field
+from typing_extensions import override
 
 from twitter_api.rate_limit.rate_limit import rate_limit
 from twitter_api.resources.api_resources import ApiResources
@@ -201,6 +202,7 @@ class GetV2DmConversationsWithParticipantDmEventsResources(ApiResources):
 class AsyncGetV2DmConversationsWithParticipantDmEventsResources(
     GetV2DmConversationsWithParticipantDmEventsResources
 ):
+    @override
     async def get(
         self,
         participant_id: UserId,
@@ -213,6 +215,7 @@ class AsyncGetV2DmConversationsWithParticipantDmEventsResources(
             query,
         )
 
+    @override
     async def get_paging_response_body_iter(
         self,
         participant_id: UserId,
@@ -224,6 +227,7 @@ class AsyncGetV2DmConversationsWithParticipantDmEventsResources(
             partial(self.get, participant_id), query, "pagination_token"
         )
 
+    @override
     async def get_collected_paging_response_body(
         self,
         participant_id: UserId,

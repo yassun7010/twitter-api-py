@@ -3,6 +3,8 @@ from dataclasses import dataclass
 from datetime import datetime, timedelta
 from typing import Optional
 
+from typing_extensions import override
+
 from twitter_api.rate_limit.manager.rate_limit_manager import RateLimitManager
 from twitter_api.rate_limit.rate_limit_info import RateLimitInfo
 
@@ -24,6 +26,7 @@ class DictRateLimitCheckerMixin(RateLimitManager):
     def __init__(self) -> None:
         self._store: dict[RateLimitInfo, RateLimitStatus] = {}
 
+    @override
     def check_limit_over(
         self,
         rate_limit_info: RateLimitInfo,

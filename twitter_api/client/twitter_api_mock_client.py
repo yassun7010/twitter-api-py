@@ -1,5 +1,7 @@
 from typing import Mapping, Optional, Self, Union, overload
 
+from typing_extensions import override
+
 from twitter_api.error import TwitterApiError
 from twitter_api.rate_limit.manager import DEFAULT_RATE_LIMIT_MANAGER
 from twitter_api.rate_limit.manager.rate_limit_manager import RateLimitManager
@@ -419,21 +421,12 @@ class _BaseTwitterApiMockClient:
 
         return self
 
-    @classmethod
-    def _get_env(cls, key: Env[str]) -> str:
-        """
-        環境変数を取り出す。
-
-        Mock であるためとりあえず値を返す。
-        """
-
-        return ""
-
 
 class TwitterApiMockClient(_BaseTwitterApiMockClient, TwitterApiClient):
     """Twitter API V2 をモックするためのクライアント"""
 
     @classmethod
+    @override
     def from_oauth2_bearer_token(
         cls,
         bearer_token: str,
@@ -454,6 +447,7 @@ class TwitterApiMockClient(_BaseTwitterApiMockClient, TwitterApiClient):
         )
 
     @classmethod
+    @override
     def from_oauth2_app(
         cls,
         *,
@@ -475,6 +469,7 @@ class TwitterApiMockClient(_BaseTwitterApiMockClient, TwitterApiClient):
         )
 
     @classmethod
+    @override
     def from_oauth2_user_flow(
         cls,
         *,
@@ -508,6 +503,7 @@ class TwitterApiMockClient(_BaseTwitterApiMockClient, TwitterApiClient):
         return TwitterOAuth2AuthorizeMockClient(session=session)
 
     @classmethod
+    @override
     def from_oauth2_user_flow_env(
         cls,
         *,
@@ -545,6 +541,7 @@ class TwitterApiMockClient(_BaseTwitterApiMockClient, TwitterApiClient):
         )
 
     @classmethod
+    @override
     def from_oauth2_user_authorization_response_url(
         cls,
         *,
@@ -585,6 +582,7 @@ class TwitterApiMockClient(_BaseTwitterApiMockClient, TwitterApiClient):
         )
 
     @classmethod
+    @override
     def from_oauth2_user_authorization_response_url_env(
         cls,
         *,
@@ -626,6 +624,7 @@ class TwitterApiMockClient(_BaseTwitterApiMockClient, TwitterApiClient):
         )
 
     @classmethod
+    @override
     def from_oauth1_app(
         cls,
         *,
@@ -649,6 +648,7 @@ class TwitterApiMockClient(_BaseTwitterApiMockClient, TwitterApiClient):
         )
 
     @classmethod
+    @override
     def from_oauth1_user_flow(
         cls,
         *,
@@ -683,6 +683,7 @@ class TwitterApiMockClient(_BaseTwitterApiMockClient, TwitterApiClient):
         return TwitterOAuth1RequestTokenMockClient(session=session)
 
     @classmethod
+    @override
     def from_oauth1_user_flow_env(
         cls,
         *,
@@ -718,6 +719,7 @@ class TwitterApiMockClient(_BaseTwitterApiMockClient, TwitterApiClient):
         )
 
     @classmethod
+    @override
     def from_oauth1_user_authorization_response_url(
         cls,
         *,
@@ -758,6 +760,7 @@ class TwitterApiMockClient(_BaseTwitterApiMockClient, TwitterApiClient):
         )
 
     @classmethod
+    @override
     def from_oauth1_user_authorization_response_url_env(
         cls,
         *,
@@ -793,3 +796,14 @@ class TwitterApiMockClient(_BaseTwitterApiMockClient, TwitterApiClient):
             transport=transport,
             verify=verify,
         )
+
+    @classmethod
+    @override
+    def _get_env(cls, key: Env[str]) -> str:
+        """
+        環境変数を取り出す。
+
+        Mock であるためとりあえず値を返す。
+        """
+
+        return ""

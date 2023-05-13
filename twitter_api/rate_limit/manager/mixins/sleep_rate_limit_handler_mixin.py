@@ -4,6 +4,8 @@ from logging import getLogger
 from random import randint
 from typing import AsyncGenerator, Generator
 
+from typing_extensions import override
+
 from twitter_api.error import TwitterApiErrorCode, TwitterApiResponseFailed
 from twitter_api.rate_limit.manager.rate_limit_manager import (
     RateLimitManager,
@@ -38,6 +40,7 @@ class SleepRateLimitHandlerMixin(RateLimitManager):
 
         return randint(self.min_random_sleep_seconds, self.max_random_sleep_seconds)
 
+    @override
     def handle(self, rate_limit_info: RateLimitInfo) -> Generator[None, None, None]:
         # レートリミットを超えてしまっていたら、必要な待ち時間分だけ待つ。
         if wait_time_seconds := self.check_limit_over(rate_limit_info):
@@ -60,6 +63,7 @@ class SleepRateLimitHandlerMixin(RateLimitManager):
 
             raise RetryRateLimitHandling()
 
+    @override
     async def ahandle(
         self, rate_limit_info: RateLimitInfo
     ) -> AsyncGenerator[None, None]:

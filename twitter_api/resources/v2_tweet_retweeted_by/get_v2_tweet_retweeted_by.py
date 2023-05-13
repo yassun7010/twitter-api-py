@@ -2,6 +2,7 @@ from functools import partial
 from typing import AsyncGenerator, Generator, NotRequired, Optional, Self, TypedDict
 
 from pydantic import Field
+from typing_extensions import override
 
 from twitter_api.rate_limit.rate_limit import rate_limit
 from twitter_api.resources.api_resources import ApiResources
@@ -142,6 +143,7 @@ class GetV2TweetRetweetedByResources(ApiResources):
 
 
 class AsyncGetV2TweetRetweetedByResources(GetV2TweetRetweetedByResources):
+    @override
     async def get(
         self, id: TweetId, query: Optional[GetV2TweetRetweetedByQueryParameters] = None
     ) -> GetV2TweetRetweetedByResponseBody:
@@ -150,6 +152,7 @@ class AsyncGetV2TweetRetweetedByResources(GetV2TweetRetweetedByResources):
             query,
         )
 
+    @override
     async def get_paging_response_body_iter(
         self, id: TweetId, query: Optional[GetV2TweetRetweetedByQueryParameters] = None
     ) -> AsyncGenerator[GetV2TweetRetweetedByResponseBody, None]:
@@ -157,6 +160,7 @@ class AsyncGetV2TweetRetweetedByResources(GetV2TweetRetweetedByResources):
             partial(self.get, id), query, "pagination_token"
         )
 
+    @override
     async def get_collected_paging_response_body(
         self, id: TweetId, query: Optional[GetV2TweetRetweetedByQueryParameters] = None
     ) -> GetV2TweetRetweetedByResponseBody:

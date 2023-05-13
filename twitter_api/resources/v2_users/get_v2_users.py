@@ -1,6 +1,7 @@
 from typing import NotRequired, Optional, TypedDict
 
 from pydantic import Field
+from typing_extensions import override
 
 from twitter_api.rate_limit.rate_limit import rate_limit
 from twitter_api.resources.api_resources import ApiResources
@@ -68,5 +69,6 @@ class GetV2UsersResources(ApiResources):
 
 
 class AsyncGetV2UsersResources(GetV2UsersResources):
+    @override
     async def get(self, query: GetV2UsersQueryParameters) -> GetV2UsersResponseBody:
         return super().get(query)

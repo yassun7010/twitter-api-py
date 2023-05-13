@@ -1,6 +1,8 @@
 import base64
 from typing import TypedDict
 
+from typing_extensions import override
+
 from twitter_api.error import TwitterApiOAuthVersionWrong
 from twitter_api.resources.api_resources import ApiResources
 from twitter_api.types.endpoint import Endpoint
@@ -57,6 +59,7 @@ class PostOauth2InvalidateTokenResources(ApiResources):
 
 
 class AsyncPostOauth2InvalidateTokenResources(PostOauth2InvalidateTokenResources):
+    @override
     async def post(
         self,
         api_key: ApiKey,
