@@ -1,4 +1,4 @@
-from typing import Literal
+from typing_extensions import Literal
 
 from .get_v2_users import AsyncGetV2UsersResources, GetV2UsersResources
 

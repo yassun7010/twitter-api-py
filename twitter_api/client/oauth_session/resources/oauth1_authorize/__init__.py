@@ -1,4 +1,4 @@
-from typing import Literal
+from typing_extensions import Literal
 
 from twitter_api.types._generic_client import TwitterApiGenericClient
 

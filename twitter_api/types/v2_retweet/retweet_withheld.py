@@ -1,4 +1,6 @@
-from typing import Literal, Optional
+from typing import Optional
+
+from typing_extensions import Literal
 
 from twitter_api.types.extra_permissive_model import ExtraPermissiveModel
 

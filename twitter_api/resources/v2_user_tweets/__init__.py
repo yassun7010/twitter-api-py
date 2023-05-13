@@ -1,4 +1,4 @@
-from typing import Literal
+from typing_extensions import Literal
 
 from .get_v2_user_tweets import AsyncGetV2UserTweetsResources, GetV2UserTweetsResources
 

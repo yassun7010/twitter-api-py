@@ -1,4 +1,6 @@
-from typing import Literal, Optional, overload
+from typing import Optional
+
+from typing_extensions import Literal, overload
 
 from twitter_api.types.v2_domain import DomainId
 from twitter_api.types.v2_entity.entity_id import EntityId

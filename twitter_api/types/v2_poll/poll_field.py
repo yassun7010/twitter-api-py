@@ -1,4 +1,4 @@
-from typing import Literal
+from typing_extensions import Literal
 
 PollField = Literal[
     "duration_minutes",

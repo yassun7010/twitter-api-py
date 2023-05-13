@@ -1,4 +1,4 @@
-from typing import Literal
+from typing_extensions import Literal
 
 from .get_v2_user_followers import (
     AsyncGetV2UserFollowersResources,

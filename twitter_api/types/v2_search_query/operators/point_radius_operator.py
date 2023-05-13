@@ -1,4 +1,6 @@
-from typing import Literal, Optional, overload
+from typing import Optional
+
+from typing_extensions import Literal, overload
 
 from .operator import InvertibleOperator, StandaloneOperator
 

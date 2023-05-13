@@ -1,4 +1,4 @@
-from typing import Literal
+from typing_extensions import Literal
 
 from .post_v2_user_following import (
     AsyncPostV2UserFollowingResources,
