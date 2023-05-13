@@ -1,0 +1,49 @@
+name: Synthetic Monitoring Test
+
+on:
+  schedule:
+    - cron: "0 * * * *"
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.11"]
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v3
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Install Poetry
+        uses: snok/install-poetry@v1
+      - name: Poetry Version
+        run: |
+          poetry --version
+      - name: Poetry Install Dependencies
+        run: |
+          poetry install --no-interaction
+      - name: Synthetic Monitoring Test
+        run: |
+          API_KEY=${{ secrets.API_KEY }} \
+          API_SECRET=${{ secrets.API_SECRET }} \
+          ACCESS_TOKEN=${{ secrets.ACCESS_TOKEN }} \
+          ACCESS_SECRET=${{ secrets.ACCESS_SECRET }} \
+          BEARER_TOEKN=${{ secrets.BEARER_TOEKN }} \
+          CLIENT_ID=${{ secrets.CLIENT_ID }} \
+          CLIENT_SECRET=${{ secrets.CLIENT_SECRET }} \
+          CALLBACK_URL=${{ secrets.CALLBACK_URL }} \
+          OAUTH1_USER_ACCESS_TOKEN=${{ secrets.OAUTH1_USER_ACCESS_TOKEN }} \
+          OAUTH1_USER_ACCESS_SECRET=${{ secrets.OAUTH1_USER_ACCESS_SECRET }} \
+          OAUTH2_USER_ACCESS_TOKEN=${{ secrets.OAUTH2_USER_ACCESS_TOKEN }} \
+          USER_ID=${{ secrets.USER_ID }} \
+          PARTICIPANT_IDS=${{ secrets.PARTICIPANT_IDS }} \
+          SYNTHETIC_MONITORING_TEST=false \
+            poetry run task test
