@@ -1,7 +1,5 @@
 from abc import abstractmethod
-from typing import Optional
-
-from typing_extensions import Type
+from typing import Optional, Type
 
 from twitter_api.client.request.request_client import RequestClient
 from twitter_api.types.endpoint import Endpoint

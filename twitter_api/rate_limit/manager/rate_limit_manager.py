@@ -1,9 +1,7 @@
 from abc import ABCMeta, abstractmethod
 from contextlib import asynccontextmanager, contextmanager
 from datetime import datetime
-from typing import Generator, Optional
-
-from typing_extensions import AsyncGenerator
+from typing import AsyncGenerator, Generator, Optional
 
 from twitter_api.rate_limit.rate_limit_info import RateLimitInfo
 

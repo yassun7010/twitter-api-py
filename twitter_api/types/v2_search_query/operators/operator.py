@@ -1,6 +1,4 @@
-from typing import Union, cast
-
-from typing_extensions import overload
+from typing import Union, cast, overload
 
 
 class Operator:

@@ -1,6 +1,15 @@
-from typing import AbstractSet, Callable, Generic, Mapping, Optional, Union
+from typing import (
+    TYPE_CHECKING,
+    AbstractSet,
+    Any,
+    Callable,
+    Generic,
+    Mapping,
+    Optional,
+    Union,
+)
 
-from typing_extensions import TYPE_CHECKING, Any, Literal
+from typing_extensions import Literal
 
 from twitter_api.types._generic_client import TwitterApiGenericClient
 from twitter_api.types.extra_permissive_model import ExtraPermissiveModel
