@@ -1,7 +1,7 @@
 from datetime import datetime
-from typing import NotRequired, Optional, TypedDict
+from typing import Optional
 
-from typing_extensions import override
+from typing_extensions import NotRequired, TypedDict, override
 
 from twitter_api.rate_limit.rate_limit import rate_limit
 from twitter_api.resources.api_resources import ApiResources

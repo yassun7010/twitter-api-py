@@ -1,4 +1,6 @@
-from typing import Literal, NotRequired, Optional, TypedDict, Union
+from typing import Optional, Union
+
+from typing_extensions import Literal, NotRequired, TypedDict
 
 from twitter_api.rate_limit.rate_limit import rate_limit
 from twitter_api.resources.api_resources import ApiResources

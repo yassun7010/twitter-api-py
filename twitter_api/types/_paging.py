@@ -1,16 +1,7 @@
 from abc import ABCMeta, abstractmethod
-from typing import (
-    Any,
-    AsyncGenerator,
-    Callable,
-    Coroutine,
-    Generator,
-    Optional,
-    Self,
-    TypedDict,
-    TypeVar,
-    cast,
-)
+from typing import Callable, Generator, Optional, cast
+
+from typing_extensions import Any, AsyncGenerator, Coroutine, Self, TypedDict, TypeVar
 
 from twitter_api.types.pagination_token import PaginationToken
 

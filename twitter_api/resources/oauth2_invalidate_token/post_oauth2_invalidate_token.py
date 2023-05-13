@@ -1,7 +1,6 @@
 import base64
-from typing import TypedDict
 
-from typing_extensions import override
+from typing_extensions import TypedDict, override
 
 from twitter_api.error import TwitterApiOAuthVersionWrong
 from twitter_api.resources.api_resources import ApiResources

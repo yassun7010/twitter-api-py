@@ -1,6 +1,8 @@
 import os
 from abc import ABCMeta, abstractmethod
-from typing import Mapping, Optional, Self, Union, overload
+from typing import Mapping, Optional, Union
+
+from typing_extensions import Self, overload
 
 from twitter_api.error import NeverError
 from twitter_api.rate_limit.manager import DEFAULT_RATE_LIMIT_MANAGER

@@ -1,4 +1,6 @@
-from typing import Any, Literal, Union, overload
+from typing import Union
+
+from typing_extensions import Any, Literal, overload
 
 from twitter_api.types.v2_cashtag import Cashtag
 from twitter_api.types.v2_dm_conversation.dm_conversation_id import DmConversationId

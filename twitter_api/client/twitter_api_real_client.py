@@ -1,8 +1,8 @@
-from typing import Mapping, Optional, Self
+from typing import Mapping, Optional
 
 from authlib.integrations.httpx_client.oauth1_client import OAuth1Auth
 from authlib.integrations.httpx_client.oauth2_client import OAuth2Auth
-from typing_extensions import override
+from typing_extensions import Self, override
 
 from twitter_api.client.oauth_flow.twitter_oauth1_request_token_client import (
     TwitterOAuth1RequestTokenClient,

@@ -1,6 +1,6 @@
-from typing import Mapping, Optional, Self
+from typing import Mapping, Optional
 
-from typing_extensions import override
+from typing_extensions import Self, override
 
 from twitter_api.client.twitter_api_async_client import TwitterApiAsyncClient
 from twitter_api.rate_limit.manager import DEFAULT_RATE_LIMIT_MANAGER

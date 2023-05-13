@@ -2,9 +2,9 @@ import asyncio
 import time
 from logging import getLogger
 from random import randint
-from typing import AsyncGenerator, Generator
+from typing import Generator
 
-from typing_extensions import override
+from typing_extensions import AsyncGenerator, override
 
 from twitter_api.error import TwitterApiErrorCode, TwitterApiResponseFailed
 from twitter_api.rate_limit.manager.rate_limit_manager import (

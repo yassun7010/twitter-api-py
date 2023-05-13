@@ -1,9 +1,9 @@
 from datetime import datetime
 from functools import partial
-from typing import AsyncGenerator, Generator, NotRequired, Optional, Self, TypedDict
+from typing import Generator, Optional
 
 from pydantic import Field
-from typing_extensions import override
+from typing_extensions import AsyncGenerator, NotRequired, Self, TypedDict, override
 
 from twitter_api.rate_limit.rate_limit import rate_limit
 from twitter_api.resources.api_resources import ApiResources

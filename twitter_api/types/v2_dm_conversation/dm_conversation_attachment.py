@@ -1,4 +1,4 @@
-from typing import TypedDict
+from typing_extensions import TypedDict
 
 from twitter_api.types.v2_media.media_id import MediaId
 

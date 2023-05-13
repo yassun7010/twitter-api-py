@@ -1,7 +1,7 @@
-from typing import Any, Callable, Generic, Mapping, Optional
+from typing import Callable, Generic, Mapping, Optional
 
 from authlib.integrations.httpx_client.oauth2_client import OAuth2Client
-from typing_extensions import override
+from typing_extensions import Any, override
 
 from twitter_api.client.oauth_session.resources.oauth2_authorize import (
     Oauth2AuthorizeUrl,

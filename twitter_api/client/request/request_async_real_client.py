@@ -1,6 +1,6 @@
-from typing import Mapping, Optional, Self, Type
+from typing import Mapping, Optional
 
-from typing_extensions import override
+from typing_extensions import Self, Type, override
 
 from twitter_api.client.request.request_async_client import RequestAsyncClient
 from twitter_api.client.request.request_real_client import (
