@@ -23,7 +23,7 @@ format = "black --target-version py310 ."
 lint = "PYRIGHT_PYTHON_FORCE_VERSION=latest pyright twitter_api/** tests/** examples/**"
 
 [tool.poetry.dependencies]
-python = "^3.11"
+python = ">=3.8.1,<4.0"
 pydantic = "^1.10.7"
 authlib = "^1.2.0"
 httpx = "^0.24.0"
