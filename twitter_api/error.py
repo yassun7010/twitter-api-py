@@ -153,39 +153,38 @@ class TwitterApiResponseFailed(TwitterApiError):
 
     @property
     def message(self) -> str:
-        match self.status_code:
-            case TwitterApiErrorCode.OK.value:
-                return "API が成功しています。"
-            case TwitterApiErrorCode.NotModified.value:
-                return "返却する新しいデータがありません。"
-            case TwitterApiErrorCode.BadRequest.value:
-                return "リクエストの形式が間違っています。"
-            case TwitterApiErrorCode.Unauthorized.value:
-                return "このリクエストは証認されていません。"
-            case TwitterApiErrorCode.Forbidden.value:
-                return "このリクエストは許可されていません。"
-            case TwitterApiErrorCode.NotFound.value:
-                return "データが見つかりません。"
-            case TwitterApiErrorCode.NotAcceptable.value:
-                return "アクセスできません。"
-            case TwitterApiErrorCode.ConnectionException.value:
-                return "接続に失敗しました。"
-            case TwitterApiErrorCode.Gone.value:
-                return "このリソースは利用できなくなりました。"
-            case TwitterApiErrorCode.UnprocessableEntity.value:
-                return "処理できないエンティティです。"
-            case TwitterApiErrorCode.TooManyRequests.value:
-                return "レートリミットか Tweet Cap が制限を超えました。"
-            case TwitterApiErrorCode.InternalServerError.value:
-                return "Twitter API の内部でエラーが発生しました。"
-            case TwitterApiErrorCode.BadGateway.value:
-                return "Twitter API がダウンしているか、アップグレード中です。"
-            case TwitterApiErrorCode.ServiceUnavailable.value:
-                return "リクエスト数が多く処理できません。後でもう一度お試しください。"
-            case TwitterApiErrorCode.GatewayTimeout.value:
-                return "Twitter API が内部的にダウンしています。後でもう一度お試しください。"
-            case _:
-                return "Twitter API の応答が 200 ではありません。"
+        if self.status_code == TwitterApiErrorCode.OK.value:
+            return "API が成功しています。"
+        elif self.status_code == TwitterApiErrorCode.NotModified.value:
+            return "返却する新しいデータがありません。"
+        elif self.status_code == TwitterApiErrorCode.BadRequest.value:
+            return "リクエストの形式が間違っています。"
+        elif self.status_code == TwitterApiErrorCode.Unauthorized.value:
+            return "このリクエストは証認されていません。"
+        elif self.status_code == TwitterApiErrorCode.Forbidden.value:
+            return "このリクエストは許可されていません。"
+        elif self.status_code == TwitterApiErrorCode.NotFound.value:
+            return "データが見つかりません。"
+        elif self.status_code == TwitterApiErrorCode.NotAcceptable.value:
+            return "アクセスできません。"
+        elif self.status_code == TwitterApiErrorCode.ConnectionException.value:
+            return "接続に失敗しました。"
+        elif self.status_code == TwitterApiErrorCode.Gone.value:
+            return "このリソースは利用できなくなりました。"
+        elif self.status_code == TwitterApiErrorCode.UnprocessableEntity.value:
+            return "処理できないエンティティです。"
+        elif self.status_code == TwitterApiErrorCode.TooManyRequests.value:
+            return "レートリミットか Tweet Cap が制限を超えました。"
+        elif self.status_code == TwitterApiErrorCode.InternalServerError.value:
+            return "Twitter API の内部でエラーが発生しました。"
+        elif self.status_code == TwitterApiErrorCode.BadGateway.value:
+            return "Twitter API がダウンしているか、アップグレード中です。"
+        elif self.status_code == TwitterApiErrorCode.ServiceUnavailable.value:
+            return "リクエスト数が多く処理できません。後でもう一度お試しください。"
+        elif self.status_code == TwitterApiErrorCode.GatewayTimeout.value:
+            return "Twitter API が内部的にダウンしています。後でもう一度お試しください。"
+        else:
+            return "Twitter API の応答が 200 ではありません。"
 
     @property
     def info(self) -> TwitterApiExceptionInfo:
