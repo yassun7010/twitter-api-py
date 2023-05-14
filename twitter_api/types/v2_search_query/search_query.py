@@ -1,7 +1,7 @@
 from typing import Callable
 
 from twitter_api.types.v2_search_query.operators.group_operator import GroupOperator
-from twitter_api.types.v2_search_query.serch_query_builder import SearchQueryBuilder
+from twitter_api.types.v2_search_query.search_query_builder import SearchQueryBuilder
 
 from .operators.operator import CompleteOperator, Operator
 
