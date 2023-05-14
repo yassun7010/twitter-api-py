@@ -1,4 +1,4 @@
-from typing import Callable, Generic, Mapping, Optional
+from typing import Callable, Mapping, Optional
 
 from authlib.integrations.httpx_client.oauth2_client import OAuth2Client
 from typing_extensions import Any, override
@@ -17,9 +17,7 @@ from twitter_api.types.v2_scope import Scope
 from twitter_api.utils._oauth import generate_code_verifier
 
 
-class TwitterOAuth2RealSession(
-    TwitterOAuth2Session, Generic[TwitterApiGenericRealClient]
-):
+class TwitterOAuth2RealSession(TwitterOAuth2Session[TwitterApiGenericRealClient]):
     def __init__(
         self,
         client_generator: Callable[[AccessToken], TwitterApiGenericRealClient],

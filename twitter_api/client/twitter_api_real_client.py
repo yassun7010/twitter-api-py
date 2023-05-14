@@ -159,11 +159,7 @@ class TwitterApiRealClient(TwitterApiClient):
             verify=verify,
         )
 
-        client: TwitterOAuth2AuthorizeRealClient[
-            TwitterApiRealClient
-        ] = TwitterOAuth2AuthorizeRealClient(session)
-
-        return client
+        return TwitterOAuth2AuthorizeRealClient(session)
 
     @classmethod
     @override
@@ -219,16 +215,12 @@ class TwitterApiRealClient(TwitterApiClient):
             verify=verify,
         )
 
-        client: TwitterOAuth2AccessTokenRealClient[
-            TwitterApiRealClient
-        ] = TwitterOAuth2AccessTokenRealClient(
+        return TwitterOAuth2AccessTokenRealClient(
             authorization_response_url=authorization_response_url,
             state=state,
             code_verifier=code_verifier,
             session=session,
         )
-
-        return client
 
     @classmethod
     @override

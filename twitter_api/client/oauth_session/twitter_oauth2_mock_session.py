@@ -7,6 +7,7 @@ from twitter_api.client.oauth_session.twitter_oauth2_session import TwitterOAuth
 from twitter_api.types._generic_client import TwitterApiGenericMockClient
 from twitter_api.types.oauth import AccessToken, CallbackUrl
 from twitter_api.types.oauth2.oauth2_access_token import OAuth2AccessToken
+from twitter_api.types.oauth2.oauth2_authorization import OAuth2Authorization
 from twitter_api.types.v2_scope import Scope
 
 
@@ -21,9 +22,9 @@ class TwitterOAuth2MockSession(TwitterOAuth2Session[TwitterApiGenericMockClient]
         self._scope = scope
 
     @override
-    def generate_authorization_url(self):
-        from twitter_api.types.oauth2.oauth2_authorization import OAuth2Authorization
-
+    def generate_authorization_url(
+        self,
+    ) -> OAuth2Authorization[TwitterApiGenericMockClient]:
         return OAuth2Authorization(
             authorization_url="https://authorization.url.com",
             state="state",
@@ -37,7 +38,7 @@ class TwitterOAuth2MockSession(TwitterOAuth2Session[TwitterApiGenericMockClient]
         authorization_response_url: CallbackUrl,
         state: str,
         code_verifier: str,
-    ) -> OAuth2AccessToken:
+    ) -> OAuth2AccessToken[TwitterApiGenericMockClient]:
         expires_in = 7200
         return OAuth2AccessToken(
             token_type="bearer",

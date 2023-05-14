@@ -155,9 +155,7 @@ class TwitterApiAsyncRealClient(TwitterApiAsyncClient):
             TwitterOAuth2RealSession,
         )
 
-        session: TwitterOAuth2RealSession[
-            TwitterApiAsyncRealClient
-        ] = TwitterOAuth2RealSession(
+        session = TwitterOAuth2RealSession(
             client_generator=lambda access_token: TwitterApiAsyncRealClient.from_oauth2_bearer_token(
                 access_token,
                 rate_limit_manager=rate_limit_manager,
@@ -182,11 +180,7 @@ class TwitterApiAsyncRealClient(TwitterApiAsyncClient):
             verify=verify,
         )
 
-        client: TwitterOAuth2AuthorizeRealClient[
-            TwitterApiAsyncRealClient
-        ] = TwitterOAuth2AuthorizeRealClient(session)
-
-        return client
+        return TwitterOAuth2AuthorizeRealClient(session)
 
     @classmethod
     @override
@@ -217,9 +211,7 @@ class TwitterApiAsyncRealClient(TwitterApiAsyncClient):
 
         from .twitter_api_async_real_client import TwitterApiAsyncRealClient
 
-        session: TwitterOAuth2RealSession[
-            TwitterApiAsyncRealClient
-        ] = TwitterOAuth2RealSession(
+        session = TwitterOAuth2RealSession(
             lambda access_token: TwitterApiAsyncRealClient.from_oauth2_bearer_token(
                 access_token,
                 rate_limit_manager=rate_limit_manager,
@@ -244,16 +236,12 @@ class TwitterApiAsyncRealClient(TwitterApiAsyncClient):
             verify=verify,
         )
 
-        client: TwitterOAuth2AccessTokenRealClient[
-            TwitterApiAsyncRealClient
-        ] = TwitterOAuth2AccessTokenRealClient(
+        return TwitterOAuth2AccessTokenRealClient(
             authorization_response_url=authorization_response_url,
             state=state,
             code_verifier=code_verifier,
             session=session,
         )
-
-        return client
 
     @classmethod
     @override
