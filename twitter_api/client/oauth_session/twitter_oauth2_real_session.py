@@ -9,7 +9,7 @@ from twitter_api.client.oauth_session.resources.oauth2_authorize import (
 from twitter_api.client.oauth_session.resources.v2_oauth2_token import V2Oauth2TokenUrl
 from twitter_api.client.oauth_session.twitter_oauth2_session import TwitterOAuth2Session
 from twitter_api.types import httpx
-from twitter_api.types._generic_client import TwitterApiGenericClient
+from twitter_api.types._generic_client import TwitterApiGenericRealClient
 from twitter_api.types.oauth import AccessToken, CallbackUrl, ClientId, ClientSecret
 from twitter_api.types.oauth2.oauth2_access_token import OAuth2AccessToken
 from twitter_api.types.oauth2.oauth2_authorization import OAuth2Authorization
@@ -17,10 +17,12 @@ from twitter_api.types.v2_scope import Scope
 from twitter_api.utils._oauth import generate_code_verifier
 
 
-class TwitterOAuth2RealSession(TwitterOAuth2Session, Generic[TwitterApiGenericClient]):
+class TwitterOAuth2RealSession(
+    TwitterOAuth2Session, Generic[TwitterApiGenericRealClient]
+):
     def __init__(
         self,
-        client_generator: Callable[[AccessToken], TwitterApiGenericClient],
+        client_generator: Callable[[AccessToken], TwitterApiGenericRealClient],
         *,
         client_id: ClientId,
         client_secret: ClientSecret,
@@ -53,7 +55,7 @@ class TwitterOAuth2RealSession(TwitterOAuth2Session, Generic[TwitterApiGenericCl
     @override
     def generate_authorization_url(
         self,
-    ) -> OAuth2Authorization[TwitterApiGenericClient]:
+    ) -> OAuth2Authorization[TwitterApiGenericRealClient]:
         url: Oauth2AuthorizeUrl = "https://twitter.com/i/oauth2/authorize"
         code_verifier = generate_code_verifier()
 
@@ -74,7 +76,7 @@ class TwitterOAuth2RealSession(TwitterOAuth2Session, Generic[TwitterApiGenericCl
         authorization_response_url: CallbackUrl,
         state: str,
         code_verifier: str,
-    ) -> OAuth2AccessToken[TwitterApiGenericClient]:
+    ) -> OAuth2AccessToken[TwitterApiGenericRealClient]:
         url: V2Oauth2TokenUrl = "https://api.twitter.com/2/oauth2/token"
 
         response = self._session.fetch_token(

@@ -148,8 +148,8 @@ class TwitterApiAsyncRealClient(TwitterApiAsyncClient):
         transport: Optional[httpx.AsyncBaseTransport] = None,
         verify: httpx.VerifyTypes = True,
     ):
-        from twitter_api.client.oauth_flow.twitter_oauth2_authorization_client import (
-            TwitterOAuth2AuthorizeClient,
+        from twitter_api.client.oauth_flow.twitter_oauth2_authorization_real_client import (
+            TwitterOAuth2AuthorizeRealClient,
         )
         from twitter_api.client.oauth_session.twitter_oauth2_real_session import (
             TwitterOAuth2RealSession,
@@ -182,9 +182,9 @@ class TwitterApiAsyncRealClient(TwitterApiAsyncClient):
             verify=verify,
         )
 
-        client: TwitterOAuth2AuthorizeClient[
+        client: TwitterOAuth2AuthorizeRealClient[
             TwitterApiAsyncRealClient
-        ] = TwitterOAuth2AuthorizeClient(session)
+        ] = TwitterOAuth2AuthorizeRealClient(session)
 
         return client
 
@@ -208,8 +208,8 @@ class TwitterApiAsyncRealClient(TwitterApiAsyncClient):
         transport: Optional[httpx.AsyncBaseTransport] = None,
         verify: httpx.VerifyTypes = True,
     ):
-        from twitter_api.client.oauth_flow.twitter_oauth2_access_token_client import (
-            TwitterOAuth2AccessTokenClient,
+        from twitter_api.client.oauth_flow.twitter_oauth2_access_token_real_client import (
+            TwitterOAuth2AccessTokenRealClient,
         )
         from twitter_api.client.oauth_session.twitter_oauth2_real_session import (
             TwitterOAuth2RealSession,
@@ -244,9 +244,9 @@ class TwitterApiAsyncRealClient(TwitterApiAsyncClient):
             verify=verify,
         )
 
-        client: TwitterOAuth2AccessTokenClient[
+        client: TwitterOAuth2AccessTokenRealClient[
             TwitterApiAsyncRealClient
-        ] = TwitterOAuth2AccessTokenClient(
+        ] = TwitterOAuth2AccessTokenRealClient(
             authorization_response_url=authorization_response_url,
             state=state,
             code_verifier=code_verifier,
@@ -312,8 +312,8 @@ class TwitterApiAsyncRealClient(TwitterApiAsyncClient):
         transport: Optional[httpx.AsyncBaseTransport] = None,
         verify: httpx.VerifyTypes = True,
     ):
-        from twitter_api.client.oauth_flow.twitter_oauth1_request_token_client import (
-            TwitterOAuth1RequestTokenClient,
+        from twitter_api.client.oauth_flow.twitter_oauth1_request_token_real_client import (
+            TwitterOAuth1RequestTokenRealClient,
         )
         from twitter_api.client.oauth_session.twitter_oauth1_real_session import (
             TwitterOAuth1RealSession,
@@ -346,7 +346,7 @@ class TwitterApiAsyncRealClient(TwitterApiAsyncClient):
             verify=verify,
         )
 
-        return TwitterOAuth1RequestTokenClient(session)
+        return TwitterOAuth1RequestTokenRealClient(session)
 
     @classmethod
     @override
@@ -366,8 +366,8 @@ class TwitterApiAsyncRealClient(TwitterApiAsyncClient):
         transport: Optional[httpx.AsyncBaseTransport] = None,
         verify: httpx.VerifyTypes = True,
     ):
-        from twitter_api.client.oauth_flow.twitter_oauth1_access_token_client import (
-            TwitterOAuth1AccessTokenClient,
+        from twitter_api.client.oauth_flow.twitter_oauth1_access_token_real_client import (
+            TwitterOAuth1AccessTokenRealClient,
         )
         from twitter_api.client.oauth_session.twitter_oauth1_real_session import (
             TwitterOAuth1RealSession,
@@ -400,7 +400,7 @@ class TwitterApiAsyncRealClient(TwitterApiAsyncClient):
             verify=verify,
         )
 
-        return TwitterOAuth1AccessTokenClient(
+        return TwitterOAuth1AccessTokenRealClient(
             authorization_response_url=authorization_response_url,
             session=session,
         )

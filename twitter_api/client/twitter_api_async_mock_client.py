@@ -387,3 +387,12 @@ class TwitterApiAsyncMockClient(_BaseTwitterApiMockClient, TwitterApiAsyncClient
             transport=transport,
             verify=verify,
         )
+
+    async def aclose(self) -> None:
+        pass
+
+    async def __aenter__(self) -> Self:
+        return self
+
+    async def __aexit__(self, exc_type, exc_value, traceback) -> None:
+        pass

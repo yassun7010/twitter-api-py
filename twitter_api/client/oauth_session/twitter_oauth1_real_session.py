@@ -20,7 +20,7 @@ from twitter_api.client.oauth_session.resources.oauth1_request_token import (
 )
 from twitter_api.client.oauth_session.twitter_oauth1_session import TwitterOAuth1Session
 from twitter_api.types import httpx
-from twitter_api.types._generic_client import TwitterApiGenericClient
+from twitter_api.types._generic_client import TwitterApiGenericRealClient
 from twitter_api.types.oauth import (
     AccessSecret,
     AccessToken,
@@ -32,11 +32,11 @@ from twitter_api.types.oauth1.oauth1_access_token import OAuth1AccessToken
 from twitter_api.types.oauth1.oauth1_authorization import OAuth1Authorization
 
 
-class TwitterOAuth1RealSession(TwitterOAuth1Session[TwitterApiGenericClient]):
+class TwitterOAuth1RealSession(TwitterOAuth1Session[TwitterApiGenericRealClient]):
     def __init__(
         self,
         client_generator: Callable[
-            [AccessToken, AccessSecret], TwitterApiGenericClient
+            [AccessToken, AccessSecret], TwitterApiGenericRealClient
         ],
         *,
         api_key: ApiKey,
@@ -74,7 +74,9 @@ class TwitterOAuth1RealSession(TwitterOAuth1Session[TwitterApiGenericClient]):
         self._verify = verify
 
     @override
-    def request_token(self) -> TwitterOAuth1AuthorizeClient[TwitterApiGenericClient]:
+    def request_token(
+        self,
+    ) -> TwitterOAuth1AuthorizeClient[TwitterApiGenericRealClient]:
         url: Oauth1RequestTokenUrl = "https://api.twitter.com/oauth/request_token"
 
         self._session.fetch_request_token(url)
@@ -85,7 +87,7 @@ class TwitterOAuth1RealSession(TwitterOAuth1Session[TwitterApiGenericClient]):
     def generate_authorization_url(
         self,
         url: Union[OauthAuth1enticateUrl, Oauth1AuthorizeUrl],
-    ) -> OAuth1Authorization[TwitterApiGenericClient]:
+    ) -> OAuth1Authorization[TwitterApiGenericRealClient]:
         return OAuth1Authorization(
             authorization_url=self._session.create_authorization_url(url),
             session=self,
@@ -95,7 +97,7 @@ class TwitterOAuth1RealSession(TwitterOAuth1Session[TwitterApiGenericClient]):
     def fetch_token(
         self,
         authorization_response_url: CallbackUrl,
-    ) -> OAuth1AccessToken[TwitterApiGenericClient]:
+    ) -> OAuth1AccessToken[TwitterApiGenericRealClient]:
         url: Oauth1AccessTokenUrl = "https://api.twitter.com/oauth/access_token"
 
         self._session.parse_authorization_response(authorization_response_url)

@@ -4,9 +4,6 @@ from authlib.integrations.httpx_client.oauth1_client import OAuth1Auth
 from authlib.integrations.httpx_client.oauth2_client import OAuth2Auth
 from typing_extensions import Self, override
 
-from twitter_api.client.oauth_flow.twitter_oauth1_request_token_client import (
-    TwitterOAuth1RequestTokenClient,
-)
 from twitter_api.rate_limit.manager import DEFAULT_RATE_LIMIT_MANAGER
 from twitter_api.rate_limit.manager.rate_limit_manager import RateLimitManager
 from twitter_api.types import httpx
@@ -138,8 +135,8 @@ class TwitterApiRealClient(TwitterApiClient):
         transport: Optional[httpx.BaseTransport] = None,
         verify: httpx.VerifyTypes = True,
     ):
-        from twitter_api.client.oauth_flow.twitter_oauth2_authorization_client import (
-            TwitterOAuth2AuthorizeClient,
+        from twitter_api.client.oauth_flow.twitter_oauth2_authorization_real_client import (
+            TwitterOAuth2AuthorizeRealClient,
         )
         from twitter_api.client.oauth_session.twitter_oauth2_real_session import (
             TwitterOAuth2RealSession,
@@ -162,9 +159,9 @@ class TwitterApiRealClient(TwitterApiClient):
             verify=verify,
         )
 
-        client: TwitterOAuth2AuthorizeClient[
+        client: TwitterOAuth2AuthorizeRealClient[
             TwitterApiRealClient
-        ] = TwitterOAuth2AuthorizeClient(session)
+        ] = TwitterOAuth2AuthorizeRealClient(session)
 
         return client
 
@@ -188,8 +185,8 @@ class TwitterApiRealClient(TwitterApiClient):
         transport: Optional[httpx.BaseTransport] = None,
         verify: httpx.VerifyTypes = True,
     ):
-        from twitter_api.client.oauth_flow.twitter_oauth2_access_token_client import (
-            TwitterOAuth2AccessTokenClient,
+        from twitter_api.client.oauth_flow.twitter_oauth2_access_token_real_client import (
+            TwitterOAuth2AccessTokenRealClient,
         )
         from twitter_api.client.oauth_session.twitter_oauth2_real_session import (
             TwitterOAuth2RealSession,
@@ -222,9 +219,9 @@ class TwitterApiRealClient(TwitterApiClient):
             verify=verify,
         )
 
-        client: TwitterOAuth2AccessTokenClient[
+        client: TwitterOAuth2AccessTokenRealClient[
             TwitterApiRealClient
-        ] = TwitterOAuth2AccessTokenClient(
+        ] = TwitterOAuth2AccessTokenRealClient(
             authorization_response_url=authorization_response_url,
             state=state,
             code_verifier=code_verifier,
@@ -290,6 +287,9 @@ class TwitterApiRealClient(TwitterApiClient):
         transport: Optional[httpx.BaseTransport] = None,
         verify: httpx.VerifyTypes = True,
     ):
+        from twitter_api.client.oauth_flow.twitter_oauth1_request_token_real_client import (
+            TwitterOAuth1RequestTokenRealClient,
+        )
         from twitter_api.client.oauth_session.twitter_oauth1_real_session import (
             TwitterOAuth1RealSession,
         )
@@ -321,7 +321,7 @@ class TwitterApiRealClient(TwitterApiClient):
             verify=verify,
         )
 
-        return TwitterOAuth1RequestTokenClient(session)
+        return TwitterOAuth1RequestTokenRealClient(session)
 
     @classmethod
     @override
@@ -341,8 +341,8 @@ class TwitterApiRealClient(TwitterApiClient):
         transport: Optional[httpx.BaseTransport] = None,
         verify: httpx.VerifyTypes = True,
     ):
-        from twitter_api.client.oauth_flow.twitter_oauth1_access_token_client import (
-            TwitterOAuth1AccessTokenClient,
+        from twitter_api.client.oauth_flow.twitter_oauth1_access_token_real_client import (
+            TwitterOAuth1AccessTokenRealClient,
         )
         from twitter_api.client.oauth_session.twitter_oauth1_real_session import (
             TwitterOAuth1RealSession,
@@ -377,7 +377,7 @@ class TwitterApiRealClient(TwitterApiClient):
             verify=verify,
         )
 
-        return TwitterOAuth1AccessTokenClient(
+        return TwitterOAuth1AccessTokenRealClient(
             authorization_response_url=authorization_response_url,
             session=session,
         )
