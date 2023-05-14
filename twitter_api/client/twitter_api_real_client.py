@@ -374,6 +374,7 @@ class TwitterApiRealClient(TwitterApiClient):
             session=session,
         )
 
+    @override
     def close(self) -> None:
         self._real_request_client.close()
 

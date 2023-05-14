@@ -388,6 +388,7 @@ class TwitterApiAsyncMockClient(_BaseTwitterApiMockClient, TwitterApiAsyncClient
             verify=verify,
         )
 
+    @override
     async def aclose(self) -> None:
         pass
 

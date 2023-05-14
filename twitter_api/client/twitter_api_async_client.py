@@ -905,6 +905,10 @@ class TwitterApiAsyncClient(Chainable, metaclass=ABCMeta):
             verify=verify,
         )
 
+    @abstractmethod
+    async def aclose(self) -> None:
+        ...
+
     @classmethod
     def _get_env(cls, key: Env[str]) -> str:
         """環境変数を取り出す。"""

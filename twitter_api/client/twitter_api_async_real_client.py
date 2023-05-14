@@ -393,6 +393,7 @@ class TwitterApiAsyncRealClient(TwitterApiAsyncClient):
             session=session,
         )
 
+    @override
     async def aclose(self) -> None:
         await self._real_request_client.aclose()
 

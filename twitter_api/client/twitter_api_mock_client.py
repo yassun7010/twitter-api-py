@@ -807,6 +807,7 @@ class TwitterApiMockClient(_BaseTwitterApiMockClient, TwitterApiClient):
             verify=verify,
         )
 
+    @override
     def close(self) -> None:
         pass
 
