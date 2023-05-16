@@ -11,7 +11,7 @@ class CompleteOperator(Operator):
     検索クエリとして成り立っている Operator。
     """
 
-    def __and__(self, other: Operator):
+    def __and__(self, other: Operator) -> "CompleteOperator":
         from ._and_operator import CompleteAndOperator
 
         return CompleteAndOperator(self, other)
