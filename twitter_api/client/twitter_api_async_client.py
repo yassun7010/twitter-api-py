@@ -400,7 +400,7 @@ class TwitterApiAsyncClient(Chainable, metaclass=ABCMeta):
         timeout: httpx.TimeoutTypes = httpx.DEFAULT_TIMEOUT_CONFIG,
         transport: Optional[httpx.AsyncBaseTransport] = None,
         verify: httpx.VerifyTypes = True,
-    ):
+    ) -> Self:
         """OAuth 2.0 の Bearer 認証を用いてクライアントを作成する。"""
 
         from twitter_api.client.twitter_api_async_real_client import (
@@ -431,7 +431,7 @@ class TwitterApiAsyncClient(Chainable, metaclass=ABCMeta):
         timeout: httpx.TimeoutTypes = httpx.DEFAULT_TIMEOUT_CONFIG,
         transport: Optional[httpx.AsyncBaseTransport] = None,
         verify: httpx.VerifyTypes = True,
-    ):
+    ) -> Self:
         """環境変数から、 OAuth 2.0 の Bearer 認証を用いてクライアントを作成する。"""
 
         return cls.from_oauth2_bearer_token(
@@ -460,7 +460,7 @@ class TwitterApiAsyncClient(Chainable, metaclass=ABCMeta):
         timeout: httpx.TimeoutTypes = httpx.DEFAULT_TIMEOUT_CONFIG,
         transport: Optional[httpx.AsyncBaseTransport] = None,
         verify: httpx.VerifyTypes = True,
-    ):
+    ) -> Self:
         """OAuth 2.0 のアプリ認証を用いてクライアントを作成する。"""
 
         from twitter_api.client.twitter_api_async_real_client import (
@@ -494,7 +494,7 @@ class TwitterApiAsyncClient(Chainable, metaclass=ABCMeta):
         timeout: httpx.TimeoutTypes = httpx.DEFAULT_TIMEOUT_CONFIG,
         transport: Optional[httpx.AsyncBaseTransport] = None,
         verify: httpx.VerifyTypes = True,
-    ):
+    ) -> Self:
         """環境変数から、OAuth 2.0 のアプリ認証を用いてクライアントを作成する。"""
 
         return cls.from_oauth2_app(
@@ -693,7 +693,7 @@ class TwitterApiAsyncClient(Chainable, metaclass=ABCMeta):
         timeout: httpx.TimeoutTypes = httpx.DEFAULT_TIMEOUT_CONFIG,
         transport: Optional[httpx.AsyncBaseTransport] = None,
         verify: httpx.VerifyTypes = True,
-    ):
+    ) -> Self:
         """OAuth1.0a のアプリ認証を用いてクライアントを作成する。"""
 
         from twitter_api.client.twitter_api_async_real_client import (
@@ -731,7 +731,7 @@ class TwitterApiAsyncClient(Chainable, metaclass=ABCMeta):
         timeout: httpx.TimeoutTypes = httpx.DEFAULT_TIMEOUT_CONFIG,
         transport: Optional[httpx.AsyncBaseTransport] = None,
         verify: httpx.VerifyTypes = True,
-    ):
+    ) -> Self:
         """環境変数から、OAuth1.0a のアプリ認証を用いてクライアントを作成する。"""
 
         return cls.from_oauth1_app(
@@ -907,6 +907,14 @@ class TwitterApiAsyncClient(Chainable, metaclass=ABCMeta):
 
     @abstractmethod
     async def aclose(self) -> None:
+        ...
+
+    @abstractmethod
+    async def __aenter__(self) -> Self:
+        ...
+
+    @abstractmethod
+    async def __aexit__(self, exc_type, exc_value, traceback) -> None:
         ...
 
     @classmethod

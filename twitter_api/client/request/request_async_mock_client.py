@@ -1,10 +1,10 @@
 from typing_extensions import Self
 
 from twitter_api.client.request.request_async_client import RequestAsyncClient
-from twitter_api.client.request.request_mock_client import RequestMockClient
+from twitter_api.client.request.request_mock_client import _RequestMockClient
 
 
-class RequestAsyncMockClient(RequestMockClient, RequestAsyncClient):
+class RequestAsyncMockClient(_RequestMockClient, RequestAsyncClient):
     async def aclose(self) -> None:
         pass
 

@@ -390,10 +390,13 @@ class TwitterApiAsyncMockClient(_BaseTwitterApiMockClient, TwitterApiAsyncClient
 
     @override
     async def aclose(self) -> None:
-        pass
+        self._client.close()
 
+    @override
     async def __aenter__(self) -> Self:
+        self._client.__enter__()
         return self
 
+    @override
     async def __aexit__(self, exc_type, exc_value, traceback) -> None:
-        pass
+        self._client.__exit__(exc_type, exc_value, traceback)

@@ -397,9 +397,11 @@ class TwitterApiAsyncRealClient(TwitterApiAsyncClient):
     async def aclose(self) -> None:
         await self._real_request_client.aclose()
 
+    @override
     async def __aenter__(self) -> Self:
         await self._real_request_client.__aenter__()
         return self
 
+    @override
     async def __aexit__(self, exc_type, exc_value, traceback) -> None:
         await self._real_request_client.__aexit__(exc_type, exc_value, traceback)

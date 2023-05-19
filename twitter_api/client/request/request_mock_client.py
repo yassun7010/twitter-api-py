@@ -4,6 +4,7 @@ from typing_extensions import Self, Type, override
 
 from twitter_api.error import (
     MockInjectionResponseWrong,
+    MockResponseBodyRemainsError,
     MockResponseNotFound,
     TwitterApiError,
 )
@@ -25,7 +26,7 @@ from .request_client import (
 )
 
 
-class RequestMockClient(RequestClient, Generic[ResponseModelBody]):
+class _RequestMockClient(RequestClient, Generic[ResponseModelBody]):
     def __init__(
         self,
         *,
@@ -119,11 +120,14 @@ class RequestMockClient(RequestClient, Generic[ResponseModelBody]):
     ) -> ResponseModelBody:
         return self._extract_response_body(endpoint)
 
+
+class RequestMockClient(_RequestMockClient):
     def close(self) -> None:
-        pass
+        if len(self._store) != 0:
+            raise MockResponseBodyRemainsError()
 
     def __enter__(self) -> Self:
         return self
 
     def __exit__(self, exc_type, exc_value, traceback) -> None:
-        pass
+        self.close()

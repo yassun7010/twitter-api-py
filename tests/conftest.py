@@ -8,6 +8,7 @@ from twitter_api.client.twitter_api_async_real_client import TwitterApiAsyncReal
 from twitter_api.client.twitter_api_mock_client import TwitterApiMockClient
 from twitter_api.client.twitter_api_real_client import TwitterApiRealClient
 from twitter_api.error import TwitterApiException
+from twitter_api.types.v2_scope import ALL_SCOPES
 from twitter_api.types.v2_tweet.tweet import Tweet
 from twitter_api.types.v2_user.user import User
 from twitter_api.types.v2_user.user_id import UserId
@@ -166,65 +167,77 @@ def oauth1_user_async_real_client() -> TwitterApiAsyncRealClient:
 
 @pytest.fixture
 def oauth2_app_mock_client() -> TwitterApiMockClient:
-    return TwitterApiMockClient(
-        oauth_version="2.0",
-        rate_limit_target="app",
-    )
+    return TwitterApiMockClient.from_oauth2_app_env()
 
 
 @pytest.fixture
 def oauth2_user_mock_client() -> TwitterApiMockClient:
-    return TwitterApiMockClient(
-        oauth_version="2.0",
-        rate_limit_target="user",
+    return (
+        TwitterApiMockClient.from_oauth2_user_flow_env(scope=ALL_SCOPES)
+        .request("https://twitter.com/i/oauth2/authorize")
+        .generate_authorization_url()
+        .input_response_url("https://localhost:3000")
+        .request("https://api.twitter.com/2/oauth2/token")
+        .post()
+        .generate_client()
     )
 
 
 @pytest.fixture
 def oauth1_app_mock_client() -> TwitterApiMockClient:
-    return TwitterApiMockClient(
-        oauth_version="1.0a",
-        rate_limit_target="app",
-    )
+    return TwitterApiMockClient.from_oauth1_app_env()
 
 
 @pytest.fixture
 def oauth1_user_mock_client() -> TwitterApiMockClient:
-    return TwitterApiMockClient(
-        oauth_version="1.0a",
-        rate_limit_target="user",
+    return (
+        TwitterApiMockClient.from_oauth1_user_flow_env()
+        .request("https://api.twitter.com/oauth/request_token")
+        .post()
+        .request("https://api.twitter.com/oauth/authorize")
+        .generate_authorization_url()
+        .input_response_url("https://localhost:3000")
+        .request("https://api.twitter.com/oauth/access_token")
+        .post()
+        .generate_client()
     )
 
 
 @pytest.fixture
 def oauth2_app_async_mock_client() -> TwitterApiAsyncMockClient:
-    return TwitterApiAsyncMockClient(
-        oauth_version="2.0",
-        rate_limit_target="app",
-    )
+    return TwitterApiAsyncMockClient.from_oauth2_app_env()
 
 
 @pytest.fixture
 def oauth2_user_async_mock_client() -> TwitterApiAsyncMockClient:
-    return TwitterApiAsyncMockClient(
-        oauth_version="2.0",
-        rate_limit_target="user",
+    return (
+        TwitterApiAsyncMockClient.from_oauth2_user_flow_env(scope=ALL_SCOPES)
+        .request("https://twitter.com/i/oauth2/authorize")
+        .generate_authorization_url()
+        .input_response_url("https://localhost:3000")
+        .request("https://api.twitter.com/2/oauth2/token")
+        .post()
+        .generate_client()
     )
 
 
 @pytest.fixture
 def oauth1_app_async_mock_client() -> TwitterApiAsyncMockClient:
-    return TwitterApiAsyncMockClient(
-        oauth_version="1.0a",
-        rate_limit_target="app",
-    )
+    return TwitterApiAsyncMockClient.from_oauth1_app_env()
 
 
 @pytest.fixture
 def oauth1_user_async_mock_client() -> TwitterApiAsyncMockClient:
-    return TwitterApiAsyncMockClient(
-        oauth_version="1.0a",
-        rate_limit_target="user",
+    return (
+        TwitterApiAsyncMockClient.from_oauth1_user_flow_env()
+        .request("https://api.twitter.com/oauth/request_token")
+        .post()
+        .request("https://api.twitter.com/oauth/authorize")
+        .generate_authorization_url()
+        .input_response_url("https://localhost:3000")
+        .request("https://api.twitter.com/oauth/access_token")
+        .post()
+        .generate_client()
     )
 
 

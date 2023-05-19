@@ -2,6 +2,7 @@ from typing import Mapping, Optional, Union
 
 from typing_extensions import Self, overload, override
 
+from twitter_api.client.twitter_api_client import TwitterApiClient
 from twitter_api.error import TwitterApiError
 from twitter_api.rate_limit.manager import DEFAULT_RATE_LIMIT_MANAGER
 from twitter_api.rate_limit.manager.rate_limit_manager import RateLimitManager
@@ -114,7 +115,6 @@ from twitter_api.types.v2_scope import Scope
 
 from .request.request_client import RequestClient
 from .request.request_mock_client import RequestMockClient
-from .twitter_api_client import TwitterApiClient
 
 
 class _BaseTwitterApiMockClient:
@@ -809,10 +809,14 @@ class TwitterApiMockClient(_BaseTwitterApiMockClient, TwitterApiClient):
 
     @override
     def close(self) -> None:
-        pass
+        self._client.close()
 
+    @override
     def __enter__(self) -> Self:
+        self._client.__enter__()
+
         return self
 
+    @override
     def __exit__(self, exc_type, exc_value, traceback) -> None:
-        pass
+        self._client.__exit__(exc_type, exc_value, traceback)

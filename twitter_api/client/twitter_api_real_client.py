@@ -378,10 +378,12 @@ class TwitterApiRealClient(TwitterApiClient):
     def close(self) -> None:
         self._real_request_client.close()
 
+    @override
     def __enter__(self) -> Self:
         self._real_request_client.__enter__()
 
         return self
 
+    @override
     def __exit__(self, exc_type, exc_value, traceback) -> None:
         self._real_request_client.__exit__(exc_type, exc_value, traceback)

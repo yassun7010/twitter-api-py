@@ -1,7 +1,10 @@
 import pytest
 
 from twitter_api.client.twitter_api_async_mock_client import TwitterApiAsyncMockClient
+from twitter_api.error import MockResponseBodyRemainsError
+from twitter_api.resources.v2_tweet.get_v2_tweet import GetV2TweetResponseBody
 from twitter_api.types.v2_scope import ALL_SCOPES
+from twitter_api.types.v2_tweet.tweet import Tweet
 
 
 class TestTwitterApiAsyncMockClient:
@@ -102,3 +105,46 @@ class TestTwitterApiAsyncMockClient:
                 client,
                 TwitterApiAsyncMockClient,
             )
+
+    @pytest.mark.asyncio
+    async def test_mock_client_request(self, intro_tweet: Tweet):
+        async with TwitterApiAsyncMockClient.from_oauth2_app_env() as client:
+            response_body = GetV2TweetResponseBody(data=intro_tweet)
+
+            assert (
+                await (
+                    client.chain()
+                    .inject_get_response_body(
+                        "https://api.twitter.com/2/tweets/:id",
+                        response_body,
+                    )
+                    .request("https://api.twitter.com/2/tweets/:id")
+                    .get(intro_tweet.id)
+                )
+                == response_body
+            )
+
+    @pytest.mark.asyncio
+    async def test_mock_client_raise_response_body_remain_error(
+        self, intro_tweet: Tweet
+    ):
+        with pytest.raises(MockResponseBodyRemainsError):
+            async with TwitterApiAsyncMockClient.from_oauth2_app_env() as client:
+                response_body = GetV2TweetResponseBody(data=intro_tweet)
+
+                assert (
+                    await (
+                        client.chain()
+                        .inject_get_response_body(
+                            "https://api.twitter.com/2/tweets/:id",
+                            response_body,
+                        )
+                        .inject_get_response_body(
+                            "https://api.twitter.com/2/tweets/:id",
+                            response_body,
+                        )
+                        .request("https://api.twitter.com/2/tweets/:id")
+                        .get(intro_tweet.id)
+                    )
+                    == response_body
+                )

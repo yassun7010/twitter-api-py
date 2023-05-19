@@ -398,7 +398,7 @@ class TwitterApiClient(Chainable, metaclass=ABCMeta):
         timeout: httpx.TimeoutTypes = httpx.DEFAULT_TIMEOUT_CONFIG,
         transport: Optional[httpx.BaseTransport] = None,
         verify: httpx.VerifyTypes = True,
-    ):
+    ) -> Self:
         """OAuth 2.0 の Bearer 認証を用いてクライアントを作成する。"""
 
         from .twitter_api_real_client import TwitterApiRealClient
@@ -427,7 +427,7 @@ class TwitterApiClient(Chainable, metaclass=ABCMeta):
         timeout: httpx.TimeoutTypes = httpx.DEFAULT_TIMEOUT_CONFIG,
         transport: Optional[httpx.BaseTransport] = None,
         verify: httpx.VerifyTypes = True,
-    ):
+    ) -> Self:
         """環境変数から、 OAuth 2.0 の Bearer 認証を用いてクライアントを作成する。"""
 
         return cls.from_oauth2_bearer_token(
@@ -456,7 +456,7 @@ class TwitterApiClient(Chainable, metaclass=ABCMeta):
         timeout: httpx.TimeoutTypes = httpx.DEFAULT_TIMEOUT_CONFIG,
         transport: Optional[httpx.BaseTransport] = None,
         verify: httpx.VerifyTypes = True,
-    ):
+    ) -> Self:
         """OAuth 2.0 のアプリ認証を用いてクライアントを作成する。"""
 
         from .twitter_api_real_client import TwitterApiRealClient
@@ -488,7 +488,7 @@ class TwitterApiClient(Chainable, metaclass=ABCMeta):
         timeout: httpx.TimeoutTypes = httpx.DEFAULT_TIMEOUT_CONFIG,
         transport: Optional[httpx.BaseTransport] = None,
         verify: httpx.VerifyTypes = True,
-    ):
+    ) -> Self:
         """環境変数から、OAuth 2.0 のアプリ認証を用いてクライアントを作成する。"""
 
         return cls.from_oauth2_app(
@@ -692,7 +692,7 @@ class TwitterApiClient(Chainable, metaclass=ABCMeta):
         timeout: httpx.TimeoutTypes = httpx.DEFAULT_TIMEOUT_CONFIG,
         transport: Optional[httpx.BaseTransport] = None,
         verify: httpx.VerifyTypes = True,
-    ):
+    ) -> Self:
         """OAuth1.0a のアプリ認証を用いてクライアントを作成する。"""
 
         from .twitter_api_real_client import TwitterApiRealClient
@@ -728,7 +728,7 @@ class TwitterApiClient(Chainable, metaclass=ABCMeta):
         timeout: httpx.TimeoutTypes = httpx.DEFAULT_TIMEOUT_CONFIG,
         transport: Optional[httpx.BaseTransport] = None,
         verify: httpx.VerifyTypes = True,
-    ):
+    ) -> Self:
         """環境変数から、OAuth1.0a のアプリ認証を用いてクライアントを作成する。"""
 
         return cls.from_oauth1_app(
@@ -908,6 +908,14 @@ class TwitterApiClient(Chainable, metaclass=ABCMeta):
 
     @abstractmethod
     def close(self) -> None:
+        ...
+
+    @abstractmethod
+    def __enter__(self) -> Self:
+        ...
+
+    @abstractmethod
+    def __exit__(self, exc_type, exc_value, traceback) -> None:
         ...
 
     @classmethod

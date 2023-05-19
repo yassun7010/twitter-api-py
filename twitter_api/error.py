@@ -112,6 +112,12 @@ class MockInjectionResponseWrong(TwitterApiError):
         )
 
 
+class MockResponseBodyRemainsError(TwitterApiError):
+    @property
+    def message(self) -> str:
+        return "モックとして出力したいデータが残っています。"
+
+
 class TwitterApiResponseModelBodyDecodeError(TwitterApiError):
     def __init__(self, endpoint: Endpoint, content: bytes, **extra):
         self.endpoint = endpoint
