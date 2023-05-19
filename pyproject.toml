@@ -2,21 +2,21 @@
 authors = ["yassun4dev <yassun4dev@outlook.com>"]
 description = "Twitter API Client by Typed Python."
 name = "twitter-api-py"
-packages = [{include = "twitter_api"}]
+packages = [{ include = "twitter_api" }]
 readme = "README.md"
 version = "0.7.1"
 license = "BSD-3-Clause"
 repository = "https://github.com/yassun4dev/twitter-api-py"
 classifiers = [
-    "Development Status :: 4 - Beta",
-    "Topic :: Software Development :: Libraries",
-    "Intended Audience :: Developers",
-    "License :: OSI Approved :: BSD License",
-    "Programming Language :: Python :: 3",
-    "Programming Language :: Python :: 3.9",
-    "Programming Language :: Python :: 3.10",
-    "Programming Language :: Python :: 3.11",
-    "Programming Language :: Python :: 3 :: Only",
+  "Development Status :: 4 - Beta",
+  "Topic :: Software Development :: Libraries",
+  "Intended Audience :: Developers",
+  "License :: OSI Approved :: BSD License",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3 :: Only",
 ]
 
 [tool.taskipy.tasks]
@@ -64,7 +64,4 @@ reportUnusedImport = true
 [tool.mypy]
 [[tool.mypy.overrides]]
 ignore_missing_imports = true
-module = [
-  "colorama",
-  "authlib",
-]
+module = ["colorama", "authlib"]
