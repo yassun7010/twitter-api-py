@@ -24,7 +24,12 @@
   ],
   "python.globalModuleInstallation": true,
   "python.linting.enabled": true,
-  "python.linting.flake8Args": ["--max-line-length", "200"],
+  "python.linting.flake8Args": [
+    "--max-line-length",
+    "200",
+    "--ignore",
+    "E203"
+  ],
   "python.linting.flake8Enabled": true,
   "python.linting.mypyEnabled": false,
   "python.linting.pylintEnabled": false,
@@ -34,7 +39,9 @@
       "source.organizeImports": true
     },
     "editor.tabSize": 4,
-    "editor.rulers": [88],
+    "editor.rulers": [
+      88
+    ],
     "editor.defaultFormatter": "ms-python.black-formatter"
   },
   "[markdown]": {
