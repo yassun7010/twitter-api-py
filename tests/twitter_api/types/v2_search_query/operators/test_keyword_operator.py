@@ -1,3 +1,6 @@
+import pytest
+
+from twitter_api.error import SearchQueryDoubleQuotedError
 from twitter_api.types.v2_search_query.operators.keyword_operator import KeywordOperator
 from twitter_api.types.v2_search_query.operators.operator import CompleteOperator
 from twitter_api.types.v2_search_query.search_query import SearchQuery, build
@@ -8,13 +11,17 @@ class TestKeywordOperator:
         assert str(KeywordOperator("test")) == "test"
 
     def test_keyword_operator_with_phrase(self):
+        assert str(KeywordOperator('"test twitter"')) == '"test twitter"'
+
+    def test_keyword_operator_with_space(self):
         assert str(KeywordOperator("test twitter")) == '"test twitter"'
 
     def test_keyword_operator_with_emoji(self):
         assert str(KeywordOperator("😃")) == "😃"
 
     def test_keyword_operator_with_exact_phrase_match(self):
-        assert str(KeywordOperator('"test" twitter')) == r'"\"test\" twitter"'
+        with pytest.raises(SearchQueryDoubleQuotedError):
+            KeywordOperator('"test" twitter')
 
     def test_query_complete(self):
         assert isinstance(

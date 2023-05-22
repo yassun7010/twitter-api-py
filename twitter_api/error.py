@@ -317,3 +317,13 @@ class UnsupportedAuthenticationError(TwitterApiError):
     @property
     def message(self) -> str:
         return "この認証方法でのアクセスは許可されていません。"
+
+
+class SearchQueryError(TwitterApiError):
+    pass
+
+
+class SearchQueryDoubleQuotedError(SearchQueryError):
+    @property
+    def message(self) -> str:
+        return 'キーワードに " を含めることはできません。'
