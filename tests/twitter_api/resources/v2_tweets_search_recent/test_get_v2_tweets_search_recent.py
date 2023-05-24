@@ -66,7 +66,7 @@ class TestGetV2TweetsSearchRecent:
             (
                 oauth2_app_real_client.chain()
                 .request("https://api.twitter.com/2/tweets/search/recent")
-                .get_paging_response_body_iter(
+                .get_paging_iter(
                     {
                         "query": "#japan test",
                         "max_results": 100,
@@ -160,7 +160,7 @@ class TestMockGetV2TweetsSearchRecent:
             if next_token is None:
                 break
 
-    def test_mock_get_paging_response_body_iter_v2_search_recent(
+    def test_mock_get_paging_iter_v2_search_recent(
         self,
         oauth2_app_mock_client: TwitterApiMockClient,
         json_files: list[str],
@@ -183,7 +183,7 @@ class TestMockGetV2TweetsSearchRecent:
             for response_body in (
                 oauth2_app_mock_client.chain()
                 .request("https://api.twitter.com/2/tweets/search/recent")
-                .get_paging_response_body_iter(
+                .get_paging_iter(
                     {
                         "query": "モックされているので、この検索条件に意味はない",
                         "expansions": ["attachments.poll_ids"],
@@ -193,7 +193,7 @@ class TestMockGetV2TweetsSearchRecent:
             )
         ] == response_bodies
 
-    def test_mock_get_collected_paging_response_body_v2_search(
+    def test_mock_get_paging_all_v2_search(
         self,
         oauth2_app_mock_client: TwitterApiMockClient,
         json_files: list[str],
@@ -215,7 +215,7 @@ class TestMockGetV2TweetsSearchRecent:
         assert (
             oauth2_app_mock_client.chain()
             .request("https://api.twitter.com/2/tweets/search/recent")
-            .get_collected_paging_response_body(
+            .get_paging_all(
                 {
                     "query": "モックされているので、この検索条件に意味はない",
                     "expansions": ["attachments.poll_ids"],
@@ -254,7 +254,7 @@ class TestAsyncMockGetV2TweetsSearchRecent:
         )
 
     @pytest.mark.asyncio
-    async def test_async_mock_get_paging_response_body_iter_v2_search_recent(
+    async def test_async_mock_get_paging_iter_v2_search_recent(
         self,
         oauth2_app_async_mock_client: TwitterApiAsyncMockClient,
         json_files: list[str],
@@ -275,7 +275,7 @@ class TestAsyncMockGetV2TweetsSearchRecent:
             async for res in await (
                 oauth2_app_async_mock_client.chain()
                 .request("https://api.twitter.com/2/tweets/search/recent")
-                .get_paging_response_body_iter(
+                .get_paging_iter(
                     {
                         "query": "モックされているので、この検索条件に意味はない",
                         "expansions": ["attachments.poll_ids"],
@@ -286,7 +286,7 @@ class TestAsyncMockGetV2TweetsSearchRecent:
         ] == response_bodies
 
     @pytest.mark.asyncio
-    async def test_async_mock_get_collected_paging_response_body_v2_search(
+    async def test_async_mock_get_paging_all_v2_search(
         self,
         oauth2_app_async_mock_client: TwitterApiAsyncMockClient,
         json_files: list[str],
@@ -307,7 +307,7 @@ class TestAsyncMockGetV2TweetsSearchRecent:
             await (
                 oauth2_app_async_mock_client.chain()
                 .request("https://api.twitter.com/2/tweets/search/recent")
-                .get_collected_paging_response_body(
+                .get_paging_all(
                     {
                         "query": "モックされているので、この検索条件に意味はない",
                         "expansions": ["attachments.poll_ids"],

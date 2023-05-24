@@ -8,10 +8,10 @@ from twitter_api.rate_limit.rate_limit import rate_limit
 from twitter_api.resources.api_resources import ApiResources
 from twitter_api.types._paging import (
     PageResponseBody,
-    aget_collected_paging_response_body,
-    aget_paging_response_body_iter,
-    get_collected_paging_response_body,
-    get_paging_response_body_iter,
+    aget_paging_all,
+    aget_paging_iter,
+    get_paging_all,
+    get_paging_iter,
 )
 from twitter_api.types.comma_separatable import CommaSeparatable, comma_separated_str
 from twitter_api.types.endpoint import Endpoint
@@ -113,7 +113,7 @@ class GetV2TweetRetweetedByResources(ApiResources):
             query=_make_query(query) if query is not None else None,
         )
 
-    def get_paging_response_body_iter(
+    def get_paging_iter(
         self, id: TweetId, query: Optional[GetV2TweetRetweetedByQueryParameters] = None
     ) -> Generator[GetV2TweetRetweetedByResponseBody, None, None]:
         """
@@ -123,11 +123,9 @@ class GetV2TweetRetweetedByResources(ApiResources):
 
         refer: https://developer.twitter.com/en/docs/twitter-api/tweets/retweets/api-reference/get-tweets-id-retweeted_by
         """
-        return get_paging_response_body_iter(
-            partial(self.get, id), query, "pagination_token"
-        )
+        return get_paging_iter(partial(self.get, id), query, "pagination_token")
 
-    def get_collected_paging_response_body(
+    def get_paging_all(
         self, id: TweetId, query: Optional[GetV2TweetRetweetedByQueryParameters] = None
     ) -> GetV2TweetRetweetedByResponseBody:
         """
@@ -137,9 +135,7 @@ class GetV2TweetRetweetedByResources(ApiResources):
 
         refer: https://developer.twitter.com/en/docs/twitter-api/tweets/retweets/api-reference/get-tweets-id-retweeted_by
         """
-        return get_collected_paging_response_body(
-            partial(self.get, id), query, "pagination_token"
-        )
+        return get_paging_all(partial(self.get, id), query, "pagination_token")
 
 
 class AsyncGetV2TweetRetweetedByResources(GetV2TweetRetweetedByResources):
@@ -153,17 +149,13 @@ class AsyncGetV2TweetRetweetedByResources(GetV2TweetRetweetedByResources):
         )
 
     @override
-    async def get_paging_response_body_iter(
+    async def get_paging_iter(
         self, id: TweetId, query: Optional[GetV2TweetRetweetedByQueryParameters] = None
     ) -> AsyncGenerator[GetV2TweetRetweetedByResponseBody, None]:
-        return aget_paging_response_body_iter(
-            partial(self.get, id), query, "pagination_token"
-        )
+        return aget_paging_iter(partial(self.get, id), query, "pagination_token")
 
     @override
-    async def get_collected_paging_response_body(
+    async def get_paging_all(
         self, id: TweetId, query: Optional[GetV2TweetRetweetedByQueryParameters] = None
     ) -> GetV2TweetRetweetedByResponseBody:
-        return await aget_collected_paging_response_body(
-            partial(self.get, id), query, "pagination_token"
-        )
+        return await aget_paging_all(partial(self.get, id), query, "pagination_token")

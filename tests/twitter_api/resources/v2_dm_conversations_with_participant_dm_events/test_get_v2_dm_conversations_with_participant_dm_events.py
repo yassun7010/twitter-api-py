@@ -71,7 +71,7 @@ class TestGetV2DmConversationsWithParticipantDmEvents:
             .request(
                 "https://api.twitter.com/2/dm_conversations/with/:participant_id/dm_events"
             )
-            .get_paging_response_body_iter(
+            .get_paging_iter(
                 participant_id,
                 {
                     "dm_event.fields": ALL_DM_EVENT_FIELDS,
@@ -153,7 +153,7 @@ class TestAsyncMockGetV2DmConversationsWithParticipantDmEvents:
         )
 
     @pytest.mark.asyncio
-    async def test_async_mock_get_paging_response_body_iter_v2_dm_conversations_with_participant_dm_events(
+    async def test_async_mock_get_paging_iter_v2_dm_conversations_with_participant_dm_events(
         self,
         oauth2_app_async_mock_client: TwitterApiAsyncMockClient,
         json_files: list[str],
@@ -179,12 +179,12 @@ class TestAsyncMockGetV2DmConversationsWithParticipantDmEvents:
                 .request(
                     "https://api.twitter.com/2/dm_conversations/with/:participant_id/dm_events"
                 )
-                .get_paging_response_body_iter(twitter_dev_user.id)
+                .get_paging_iter(twitter_dev_user.id)
             )
         ] == response_bodies
 
     @pytest.mark.asyncio
-    async def test_async_mock_get_collected_paging_response_body_v2_search(
+    async def test_async_mock_get_paging_all_v2_search(
         self,
         oauth2_app_async_mock_client: TwitterApiAsyncMockClient,
         json_files: list[str],
@@ -210,7 +210,7 @@ class TestAsyncMockGetV2DmConversationsWithParticipantDmEvents:
                 .request(
                     "https://api.twitter.com/2/dm_conversations/with/:participant_id/dm_events"
                 )
-                .get_collected_paging_response_body(twitter_dev_user.id)
+                .get_paging_all(twitter_dev_user.id)
             )
             == response_body
         )
