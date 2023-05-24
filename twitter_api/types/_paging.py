@@ -18,18 +18,11 @@ class PageResponseBody(metaclass=ABCMeta):
 
 
 AnyQueryParameters = TypeVar("AnyQueryParameters", bound=TypedDict)
-
-AnyPageResponseBody = TypeVar(
-    "AnyPageResponseBody",
-    bound=PageResponseBody,
-)
+AnyPageResponseBody = TypeVar("AnyPageResponseBody", bound=PageResponseBody)
 
 
 def get_paging_iter(
-    get_func: Callable[
-        [AnyQueryParameters],
-        AnyPageResponseBody,
-    ],
+    get_func: Callable[[AnyQueryParameters], AnyPageResponseBody],
     query: Optional[AnyQueryParameters],
     pagination_token_key: str,
 ) -> Generator[AnyPageResponseBody, None, None]:
@@ -53,10 +46,7 @@ def get_paging_iter(
 
 
 def get_paging_all(
-    get_func: Callable[
-        [AnyQueryParameters],
-        AnyPageResponseBody,
-    ],
+    get_func: Callable[[AnyQueryParameters], AnyPageResponseBody],
     query: Optional[AnyQueryParameters],
     pagination_token_key: str,
 ) -> AnyPageResponseBody:
@@ -73,10 +63,7 @@ def get_paging_all(
 
 
 async def aget_paging_iter(
-    get_func: Callable[
-        [AnyQueryParameters],
-        Coroutine[Any, Any, AnyPageResponseBody],
-    ],
+    get_func: Callable[[AnyQueryParameters], Coroutine[Any, Any, AnyPageResponseBody]],
     query: Optional[AnyQueryParameters],
     pagination_token_key: str,
 ) -> AsyncGenerator[AnyPageResponseBody, None]:
@@ -100,10 +87,7 @@ async def aget_paging_iter(
 
 
 async def aget_paging_all(
-    get_func: Callable[
-        [AnyQueryParameters],
-        Coroutine[Any, Any, AnyPageResponseBody],
-    ],
+    get_func: Callable[[AnyQueryParameters], Coroutine[Any, Any, AnyPageResponseBody]],
     query: Optional[AnyQueryParameters],
     pagination_token_key: str,
 ) -> AnyPageResponseBody:
