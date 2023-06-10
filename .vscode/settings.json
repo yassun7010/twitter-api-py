@@ -28,7 +28,9 @@
     "--max-line-length",
     "200",
     "--ignore",
-    "E203"
+    "E203",
+    "--extend-ignore",
+    "W503",
   ],
   "python.linting.flake8Enabled": true,
   "python.linting.mypyEnabled": false,

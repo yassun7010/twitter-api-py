@@ -56,6 +56,7 @@ profile = "black"
 [tool.flake8]
 max-line-length = 200
 ignore = ["E203"]
+extend-ignore = ["W503"]
 
 [tool.pyright]
 exclude = ["**/__pycache__"]
