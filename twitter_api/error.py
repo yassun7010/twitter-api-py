@@ -108,7 +108,7 @@ class MockInjectionResponseWrong(TwitterApiError):
             **dict(
                 expected_endpoint=self.expected_endpoint,
                 endpoint=self.endpoint,
-            ),
+            ),  # type: ignore
         )
 
 
@@ -209,7 +209,7 @@ class TwitterApiResponseFailed(TwitterApiError):
                     if not isinstance(self.response_body, bytes)
                     else self.response_body
                 ),
-            ),
+            ),  # type: ignore
         )
 
 
@@ -265,7 +265,7 @@ class TwitterApiResponseValidationError(TwitterApiError):
                 endpoint=self.endpoint,
                 response_body=response_body,
                 errors=self.error.errors(),
-            ),
+            ),  # type: ignore
         )
 
 
