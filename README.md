@@ -32,7 +32,7 @@ The simplest way to use the library is as follows:
 from twitter_api import TwitterApiClient
 
 response_body = (
-    TwitterApiClient.from_oauth2_app_env().chain()
+    TwitterApiClient.from_oauth2_app_env()
     .request("https://api.twitter.com/2/tweets")
     .get({
         "ids": "1460323737035677698",
