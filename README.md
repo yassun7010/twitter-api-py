@@ -31,15 +31,14 @@ The simplest way to use the library is as follows:
 ```python
 from twitter_api import TwitterApiClient
 
-with TwitterApiClient.from_oauth2_app_env() as twitter_client:
-    response_body = (
-        twitter_client.chain()
-        .request("https://api.twitter.com/2/tweets")
-        .get({
-            "ids": "1460323737035677698",
-            "expansions": ["referenced_tweets.id"]
-        })
-    )
+response_body = (
+    TwitterApiClient.from_oauth2_app_env().chain()
+    .request("https://api.twitter.com/2/tweets")
+    .get({
+        "ids": "1460323737035677698",
+        "expansions": ["referenced_tweets.id"]
+    })
+)
 ```
 
 As a characteristic feature of the library, it explicitly prompts the user to write the Endpoint URL, which makes it clear from the source code which Twitter API is being called.
