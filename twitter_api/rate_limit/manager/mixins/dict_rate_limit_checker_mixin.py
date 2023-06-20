@@ -1,3 +1,4 @@
+from abc import abstractmethod
 from bisect import bisect_left
 from dataclasses import dataclass
 from datetime import datetime, timedelta
@@ -23,8 +24,10 @@ class DictRateLimitCheckerMixin(RateLimitManager):
     このクラスを参考に RateLimitManager を実装すればよい。
     """
 
-    def __init__(self) -> None:
-        self._store: dict[RateLimitInfo, RateLimitStatus] = {}
+    @property
+    @abstractmethod
+    def store(self) -> dict[RateLimitInfo, RateLimitStatus]:
+        ...
 
     @override
     def check_limit_over(
@@ -35,13 +38,13 @@ class DictRateLimitCheckerMixin(RateLimitManager):
         if now is None:
             now = datetime.now()
 
-        if rate_limit_info not in self._store:
-            self._store[rate_limit_info] = RateLimitStatus(
+        if rate_limit_info not in self.store:
+            self.store[rate_limit_info] = RateLimitStatus(
                 start_datetime=now, request_datetimes=[now]
             )
 
         # 今回のデータを履歴に追加する。
-        status = self._store[rate_limit_info]
+        status = self.store[rate_limit_info]
         status.request_datetimes.append(now)
 
         # レートリミットの計算対象より過去のデータを履歴から消す。
