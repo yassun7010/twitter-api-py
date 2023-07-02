@@ -29,7 +29,7 @@ try:
         )
 
         for tweet in tweets:
-            print(tweet.json(indent=2))
+            print(tweet.model_dump_json(indent=2))
 
 except TwitterApiError as error:
-    print(error.info.json(indent=2), file=sys.stderr)
+    print(error.info.model_dump_json(indent=2), file=sys.stderr)

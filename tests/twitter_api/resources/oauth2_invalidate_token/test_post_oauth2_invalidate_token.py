@@ -9,7 +9,6 @@ from twitter_api.client.twitter_api_real_client import TwitterApiRealClient
 from twitter_api.resources.oauth2_invalidate_token.post_oauth2_invalidate_token import (
     PostOauth2InvalidateTokenResponseBody,
 )
-from twitter_api.types.extra_permissive_model import get_extra_fields
 
 
 @pytest.mark.skipif(**synthetic_monitoring_is_disable())
@@ -32,11 +31,11 @@ class TestPostOauth2InvalidateToken:
             )
         )
 
-        print(real_response.json())
-        print(expected_response_body.json())
+        print(real_response.model_dump_json())
+        print(expected_response_body.model_dump_json())
 
         assert real_response == expected_response_body
-        assert get_extra_fields(expected_response_body) == {}
+        assert expected_response_body.model_extra == {}
 
 
 class TestMockPostOauth2InvalidateToken:
@@ -47,7 +46,7 @@ class TestMockPostOauth2InvalidateToken:
             access_token="DUMMY_ACCESS_TOKEN",
         )
 
-        assert get_extra_fields(response_body) == {}
+        assert response_body.model_extra == {}
 
         assert (
             oauth2_app_mock_client.chain()
@@ -73,7 +72,7 @@ class TestAsyncMockPostOauth2InvalidateToken:
             access_token="DUMMY_ACCESS_TOKEN",
         )
 
-        assert get_extra_fields(response_body) == {}
+        assert response_body.model_extra == {}
 
         assert (
             await (

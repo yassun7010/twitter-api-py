@@ -8,7 +8,6 @@ from twitter_api.client.twitter_api_mock_client import TwitterApiMockClient
 from twitter_api.resources.v2_dm_conversation_messages.post_v2_dm_conversations_messages import (
     PostV2DmConversationMessagesResponseBody,
 )
-from twitter_api.types.extra_permissive_model import get_extra_fields
 from twitter_api.types.v2_user.user_id import UserId
 
 
@@ -55,9 +54,9 @@ class TestGetV2DmConversationsMessages:
                 .post(dm_conversation_id, {"text": "DM のテスト。"})
             )
 
-            print(response_body.json())
+            print(response_body.model_dump_json())
 
-            assert get_extra_fields(response_body) == {}
+            assert response_body.model_extra == {}
 
 
 class TestMockGetV2DmConversationsMessages:
@@ -72,11 +71,11 @@ class TestMockGetV2DmConversationsMessages:
         oauth2_app_mock_client: TwitterApiMockClient,
         json_filename: str,
     ):
-        response_body = PostV2DmConversationMessagesResponseBody.parse_file(
+        response_body = PostV2DmConversationMessagesResponseBody.model_validate(
             json_test_data(json_filename)
         )
 
-        assert get_extra_fields(response_body) == {}
+        assert response_body.model_extra == {}
 
         assert (
             oauth2_app_mock_client.chain()
@@ -97,11 +96,11 @@ class TestAsyncMockGetV2DmConversationsMessages:
         self,
         oauth2_app_async_mock_client: TwitterApiAsyncMockClient,
     ):
-        response_body = PostV2DmConversationMessagesResponseBody.parse_file(
+        response_body = PostV2DmConversationMessagesResponseBody.model_validate(
             json_test_data("post_v2_dm_conversation_messages_response_body.json")
         )
 
-        assert get_extra_fields(response_body) == {}
+        assert response_body.model_extra == {}
 
         assert (
             await (

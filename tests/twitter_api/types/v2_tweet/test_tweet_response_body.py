@@ -6,7 +6,7 @@ from twitter_api.types.v2_tweet.tweet_response_body import TweetsSearchResponseB
 
 @pytest.fixture
 def response() -> TweetsSearchResponseBody:
-    return TweetsSearchResponseBody.parse_file(
+    return TweetsSearchResponseBody.model_validate(
         json_test_data("get_v2_tweets_search_recent/collected_response_body.json"),
     )
 

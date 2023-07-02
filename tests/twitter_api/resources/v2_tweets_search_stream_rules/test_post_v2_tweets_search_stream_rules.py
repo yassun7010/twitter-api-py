@@ -9,7 +9,6 @@ from twitter_api.client.twitter_api_real_client import TwitterApiRealClient
 from twitter_api.resources.v2_tweets_search_stream_rules.post_v2_tweets_search_stream_rules import (
     PostV2TweetsSearchStreamRulesResponseBody,
 )
-from twitter_api.types.extra_permissive_model import get_extra_fields
 
 
 @pytest.mark.skipif(**synthetic_monitoring_is_disable())
@@ -43,9 +42,9 @@ class TestPostV2TweetsSearchStreamRules:
                 )
             )
 
-            print(response_body.json())
+            print(response_body.model_dump_json())
 
-            assert get_extra_fields(response_body) == {}
+            assert response_body.model_extra == {}
 
     def test_post_v2_search_stream_rules_when_delete_case(
         self, oauth2_app_real_client: TwitterApiRealClient
@@ -72,9 +71,9 @@ class TestPostV2TweetsSearchStreamRules:
             )
         )
 
-        print(response_body.json())
+        print(response_body.model_dump_json())
 
-        assert get_extra_fields(response_body) == {}
+        assert response_body.model_extra == {}
 
 
 class TestMockPostV2TweetsSearchStreamRules:
@@ -90,11 +89,11 @@ class TestMockPostV2TweetsSearchStreamRules:
         oauth2_app_mock_client: TwitterApiMockClient,
         json_filename: str,
     ):
-        response_body = PostV2TweetsSearchStreamRulesResponseBody.parse_file(
+        response_body = PostV2TweetsSearchStreamRulesResponseBody.model_validate(
             json_test_data(json_filename)
         )
 
-        assert get_extra_fields(response_body) == {}
+        assert response_body.model_extra == {}
 
         assert (
             oauth2_app_mock_client.chain()
@@ -119,13 +118,13 @@ class TestAsyncMockPostV2TweetsSearchStreamRules:
         self,
         oauth2_app_async_mock_client: TwitterApiAsyncMockClient,
     ):
-        response_body = PostV2TweetsSearchStreamRulesResponseBody.parse_file(
+        response_body = PostV2TweetsSearchStreamRulesResponseBody.model_validate(
             json_test_data(
                 "post_v2_search_stream_rules_response_body_create_rules.json"
             )
         )
 
-        assert get_extra_fields(response_body) == {}
+        assert response_body.model_extra == {}
 
         assert (
             await (

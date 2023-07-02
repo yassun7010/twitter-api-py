@@ -1,14 +1,15 @@
 from typing import (
     TYPE_CHECKING,
     AbstractSet,
+    Annotated,
     Any,
     Callable,
     Generic,
     Mapping,
-    Optional,
     Union,
 )
 
+from pydantic import Field
 from typing_extensions import Literal
 
 from twitter_api.types._generic_client import TwitterApiGenericClient
@@ -28,38 +29,33 @@ class OAuth2AccessToken(Generic[TwitterApiGenericClient], ExtraPermissiveModel):
     expires_at: int
     access_token: AccessToken
     scope: list[Scope]
-    _client_generator: Callable[[AccessToken], TwitterApiGenericClient]
+    _client_generator: Annotated[
+        Callable[[AccessToken], TwitterApiGenericClient],
+        Field(exclude=True),
+    ]
 
     def generate_client(self) -> TwitterApiGenericClient:
         return self._client_generator(self.access_token)
 
-    def json(
+    def model_dump_json(
         self,
         *,
-        include: Optional[Union["AbstractSetIntStr", "MappingIntStrAny"]] = None,
-        exclude: Optional[Union["AbstractSetIntStr", "MappingIntStrAny"]] = {
-            "_client_generator"
-        },
+        indent: int | None = None,
         by_alias: bool = False,
-        skip_defaults: Optional[bool] = None,
-        exclude_unset: bool = True,
+        exclude_unset: bool = False,
         exclude_defaults: bool = False,
-        exclude_none: bool = True,
-        encoder: Optional[Callable[[Any], Any]] = None,
-        models_as_dict: bool = True,
-        ensure_ascii=False,
-        **dumps_kwargs: Any,
+        exclude_none: bool = False,
+        round_trip: bool = False,
+        warnings: bool = True,
     ) -> str:
-        return super().json(
-            include=include,
-            exclude=exclude,
+        return super().model_dump_json(
+            indent=indent,
+            include=None,
+            exclude=set("_client_generator"),
             by_alias=by_alias,
-            skip_defaults=skip_defaults,
             exclude_unset=exclude_unset,
             exclude_defaults=exclude_defaults,
             exclude_none=exclude_none,
-            encoder=encoder,
-            models_as_dict=models_as_dict,
-            ensure_ascii=ensure_ascii,
-            **dumps_kwargs,
+            round_trip=round_trip,
+            warnings=warnings,
         )

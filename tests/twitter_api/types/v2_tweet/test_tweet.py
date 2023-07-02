@@ -9,8 +9,8 @@ from twitter_api.types.v2_tweet.tweet import Tweet
 
 @pytest.fixture
 def tweet() -> Tweet:
-    return Tweet.parse_obj(
-        GetV2TweetResponseBody.parse_file(
+    return Tweet.model_validate(
+        GetV2TweetResponseBody.model_validate(
             json_test_data("get_v2_tweet_response_body_all_fields.json"),
         ).data
     )
@@ -18,7 +18,7 @@ def tweet() -> Tweet:
 
 @pytest.fixture
 def mention_tweet() -> Tweet:
-    return Tweet.parse_file(
+    return Tweet.model_validate(
         json_test_data("mention_tweet.json"),
     )
 

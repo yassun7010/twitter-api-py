@@ -24,7 +24,7 @@ class PytestTwitterApiException(TwitterApiException):
         self._error = error
 
     def __str__(self) -> str:
-        return str(self._error.info.json(indent=2))
+        return str(self._error.info.model_dump_json(indent=2))
 
 
 def pytest_runtest_call(item: pytest.Item):

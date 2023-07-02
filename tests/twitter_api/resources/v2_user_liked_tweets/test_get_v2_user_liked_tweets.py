@@ -9,7 +9,6 @@ from twitter_api.client.twitter_api_real_client import TwitterApiRealClient
 from twitter_api.resources.v2_user_liked_tweets.get_v2_user_liked_tweets import (
     GetV2UserLikedTweetsResponseBody,
 )
-from twitter_api.types.extra_permissive_model import get_extra_fields
 from twitter_api.types.v2_user.user import User
 
 
@@ -37,9 +36,9 @@ class TestGetV2UserLikedTweets:
                 .get("2244994945")
             )
 
-            print(response_body.json())
+            print(response_body.model_dump_json())
 
-            assert get_extra_fields(response_body) == {}
+            assert response_body.model_extra == {}
 
     def test_get_v2_user_liked_tweets_all_fields(
         self,
@@ -52,9 +51,9 @@ class TestGetV2UserLikedTweets:
             .get(twitter_dev_user.id)
         )
 
-        print(response_body.json())
+        print(response_body.model_dump_json())
 
-        assert get_extra_fields(response_body) == {}
+        assert response_body.model_extra == {}
 
 
 class TestMockGetV2UserLikedTweets:
@@ -69,11 +68,11 @@ class TestMockGetV2UserLikedTweets:
         oauth2_app_mock_client: TwitterApiMockClient,
         json_filename: str,
     ):
-        response_body = GetV2UserLikedTweetsResponseBody.parse_file(
+        response_body = GetV2UserLikedTweetsResponseBody.model_validate(
             json_test_data(json_filename),
         )
 
-        assert get_extra_fields(response_body) == {}
+        assert response_body.model_extra == {}
 
         assert (
             oauth2_app_mock_client.chain()
@@ -91,11 +90,11 @@ class TestAsyncMockGetV2UserLikedTweets:
         self,
         oauth2_app_async_mock_client: TwitterApiAsyncMockClient,
     ):
-        response_body = GetV2UserLikedTweetsResponseBody.parse_file(
+        response_body = GetV2UserLikedTweetsResponseBody.model_validate(
             json_test_data("get_v2_user_liked_tweets_response_body.json"),
         )
 
-        assert get_extra_fields(response_body) == {}
+        assert response_body.model_extra == {}
 
         assert (
             await (

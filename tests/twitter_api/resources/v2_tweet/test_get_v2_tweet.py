@@ -10,7 +10,6 @@ from twitter_api.resources.v2_tweet.get_v2_tweet import (
     GetV2TweetQueryParameters,
     GetV2TweetResponseBody,
 )
-from twitter_api.types.extra_permissive_model import get_extra_fields
 from twitter_api.types.v2_media.media_field import ALL_MEDIA_FIELDS
 from twitter_api.types.v2_place.place_field import ALL_PLACE_FIELDS
 from twitter_api.types.v2_poll.poll_field import ALL_POLL_FIELDS
@@ -57,10 +56,10 @@ class TestGetV2Tweet:
                 "https://api.twitter.com/2/tweets/:id"
             ).get(intro_tweet.id)
 
-            print(response_body.json())
-            print(expected_response_body.json())
+            print(response_body.model_dump_json())
+            print(expected_response_body.model_dump_json())
 
-            assert get_extra_fields(response_body) == {}
+            assert response_body.model_extra == {}
             assert response_body == expected_response_body
 
     def test_get_v2_tweet_all_fields(
@@ -76,9 +75,9 @@ class TestGetV2Tweet:
             all_fields,
         )
 
-        print(response_body.json())
+        print(response_body.model_dump_json())
 
-        assert get_extra_fields(response_body) == {}
+        assert response_body.model_extra == {}
 
 
 class TestMockGetV2Tweet:
@@ -95,11 +94,11 @@ class TestMockGetV2Tweet:
         all_fields: GetV2TweetQueryParameters,
         json_filename: str,
     ):
-        response_body = GetV2TweetResponseBody.parse_file(
+        response_body = GetV2TweetResponseBody.model_validate(
             json_test_data(json_filename),
         )
 
-        assert get_extra_fields(response_body) == {}
+        assert response_body.model_extra == {}
         assert (
             oauth2_app_mock_client.chain()
             .inject_get_response_body(
@@ -121,11 +120,11 @@ class TestAsyncMockGetV2Tweet:
         intro_tweet: Tweet,
         all_fields: GetV2TweetQueryParameters,
     ):
-        response_body = GetV2TweetResponseBody.parse_file(
+        response_body = GetV2TweetResponseBody.model_validate(
             json_test_data("get_v2_tweet_response_body_all_fields.json"),
         )
 
-        assert get_extra_fields(response_body) == {}
+        assert response_body.model_extra == {}
         assert (
             await (
                 oauth2_app_async_mock_client.chain()

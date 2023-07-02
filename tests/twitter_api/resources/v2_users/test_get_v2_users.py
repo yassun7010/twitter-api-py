@@ -7,7 +7,6 @@ from twitter_api.client.twitter_api_async_mock_client import TwitterApiAsyncMock
 from twitter_api.client.twitter_api_mock_client import TwitterApiMockClient
 from twitter_api.client.twitter_api_real_client import TwitterApiRealClient
 from twitter_api.resources.v2_users.get_v2_users import GetV2UsersResponseBody
-from twitter_api.types.extra_permissive_model import get_extra_fields
 from twitter_api.types.v2_tweet.tweet_field import ALL_PUBLIC_TWEET_FIELDS
 from twitter_api.types.v2_user.user import User
 from twitter_api.types.v2_user.user_expantion import ALL_USER_EXPANSIONS
@@ -39,9 +38,9 @@ class TestGetV2Users:
                 .get({"ids": [twitter_dev_user.id]})
             )
 
-            print(response_body.json())
+            print(response_body.model_dump_json())
 
-            assert get_extra_fields(response_body) == {}
+            assert response_body.model_extra == {}
 
     def test_get_v2_users_all_fields(
         self,
@@ -61,9 +60,9 @@ class TestGetV2Users:
             )
         )
 
-        print(response_body.json())
+        print(response_body.model_dump_json())
 
-        assert get_extra_fields(response_body) == {}
+        assert response_body.model_extra == {}
 
 
 class TestMockGetV2Users:
@@ -79,11 +78,11 @@ class TestMockGetV2Users:
         json_filename: str,
         twitter_dev_user: User,
     ):
-        response_body = GetV2UsersResponseBody.parse_file(
+        response_body = GetV2UsersResponseBody.model_validate(
             json_test_data(json_filename),
         )
 
-        assert get_extra_fields(response_body) == {}
+        assert response_body.model_extra == {}
 
         assert (
             oauth2_app_mock_client.chain()
@@ -100,11 +99,11 @@ class TestAsyncMockGetV2Users:
         oauth2_app_async_mock_client: TwitterApiAsyncMockClient,
         twitter_dev_user: User,
     ):
-        response_body = GetV2UsersResponseBody.parse_file(
+        response_body = GetV2UsersResponseBody.model_validate(
             json_test_data("get_v2_users_response_body.json"),
         )
 
-        assert get_extra_fields(response_body) == {}
+        assert response_body.model_extra == {}
 
         assert (
             await (

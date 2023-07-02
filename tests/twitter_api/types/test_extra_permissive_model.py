@@ -1,7 +1,4 @@
-from twitter_api.types.extra_permissive_model import (
-    ExtraPermissiveModel,
-    get_extra_fields,
-)
+from twitter_api.types.extra_permissive_model import ExtraPermissiveModel
 
 
 class TestHasExtraFields:
@@ -10,8 +7,8 @@ class TestHasExtraFields:
             a: int
             b: str
 
-        assert get_extra_fields(A.parse_obj({"a": 1, "b": "b"})) == {}
-        assert get_extra_fields(A.parse_obj({"a": 1, "b": "b", "c": 2})) != {}
+        assert A.model_validate({"a": 1, "b": "b"}).model_extra == {}
+        assert A.model_validate({"a": 1, "b": "b", "c": 2}).model_extra != {}
 
     def test_get_extra_fields_deep(self):
         class A(ExtraPermissiveModel):
@@ -23,38 +20,32 @@ class TestHasExtraFields:
             b: str
 
         assert (
-            get_extra_fields(
-                B.parse_obj(
-                    {
-                        "a": {"c": 1, "d": "d"},
-                        "b": "b",
-                    }
-                )
-            )
+            B.model_validate(
+                {
+                    "a": {"c": 1, "d": "d"},
+                    "b": "b",
+                }
+            ).model_extra
             == {}
         )
 
         assert (
-            get_extra_fields(
-                B.parse_obj(
-                    {
-                        "a": {"c": 1, "d": "d"},
-                        "b": "b",
-                        "e": 2,
-                    }
-                )
-            )
+            B.model_validate(
+                {
+                    "a": {"c": 1, "d": "d"},
+                    "b": "b",
+                    "e": 2,
+                }
+            ).model_extra
             != {}
         )
 
         assert (
-            get_extra_fields(
-                B.parse_obj(
-                    {
-                        "a": {"c": 1, "d": "d", "e": 2},
-                        "b": "b",
-                    }
-                )
-            )
+            B.model_validate(
+                {
+                    "a": {"c": 1, "d": "d", "e": 2},
+                    "b": "b",
+                }
+            ).model_extra
             != {}
         )

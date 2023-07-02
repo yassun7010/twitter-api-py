@@ -14,7 +14,7 @@ class TestOAuth2AccessToken:
                 access_token="access_token",
                 scope=["tweet.read"],
                 _client_generator=lambda access_token: TwitterApiMockClient.from_oauth2_app_env(),
-            ).json(indent=4)
+            ).model_dump_json(indent=4)
             == dedent(
                 """
                 {

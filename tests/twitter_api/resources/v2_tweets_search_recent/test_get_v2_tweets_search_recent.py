@@ -12,7 +12,6 @@ from twitter_api.client.twitter_api_real_client import TwitterApiRealClient
 from twitter_api.resources.v2_tweets_search_recent.get_v2_tweets_search_recent import (
     GetV2TweetsSearchRecentResponseBody,
 )
-from twitter_api.types.extra_permissive_model import get_extra_fields
 from twitter_api.types.pagination_token import PaginationToken
 from twitter_api.types.v2_media.media_field import ALL_MEDIA_FIELDS
 from twitter_api.types.v2_place.place_field import ALL_PLACE_FIELDS
@@ -54,9 +53,9 @@ class TestGetV2TweetsSearchRecent:
                 .get({"query": "ツイート", "max_results": 10})
             )
 
-            print(response_body.json())
+            print(response_body.model_dump_json())
 
-            assert get_extra_fields(response_body) == {}
+            assert response_body.model_extra == {}
 
     def test_get_v2_search_recent_all_fields(
         self,
@@ -81,7 +80,7 @@ class TestGetV2TweetsSearchRecent:
             ),
             range(3),  # テスト時間が伸びるのも嫌なので、3つまで取り出す。
         ):
-            assert get_extra_fields(response_body) == {}
+            assert response_body.model_extra == {}
 
 
 class TestMockGetV2TweetsSearchRecent:
@@ -98,11 +97,11 @@ class TestMockGetV2TweetsSearchRecent:
         oauth2_app_mock_client: TwitterApiMockClient,
         json_filename: str,
     ):
-        response_body = GetV2TweetsSearchRecentResponseBody.parse_file(
+        response_body = GetV2TweetsSearchRecentResponseBody.model_validate(
             json_test_data(json_filename)
         )
 
-        assert get_extra_fields(response_body) == {}
+        assert response_body.model_extra == {}
 
         assert (
             oauth2_app_mock_client.chain()
@@ -127,7 +126,7 @@ class TestMockGetV2TweetsSearchRecent:
         for json_file in json_files:
             oauth2_app_mock_client.inject_get_response_body(
                 "https://api.twitter.com/2/tweets/search/recent",
-                GetV2TweetsSearchRecentResponseBody.parse_file(
+                GetV2TweetsSearchRecentResponseBody.model_validate(
                     json_test_data(json_file)
                 ),
             )
@@ -153,7 +152,7 @@ class TestMockGetV2TweetsSearchRecent:
                 )
             )
 
-            assert get_extra_fields(response_body) == {}
+            assert response_body.model_extra == {}
 
             next_token = response_body.meta.next_token
 
@@ -166,12 +165,14 @@ class TestMockGetV2TweetsSearchRecent:
         json_files: list[str],
     ):
         response_bodies = [
-            GetV2TweetsSearchRecentResponseBody.parse_file(json_test_data(json_file))
+            GetV2TweetsSearchRecentResponseBody.model_validate(
+                json_test_data(json_file)
+            )
             for json_file in json_files
         ]
 
         for response_body in response_bodies:
-            assert get_extra_fields(response_body) == {}
+            assert response_body.model_extra == {}
 
             oauth2_app_mock_client.inject_get_response_body(
                 "https://api.twitter.com/2/tweets/search/recent",
@@ -198,16 +199,16 @@ class TestMockGetV2TweetsSearchRecent:
         oauth2_app_mock_client: TwitterApiMockClient,
         json_files: list[str],
     ):
-        response_body = GetV2TweetsSearchRecentResponseBody.parse_file(
+        response_body = GetV2TweetsSearchRecentResponseBody.model_validate(
             json_test_data("get_v2_tweets_search_recent/collected_response_body.json")
         )
 
-        assert get_extra_fields(response_body) == {}
+        assert response_body.model_extra == {}
 
         for json_file in json_files:
             oauth2_app_mock_client.inject_get_response_body(
                 "https://api.twitter.com/2/tweets/search/recent",
-                GetV2TweetsSearchRecentResponseBody.parse_file(
+                GetV2TweetsSearchRecentResponseBody.model_validate(
                     json_test_data(json_file)
                 ),
             )
@@ -231,7 +232,7 @@ class TestAsyncMockGetV2TweetsSearchRecent:
         self,
         oauth2_app_async_mock_client: TwitterApiAsyncMockClient,
     ):
-        response_body = GetV2TweetsSearchRecentResponseBody.parse_file(
+        response_body = GetV2TweetsSearchRecentResponseBody.model_validate(
             json_test_data("get_v2_tweets_search_recent_response_body.json")
         )
 
@@ -260,7 +261,9 @@ class TestAsyncMockGetV2TweetsSearchRecent:
         json_files: list[str],
     ):
         response_bodies = [
-            GetV2TweetsSearchRecentResponseBody.parse_file(json_test_data(json_file))
+            GetV2TweetsSearchRecentResponseBody.model_validate(
+                json_test_data(json_file)
+            )
             for json_file in json_files
         ]
 
@@ -291,14 +294,14 @@ class TestAsyncMockGetV2TweetsSearchRecent:
         oauth2_app_async_mock_client: TwitterApiAsyncMockClient,
         json_files: list[str],
     ):
-        response_body = GetV2TweetsSearchRecentResponseBody.parse_file(
+        response_body = GetV2TweetsSearchRecentResponseBody.model_validate(
             json_test_data("get_v2_tweets_search_recent/collected_response_body.json")
         )
 
         for json_file in json_files:
             oauth2_app_async_mock_client.inject_get_response_body(
                 "https://api.twitter.com/2/tweets/search/recent",
-                GetV2TweetsSearchRecentResponseBody.parse_file(
+                GetV2TweetsSearchRecentResponseBody.model_validate(
                     json_test_data(json_file)
                 ),
             )

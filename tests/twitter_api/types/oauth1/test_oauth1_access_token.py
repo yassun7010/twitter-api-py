@@ -13,7 +13,7 @@ class TestOAuth1AccessToken:
                 user_id="user_id",
                 screen_name="screen_name",
                 _client_generator=lambda access_token, access_secret: TwitterApiMockClient.from_oauth1_app_env(),
-            ).json(indent=4)
+            ).model_dump_json(indent=4)
             == dedent(
                 """
                 {

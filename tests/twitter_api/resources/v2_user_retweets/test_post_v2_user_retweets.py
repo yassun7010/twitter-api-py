@@ -8,7 +8,6 @@ from twitter_api.client.twitter_api_mock_client import TwitterApiMockClient
 from twitter_api.resources.v2_user_retweets.post_v2_user_retweets import (
     PostV2UserRetweetsResponseBody,
 )
-from twitter_api.types.extra_permissive_model import get_extra_fields
 from twitter_api.types.v2_user.user import User
 
 
@@ -37,7 +36,7 @@ class TestGetV2UserRetweets:
                 .post(user_id, {"tweet_id": "1228393702244134912"})
             )
 
-            assert get_extra_fields(response_body) == {}
+            assert response_body.model_extra == {}
 
 
 class TestMockGetV2UserRetweets:
@@ -53,11 +52,11 @@ class TestMockGetV2UserRetweets:
         json_filename: str,
         twitter_dev_user: User,
     ):
-        response_body = PostV2UserRetweetsResponseBody.parse_file(
+        response_body = PostV2UserRetweetsResponseBody.model_validate(
             json_test_data(json_filename)
         )
 
-        assert get_extra_fields(response_body) == {}
+        assert response_body.model_extra == {}
 
         assert (
             oauth2_app_mock_client.chain()
@@ -76,11 +75,11 @@ class TestAsyncMockGetV2UserRetweets:
         oauth2_app_async_mock_client: TwitterApiAsyncMockClient,
         twitter_dev_user: User,
     ):
-        response_body = PostV2UserRetweetsResponseBody.parse_file(
+        response_body = PostV2UserRetweetsResponseBody.model_validate(
             json_test_data("post_v2_user_retweets_response_body.json")
         )
 
-        assert get_extra_fields(response_body) == {}
+        assert response_body.model_extra == {}
 
         assert (
             await (

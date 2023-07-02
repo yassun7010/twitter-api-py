@@ -8,7 +8,6 @@ from twitter_api.client.twitter_api_mock_client import TwitterApiMockClient
 from twitter_api.resources.v2_tweets_search_stream.get_v2_tweets_search_stream import (
     GetV2TweetsSearchStreamResponseBody,
 )
-from twitter_api.types.extra_permissive_model import get_extra_fields
 
 
 @pytest.mark.skipif(**synthetic_monitoring_is_disable())
@@ -36,9 +35,9 @@ class TestGetV2TweetsSearchStream:
                 .get()
             )
 
-            print(response_body.json())
+            print(response_body.model_dump_json())
 
-            assert get_extra_fields(response_body) == {}
+            assert response_body.model_extra == {}
 
 
 class TestMockGetV2TweetsSearchStream:
@@ -53,11 +52,11 @@ class TestMockGetV2TweetsSearchStream:
         oauth2_app_mock_client: TwitterApiMockClient,
         json_filename: str,
     ):
-        response_body = GetV2TweetsSearchStreamResponseBody.parse_file(
+        response_body = GetV2TweetsSearchStreamResponseBody.model_validate(
             json_test_data(json_filename)
         )
 
-        assert get_extra_fields(response_body) == {}
+        assert response_body.model_extra == {}
 
         assert (
             oauth2_app_mock_client.chain()
@@ -80,11 +79,11 @@ class TestAsyncMockGetV2TweetsSearchStream:
         self,
         oauth2_app_async_mock_client: TwitterApiAsyncMockClient,
     ):
-        response_body = GetV2TweetsSearchStreamResponseBody.parse_file(
+        response_body = GetV2TweetsSearchStreamResponseBody.model_validate(
             json_test_data("get_v2_tweets_search_stream_response_body.json")
         )
 
-        assert get_extra_fields(response_body) == {}
+        assert response_body.model_extra == {}
 
         assert (
             await (

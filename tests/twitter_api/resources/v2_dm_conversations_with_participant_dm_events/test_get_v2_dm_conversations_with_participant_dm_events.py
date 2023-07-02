@@ -9,7 +9,6 @@ from twitter_api.client.twitter_api_real_client import TwitterApiRealClient
 from twitter_api.resources.v2_dm_conversations_with_participant_dm_events.get_v2_dm_conversations_with_participant_dm_events import (
     GetV2DmConversationsWithParticipantDmEventsResponseBody,
 )
-from twitter_api.types.extra_permissive_model import get_extra_fields
 from twitter_api.types.v2_dm_event.dm_event_expansion import ALL_DM_EVENT_EXPANSIONS
 from twitter_api.types.v2_dm_event.dm_event_field import ALL_DM_EVENT_FIELDS
 from twitter_api.types.v2_dm_event.dm_event_type import ALL_DM_EVENT_TYPES
@@ -57,9 +56,9 @@ class TestGetV2DmConversationsWithParticipantDmEvents:
                 .get(participant_id)
             )
 
-            print(response_body.json())
+            print(response_body.model_dump_json())
 
-            assert get_extra_fields(response_body) == {}
+            assert response_body.model_extra == {}
 
     def test_get_v2_dm_conversations_with_participant_dm_events_all_fields(
         self,
@@ -85,7 +84,7 @@ class TestGetV2DmConversationsWithParticipantDmEvents:
             ),
             range(3),
         ):
-            assert get_extra_fields(response_body) == {}
+            assert response_body.model_extra == {}
 
 
 class TestMockGetV2DmConversationsWithParticipantDmEvents:
@@ -102,12 +101,12 @@ class TestMockGetV2DmConversationsWithParticipantDmEvents:
         twitter_dev_user: User,
     ):
         response_body = (
-            GetV2DmConversationsWithParticipantDmEventsResponseBody.parse_file(
+            GetV2DmConversationsWithParticipantDmEventsResponseBody.model_validate(
                 json_test_data(json_filename)
             )
         )
 
-        assert get_extra_fields(response_body) == {}
+        assert response_body.model_extra == {}
 
         assert (
             oauth2_app_mock_client.chain()
@@ -129,13 +128,13 @@ class TestAsyncMockGetV2DmConversationsWithParticipantDmEvents:
         oauth2_app_async_mock_client: TwitterApiAsyncMockClient,
         twitter_dev_user: User,
     ):
-        response_body = GetV2DmConversationsWithParticipantDmEventsResponseBody.parse_file(
+        response_body = GetV2DmConversationsWithParticipantDmEventsResponseBody.model_validate(
             json_test_data(
                 "get_v2_dm_conversations_with_participant_dm_events_response_body.json"
             )
         )
 
-        assert get_extra_fields(response_body) == {}
+        assert response_body.model_extra == {}
 
         assert (
             await (
@@ -160,7 +159,7 @@ class TestAsyncMockGetV2DmConversationsWithParticipantDmEvents:
         twitter_dev_user: User,
     ):
         response_bodies = [
-            GetV2DmConversationsWithParticipantDmEventsResponseBody.parse_file(
+            GetV2DmConversationsWithParticipantDmEventsResponseBody.model_validate(
                 json_test_data(json_file)
             )
             for json_file in json_files
@@ -190,7 +189,7 @@ class TestAsyncMockGetV2DmConversationsWithParticipantDmEvents:
         json_files: list[str],
         twitter_dev_user: User,
     ):
-        response_body = GetV2DmConversationsWithParticipantDmEventsResponseBody.parse_file(
+        response_body = GetV2DmConversationsWithParticipantDmEventsResponseBody.model_validate(
             json_test_data(
                 "get_v2_dm_conversations_with_participant_dm_events/collected_response_body.json"
             )
@@ -199,7 +198,7 @@ class TestAsyncMockGetV2DmConversationsWithParticipantDmEvents:
         for json_file in json_files:
             oauth2_app_async_mock_client.inject_get_response_body(
                 "https://api.twitter.com/2/dm_conversations/with/:participant_id/dm_events",
-                GetV2DmConversationsWithParticipantDmEventsResponseBody.parse_file(
+                GetV2DmConversationsWithParticipantDmEventsResponseBody.model_validate(
                     json_test_data(json_file)
                 ),
             )

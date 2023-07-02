@@ -46,7 +46,7 @@ try:
 
         # Find Mentioned Users
         for user in response_body.find_mentioned_users_by(response_body.data[-1]):
-            print(user.json(indent=2))
+            print(user.model_dump_json(indent=2))
 
 except TwitterApiError as error:
-    print(error.info.json(indent=2), file=sys.stderr)
+    print(error.info.model_dump_json(indent=2), file=sys.stderr)

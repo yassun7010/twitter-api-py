@@ -8,7 +8,6 @@ from twitter_api.client.twitter_api_mock_client import TwitterApiMockClient
 from twitter_api.resources.v2_user_following.post_v2_user_following import (
     PostV2UserFollowingResponseBody,
 )
-from twitter_api.types.extra_permissive_model import get_extra_fields
 from twitter_api.types.v2_user.user import User
 
 
@@ -38,7 +37,7 @@ class TestGetV2UserFollowing:
                 .post(user_id, {"target_user_id": twitter_dev_user.id})
             )
 
-            assert get_extra_fields(response_body) == {}
+            assert response_body.model_extra == {}
 
 
 class TestMockGetV2UserFollowing:
@@ -54,11 +53,11 @@ class TestMockGetV2UserFollowing:
         twitter_dev_user: User,
         json_filename: str,
     ):
-        response_body = PostV2UserFollowingResponseBody.parse_file(
+        response_body = PostV2UserFollowingResponseBody.model_validate(
             json_test_data(json_filename)
         )
 
-        assert get_extra_fields(response_body) == {}
+        assert response_body.model_extra == {}
 
         assert (
             oauth2_app_mock_client.chain()
@@ -77,11 +76,11 @@ class TestAsyncMockGetV2UserFollowing:
         oauth2_app_async_mock_client: TwitterApiAsyncMockClient,
         twitter_dev_user: User,
     ):
-        response_body = PostV2UserFollowingResponseBody.parse_file(
+        response_body = PostV2UserFollowingResponseBody.model_validate(
             json_test_data("get_v2_user_following_response_body.json")
         )
 
-        assert get_extra_fields(response_body) == {}
+        assert response_body.model_extra == {}
 
         assert (
             await (

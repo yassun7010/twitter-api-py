@@ -9,7 +9,6 @@ from twitter_api.client.twitter_api_real_client import TwitterApiRealClient
 from twitter_api.resources.v2_user_followers.get_v2_user_followers import (
     GetV2UserFollowersResponseBody,
 )
-from twitter_api.types.extra_permissive_model import get_extra_fields
 from twitter_api.types.v2_tweet.tweet_field import ALL_TWEET_FIELDS
 from twitter_api.types.v2_user.user import User
 from twitter_api.types.v2_user.user_expantion import ALL_USER_EXPANSIONS
@@ -41,9 +40,9 @@ class TestGetV2UserFollowers:
                 .get(twitter_dev_user.id)
             )
 
-            print(response_body.json())
+            print(response_body.model_dump_json())
 
-            assert get_extra_fields(response_body) == {}
+            assert response_body.model_extra == {}
 
     def test_get_v2_user_followers_all_fields(
         self,
@@ -63,9 +62,9 @@ class TestGetV2UserFollowers:
             )
         )
 
-        print(response_body.json())
+        print(response_body.model_dump_json())
 
-        assert get_extra_fields(response_body) == {}
+        assert response_body.model_extra == {}
 
 
 class TestMockGetV2UserFollowers:
@@ -81,11 +80,11 @@ class TestMockGetV2UserFollowers:
         json_filename: str,
         twitter_dev_user: User,
     ):
-        response_body = GetV2UserFollowersResponseBody.parse_file(
+        response_body = GetV2UserFollowersResponseBody.model_validate(
             json_test_data(json_filename)
         )
 
-        assert get_extra_fields(response_body) == {}
+        assert response_body.model_extra == {}
 
         assert (
             oauth2_app_mock_client.chain()
@@ -104,11 +103,11 @@ class TestAsyncMockGetV2UserFollowers:
         oauth2_app_async_mock_client: TwitterApiAsyncMockClient,
         twitter_dev_user: User,
     ):
-        response_body = GetV2UserFollowersResponseBody.parse_file(
+        response_body = GetV2UserFollowersResponseBody.model_validate(
             json_test_data("get_v2_user_followers_response_body.json")
         )
 
-        assert get_extra_fields(response_body) == {}
+        assert response_body.model_extra == {}
 
         assert (
             await (

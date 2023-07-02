@@ -24,4 +24,4 @@ try:
         print(user.username)
 
 except TwitterApiError as error:
-    print(error.info.json(indent=2), file=sys.stderr)
+    print(error.info.model_dump_json(indent=2), file=sys.stderr)

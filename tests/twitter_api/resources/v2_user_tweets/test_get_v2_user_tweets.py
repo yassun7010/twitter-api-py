@@ -9,7 +9,6 @@ from twitter_api.client.twitter_api_real_client import TwitterApiRealClient
 from twitter_api.resources.v2_user_tweets.get_v2_user_tweets import (
     GetV2UserTweetsResponseBody,
 )
-from twitter_api.types.extra_permissive_model import get_extra_fields
 from twitter_api.types.v2_user.user import User
 
 
@@ -38,9 +37,9 @@ class TestGetV2UserTweets:
                 .get(twitter_dev_user.id)
             )
 
-            print(response_body.json())
+            print(response_body.model_dump_json())
 
-            assert get_extra_fields(response_body) == {}
+            assert response_body.model_extra == {}
 
     def test_get_v2_user_tweets_all_fields(
         self,
@@ -53,9 +52,9 @@ class TestGetV2UserTweets:
             .get(twitter_dev_user.id)
         )
 
-        print(response_body.json())
+        print(response_body.model_dump_json())
 
-        assert get_extra_fields(response_body) == {}
+        assert response_body.model_extra == {}
 
 
 class TestMockGetV2UserTweets:
@@ -73,11 +72,11 @@ class TestMockGetV2UserTweets:
         twitter_dev_user: User,
         json_filename: str,
     ):
-        response_body = GetV2UserTweetsResponseBody.parse_file(
+        response_body = GetV2UserTweetsResponseBody.model_validate(
             json_test_data(json_filename),
         )
 
-        assert get_extra_fields(response_body) == {}
+        assert response_body.model_extra == {}
 
         assert (
             oauth2_app_mock_client.chain()
@@ -96,11 +95,11 @@ class TestAsyncMockGetV2UserTweets:
         oauth2_app_async_mock_client: TwitterApiAsyncMockClient,
         twitter_dev_user: User,
     ):
-        response_body = GetV2UserTweetsResponseBody.parse_file(
+        response_body = GetV2UserTweetsResponseBody.model_validate(
             json_test_data("get_v2_user_tweets_response_body_default_fields.json"),
         )
 
-        assert get_extra_fields(response_body) == {}
+        assert response_body.model_extra == {}
 
         assert (
             await (

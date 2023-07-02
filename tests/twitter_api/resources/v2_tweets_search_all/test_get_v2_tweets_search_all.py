@@ -35,7 +35,7 @@ class TestGetV2TweetsSearchAll:
                 .get({"query": "conversation_id:1273733248749690880", "max_results": 1})
             )
 
-            print(real_response.json())
+            print(real_response.model_dump_json())
 
             assert False
 
@@ -45,7 +45,7 @@ class TestMockGetV2TweetsSearchAll:
         self,
         oauth2_app_mock_client: TwitterApiMockClient,
     ):
-        response_body = GetV2TweetsSearchAllResponseBody.parse_file(
+        response_body = GetV2TweetsSearchAllResponseBody.model_validate(
             json_test_data("get_v2_tweets_search_all_response_body.json")
         )
 
@@ -65,7 +65,7 @@ class TestAsyncMockGetV2TweetsSearchAll:
         self,
         oauth2_app_async_mock_client: TwitterApiAsyncMockClient,
     ):
-        response_body = GetV2TweetsSearchAllResponseBody.parse_file(
+        response_body = GetV2TweetsSearchAllResponseBody.model_validate(
             json_test_data("get_v2_tweets_search_all_response_body.json")
         )
 

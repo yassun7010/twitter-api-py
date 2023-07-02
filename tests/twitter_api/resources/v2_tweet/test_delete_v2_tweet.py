@@ -10,7 +10,6 @@ from twitter_api.resources.v2_tweet.delete_v2_tweet import (
     DeleteV2TweetResponseBody,
     DeleteV2TweetResponseBodyData,
 )
-from twitter_api.types.extra_permissive_model import get_extra_fields
 
 
 @pytest.mark.skipif(**synthetic_monitoring_is_disable())
@@ -46,7 +45,7 @@ class TestDeleteV2Tweet:
                 .delete(tweet.id)
             )
 
-            print(real_response.json())
+            print(real_response.model_dump_json())
 
             assert real_response.data.deleted is True
 
@@ -57,7 +56,7 @@ class TestMockDeleteV2Tweet:
             data=DeleteV2TweetResponseBodyData(deleted=True)
         )
 
-        assert get_extra_fields(response_body) == {}
+        assert response_body.model_extra == {}
 
         assert (
             oauth2_app_mock_client.chain()
@@ -79,7 +78,7 @@ class TestAsyncMockDeleteV2Tweet:
             data=DeleteV2TweetResponseBodyData(deleted=True)
         )
 
-        assert get_extra_fields(response_body) == {}
+        assert response_body.model_extra == {}
 
         assert (
             await (

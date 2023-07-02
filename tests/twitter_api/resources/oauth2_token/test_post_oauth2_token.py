@@ -9,7 +9,6 @@ from twitter_api.client.twitter_api_mock_client import TwitterApiMockClient
 from twitter_api.resources.oauth2_token.post_oauth2_token import (
     PostOauth2TokenResponseBody,
 )
-from twitter_api.types.extra_permissive_model import get_extra_fields
 
 
 @pytest.mark.skipif(**synthetic_monitoring_is_disable())
@@ -46,11 +45,11 @@ class TestPostOauth2Token:
                 )
             )
 
-            print(real_response.json())
-            print(expected_response_body.json())
+            print(real_response.model_dump_json())
+            print(expected_response_body.model_dump_json())
 
             assert real_response.token_type == expected_response_body.token_type
-            assert get_extra_fields(real_response) == {}
+            assert real_response.model_extra == {}
 
 
 class TestMockPostOauth2Token:
@@ -60,7 +59,7 @@ class TestMockPostOauth2Token:
             access_token="AAAAAAAAAAAAAAAAAAAAA",
         )
 
-        assert get_extra_fields(response_body) == {}
+        assert response_body.model_extra == {}
 
         assert (
             oauth2_app_mock_client.chain()
@@ -87,7 +86,7 @@ class TestAsyncMockPostOauth2Token:
             access_token="AAAAAAAAAAAAAAAAAAAAA",
         )
 
-        assert get_extra_fields(response_body) == {}
+        assert response_body.model_extra == {}
 
         assert (
             await (

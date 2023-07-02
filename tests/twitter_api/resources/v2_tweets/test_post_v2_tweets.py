@@ -40,7 +40,7 @@ class TestGetV2Tweet:
                 )
             )
 
-            print(real_response.json())
+            print(real_response.model_dump_json())
             print(tweet_text)
 
             # テストが終わったらデータを消しておく。

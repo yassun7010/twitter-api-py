@@ -201,7 +201,7 @@ def _parse_response(
         data: dict = {}
     else:
         try:
-            data = response.json()
+            data = response.model_dump_json()
         except ValueError:
             if response.is_error:
                 raise TwitterApiResponseFailed(

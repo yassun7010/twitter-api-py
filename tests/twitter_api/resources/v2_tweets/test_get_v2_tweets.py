@@ -10,7 +10,6 @@ from twitter_api.resources.v2_tweets.get_v2_tweets import (
     GetV2TweetsQueryParameters,
     GetV2TweetsResponseBody,
 )
-from twitter_api.types.extra_permissive_model import get_extra_fields
 from twitter_api.types.v2_media.media_field import ALL_MEDIA_FIELDS
 from twitter_api.types.v2_place.place_field import ALL_PLACE_FIELDS
 from twitter_api.types.v2_poll.poll_field import ALL_POLL_FIELDS
@@ -65,10 +64,10 @@ class TestGetV2Tweets:
                 .get({"ids": list(map(lambda tweet: tweet.id, tweets))})
             )
 
-            print(response_body.json())
-            print(expected_response_body.json())
+            print(response_body.model_dump_json())
+            print(expected_response_body.model_dump_json())
 
-            assert get_extra_fields(response_body) == {}
+            assert response_body.model_extra == {}
             assert response_body == expected_response_body
 
     def test_get_v2_tweet_all_fields(
@@ -82,9 +81,9 @@ class TestGetV2Tweets:
             .get(all_fields)
         )
 
-        print(response_body.json())
+        print(response_body.model_dump_json())
 
-        assert get_extra_fields(response_body) == {}
+        assert response_body.model_extra == {}
 
 
 class TestMockGetV2Tweets:
@@ -100,7 +99,7 @@ class TestMockGetV2Tweets:
         all_fields: GetV2TweetsQueryParameters,
         json_filename: str,
     ):
-        response_body = GetV2TweetsResponseBody.parse_file(
+        response_body = GetV2TweetsResponseBody.model_validate(
             json_test_data(json_filename),
         )
 
@@ -119,7 +118,7 @@ class TestAsyncMockGetV2Tweets:
         oauth2_app_async_mock_client: TwitterApiAsyncMockClient,
         all_fields: GetV2TweetsQueryParameters,
     ):
-        response_body: GetV2TweetsResponseBody = GetV2TweetsResponseBody.parse_file(
+        response_body: GetV2TweetsResponseBody = GetV2TweetsResponseBody.model_validate(
             json_test_data("get_v2_tweets_response_body_all_fields.json"),
         )
 
