@@ -1,5 +1,5 @@
 from datetime import datetime
-from typing import Generator, Optional, Union
+from typing import Callable, Generator, Optional, Union
 
 from typing_extensions import AsyncGenerator, Literal, NotRequired, TypedDict, override
 
@@ -18,7 +18,9 @@ from twitter_api.types.v2_media.media_field import MediaField
 from twitter_api.types.v2_place.place_field import PlaceField
 from twitter_api.types.v2_poll.poll_field import PollField
 from twitter_api.types.v2_scope import oauth2_scopes
+from twitter_api.types.v2_search_query.operators.operator import CompleteOperator
 from twitter_api.types.v2_search_query.search_query import SearchQuery
+from twitter_api.types.v2_search_query.search_query_builder import SearchQueryBuilder
 from twitter_api.types.v2_tweet.tweet_expansion import TweetExpansion
 from twitter_api.types.v2_tweet.tweet_field import TweetField
 from twitter_api.types.v2_tweet.tweet_id import TweetId
@@ -32,7 +34,11 @@ ENDPOINT = Endpoint("GET", "https://api.twitter.com/2/tweets/search/recent")
 GetV2TweetsSearchRecentQueryParameters = TypedDict(
     "GetV2TweetsSearchRecentQueryParameters",
     {
-        "query": Union[SearchQuery, str],
+        "query": Union[
+            str,
+            SearchQuery,
+            Callable[[SearchQueryBuilder], CompleteOperator],
+        ],
         "start_time": NotRequired[Optional[datetime]],
         "end_time": NotRequired[Optional[datetime]],
         "since_id": NotRequired[Optional[TweetId]],
@@ -50,22 +56,28 @@ GetV2TweetsSearchRecentQueryParameters = TypedDict(
 )
 
 
-def _make_query(query: GetV2TweetsSearchRecentQueryParameters) -> dict:
+def _make_query(query_params: GetV2TweetsSearchRecentQueryParameters) -> dict:
+    query = (
+        SearchQuery.build(query_params["query"])
+        if callable(query_params["query"])
+        else query_params["query"]
+    )
+
     return {
-        "query": str(query["query"]),
-        "start_time": map_optional(rfc3339, query.get("start_time")),
-        "end_time": map_optional(rfc3339, query.get("end_time")),
-        "since_id": query.get("since_id"),
-        "until_id": query.get("until_id"),
-        "sort_order": query.get("sort_order"),
-        "next_token": query.get("next_token"),
-        "max_results": query.get("max_results"),
-        "expansions": comma_separated_str(query.get("expansions")),
-        "place.fields": comma_separated_str(query.get("place.fields")),
-        "media.fields": comma_separated_str(query.get("media.fields")),
-        "poll.fields": comma_separated_str(query.get("poll.fields")),
-        "tweet.fields": comma_separated_str(query.get("tweet.fields")),
-        "user.fields": comma_separated_str(query.get("user.fields")),
+        "query": str(query),
+        "start_time": map_optional(rfc3339, query_params.get("start_time")),
+        "end_time": map_optional(rfc3339, query_params.get("end_time")),
+        "since_id": query_params.get("since_id"),
+        "until_id": query_params.get("until_id"),
+        "sort_order": query_params.get("sort_order"),
+        "next_token": query_params.get("next_token"),
+        "max_results": query_params.get("max_results"),
+        "expansions": comma_separated_str(query_params.get("expansions")),
+        "place.fields": comma_separated_str(query_params.get("place.fields")),
+        "media.fields": comma_separated_str(query_params.get("media.fields")),
+        "poll.fields": comma_separated_str(query_params.get("poll.fields")),
+        "tweet.fields": comma_separated_str(query_params.get("tweet.fields")),
+        "user.fields": comma_separated_str(query_params.get("user.fields")),
     }
 
 
