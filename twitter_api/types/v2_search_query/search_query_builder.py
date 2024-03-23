@@ -56,6 +56,11 @@ from .operators.url_operator import UrlOperator
 
 
 class SearchQueryBuilder:
+    """
+    ツイート検索クエリを構築するためのビルダー。
+
+    Reference: https://developer.twitter.com/en/docs/twitter-api/tweets/search/integrate/build-a-query
+    """
     @overload
     def group(self, operator: CompleteOperator) -> CompleteGroupOperator:
         ...
